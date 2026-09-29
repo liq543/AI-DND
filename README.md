@@ -36,8 +36,10 @@ rooms and enemy HP never reach the browser.
 - **Real dice.** Rolls use the operating system's cryptographic RNG, are stored with every die face, and can't be
   re-rolled. Player rolls happen in the engine when you click Roll; typed numbers are never used.
 - **Tamper-evident.** State is rebuilt from an append-only event log where each event is HMAC-signed and
-  chained to the previous one; the key lives outside the project (`~/.dnd-engine/keys/`). Editing, deleting or
-  reordering anything is detected, and the game stops until it's restored from a signed backup.
+  chained to the previous one; the key lives with the campaign (`campaigns/<name>/engine/signing.key`) so a
+  campaign moves between machines with git. Editing, deleting or reordering anything is detected, and the game
+  stops until it's restored from a signed backup. Lost a key from an older campaign? `python -m engine rekey`
+  re-signs an intact log with a new one.
 - **No quiet favours.** Anything beyond the rules (a deadly encounter, a legendary item early, a big hoard) needs a
   DM override with a reason, and every override is shown on the table for everyone to see.
 - **Locked in Claude Code.** `.claude/settings.json` pre-approves engine commands and denies hand-editing engine

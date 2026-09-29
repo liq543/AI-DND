@@ -3,7 +3,7 @@
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
 **Session:** 1 · **In-world time:** Day 2, 02:48 · **Mode:** exploration
-**Current map:** The Undercroft Stores (`stores`) · **Events:** 3235 · **Log head:** `9322b6d3e373cf23`
+**Current map:** The Undercroft Stores (`stores`) · **Events:** 3235 · **Log head:** `32e78a6a9f88b994`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=3
 
 ## Party

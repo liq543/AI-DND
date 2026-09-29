@@ -1888,6 +1888,15 @@ def cmd_verify(a):
         sys.exit(3)
 
 
+def cmd_rekey(a):
+    d = active_dir()
+    st = Store(d)
+    n = st.rekey()
+    print(f"✔ Re-signed {n} events (and backups) with a new key at {st.key_path.relative_to(d.parent.parent)}.")
+    if st.legacy_key_path.exists():
+        print(f"  The old key in {st.legacy_key_path} is no longer used and can be deleted.")
+
+
 def cmd_repair(a):
     d = active_dir()
     st = Store(d)
@@ -2287,6 +2296,7 @@ def build_parser():
     c = sp.add_parser("repair")
     c.add_argument("--truncate", action="store_true")
     c.add_argument("--restore", action="store_true", help="restore the newest fully-signed backup")
+    sp.add_parser("rekey", help="re-sign the log with a fresh key stored in the campaign folder")
     c = sp.add_parser("log")
     c.add_argument("-n", type=int, default=30)
     c = sp.add_parser("rules", help="spell|monster|item|condition <name>")
@@ -2333,6 +2343,9 @@ def main(argv=None):
             return 0
         if a.cmd == "repair":
             cmd_repair(a)
+            return 0
+        if a.cmd == "rekey":
+            cmd_rekey(a)
             return 0
         if a.cmd == "rules":
             cmd_rules(a)

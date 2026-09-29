@@ -14,6 +14,7 @@ status                              # full DM snapshot (also in campaigns/<slug>
 log -n 20                           # recent public events (read this after the player clicks Roll)
 audit [--hidden]                    # overrides, homebrew, hidden rolls
 verify | repair [--restore]         # integrity check / restore last fully-signed backup
+rekey                               # re-sign an intact log with a fresh in-repo key (lost/legacy key)
 serve                               # live table at http://localhost:8765
 rules spell|monster|item|condition <name>   # print the SRD entry
 ```

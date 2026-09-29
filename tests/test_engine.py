@@ -202,6 +202,32 @@ class EngineTest(unittest.TestCase):
         finally:
             path.write_text(original, encoding="utf-8")
 
+    def test_rekey_after_lost_key(self):
+        g = self.state()
+        engine_dir = Path(g.dir) / "engine"
+        key, path = engine_dir / "signing.key", engine_dir / "events.jsonl"
+        self.assertTrue(key.exists())
+        key.unlink()
+        self.assertEqual(self.run_cli("status")[0], 3)
+        # a broken chain is still refused without the key
+        original = path.read_text(encoding="utf-8")
+        lines = original.splitlines()
+        path.write_text("\n".join(lines[:5] + lines[6:]) + "\n", encoding="utf-8")
+        self.assertEqual(self.run_cli("rekey")[0], 3)
+        path.write_text(original, encoding="utf-8")
+        self.assertIn("Re-signed", self.ok("rekey"))
+        self.ok("verify")
+        self.ok("roll", "1d20", "--purpose", "after rekey")
+        self.assertIn("nothing to repair", self.ok("repair"))
+        # with the key present, rekey still refuses a modified log
+        edited = path.read_text(encoding="utf-8")
+        try:
+            path.write_text(edited.replace('"hp_max":12', '"hp_max":120', 1), encoding="utf-8")
+            self.assertEqual(self.run_cli("rekey")[0], 3)
+        finally:
+            path.write_text(edited, encoding="utf-8")
+        self.ok("verify")
+
     # ------------------------------------------------------------------ player view hides secrets
     def test_player_view_hides_secrets(self):
         self.ok("npc", "add", "bandit-captain", "--name", "Hidden Boss", "--hidden", "--at", "2,2", "--map", "arena")
