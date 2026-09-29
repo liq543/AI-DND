@@ -267,10 +267,14 @@ def animation_cues(g, feed):
             if not _seen(g, who):
                 continue
             c.update(who=who["id"], amount=f["amount"], dtype=f.get("dtype"), crit=f.get("crit"), down=f.get("down"), dead=f.get("dead"))
+            if who["kind"] == "pc" or who.get("side") == "ally":
+                c.update(hp=f.get("hp"), hp_max=f.get("hp_max"))
         elif k == "heal" and who and ("amount" in f or "temp" in f):
             if not _seen(g, who):
                 continue
             c.update(who=who["id"], amount=f.get("amount"), temp=f.get("temp"))
+            if who["kind"] == "pc" or who.get("side") == "ally":
+                c.update(hp=f.get("hp"), hp_max=f.get("hp_max"))
         elif k == "condition" and f.get("cond"):
             if not _seen(g, who):
                 continue
@@ -369,7 +373,7 @@ def map_svg(g, map_id, mode="player", live=False):
             ee["portrait_href"] = f"/api/art/face/{e['id']}.svg?v={art.art_version(e)}"
         ents.append(ee)
     party_pos = g.state["view"].get("party_pos") if m["kind"] == "region" else None
-    return render.render_map(m, mode, ents, current_id(g), party_pos=party_pos)
+    return render.render_map(m, mode, ents, current_id(g), party_pos=party_pos, live=live)
 
 
 # ------------------------------------------------------------ markdown snapshots

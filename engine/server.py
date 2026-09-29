@@ -115,14 +115,18 @@ class Handler(BaseHTTPRequestHandler):
             if m.get("background") and m["background"] in s["assets"]:
                 svg = svg.replace("<defs>", f'<image href="/asset/{m["background"]}" x="0" y="0" width="{m["w"] * 32}" height="{m["h"] * 32}" preserveAspectRatio="none"/><defs>', 1)
             return self.svg(svg)
-        if path.startswith("/api/portrait/") or path.startswith("/api/art/portrait/") or path.startswith("/api/art/face/"):
+        if path == "/favicon.ico" or path == "/favicon.svg":
+            return self.send(200, '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,4 93,28 93,72 50,96 7,72 7,28" '
+                                  'fill="#b3261e" stroke="#ffd9a0" stroke-width="5"/><polygon points="50,22 76,66 24,66" fill="#d9443b"/></svg>',
+                             "image/svg+xml", cache=True)
+        if path.startswith(("/api/portrait/", "/api/art/portrait/", "/api/art/face/", "/api/art/bust/")):
             eid = path.rsplit("/", 1)[-1].removesuffix(".svg")
             e = s["entities"].get(eid)
             if not e or e.get("hidden"):
                 return self.json({"error": "unknown"}, 404)
             if e.get("portrait") and e["portrait"] in s["assets"] and s["assets"][e["portrait"]].get("public"):
                 return self.redirect(f"/asset/{e['portrait']}")
-            fn = art.face_svg if "/face/" in path else art.portrait_svg
+            fn = art.face_svg if "/face/" in path else art.bust_svg_any if "/bust/" in path else art.portrait_svg
             return self.send(200, fn(e), "image/svg+xml; charset=utf-8", cache=True)
         if path.startswith("/api/token/"):
             eid = path.rsplit("/", 1)[-1].removesuffix(".svg")

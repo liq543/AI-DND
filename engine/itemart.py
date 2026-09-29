@@ -106,6 +106,13 @@ def form_of(item):
     for key, form in FORMS:
         if re.search(r"\b" + re.escape(key), base):
             return form
+    meta = str(item.get("meta") or item.get("type") or "").lower()   # SRD magic items: "Weapon (any sword)", "Armor (plate)", "Ring"
+    for key, form in (("weapon (any axe", "axe"), ("battleaxe", "axe"), ("mace", "mace"), ("warhammer", "warhammer"), ("dagger", "dagger"),
+                      ("bow", "bow"), ("javelin", "javelin"), ("trident", "trident"), ("weapon", "sword"), ("shield", "shield"),
+                      ("armor (plate", "plate"), ("armor (leather", "leather"), ("armor", "chain"), ("potion", "potion"), ("ring", "ring"),
+                      ("wand", "wand"), ("rod", "rod"), ("staff", "staff"), ("scroll", "scroll")):
+        if key in meta:
+            return form
     kind = item.get("kind")
     if kind == "weapon":
         return "sword"

@@ -85,7 +85,7 @@ def _runs(row):
     return out
 
 
-def render_battle(m, mode="player", entities=(), current=None, show_grid=True, cell=CELL, highlight=None):
+def render_battle(m, mode="player", entities=(), current=None, show_grid=True, cell=CELL, highlight=None, live=False):
     w, h = m["w"], m["h"]
     player = mode == "player"
     grid = [list(r) for r in m["grid"]]
@@ -221,6 +221,14 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
         if player and m.get("fog") and revealed and not (0 <= fy < len(revealed) and revealed[fy][fx] == "1"):
             continue
         px, py = fx * cell + cell - 9, fy * cell + cell - 9
+        if live:  # the viewer: a small framed picture of the item
+            from . import itemart
+            s0 = cell * .56
+            parts.append(f'<g class="flooritem" data-floor="{esc(f["id"])}" style="cursor:pointer"><title>{esc(f["item"]["name"])} (on the floor)</title>'
+                         f'<rect x="{fx * cell + cell - s0 - 2:.1f}" y="{fy * cell + cell - s0 - 2:.1f}" width="{s0:.1f}" height="{s0:.1f}" rx="4" fill="#1a130c" fill-opacity=".85" stroke="#d8b36a" stroke-width="1.5"/>'
+                         f'<image href="/api/art/floor/{esc(m["id"])}/{esc(f["id"])}.svg?v={itemart.item_art_version(f["item"])}" x="{fx * cell + cell - s0 - 1:.1f}" y="{fy * cell + cell - s0 - 1:.1f}" '
+                         f'width="{s0 - 2:.1f}" height="{s0 - 2:.1f}"/></g>')
+            continue
         parts.append(f'<g class="flooritem" data-floor="{esc(f["id"])}" style="cursor:pointer"><title>{esc(f["item"]["name"])} (on the floor)</title>'
                      f'<rect x="{px - 7}" y="{py - 7}" width="14" height="14" rx="2" transform="rotate(45 {px} {py})" fill="#d8b36a" stroke="#2b1d0e" stroke-width="2"/>'
                      f'<circle cx="{px}" cy="{py}" r="2.5" fill="#2b1d0e"/></g>')
@@ -246,7 +254,7 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
                 else:
                     xs += [x0, x0 + n]
                     ys.append(y)
-        parts.append(f'<g fill="#0b0a0f" shape-rendering="crispEdges">{"".join(fog)}</g>')
+        parts.append(f'<g id="fog" fill="#0b0a0f" shape-rendering="crispEdges">{"".join(fog)}</g>')
         if xs:
             pad = 3
             fx0, fy0 = max(0, min(xs) - pad), max(0, min(ys) - pad)
@@ -340,12 +348,15 @@ def tokens_svg(m, entities, current, cell, player):
         side = assets.side_of(e)
         color = assets.SIDE_COLORS.get(side, "#888")
         icon = assets.icon_for_entity(e)
+        if side not in assets.SIDE_COLORS:
+            side = "neutral"
         sym = f"i-{icon}"
         symbols[sym] = icon
         hue = assets.hue_from(e["id"])
         dead = is_dead(e)
         cls = "token" + (" current" if current == e["id"] else "") + (" dead" if dead else "")
-        g = [f'<g class="{cls}" data-id="{esc(e["id"])}" data-stack="{esc(stack)}" opacity="{0.45 if dead else 1}">',
+        g = [f'<g class="{cls}" data-id="{esc(e["id"])}" data-stack="{esc(stack)}" data-cx="{cx:.1f}" data-cy="{cy:.1f}" data-r="{r:.1f}" '
+             f'data-side="{side}" opacity="{0.45 if dead else 1}">',
              f'<title>{esc(e["name"])}</title>']
         if current == e["id"]:
             g.append(f'<circle cx="{cx}" cy="{cy}" r="{r + 3}" fill="none" stroke="#ffd34d" stroke-width="4" filter="url(#glow)"><animate attributeName="stroke-opacity" values="1;.35;1" dur="1.6s" repeatCount="indefinite"/></circle>')
@@ -365,7 +376,7 @@ def tokens_svg(m, entities, current, cell, player):
                 bw = 2 * r - 6
                 col = "#3cb371" if frac > .5 else "#e0a030" if frac > .25 else "#d9443b"
                 g.append(f'<rect x="{cx - bw / 2}" y="{cy + r - 5}" width="{bw}" height="5" rx="2" fill="#111" fill-opacity=".7"/>'
-                         f'<rect x="{cx - bw / 2}" y="{cy + r - 5}" width="{bw * frac}" height="5" rx="2" fill="{col}"/>')
+                         f'<rect class="hpbar" data-w="{bw:.1f}" x="{cx - bw / 2}" y="{cy + r - 5}" width="{bw * frac}" height="5" rx="2" fill="{col}"/>')
             elif frac <= .5 and not dead:
                 g.append(f'<path d="M{cx - r * .7} {cy - r * .7} L{cx + r * .7} {cy + r * .7}" stroke="#d9443b" stroke-width="3" stroke-opacity=".85"/>')
         conds = [c["name"] for c in e.get("conditions", [])][:4]

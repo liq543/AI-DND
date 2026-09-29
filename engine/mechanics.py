@@ -340,7 +340,7 @@ def apply_damage(g, e, parts, source=None, crit=False, attacker=None, melee_with
     if patch.get("dead"):
         end_concentration(g, e, "died")
     g.say(msg, kind="damage", who=e["id"], amount=total, dtype=(parts[0][1] if parts else None), crit=bool(crit),
-          down=new_hp == 0, dead=bool(patch.get("dead")))
+          down=new_hp == 0, dead=bool(patch.get("dead")), hp=new_hp, hp_max=hp_max(e))
     # concentration
     if total > 0 and e.get("concentration") and not patch.get("dead"):
         if new_hp == 0:
@@ -372,7 +372,7 @@ def heal(g, e, amount, source):
     g.set(e, **patch)
     if e["hp"] == 0 and new > 0 or (new > 0 and any(c["name"] == "unconscious" and c.get("source") == "0 HP" for c in e.get("conditions", []))):
         remove_condition(g, e, "unconscious", quiet=True)
-    g.say(f"💚 {e['name']} regains {gained} HP from {source} ({new}/{mx}).", kind="heal", who=e["id"], amount=gained)
+    g.say(f"💚 {e['name']} regains {gained} HP from {source} ({new}/{mx}).", kind="heal", who=e["id"], amount=gained, hp=new, hp_max=mx)
     return gained
 
 

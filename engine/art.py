@@ -156,7 +156,8 @@ TYPE_STYLE = {  # creature art palettes: (backdrop, backdrop dark, silhouette li
     "plant": ("#2f5a2a", "#081208", "#b8e0a0", "#2f4a26", "#8ad06a"),
     "undead": ("#2f4a4a", "#060e10", "#c8e8e0", "#2f4040", "#7af0d0"),
 }
-HUMANLIKE_NAMES = ("vampire", "hag", "doppelganger", "drow", "duergar", "cultist", "lich")
+HUMANLIKE_NAMES = ("vampire", "hag", "doppelganger", "drow", "duergar", "cultist", "goblin", "hobgoblin", "bugbear", "kobold",
+                   "lizardfolk", "orc")
 
 
 # ============================================================== reading a description
@@ -385,7 +386,7 @@ def is_humanlike(e):
         return True
     t = (e.get("type") or "").lower()
     name = f"{e.get('srd_name', '')} {e.get('name', '')}".lower()
-    return t.startswith("humanoid") or any(k in name for k in HUMANLIKE_NAMES)
+    return t.startswith("humanoid") or any(re.search(r"\b" + k + r"\b", name) for k in HUMANLIKE_NAMES)
 
 
 LOOK_FIELDS = ("hair", "beard", "eyes", "skin", "marks", "headwear", "outfit", "cloak", "build", "age",
@@ -1298,6 +1299,11 @@ def creature_svg(e, mode="portrait", size=None):
 
 def portrait_svg(e, size=None):
     return bust_svg(e, "portrait", size) if is_humanlike(e) else creature_svg(e, "portrait", size)
+
+
+def bust_svg_any(e, size=None):
+    """Unframed head-and-shoulders (small portraits: party cards, sheet header)."""
+    return bust_svg(e, "bust", size) if is_humanlike(e) else creature_svg(e, "bust", size)
 
 
 def face_svg(e, size=None):

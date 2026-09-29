@@ -5,14 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Live Table</title>
 <link rel="stylesheet" href="/style.css">
+<link rel="icon" href="/favicon.svg">
 </head>
 <body>
 <header id="top">
-  <div class="brand"><span class="d20">⬢</span> <span id="title">Live Table</span></div>
+  <div class="brand"><svg class="d20" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,4 93,28 93,72 50,96 7,72 7,28"/><polygon class="in" points="50,22 76,66 24,66"/></svg><span id="title">Live Table</span></div>
   <div id="meta"></div>
   <div class="spacer"></div>
+  <div class="hbtns">
+    <button id="fxbtn" class="hbtn" title="Table animation" aria-haspopup="true" aria-expanded="false"><span class="ic">🎞</span><span id="fxlabel">Animations</span></button>
+    <div id="fxmenu" class="menu" hidden>
+      <div class="mhead">Table animation</div>
+      <div id="fxdm" class="muted small"></div>
+      <label class="opt"><input type="radio" name="fxpref" value="dm"> <span><b>As the DM set it</b><small>Moves, attacks, turn banners and weather play as the DM chose.</small></span></label>
+      <label class="opt"><input type="radio" name="fxpref" value="reduced"> <span><b>Reduced motion</b><small>Faster, no screen shake or weather.</small></span></label>
+      <label class="opt"><input type="radio" name="fxpref" value="off"> <span><b>Off</b><small>Changes appear instantly.</small></span></label>
+    </div>
+  </div>
   <div id="integrity" title="Every change is a signed, hash-chained event. Tampering is detected."></div>
-  <div id="conn" class="dot" title="live connection"></div>
+  <div id="conn" class="dot" title="Live connection"></div>
 </header>
 <div id="alert" hidden></div>
 <main>
@@ -22,8 +33,13 @@
     <nav id="maptabs"></nav>
     <div id="viewport">
       <div id="mapwrap"><div id="map"></div></div>
-      <div id="nomap">Waiting for the Dungeon Master to reveal a map…</div>
+      <canvas id="ambient"></canvas>
+      <div id="fxscreen"></div>
+      <div id="nomap"><div class="nm"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,4 93,28 93,72 50,96 7,72 7,28"/><polygon class="in" points="50,22 76,66 24,66"/></svg>
+        <p>Waiting for the Dungeon Master to reveal a map…</p></div></div>
+      <button id="skipfx" title="Skip the animation">Skip ⏭</button>
       <div class="mapctl">
+        <button data-z="follow" id="followbtn" title="Follow the action (camera)">◎</button>
         <button data-z="in" title="Zoom in">＋</button><button data-z="out" title="Zoom out">－</button><button data-z="fit" title="Fit">⤢</button>
       </div>
     </div>
@@ -47,9 +63,9 @@
   </aside>
 </main>
 <div id="requests"></div>
-<div id="diceov" hidden><div class="die"><svg viewBox="0 0 100 100"><polygon points="50,4 93,28 93,72 50,96 7,72 7,28" /><polygon class="inner" points="50,22 76,66 24,66"/></svg><span id="dieval"></span></div><div id="dielabel"></div></div>
-<div id="modal" hidden><div class="card"><button class="x" title="Close">✕</button><div id="modalbody"></div></div></div>
-<div id="toast" hidden></div>
+<div id="modal" hidden><div class="card"><button class="x" title="Close (Esc)">✕</button><div id="modalbody"></div></div></div>
+<div id="toasts"></div>
+<script src="/fx.js"></script>
 <script src="/app.js"></script>
 </body>
 </html>
