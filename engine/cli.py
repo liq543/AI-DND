@@ -12,7 +12,7 @@ import shutil
 import sys
 from pathlib import Path
 
-from . import assets, chargen, dice, maps, mechanics as M, render, srd, views
+from . import art, assets, chargen, dice, itemart, maps, mechanics as M, render, srd, views
 from .core import (Game, RuleError, derive, fmt_time, level, parse_duration, replay, tier, TIER_MAX_GP_AWARD,
                    SIZE_CELLS)
 from .store import ACTIVE_FILE, CAMPAIGNS, Store, TamperError, active_dir
@@ -356,7 +356,7 @@ def cmd_place(g, a):
     if a.force and M.combat(g):
         g.override(a.force, f"placed {e['name']} at ({x},{y})")
     g.set(e, token={"map": mid, "x": x, "y": y}, cells=SIZE_CELLS.get(e.get("size", "Medium"), 1))
-    g.say(f"{e['name']} is at ({x},{y}) on {m['name']}.", kind="move")
+    g.say(f"{e['name']} is at ({x},{y}) on {m['name']}.", kind="move", who=e["id"], map=mid, to=[x, y], placed=True)
     M.reveal_for(g, g.get(e["id"]))
 
 
@@ -380,7 +380,7 @@ def cmd_party_move(g, a):
         occupied = {(o["token"]["x"], o["token"]["y"]) for o in g.entities.values() if o.get("token", {}).get("map") == mid and o["id"] != e["id"]}
         spot = maps.free_cells(m, 1, __import__("random").Random(len(g.pending)), near=(x, y), avoid=frozenset(occupied), radius=3)
         if spot:
-            M.move(g, e["id"], spot[0])
+            M.move(g, e["id"], spot[0], group="party")
 
 
 def alive_e(e):
@@ -417,7 +417,7 @@ def cmd_combat(g, a):
         state = {"active": True, "round": 1, "turn": 0, "order": [], "economy": {}, "defeated": [],
                  "started": g.state["time"], "pending_init": pending, "unsorted": order}
         g.emit("combat.set", combat=state)
-        g.say("⚔ Roll for initiative! Combat begins.", kind="combat")
+        g.say("⚔ Roll for initiative! Combat begins.", kind="combat", phase="start")
         if not pending:
             finalize_initiative(g)
         else:
@@ -438,7 +438,7 @@ def cmd_combat(g, a):
             if c["turn"] >= n:
                 c["turn"] = 0
                 c["round"] += 1
-                g.say(f"— Round {c['round']} —", kind="combat")
+                g.say(f"— Round {c['round']} —", kind="combat", phase="round", round=c["round"])
                 # reactions refresh at the start of each creature's turn; reset per-turn economy
             nid = c["order"][c["turn"]]["id"]
             ne = g.entities.get(nid)
@@ -447,7 +447,7 @@ def cmd_combat(g, a):
         c["economy"] = {**c.get("economy", {}), nid: {}}
         g.emit("combat.set", combat=c)
         ne = g.get(nid)
-        g.say(f"▶ {ne['name']}'s turn (round {c['round']}).", kind="turn", who=nid)
+        g.say(f"▶ {ne['name']}'s turn (round {c['round']}).", kind="turn", who=nid, round=c["round"])
         M.start_of_turn(g, ne)
         return
     if a.action == "add":
@@ -474,7 +474,7 @@ def cmd_combat(g, a):
         c["economy"] = {**c.get("economy", {}), e["id"]: {}}
         g.emit("combat.set", combat=c)
         g.override(a.reason, f"turn returned to {e['name']}")
-        g.say(f"▶ {e['name']}'s turn (round {c['round']}) — returned after a skip.", kind="turn", who=e["id"])
+        g.say(f"▶ {e['name']}'s turn (round {c['round']}) — returned after a skip.", kind="turn", who=e["id"], round=c["round"])
         return
     if a.action == "oa-window":
         # beta repair: open the opportunity-attack window a move warning should have opened (logged publicly)
@@ -512,7 +512,7 @@ def cmd_combat(g, a):
         g.say(f"{e['name']} leaves combat.", kind="combat")
         if was_current:
             ne = g.get(c["order"][c["turn"]]["id"])
-            g.say(f"▶ {ne['name']}'s turn (round {c['round']}).", kind="turn", who=ne["id"])
+            g.say(f"▶ {ne['name']}'s turn (round {c['round']}).", kind="turn", who=ne["id"], round=c["round"])
             M.start_of_turn(g, ne)
         return
     if a.action == "end":
@@ -527,7 +527,7 @@ def cmd_combat(g, a):
                 g.set(e, conditions=[x for x in e["conditions"] if x not in conds])
         g.emit("combat.set", combat=None)
         g.say(f"🏁 Combat ends after {c['round']} round(s). Defeated: {', '.join(g.entities[i]['name'] for i in defeated if i in g.entities) or 'none'}"
-              f" ({xp} XP available — `xp award --encounter`).", kind="combat")
+              f" ({xp} XP available — `xp award --encounter`).", kind="combat", phase="end")
         return
     if a.action == "status":
         for i, o in enumerate(c["order"]):
@@ -543,7 +543,7 @@ def finalize_initiative(g):
     g.emit("combat.set", combat=c)
     g.say("Initiative order: " + " → ".join(f"{g.get(o['id'])['name']} ({o['init']})" for o in order if not g.get(o['id']).get('hidden')), kind="combat")
     first = g.get(order[0]["id"])
-    g.say(f"▶ {first['name']}'s turn (round 1).", kind="turn", who=first["id"])
+    g.say(f"▶ {first['name']}'s turn (round 1).", kind="turn", who=first["id"], round=1)
     M.start_of_turn(g, first)
 
 
@@ -1403,6 +1403,8 @@ def cmd_asset(g, a):
                 "license": a.license, "credit": a.credit or "", "source": src, "public": not a.private}
         g.emit("asset.add", asset=meta)
         g.note(f"Asset {aid} saved ({len(data) // 1024} KB, sha256 {sha[:12]}).")
+        if a.item:
+            set_item_art(g, a.item, aid)
         if a.portrait:
             e = g.get(a.portrait)
             g.set(e, portrait=aid)
@@ -1422,23 +1424,216 @@ def cmd_asset(g, a):
                                    "license": "original (generated for this campaign)", "credit": "DM", "source": "generated", "public": not a.private})
         if a.portrait:
             g.set(g.get(a.portrait), portrait=aid)
+        if a.item:
+            set_item_art(g, a.item, aid)
         g.note(f"Asset {aid} registered.")
         return
     if a.action == "portrait":
+        # Pin a portrait. Without this, every creature is drawn live from its look and description (and updates with them).
         e = g.get(a.args[0])
-        svg = assets.portrait_svg(e)
+        if a.clear:
+            g.set(e, portrait=None)
+            g.note(f"{e['name']} is drawn live from their look again.")
+            return
+        svg = assets.portrait_svg(e) if a.style == "heraldic" else art.portrait_svg(e)
         aid = srd.slug(f"portrait-{e['id']}")
+        while aid in s["assets"]:
+            aid += "-2"
         path, sha = assets.save_file(g.dir, svg.encode(), "image/svg+xml", aid)
         g.emit("asset.add", asset={"id": aid, "name": f"{e['name']} portrait", "kind": "portrait", "file": path.name, "sha256": sha,
                                    "license": "generated; icons CC BY 3.0 game-icons.net", "credit": "game-icons.net", "source": "generated", "public": True})
         g.set(e, portrait=aid)
-        g.note(f"Portrait {aid} generated.")
+        g.note(f"Portrait {aid} pinned (it no longer follows `asset look` changes; `asset portrait {e['id']} --clear` to go back to live art).")
+        return
+    if a.action == "look":
+        # What a creature looks like, feature by feature. The live table redraws its portrait and token from this.
+        e = g.get(a.args[0])
+        fields = {f: getattr(a, f"look_{f}") for f in art.LOOK_FIELDS if getattr(a, f"look_{f}", None)}
+        if a.clear:
+            drop = art.LOOK_FIELDS if a.clear == "all" else [x.strip() for x in a.clear.split(",")]
+            bad = [x for x in drop if x not in art.LOOK_FIELDS]
+            if bad:
+                raise RuleError(f"Unknown look field(s): {', '.join(bad)}. Fields: {', '.join(art.LOOK_FIELDS)}")
+            g.set(e, **{f"look__{f}": None for f in drop if f in (e.get("look") or {})})
+        if fields:
+            g.set(e, **{f"look__{k}": v for k, v in fields.items()})
+        if fields or a.clear:
+            if e.get("portrait"):
+                g.note(f"  Note: {e['name']} has a pinned portrait ({e['portrait']}); `asset portrait {e['id']} --clear` to show the live art.")
+            g.note("🎨 Look updated.")
+        g.note(art.describe_look(g.get(e["id"])))
+        return
+    if a.action == "art":
+        # Write the generated picture to a file so the DM can look at it (or hand-edit it and `asset draw` it back).
+        ref = a.args[0] if a.args else ""
+        if ":" in ref:
+            owner, _, iid = ref.partition(":")
+            if owner == "srd":
+                it = M.resolve_item(g, iid)
+                if not it:
+                    raise RuleError(f"No SRD item {iid}")
+                svg, name = itemart.item_svg({**it, "identified": True}), srd.slug(it["name"])
+            else:
+                it = M.find_item(g.get(owner), iid)
+                svg, name = itemart.item_svg(it), f"{owner}-{it['id']}"
+        else:
+            e = g.get(ref)
+            svg = art.face_svg(e) if a.crop == "face" else art.portrait_svg(e)
+            name = f"{e['id']}-{a.crop or 'portrait'}"
+        out = Path(a.out) if a.out else Path(g.dir) / "views" / "art" / f"{name}.svg"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(svg, encoding="utf-8")
+        g.note(f"Wrote {out}")
         return
     if a.action == "list":
         for k, v in s["assets"].items():
             print(f"{k}: {v['name']} [{v['kind']}] {v['license']} — {v.get('credit', '')} ({v['source'][:60]})")
         return
-    raise RuleError("asset icon|fetch|import|draw|portrait|list")
+    raise RuleError("asset icon|fetch|import|draw|portrait|look|art|list")
+
+
+def set_item_art(g, ref, aid):
+    """Give one inventory item its own picture (drawn or fetched) instead of the generated illustration."""
+    owner, _, iid = ref.partition(":")
+    e = g.get(owner)
+    it = M.find_item(e, iid)
+    g.set(e, inventory=[dict(i, art=aid) if i["id"] == it["id"] else i for i in e["inventory"]])
+    g.note(f"  {e['name']}'s {it['name']} now shows {aid}.")
+
+
+# ====================================================================== table animation (DM-controlled)
+
+ANIM_DEFAULTS = {"speed": 1.0, "moves": "on", "attacks": "on", "numbers": "on", "turns": "on", "camera": "follow", "dice": "on",
+                 "shake": "on", "sync": "on", "tokens": "art", "ambient": "none", "intensity": 0.6}
+ANIM_PRESETS = {
+    "cinematic": {"speed": 0.8, "moves": "on", "attacks": "on", "numbers": "on", "turns": "on", "camera": "follow", "dice": "on", "shake": "on", "sync": "on"},
+    "standard": {"speed": 1.0, "moves": "on", "attacks": "on", "numbers": "on", "turns": "on", "camera": "follow", "dice": "on", "shake": "on", "sync": "on"},
+    "quick": {"speed": 2.0, "moves": "on", "attacks": "on", "numbers": "on", "turns": "off", "camera": "follow", "dice": "off", "shake": "off", "sync": "off"},
+    "off": {"moves": "off", "attacks": "off", "numbers": "off", "turns": "off", "camera": "off", "dice": "off", "shake": "off", "sync": "off"},
+}
+ANIM_CHOICES = {"moves": ("on", "off"), "attacks": ("on", "off"), "numbers": ("on", "off"), "turns": ("on", "off"),
+                "camera": ("follow", "off"), "dice": ("on", "off"), "shake": ("on", "off"), "sync": ("on", "off"),
+                "tokens": ("art", "icon"), "ambient": ("none", "rain", "snow", "fog", "embers", "ash", "motes", "storm")}
+FX_EFFECTS = ("burst", "ring", "beam", "bolt", "projectile", "flash", "shake", "banner", "focus", "ping", "float", "sparkle", "smoke")
+FX_COLORS = {"fire": "#ff6a1a", "cold": "#6ad8ff", "ice": "#6ad8ff", "lightning": "#bfe4ff", "acid": "#9ae02a", "poison": "#6ac04a",
+             "necrotic": "#8a4ac0", "radiant": "#ffe28a", "holy": "#ffe28a", "force": "#b89aff", "psychic": "#ff6ad8",
+             "thunder": "#9ab0ff", "blood": "#c8102a", "shadow": "#3a2a5a", "arcane": "#9a6af0", "nature": "#5ac84a",
+             "gold": "#e0b448", "white": "#ffffff", "black": "#111111", "red": "#e0302a", "green": "#3ac85a", "blue": "#3a8af0",
+             "purple": "#9a4ae0", "orange": "#ff8a2a", "yellow": "#ffe04a"}
+
+
+def anim_settings(g):
+    return {**ANIM_DEFAULTS, **(g.state["view"].get("anim") or {})}
+
+
+def _fx_point(g, ref, mid):
+    """A creature id or x,y → [x, y] on map mid (creatures must be on that map)."""
+    if not ref:
+        return None
+    if re.match(r"^\s*\d+\s*,\s*\d+\s*$", ref):
+        return list(xy(ref))
+    e = g.get(ref)
+    t = e.get("token")
+    if not t or t.get("map") != mid:
+        raise RuleError(f"{e['name']} isn't on map {mid}.")
+    return {"id": e["id"]}
+
+
+def cmd_fx(g, a):
+    """How the live table animates (the DM's call), plus one-off visual effects. Visual only: nothing here changes the game."""
+    cur = anim_settings(g)
+    if a.action in ("status", "show"):
+        g.note("Table animation: " + ", ".join(f"{k}={v}" for k, v in cur.items()))
+        return
+    if a.action == "preset":
+        name = (a.args or [""])[0]
+        if name not in ANIM_PRESETS:
+            raise RuleError(f"fx preset {'|'.join(ANIM_PRESETS)}")
+        g.emit("view.set", anim={**cur, **ANIM_PRESETS[name], "preset": name})
+        g.note(f"🎞 Table animation preset: {name}.")
+        return
+    if a.action == "set":
+        new = dict(cur)
+        for kv in a.args:
+            if "=" not in kv:
+                raise RuleError(f"fx set key=value ... (got '{kv}'). Keys: speed, {', '.join(ANIM_CHOICES)}, intensity")
+            k, v = [x.strip().lower() for x in kv.split("=", 1)]
+            if k in ("speed", "intensity"):
+                try:
+                    f = float(v.rstrip("x"))
+                except ValueError:
+                    raise RuleError(f"{k} must be a number")
+                lo, hi = (0.25, 4.0) if k == "speed" else (0.1, 1.0)
+                if not lo <= f <= hi:
+                    raise RuleError(f"{k} must be between {lo} and {hi}")
+                new[k] = f
+            elif k in ANIM_CHOICES:
+                v = {"true": "on", "yes": "on", "false": "off", "no": "off", "none": "none"}.get(v, v)
+                if k == "camera" and v == "on":
+                    v = "follow"
+                if v not in ANIM_CHOICES[k]:
+                    raise RuleError(f"{k}: {'|'.join(ANIM_CHOICES[k])}")
+                new[k] = v
+            else:
+                raise RuleError(f"Unknown fx setting '{k}'. Keys: speed, {', '.join(ANIM_CHOICES)}, intensity")
+        new["preset"] = "custom"
+        g.emit("view.set", anim=new)
+        g.note("🎞 Table animation: " + ", ".join(f"{k}={v}" for k, v in new.items()))
+        return
+    if a.action == "ambient":
+        kind = (a.args or ["none"])[0].lower()
+        if kind not in ANIM_CHOICES["ambient"]:
+            raise RuleError(f"fx ambient {'|'.join(ANIM_CHOICES['ambient'])} [--intensity 0.1-1]")
+        new = {**cur, "ambient": kind}
+        if a.intensity is not None:
+            if not 0.1 <= a.intensity <= 1:
+                raise RuleError("--intensity must be between 0.1 and 1")
+            new["intensity"] = a.intensity
+        g.emit("view.set", anim=new)
+        g.note(f"🌦 Ambient: {kind}.")
+        return
+    if a.action in ("camera", "focus"):
+        a.action, a.args = "play", ["focus"] + list(a.args)
+    if a.action != "play":
+        raise RuleError("fx status | preset cinematic|standard|quick|off | set key=value ... | ambient <kind> | play <effect> ... | camera <id|x,y|fit>")
+    if not a.args or a.args[0] not in FX_EFFECTS:
+        raise RuleError(f"fx play {'|'.join(FX_EFFECTS)} [--at x,y|--on id] [--from id|x,y --to id|x,y] [--color fire|#hex] [--radius ft] [--text ...]")
+    eff = a.args[0]
+    rest = a.args[1:]
+    mid = a.map or g.state["view"].get("map")
+    cue = {"fx": eff}
+    if eff in ("banner", "float") and (a.text or rest):
+        cue["label"] = (a.text or " ".join(rest))[:120]
+    elif eff == "focus" and rest:
+        if rest[0] == "fit":
+            cue["fit"] = True
+        else:
+            cue["at"] = _fx_point(g, rest[0], mid)
+    at = a.on or a.at
+    if at:
+        cue["at"] = _fx_point(g, at, mid)
+    if a.src or a.dst:
+        if not (a.src and a.dst):
+            raise RuleError("--from and --to go together.")
+        cue["from"], cue["to"] = _fx_point(g, a.src, mid), _fx_point(g, a.dst, mid)
+    if eff in ("burst", "ring", "ping", "sparkle", "smoke", "float") and "at" not in cue:
+        raise RuleError(f"fx play {eff} needs --at x,y or --on <creature>.")
+    if eff in ("beam", "bolt", "projectile") and "from" not in cue:
+        raise RuleError(f"fx play {eff} needs --from and --to.")
+    if eff == "focus" and "at" not in cue and not cue.get("fit"):
+        raise RuleError("fx camera <creature|x,y|fit>")
+    if eff == "float" and not cue.get("label"):
+        raise RuleError('fx play float --on <creature> --text "..."')
+    if a.color:
+        c = a.color.lower()
+        if c not in FX_COLORS and not re.match(r"^#[0-9a-f]{6}$", c):
+            raise RuleError(f"--color: {', '.join(FX_COLORS)} or #rrggbb")
+        cue["color"] = FX_COLORS.get(c, c)
+    if a.radius:
+        cue["radius"] = max(5, min(120, a.radius))
+    cue["map"] = mid
+    what = {"focus": "camera", "banner": f"banner “{cue.get('label', '')}”"}.get(eff, eff)
+    g.say(f"🎞 {what}", kind="fx", **cue)
 
 
 def cmd_say(g, a):
@@ -2029,7 +2224,7 @@ def build_parser():
     c.add_argument("--text", help="map poi: what the characters perceive (becomes the journal entry)")
     c.add_argument("--reason", help="map poi-move/poi-remove: what changed")
 
-    c = sp.add_parser("asset", help="icon|fetch|import|draw|portrait|list")
+    c = sp.add_parser("asset", help="icon|fetch|import|draw|portrait|look|art|list")
     c.add_argument("action")
     c.add_argument("args", nargs="*")
     c.add_argument("--name")
@@ -2037,7 +2232,27 @@ def build_parser():
     c.add_argument("--license")
     c.add_argument("--credit")
     c.add_argument("--portrait", help="set as this creature's portrait")
+    c.add_argument("--item", help="draw/fetch/import: use as this item's picture (owner:item-id)")
     c.add_argument("--private", action="store_true")
+    c.add_argument("--style", choices=["art", "heraldic"], default="art", help="portrait: generated bust (default) or the old heraldic card")
+    c.add_argument("--clear", nargs="?", const="all", help="portrait: unpin; look: clear fields (comma list or all)")
+    c.add_argument("--out", help="art: write the SVG here")
+    c.add_argument("--crop", choices=["portrait", "face"], help="art: framed portrait (default) or the token face")
+    for f in ("hair", "beard", "eyes", "skin", "marks", "headwear", "outfit", "cloak", "build", "age", "expression", "horns",
+              "accent", "background", "presentation"):
+        c.add_argument(f"--{f}", dest=f"look_{f}", help=f"look: {f} (free text, e.g. --hair \"long silver braid\")")
+    c = sp.add_parser("fx", help="table animation: status|preset|set|ambient|play <effect>|camera <target>")
+    c.add_argument("action")
+    c.add_argument("args", nargs="*")
+    c.add_argument("--at")
+    c.add_argument("--on")
+    c.add_argument("--from", dest="src")
+    c.add_argument("--to", dest="dst")
+    c.add_argument("--color")
+    c.add_argument("--radius", type=int, help="feet")
+    c.add_argument("--text")
+    c.add_argument("--map")
+    c.add_argument("--intensity", type=float)
     c = sp.add_parser("say", help="narration or NPC speech to the viewer feed")
     c.add_argument("text", nargs="+")
     c.add_argument("--as", dest="speaker")
@@ -2092,7 +2307,7 @@ HANDLERS = {
     "damage": cmd_damage, "heal": cmd_heal, "temphp": cmd_temphp, "condition": cmd_condition, "exhaustion": cmd_exhaustion,
     "feature": cmd_feature, "bardic": cmd_bardic, "deathsave": cmd_deathsave, "stabilize": cmd_stabilize,
     "legendary-resist": cmd_legendary, "rest": cmd_rest, "time": cmd_time, "travel": cmd_travel, "item": cmd_item,
-    "coins": cmd_coins, "xp": cmd_xp, "encounter": cmd_encounter, "map": cmd_map, "asset": cmd_asset, "say": cmd_say,
+    "coins": cmd_coins, "xp": cmd_xp, "encounter": cmd_encounter, "map": cmd_map, "asset": cmd_asset, "say": cmd_say, "fx": cmd_fx,
     "scene": cmd_scene, "show": cmd_show, "homebrew": cmd_homebrew, "request": cmd_request, "roll": cmd_roll,
     "status": cmd_status, "audit": cmd_audit, "log": cmd_log,
 }

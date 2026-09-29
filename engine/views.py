@@ -7,7 +7,7 @@ write_snapshots(): human-readable state.md + party/<id>.md regenerated after eve
 from pathlib import Path
 import re as _re
 
-from . import render, srd
+from . import art, itemart, render, srd
 from .core import derive, fmt_time, item_display_name, item_known, level, pb, resources
 from .mechanics import coins_total_cp, combat, current_id, economy, fmt_cp, xp_threshold
 
@@ -79,7 +79,8 @@ def player_item(it):
     known = item_known(it)
     out = {k: it.get(k) for k in ("id", "qty", "equipped", "attuned", "kind", "note", "source", "magic", "lit", "category", "base_name")}
     out.update({"name": it["name"] if known else item_display_name(dict(it, alias=None)), "alias": it.get("alias"),
-                "rarity": it.get("rarity") if known else None, "identified": known})
+                "rarity": it.get("rarity") if known else None, "identified": known, "art": itemart.item_art_version(it),
+                "custom_art": bool(it.get("art"))})
     return out
 
 
@@ -146,7 +147,7 @@ def pc_view(g, e):
         "inventory": [player_item(it) for it in e.get("inventory", [])],
         "feats": [f["name"] for f in e.get("feats", [])], "languages": e.get("languages", []),
         "features": features_of(e), "tools": e.get("tools", []), "choices": e.get("choices", {}),
-        "token": e.get("token"), "portrait": e.get("portrait"), "hit_dice": {c: {"max": l, "left": l - e.get("hd_spent", {}).get(c, 0)} for c, l in e["classes"].items()},
+        "token": e.get("token"), "portrait": e.get("portrait"), "art": art.art_version(e), "hit_dice": {c: {"max": l, "left": l - e.get("hd_spent", {}).get(c, 0)} for c, l in e["classes"].items()},
     }
 
 
@@ -154,7 +155,8 @@ def npc_view(g, e):
     ally = e.get("side") == "ally"
     v = {"id": e["id"], "kind": e["kind"], "name": e["name"], "side": e.get("side", "enemy"), "type": e.get("type"),
          "size": e.get("size"), "status": status_band(e), "conditions": [c["name"] for c in e.get("conditions", [])],
-         "token": e.get("token"), "dead": e.get("dead") or e.get("hp", 1) <= 0, "portrait": e.get("portrait")}
+         "token": e.get("token"), "dead": e.get("dead") or e.get("hp", 1) <= 0, "portrait": e.get("portrait"),
+         "art": art.art_version(e)}
     if ally:
         v.update({"hp": e["hp"], "hp_max": e["hp_max"], "ac": derive(e)["ac"]})
     return v
@@ -166,7 +168,7 @@ def creature_info(g, e):
     s = g.state
     ally = e.get("side") == "ally"
     name = e["name"]
-    info = {"id": e["id"], "name": name, "side": e.get("side", "enemy"), "size": e.get("size"), "type": e.get("type"),
+    info = {"id": e["id"], "name": name, "side": e.get("side", "enemy"), "size": e.get("size"), "type": e.get("type"), "art": art.art_version(e),
             "status": status_band(e), "dead": e.get("dead") or e.get("hp", 1) <= 0,
             "conditions": [{"name": c["name"], "source": c.get("source"), "until": c.get("until")} for c in e.get("conditions", [])],
             "lore": e.get("lore", []), "full": ally, "appearance": e.get("appearance", "")}
@@ -213,6 +215,92 @@ def visible_maps(g):
     return {mid for mid in vis if s["maps"].get(mid, {}).get("shown")}
 
 
+def _seen(g, e):
+    """Can the players see this creature where it stands right now?"""
+    if not e or e.get("hidden"):
+        return False
+    t = e.get("token")
+    if not t or e["kind"] == "pc" or e.get("side") == "ally":
+        return True
+    m = g.state["maps"].get(t.get("map"))
+    if not m or not m.get("fog"):
+        return True
+    rv = m.get("revealed") or []
+    return 0 <= t["y"] < len(rv) and rv[t["y"]][t["x"]] == "1"
+
+
+def _cell_seen(m, x, y):
+    if not m.get("fog"):
+        return True
+    rv = m.get("revealed") or []
+    return 0 <= y < len(rv) and 0 <= x < len(rv[y]) and rv[y][x] == "1"
+
+
+def animation_cues(g, feed):
+    """What the live table animates: the structured side of recent public feed lines (moves, attacks, damage, turns,
+    DM effects), filtered so an animation never shows a hidden creature or a position under fog."""
+    s = g.state
+    ent = s["entities"]
+    out = []
+    for f in feed[-80:]:
+        k = f.get("kind")
+        c = {"seq": f.get("seq"), "k": k}
+        who = ent.get(f.get("who")) if f.get("who") else None
+        if k == "move" and who:
+            m = s["maps"].get(f.get("map"))
+            path = f.get("path") or ([f["to"]] if f.get("to") else None)
+            if not m or not path or not _seen(g, who):
+                continue
+            if who["kind"] != "pc" and who.get("side") != "ally":
+                path = [p for p in path if _cell_seen(m, *p)]
+                if not path:
+                    continue
+            c.update(who=who["id"], map=f["map"], path=path, placed=bool(f.get("placed")), forced=bool(f.get("forced")),
+                     group=f.get("group"))
+        elif k == "attack" and f.get("target"):
+            tgt = ent.get(f["target"])
+            if not _seen(g, tgt):
+                continue
+            c.update(who=who["id"] if _seen(g, who) else None, target=tgt["id"], hit=f.get("hit"), crit=f.get("crit"),
+                     ranged=f.get("ranged"), dtype=f.get("dtype"), spell=f.get("spell"), roll=f.get("roll"), nat=f.get("nat"))
+        elif k == "damage" and "amount" in f:
+            if not _seen(g, who):
+                continue
+            c.update(who=who["id"], amount=f["amount"], dtype=f.get("dtype"), crit=f.get("crit"), down=f.get("down"), dead=f.get("dead"))
+        elif k == "heal" and who and ("amount" in f or "temp" in f):
+            if not _seen(g, who):
+                continue
+            c.update(who=who["id"], amount=f.get("amount"), temp=f.get("temp"))
+        elif k == "condition" and f.get("cond"):
+            if not _seen(g, who):
+                continue
+            c.update(who=who["id"], cond=f["cond"], on=f.get("on"))
+        elif k == "spell" and f.get("spell"):
+            tg = [t for t in f.get("targets", []) if _seen(g, ent.get(t))]
+            if not _seen(g, who) and not tg:
+                continue
+            c.update(who=who["id"] if _seen(g, who) else None, spell=f["spell"], targets=tg, dtype=f.get("dtype"), fxkind=f.get("fxkind"))
+        elif k == "roll" and (f.get("save") or f.get("death")):
+            if not _seen(g, who):
+                continue
+            c.update(who=who["id"], save=f.get("save"), success=f.get("success"), death=f.get("death"), roll=f.get("roll"))
+        elif k == "turn" and who:
+            if not _seen(g, who):
+                continue
+            c.update(who=who["id"], round=f.get("round"))
+        elif k == "combat" and f.get("phase"):
+            c.update(phase=f["phase"], round=f.get("round"))
+        elif k == "fx":
+            pts = [f.get(p) for p in ("at", "from", "to") if isinstance(f.get(p), dict)]
+            if any(not _seen(g, ent.get(p.get("id"))) for p in pts):
+                continue
+            c.update({x: f[x] for x in ("fx", "at", "from", "to", "color", "radius", "label", "map", "fit") if x in f})
+        else:
+            continue
+        out.append(c)
+    return out
+
+
 def player_view(g):
     s = g.state
     c = combat(g)
@@ -239,7 +327,8 @@ def player_view(g):
              for r in s["rolls"] if not r.get("hidden")][-60:]
     maps_known = {mid: {"id": mid, "name": m["name"], "kind": m["kind"], "w": m["w"], "h": m["h"],
                         "floor": [{"id": f["id"], "x": f["x"], "y": f["y"], "name": f["item"]["name"], "qty": f["item"].get("qty", 1),
-                                   "note": f.get("note", "")} for f in m.get("floor", [])],
+                                   "note": f.get("note", ""), "art": itemart.item_art_version(f["item"])} for f in m.get("floor", [])
+                                  if not m.get("fog") or (m.get("revealed") and m["revealed"][f["y"]][f["x"]] == "1")],
                         "pois": [{k: p[k] for k in ("id", "x", "y", "name", "journal")} for p in m.get("pois", [])
                                  if not m.get("fog") or (m.get("revealed") and m["revealed"][p["y"]][p["x"]] == "1")]}
                   for mid, m in s["maps"].items() if mid in visible_maps(g)}
@@ -254,7 +343,7 @@ def player_view(g):
                    "economy": econ} if c else None,
         "requests": [{"id": r["id"], "who": r["who"], "name": s["entities"].get(r["who"], {}).get("name"), "label": r["label"]}
                      for r in s["requests"].values()],
-        "feed": feed, "rolls": rolls, "roll_count": s["roll_count"],
+        "feed": feed, "rolls": rolls, "roll_count": s["roll_count"], "cues": animation_cues(g, feed),
         "journal": s.get("journal", []),
         "lore": [{"id": e["id"], "name": e["name"], "facts": e.get("lore", [])} for e in s["entities"].values()
                  if e.get("lore") and not e.get("hidden")],
@@ -263,8 +352,10 @@ def player_view(g):
     }
 
 
-def map_svg(g, map_id, mode="player"):
+def map_svg(g, map_id, mode="player", live=False):
+    """live=True: for the viewer, where tokens show each creature's generated art (static snapshot files keep emblems)."""
     m = g.state["maps"][map_id]
+    style = (g.state["view"].get("anim") or {}).get("tokens", "art")
     ents = []
     for e in g.state["entities"].values():
         if e.get("token", {}).get("map") != map_id:
@@ -274,6 +365,8 @@ def map_svg(g, map_id, mode="player"):
         ee = dict(e)
         if e.get("portrait") and e["portrait"] in g.state["assets"]:
             ee["portrait_href"] = f"/asset/{e['portrait']}"
+        elif live and style == "art":
+            ee["portrait_href"] = f"/api/art/face/{e['id']}.svg?v={art.art_version(e)}"
         ents.append(ee)
     party_pos = g.state["view"].get("party_pos") if m["kind"] == "region" else None
     return render.render_map(m, mode, ents, current_id(g), party_pos=party_pos)

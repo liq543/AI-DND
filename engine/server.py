@@ -6,6 +6,7 @@ Updates are pushed with Server-Sent Events whenever the signed log changes.
 """
 import json
 import mimetypes
+import re
 import threading
 import time
 import traceback
@@ -13,7 +14,7 @@ import urllib.parse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
-from . import assets, srd, views
+from . import art, assets, itemart, srd, views
 from .core import Game, RuleError, derive
 from .store import TamperError, active_dir
 
@@ -89,7 +90,7 @@ class Handler(BaseHTTPRequestHandler):
         q = urllib.parse.parse_qs(url.query)
         if path in ("/", "/index.html"):
             return self.send(200, (VIEWER / "index.html").read_bytes(), "text/html; charset=utf-8")
-        if path in ("/app.js", "/style.css"):
+        if re.fullmatch(r"/[a-z][a-z0-9-]*\.(js|css)", path) and (VIEWER / path[1:]).is_file():
             return self.send(200, (VIEWER / path[1:]).read_bytes(), mimetypes.guess_type(path)[0] + "; charset=utf-8")
         if path == "/events":
             return self.sse()
@@ -110,25 +111,54 @@ class Handler(BaseHTTPRequestHandler):
             m = s["maps"].get(mid)
             if not m or not m.get("shown") or mid not in views.visible_maps(g):
                 return self.json({"error": "map not shown to players"}, 404)
-            svg = views.map_svg(g, mid, "player")
+            svg = views.map_svg(g, mid, "player", live=True)
             if m.get("background") and m["background"] in s["assets"]:
                 svg = svg.replace("<defs>", f'<image href="/asset/{m["background"]}" x="0" y="0" width="{m["w"] * 32}" height="{m["h"] * 32}" preserveAspectRatio="none"/><defs>', 1)
             return self.svg(svg)
-        if path.startswith("/api/portrait/"):
+        if path.startswith("/api/portrait/") or path.startswith("/api/art/portrait/") or path.startswith("/api/art/face/"):
             eid = path.rsplit("/", 1)[-1].removesuffix(".svg")
             e = s["entities"].get(eid)
             if not e or e.get("hidden"):
                 return self.json({"error": "unknown"}, 404)
-            if e.get("portrait") and e["portrait"] in s["assets"]:
+            if e.get("portrait") and e["portrait"] in s["assets"] and s["assets"][e["portrait"]].get("public"):
                 return self.redirect(f"/asset/{e['portrait']}")
-            return self.svg(assets.portrait_svg(e))
+            fn = art.face_svg if "/face/" in path else art.portrait_svg
+            return self.send(200, fn(e), "image/svg+xml; charset=utf-8", cache=True)
         if path.startswith("/api/token/"):
             eid = path.rsplit("/", 1)[-1].removesuffix(".svg")
             e = s["entities"].get(eid)
             if not e or e.get("hidden"):
                 return self.json({"error": "unknown"}, 404)
-            href = f"/asset/{e['portrait']}" if e.get("portrait") in s["assets"] else None
-            return self.svg(assets.token_svg(e, 96, href))
+            own = e.get("portrait") in s["assets"] and s["assets"][e["portrait"]].get("public")
+            if own:  # an <img> can't load images inside an SVG, so the picture is inlined
+                a = s["assets"][e["portrait"]]
+                inner = assets.data_uri(Path(g.dir) / "assets" / a["file"])
+                return self.send(200, assets.token_svg(e, 96, inner), "image/svg+xml; charset=utf-8", cache=True)
+            return self.send(200, assets.token_svg(e, 96, face=art.face_svg(e, 108)), "image/svg+xml; charset=utf-8", cache=True)
+        if path.startswith("/api/art/item/"):
+            parts = path[len("/api/art/item/"):].removesuffix(".svg").split("/")
+            if parts[0] == "srd" and len(parts) > 1:
+                from . import mechanics as M
+                it = M.resolve_item(g, urllib.parse.unquote(parts[1]))
+                if not it:
+                    return self.json({"error": "unknown item"}, 404)
+                return self.send(200, itemart.item_svg({**it, "identified": True}), "image/svg+xml; charset=utf-8", cache=True)
+            e = s["entities"].get(parts[0])
+            it = next((i for i in (e or {}).get("inventory", []) if len(parts) > 1 and i["id"] == parts[1]), None) if e and e["kind"] == "pc" else None
+            if not it:
+                return self.json({"error": "unknown"}, 404)
+            if it.get("art") in s["assets"] and s["assets"][it["art"]].get("public"):
+                return self.redirect(f"/asset/{it['art']}")
+            return self.send(200, itemart.item_svg(it), "image/svg+xml; charset=utf-8", cache=True)
+        if path.startswith("/api/art/floor/"):
+            parts = path[len("/api/art/floor/"):].removesuffix(".svg").split("/")
+            m = s["maps"].get(parts[0]) if parts else None
+            if not m or len(parts) < 2 or parts[0] not in views.visible_maps(g):
+                return self.json({"error": "unknown"}, 404)
+            f = next((x for x in m.get("floor", []) if x["id"] == parts[1]), None)
+            if not f or (m.get("fog") and m.get("revealed") and m["revealed"][f["y"]][f["x"]] != "1"):
+                return self.json({"error": "unknown"}, 404)
+            return self.send(200, itemart.item_svg(f["item"]), "image/svg+xml; charset=utf-8", cache=True)
         if path.startswith("/api/card/"):
             return self.card(g, path[len("/api/card/"):], q)
         if path == "/api/pins":

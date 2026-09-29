@@ -229,7 +229,8 @@ def saving_throw(g, e, ability, dc, adv=(), dis=(), source=None, spell=False, no
     mode = _mode(adv, dis)
     r = g.roll(f"1d20{fmt_mod(m) if m else ''}", purpose or f"{ab.upper()} save" + (f" vs {source}" if source else ""), e["id"], mode, request=request)
     ok = r["total"] >= dc
-    g.say(f"{e['name']} — {label}{_fmt_mode(mode, adv, dis)}: {r['text']} → {'SUCCESS' if ok else 'FAILURE'}", kind="roll", roll=r["id"])
+    g.say(f"{e['name']} — {label}{_fmt_mode(mode, adv, dis)}: {r['text']} → {'SUCCESS' if ok else 'FAILURE'}", kind="roll", roll=r["id"],
+          who=e["id"], save=ab, success=ok)
     res = {"success": ok, "total": r["total"], "nat": r["nat"]}
     if not ok and e["kind"] != "pc" and (e.get("legendary_resistance") or 0) > e.get("legendary_resistance_used", 0):
         g.note(f"  {e['name']} may use Legendary Resistance ({e['legendary_resistance'] - e.get('legendary_resistance_used', 0)} left): "
@@ -338,7 +339,8 @@ def apply_damage(g, e, parts, source=None, crit=False, attacker=None, melee_with
         add_condition(g, e, "unconscious", source="0 HP", quiet=True)
     if patch.get("dead"):
         end_concentration(g, e, "died")
-    g.say(msg, kind="damage", who=e["id"])
+    g.say(msg, kind="damage", who=e["id"], amount=total, dtype=(parts[0][1] if parts else None), crit=bool(crit),
+          down=new_hp == 0, dead=bool(patch.get("dead")))
     # concentration
     if total > 0 and e.get("concentration") and not patch.get("dead"):
         if new_hp == 0:
@@ -370,7 +372,7 @@ def heal(g, e, amount, source):
     g.set(e, **patch)
     if e["hp"] == 0 and new > 0 or (new > 0 and any(c["name"] == "unconscious" and c.get("source") == "0 HP" for c in e.get("conditions", []))):
         remove_condition(g, e, "unconscious", quiet=True)
-    g.say(f"💚 {e['name']} regains {gained} HP from {source} ({new}/{mx}).", kind="heal", who=e["id"])
+    g.say(f"💚 {e['name']} regains {gained} HP from {source} ({new}/{mx}).", kind="heal", who=e["id"], amount=gained)
     return gained
 
 
@@ -380,7 +382,7 @@ def temp_hp(g, e, amount, source):
         g.say(f"{e['name']} keeps {cur} temporary HP (temporary HP don't stack; {amount} from {source} is not higher).")
         return
     g.set(e, temp_hp=int(amount))
-    g.say(f"🛡 {e['name']} gains {amount} temporary HP from {source}.", kind="heal")
+    g.say(f"🛡 {e['name']} gains {amount} temporary HP from {source}.", kind="heal", who=e["id"], temp=int(amount))
 
 
 # ====================================================================== conditions
@@ -404,7 +406,8 @@ def add_condition(g, e, name, source=None, until=None, caster=None, spell=None, 
     conds.append(entry)
     g.set(e, conditions=conds)
     if not quiet:
-        g.say(f"{e['name']} is now {name.title()}" + (f" ({source})" if source else "") + (f" until {until}" if until else "") + ".", kind="condition", who=e["id"])
+        g.say(f"{e['name']} is now {name.title()}" + (f" ({source})" if source else "") + (f" until {until}" if until else "") + ".", kind="condition",
+              who=e["id"], cond=name, on=True)
     if name in ("incapacitated", "paralyzed", "stunned", "unconscious", "petrified") and e.get("concentration"):
         end_concentration(g, e, f"became {name.title()}")
     return True
@@ -419,7 +422,7 @@ def remove_condition(g, e, name, quiet=False):
         return
     g.set(e, conditions=conds)
     if not quiet:
-        g.say(f"{e['name']} is no longer {name.title()}.", kind="condition", who=e["id"])
+        g.say(f"{e['name']} is no longer {name.title()}.", kind="condition", who=e["id"], cond=name, on=False)
 
 
 def release_spell_if_unused(g, cond):
@@ -617,7 +620,8 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
     line = (f"⚔ {att['name']} attacks {tgt['name']} with {name}{_fmt_mode(mode, a_adv, a_dis)}: {r['text']} vs AC {eff_ac}"
             + (f" ({cover} cover +{cover_bonus})" if cover_bonus else "") + " → " +
             ("CRITICAL HIT!" if crit else "HIT" if hit else "MISS" + (" (natural 1)" if r["nat"] == 1 else "")))
-    g.say(line, kind="attack", roll=r["id"], who=att["id"])
+    g.say(line, kind="attack", roll=r["id"], who=att["id"], target=tgt["id"], hit=hit, crit=crit, ranged=bool(ranged),
+          weapon=name, dtype=(dmg_parts[0][1] if dmg_parts else None), nat=r["nat"])
     if not hit:
         if att["kind"] == "pc" and prof.get("mastery") == "graze" and prof["mastery"] in [m.lower() for m in att.get("masteries", [])]:
             gd = max(0, amod(att, prof["ability"]))
@@ -936,7 +940,9 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
             return {"failed": True}
     g.say(f"✨ {e['name']} casts {spell['name']}" + (f" at level {slot_level}" if base and slot_level > base else "") +
           (" as a ritual" if ritual else "") + (f" (from {how})" if how in ("scroll", "granted") else "") +
-          (f" targeting {', '.join(t['name'] for t in tgts)}" if tgts else "") + ".", kind="spell", who=e["id"])
+          (f" targeting {', '.join(t['name'] for t in tgts)}" if tgts else "") + ".", kind="spell", who=e["id"],
+          spell=spell["slug"], targets=[t["id"] for t in tgts], dtype=(spell.get("effect") or {}).get("type"),
+          fxkind=(spell.get("effect") or {}).get("kind"))
     # --------------------------------------------------------------- effects
     fx = spell["effect"]
     char_level = level(e) if e["kind"] == "pc" else max(1, int(srd.num(str(e.get("cr", "1")).split("/")[0], 1)))
@@ -1049,7 +1055,8 @@ def spell_attack(g, e, t, spell, sc, expr, fx, adv, dis, now):
     crit = r["nat"] == 20
     hit = crit or (r["nat"] != 1 and r["total"] >= ac)
     g.say(f"✨ {spell['name']} → {t['name']}{_fmt_mode(mode, a_adv, a_dis)}: {r['text']} vs AC {ac} → " +
-          ("CRITICAL HIT!" if crit else "HIT" if hit else "MISS"), kind="attack", roll=r["id"])
+          ("CRITICAL HIT!" if crit else "HIT" if hit else "MISS"), kind="attack", roll=r["id"], who=e["id"], target=t["id"],
+          hit=hit, crit=crit, ranged=ranged, spell=spell["slug"], dtype=fx.get("type"), nat=r["nat"])
     if hit and expr:
         dr = g.roll(expr, f"{spell['name']} damage", e["id"], crit=crit)
         apply_damage(g, t, [[dr["total"], fx["type"]]], source=spell["name"], crit=crit)
@@ -1085,7 +1092,8 @@ def death_save(g, e, now=False, request=None):
         ds["stable"] = True
         txt += f". {e['name']} is Stable."
     g.set(e, **patch)
-    g.say(txt, kind="roll", roll=r["id"])
+    g.say(txt, kind="roll", roll=r["id"], who=e["id"], death=("dead" if patch.get("dead") else "stable" if ds.get("stable") else
+                                                            "fail" if r["nat"] == 1 or r["total"] < 10 else "success"))
     return {"total": r["total"]}
 
 
@@ -1152,7 +1160,7 @@ def end_of_turn(g, e):
 
 # ====================================================================== movement
 
-def move(g, ref, dest=None, path=None, dash=False, force=None, crawl=False, jump=False):
+def move(g, ref, dest=None, path=None, dash=False, force=None, crawl=False, jump=False, group=None):
     e = g.get(ref)
     if not e.get("token"):
         raise RuleError(f"{e['name']} isn't placed on a map. Use `place`.")
@@ -1229,7 +1237,8 @@ def move(g, ref, dest=None, path=None, dash=False, force=None, crawl=False, jump
     end = full[-1]
     g.set(e, token={**e["token"], "x": end[0], "y": end[1]})
     trap_hits = [f for f in m.get("features", []) if f.get("type") == "trap" and f.get("hidden") and (f["x"], f["y"]) in set(full[1:])]
-    g.say(f"🚶 {e['name']} moves {feet} ft to ({end[0]},{end[1]})" + (" (forced)" if force else "") + ".", kind="move", who=e["id"])
+    g.say(f"🚶 {e['name']} moves {feet} ft to ({end[0]},{end[1]})" + (" (forced)" if force else "") + ".", kind="move", who=e["id"],
+          path=[list(p) for p in full], map=e["token"]["map"], forced=bool(force), **({"group": group} if group else {}))
     for t in trap_hits:
         g.note(f"  ⚠ TRAP: {e['name']} entered ({t['x']},{t['y']}) — {t['name']}. {t.get('note', '')} (passive Perception {derive(e).get('passive_perception', 10)})")
     reveal_for(g, e)

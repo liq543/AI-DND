@@ -194,13 +194,23 @@ def side_of(e):
 
 # ------------------------------------------------------------ token & portrait
 
-def token_svg(e, size=128, portrait_href=None):
+def nest_svg(svg, x, y, w, h):
+    """Place a standalone SVG document inside another one at (x, y) with size w×h."""
+    svg = re.sub(r'\s(width|height)="[\d.]+"', "", svg, count=2)
+    return svg.replace("<svg ", f'<svg x="{x}" y="{y}" width="{w}" height="{h}" ', 1)
+
+
+def token_svg(e, size=128, portrait_href=None, face=None):
+    """Round token: side-coloured ring around the creature's picture (an image href, an inline SVG, or its emblem)."""
     color = SIDE_COLORS.get(side_of(e), "#888")
     hue = hue_from(e["id"])
-    inner = (f'<clipPath id="c"><circle cx="64" cy="64" r="54"/></clipPath>'
-             f'<image href="{esc(portrait_href)}" x="10" y="10" width="108" height="108" clip-path="url(#c)" preserveAspectRatio="xMidYMid slice"/>'
-             if portrait_href else
-             f'<g transform="translate(24 24) scale(0.15625)" fill="#f4efe6">{icon_body(icon_for_entity(e)).replace("currentColor", "#f4efe6")}</g>')
+    if face:  # inline generated art, clipped to the disc
+        inner = f'<clipPath id="c"><circle cx="64" cy="64" r="54"/></clipPath><g clip-path="url(#c)">{nest_svg(face, 10, 10, 108, 108)}</g>'
+    elif portrait_href:
+        inner = (f'<clipPath id="c"><circle cx="64" cy="64" r="54"/></clipPath>'
+                 f'<image href="{esc(portrait_href)}" x="10" y="10" width="108" height="108" clip-path="url(#c)" preserveAspectRatio="xMidYMid slice"/>')
+    else:
+        inner = f'<g transform="translate(24 24) scale(0.15625)" fill="#f4efe6">{icon_body(icon_for_entity(e)).replace("currentColor", "#f4efe6")}</g>'
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="{size}" height="{size}">'
             f'<defs><radialGradient id="g" cx="40%" cy="35%"><stop offset="0" stop-color="hsl({hue},35%,42%)"/>'
             f'<stop offset="1" stop-color="hsl({hue},40%,18%)"/></radialGradient></defs>'
