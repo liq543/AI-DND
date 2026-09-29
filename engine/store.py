@@ -1,9 +1,11 @@
 """Append-only, hash-chained, HMAC-signed event log — the campaign's mechanical memory.
 
 Game state is never stored directly: it is rebuilt by replaying events.jsonl. Each event carries
-the HMAC of (previous hash + its own content) under a per-campaign secret kept OUTSIDE the project
-folder (~/.dnd-engine/keys/). Editing, deleting, reordering or inserting any line breaks the chain,
-and the engine refuses to continue until the tampering is resolved with `engine verify`.
+the HMAC of (previous hash + its own content) under a per-campaign secret stored with the campaign
+(campaigns/<name>/engine/signing.key) so the campaign travels between machines via git. Editing,
+deleting, reordering or inserting any line breaks the chain, and the engine refuses to continue until
+the tampering is resolved with `engine verify`. Older campaigns may still keep their key in
+~/.dnd-engine/keys/; `engine rekey` moves them to a fresh in-repo key.
 """
 import datetime
 import hashlib
@@ -37,17 +39,23 @@ class Store:
         self.events_path = self.engine_dir / "events.jsonl"
         self.lock_path = self.engine_dir / ".lock"
         self.id_path = self.engine_dir / "campaign-id"
+        self.key_path = self.engine_dir / "signing.key"
 
     # -------------------------------------------------------------- key management
     @property
     def campaign_id(self):
         return self.id_path.read_text(encoding="utf-8").strip()
 
+    @property
+    def legacy_key_path(self):
+        return KEY_DIR / f"{self.campaign_id}.key"
+
     def _key(self):
-        path = KEY_DIR / f"{self.campaign_id}.key"
-        if not path.exists():
-            raise TamperError(f"Signing key for this campaign is missing ({path}). The log can't be trusted.")
-        return bytes.fromhex(path.read_text(encoding="utf-8").strip())
+        for path in (self.key_path, self.legacy_key_path):
+            if path.exists():
+                return bytes.fromhex(path.read_text(encoding="utf-8").strip())
+        raise TamperError(f"Signing key for this campaign is missing ({self.key_path}). The log can't be trusted. "
+                          "If the log itself is fine (e.g. the key was left on another machine), `engine rekey` re-signs it.")
 
     def init(self):
         self.engine_dir.mkdir(parents=True, exist_ok=True)
@@ -55,9 +63,62 @@ class Store:
             raise FileExistsError("engine already initialised for this campaign")
         cid = secrets.token_hex(8)
         self.id_path.write_text(cid + "\n", encoding="utf-8")
-        KEY_DIR.mkdir(parents=True, exist_ok=True)
-        (KEY_DIR / f"{cid}.key").write_text(secrets.token_hex(32), encoding="utf-8")
+        self.key_path.write_text(secrets.token_hex(32), encoding="utf-8")
         self.events_path.write_text("", encoding="utf-8")
+
+    def rekey(self):
+        """Re-sign the log (and its backups) under a fresh in-repo key. Returns the number of events.
+
+        If a key is present, the log must verify under it first. If the key is missing, only the chain's
+        structure (sequence numbers and prev links) can be checked, since signatures can't be verified."""
+        with self.lock():
+            has_key = self.key_path.exists() or self.legacy_key_path.exists()
+            if has_key:
+                self.load()  # raises TamperError on a genuinely modified log
+            events = self._parse_chain(self.events_path)
+            key = secrets.token_bytes(32)
+            tmp = self.events_path.with_suffix(".jsonl.tmp")
+            tmp.write_text("".join(line + "\n" for line in self._sign(events, key)), encoding="utf-8", newline="\n")
+            self.key_path.write_text(key.hex(), encoding="utf-8")
+            os.replace(tmp, self.events_path)
+            bdir = self.engine_dir / "backups"
+            for p in sorted(bdir.glob("*.jsonl")) if bdir.is_dir() else []:
+                if p.name.startswith("events-tampered"):
+                    continue
+                try:
+                    lines = self._sign(self._parse_chain(p), key)
+                except TamperError:
+                    continue  # leave an unusable backup as it is
+                p.write_text("".join(line + "\n" for line in lines), encoding="utf-8", newline="\n")
+            return len(events)
+
+    @staticmethod
+    def _parse_chain(path):
+        events, prev = [], GENESIS
+        with open(path, encoding="utf-8") as fh:
+            for lineno, line in enumerate(fh, 1):
+                if not line.strip():
+                    continue
+                try:
+                    ev = json.loads(line)
+                except ValueError:
+                    raise TamperError(f"{path.name} line {lineno} is not valid JSON")
+                if ev.get("seq") != len(events) + 1 or ev.get("prev") != prev:
+                    raise TamperError(f"{path.name} line {lineno}: chain broken (events missing, reordered or edited)")
+                prev = ev.get("hash", "")
+                events.append(ev)
+        return events
+
+    @staticmethod
+    def _sign(events, key):
+        prev, lines = GENESIS, []
+        for ev in events:
+            body = {k: v for k, v in ev.items() if k != "hash"}
+            body["prev"] = prev
+            body["hash"] = hmac.new(key, (prev + canonical(body)).encode(), hashlib.sha256).hexdigest()
+            prev = body["hash"]
+            lines.append(canonical(body))
+        return lines
 
     # -------------------------------------------------------------- locking
     @contextmanager
