@@ -18,6 +18,8 @@ drama and the monsters' tactics.
    each at least one line of narration per round when they do something visible. In player-roll mode, the player clicks **Roll** for their initiative;
    the order is set once everyone has rolled.
 4. Describe the battlefield in one paragraph: distances, cover, light, terrain.
+5. Pick the table's pace (dm/visuals.md → Table animation): `fx preset cinematic` for a boss, `quick` for a
+   large skirmish, and set the mood (`fx ambient storm`). Every move, attack and turn then animates on its own.
 
 ## Each turn
 - The engine announces whose turn it is. **PC turn**: the player declares; you translate into commands:

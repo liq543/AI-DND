@@ -23,7 +23,9 @@ conversation. Summarise options briefly (don't dump chapters) and recommend fits
    `python -m engine char create --name ... (see dm/engine-reference.md)`
 8. **Spellcasters**: `spells set <id> --cantrips ... --prepared ...` (Wizards also `--spellbook` six level-1 spells).
 9. **Personality**: `char bio <id> appearance|personality|ideals|bonds|flaws|backstory|goals "..."`.
-10. **Portrait**: `asset portrait <id>`. Place the token when play begins.
+10. **Portrait**: generated live from the appearance bio (dm/visuals.md → Tokens & portraits). Ask the player how
+    their character looks and pin the details with `asset look <id> --hair ... --eyes ... --outfit ...`; have them
+    check the Party tab and adjust until it matches their idea. Place the token when play begins.
 11. Read back a short summary (the Sheet tab in the live table shows everything) and confirm.
 
 Starting above level 1: the campaign's `start_level` lets `char levelup` run without XP until that level;

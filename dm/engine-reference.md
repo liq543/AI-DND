@@ -132,10 +132,16 @@ map door <id> 12,7 open|close|reveal|break                map feature <id> 5,5 r
 map crop <id> --room 4 --pad 2 --show                     map paint <id> "3,3 5,5-9,5" --char "#"
 map set <id> --kv lighting=dark                           map party 40,30   map label <id> 10,10 --name "Old Mill"
 map from-image <asset-id> --w 30 --h 20
-asset portrait kira | asset icon "dragon" | asset fetch <url> --name "Cave art" --license CC0 --credit "..." [--portrait kira]
+asset look kira --hair "long auburn braid" --eyes green --marks "scar across left cheek" --outfit "crimson robes" [--headwear hood] [--clear eyes|all]
+asset art kira [--crop face] [--out file.svg] | asset art kira:<item-id> | asset art srd:flame-tongue     # write the generated picture to look at
+asset portrait kira [--style heraldic] [--clear] | asset icon "dragon" | asset fetch <url> --name "Cave art" --license CC0 --credit "..." [--portrait kira] [--item kira:<item-id>]
 asset import path/to/file.png --license "own work" | asset draw drawing.svg --name "Sister Maren" --portrait maren
 say "The torch gutters." | say --as "Brother Aldric" "Welcome, travellers."
 scene "The Sunken Shrine" --desc "Rain hammers the broken roof." [--image <asset>] [--map shrine]
 journal add "What the note says" --title "..."   # players' Journal tab (every `show` is added automatically)
 show item kira:<item-id> | show creature <id> | show asset <id> | show text "The letter reads..." --title "Letter" | show srd-item "Bag of Holding" | show clear
+fx status | fx preset cinematic|standard|quick|off | fx set speed=1.5 camera=off dice=off tokens=art|icon ...
+fx ambient rain|snow|fog|embers|ash|motes|storm|none [--intensity 0.1-1]
+fx camera kira|12,7|fit | fx play burst|ring|sparkle|smoke|ping --on <id>|--at x,y [--color fire|#hex] [--radius 20]
+fx play beam|bolt|projectile --from <id|x,y> --to <id|x,y> [--color ...] | fx play banner --text "..." | fx play float --on <id> --text "..." | fx play flash|shake
 ```

@@ -24,7 +24,7 @@ tone, lines/veils, house rules). House rules can't contradict the engine; if you
 homebrew — register it publicly.
 
 ## 3. Characters
-Follow `character-creation.md` for each PC. Then `asset portrait <id>` for each (or draw one).
+Follow `character-creation.md` for each PC. Each PC's portrait is drawn from their appearance bio and `asset look` (show the player and adjust), or draw one.
 
 ## 4. World prep (silently — never shown)
 - `map gen region --name "..." --show`, pick the start settlement → `map party x,y`.

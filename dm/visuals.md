@@ -67,23 +67,67 @@ Prefer one well-chosen update per beat over constant churn.
 - **Lighting drives fog of war**: `map set <id> --kv lighting=bright|dim|dark`. In the dark, characters see only
   with Darkvision or a lit torch/lantern (`item light kira torch-1`).
 
-## Tokens & portraits
+## Tokens & portraits: generated from what they look like
 
 **Every creature you describe gets its description on the table.** The moment you narrate what an NPC or
 monster looks like, run `npc describe <id> --text "what anyone can see"` (looks, clothing, gear in view,
 voice, what they're doing). The players click the token and read it on the info panel. Update it when their
 look changes (wounded, disguised, chained). Hidden facts go in `npc lore` only once the party learns them.
 
-- Every creature placed on a map gets a token: ring colour = side (blue party, teal ally, red enemy, gold neutral),
-  emblem = class or creature type (from game-icons.net), health bar for the party, "bloodied" slash for enemies.
-- `asset portrait <id>` generates a heraldic portrait card (used in the party panel and on the token).
-- For a bespoke look you can **draw** one: write an SVG file (no scripts — they are rejected) and register it with
-  `asset draw file.svg --name "Sister Maren" --portrait maren`. Keep it simple and evocative: silhouette, palette,
-  one telling detail.
+**Pictures are drawn live from that description.** Every character and humanlike NPC gets a generated portrait
+(party panel, sheet, info card) and face (map token, initiative bar, log, journal), drawn from: species; class or
+NPC role (guard, cultist, noble, pirate...); the armor a PC actually wears; and whatever the description says about
+hair, eyes, skin, beard, scars, freckles, tattoos, war paint, eyepatch, horns, headwear, clothing, cloak, build,
+age and expression. Beasts, monsters and other non-humanoids get creature art in their type's palette. Nothing
+needs storing: change the description or the look and the table redraws it.
+
+- **Pin exact features** with `asset look <id> --hair "..." --eyes "..." --skin "..." --beard "..." --marks "..."
+  --headwear "..." --outfit "..." --cloak "..." --build "..." --age "..." --expression "..." --horns "..."
+  --background "..." --presentation feminine|masculine`. Each field overrides what the description implies;
+  `--clear eyes` (or `all`) removes pins. Every call prints what the generator will draw.
+- **Set it when the player describes their character** (session zero, character creation) so the portrait
+  matches their idea. Ask them to look at it on the table and adjust with `asset look` until it does.
+- **See it yourself**: `asset art <id> [--crop face]` writes the SVG to `views/art/`.
+- **A bespoke picture**: `asset portrait <id>` pins the current art as a fixed asset; `--style heraldic` gives the
+  old heraldic card; `asset portrait <id> --clear` goes back to live art. You can also **draw** one (write an SVG,
+  no scripts) and `asset draw file.svg --name "Sister Maren" --portrait maren`.
 - **Public images:** `asset fetch <url> --name "..." --license CC0|CC-BY-4.0|public domain --credit "Author, source"`.
   Only use images whose license allows it (Wikimedia Commons, OpenGameArt, the player's own). The license and
   source are logged with the asset. A fetched battle map can become a grid map: `map from-image <asset> --w 30 --h 20`,
   then `map paint` the walls so movement and line of sight work.
+- Token ring colour = side (blue party, teal ally, red enemy, gold neutral), health bar for the party, "bloodied"
+  slash for enemies. `fx set tokens=icon` switches the table back to emblem tokens.
+
+## Item art
+
+Every item has an illustration: its shape comes from what it is (sword, axe, bow, potion, scroll, ring, cloak,
+key, lantern...), its colours from its name, alias and note ("silver dagger", "ruby-set ring", "cloak of midnight
+blue"). Identified magic items glow in their rarity colour; unidentified ones show only their shape with a "?"
+shimmer, never colours taken from their true name. So **`item note --alias ... --text "what it looks like"`
+also changes its picture.** For a unique look, `asset draw file.svg --item kira:<item-id>` (or `asset fetch ... --item`).
+
+## Table animation (you control it)
+
+Moves, attacks, damage, healing, spells, conditions, saves and turns animate on the live table automatically, in
+order, before the new state appears: tokens walk their path, arrows fly, spell orbs burst, numbers float up, the
+fallen fall, and each turn gets a banner. The camera follows the action. You decide how it plays:
+
+| Want | Do |
+|---|---|
+| A tense boss fight | `fx preset cinematic` (slower, everything on) |
+| Normal play | `fx preset standard` |
+| A big fight with many creatures | `fx preset quick` (2× speed, no turn banners or dice) |
+| No animation | `fx preset off` |
+| Fine control | `fx set speed=1.5 moves=on attacks=on numbers=on turns=off camera=follow dice=on shake=off sync=on` |
+| Weather / atmosphere | `fx ambient rain|snow|fog|embers|ash|motes|storm|none --intensity 0.6` |
+| Point the players at something | `fx camera <id|x,y|fit>`, `fx play ping --at 12,7` |
+| A moment the rules don't animate | `fx play burst --at 12,7 --color fire --radius 20` (explosion), `fx play bolt --from mage --to kira --color lightning`, `fx play banner --text "The ceiling gives way!"`, `fx play shake`, `fx play flash --color white`, `fx play float --on kira --text "Blessed"` |
+
+`sync=on` holds the side panels until the animation finishes, so a result never shows before its moment.
+Effects are visual only: they never change the game. Hidden creatures and fogged squares never animate for the
+players. Each player can still pick "Reduced motion" or "Off" for themselves in the table's Animations menu.
+Match the ambient to the scene (`fx ambient none` when they leave the storm), and don't overuse `fx play`: one
+flourish at the dramatic beat is worth ten.
 
 ## Points of interest (perceived objects)
 
