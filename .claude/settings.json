@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m engine:*)",
+      "PowerShell(python -m engine:*)",
+      "Bash(python -m unittest:*)",
+      "Read(./rules/**)",
+      "Read(./dm/**)",
+      "Read(./campaigns/**)",
+      "Edit(./campaigns/*/campaign.md)",
+      "Edit(./campaigns/*/npcs.md)",
+      "Edit(./campaigns/*/locations.md)",
+      "Edit(./campaigns/*/quests.md)",
+      "Edit(./campaigns/*/secrets.md)",
+      "Edit(./campaigns/*/log/**)",
+      "Write(./campaigns/*/log/**)"
+    ],
+    "deny": [
+      "Read(./campaigns/_archive/**)",
+      "Edit(./campaigns/_archive/**)",
+      "Write(./campaigns/_archive/**)",
+      "Edit(./campaigns/*/engine/**)",
+      "Write(./campaigns/*/engine/**)",
+      "Edit(./campaigns/*/state.md)",
+      "Write(./campaigns/*/state.md)",
+      "Edit(./campaigns/*/party/**)",
+      "Write(./campaigns/*/party/**)",
+      "Edit(./campaigns/ACTIVE)",
+      "Write(./campaigns/ACTIVE)",
+      "Read(~/.dnd-engine/**)",
+      "Edit(~/.dnd-engine/**)",
+      "Write(~/.dnd-engine/**)",
+      "Bash(python -c:*)",
+      "Bash(python3 -c:*)",
+      "Bash(py -c:*)",
+      "PowerShell(python -c:*)",
+      "PowerShell(py -c:*)"
+    ]
+  }
+}
