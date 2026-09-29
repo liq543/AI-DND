@@ -46,9 +46,17 @@ TERRAIN = {
     "x": ("chasm", None, False, None),
     "b": ("bridge", 1, False, None),
     "r": ("well / fountain", None, False, "half"),
+    "k": ("carpet", 1, False, None),
+    "q": ("marble floor", 1, False, None),
+    "a": ("gaming table", None, False, "half"),
+    "g": ("railing", None, False, "half"),
+    "v": ("crates / barrels", None, False, "half"),
+    "l": ("lamp / candelabrum", 1, False, None),
+    "u": ("statue / display plinth", None, True, "three-quarters"),
+    "n": ("mast / column", None, True, "three-quarters"),
     " ": ("void", None, True, "total"),
 }
-CORNER_BLOCKERS = set("#BTPDS o")
+CORNER_BLOCKERS = set("#BTPDS oun")
 
 BIOMES = {  # region map cell codes
     "O": ("deep ocean", "#1e3f66"), "C": ("shallow sea", "#2f6690"), "s": ("beach", "#e0cda0"),

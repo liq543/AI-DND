@@ -19,10 +19,50 @@ FILL = {
     "f": "#b38b5d", "D": "#cfc4ae", "d": "#cfc4ae", "S": "#3a342e", "<": "#cfc4ae", ">": "#cfc4ae",
     "x": "#0c0a09", "b": "#8c6a43", "r": "#a8a39a", " ": "#000",
 }
-BASE_UNDER = {"T": ",", "o": None, "P": ".", "h": "=", "c": "=", "f": "=", "D": None, "d": None, "<": ".", ">": ".", "r": "_"}
+BASE_UNDER = {"T": ",", "o": None, "P": ".", "h": "=", "c": "=", "f": "=", "D": None, "d": None, "<": ".", ">": ".", "r": "_",
+              "a": "k", "g": "=", "v": "=", "l": "=", "u": "q", "n": "="}
+
+# Visual themes: each map can look like its place. (palette keys: wall, wall_edge, wall_line, trim, plank, plank_line,
+# flag, flag_line, water, deep, carpet, carpet_trim, marble, marble_vein, furniture, furniture_line, counter)
+THEMES = {
+    "stone": {"wall": "#3a342e", "wall_edge": "#4a423a", "wall_line": "#2a2521", "trim": None, "plank": "#b38b5d",
+              "plank_line": "#8a6a43", "flag": "#cfc4ae", "flag_line": "#b9ad95", "water": "#8cc3e0", "deep": "#3f84bf",
+              "carpet": "#7d2430", "carpet_trim": "#c9a14a", "marble": "#e6e1d8", "marble_vein": "#c9c2b5",
+              "furniture": "#7a5530", "furniture_line": "#4a3018", "counter": "#6a4524", "backdrop": None},
+    "ship": {"wall": "#2b1a10", "wall_edge": "#3d2415", "wall_line": "#1a0f08", "trim": "#c9a14a", "plank": "#6e3b22",
+             "plank_line": "#4a2414", "flag": "#8a8478", "flag_line": "#6f6a60", "water": "#2a4d5e", "deep": "#16303d",
+             "carpet": "#8e1f2b", "carpet_trim": "#d4ae55", "marble": "#e6e1d8", "marble_vein": "#c9c2b5",
+             "furniture": "#4a2414", "furniture_line": "#c9a14a", "counter": "#3b1d0f", "backdrop": "#0f1d25"},
+    "sewer": {"wall": "#262a24", "wall_edge": "#353b31", "wall_line": "#171a15", "trim": "#4f6b3a", "plank": "#6b5a42",
+              "plank_line": "#4a3d2c", "flag": "#7f8674", "flag_line": "#626a58", "water": "#3f6b5a", "deep": "#1f3d34",
+              "carpet": "#5a3a2a", "carpet_trim": "#8a7a4a", "marble": "#9aa08f", "marble_vein": "#7d8373",
+              "furniture": "#4d4030", "furniture_line": "#2a2218", "counter": "#3d3226", "backdrop": None, "moss": "#5f8a3a"},
+    "marble": {"wall": "#8f8576", "wall_edge": "#a89d8c", "wall_line": "#6e6557", "trim": "#d8b36a", "plank": "#9c7248",
+               "plank_line": "#7a5634", "flag": "#e6e1d8", "flag_line": "#cfc8bb", "water": "#9fd0e8", "deep": "#4a8fc0",
+               "carpet": "#8a1c2a", "carpet_trim": "#e0c070", "marble": "#efeae2", "marble_vein": "#cdc5b6",
+               "furniture": "#5a3a22", "furniture_line": "#d8b36a", "counter": "#4a2e1a", "backdrop": None},
+}
 
 
-def _defs():
+def _defs(theme="stone"):
+    t = THEMES.get(theme, THEMES["stone"])
+    return f"""<defs>
+<pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="{t['wall']}"/><line x1="0" y1="0" x2="0" y2="8" stroke="{t['wall_line']}" stroke-width="3"/></pattern>
+<pattern id="waves" width="24" height="12" patternUnits="userSpaceOnUse"><path d="M0 6 Q6 0 12 6 T24 6" fill="none" stroke="#ffffff" stroke-opacity=".25" stroke-width="1.5"/></pattern>
+<pattern id="planks" width="64" height="8" patternUnits="userSpaceOnUse"><rect width="64" height="8" fill="{t['plank']}"/><line x1="0" y1="7.5" x2="64" y2="7.5" stroke="{t['plank_line']}" stroke-width="1"/><line x1="23" y1="0" x2="23" y2="7.5" stroke="{t['plank_line']}" stroke-width=".8"/><line x1="51" y1="0" x2="51" y2="7.5" stroke="{t['plank_line']}" stroke-width=".8"/></pattern>
+<pattern id="cobble" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#a8a39a"/><circle cx="4" cy="4" r="3" fill="#b8b3aa"/><circle cx="12" cy="11" r="3.5" fill="#9b968d"/></pattern>
+<pattern id="flag" width="32" height="32" patternUnits="userSpaceOnUse"><rect width="32" height="32" fill="{t['flag']}"/><path d="M0 16H32M16 0V16M8 16V32M24 16V32" stroke="{t['flag_line']}" stroke-width="1"/>{'<circle cx="5" cy="21" r="2.2" fill="' + t['moss'] + '" fill-opacity=".55"/><circle cx="27" cy="6" r="1.6" fill="' + t['moss'] + '" fill-opacity=".45"/>' if t.get('moss') else ''}</pattern>
+<pattern id="carpet" width="32" height="32" patternUnits="userSpaceOnUse"><rect width="32" height="32" fill="{t['carpet']}"/><path d="M16 4 L28 16 L16 28 L4 16 Z" fill="none" stroke="{t['carpet_trim']}" stroke-opacity=".55" stroke-width="1.2"/><circle cx="16" cy="16" r="2" fill="{t['carpet_trim']}" fill-opacity=".6"/></pattern>
+<pattern id="marble" width="64" height="64" patternUnits="userSpaceOnUse"><rect width="64" height="64" fill="{t['marble']}"/><path d="M0 40 C16 30 26 52 44 38 S60 20 64 26" fill="none" stroke="{t['marble_vein']}" stroke-width="1.2"/><path d="M10 0 C14 12 4 20 12 32" fill="none" stroke="{t['marble_vein']}" stroke-width=".8"/><path d="M0 0H64V64" fill="none" stroke="{t['marble_vein']}" stroke-opacity=".6"/></pattern>
+<radialGradient id="canopy" cx="40%" cy="35%"><stop offset="0" stop-color="#5f9a3c"/><stop offset="1" stop-color="#2e5a22"/></radialGradient>
+<radialGradient id="rock" cx="35%" cy="30%"><stop offset="0" stop-color="#b5aea3"/><stop offset="1" stop-color="#6b645a"/></radialGradient>
+<radialGradient id="lampglow"><stop offset="0" stop-color="#ffd98a" stop-opacity=".75"/><stop offset=".45" stop-color="#ffb347" stop-opacity=".25"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
+<radialGradient id="felt" cx="45%" cy="40%"><stop offset="0" stop-color="#2f7a4a"/><stop offset="1" stop-color="#174a2c"/></radialGradient>
+<filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>"""
+
+
+def _defs_legacy():
     return """<defs>
 <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#3a342e"/><line x1="0" y1="0" x2="0" y2="8" stroke="#2a2521" stroke-width="3"/></pattern>
 <pattern id="waves" width="24" height="12" patternUnits="userSpaceOnUse"><path d="M0 6 Q6 0 12 6 T24 6" fill="none" stroke="#ffffff" stroke-opacity=".35" stroke-width="1.5"/></pattern>
@@ -54,15 +94,20 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
             if f.get("type") == "secret_door" and f.get("hidden"):
                 grid[f["y"]][f["x"]] = "#"
     rng = random.Random(m.get("seed") or 1)
+    theme = m.get("theme") or "stone"
+    T = THEMES.get(theme, THEMES["stone"])
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w * cell} {h * cell}" width="{w * cell}" height="{h * cell}" '
-             f'font-family="Georgia,serif" data-cell="{cell}">', _defs()]
+             f'font-family="Georgia,serif" data-cell="{cell}">', _defs(theme)]
+    if T.get("backdrop"):
+        parts.append(f'<rect width="{w * cell}" height="{h * cell}" fill="{T["backdrop"]}"/>')
     # base terrain as merged runs
     for y, row in enumerate(grid):
         base_row = [BASE_UNDER.get(c) or ({"D": ".", "d": ".", "o": ","}.get(c, c)) for c in row]
         if m["kind"] in ("dungeon", "cave", "battle", "interior") :
             base_row = [({"o": "."}.get(c, c) if row[i] == "o" else c) for i, c in enumerate(base_row)]
         for x0, n, c in _runs(base_row):
-            fill = {"#": "url(#hatch)", "S": "url(#hatch)", "=": "url(#planks)", "_": "url(#cobble)", ".": "url(#flag)"}.get(c, FILL.get(c, "#888"))
+            fill = {"#": "url(#hatch)", "S": "url(#hatch)", "=": "url(#planks)", "_": "url(#cobble)", ".": "url(#flag)",
+                    "k": "url(#carpet)", "q": "url(#marble)", "w": T["water"], "~": T["deep"]}.get(c, FILL.get(c, "#888"))
             parts.append(f'<rect x="{x0 * cell}" y="{y * cell}" width="{n * cell}" height="{cell}" fill="{fill}"/>')
             if c == "~":
                 parts.append(f'<rect x="{x0 * cell}" y="{y * cell}" width="{n * cell}" height="{cell}" fill="url(#waves)"/>')
@@ -74,7 +119,7 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
             s = cell
             if c in "#B" and any(0 <= y + dy < h and 0 <= x + dx < w and grid[y + dy][x + dx] not in "#B "
                                  for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
-                parts.append(f'<rect x="{cx}" y="{cy}" width="{s}" height="{s}" fill="{"#4a423a" if c == "#" else "#6b5240"}" stroke="#211d19" stroke-width="1"/>')
+                parts.append(f'<rect x="{cx}" y="{cy}" width="{s}" height="{s}" fill="{T["wall_edge"] if c == "#" else "#6b5240"}" stroke="{T["trim"] or "#211d19"}" stroke-width="{1.5 if T["trim"] else 1}"/>')
             elif c == "T":
                 r = s * (0.42 + rng.random() * 0.12)
                 parts.append(f'<circle cx="{cx + s / 2 + 2}" cy="{cy + s / 2 + 3}" r="{r}" fill="#000" fill-opacity=".18"/>'
@@ -92,9 +137,29 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
             elif c == "P":
                 parts.append(f'<circle cx="{cx + s / 2}" cy="{cy + s / 2}" r="{s * .38}" fill="#8f877a" stroke="#4a443c" stroke-width="2"/>')
             elif c == "h":
-                parts.append(f'<rect x="{cx + 4}" y="{cy + 4}" width="{s - 8}" height="{s - 8}" rx="3" fill="#7a5530" stroke="#4a3018"/>')
+                parts.append(f'<rect x="{cx + 4}" y="{cy + 4}" width="{s - 8}" height="{s - 8}" rx="3" fill="{T["furniture"]}" stroke="{T["furniture_line"]}"/>')
             elif c == "c":
-                parts.append(f'<rect x="{cx + 2}" y="{cy + 6}" width="{s - 4}" height="{s - 12}" fill="#6a4524" stroke="#3a2412"/>')
+                parts.append(f'<rect x="{cx + 2}" y="{cy + 6}" width="{s - 4}" height="{s - 12}" fill="{T["counter"]}" stroke="{T["furniture_line"]}"/>')
+            elif c == "a":  # gaming table: green felt, gilt rim, a few chips
+                parts.append(f'<ellipse cx="{cx + s / 2}" cy="{cy + s / 2}" rx="{s * .46}" ry="{s * .38}" fill="#000" fill-opacity=".25" transform="translate(2 3)"/>'
+                             f'<ellipse cx="{cx + s / 2}" cy="{cy + s / 2}" rx="{s * .46}" ry="{s * .38}" fill="url(#felt)" stroke="#c9a14a" stroke-width="2"/>')
+                for _ in range(3):
+                    parts.append(f'<circle cx="{cx + s * (.3 + rng.random() * .4):.1f}" cy="{cy + s * (.35 + rng.random() * .3):.1f}" r="2.2" fill="{rng.choice(["#d9443b", "#f2e6c9", "#2f8fdd"])}"/>')
+            elif c == "g":  # railing
+                parts.append(f'<rect x="{cx}" y="{cy + s * .42}" width="{s}" height="{s * .16}" fill="{T["trim"] or "#8a6a43"}"/>'
+                             f'<circle cx="{cx + 4}" cy="{cy + s / 2}" r="3" fill="{T["trim"] or "#8a6a43"}"/><circle cx="{cx + s - 4}" cy="{cy + s / 2}" r="3" fill="{T["trim"] or "#8a6a43"}"/>')
+            elif c == "v":  # crates and barrels
+                parts.append(f'<rect x="{cx + 3}" y="{cy + 3}" width="{s * .5}" height="{s * .5}" fill="#8a6a3a" stroke="#4a3418"/>'
+                             f'<path d="M{cx + 3} {cy + 3} L{cx + 3 + s * .5} {cy + 3 + s * .5} M{cx + 3 + s * .5} {cy + 3} L{cx + 3} {cy + 3 + s * .5}" stroke="#4a3418"/>'
+                             f'<circle cx="{cx + s * .7}" cy="{cy + s * .68}" r="{s * .24}" fill="#7a5530" stroke="#3a2412" stroke-width="2"/>')
+            elif c == "l":  # lamp: a pool of warm light
+                parts.append(f'<circle cx="{cx + s / 2}" cy="{cy + s / 2}" r="{s * 1.6}" fill="url(#lampglow)"/>'
+                             f'<circle cx="{cx + s / 2}" cy="{cy + s / 2}" r="3.5" fill="#fff2c4" stroke="#8a6a2a"/>')
+            elif c == "u":  # statue / display plinth
+                parts.append(f'<rect x="{cx + 3}" y="{cy + 3}" width="{s - 6}" height="{s - 6}" fill="#d8d2c6" stroke="#8f8576" stroke-width="2"/>'
+                             f'<circle cx="{cx + s / 2}" cy="{cy + s / 2}" r="{s * .22}" fill="#b8b0a2" stroke="#6e6557"/>')
+            elif c == "n":  # mast / column
+                parts.append(f'<circle cx="{cx + s / 2}" cy="{cy + s / 2}" r="{s * .34}" fill="#5a3a22" stroke="{T["trim"] or "#2a1a0e"}" stroke-width="2"/>')
             elif c == "f":
                 parts.append(f'<rect x="{cx + 3}" y="{cy + 3}" width="{s - 6}" height="{s - 6}" fill="#555"/><circle cx="{cx + s / 2}" cy="{cy + s / 2}" r="{s * .25}" fill="#f08a24" filter="url(#glow)"/>')
             elif c in "Dd":
@@ -159,6 +224,15 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
         parts.append(f'<g class="flooritem" data-floor="{esc(f["id"])}" style="cursor:pointer"><title>{esc(f["item"]["name"])} (on the floor)</title>'
                      f'<rect x="{px - 7}" y="{py - 7}" width="14" height="14" rx="2" transform="rotate(45 {px} {py})" fill="#d8b36a" stroke="#2b1d0e" stroke-width="2"/>'
                      f'<circle cx="{px}" cy="{py}" r="2.5" fill="#2b1d0e"/></g>')
+    # points of interest the characters have perceived: a small blue marker in the tile's top-left corner
+    for p in m.get("pois", []):
+        pxx, pyy = p["x"], p["y"]
+        if player and m.get("fog") and revealed and not (0 <= pyy < len(revealed) and revealed[pyy][pxx] == "1"):
+            continue
+        cx, cy = pxx * cell + 9, pyy * cell + 9
+        parts.append(f'<g class="poi" data-poi="{esc(p["id"])}" style="cursor:pointer"><title>{esc(p["name"])}</title>'
+                     f'<circle cx="{cx}" cy="{cy}" r="7.5" fill="#6fb0ff" stroke="#10243d" stroke-width="2"/>'
+                     f'<text x="{cx}" y="{cy + 3.6}" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="10.5" fill="#10243d">i</text></g>')
     # tokens
     parts.append(tokens_svg(m, entities, current, cell, player))
     # fog
@@ -269,7 +343,7 @@ def tokens_svg(m, entities, current, cell, player):
         sym = f"i-{icon}"
         symbols[sym] = icon
         hue = assets.hue_from(e["id"])
-        dead = e.get("dead") or (e["kind"] != "pc" and e.get("hp", 1) <= 0)
+        dead = is_dead(e)
         cls = "token" + (" current" if current == e["id"] else "") + (" dead" if dead else "")
         g = [f'<g class="{cls}" data-id="{esc(e["id"])}" data-stack="{esc(stack)}" opacity="{0.45 if dead else 1}">',
              f'<title>{esc(e["name"])}</title>']

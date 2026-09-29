@@ -21,7 +21,20 @@ they matter. Use Passive Perception for things the characters would just notice;
 
 **Social** — NPCs have attitudes (Friendly / Indifferent / Hostile, see glossary "Influence [Action]"). Good
 roleplay and leverage can make a roll unnecessary or give Advantage. A failed Persuasion means "not like that",
-not "never".
+not "never". **Run every social exchange by the rules, every time:**
+- **PC urges an NPC** (persuade, deceive, intimidate, amuse). This is the Influence action. Decide whether the NPC is
+  willing (no roll), unwilling (no roll, no), or hesitant (roll). The DC is **15 or the NPC's Intelligence score,
+  whichever is higher**. **Friendly means Advantage and Hostile means Disadvantage.** Stack these with other sources
+  (Help, leverage), and remember that Advantage and Disadvantage cancel out. A failure means the same approach can't
+  be retried for 24 hours.
+- **An ally setting up another's pitch** (bad cop, flattery, a distraction) is the **Help** action, which gives Advantage
+  on the next check. It is not a separate check.
+- **An NPC lies, bluffs or hides something.** Roll `contest <npc> deception --vs <pc> --vs-skill insight --passive
+  --hidden` against the best passive Insight in the room. If the PC wins, tell the player "something about that
+  rings false", not the truth itself. When a player *actively* reads someone, drop `--passive` so both sides roll.
+- **A PC lies to an NPC.** Roll `contest <pc> deception --vs <npc> --vs-skill insight --passive`.
+- **Sneaking past or palming in front of someone:** Stealth or Sleight of Hand vs their passive Perception.
+- State the check, the DC or the opposing skill, and any Advantage or Disadvantage and why **before** rolling.
 
 **Combat** — See `procedures/combat.md`. Make fights about more than HP: terrain, objectives, enemies that retreat,
 surrender, call for help, or bargain. Monsters act intelligently according to their nature.
@@ -66,6 +79,7 @@ surrender, call for help, or bargain. Monsters act intelligently according to th
 - **Spotlight.** Give every PC (and their backstory, goals, bonds) moments to shine. Weave backstories into the plot.
 - **Vary the rhythm.** Alternate tension and release: fight → exploration → social → rest → twist.
 - **Loot with personality.** A mundane item with a story is more memorable than +1 gold. Magic items from `rules/magic-items/`.
+- **Check the tier cap BEFORE placing loot.** Anything the characters could physically take (a vault shelf, a cage, a corpse, a chest) must fit the engine's rarity ceiling for the party's tier (tier 1: Uncommon). An out-of-tier item the story needs must be genuinely unreachable (behind a boss, a deadly ward, a sealed vault). If you already placed a reachable one, it's your mistake, not the player's: resolve their attempt with its real risks and use `--override "DM placement error: ..."`.
 
 ## Encounter building
 

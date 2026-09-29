@@ -48,7 +48,7 @@ their character already knows. Write it as player-facing prose with short headed
 5. **Why you're here tonight:** what the character came to do, what they want from this scene, and what
    they're carrying.
 6. **What you can do:** a two-line reminder of the character's best tools for this kind of situation.
-Then ask for pronouns/tweaks ("Anything you'd change about Kit before we start?") and wait for a reply.
+Then ask for pronouns/tweaks ("Anything you'd change about <character> before we start?") and wait for a reply.
 
 ## 6. Begin
 ```

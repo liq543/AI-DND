@@ -2,9 +2,9 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Halfling** · **Wizard 3** (Evoker) · **Background:** Sage · **XP:** 1150
+**Player:** DM · **Halfling** · **Wizard 3** (Evoker) · **Background:** Sage · **XP:** 1537
 
-**HP** 9/23 · **AC** 11 (unarmored 10 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +2 · **Passive Perception** 11
+**HP** 23/23 · **AC** 11 (unarmored 10 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +2 · **Passive Perception** 11
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
@@ -14,7 +14,7 @@
 
 **Skills:** Acrobatics +1, Animal Handling +1, Arcana +7**, Athletics -1, Deception +0, History +5*, Insight +1, Intimidation +0, Investigation +5*, Medicine +3*, Nature +3, Perception +1, Performance +0, Persuasion +0, Religion +3, Sleight Of Hand +1, Stealth +1, Survival +1
 
-**Conditions:** — · **Exhaustion:** 0 · **Concentrating on:** Web
+**Conditions:** — · **Exhaustion:** 0 · **Concentrating on:** Detect Magic
 
 ## Attacks
 
@@ -29,7 +29,7 @@ Attacks per Attack action: 1
 ## Spellcasting
 
 - **Wizard:** save DC 13, attack +5, cantrips 3, prepared 6, up to level 2
-- **Slots:** L1 0/4, L2 0/2
+- **Slots:** L1 4/4, L2 2/2
 - **Cantrips:** fire-bolt, ray-of-frost, message
 - **Prepared:** mage-armor, magic-missile, shield, sleep, scorching-ray, web
 - **Spellbook:** detect-magic, find-familiar, mage-armor, magic-missile, shield, sleep, disguise-self, silent-image, invisibility, web, scorching-ray, shatter
@@ -55,6 +55,8 @@ Species traits: Brave, Halfling Nimbleness, Luck, Naturally Stealthy
 - `spellbook-1` 1× Spellbook · _starting equipment_
 - `scholars-pack-1` 1× Scholar's Pack · _starting equipment_
 - `quarterstaff-1` 1× Quarterstaff (equipped) · _starting equipment: Wizard option A (Arcane Focus - Quarterstaff)_
+- `codex-of-stillness-1` 1× Codex of Stillness · _stolen: Lot 11, lifted from a looter's sack_
+- `hooded-lantern-1` 1× Hooded Lantern · _starting equipment (unpacked from Burglar's Pack)_
 
 Hit Point Dice: Wizard d6 3/3
 Languages: Common, Halfling, Draconic · Tools: Calligrapher's Supplies · Armor training: none

@@ -108,7 +108,7 @@ class Handler(BaseHTTPRequestHandler):
         if path.startswith("/api/map/"):
             mid = path.rsplit("/", 1)[-1].removesuffix(".svg")
             m = s["maps"].get(mid)
-            if not m or not m.get("shown"):
+            if not m or not m.get("shown") or mid not in views.visible_maps(g):
                 return self.json({"error": "map not shown to players"}, 404)
             svg = views.map_svg(g, mid, "player")
             if m.get("background") and m["background"] in s["assets"]:
@@ -131,6 +131,25 @@ class Handler(BaseHTTPRequestHandler):
             return self.svg(assets.token_svg(e, 96, href))
         if path.startswith("/api/card/"):
             return self.card(g, path[len("/api/card/"):], q)
+        if path == "/api/pins":
+            f = Path(g.dir) / "player-pins.json"
+            return self.json({"pins": json.loads(f.read_text(encoding="utf-8")) if f.exists() else []})
+        if path == "/api/notes":
+            f = Path(g.dir) / "player-notes.md"
+            return self.json({"text": f.read_text(encoding="utf-8") if f.exists() else ""})
+        if path.startswith("/api/item/"):
+            parts = path[len("/api/item/"):].split("/")
+            if parts[0] == "srd" and len(parts) > 1:
+                from . import mechanics as M
+                it = M.resolve_item(g, urllib.parse.unquote(parts[1]))
+                if not it:
+                    return self.json({"error": "unknown item"}, 404)
+                return self.json(views.item_info(g, {**it, "identified": True, "source": "SRD 5.2"}))
+            e = s["entities"].get(parts[0])
+            it = next((i for i in (e or {}).get("inventory", []) if len(parts) > 1 and i["id"] == parts[1]), None) if e and e["kind"] == "pc" else None
+            if not it:
+                return self.json({"error": "unknown"}, 404)
+            return self.json(views.item_info(g, it, e["id"]))
         if path.startswith("/api/creature/"):
             e = s["entities"].get(path.rsplit("/", 1)[-1])
             if not e or e.get("hidden") or e["kind"] == "pc":
@@ -215,6 +234,29 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         url = urllib.parse.urlparse(self.path)
         parts = url.path.strip("/").split("/")
+        if parts == ["api", "pins"]:
+            if self.headers.get("X-Requested-With") != "dnd-vtt":
+                return self.json({"error": "bad request"}, 400)
+            g, err = game()
+            if not g:
+                return self.json({"error": err}, 503)
+            n = int(self.headers.get("Content-Length") or 0)
+            try:
+                pins = [str(x)[:40] for x in json.loads(self.rfile.read(min(n, 20_000)).decode("utf-8") or "[]")][:200]
+            except ValueError:
+                return self.json({"error": "bad pins"}, 400)
+            (Path(g.dir) / "player-pins.json").write_text(json.dumps(pins), encoding="utf-8")
+            return self.json({"ok": True})
+        if parts == ["api", "notes"]:
+            if self.headers.get("X-Requested-With") != "dnd-vtt":
+                return self.json({"error": "bad request"}, 400)
+            g, err = game()
+            if not g:
+                return self.json({"error": err}, 503)
+            n = int(self.headers.get("Content-Length") or 0)
+            body = self.rfile.read(min(n, 200_000)).decode("utf-8", "replace")
+            (Path(g.dir) / "player-notes.md").write_text(body, encoding="utf-8")
+            return self.json({"ok": True})
         if len(parts) == 4 and parts[:2] == ["api", "request"] and parts[3] == "roll":
             rid = parts[2]
             if self.headers.get("X-Requested-With") != "dnd-vtt":

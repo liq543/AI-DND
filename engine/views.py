@@ -5,9 +5,10 @@ HP numbers or stat blocks, no undiscovered map features. The live viewer only ev
 write_snapshots(): human-readable state.md + party/<id>.md regenerated after every command.
 """
 from pathlib import Path
+import re as _re
 
 from . import render, srd
-from .core import derive, fmt_time, level, pb, resources
+from .core import derive, fmt_time, item_display_name, item_known, level, pb, resources
 from .mechanics import coins_total_cp, combat, current_id, economy, fmt_cp, xp_threshold
 
 
@@ -73,6 +74,55 @@ def features_of(e):
     return out
 
 
+def player_item(it):
+    """An inventory item as the players know it: unidentified magic keeps its secrets (name, rarity, rules)."""
+    known = item_known(it)
+    out = {k: it.get(k) for k in ("id", "qty", "equipped", "attuned", "kind", "note", "source", "magic", "lit", "category", "base_name")}
+    out.update({"name": it["name"] if known else item_display_name(dict(it, alias=None)), "alias": it.get("alias"),
+                "rarity": it.get("rarity") if known else None, "identified": known})
+    return out
+
+
+def item_info(g, it, owner=None):
+    """Everything the item card shows, respecting identification: display name, what it is, stats, rules text."""
+    known = item_known(it)
+    kind = it.get("kind", "gear")
+    stats, base = [], it.get("base_name") or (it["name"] if kind in ("weapon", "armor") else None)
+    if kind == "weapon" and base:
+        w = srd.find("weapons", base) or {}
+        bonus = it.get("magic_bonus", 0) if known else 0
+        stats = [("Damage", f"{w.get('damage', '?')}{f' +{bonus}' if bonus else ''} {w.get('type', '')}".strip()),
+                 ("Properties", ", ".join(p.title() for p in w.get("properties", [])) or "—"),
+                 ("Mastery", (w.get("mastery") or "—").title())]
+        if w.get("range"):
+            stats.insert(1, ("Range", f"{w['range'][0]}/{w['range'][1]} ft"))
+        if bonus:
+            stats.insert(0, ("Attack", f"+{bonus} magic bonus"))
+    elif kind == "armor" and base:
+        a = srd.find("armor", base) or {}
+        ac = f"{a.get('base', '?')}{' + Dex' if a.get('adds_dex') else ''}{' (max 2)' if a.get('dex_max') == 2 else ''}"
+        if known and it.get("magic_bonus"):
+            ac += f" +{it['magic_bonus']}"
+        stats = [("Armor Class", ac), ("Category", (a.get("category") or "").title())]
+    rules = ""
+    if known and it.get("magic") and it.get("ref"):
+        f = srd.RULES / "magic-items" / f"{it['ref']}.md"
+        if f.exists():
+            rules = _re.sub(r"^# .*\n+(\*[^\n]*\*\s*\n)?", "", f.read_text(encoding="utf-8")).strip()
+    elif known and it.get("custom"):
+        rules = it.get("description") or ""
+    meta = (it.get("meta") or "").strip("* ") if known else ""
+    subtitle = meta or " · ".join(x for x in [
+        (base if base and base != it.get("alias") and base != item_display_name(it) else None),
+        {"weapon": "Weapon", "armor": "Armor", "consumable": "Consumable", "gear": "Gear", "magic": "Wondrous item"}.get(kind, kind.title()),
+        (it.get("rarity") if known and it.get("rarity") else None)] if x)
+    return {"id": it.get("id"), "owner": owner, "name": item_display_name(it), "true_name": it["name"] if known else None,
+            "subtitle": subtitle, "kind": kind, "base": base, "rarity": it.get("rarity") if known else None,
+            "magic": bool(it.get("magic")), "identified": known, "attunement": bool(it.get("needs_attunement")) if known else None,
+            "note": it.get("note") or "", "stats": stats, "rules_md": rules, "qty": it.get("qty", 1),
+            "equipped": it.get("equipped"), "attuned": it.get("attuned"), "lit": it.get("lit"), "source": it.get("source", "")}
+
+
 def pc_view(g, e):
     d = derive(e)
     slots = {str(k): {"max": v, "left": v - e.get("slots_used", {}).get(str(k), 0)} for k, v in d["slots"].items()}
@@ -87,11 +137,13 @@ def pc_view(g, e):
         "conditions": [c["name"] for c in e.get("conditions", [])], "exhaustion": e.get("exhaustion", 0),
         "death": e.get("death"), "dead": e.get("dead", False), "concentration": (e.get("concentration") or {}).get("spell_name"),
         "slots": slots, "pact": ({**d["pact"], "left": d["pact"]["count"] - e.get("pact_used", 0)} if d["pact"] else None),
-        "spellcasting": d["spellcasting"], "resources": d["resources"], "attacks": d["attacks"],
+        "spellcasting": d["spellcasting"], "resources": d["resources"],
+        "attacks": [dict(a, name=item_display_name(it)) if (it := next((i for i in e.get("inventory", []) if i["id"] == a.get("item")), None)) else a
+                    for a in d["attacks"]],
         "spells": e.get("spells", {}), "granted_spells": e.get("granted_spells", []),
         "xp": e.get("xp", 0), "xp_next": xp_threshold(lv + 1) if lv < 20 else None,
         "coins": e.get("coins", {}), "wealth": fmt_cp(coins_total_cp(e)), "inspiration": e.get("inspiration", False),
-        "inventory": [{k: it.get(k) for k in ("id", "name", "qty", "equipped", "attuned", "rarity", "kind")} for it in e.get("inventory", [])],
+        "inventory": [player_item(it) for it in e.get("inventory", [])],
         "feats": [f["name"] for f in e.get("feats", [])], "languages": e.get("languages", []),
         "features": features_of(e), "tools": e.get("tools", []), "choices": e.get("choices", {}),
         "token": e.get("token"), "portrait": e.get("portrait"), "hit_dice": {c: {"max": l, "left": l - e.get("hd_spent", {}).get(c, 0)} for c, l in e["classes"].items()},
@@ -117,7 +169,7 @@ def creature_info(g, e):
     info = {"id": e["id"], "name": name, "side": e.get("side", "enemy"), "size": e.get("size"), "type": e.get("type"),
             "status": status_band(e), "dead": e.get("dead") or e.get("hp", 1) <= 0,
             "conditions": [{"name": c["name"], "source": c.get("source"), "until": c.get("until")} for c in e.get("conditions", [])],
-            "lore": e.get("lore", []), "full": ally}
+            "lore": e.get("lore", []), "full": ally, "appearance": e.get("appearance", "")}
     feed = [f.get("text", "") for f in s["feed"] if f.get("kind") != "dm"]
     ac, attacks, saves, dmg, hits, misses = None, [], [], 0, 0, 0
     for t in feed:
@@ -146,6 +198,21 @@ def creature_info(g, e):
     return info
 
 
+def visible_maps(g):
+    """Maps the players can look at now: the one on the table, every map a PC stands on (split party), and maps the DM
+    linked as physically connected (another floor, the stair down) that the party has already seen."""
+    s = g.state
+    here = {s["view"].get("map")} | {e["token"]["map"] for e in s["entities"].values()
+                                      if e["kind"] == "pc" and e.get("token") and not e.get("dead")}
+    here.discard(None)
+    vis = set(here)
+    for mid in here:
+        for other in s["maps"].get(mid, {}).get("links", []):
+            if s["maps"].get(other, {}).get("shown"):
+                vis.add(other)
+    return {mid for mid in vis if s["maps"].get(mid, {}).get("shown")}
+
+
 def player_view(g):
     s = g.state
     c = combat(g)
@@ -172,8 +239,10 @@ def player_view(g):
              for r in s["rolls"] if not r.get("hidden")][-60:]
     maps_known = {mid: {"id": mid, "name": m["name"], "kind": m["kind"], "w": m["w"], "h": m["h"],
                         "floor": [{"id": f["id"], "x": f["x"], "y": f["y"], "name": f["item"]["name"], "qty": f["item"].get("qty", 1),
-                                   "note": f.get("note", "")} for f in m.get("floor", [])]}
-                  for mid, m in s["maps"].items() if m.get("shown")}
+                                   "note": f.get("note", "")} for f in m.get("floor", [])],
+                        "pois": [{k: p[k] for k in ("id", "x", "y", "name", "journal")} for p in m.get("pois", [])
+                                 if not m.get("fog") or (m.get("revealed") and m["revealed"][p["y"]][p["x"]] == "1")]}
+                  for mid, m in s["maps"].items() if mid in visible_maps(g)}
     return {
         "campaign": s["campaign"].get("title"), "session": s["session"], "time": fmt_time(s["time"]), "minutes": s["time"],
         "seq": s["seq"], "events": len(g.events), "head": g.events[-1]["hash"][:12] if g.events else "",
@@ -186,6 +255,9 @@ def player_view(g):
         "requests": [{"id": r["id"], "who": r["who"], "name": s["entities"].get(r["who"], {}).get("name"), "label": r["label"]}
                      for r in s["requests"].values()],
         "feed": feed, "rolls": rolls, "roll_count": s["roll_count"],
+        "journal": s.get("journal", []),
+        "lore": [{"id": e["id"], "name": e["name"], "facts": e.get("lore", [])} for e in s["entities"].values()
+                 if e.get("lore") and not e.get("hidden")],
         "overrides": s["overrides"][-20:], "settings": {k: v for k, v in s["settings"].items() if k in ("player_rolls", "xp_mode", "difficulty")},
         "assets": {k: {kk: v.get(kk) for kk in ("id", "name", "kind", "license", "credit", "source")} for k, v in s["assets"].items() if v.get("public")},
     }
@@ -253,8 +325,10 @@ def sheet_md(g, e):
               f"Species traits: {', '.join(e.get('species_traits', []))}", "",
               "## Inventory", "", f"**Coins:** {fmt_cp(coins_total_cp(e))}", ""]
     for it in e.get("inventory", []):
-        lines.append(f"- `{it['id']}` {it.get('qty', 1)}× {it['name']}" + (" (equipped)" if it.get("equipped") else "") +
-                     (" (attuned)" if it.get("attuned") else "") + (f" — {it['rarity']}" if it.get("rarity") else "") + f" · _{it.get('source', '')}_")
+        lines.append(f"- `{it['id']}` {it.get('qty', 1)}× " + (f"{it['alias']} ({it['name']})" if it.get("alias") else it["name"]) +
+                     ("" if item_known(it) else f" (UNIDENTIFIED — players see \"{item_display_name(it)}\")") + (" (equipped)" if it.get("equipped") else "") +
+                     (" (attuned)" if it.get("attuned") else "") + (f" — {it['rarity']}" if it.get("rarity") else "") + f" · _{it.get('source', '')}_" +
+                     (f"\n  - {it['note']}" if it.get("note") else ""))
     lines += ["", f"Hit Point Dice: " + ", ".join(f"{c} d{srd.find('classes', c)['hit_die']} {l - e.get('hd_spent', {}).get(c, 0)}/{l}" for c, l in e["classes"].items()),
               f"Languages: {', '.join(e.get('languages', []))} · Tools: {', '.join(e.get('tools', []))} · Armor training: {', '.join(e.get('armor_training', [])) or 'none'}",
               "", "## HP history", ""] + [f"- Level {h['level']}: +{h['gain']} ({h['how']})" for h in e.get("hp_log", [])]
@@ -291,10 +365,56 @@ def state_md(g):
         lines += ["", f"## Initiative — round {c['round']}", ""]
         for i, o in enumerate(c["order"]):
             lines.append(f"{'➤' if i == c['turn'] else ' '} {o['init']:>2}  {s['entities'].get(o['id'], {}).get('name', o['id'])}")
+    if s["maps"]:
+        lines += ["", "## Maps (exact current contents — tokens and items stay where they were left)", ""]
+        for mid in s["maps"]:
+            if s["maps"][mid]["kind"] == "region":
+                continue
+            lines += [map_state_md(g, mid), ""]
     if s["requests"]:
         lines += ["", "## Pending player rolls", ""] + [f"- `{r['id']}` {r['who']}: {r['label']}" for r in s["requests"].values()]
     lines += ["", "## Recent events", ""] + [f"- {f['text']}" for f in s["feed"][-15:]]
     return "\n".join(lines) + "\n"
+
+
+def map_state_md(g, mid):
+    """Everything on a map right now: creatures (with position/status), items on the floor, doors, labels."""
+    s = g.state
+    m = s["maps"][mid]
+    lines = [f"### {m['name']} (`{mid}`, {m['kind']} {m['w']}×{m['h']}, lighting {m.get('lighting', 'bright')})"]
+    ents = [e for e in s["entities"].values() if e.get("token", {}).get("map") == mid]
+    for e in sorted(ents, key=lambda e: (e["kind"] != "pc", e["name"])):
+        t = e["token"]
+        state = "DEAD" if e.get("dead") else f"{e['hp']}/{e['hp_max']} HP"
+        conds = ", ".join(c["name"] for c in e.get("conditions", []))
+        lines.append(f"- {e['name']} (`{e['id']}`, {e['kind'] if e['kind'] == 'pc' else e.get('side', 'enemy')}) at ({t['x']},{t['y']}) — {state}"
+                     + (f" · {conds}" if conds else "") + (" · hidden" if e.get("hidden") else ""))
+    for f in m.get("floor", []):
+        lines.append(f"- item on floor `{f['id']}`: {f['item'].get('qty', 1)}× {f['item']['name']} at ({f['x']},{f['y']}) — {f.get('note', '')}")
+    for p in m.get("pois", []):
+        lines.append(f"- point of interest `{p['id']}`: {p['name']} at ({p['x']},{p['y']}) → journal {p['journal']}")
+    doors = []
+    for y, row in enumerate(m["grid"]):
+        for x, ch in enumerate(row):
+            if ch in "Dd":
+                doors.append(f"({x},{y}) {'open' if ch == 'd' else 'closed'}")
+    if doors:
+        lines.append("- doors: " + ", ".join(doors))
+    if m.get("labels"):
+        lines.append("- labels: " + ", ".join(f"{lb['text']} ({lb['x']},{lb['y']})" for lb in m["labels"]))
+    return "\n".join(lines)
+
+
+def snapshot_map(g, mid, why="left"):
+    """Freeze a map exactly as the party left it: player + DM SVG and a text summary under views/maps/."""
+    d = Path(g.dir) / "views" / "maps"
+    d.mkdir(parents=True, exist_ok=True)
+    tag = f"{mid}-e{len(g.events):05d}"
+    (d / f"{tag}-player.svg").write_text(map_svg(g, mid, "player"), encoding="utf-8")
+    (d / f"{tag}-dm.svg").write_text(map_svg(g, mid, "dm"), encoding="utf-8")
+    (d / f"{tag}.md").write_text(f"# Snapshot — {why} at {fmt_time(g.state['time'])} (event {len(g.events)})\n\n"
+                                 + map_state_md(g, mid) + "\n", encoding="utf-8")
+    return d / f"{tag}.md"
 
 
 def write_snapshots(g):

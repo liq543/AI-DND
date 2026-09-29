@@ -41,6 +41,7 @@ char show kira
 ```
 npc add goblin-warrior --count 3 --at 12,8 [--map crypt] [--hidden] [--side enemy|ally|neutral] [--hp roll] [--name "Snag"]
 npc reveal|hide|remove <ids,...> | npc rename <id> --name "..." | npc side <id> --side ally | npc show <id>
+npc describe <id> --text "Tall, grey coat, a pistol on one hip"   # what anyone can SEE (info panel); do it whenever you describe them
 npc lore <id> --text "Resistant to fire; hates mirrors"   # public knowledge the party has earned (knowledge check, clue)
                                                            # → shown on the creature's click-to-inspect panel
 encounter plan goblin-warrior:4 bugbear-warrior:1        # XP budget check vs party
@@ -74,6 +75,9 @@ deathsave kira | stabilize wren kira | legendary-resist adult-red-dragon
 ## Checks, saves, damage, conditions
 ```
 check kira athletics --dc 15 [--adv "rope"] [--hidden]      # several: check kira,wren perception --dc 12
+contest bandit-captain deception --vs kira --vs-skill insight --passive --hidden   # opposed check (NPC lie vs passive Insight)
+contest kira deception --vs guard --vs-skill insight --passive          # PC lie vs NPC; drop --passive if they actively read
+ruling --what "The captain's confession stands" --reason "..."            # public DM ruling / correction (override list)
 save kira,wren dex --dc 13 --damage "4d6 fire" --half --source "fire trap"
 save bandit wis --dc 13 --condition frightened --repeat --source "Frightful Presence"
 damage kira 2d6 bludgeoning --source "falling 20 ft"
@@ -103,6 +107,13 @@ item equip|unequip|attune|unattune|use|light|drop|sell <who> <item-id> [--to <ta
 item give kira <item-id> --to wren | item recover-ammo kira Arrows | item card kira <item-id>
 item drop kira dagger-1 --qty 1      # lands on the map at the token's square (gold diamond marker, shown to players)
 item pickup kira floor-1             # must be in/next to that square; in combat uses the free object interaction
+item identify kira <item-id> --how "Identify spell (cast by wren)"   # magic items start UNIDENTIFIED unless bought, starting or --identified
+rest short --focus kira:<item-id>     # SRD: focus on one magic item through a Short Rest to learn its properties
+item obscure kira <item-id> --how "..." | item refresh kira <item-id>   # DM repair: mark unidentified / re-read an item from the SRD
+item unpack kira burglars-pack-1        # opens an SRD equipment pack into its listed contents (Hooded Lantern, Oil, Rations...)
+item note kira longsword-1 --alias "Oathkeeper" --text "Her father's sword, the grip wrapped in faded blue cord..."   # flavour only: display name + description on the sheet and item card.
+#   ALWAYS do this for notable items: anything with a story, a disguise, a maker, or a look the rules name does not capture
+#   (an heirloom blade, a weapon disguised as something else, a guild token, a cursed trinket). Mechanics still use the SRD base item.
 coins kira +25gp --source "loot: goblin pouches" | coins kira -5sp --source "spent: ferry"
 xp award --encounter | xp award --amount 200 --reason "negotiated the goblins' surrender" | xp milestone --reason "..."
 homebrew add monsters|items|subclasses|species|backgrounds --file thing.json --reason "..."   # public
@@ -114,6 +125,9 @@ map gen region|town|dungeon|cave|wilderness|interior|arena [--preset road-ambush
         [--name "..."] [--id crypt] [--seed 42] [--w 40 --h 30] [--show]
 map show <id> | map list | map ascii <id> | map render <id> [--dm]
 map reveal <id> --room 3 | --rect 0,0,10,10 | --all      map hide <id> --rect ...
+map poi <id> x,y --name "Weathered Statue" --text "What they perceive"   # pin a perceived notable object to its tile
+map poi <id> x,y --name "..." --id j12   # ...or link an existing journal entry; players click the marker to open it
+map poi-move <id> x,y --id poi-2 --reason "dragged aside" | map poi-remove <id> --id poi-2 --reason "carted away"
 map door <id> 12,7 open|close|reveal|break                map feature <id> 5,5 reveal|add|remove
 map crop <id> --room 4 --pad 2 --show                     map paint <id> "3,3 5,5-9,5" --char "#"
 map set <id> --kv lighting=dark                           map party 40,30   map label <id> 10,10 --name "Old Mill"
@@ -121,6 +135,7 @@ map from-image <asset-id> --w 30 --h 20
 asset portrait kira | asset icon "dragon" | asset fetch <url> --name "Cave art" --license CC0 --credit "..." [--portrait kira]
 asset import path/to/file.png --license "own work" | asset draw drawing.svg --name "Sister Maren" --portrait maren
 say "The torch gutters." | say --as "Brother Aldric" "Welcome, travellers."
-scene "The Drowned Chapel" --desc "Rain hammers the broken roof." [--image <asset>] [--map chapel]
+scene "The Sunken Shrine" --desc "Rain hammers the broken roof." [--image <asset>] [--map shrine]
+journal add "What the note says" --title "..."   # players' Journal tab (every `show` is added automatically)
 show item kira:<item-id> | show creature <id> | show asset <id> | show text "The letter reads..." --title "Letter" | show srd-item "Bag of Holding" | show clear
 ```

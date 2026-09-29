@@ -75,6 +75,8 @@ def apply(state, ev):
         state["maps"].pop(d["id"], None)
     elif t == "view.set":
         state["view"].update(d)
+    elif t == "journal.add":
+        state.setdefault("journal", []).append(d["entry"])
     elif t == "time.set":
         state["time"] = d["minutes"]
     elif t == "session.set":
@@ -600,6 +602,24 @@ def weapon_proficient(e, weapon):
     return weapon["name"].lower() in [w.lower() for w in e.get("weapon_profs", [])]
 
 
+def item_known(it):
+    """Magic items start unidentified (SRD: handling one tells you it's extraordinary, not what it does)."""
+    return it.get("identified", True) or not it.get("magic")
+
+
+def item_display_name(it):
+    """What the characters call an item: the DM's alias, else the real name once identified, else a vague label."""
+    if it.get("alias"):
+        return it["alias"]
+    if item_known(it):
+        return it["name"]
+    base = it.get("base_name")
+    if base:
+        return f"Unidentified magic {base.lower()}"
+    return {"consumable": "Unidentified potion" if "potion" in it["name"].lower() else "Unidentified magic consumable",
+            "armor": "Unidentified magic armor"}.get(it.get("kind"), "Unidentified magic item")
+
+
 def weapon_attack(e, item, versatile=False, offhand=False):
     """Compute attack bonus and damage for a PC wielding an inventory weapon (or unarmed)."""
     if item is None:  # Unarmed Strike
@@ -633,10 +653,10 @@ def weapon_attack(e, item, versatile=False, offhand=False):
     if has_feat(e, "Dueling") and not w["ranged"] and not versatile and "two-handed" not in props:
         dmg_mod += 2
     rng = w["range"]
-    return {"name": item["name"], "bonus": bonus, "damage": f"{die}{fmt_mod(dmg_mod) if dmg_mod else ''}",
+    return {"name": item["name"], "item": item.get("id"), "bonus": bonus, "damage": f"{die}{fmt_mod(dmg_mod) if dmg_mod else ''}",
             "type": w["type"], "reach": 10 if "reach" in props else 5, "range": rng, "ranged": w["ranged"],
             "thrown": "thrown" in props, "properties": sorted(props),
-            # mastery is per weapon kind: only the weapons the character picked (Kit: Shortsword, Dagger — not Shortbow)
+            # mastery is per weapon kind: only the weapons the character picked (e.g. a Rogue who chose Shortsword and Dagger gets no Shortbow mastery)
             "mastery": w["mastery"] if e["kind"] != "pc" or w["name"] in e.get("mastery_weapons", []) else None,
             "ability": ability,
             "ammo": "ammunition" in props}

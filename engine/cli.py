@@ -248,7 +248,7 @@ def instantiate_monster(g, mon, name=None, side="enemy", hidden=False, hp_mode="
         hp, how = max(1, r["total"]), "rolled"
     lr = next((a for a in mon["actions"] if a["name"] == "Legendary Resistance"), None)
     e = {"id": eid, "kind": "monster", "name": name or mon["name"], "srd": mon.get("slug"), "srd_name": mon["name"],
-         "side": side, "hidden": hidden, "size": mon["size"], "type": mon["type"], "alignment": mon["alignment"],
+         "side": side, "hidden": hidden, "size": ("Medium" if mon["size"] == "Small" and str(mon["type"]).lower().startswith("humanoid") else mon["size"]), "type": mon["type"], "alignment": mon["alignment"],
          "ac": mon["ac"], "hp": hp, "hp_max": hp, "hp_how": how, "temp_hp": 0, "speed": mon["speed"], "init": mon["init"],
          "abilities": mon["abilities"], "skills": mon["skills"], "resist": mon["resist"], "immune": mon["immune"],
          "vulnerable": mon["vulnerable"], "condition_immune": mon["condition_immune"], "darkvision": mon["darkvision"],
@@ -261,6 +261,23 @@ def instantiate_monster(g, mon, name=None, side="enemy", hidden=False, hp_mode="
 
 
 def cmd_npc(g, a):
+    if a.action == "resize":
+        # SRD generic NPCs are "Medium or Small" humanoids; pick the one that fits the person
+        e = g.get(a.what)
+        size = (a.size or "").title()
+        if size not in ("Tiny", "Small", "Medium", "Large", "Huge", "Gargantuan"):
+            raise RuleError("npc resize <id> --size Tiny|Small|Medium|Large|Huge|Gargantuan")
+        g.set(e, size=size)
+        g.note(f"  {e['name']} is {size}.")
+        return
+    if a.action == "describe":
+        # what anyone looking at them can see (shown on their info panel); replaces the previous description
+        e = g.get(a.what)
+        if not a.text or len(a.text) < 4:
+            raise RuleError('npc describe <id> --text "what the characters can see"')
+        g.set(e, appearance=a.text)
+        g.note(f"  Described {e['name']}.")
+        return
     if a.action == "lore":
         # public knowledge the party has earned (a knowledge check, a clue, an NPC's word) — shown on the creature's info panel
         e = g.get(a.what)
@@ -306,8 +323,9 @@ def cmd_npc(g, a):
             g.note(f"removed {e['id']}")
     elif a.action == "rename":
         e = g.get(a.what)
+        old = e["name"]
         g.set(e, name=a.name)
-        g.say(f"{e['name']} is now known as {a.name}.")
+        g.say(f"{old} is now known as {a.name}.")
     elif a.action == "side":
         e = g.get(a.what)
         if a.side not in ("enemy", "ally", "neutral"):
@@ -443,6 +461,29 @@ def cmd_combat(g, a):
         g.emit("combat.set", combat=c)
         g.say(f"{e['name']} joins the fight (initiative {r['total']}).", kind="combat")
         return
+    if a.action == "give-turn":
+        # repair: a creature's turn was skipped by mistake; return the turn to it (logged publicly)
+        if not a.ids or not a.reason:
+            raise RuleError('combat give-turn <id> --reason "..."')
+        e = g.get(a.ids)
+        c = dict(c)
+        idx = next((i for i, o in enumerate(c["order"]) if o["id"] == e["id"]), None)
+        if idx is None:
+            raise RuleError(f"{e['name']} isn't in the initiative order.")
+        c["turn"] = idx
+        c["economy"] = {**c.get("economy", {}), e["id"]: {}}
+        g.emit("combat.set", combat=c)
+        g.override(a.reason, f"turn returned to {e['name']}")
+        g.say(f"▶ {e['name']}'s turn (round {c['round']}) — returned after a skip.", kind="turn", who=e["id"])
+        return
+    if a.action == "oa-window":
+        # beta repair: open the opportunity-attack window a move warning should have opened (logged publicly)
+        att_id, _, tgt_id = (a.ids or "").partition(",")
+        if not tgt_id or not a.reason:
+            raise RuleError('combat oa-window <attacker>,<target> --reason "..."')
+        M.set_economy(g, g.get(att_id)["id"], oa_window=g.get(tgt_id)["id"])
+        g.override(a.reason, f"opportunity-attack window for {g.get(att_id)['name']} vs {g.get(tgt_id)['name']}")
+        return
     if a.action == "reset-turn":
         # beta repair: the current creature's action economy was left stale by an engine bug; logged publicly
         if not a.reason or len(a.reason) < 8:
@@ -573,6 +614,42 @@ def cmd_check(g, a):
     for who in ids(a.who):
         M.ability_check(g, g.get(who), a.what, dc=a.dc, adv=ids(a.adv), dis=ids(a.dis), hidden=a.hidden, now=a.now,
                         purpose=a.purpose)
+
+
+def cmd_ruling(g, a):
+    """A public DM ruling or correction (shown in the viewer's DM-override list): mistakes, retcons, judgement calls."""
+    if not a.what or not a.reason or len(a.reason) < 10:
+        raise RuleError('ruling --what "what was decided" --reason "why" (shown to the players)')
+    g.override(a.reason, a.what)
+    g.say(f"⚖ DM ruling: {a.what} — {a.reason}", kind="info")
+
+
+def cmd_contest(g, a):
+    """Opposed check (rules/core/01-playing-the-game.md → Contests): e.g. an NPC's Deception vs a PC's Insight.
+    The initiator must beat the opponent; a tie leaves things as they were (the opponent wins).
+    --passive: the opponent uses its passive score (10 + modifier) instead of rolling (they aren't actively trying).
+    --hidden: the rolls are secret (a lie the characters can't know about); players only see that a secret check happened."""
+    from .core import skill_mod
+    A, B = g.get(a.who), g.get(a.vs)
+    skill_a, skill_b = a.what.lower(), a.vs_skill.lower()
+    ra = M.ability_check(g, A, skill_a, adv=ids(a.adv), dis=ids(a.dis), hidden=a.hidden, now=True,
+                         purpose=a.purpose or f"contest: {skill_a} vs {B['name']}'s {skill_b}")
+    if a.passive:
+        if skill_b not in srd.SKILLS:
+            raise RuleError(f"--passive needs a skill for the opponent, got '{skill_b}'.")
+        tb = 10 + skill_mod(B, skill_b) + (5 if a.passive_adv else 0) - (5 if a.passive_dis else 0)
+        desc_b = f"passive {skill_b.title()} {tb}"
+    else:
+        rb = M.ability_check(g, B, skill_b, hidden=a.hidden, now=True, purpose=f"contest: {skill_b} vs {A['name']}'s {skill_a}")
+        tb = rb["total"]
+        desc_b = f"{skill_b.title()} {tb}"
+    winner = A if ra["total"] > tb else B
+    line = (f"⚖ Contest — {A['name']} {skill_a.title()} {ra['total']} vs {B['name']} {desc_b} → "
+            f"{winner['name']} wins" + (" (tie: things stay as they were)" if ra["total"] == tb else "") + ".")
+    if a.hidden:
+        g.note("[secret] " + line)
+    else:
+        g.say(line, kind="roll")
 
 
 def cmd_save(g, a):
@@ -771,7 +848,16 @@ def cmd_rest(g, a):
         for part in ids(a.hd):
             k, _, n = part.partition(":")
             hd[g.get(k)["id"]] = int(n or 1)
-        M.short_rest(g, members, hd)
+        focus = {}
+        for part in ids(a.focus):
+            k, _, item = part.partition(":")
+            if not item:
+                raise RuleError("--focus who:item-id (one magic item per creature)")
+            if g.get(k)["id"] in focus:
+                raise RuleError("A creature can focus on only one magic item per Short Rest.")
+            M.find_item(g.get(k), item)
+            focus[g.get(k)["id"]] = item
+        M.short_rest(g, members, hd, focus)
     else:
         M.long_rest(g, members)
 
@@ -844,6 +930,13 @@ def cmd_travel(g, a):
         g.say("   Slow pace: Advantage on Wisdom (Perception/Survival) checks; the party can travel stealthily.")
 
 
+def _reveal_pcs_on(g, mid):
+    """Fog of war follows the party: recompute what every PC/ally on this map can see (after layout or light changes)."""
+    for e in list(g.entities.values()):
+        if e.get("token", {}).get("map") == mid:
+            M.reveal_for(g, g.get(e["id"]))
+
+
 # ====================================================================== items, coins, xp
 
 def cmd_item(g, a):
@@ -858,7 +951,8 @@ def cmd_item(g, a):
             raise RuleError("--source must start with loot / reward / found / starting / crafted / gift / stolen / quest, "
                             "e.g. --source \"loot: bandit captain's chest\"")
         price = M.parse_coins(a.price) if a.price else None
-        M.add_item(g, e, a.item, qty=a.qty, source=src, price=price, purchase=a.purchase, override=a.override, custom=a.custom)
+        M.add_item(g, e, a.item, qty=a.qty, source=src, price=price, purchase=a.purchase, override=a.override, custom=a.custom,
+                   identified=True if a.identified else None)
     elif a.action in ("remove", "drop", "sell", "give"):
         to = g.get(a.to) if a.to else None
         if a.action == "give" and not to:
@@ -890,6 +984,45 @@ def cmd_item(g, a):
         M.attune(g, e, a.item, False)
     elif a.action == "use":
         M.use_item(g, e, a.item, a.to)
+    elif a.action == "identify":
+        # the Identify spell (cast it first), or the DM confirming another in-world way (a sage, a clear clue, a potion taste)
+        if not a.how:
+            raise RuleError('item identify <who> <item> --how "Identify spell (Tobias)" | "tasted it" | ... (a Short Rest: `rest short --focus who:item`)')
+        M.identify_item(g, e, a.item, a.how)
+    elif a.action == "obscure":
+        # beta repair / DM: mark a magic item the characters don't actually understand yet as unidentified
+        it = M.find_item(e, a.item)
+        if not it.get("magic"):
+            raise RuleError(f"{it['name']} isn't magical.")
+        if not a.how:
+            raise RuleError('item obscure <who> <item> --how "why the characters don\'t know it yet"')
+        g.set(e, inventory=[dict(i, identified=False) if i["id"] == it["id"] else i for i in e["inventory"]])
+        g.say(f"❔ {e['name']}'s {it['name']} is marked unidentified — {a.how}.", kind="item")
+    elif a.action == "refresh":
+        # beta repair: re-read an inventory item's rules from the SRD (after an engine fix), keeping id, qty, source, notes
+        it = M.find_item(e, a.item)
+        fresh = M.resolve_item(g, it["name"])
+        if not fresh:
+            raise RuleError(f"{it['name']} isn't an SRD item.")
+        keep = {k: it[k] for k in ("id", "qty", "equipped", "attuned", "source", "alias", "note", "identified", "lit") if k in it}
+        g.set(e, inventory=[{**fresh, **keep} if i["id"] == it["id"] else i for i in e["inventory"]])
+        g.say(f"🔧 {e['name']}'s {it['name']} re-read from the SRD (beta fix): now {fresh['kind']}" +
+              (f", based on {fresh['base_name']}" if fresh.get("base_name") else "") + ".", kind="item")
+    elif a.action == "unpack":
+        M.unpack(g, e, a.item)
+    elif a.action == "note":
+        # flavour only: what a notable item really is (e.g. a disguised or heirloom weapon the engine treats as its SRD base). No mechanics change.
+        if not a.text and not a.alias:
+            raise RuleError('item note <who> <item> --text "what it is / looks like" [--alias "Display name"]')
+        it = M.find_item(e, a.item)
+        upd = {}
+        if a.text:
+            upd["note"] = a.text
+        if a.alias:
+            upd["alias"] = a.alias
+        inv = [dict(i, **upd) if i["id"] == it["id"] else i for i in e["inventory"]]
+        g.set(e, inventory=inv)
+        g.say(f"🏷 {e['name']}'s {it['name']}" + (f" is now known as \"{a.alias}\"" if a.alias else "") + " — note added.", kind="item")
     elif a.action == "light":
         it = M.find_item(e, a.item)
         if not re.search(r"torch|lantern|candle", it["name"], re.I):
@@ -1093,16 +1226,62 @@ def cmd_map(g, a):
     elif a.action == "set":
         m = s["maps"][a.target]
         k, _, v = a.kv.partition("=")
-        if k not in ("name", "lighting", "fog"):
-            raise RuleError("map set name=...|lighting=bright|dim|dark|fog=true|false")
+        if k not in ("name", "lighting", "fog", "theme"):
+            raise RuleError("map set name=...|lighting=bright|dim|dark|fog=true|false|theme=" + "|".join(render.THEMES))
         val = v if k != "fog" else v.lower() == "true"
         if k == "lighting" and v not in ("bright", "dim", "dark"):
             raise RuleError("lighting: bright|dim|dark")
+        if k == "theme" and v not in render.THEMES:
+            raise RuleError("theme: " + "|".join(render.THEMES))
         g.emit("map.set", id=m["id"], set={k: val})
+        if k in ("lighting", "fog"):
+            _reveal_pcs_on(g, m["id"])
     elif a.action == "party":
         x, y = xy(a.target)
         g.emit("view.set", party_pos=[x, y])
         g.say(f"🧭 The party is at ({x},{y}) on the region map.", kind="map")
+    elif a.action in ("poi", "poi-move", "poi-remove"):
+        # points of interest: a notable object the characters have perceived, pinned to the tile it physically occupies,
+        # clickable on the table and linked to its journal entry. Permanent until the room changes (move / remove it).
+        if a.target not in s["maps"]:
+            raise RuleError(f"No map '{a.target}'.")
+        m = s["maps"][a.target]
+        pois = [dict(p) for p in m.get("pois", [])]
+        if a.action == "poi":
+            if not a.at or not a.name:
+                raise RuleError('map poi <map> x,y --name "Title" (--text "what they perceive" | --id <journal-id>)')
+            x, y = xy(a.at)
+            if not (0 <= x < m["w"] and 0 <= y < m["h"]):
+                raise RuleError(f"({x},{y}) is outside {m['name']} ({m['w']}×{m['h']}).")
+            if any((p["x"], p["y"]) == (x, y) for p in pois):
+                raise RuleError(f"({x},{y}) already has a point of interest; move that one or pick the neighbouring tile.")
+            jid = a.id
+            if jid:
+                if not any(j["id"] == jid for j in s.get("journal", [])):
+                    raise RuleError(f"No journal entry '{jid}'.")
+            else:
+                if not a.text:
+                    raise RuleError('map poi needs --text "what the characters perceive" (creates the journal entry) or --id <journal-id>')
+                jid = f"j{len(s.get('journal', [])) + 1}"
+                journal_add(g, {"kind": "text", "title": a.name, "text": a.text, "ref": a.text, "poi": {"map": m["id"], "x": x, "y": y}})
+            pid = f"poi-{max([int(p['id'].split('-')[1]) for p in pois] + [0]) + 1}"
+            pois.append({"id": pid, "x": x, "y": y, "name": a.name, "journal": jid})
+            g.emit("map.set", id=m["id"], set={"pois": pois})
+            g.say(f"📍 Noted on {m['name']}: {a.name} ({x},{y}) — click it on the map for its journal entry.", kind="map")
+        else:
+            p = next((p for p in pois if p["id"] == a.id), None)
+            if not p:
+                raise RuleError(f"No point of interest '{a.id}' on {m['name']} ({', '.join(q['id'] for q in pois) or 'none'}).")
+            if not a.reason:
+                raise RuleError("--reason \"what changed in the room\" (shown in the log)")
+            if a.action == "poi-move":
+                x, y = xy(a.at)
+                pois = [dict(q, x=x, y=y) if q["id"] == p["id"] else q for q in pois]
+                g.say(f"📍 {p['name']} moved to ({x},{y}) on {m['name']} — {a.reason}.", kind="map")
+            else:
+                pois = [q for q in pois if q["id"] != p["id"]]
+                g.say(f"📍 {p['name']} is no longer on {m['name']} — {a.reason}. (Its journal entry remains.)", kind="map")
+            g.emit("map.set", id=m["id"], set={"pois": pois})
     elif a.action == "label":
         m = s["maps"][a.target]
         x, y = xy(a.at)
@@ -1137,13 +1316,49 @@ def cmd_map(g, a):
             print(f"  room {r['n']}: {r['label']} at ({r['x']},{r['y']}) {r['w']}x{r['h']}")
         for f in m.get("features", []):
             print(f"  feature: {f['type']} {f.get('name')} ({f['x']},{f['y']}){' HIDDEN' if f.get('hidden') else ''}")
+    elif a.action == "import-grid":
+        # hand-drawn layout: a text file, one row per line, using the terrain codes in dm/visuals.md
+        mid = a.target
+        if mid not in s["maps"]:
+            raise RuleError(f"No map '{mid}'. Create one first (map gen ...), then import a grid into it.")
+        if not a.out:
+            raise RuleError("map import-grid <id> --out <grid.txt>")
+        rows = [r.rstrip("\n") for r in Path(a.out).read_text(encoding="utf-8").splitlines() if r.strip() and not r.startswith(";")]
+        width = max(len(r) for r in rows)
+        rows = [r.ljust(width, "#") for r in rows]
+        bad = sorted({ch for r in rows for ch in r if ch not in maps.TERRAIN})
+        if bad:
+            raise RuleError(f"Unknown terrain codes in grid: {' '.join(repr(b) for b in bad)}")
+        m = s["maps"][mid]
+        g.emit("map.set", id=mid, set={"grid": rows, "w": width, "h": len(rows), "rooms": [], "features": [], "labels": [], "floor": [],
+                                        "revealed": ["1" * width] * len(rows) if not m.get("fog") else ["0" * width] * len(rows)})
+        print(f"Imported a {width}×{len(rows)} grid into '{m['name']}'.")
+        _reveal_pcs_on(g, mid)
+    elif a.action in ("link", "unlink"):
+        # physically connected areas (floors of a building, a stair to a cellar): shown together in the map tabs
+        other = a.at
+        if a.target not in s["maps"] or other not in s["maps"]:
+            raise RuleError("map link <map-a> <map-b>  (both must exist)")
+        for x, y in ((a.target, other), (other, a.target)):
+            links = [l for l in s["maps"][x].get("links", []) if l != y] + ([y] if a.action == "link" else [])
+            g.emit("map.set", id=x, set={"links": links})
+        g.note(f"  {'Linked' if a.action == 'link' else 'Unlinked'} {s['maps'][a.target]['name']} ↔ {s['maps'][other]['name']}.")
+    elif a.action == "snapshot":
+        mid = a.target or s["view"].get("map")
+        if mid not in s["maps"]:
+            raise RuleError(f"No map '{mid}'.")
+        print(f"📸 Snapshot of '{s['maps'][mid]['name']}' → {views.snapshot_map(g, mid, why='manual snapshot')}")
     else:
-        raise RuleError("map gen|list|show|reveal|hide|door|feature|crop|paint|set|party|label|from-image|render|ascii")
+        raise RuleError("map gen|list|show|reveal|hide|door|feature|crop|paint|set|party|label|from-image|render|ascii|snapshot")
 
 
 def show_map(g, mid):
     if mid not in g.state["maps"]:
         raise RuleError(f"No map '{mid}'.")
+    prev = g.state["view"].get("map")
+    if prev and prev != mid and prev in g.state["maps"] and g.state["maps"][prev]["kind"] != "region":
+        path = views.snapshot_map(g, prev, why=f"party moved to {g.state['maps'][mid]['name']}")
+        g.note(f"  📸 Saved the exact state of '{g.state['maps'][prev]['name']}' → {path}")
     g.emit("map.set", id=mid, set={"shown": True})
     g.emit("view.set", map=mid)
     m = g.state["maps"][mid]
@@ -1275,6 +1490,25 @@ def cmd_show(g, a):
         raise RuleError("show item <owner:item-id> | creature <id> | asset <id> | text \"...\" --title | srd-item <name> | clear")
     g.emit("view.set", handout=handout)
     g.say(f"📜 Shown to the players: {handout['title']}", kind="handout")
+    journal_add(g, handout)
+
+
+def journal_add(g, handout, note=None):
+    """The players' journal: every handout, card and clue they've been shown, kept for later."""
+    j = g.state.get("journal", [])
+    entry = {**handout, "id": f"j{len(j) + 1}", "time": fmt_time(g.state["time"]), "session": g.state["session"]}
+    if note:
+        entry["note"] = note
+    g.emit("journal.add", entry=entry)
+
+
+def cmd_journal(g, a):
+    if a.action != "add":
+        raise RuleError('journal add "text" --title "..." (adds a note to the players\' journal)')
+    if not a.text or not a.title:
+        raise RuleError('journal add "text" --title "..."')
+    journal_add(g, {"kind": "text", "title": a.title, "text": a.text, "ref": a.text})
+    g.say(f"📓 Added to the journal: {a.title}", kind="handout")
 
 
 def cmd_homebrew(g, a):
@@ -1553,10 +1787,16 @@ def build_parser():
     c.add_argument("--spell")
     c.add_argument("--source")
 
+    c = sp.add_parser("journal", help="add \"text\" --title — a note in the players' journal (handouts are added automatically)")
+    c.add_argument("action")
+    c.add_argument("text", nargs="?")
+    c.add_argument("--title")
+
     c = sp.add_parser("npc", help="add <srd-monster>|reveal|hide|remove|rename|side|show|lore")
     c.add_argument("action")
     c.add_argument("what")
     c.add_argument("--text", help="npc lore: public knowledge about the creature")
+    c.add_argument("--size", help="npc resize: Small/Medium/...")
     c.add_argument("--name")
     c.add_argument("--count", type=int, default=1)
     c.add_argument("--side", default="enemy")
@@ -1635,6 +1875,23 @@ def build_parser():
     c.add_argument("--hidden", action="store_true")
     c.add_argument("--purpose")
     c.add_argument("--now", action="store_true")
+    c = sp.add_parser("ruling", help="public DM ruling/correction: ruling --what ... --reason ...")
+    c.add_argument("--what")
+    c.add_argument("--reason")
+
+    c = sp.add_parser("contest", help="opposed check: contest <who> <skill> --vs <id> --vs-skill <skill> [--passive]")
+    c.add_argument("who")
+    c.add_argument("what")
+    c.add_argument("--vs", required=True)
+    c.add_argument("--vs-skill", dest="vs_skill", required=True)
+    c.add_argument("--passive", action="store_true", help="opponent uses 10 + modifier")
+    c.add_argument("--passive-adv", dest="passive_adv", action="store_true")
+    c.add_argument("--passive-dis", dest="passive_dis", action="store_true")
+    c.add_argument("--adv")
+    c.add_argument("--dis")
+    c.add_argument("--hidden", action="store_true")
+    c.add_argument("--purpose")
+
     c = sp.add_parser("save", help="saving throw(s), optional damage/condition")
     c.add_argument("who")
     c.add_argument("ability")
@@ -1700,6 +1957,7 @@ def build_parser():
     c.add_argument("kind", choices=["short", "long"])
     c.add_argument("--who")
     c.add_argument("--hd", help="hit dice to spend: kira:2,bob:1")
+    c.add_argument("--focus", help="short rest: identify a magic item by focusing on it, kira:item-id (one per creature)")
     c = sp.add_parser("time", help="advance in-world time")
     c.add_argument("amount")
     c.add_argument("--reason")
@@ -1709,7 +1967,7 @@ def build_parser():
     c.add_argument("--to")
     c.add_argument("--map")
 
-    c = sp.add_parser("item", help="add|remove|drop|sell|give|equip|unequip|attune|unattune|use|light|recover-ammo|card")
+    c = sp.add_parser("item", help="add|remove|drop|sell|give|equip|unequip|attune|unattune|use|light|note|unpack|identify|obscure|refresh|recover-ammo|card")
     c.add_argument("action")
     c.add_argument("who")
     c.add_argument("item")
@@ -1720,6 +1978,10 @@ def build_parser():
     c.add_argument("--override")
     c.add_argument("--custom")
     c.add_argument("--to")
+    c.add_argument("--text", help="item note: what the item really is / looks like (flavour)")
+    c.add_argument("--alias", help="item note: display name (e.g. 'Oathkeeper' for a Longsword)")
+    c.add_argument("--how", help="item identify/obscure: how the characters learned (or why they don't know) its properties")
+    c.add_argument("--identified", action="store_true", help="item add: the characters already know what this magic item does")
     c = sp.add_parser("coins")
     c.add_argument("who")
     c.add_argument("amount")
@@ -1739,7 +2001,7 @@ def build_parser():
     c.add_argument("--hidden", action="store_true")
     c.add_argument("--override")
 
-    c = sp.add_parser("map", help="gen|list|show|reveal|hide|door|feature|crop|paint|set|party|label|from-image|render|ascii")
+    c = sp.add_parser("map", help="gen|list|show|reveal|hide|door|feature|crop|paint|set|party|label|poi|poi-move|poi-remove|from-image|render|ascii")
     c.add_argument("action")
     c.add_argument("target", nargs="?")
     c.add_argument("at", nargs="?")
@@ -1764,6 +2026,8 @@ def build_parser():
     c.add_argument("--hidden", action="store_true")
     c.add_argument("--dm", action="store_true")
     c.add_argument("--out")
+    c.add_argument("--text", help="map poi: what the characters perceive (becomes the journal entry)")
+    c.add_argument("--reason", help="map poi-move/poi-remove: what changed")
 
     c = sp.add_parser("asset", help="icon|fetch|import|draw|portrait|list")
     c.add_argument("action")
@@ -1822,6 +2086,7 @@ def build_parser():
 
 HANDLERS = {
     "set": cmd_set, "session": cmd_session, "char": cmd_char, "spells": cmd_spells, "npc": cmd_npc, "place": cmd_place,
+    "journal": cmd_journal, "contest": cmd_contest, "ruling": cmd_ruling,
     "move": cmd_move, "party-move": cmd_party_move, "stand": lambda g, a: M.stand(g, a.who), "combat": cmd_combat,
     "action": cmd_action, "attack": cmd_attack, "cast": cmd_cast, "check": cmd_check, "save": cmd_save,
     "damage": cmd_damage, "heal": cmd_heal, "temphp": cmd_temphp, "condition": cmd_condition, "exhaustion": cmd_exhaustion,
@@ -1837,6 +2102,8 @@ READ_ONLY = {"status", "audit", "log"}
 def main(argv=None):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     argv = sys.argv[1:] if argv is None else argv
+    # `coins kira -5sp`: a negative amount looks like an option to argparse; pass it as a value instead
+    argv = [f"={x}" if i and argv[0] == "coins" and re.match(r"^-\d", x) else x for i, x in enumerate(argv)]
     p = build_parser()
     a = p.parse_args(argv)
     if not a.cmd or a.cmd == "help":

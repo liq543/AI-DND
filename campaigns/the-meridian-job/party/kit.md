@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** Player · **Human** · **Rogue 3** (Thief) · **Background:** Criminal · **XP:** 1150
+**Player:** Player · **Human** · **Rogue 3** (Thief) · **Background:** Criminal · **XP:** 1537
 
 **HP** 27/27 · **AC** 14 (Leather Armor 11 + Dex 3) · **Speed** 30 ft · **Initiative** +5 · **Proficiency** +2 · **Passive Perception** 13
 
@@ -20,12 +20,12 @@
 
 | Attack | To hit | Damage | Notes |
 |---|---|---|---|
-| Shortbow | +5 | 1d6+3 piercing | range 80/320 ft |
+| Rapier | +5 | 1d8+3 piercing | reach 5 ft |
 | Unarmed Strike | +1 | 0 bludgeoning | reach 5 ft |
 
 Attacks per Attack action: 1
 
-**Granted spells:** mage-hand (Magic Initiate (Wizard)), minor-illusion (Magic Initiate (Wizard)), disguise-self (Magic Initiate (Wizard))
+**Granted spells:** mage-hand (Magic Initiate (Wizard)), minor-illusion (Magic Initiate (Wizard)), disguise-self (Magic Initiate (Wizard), free cast used)
 
 ## Features & feats
 
@@ -35,20 +35,33 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 58 GP
+**Coins:** 292 GP
 
-- `dagger-1` 2× Dagger · _starting equipment_
-- `shortsword-1` 1× Shortsword · _starting equipment_
-- `arrows-1` 16× Arrows · _starting equipment_
-- `quiver-1` 1× Quiver · _starting equipment_
+- `dagger-1` 1× Dagger · _starting equipment_
 - `thieves-tools-1` 1× Thieves' Tools · _starting equipment_
-- `burglars-pack-1` 1× Burglar's Pack · _starting equipment_
 - `leather-armor-1` 1× Leather Armor (equipped) · _starting equipment: Rogue option A (replaces mis-parsed entry)_
+- `potion-of-healing-1` 2× Potion of Healing — Common · _reward: Crane's strongbox_
+- `rapier-1` 1× Heron-head Sword-cane (Rapier) (equipped) · _loot: the blade hidden inside Crane's heron's-head cane (a sword-cane)_
+  - Valentin Crane's walking cane: black lacquered wood with a silver heron's-head handle. A twist of the handle draws a slim, needle-pointed blade. It passes for a gentleman's cane anywhere a sword would draw looks. The engine treats it as a Rapier.
 - `the-magpies-key-1` 1× The Magpie's Key · _stolen: Lot 9, lifted from Dorothea Quill mid-raid_
-- `shortbow-1` 1× Shortbow (equipped) · _starting equipment_
-- `codex-of-stillness-1` 1× Codex of Stillness · _stolen: Lot 11, lifted from a looter's sack_
+- `shortbow-1` 1× Shortbow · _starting equipment_
+- `quiver-1` 1× Quiver · _starting equipment_
+- `arrows-1` 12× Arrows · _starting equipment_
+- `backpack-1` 1× Backpack · _starting equipment (unpacked from Burglar's Pack)_
+- `ball-bearings-1` 1× Ball Bearings · _starting equipment (unpacked from Burglar's Pack)_
+- `bell-1` 1× Bell · _starting equipment (unpacked from Burglar's Pack)_
+- `candle-1` 10× Candle · _starting equipment (unpacked from Burglar's Pack)_
+- `crowbar-1` 1× Crowbar · _starting equipment (unpacked from Burglar's Pack)_
+- `oil-1` 7× Oil · _starting equipment (unpacked from Burglar's Pack)_
+- `rations-1` 5× Rations · _starting equipment (unpacked from Burglar's Pack)_
+- `rope-1` 1× Rope · _starting equipment (unpacked from Burglar's Pack)_
+- `tinderbox-1` 1× Tinderbox · _starting equipment (unpacked from Burglar's Pack)_
+- `waterskin-1` 1× Waterskin · _starting equipment (unpacked from Burglar's Pack)_
+- `wax-key-impressions-1` 1× Wax Key Impressions · _crafted: Kit's candle-wax impressions of Pim Hobb's STORES, CAGE and LIFT keys_
+- `dagger-of-venom-1` 1× Dagger of Venom (per its tag) (Dagger of Venom) (UNIDENTIFIED — players see "Dagger of Venom (per its tag)") — Rare · _stolen: Acquisitions case A-148, Cage Three, Undercroft Stores (swapped for a plain dagger)_
+  - Acquisitions exhibit A-148, lifted from its glass case in the Undercroft Stores. A slim blade of blued black steel with a green-enamelled hilt, faintly oily to the touch. A plain dagger lies on the black felt in its place, under an unbroken Acquisitions seal.
 
-Hit Point Dice: Rogue d8 3/3
+Hit Point Dice: Rogue d8 1/3
 Languages: Common, Elvish, Halfling, Thieves' Cant · Tools: Thieves' Tools · Armor training: light
 
 ## HP history

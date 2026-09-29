@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 RULES = ROOT / "rules"
 CACHE = Path(__file__).resolve().parent / ".cache" / "srd.json"
-CACHE_VERSION = 10
+CACHE_VERSION = 13
 
 ABILITIES = ["str", "dex", "con", "int", "wis", "cha"]
 ABILITY_NAMES = {"strength": "str", "dexterity": "dex", "constitution": "con",
@@ -403,8 +403,11 @@ def parse_equipment():
                     price = next((cost_cp(c) for c in reversed(r) if cost_cp(c) is not None), None)
                     if price is not None:
                         gear[r[0].lower()] = {"name": r[0], "cost_cp": price}
-    for m in re.finditer(r"^#### (.+?) \(([\d,]+ (?:CP|SP|GP|PP))\)", text, re.M):
-        gear.setdefault(m.group(1).strip().lower(), {"name": m.group(1).strip(), "cost_cp": cost_cp(m.group(2))})
+    for m in re.finditer(r"^#### \**([^\n(*]+?) \(([\d,]+ (?:CP|SP|GP|PP))\)\**[ \t]*\n(?=(.{0,400}))", text, re.M | re.S):
+        entry = gear.setdefault(m.group(1).strip().lower(), {"name": m.group(1).strip(), "cost_cp": cost_cp(m.group(2))})
+        ab = re.match(r"\s*\*\*Ability:\*\*\s*(\w+)", m.group(3))
+        if ab and ability_key(ab.group(1)):
+            entry["tool_ability"] = ability_key(ab.group(1))
     # tools priced per variant, e.g. "#### Musical Instrument (Varies)" ... "**Variants:** Bagpipes (30 GP, 6 lb.), drum (6 GP, 3 lb.)"
     for m in re.finditer(r"^#### \**([^\n(*]+?) \(Varies\)\**[ \t]*\n(.*?)(?=^#{2,4} |\Z)", text, re.M | re.S):
         kind = m.group(1).strip()
@@ -414,7 +417,9 @@ def parse_equipment():
         for vm in re.finditer(r"([A-Za-z' -]+?)\s*\(([\d,]+ (?:CP|SP|GP|PP))", var.group(1)):
             vname = vm.group(1).strip(" ,").strip()
             vname = vname[0].upper() + vname[1:]
-            gear.setdefault(vname.lower(), {"name": vname, "cost_cp": cost_cp(vm.group(2)), "tool_kind": kind})
+            ab = re.search(r"\*\*Ability:\*\*\s*(\w+)", m.group(2))
+            gear.setdefault(vname.lower(), {"name": vname, "cost_cp": cost_cp(vm.group(2)), "tool_kind": kind,
+                                            **({"tool_ability": ability_key(ab.group(1))} if ab and ability_key(ab.group(1)) else {})})
     return weapons, armor, gear
 
 

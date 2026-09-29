@@ -263,6 +263,12 @@ def srd_text(kind, slug_, max_chars=900):
 
 
 def item_card(item):
+    from .core import item_display_name, item_known
+    if not item_known(item):
+        item = {"name": item_display_name(item), "kind": item.get("kind", "gear"), "base_name": item.get("base_name"),
+                "note": item.get("note"), "alias": None, "source": item.get("source"), "magic": False,
+                "description": "Unidentified. It hums with magic when you hold it, but its properties are unknown. Identify it with "
+                               "the Identify spell, or by focusing on it through a Short Rest."}
     rarity = item.get("rarity") or ("Mundane" if not item.get("magic") else "Varies")
     color = RARITY_COLORS.get(rarity, "#8a7a5a")
     sub = item.get("meta") or f"{item.get('kind', 'gear').title()}" + (f", {rarity}" if item.get("magic") else "")
@@ -273,7 +279,11 @@ def item_card(item):
     if not desc and item.get("kind") == "armor":
         a = srd.find("armor", item.get("base_name", item["name"])) or {}
         desc = f"AC {a.get('base')}{' + Dex' if a.get('adds_dex') else ''}{' (max 2)' if a.get('dex_max') == 2 else ''}\nCategory: {a.get('category', '')}"
-    return _card_frame(item["name"], sub, color, icon_for_item(item["name"], item.get("kind")),
+    if item.get("alias"):
+        sub = f"{item['name']} · {sub}"
+    if item.get("note"):
+        desc = item["note"] + ("\n\n" + desc if desc else "")
+    return _card_frame(item.get("alias") or item["name"], sub, color, icon_for_item(item["name"], item.get("kind")),
                        wrap(desc or "—", 44), footer=f"Source: {item.get('source', 'SRD 5.2')}")
 
 

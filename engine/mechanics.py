@@ -7,6 +7,7 @@ import math
 import re
 
 from . import dice, maps, srd
+from .core import item_display_name
 from .core import (MAGIC_EFFECTS, RARITY_ORDER, TIER_MAX_GP_AWARD, TIER_MAX_RARITY, RuleError,
                    abilities, amod, armor_class, attacks_per_action, condition_names, derive, fmt_mod,
                    has_feat, has_feature, hp_max, level, mod, pact_slots, pb, resources, save_mod,
@@ -150,10 +151,19 @@ def ability_check(g, e, what, dc=None, adv=(), dis=(), hidden=False, purpose=Non
     what = what.lower().strip()
     if what in srd.SKILLS:
         m, label = skill_mod(g_ent(g, e), what), f"{srd.SKILLS[what].upper()} ({what.title()})"
+    elif (srd.find("gear", what) or {}).get("tool_ability"):
+        tool = srd.find("gear", what)
+        ab = tool["tool_ability"]
+        prof = e["kind"] == "pc" and any(tool["name"].lower() == t.lower() or (tool.get("tool_kind") or "").lower() == t.lower()
+                                         for t in e.get("tools", []))
+        m = amod(e, ab) + (pb(e) if prof else (skill_bonus_jack(e) if e["kind"] == "pc" else 0))
+        label = f"{ab.upper()} ({tool['name']}{', proficient' if prof else ''})"
+        if e["kind"] == "pc" and not any(i["name"].lower() == tool["name"].lower() for i in e.get("inventory", [])):
+            raise RuleError(f"{e['name']} needs {tool['name']} in hand for that check.")
     else:
         ab = srd.ability_key(what)
         if not ab:
-            raise RuleError(f"'{what}' is not a skill or ability. Skills: {', '.join(srd.SKILLS)}")
+            raise RuleError(f"'{what}' is not a skill, ability or tool. Skills: {', '.join(srd.SKILLS)}")
         m, label = amod(e, ab) + (skill_bonus_jack(e) if e["kind"] == "pc" else 0), f"{ab.upper()} check"
     adv, dis = list(adv), list(dis)
     if what == "athletics" and e["kind"] == "pc" and _has_feature(e, "Remarkable Athlete"):
@@ -541,6 +551,11 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
     cover = None
     if d is not None:
         m = g.state["maps"][att["token"]["map"]]
+        oa_ok = reaction and combat(g) and economy(g, att["id"]).get("oa_window") == tgt["id"]
+        if oa_ok:
+            if request or not wants_request(g, att, now):  # keep the window open until the player's Roll resolves it
+                set_economy(g, att["id"], oa_window=None)
+            d = min(d, reach or 5)  # resolved at the moment the target stepped out of reach
         if not ranged and d > (reach or 5):
             if prof.get("thrown") and rng:
                 ranged = True
@@ -812,6 +827,9 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
             how = "scroll"
         else:
             how = known_spell(e, spell)
+            if not how and ritual and spell.get("ritual") and "Wizard" in e.get("classes", {}) \
+                    and spell["slug"] in e.get("spells", {}).get("spellbook", []):
+                how = "ritual from spellbook (Ritual Adept)"  # rules/classes/wizard.md: Level 1 Ritual Adept
             if not how:
                 raise RuleError(f"{e['name']} doesn't have {spell['name']} prepared (or granted by a feature). "
                                 f"Prepared: {', '.join(e.get('spells', {}).get('prepared', [])) or 'none'}")
@@ -1203,6 +1221,8 @@ def move(g, ref, dest=None, path=None, dash=False, force=None, crawl=False, jump
                     if was_in and maps.distance_squares(sq, token_pos(o)) * 5 > reach:
                         g.say(f"⚠ {e['name']} leaves {o['name']}'s reach — {o['name']} may make an Opportunity Attack "
                               f"(`attack {o['id']} {e['id']} --reaction`).", kind="warning")
+                        # the attack happens as the target leaves reach: remember the window so the reaction can resolve
+                        set_economy(g, o["id"], oa_window=e["id"])
                         break
                     was_in = maps.distance_squares(sq, token_pos(o)) * 5 <= reach
         set_economy(g, e["id"], move_used=used + feet)
@@ -1237,10 +1257,10 @@ def vision_ft(g, e, m):
         n = it["name"].lower()
         if it.get("lit"):
             carried = max(carried, 40 if "torch" in n else 60 if "lantern" in n else 10)
-    if light == "bright":
-        return 120 if m["kind"] not in ("dungeon", "cave") else 60
-    if light == "dim":
-        return max(60, dv, carried)
+    if light in ("bright", "dim"):
+        # SRD: dim light only makes an area Lightly Obscured (Disadvantage on sight-based Perception); it doesn't limit
+        # how far you can see, so dim is revealed like bright light. Walls and doors still block line of sight.
+        return max(120, dv, carried)
     return max(dv, carried)
 
 
@@ -1280,7 +1300,7 @@ def require_no_dying(g, what):
                         f"before {what} — time doesn't skip past death saves.")
 
 
-def short_rest(g, members, hit_dice=None):
+def short_rest(g, members, hit_dice=None, focus=None):
     if combat(g):
         raise RuleError("You can't rest during combat.")
     require_no_dying(g, "resting")
@@ -1293,6 +1313,21 @@ def short_rest(g, members, hit_dice=None):
             continue
         n = int(hit_dice.get(e["id"], 0))
         spent = dict(e.get("hd_spent", {}))
+        if n and not e.get("classes"):
+            # monsters / NPCs: Hit Point Dice come from the stat block's HP expression, e.g. 65 (10d8 + 20) → ten d8s
+            mon = srd.find("monsters", e.get("srd") or e.get("srd_name") or "") or {}
+            m = re.match(r"(\d+)d(\d+)", str(mon.get("hp_dice") or ""))
+            if not m:
+                raise RuleError(f"{e['name']} has no Hit Point Dice in its stat block.")
+            total, die = int(m.group(1)), int(m.group(2))
+            if spent.get("monster", 0) + n > total:
+                raise RuleError(f"{e['name']} has only {total - spent.get('monster', 0)} Hit Point Dice left.")
+            for _ in range(n):
+                r = g.roll(f"1d{die}{fmt_mod(amod(e, 'con'))}", "Hit Point Die", e["id"])
+                spent["monster"] = spent.get("monster", 0) + 1
+                g.set(e, hd_spent=spent)
+                heal(g, g.get(e["id"]), max(0, r["total"]), f"Hit Point Die ({r['text']})")
+            n = 0
         for _ in range(n):
             cls = max(e["classes"], key=lambda c: e["classes"][c] - spent.get(c, 0))
             if e["classes"][cls] - spent.get(cls, 0) <= 0:
@@ -1312,6 +1347,9 @@ def short_rest(g, members, hit_dice=None):
             elif info["short"] == "font" and e["classes"].get("Bard", 0) >= 5:
                 used[name] = 0
         g.set(e, resources_used=used, pact_used=0)
+    for eid, ref in (focus or {}).items():
+        # SRD: focus on one magic item during a Short Rest while in contact with it; at the end you learn its properties
+        identify_item(g, g.get(eid), ref, "focused on it through a Short Rest")
 
 
 def long_rest(g, members):
@@ -1442,14 +1480,34 @@ def resolve_item(g, name):
     a = srd.find("armor", raw)
     if a:
         return {"name": a["name"], "kind": "armor", "base_name": a["name"], "category": a["category"], "value_cp": a["cost_cp"] or 0}
-    mi = srd.find("magic_items", raw)
+    named_base = re.match(r"^(.+?)\s*\(([^)]+)\)\s*$", raw)   # "Flame Tongue (Longsword)"
+    mi = srd.find("magic_items", raw) or (srd.find("magic_items", named_base.group(1)) if named_base else None)
     if mi:
         rar = mi["rarities"][0] if len(mi["rarities"]) == 1 else None
         if not rar:
             raise RuleError(f"{mi['name']} comes in several rarities ({', '.join(mi['rarities'])}) — name the specific version.")
-        return {"name": mi["name"], "kind": "consumable" if mi["consumable"] else "magic", "magic": True, "ref": mi["slug"],
-                "rarity": rar, "needs_attunement": mi["attunement"], "meta": mi["meta"],
-                "value_cp": MAGIC_VALUE_GP.get(rar, 0) * (50 if mi["consumable"] else 100)}
+        out = {"name": mi["name"], "kind": "consumable" if mi["consumable"] else "magic", "magic": True, "ref": mi["slug"],
+               "rarity": rar, "needs_attunement": mi["attunement"], "meta": mi["meta"],
+               "value_cp": MAGIC_VALUE_GP.get(rar, 0) * (50 if mi["consumable"] else 100)}
+        # a magic weapon or armor is still that weapon/armor: "Weapon (Dagger)", "Armor (Plate Armor)", "Weapon (Any Sword)"
+        wm = re.match(r"\W*(Weapon|Armor)\s*\(([^)]+)\)", mi.get("meta") or "")
+        if wm:
+            text = (srd.RULES / "magic-items" / f"{mi['slug']}.md")
+            text = text.read_text(encoding="utf-8") if text.exists() else ""
+            want = named_base.group(2) if named_base else wm.group(2)
+            table = "weapons" if wm.group(1) == "Weapon" else "armor"
+            base = srd.find(table, want)
+            if not base:
+                out["needs_base"] = wm.group(2)   # reported after the treasure-limit check (add_item)
+                return out
+            out.update({"kind": "weapon" if table == "weapons" else "armor", "base_name": base["name"],
+                        "name": mi["name"] if not named_base or wm.group(2).lower() == base["name"].lower() else f"{mi['name']} ({base['name']})"})
+            if table == "armor":
+                out["category"] = base["category"]
+            bm = re.search(r"\+(\d) bonus to attack rolls and damage rolls" if table == "weapons" else r"\+(\d) bonus to Armor Class", text)
+            if bm:
+                out["magic_bonus"] = int(bm.group(1))
+        return out
     gear = srd.find("gear", raw)
     if gear:
         return {"name": gear["name"], "kind": "gear", "value_cp": gear["cost_cp"]}
@@ -1478,7 +1536,7 @@ def new_item_id(e, name):
     return f"{base}-{n}"
 
 
-def add_item(g, e, name, qty=1, source="found", price=None, purchase=False, override=None, custom=None):
+def add_item(g, e, name, qty=1, source="found", price=None, purchase=False, override=None, custom=None, identified=None):
     if qty < 1:
         raise RuleError("Quantity must be at least 1.")
     item = resolve_item(g, name)
@@ -1490,6 +1548,8 @@ def add_item(g, e, name, qty=1, source="found", price=None, purchase=False, over
         item = {"name": name, "kind": "gear", "custom": True, "description": custom, "value_cp": 0}
     if item.get("magic"):
         check_magic_allowed(g, item, override)
+    if item.get("needs_base"):
+        raise RuleError(f"{item['name']} can be {item['needs_base']} — name the base item, e.g. \"{item['name']} (Longsword)\".")
     if purchase:
         # rules/core/10-magic-item-rules.md: Common items can often be bought in a town; rarer ones are rarely for sale
         if item.get("magic") and item.get("rarity") != "Common" and not override:
@@ -1503,17 +1563,65 @@ def add_item(g, e, name, qty=1, source="found", price=None, purchase=False, over
                             f"A discount that large needs --override with the reason (haggling result, favour...).")
         change_coins(g, e, -cost * qty, f"buy {item['name']}")
         source = f"purchased for {fmt_cp(cost * qty)}"
+    if item.get("magic"):
+        # SRD: learning a magic item's properties isn't automatic (Identify, or a Short Rest focused on it). Bought and
+        # starting items are known; anything found, looted, stolen or given starts unidentified unless the DM says otherwise.
+        known = identified if identified is not None else (purchase or bool(re.match(r"^(starting|purchase|crafted)", source or "", re.I)))
+        item = {**item, "identified": bool(known)}
     inv = [dict(i) for i in e.get("inventory", [])]
     stackable = (item["kind"] in ("gear", "consumable") or (item["kind"] == "weapon" and not item.get("magic"))) and not item.get("custom")
-    existing = next((i for i in inv if stackable and i["name"] == item["name"]), None)
+    existing = next((i for i in inv if stackable and i["name"] == item["name"] and i.get("identified", True) == item.get("identified", True)), None)
     if existing:
         existing["qty"] = existing.get("qty", 1) + qty
     else:
         inv.append({"id": new_item_id(e, item["name"]), **item, "qty": qty, "equipped": False, "source": source})
     g.set(e, inventory=inv)
-    g.say(f"🎒 {e['name']} gains {qty}× {item['name']}" + (f" ({item['rarity']})" if item.get("rarity") else "") + f" — {source}.",
-          kind="item", who=e["id"])
+    label = item["name"] + (f" ({item['rarity']})" if item.get("rarity") else "")
+    if item.get("magic") and not item.get("identified"):
+        label = f"{item_display_name(item)} (its properties are unknown until identified)"
+    g.say(f"🎒 {e['name']} gains {qty}× {label} — {source}.", kind="item", who=e["id"])
     return item
+
+
+def identify_item(g, e, ref, how):
+    it = find_item(e, ref)
+    if not it.get("magic"):
+        raise RuleError(f"{it['name']} isn't magical — there's nothing to identify.")
+    if it.get("identified", True):
+        raise RuleError(f"{e['name']} already knows what the {it['name']} does.")
+    g.set(e, inventory=[dict(i, identified=True) if i["id"] == it["id"] else i for i in e["inventory"]])
+    g.say(f"🔍 {e['name']} identifies the {item_display_name(it)}: it is {it['name']}" +
+          (f" ({it['rarity']})" if it.get("rarity") else "") + f" — {how}. Its properties are now known.", kind="item", who=e["id"])
+
+
+def pack_contents(pack_name):
+    """[(name, qty)] from the SRD text 'A Burglar's Pack contains the following items: Backpack, ..., and Waterskin.'"""
+    text = (srd.RULES / "core" / "06-equipment.md").read_text(encoding="utf-8")
+    m = re.search(rf"An? {re.escape(pack_name)} contains the following items:\s*(.+?)\.\s", text, re.S)
+    if not m:
+        return None
+    out = []
+    for part in re.split(r",\s*(?:and\s+)?|\s+and\s+", " ".join(m.group(1).split())):
+        part = part.strip()
+        if not part:
+            continue
+        q = re.match(r"(\d+)\s+(?:(?:flasks|days|sheets|pieces|feet)\s+of\s+)?(.+)", part)
+        out.append((q.group(2), int(q.group(1))) if q else (part, 1))
+    return out
+
+
+def unpack(g, e, ref):
+    """Open an equipment pack: replace it with the SRD items it contains (same source)."""
+    it = find_item(e, ref)
+    contents = pack_contents(it["name"])
+    if not contents:
+        raise RuleError(f"{it['name']} isn't an equipment pack with listed contents (rules/core/06-equipment.md).")
+    remove_item(g, e, it["id"], 1, "unpacked")
+    src = f"{it.get('source', '')} (unpacked from {it['name']})".strip()
+    for name, qty in contents:
+        cand = [name, name[:-1] if name.endswith("s") else name, name[:-2] if name.endswith("es") else name]
+        hit = next((c for c in cand if resolve_item(g, c)), None)
+        add_item(g, g.get(e["id"]), hit or name, qty=qty, source=src, custom=None if hit else f"From the SRD {it['name']}.")
 
 
 def find_item(e, ref):

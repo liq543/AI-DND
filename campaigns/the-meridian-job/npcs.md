@@ -30,7 +30,7 @@
 - **Role:** field leader of the Acquisitions Office. Leads tonight's raid.
 - **Look & voice:** shaved head, a burn-scarred jaw, the Meridian's sun-and-key on his breastplate. Hums while
   he works. Testified against Hedda at her trial.
-- **Stat block:** `warrior-veteran`. **Status:** at the Drowned Chapel.
+- **Stat block:** `warrior-veteran`. **Status:** the crew's prisoner at the Sluice House (1 HP, hooded, chained). He saw Thorne kill Dane and perjured himself at Hedda's trial. He will trade testimony for his life and a way out of Vessarine.
 
 ### Captain Aldric Thorne
 - **Role:** Captain of the Meridian Wardens. He framed Hedda.
@@ -63,3 +63,27 @@
 - **Look & voice:** ancient, toothless, rain-cloak and a lantern on a pole. Hums sea shanties and never finishes a sentence.
 - **Wants:** to deliver the crew to the *Gilded Heron*, and to get paid.
 - **Stat block:** `commoner`.
+
+### Old Mags Pritchard
+- **Role:** a Meridian Warden gate-sergeant, busted to night shifts on the Bridge of Saints gatehouse for speaking up
+  for Hedda at her trial. Sorts the Warden post on nights. Lives above the chandler's on Tallow Lane, Cinderwharf.
+- **Look & voice:** sixty, grey hair in a tight bun, a jaw like a boot heel, a pipe she never lights. Calls everyone "pet".
+- **Wants:** to finish her twenty years and draw her pension. She liked Emeric Dane, and never believed Hedda did it.
+- **Stat block:** `guard`. **Status:** Day 1, 10:19, being hauled off by the Collectors for questioning about Hedda.
+
+### Collector-Lieutenant Oona Brask
+- **Role:** Varga's second in the Acquisitions Office. Leads the hunt for the Night Market escapees.
+- **Look & voice:** thirties, sleek black braid, a duelling scar through one eyebrow, a pistol and a scimitar. Bored, precise, cruel.
+- **Stat block:** `bandit-captain`.
+
+## Deaths
+- **Valentin Crane**: died locked in the Heron's brig when the crew burned the ship (Day 1, 12:35).
+- **Ilse**: tricked into the brig by Sera; burned with Crane.
+
+### Pim Hobb (the night receiving clerk, Acquisitions Dock)
+- **Role:** twelve years at the Receiving Ledger, and sleeps on duty. Bought by the crew (50 gp, plus his own forged ledger line as leverage). Keys back before the 05:00 bell. A potential inside man.
+- **Look & voice:** thin and ink-stained, sleeve-garters, half-moon spectacles, precise, frightened, a long memory.
+- **Stat block:** `commoner`. **Attitude:** a bought ally.
+
+### Collector A. Venn (the statue in Cage Five)
+- A Collector petrified three years ago when he tried a Collector sigil on the Curator's plate. Stored under a dust sheet, "Do not display". Wakes if the Eye is shattered.

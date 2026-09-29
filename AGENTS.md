@@ -94,6 +94,10 @@ Ambiguous opener ("hi", "let's play")? Check `campaigns/ACTIVE`: offer to contin
 - A new game starts in a **fresh chat**; if this chat contains another campaign's story, say so and stop.
 - Look up rules on demand (`python -m engine rules spell fireball`, grep `rules/`), don't bulk-load.
 - The engine remembers mechanics; `log/summary.md` remembers story. Long chat? Save, then continue in a new chat.
+- **Project-wide files stay campaign-agnostic.** Everything outside `campaigns/<slug>/` (this file, `dm/`, `engine/` code,
+  comments and messages, `viewer/`, `tests/`, `.claude/`, and assistant memory) is written for D&D as a whole. Use generic
+  examples (SRD monsters, placeholder names like "kira" or "Captain Rhosk"), never the current campaign's characters, places,
+  items or plot, so one game never shapes the next. Campaign facts live only in that campaign's own notes.
 
 ## 6. The turn loop
 
@@ -103,8 +107,15 @@ Ambiguous opener ("hi", "let's play")? Check `campaigns/ACTIVE`: offer to contin
 3. Resolve with the engine: `check`, `save`, `attack`, `cast`, `move`, `feature`, `item`, … In player-roll mode
    PC rolls become **Roll** buttons; end your message asking them to roll, then read the result next turn
    (`python -m engine log -n 10`).
-4. Update visuals when the scene changes (new map, reveal a room, show a handout, set a scene banner).
+4. Update visuals when the scene changes. **Entering a new area always means a new map, shown before you describe it**, and **re-entering or passing a known area means updating it first** for the time of day and for what has changed (crowds, closing hours, guards, doors). When the characters perceive a
+   notable object, pin it to its tile with `map poi` (dm/visuals.md → Points of interest)
+   (dm/visuals.md). Also reveal rooms, show handouts, and set a scene banner.
 5. Narrate the engine's result vividly (1–3 short paragraphs), then prompt: *"What do you do?"*
+   **Log the dialogue:** every line a character speaks, the player's own PC included, goes into the log with
+   `say --as "<Name>" "..."`: the player's words for their PC (lightly cleaned up), plus the key lines of companions and NPCs.
+   **Log the events too:** every beat of what happens in the world (what a character does, what they find, how a roll plays
+   out) goes in as a 1–2 sentence narration line with `say "..."` (no --as), right after the engine resolves it. The
+   log should read as the story on its own, not just the dice.
 6. Keep narrative notes current: new NPC → `npcs.md`; new place → `locations.md`; plot → `quests.md`/`secrets.md`;
    a bullet per scene in `log/session-NNN.md`.
 
