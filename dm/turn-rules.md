@@ -40,6 +40,9 @@ correct me. A correction means the game wasn't played right.** Check every actio
    4. Every creature present: placed, `npc describe`d, named ones given an `npc alignment`.
    5. `locations.md` updated with the layout, the coordinates and the pois.
    6. Re-entering a known area: update it first for the time of day and for what has changed.
+   7. Meet **the detail standard** (dm/visuals.md → Maps): zones by function including staff and service routes, a
+      centrepiece and a quirk per room, numbered and owned storage as containers, staff placed at their posts, and poi
+      states kept live as the fiction changes them.
 9. **Beta fixes.** Fix genuine engine or SRD bugs in `engine/`, `viewer/` or `tests/`, add a test, run the suite, and
    tell the player in one line. Fixes must match the SRD and never change a rolled outcome.
 10. **Every correction becomes a rule, the same turn.** When the player corrects anything, fix it, then add the lesson to

@@ -117,3 +117,23 @@
 
 ### Rosewater Doorman, Lawful Neutral
 - Pink livery, white gloves. Believed Sera's sunk-boat story (Day 3). Stands on the portico.
+
+### Master Pellow (`master-pellow`), Lawful Neutral
+- A round, cheerful merchant of about sixty with mutton-chop whiskers, a plum coat and a gold signet ring. At the Rosewater every morning. Cabinet 8 holds his fat purse and his watch; the key is on his wrist.
+
+### The Alderman's Lady (`the-aldermans-lady`), Lawful Neutral
+- In her forties, with pearl pins and a gold chain; sharp. Going to the Curator's gala, jealous of 'the Delacroix woman'. Her key is on her wrist.
+
+### Vessie, the Alderman's Sister (`the-aldermans-sister`), Neutral Good
+- Younger, freckled and giggly, in a blue silk gown with a jewelled comb. Chatty and trusting; her key cord hangs loose.
+- Update, Day 3: Pellow's first name is Barnaby (Pellow and Sons, wines and cordials, Vintner's Row); he now likes Kit. The Alderman's Lady is Hesper. Vessie likes Sera, invited her to the Alderman's supper on Thursday, and says her hairdresser is Madame Orsolya on Silk Street.
+- Pellow is a widower (his late wife was Marta, who called him 'Pell'); he lets Kit call him Pell.
+- The Rosewater Doorman is called Crabbe (Pellow calls him 'old Crabbe').
+- Day 3, 10:59: Pellow saw Kit's dagger in his towel. He's still friendly, but watchful, and waiting for an explanation.
+- Pell's Gala role: Pellow and Sons supplies 60 bottles of the Sable Vine '31. He delivers them in person on the afternoon of Day 8 by the Meridian's service landing and stays below stairs in the cellar until midnight. He isn't a guest: 'I'm trade.'
+
+### E. Marrow, Steward of the Household (the Meridian)
+- Known only from their signature on the Gala wine order (Day 3). Handles household supplies for the Lantern Gala.
+- Day 3 11:10: Lettie saw through Kit's attendant disguise story. She's suspicious of the 'new boy' and about to call Crabbe.
+- Day 3 11:10: Sera talked Lettie round. She believes the 'new boy' is Tam, valet to Sera's brother (Corvell), and won't tell Madam or Crabbe.
+- **Day 3, 11:12: DEAD.** Kit cut Pell's throat in private bath B at the Rosewater. Lettie believes 'Tam the valet' went in to him; the body is in the tub.

@@ -2,18 +2,18 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 2 · **In-world time:** Day 3, 10:52 · **Mode:** exploration
-**Current map:** The Rosewater Baths (`rosewater`) · **Events:** 4899 · **Log head:** `de5f40bb3101a496`
+**Session:** 2 · **In-world time:** Day 3, 11:17 · **Mode:** exploration
+**Current map:** The Rosewater Baths (`rosewater`) · **Events:** 5568 · **Log head:** `0478625792602e35`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=3
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 3 | 27/27 | 14 | — | — | rosewater (17,20) |
+| Kit Corvell (`kit`) | 3 | 27/27 | 13 | — | — | rosewater (4,17) |
 | Hedda Vask (`hedda`) | 3 | 34/34 | 17 | — | — | sluice (5,9) |
 | Tobias Fenwick (`tobias`) | 3 | 23/23 | 11 | — | L1:1/4 L2:2/2 | sluice (5,9) |
-| Sera Lark (`sera`) | 3 | 21/21 | 13 | — | L1:3/4 L2:2/2 | rosewater (18,20) |
+| Sera Lark (`sera`) | 3 | 21/21 | 13 | — | L1:3/4 L2:2/2 | rosewater (14,10) |
 
 ## Other creatures (DM view)
 
@@ -48,10 +48,13 @@
 | Col Dunnock (`col-dunnock`, bandit) | neutral | 0/11 | 12 | restrained · DEAD | sluice (14,15) |  |
 | Hal Brannock (`lighterman`, commoner) | neutral | 4/4 | 10 | — | bellwater (13,12) | yes |
 | Jory Brannock (`lightermans-son`, commoner) | neutral | 4/4 | 10 | — | bellwater (17,12) | yes |
-| Rosewater Doorman (`rosewater-doorman`, commoner) | neutral | 4/4 | 10 | — | rosewater (15,17) | yes |
+| Crabbe, the Rosewater Doorman (`rosewater-doorman`, commoner) | neutral | 4/4 | 10 | — | rosewater (15,17) |  |
 | Flower Seller (`flower-seller`, commoner) | neutral | 4/4 | 10 | — | bellwater (6,4) |  |
 | Lettie (`rosewater-attendant`, commoner) | neutral | 4/4 | 10 | — | rosewater (30,16) |  |
 | Departing Gentleman (`departing-gentleman`, noble) | neutral | 9/9 | 15 | — | rosewater (5,17) | yes |
+| Master Pellow (`master-pellow`, noble) | neutral | 0/9 | 11 | — · DEAD | rosewater (3,4) |  |
+| Hesper, the Alderman's Lady (`the-aldermans-lady`, noble) | neutral | 9/9 | 15 | — | rosewater (24,10) |  |
+| Vessie, the Alderman's Sister (`the-aldermans-sister`, noble) | neutral | 9/9 | 15 | — | rosewater (25,12) |  |
 
 ## Maps (exact current contents — tokens and items stay where they were left)
 
@@ -171,34 +174,85 @@
 - labels: The Rosewater Baths (15,1), Bellwater Steps (15,10), Rosewater Lane (uphill) (15,6), Bellwater Cut (15,12)
 
 ### The Rosewater Baths (`rosewater`, interior 36×22, lighting bright)
-- Kit Corvell (`kit`, pc) at (17,20) — 27/27 HP
-- Sera Lark (`sera`, pc) at (18,20) — 21/21 HP
+- Kit Corvell (`kit`, pc) at (4,17) — 27/27 HP
+- Sera Lark (`sera`, pc) at (14,10) — 21/21 HP
+- Crabbe, the Rosewater Doorman (`rosewater-doorman`, neutral) at (15,17) — 4/4 HP
 - Departing Gentleman (`departing-gentleman`, neutral) at (5,17) — 9/9 HP · hidden
+- Hesper, the Alderman's Lady (`the-aldermans-lady`, neutral) at (24,10) — 9/9 HP
 - Lettie (`rosewater-attendant`, neutral) at (30,16) — 4/4 HP
-- Rosewater Doorman (`rosewater-doorman`, neutral) at (15,17) — 4/4 HP · hidden
+- Master Pellow (`master-pellow`, neutral) at (3,4) — DEAD
+- Vessie, the Alderman's Sister (`the-aldermans-sister`, neutral) at (25,12) — 9/9 HP
+- container `cab-9`: Cabinet 9 at (5,8)
+- in Cabinet 9 (`cab-9`) `floor-2`: 1× Leather Armor at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-3`: 2× Potion of Healing at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-4`: 1× Rapier at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-5`: 1× The Magpie's Key at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-6`: 1× Shortbow at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-7`: 1× Quiver at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-8`: 11× Arrows at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-9`: 1× Backpack at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-10`: 1× Ball Bearings at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-11`: 1× Bell at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-12`: 10× Candle at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-13`: 1× Crowbar at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-14`: 7× Oil at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-15`: 5× Rations at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-16`: 1× Tinderbox at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-17`: 1× Waterskin at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-18`: 1× Wax Key Impressions at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-19`: 1× Forged Leave Request (Varga) at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-20`: 1× Black-Gold Coin at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-21`: 1× Warden's Sigil Ring at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-22`: 1× Emeric Dane's Last Letter at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-23`: 1× Tobias's Notes on the Blink and the Heart at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-1`: 1× Gold pocket watch at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-26`: 1× Wine delivery order at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-27`: 1× Ring of shop keys at (5,8) — stashed by Kit Corvell
+- in Cabinet 9 (`cab-9`) `floor-28`: 1× Thieves' Tools at (5,8) — stashed by Kit Corvell
 - point of interest `poi-1`: Gentlemen's changing room at (3,15) → journal j47
 - point of interest `poi-2`: Ladies' changing room at (30,15) → journal j48
 - point of interest `poi-3`: Staff door at (34,15) → journal j49
 - point of interest `poi-4`: The Nymph Fountain at (17,17) → journal j50
 - point of interest `poi-5`: The Towel Counter at (30,17) → journal j51
+- point of interest `poi-6`: Gentlemen's Cabinets at (3,8) → journal j52
+- point of interest `poi-7`: Ladies' Cabinets at (30,8) → journal j53
+- point of interest `poi-8`: Arch to the Warm Hall at (7,11) → journal j54
+- point of interest `poi-9`: Arch to the Warm Hall at (28,11) → journal j55
+- point of interest `poi-10`: Service Door at (33,12) → journal j56
+- point of interest `poi-11`: The Warm Pool at (17,11) → journal j58
+- point of interest `poi-12`: Statue: Spring at (9,8) → journal j59
+- point of interest `poi-13`: Statue: Summer at (26,8) → journal j60
+- point of interest `poi-14`: Statue: Autumn at (9,14) → journal j61
+- point of interest `poi-15`: Statue: Winter at (26,14) → journal j62
+- point of interest `poi-16`: Arches to the Hot Room at (13,7) → journal j63
+- point of interest `poi-17`: The Hot Pool at (17,4) → journal j64
+- point of interest `poi-18`: The Apse Statue at (17,1) → journal j65
+- point of interest `poi-19`: Private Bath A at (7,2) → journal j66
+- point of interest `poi-22`: Slatted Bench at (5,5) → journal j70
+- point of interest `poi-23`: Wall Lamp at (1,6) → journal j71
+- point of interest `poi-24`: Private Bath B (door) at (7,5) → journal j72
+- point of interest `poi-25`: Plain Door (Hot Room) at (28,4) → journal j73
+- point of interest `poi-26`: Cabinet 8 (Pell's) at (4,8) → journal j76
+- point of interest `poi-27`: Twin Copper Tubs (bloodied) at (2,5) → journal j77
+- point of interest `poi-28`: The Front Doors at (17,21) → journal j78
 - doors: (7,2) closed, (28,4) closed, (7,5) closed, (13,7) open, (14,7) open, (21,7) open, (22,7) open, (34,7) closed, (7,11) open, (28,11) open, (33,12) closed, (3,15) open, (30,15) open, (34,15) closed, (17,21) open, (18,21) open
 - labels: Foyer (17,18), Towel counter (30,18), Nymph fountain (17,19), Warm hall (17,11), Hot room (17,2)
 
 
 ## Recent events
 
-- 📍 Noted on The Rosewater Baths: Staff door (26,14) — click it on the map for its journal entry.
-- 🎬 The Rosewater Baths — Pink marble, warm steam, rosewater and orange oil. Soft voices behind painted doors; somewhere deeper in, water laps against stone.
+- 🚪 The door at (3,15) is opened.
+- 🚶 Kit Corvell moves 15 ft to (4,17).
+- 🚪 The door at (30,15) is opened.
+- 🚶 Lettie moves 30 ft to (30,16).
+- 👁 Crabbe, the Rosewater Doorman is revealed!
 - 🗺 Map: The Rosewater Baths
-- “Lettie, two private baths, the oils, the good linens. The lady and her brother had a misfortune on the water.”
-- “Oh, you poor dears! Gentlemen through the stag, ladies through the swan. Leave your things in a cabinet, take a key, and I'll bring your oils to the warm hall. Mind the floor, it's slippery.”
-- The doorman bowed himself back out to the portico. The fur-collared gentleman nodded to the attendant and strolled out after him, purse swinging, trailing bay rum and steam.
-- Rosewater Attendant is now known as Lettie.
-- Kit Corvell is at (17,20) on The Rosewater Baths.
-- Sera Lark is at (18,20) on The Rosewater Baths.
-- Lettie is at (30,16) on The Rosewater Baths.
-- 📍 Gentlemen's changing room moved to (3,15) on The Rosewater Baths — map redrawn.
-- 📍 Ladies' changing room moved to (30,15) on The Rosewater Baths — map redrawn.
-- 📍 Staff door moved to (34,15) on The Rosewater Baths — map redrawn.
-- 📍 Noted on The Rosewater Baths: The Nymph Fountain (17,17) — click it on the map for its journal entry.
-- 📍 Noted on The Rosewater Baths: The Towel Counter (30,17) — click it on the map for its journal entry.
+- 📍 Noted on The Rosewater Baths: The Front Doors (17,21) — click it on the map for its journal entry.
+- Kit slips out through the stag door into the foyer, and stops. The front doors aren't unattended. Crabbe the doorman, in his pink livery, stands square beside them with his hands behind his back, watching the lane through the frosted roses. At the towel counter, Lettie is folding linens.
+- Crabbe turns at the soft slap of sandals on marble and looks the strange young attendant up and down. His brows come together.
+- “And where did you spring from, lad? I've had this door since seven bells and I never let you in.”
+- At the counter, Lettie goes white. She makes a small frantic shooing motion at Kit behind Crabbe's back, which means get back in there before he looks properly.
+- In the warm hall, Sera has drifted back to Hesper and Vessie and is admiring Vessie's comb, glancing now and then at the gentlemen's arch.
+- 🗺 Map: The Rosewater Baths
+- ⏳ 1m passes — walking through to the foyer. Now Day 3, 11:17.
+- — Session 2 ends —

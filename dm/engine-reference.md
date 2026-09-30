@@ -46,6 +46,7 @@ npc add goblin-warrior --count 3 --at 12,8 [--map crypt] [--hidden] [--side enem
 npc reveal|hide|remove <ids,...> | npc rename <id> --name "..." | npc side <id> --side ally | npc show <id>
 npc leave <ids,...> | npc return <id>   # walks out of the scene (off the table, out of fights here); faces stay in the log
 npc describe <id> --text "Tall, grey coat, a pistol on one hip"   # what anyone can SEE (info panel); do it whenever you describe them
+npc unarmored <id>  |  npc armored <id>   # a creature caught without its stat-block armour (bathing, asleep, stripped): AC 10 + Dex; `armored` restores it
 npc alignment <id> --text "Lawful Evil"   # every named NPC gets their own alignment (shown on their info card);
                                           # PCs never do: the player plays their character's outlook
 npc lore <id> --text "Resistant to fire; hates mirrors"   # public knowledge the party has earned (knowledge check, clue)
@@ -96,6 +97,15 @@ request list | request roll <id> | request cancel <id>       # pending player ro
 ```
 `heal` / `temphp` for party members require `--override "reason"` — healing must come from a spell, potion,
 feature, rest, or a paid NPC service.
+
+## Quicksave / quickload (player's choice only)
+```
+quicksave [name] [--label "before the duel"]   # a restore point now (a timestamped name if none given)
+quicksave name --at-seq 1234                  # a restore point at an earlier event (after event 1234)
+quicksave list | quicksave delete <name>
+quickload [name]                              # restore exactly: log, notes, views (default: the latest save)
+```
+After a quickload, everything past the save point never happened: don't mention it or let it shape anything.
 
 ## Rest, time, travel
 ```

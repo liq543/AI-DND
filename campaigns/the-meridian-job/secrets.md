@@ -161,3 +161,9 @@
 - **Day 5:** the Acquisitions inventory (visual; the dagger swap passes).
 - **Day 7 night:** the Curator does Detect Magic on the stores before the Gala and finds the plain dagger in case A-148. She also brings the Eye up to the Heart that night.
 - Ideas: Pim as an inside man; the Dunnocks' stolen Watch tabards; visors from Crate Two on Gala eve; Varga's decision in the morning.
+
+## The Rosewater body (Day 3, 11:12)
+- **Discovery clock:** nobody opens an OCCUPIED private bath uninvited. But Pell's routine is an hour in the hot room, then the cold plunge, and Lettie brings fresh towels around the hour. So by about **12:10** Lettie knocks on bath B; by **12:15**, if nobody answers, she opens it. Then Crabbe bars the front door and sends a boy for the Watch; the Lantern Watch arrives in about 20 minutes, and Inspector Quince hears by evening.
+- **Who they'll want:** Master Corvell (he came in with Pell and went into the hot room with him), "Tam the valet" (the last one in to see him; Lettie vouched for him), and "Corvell's sister" Sera. Crabbe never admitted any Tam. Lettie will crack under questioning and tell about the stoke-boy smock.
+- **Evidence:** blood in the drain; Pell's cabinet 8 is locked but empty of its purse, watch and papers; the watch is engraved 'B.P. from M.'; a wet towel with blade-wipes in bath B.
+- **Pellow & Sons:** the shop's foreman (unnamed yet) expects Pell back for the afternoon. With Pell dead, the Household's steward E. Marrow will need a new wine supplier by Day 8, or will accept anyone presenting the order and the Pellow & Sons cart.

@@ -33,3 +33,7 @@
 - The Magpie's Key: taken (Night Market). The Codex of Stillness: taken, folio 32 translated.
 - Crane's job: ended with Crane's death (Day 1, 12:35).
 - Protect the ring: moot. The forged leave was useless once Collector D reported the ring stolen.
+- **Lead (Day 3):** Barnaby Pellow (Pellow and Sons, Vintner's Row) delivers the Gala wine himself on the afternoon of Day 8 by the service landing, and stays in the Meridian's cellar until midnight. A possible way in below stairs (crate/porter cover?), if the crew can work him. Gala invitations are Council, Gilt families and benefactors only.
+- **Stolen Day 3: the Gala wine delivery order.** On Meridian paper with the orrery seal: Pellow & Sons, 60 bottles of Sable Vine '31, to be delivered the afternoon of Day 8, third bell, at the SERVICE LANDING (east water-stairs). Showing it to the landing warden admits the cart and ONE porter. Signed E. Marrow, Steward of the Household. Also stolen: the keys to Pell's shop on Vintner's Row (front, cellar, counting-room).
+- **Day 3, 11:12: Pellow is dead** (Kit, bath B at the Rosewater Baths). The wine order and the shop keys are in cabinet 9. The Day 8 delivery now needs someone to take Pellow & Sons' place, or the Household will notice no wine and no Pellow. The shop on Vintner's Row is unguarded for now (keys in hand).
+- **Open now:** get out of the Rosewater clean. Corvell entered with Pell and must leave calmly; "Tam" must vanish before the body is found. Sera wants the Alderman's supper (Thursday, Day 5?) as a way onto the Gala guest list.

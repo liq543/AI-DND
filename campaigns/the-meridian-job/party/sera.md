@@ -54,6 +54,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `viol-1` 1× Viol · _starting equipment: Bard option A (chosen instrument)_
 - `calligraphers-supplies-1` 1× Calligrapher's Supplies · _purchased for 10 GP_
 - `cask-of-ironmoor-brandy-1` 1× Cask of Ironmoor Brandy · _found: the smugglers' cache behind the sack-store panel_
+- `cabinet-key-1` 1× Cabinet key · _gift: loaned by the attendant_
 
 Hit Point Dice: Bard d8 3/3
 Languages: Common, Elvish, Dwarvish · Tools: Calligrapher's Supplies · Armor training: light

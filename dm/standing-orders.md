@@ -24,6 +24,21 @@ These are lessons from past corrections. Each one is a promise: the player shoul
   described `map poi`. A `map label` never replaces one.
 - **Never need correcting.** A correction means the game wasn't played right. When one happens: fix it, then write the
   lesson here or in dm/turn-rules.md, generically worded, the same turn.
+- **Reactions belong to the player: call them at the trigger.** When a creature moves next to or away from a PC, say
+  whether it provokes. The moment it leaves the PC's reach, stop and resolve the PC's opportunity attack (an Unarmed
+  Strike can Grapple or Shove) before that creature does anything else. Don't narrate past a trigger.
+- **Every change to a map is rendered and shown.** When anything physical in a scene changes (furniture moved,
+  a barricade, a door opened, broken or blocked, something knocked over, a body, fire, flooding), change the map with
+  engine commands (`map set`/`map door`/`map feature`/`map poi`, terrain edits) so the table shows it, then `map show`
+  it to the players the same turn. Narration alone is never enough.
+- **Only roll when the outcome is truly uncertain.** Before calling any check, ask whether the action could actually
+  fail given what the character has and knows. Trivial or mechanically certain actions just happen: re-locking a lock
+  you just picked (the wrench is still seated), closing a latch, locking a door with its key, walking across an empty
+  room, pocketing an item. If a roll is called by mistake, void it publicly with `ruling` and proceed as automatic.
+- **Quicksave / quickload belong to the player.** When they say "quicksave" or "quickload", run
+  `quicksave [name]` / `quickload [name]`. After a quickload, the discarded timeline never happened. Never mention it,
+  hint at it, or let anything from it shape narration, NPC choices, DCs or tactics. Pick up from the save point as if
+  for the first time. Never save or reload on your own initiative.
 - **Do the work, don't hand it back.** When a step is mine to do (commit, run the tests, restart the table, fix the file),
   do it instead of telling the player to. Only ask when it truly needs their decision or their hands.
 - **Project files stay campaign-agnostic.** No campaign's names, places, items or plot outside its own folder.

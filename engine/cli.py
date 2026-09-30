@@ -307,6 +307,25 @@ def cmd_npc(g, a):
         g.set(e, alignment=text)
         g.note(f"  {e['name']} is {text}.")
         return
+    if a.action in ("unarmored", "armored"):
+        # a stat block's AC includes the armour it wears; a creature caught without it (asleep, bathing, stripped)
+        # has the SRD unarmoured AC, 10 + its Dexterity modifier. `armored` puts the stat block's AC back.
+        e = g.get(a.what)
+        if e["kind"] == "pc":
+            raise RuleError("PCs' AC follows their equipped armour: use `item unequip` instead.")
+        mon = g.lookup("monsters", e.get("srd") or "") or {}
+        if a.action == "unarmored":
+            dex = (e.get("abilities") or mon.get("abilities") or {}).get("dex", 10)
+            if isinstance(dex, dict):     # stat blocks store {"score": n, "mod": m, ...}
+                dex = dex.get("score", 10 + 2 * dex.get("mod", 0))
+            ac = 10 + (dex - 10) // 2
+            g.set(e, ac=ac, armored_ac=e.get("armored_ac", e["ac"]))
+            g.say(f"🛡 {e['name']} has no armour on: AC {ac} (10 + Dex).", kind="info", who=e["id"])
+        else:
+            ac = e.get("armored_ac") or mon.get("ac") or e["ac"]
+            g.set(e, ac=ac, armored_ac=None)
+            g.say(f"🛡 {e['name']} is armoured again: AC {ac}.", kind="info", who=e["id"])
+        return
     if a.action == "lore":
         # public knowledge the party has earned (a knowledge check, a clue, an NPC's word) — shown on the creature's info panel
         e = g.get(a.what)
@@ -2022,6 +2041,35 @@ def cmd_audit(g, a):
                 print(f"  {r['id']} {r['purpose']}: {r['text']}")
 
 
+def cmd_quick(a):
+    """Quicksave / quickload: named restore points. A quickload resets the whole game (log, notes, views) exactly."""
+    from . import quicksave as Q
+    d = active_dir()
+    try:
+        if a.cmd == "quicksave" and a.name == "list":
+            saves = Q.list_saves(d)
+            for m in saves:
+                print(f"  {m['slot']}: event {m['seq']} ({m.get('event_ts') or '?'}){' - ' + m['label'] if m.get('label') else ''}")
+            print(f"{len(saves)} quicksave(s).")
+            return 0
+        if a.cmd == "quicksave" and a.name == "delete":
+            Q.delete(d, a.target)
+            print(f"Deleted quicksave '{a.target}'.")
+            return 0
+        if a.cmd == "quicksave":
+            m = Q.save(d, a.name, a.at_seq, a.label)
+            print(f"💾 Quicksaved '{m['slot']}' at event {m['seq']}.")
+            return 0
+        m = Q.load(d, a.name)
+    except Q.QuicksaveError as err:
+        print(f"✖ RULE: {err}")
+        return 2
+    g = Game()
+    views.write_snapshots(g)
+    print(f"⏪ Quickloaded '{m['slot']}': the game is exactly as it was at event {m['seq']} ({fmt_time(g.state['time'])}).")
+    return 0
+
+
 def cmd_verify(a):
     d = active_dir()
     st = Store(d)
@@ -2445,6 +2493,13 @@ def build_parser():
     c = sp.add_parser("audit")
     c.add_argument("--hidden", action="store_true")
     sp.add_parser("verify")
+    c = sp.add_parser("quicksave", help="save a named restore point: quicksave [name] [--at-seq N] | quicksave list | quicksave delete <name>")
+    c.add_argument("name", nargs="?")
+    c.add_argument("target", nargs="?")
+    c.add_argument("--at-seq", type=int, help="save the game as it was after event N (a point already passed)")
+    c.add_argument("--label", default="")
+    c = sp.add_parser("quickload", help="restore a quicksave exactly (default: the most recent)")
+    c.add_argument("name", nargs="?")
     c = sp.add_parser("repair")
     c.add_argument("--truncate", action="store_true")
     c.add_argument("--restore", action="store_true", help="restore the newest fully-signed backup")
@@ -2494,6 +2549,8 @@ def main(argv=None):
         if a.cmd == "verify":
             cmd_verify(a)
             return 0
+        if a.cmd in ("quicksave", "quickload"):
+            return cmd_quick(a)
         if a.cmd == "repair":
             cmd_repair(a)
             return 0

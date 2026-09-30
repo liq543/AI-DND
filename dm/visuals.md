@@ -75,6 +75,24 @@ Prefer one well-chosen update per beat over constant churn.
   colonnade), put rooms where the building's work needs them (a kitchen by the hall, stores by the loading door,
   private rooms off a passage), and give every room at least one thing only that room has. Before importing, compare
   it with the last few maps you drew: if it could pass for one of them with the labels swapped, redraw it.
+- **The detail standard (every map, every time).** The bar is a map the players can explore by clicking, not a floor
+  plan. A finished map has all of these:
+  1. **Zones by function, in the order people use them.** Public entry → staff post or counter → where guests change,
+     wait or store things → the main room with a centrepiece → inner or restricted rooms → private rooms off a passage →
+     staff and service routes (a staff door, a service passage, a back stair, stores). Each zone is its own shape and size.
+  2. **A centrepiece and a quirk per room.** A pool, a hearth, an altar or a long table anchors the main room, and each
+     lesser room gets one thing only it has. Repeated objects (four statues, a row of cabinets) each get their own
+     detail: a worn patch of luck-rubbing, a lost-property dish, a real burning lamp.
+  3. **A poi for every object anyone could walk up to**, written as what a character notices: material, wear, sound,
+     smell, who uses it, and one hook (a stamp, a number, a stain, a lock). Doors worth naming get pois too, including
+     their locks, slides and bolts.
+  4. **Numbered and owned storage.** Lockers, cabinets, crates, cells and berths are numbered on the map. Record in
+     locations.md which tile is which number and whose it is. Anything that holds items is a `map container`.
+  5. **People at their posts.** Staff are placed where their job keeps them (door, counter, stove, desk), and regulars
+     where they'd be. Each is described and aligned, with a want, so the room reacts when things go wrong.
+  6. **State kept live.** When the fiction changes something (opened, picked, bloodied, barricaded, emptied), replace
+     its poi with the new state and `map show`. The map is always the truth of the room *now*.
+  7. **locations.md mirrors it**: zones with coordinates, every poi, the numbering, the posts and the exits.
 - **Lighting drives fog of war**: `map set <id> --kv lighting=bright|dim|dark`. In the dark, characters see only
   with Darkvision or a lit torch/lantern (`item light kira torch-1`).
 
