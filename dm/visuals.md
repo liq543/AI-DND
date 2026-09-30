@@ -52,15 +52,33 @@ Prefer one well-chosen update per beat over constant churn.
   (`--biome forest|plains|swamp|hills|desert|snow`), `interior` (`--building tavern|temple|shop`),
   `arena` (`--preset road-ambush|forest-clearing|bridge|ruins|crypt|cave-chamber|tavern-brawl`).
 - **Record what's on it.** After generating, write the important rooms/places into `locations.md` (and the
-  secrets of hidden rooms into `secrets.md`), keyed by map id and room number, so descriptions stay consistent.
+  secrets of hidden rooms into `secrets.md`), keyed by map id and room name, so descriptions stay consistent. Room
+  numbers are the DM's key only: they are drawn on the DM render, never on the players' table.
 - **Custom touches:** `map paint` terrain codes: `#` wall, `.` floor, `,` grass, `:` road, `t` undergrowth (difficult),
   `^` rubble (difficult), `w` shallow water, `~` deep water, `T` tree, `P` pillar, `o` boulder (half cover),
   `h` furniture, `c` counter, `D` door, `d` open door, `S` secret door, `<` `>` stairs, `x` chasm, `b` bridge.
 - **More terrain codes:** `k` carpet, `q` marble floor, `a` gaming table (half cover), `g` railing (half cover),
   `v` crates/barrels (half cover), `l` lamp/candelabrum (a pool of light, walkable), `u` statue or display plinth
   (¾ cover), `n` mast/column (¾ cover), `p` potted plant (half cover), `e` bench (difficult, half cover; joins its
-  neighbours), `i` cabinets/shelves/wardrobe (¾ cover, blocks sight), `y` bed, `j` tub/basin (half cover), `z` tiled floor.
+  neighbours), `i` cupboard/wardrobe (¾ cover, blocks sight), `y` bed, `j` tub/basin (half cover), `z` tiled floor.
   Built pools and channels (`w`/`~` indoors) get a stone coping drawn automatically.
+- **Furnishings: use the piece the fiction names.** Each has its own top-down art; long pieces join their neighbours
+  and wall pieces sit against the wall. `A` table (plain wood: anything you eat, work or talk at), `C` chair/stool
+  (difficult; its back turns away from the table), `W` writing desk, `K` bookshelf/shelving (¾ cover, blocks sight),
+  `Q` chest/trunk, `O` barrel/keg, `U` sacks/bales, `J` workbench, `R` rack (weapons, tools, drying lines), `!` anvil,
+  `F` forge/kiln, `&` stove/oven/range, `@` cauldron/vat, `*` brazier (casts light), `X` altar, `H` throne/great chair,
+  `Y` coffin/sarcophagus, `$` strongbox/safe, `N` cage, `M` market stall (striped awning), `+` signpost/notice board,
+  `|` curtain/screen (walkable, blocks sight), `L` ladder (difficult), `Z` hay/straw (difficult), `G` grate/drain,
+  `%` hedge/shrubs (¾ cover, blocks sight). **`a` is a card or dice table only** (green felt and chips): never use it
+  for a desk, a bench or a dining table. **`i` is a cupboard or wardrobe only**: shelves of books or goods are `K`.
+  A room built from two codes looks like nobody lives in it. Vary it.
+- **Props: anything else, from 4,100+ icons.** `map icons <words>` searches the vendored game-icons library, and
+  `map prop <id> x,y --icon <name> --name "What it is" [--size small|large] [--color #hex] [--rotate 30] [--blocks]`
+  sets it on the tile: a globe on a desk, a skull on a shelf, a harp in a corner, a cauldron, a telescope, a birdcage.
+  `--blocks` makes it fill the square; without it the prop is set dressing on top of whatever is there. Change it with
+  `map prop-move <id> x,y --id prop-2 --reason "..."` or `map prop-remove <id> --id prop-2 --reason "..."`. Dress every
+  room with a few: what's on the tables, the tools of the trade, the owner's one vanity. Props are decoration; anything
+  a character can walk up to and examine still gets a `map poi`.
 - **Every place must look like itself.** Never reuse a generator layout for a different kind of place with the
   furniture shuffled. Set a **theme** (`map set <id> --kv theme=stone|ship|sewer|marble|bathhouse|timber|manor|temple|cellar`:
   palette, textures, trim, backdrop) and override its textures per map so two places in the same theme still differ:
@@ -84,15 +102,17 @@ Prefer one well-chosen update per beat over constant churn.
      lesser room gets one thing only it has. Repeated objects (four statues, a row of cabinets) each get their own
      detail: a worn patch of luck-rubbing, a lost-property dish, a real burning lamp.
   3. **A poi for every object anyone could walk up to**, written as what a character notices: material, wear, sound,
-     smell, who uses it, and one hook (a stamp, a number, a stain, a lock). Doors worth naming get pois too, including
-     their locks, slides and bolts.
-  4. **Numbered and owned storage.** Lockers, cabinets, crates, cells and berths are numbered on the map. Record in
-     locations.md which tile is which number and whose it is. Anything that holds items is a `map container`.
+     smell, who uses it, and one hook (a stamp, a stain, a lock, a name scratched in). Doors worth naming get pois too,
+     including their locks, slides and bolts.
+  4. **Owned storage.** Lockers, cupboards, crates, cells and berths belong to someone: name them by owner or contents
+     ("the cook's spice chest", "the cell by the drain"), not by number. Use a number only where the world itself shows
+     one and it matters (a painted cell number, a tag on a key). Record in locations.md whose each one is. Anything that
+     holds items is a `map container`.
   5. **People at their posts.** Staff are placed where their job keeps them (door, counter, stove, desk), and regulars
      where they'd be. Each is described and aligned, with a want, so the room reacts when things go wrong.
   6. **State kept live.** When the fiction changes something (opened, picked, bloodied, barricaded, emptied), replace
      its poi with the new state and `map show`. The map is always the truth of the room *now*.
-  7. **locations.md mirrors it**: zones with coordinates, every poi, the numbering, the posts and the exits.
+  7. **locations.md mirrors it**: zones with coordinates, every poi, who owns what, the posts and the exits.
 - **Lighting drives fog of war**: `map set <id> --kv lighting=bright|dim|dark`. In the dark, characters see only
   with Darkvision or a lit torch/lantern (`item light kira torch-1`).
 

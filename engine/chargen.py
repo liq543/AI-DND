@@ -349,8 +349,12 @@ def create(g, a):
             raise RuleError("Fiendish Legacy: abyssal, chthonic, or infernal (--ancestry)")
         ent["resist"] = [leg[a.ancestry.lower()]]
         ent["ancestry"] = a.ancestry.title()
+    from .mechanics import party_xp
+    ent["xp"], ent["milestones"] = party_xp(g)   # joins at the party's XP, so the whole party levels up together
     g.emit("entity.add", entity=ent)
-    g.say(f"🧙 {name} joins the party: {sp['name']} {cls['name']} ({bg['name']}), {hp} HP.", kind="party")
+    g.say(f"🧙 {name} joins the party: {sp['name']} {cls['name']} ({bg['name']}), {hp} HP"
+          + (f", at the party's {ent['xp']} XP (`char levelup` until they match the party's level)" if ent["xp"] else "") + ".",
+          kind="party")
     # starting equipment
     items, cp = starting_equipment(cls["starting_equipment"], (a.equipment or "A").upper())
     bitems, bcp = starting_equipment(bg["equipment"], (a.bg_equipment or "A").upper())

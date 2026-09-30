@@ -10,6 +10,7 @@ import re
 from . import assets
 from .assets import esc
 from .maps import BIOMES
+from .furniture import DRAW as FURNITURE_ART
 
 CELL = 32
 
@@ -21,7 +22,8 @@ FILL = {
     "x": "#0c0a09", "b": "#8c6a43", "r": "#a8a39a", " ": "#000",
 }
 BASE_UNDER = {"T": ",", "o": None, "P": ".", "h": "=", "c": "=", "f": "=", "D": None, "d": None, "<": ".", ">": ".", "r": "_",
-              "a": "k", "g": "=", "v": "=", "l": "=", "u": "q", "n": "=", "p": ".", "e": "=", "i": "=", "y": "=", "j": "."}
+              "a": "k", "g": "=", "v": "=", "l": "=", "u": "q", "n": "=", "p": ".", "e": "=", "i": "=", "y": "=", "j": ".",
+              **{c: "=" for c in FURNITURE_ART}, "`": "="}
 
 # Visual themes: each map can look like its place. (palette keys: wall, wall_edge, wall_line, trim, plank, plank_line,
 # flag, flag_line, water, deep, carpet, carpet_trim, marble, marble_vein, furniture, furniture_line, counter)
@@ -374,6 +376,9 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
             elif c == "b":
                 for i in range(4):
                     parts.append(f'<line x1="{cx + i * 8 + 4}" y1="{cy}" x2="{cx + i * 8 + 4}" y2="{cy + s}" stroke="#5a3e22" stroke-width="1"/>')
+            elif c in FURNITURE_ART:
+                parts.append(FURNITURE_ART[c](cx, cy, s, T, rng, lambda dx, dy, x=x, y=y: grid[y + dy][x + dx]
+                                              if 0 <= x + dx < w and 0 <= y + dy < h else " "))
     if show_grid:
         gl = [f'<path d="' + "".join(f"M{x * cell} 0V{h * cell}" for x in range(w + 1)) +
               "".join(f"M0 {y * cell}H{w * cell}" for y in range(h + 1)) + '" stroke="#000" stroke-opacity=".13" stroke-width="1"/>']
@@ -386,7 +391,7 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
             continue
         if m["kind"] == "town":
             parts.append(f'<text x="{(r["x"] + r["w"] / 2) * cell}" y="{(r["y"] + r["h"] / 2) * cell + 5}" text-anchor="middle" font-size="{cell * .42}" fill="#fff" stroke="#2b1d0e" stroke-width="3" paint-order="stroke">{esc(r["label"])}</text>')
-        else:
+        elif not player:  # room numbers are the DM's key, never shown at the table
             parts.append(f'<circle cx="{(r["x"] + .5) * cell}" cy="{(r["y"] + .5) * cell}" r="{cell * .38}" fill="#fff" fill-opacity=".8" stroke="#3a2a1a"/>'
                          f'<text x="{(r["x"] + .5) * cell}" y="{(r["y"] + .5) * cell + 5}" text-anchor="middle" font-size="{cell * .42}" font-weight="bold" fill="#3a2a1a">{r["n"]}</text>')
     for lb in m.get("labels", []):
@@ -406,6 +411,11 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
             parts.append(f'<circle cx="{cx}" cy="{cy}" r="{cell * .3}" fill="#ffd36b" filter="url(#glow)"/>')
         elif f["type"] == "poi":
             parts.append(f'<text x="{cx}" y="{cy + 6}" text-anchor="middle" font-size="{cell * .6}">★</text>')
+    # props: any icon from the vendored game-icons library placed on a tile as a decoration (a globe, a skull, a harp)
+    for pr in m.get("props", []):
+        if player and m.get("fog") and not (0 <= pr["y"] < len(revealed) and revealed[pr["y"]][pr["x"]] == "1"):
+            continue
+        parts.append(prop_svg(pr, cell, T))
     # highlight squares (movement range / area of effect)
     if highlight:
         for (x, y) in highlight:
@@ -481,6 +491,23 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
     if focus:
         parts[0] = parts[0].replace("<svg ", f'<svg data-focus="{focus}" ', 1)
     return "".join(parts)
+
+
+def prop_svg(pr, cell, T):
+    """A decoration drawn from an icon: a soft shadow and the silhouette in the prop's colour, filling most of the tile."""
+    size = cell * {"small": .5, "large": .95}.get(pr.get("size"), .74)
+    x0, y0 = pr["x"] * cell + (cell - size) / 2, pr["y"] * cell + (cell - size) / 2
+    line = T["furniture_line"]
+    col = pr.get("color") or ("#2e1c0e" if line.lower() in GOLD_LINES else line)   # gold trim would vanish on warm floors
+    body = assets.icon_body(pr["icon"]).replace('fill="currentColor"', "")
+    rot = f' transform="rotate({pr["rotate"]} {x0 + size / 2:.1f} {y0 + size / 2:.1f})"' if pr.get("rotate") else ""
+    name = esc(pr.get("name") or pr["icon"].replace("-", " "))
+    return (f'<g class="prop"{rot}><title>{name}</title>'
+            f'<svg x="{x0 + 1.5:.1f}" y="{y0 + 2:.1f}" width="{size:.1f}" height="{size:.1f}" viewBox="0 0 512 512" fill="#000" fill-opacity=".25">{body}</svg>'
+            f'<svg x="{x0:.1f}" y="{y0:.1f}" width="{size:.1f}" height="{size:.1f}" viewBox="0 0 512 512" fill="{col}">{body}</svg></g>')
+
+
+GOLD_LINES = {"#d8b45a", "#d8b36a", "#e3c46a", "#c9a14a", "#e8c98a"}
 
 
 def wrap_words(text, max_chars):

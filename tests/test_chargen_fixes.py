@@ -156,7 +156,7 @@ class ChargenFixesTest(unittest.TestCase):
         self.assertIn("url(#carpet)", svg)
         self.assertIn("url(#felt)", svg)
         bad = self.tmp / "bad.txt"
-        bad.write_text("##Z#\n", encoding="utf-8")
+        bad.write_text("##9#\n", encoding="utf-8")
         self.rule("map", "import-grid", "barge", "--out", str(bad), contains="Unknown terrain")
 
     def test_interior_styles_and_new_furnishings(self):

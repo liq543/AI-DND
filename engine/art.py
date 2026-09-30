@@ -405,11 +405,18 @@ LOOK_FIELDS = ("hair", "beard", "eyes", "skin", "marks", "headwear", "outfit", "
                "expression", "horns", "accent", "background", "presentation")
 
 
+def _art_id(e):
+    """The seed a creature's art is drawn from: its own id, or the creature whose face it keeps (`asset look --like`)."""
+    return (e.get("art_of") or {}).get("seed") or e["id"]
+
+
 def look_of(e):
     """The resolved visual traits used to draw a humanlike creature (defaults ← description ← DM's look fields)."""
-    sp = species_of(e)
-    r = seeded("look", e["id"], e.get("name", ""))
-    st = _style_for(e)
+    kept = e.get("art_of") or {}
+    sp = kept.get("species") or species_of(e)
+    r = seeded("look", _art_id(e), kept.get("name") or e.get("name", ""))
+    st = dict(kept["style"]) if kept.get("style") else _style_for(e)
+    st.update({k: tuple(v) for k, v in st.items() if isinstance(v, list)})   # stored styles come back from JSON as lists
     tones = SPECIES_SKIN.get(sp, HUMAN_TONES)
     L = {"species": sp, "skin": r.choice(tones), "hair_color": r.choice(["#1d1a1c", "#3b2618", "#5a3a22", "#6e3a1f", "#7f2f1a",
                                                                           "#c9953f", "#d9b46a", "#2a1d16"]),
@@ -420,7 +427,7 @@ def look_of(e):
          "headwear": "none", "bg": st.get("bg", ("#3a3a4a", "#0a0a12")), "pendant": st.get("pendant"),
          "paint": r.random() < st.get("paint", 0), "eye_glow": r.random() < st.get("glow", 0), "collar": st.get("collar", False),
          "ears": "round", "horns": None, "tusks": False, "scars": [], "freckles": False, "tattoo": False, "earrings": r.random() < .2,
-         "cloak": r.random() < .3, "cloak_color": None, "eyepatch": None, "nosering": False, "undercut": False, "seed": e["id"]}
+         "cloak": r.random() < .3, "cloak_color": None, "eyepatch": None, "nosering": False, "undercut": False, "seed": _art_id(e)}
     L["cloak_color"] = darken(L["cloth"], .25) if r.random() < .5 else r.choice(["#3a2a1e", "#2a3a2a", "#2a2a3a", "#5a1a1e"])
     if st.get("headwear") and r.random() < st["headwear"][1]:
         L["headwear"] = st["headwear"][0]
@@ -485,7 +492,7 @@ def look_of(e):
             read_description(e.get("appearance") or (e.get("bio") or {}).get("appearance") or "").get("presentation") != "feminine":
         L["beard"] = r.choice(["short", "stubble", "mustache", "goatee"])
     # armor actually worn by a PC decides the outfit
-    if e["kind"] == "pc":
+    if e["kind"] == "pc" and not kept:
         worn = [it for it in e.get("inventory", []) if it.get("kind") == "armor" and it.get("equipped") and it.get("category") != "shield"]
         if worn:
             cat = worn[0].get("category")
@@ -1288,7 +1295,7 @@ def creature_svg(e, mode="portrait", size=None):
     if e.get("side") == "ally":
         glow = "#6af0d0"
     icon = assets.icon_for_entity(e)
-    r = seeded("creature", e["id"])
+    r = seeded("creature", _art_id(e))
     P = f"c{hashlib.md5(e['id'].encode()).hexdigest()[:5]}"
     body = assets.icon_body(icon)
     sil = body.replace('fill="currentColor"', f'fill="url(#{P}sil)"')
@@ -1344,7 +1351,7 @@ def face_svg(e, size=None):
 
 def art_version(e):
     """Changes whenever anything the picture is drawn from changes (cache-busting for the viewer)."""
-    keys = ("name", "species", "classes", "ancestry", "appearance", "look", "side", "type", "size", "srd_name")
+    keys = ("name", "species", "classes", "ancestry", "appearance", "look", "side", "type", "size", "srd_name", "art_of")
     worn = [(i.get("name"), i.get("category")) for i in e.get("inventory", []) if i.get("kind") == "armor" and i.get("equipped")]
     blob = repr([e.get(k) for k in keys] + [(e.get("bio") or {}).get("appearance"), worn, ART_REV])
     return hashlib.sha1(blob.encode()).hexdigest()[:10]

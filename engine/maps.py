@@ -48,7 +48,7 @@ TERRAIN = {
     "r": ("well / fountain", None, False, "half"),
     "k": ("carpet", 1, False, None),
     "q": ("marble floor", 1, False, None),
-    "a": ("gaming table", None, False, "half"),
+    "a": ("gaming table (felt, for cards and dice only)", None, False, "half"),
     "g": ("railing", None, False, "half"),
     "v": ("crates / barrels", None, False, "half"),
     "l": ("lamp / candelabrum", 1, False, None),
@@ -56,13 +56,42 @@ TERRAIN = {
     "n": ("mast / column", None, True, "three-quarters"),
     "p": ("potted plant", None, False, "half"),
     "e": ("bench", 2, False, "half"),
-    "i": ("cabinets / shelves / wardrobe", None, True, "three-quarters"),
+    "i": ("cupboard / wardrobe", None, True, "three-quarters"),
     "y": ("bed", 2, False, "half"),
     "j": ("tub / basin", None, False, "half"),
     "z": ("tiled floor", 1, False, None),
+    # furnishings: pick the piece the fiction names, not the nearest lookalike
+    "A": ("table", None, False, "half"),
+    "C": ("chair / stool", 2, False, None),
+    "W": ("writing desk", None, False, "half"),
+    "K": ("bookshelf", None, True, "three-quarters"),
+    "Q": ("chest / trunk", None, False, "half"),
+    "O": ("barrel / keg", None, False, "half"),
+    "U": ("sacks / bales", None, False, "half"),
+    "J": ("workbench", None, False, "half"),
+    "R": ("rack (weapons, tools, drying)", None, False, "half"),
+    "!": ("anvil", None, False, "half"),
+    "F": ("forge / kiln", None, False, "half"),
+    "&": ("stove / oven / range", None, False, "half"),
+    "@": ("cauldron / vat", None, False, "half"),
+    "*": ("brazier", None, False, "half"),
+    "X": ("altar", None, False, "half"),
+    "H": ("throne / great chair", None, False, "half"),
+    "Y": ("coffin / sarcophagus", None, False, "half"),
+    "$": ("strongbox / safe", None, False, "half"),
+    "N": ("cage", None, False, "half"),
+    "M": ("market stall", None, False, "half"),
+    "+": ("signpost / notice board", None, False, "half"),
+    "|": ("curtain / screen", 1, True, None),
+    "L": ("ladder", 2, False, None),
+    "Z": ("hay / straw", 2, False, None),
+    "G": ("grate / drain", 1, False, None),
+    "%": ("hedge / shrubs", None, True, "three-quarters"),
+    "`": ("furnishing (drawn as a prop)", None, False, "half"),
     " ": ("void", None, True, "total"),
 }
-CORNER_BLOCKERS = set("#BTPDS ouni")
+CORNER_BLOCKERS = set("#BTPDS ouniK%")
+FURNITURE = set("hecPaiyjACWKQOUJR!F&@*XHY$NM+`")  # pieces the generators keep apart
 
 BIOMES = {  # region map cell codes
     "O": ("deep ocean", "#1e3f66"), "C": ("shallow sea", "#2f6690"), "s": ("beach", "#e0cda0"),
@@ -726,7 +755,7 @@ def gen_interior(seed, w=24, h=18, name=None, kind="tavern"):
             if n <= 0:
                 return
             x, y = rng.randint(hx + pad, hx + hw - 1 - pad), rng.randint(hy + pad, hy + hh - 1 - pad)
-            if free(x, y, c) and all(G.get(x + a, y + b) not in "hecPaiyj" for a in (-1, 0, 1) for b in (-1, 0, 1)):
+            if free(x, y, c) and all(G.get(x + a, y + b) not in FURNITURE for a in (-1, 0, 1) for b in (-1, 0, 1)):
                 G.set(x, y, ch)
                 n -= 1
 
@@ -747,17 +776,29 @@ def gen_interior(seed, w=24, h=18, name=None, kind="tavern"):
         hearth(hx + hw - 1 if bx < mid_x else hx)
         for _ in range(rng.randint(4, 7)):
             x, y = rng.randint(hx + 3, hx + hw - 4), rng.randint(hy + 2, hy + hh - 3)
-            if free(x, y) and free(x - 1, y) and free(x + 1, y) and G.get(x, y - 1) != "h":
-                G.set(x, y, "h")
-                G.set(x - 1, y, "e")
-                G.set(x + 1, y, "e")
+            if free(x, y) and free(x - 1, y) and free(x + 1, y) and G.get(x, y - 1) not in "hA":
+                if rng.random() < .5:      # a trestle table with benches either side
+                    G.set(x, y, "A")
+                    G.set(x - 1, y, "e")
+                    G.set(x + 1, y, "e")
+                else:                      # a small table with stools
+                    G.set(x, y, "h")
+                    G.set(x - 1, y, "C")
+                    G.set(x + 1, y, "C")
+        for y in (hy + 1, hy + hh - 2):   # kegs behind the bar
+            bx2 = bx + (1 if bx < mid_x else -1)
+            if free(bx2, y):
+                G.set(bx2, y, "O")
         scatter("l", 2)
     elif kind in ("temple",):
         for x in range(hx + 1, hx + hw - 1):
             if G.get(x, far_y) == fl:
                 G.set(x, far_y, "k")
         ax = next((x for x in sorted(range(hx + 1, hx + hw - 1), key=lambda x: abs(x - mid_x)) if free(x, far_y, "k")), mid_x)
-        G.set(ax, far_y, "c")
+        G.set(ax, far_y, "X")
+        for bx2 in (ax - 2, ax + 2):
+            if free(bx2, far_y, "k"):
+                G.set(bx2, far_y, "*")
         m["labels"].append({"x": ax, "y": far_y + (1 if not front_top else -1), "text": "Altar"})
         for y in range(hy, hy + hh):
             if G.get(mid_x, y) == fl:
@@ -797,20 +838,31 @@ def gen_interior(seed, w=24, h=18, name=None, kind="tavern"):
                     G.set(x, y, "k")
         hearth(rng.choice((hx, hx + hw - 1)))
         for x in range(hx + 1, hx + hw - 1):
-            if rng.random() < (.7 if kind == "library" else .3) and free(x, far_y):
-                G.set(x, far_y, "i")
-        scatter("h", rng.randint(3, 6), c="k")
-        scatter("h", 2)
+            if rng.random() < (.8 if kind == "library" else .35) and free(x, far_y):
+                G.set(x, far_y, "K")
+        scatter("A" if kind != "library" else "W", rng.randint(1, 2), c="k")
+        scatter("h", rng.randint(2, 4), c="k")
+        scatter("C", 2, c="k")
+        scatter("W" if kind != "library" else "A", 1)
+        scatter("i", 1)
         scatter("p", 2)
         scatter("l", 2)
     elif kind in ("warehouse", "workshop", "smithy"):
         for y in range(hy + 2, hy + hh - 2, rng.choice((2, 3))):
             for x in range(hx + 2, hx + hw - 2):
                 if rng.random() < .55 and free(x, y):
-                    G.set(x, y, "v")
-        if kind != "warehouse":
+                    G.set(x, y, rng.choice("vvOU") if kind == "warehouse" else rng.choice("vJJR"))
+        if kind == "smithy":
+            fx = rng.choice((hx, hx + hw - 1))
+            for y in sorted(range(hy + 1, hy + hh - 1), key=lambda y: abs(y - hy - hh // 2)):
+                if free(fx, y):
+                    G.set(fx, y, "F")
+                    break
+            scatter("!", 1)
+            scatter("O", 1)
+        elif kind != "warehouse":
             hearth(rng.choice((hx, hx + hw - 1)))
-        scatter("c", 2)
+        scatter("J" if kind != "warehouse" else "Q", 2)
         scatter("l", 2)
     else:  # shops and anything else: a counter facing the door, shelves along the walls
         cy = far_y + (2 if not front_top else -2)
@@ -820,16 +872,17 @@ def gen_interior(seed, w=24, h=18, name=None, kind="tavern"):
         for y in range(hy, hy + hh):
             for x in (hx, hx + hw - 1):
                 if rng.random() < .5 and free(x, y):
-                    G.set(x, y, "i")
-        scatter("v", 3)
-        scatter("h", 2)
+                    G.set(x, y, rng.choice("KKi"))
+        scatter(rng.choice("vOU"), 2)
+        scatter("Q", 1)
+        scatter("C", 1)
         scatter("l", 2)
     # back rooms: a touch of furniture each, by what they are
-    dress = {"Kitchen": "fcv", "Storeroom": "vv", "Pantry": "vi", "Snug": "hf", "Guest room": "yi", "Bedroom": "yi",
-             "Bedchamber": "yif", "Workroom": "ch", "Office": "hi", "Vestry": "ii", "Sanctum": "cl", "Reliquary": "uu",
-             "Changing room": "iie", "Hot room": "jwl", "Linen store": "iv", "Study": "hif", "Dining room": "hhf",
-             "Library": "iii", "Stacks": "iiii", "Archive": "iiv", "Scriptorium": "hhl", "Loading bay": "vv",
-             "Strongroom": "vi", "Forge": "fc", "Back room": "hv", "Cellar stairs": ">", "Stairs": "<"}
+    dress = {"Kitchen": "&AO", "Storeroom": "vOU", "Pantry": "OUi", "Snug": "hCf", "Guest room": "yiC", "Bedroom": "yiQ",
+             "Bedchamber": "yiQf", "Workroom": "JCR", "Office": "WCK", "Vestry": "iQ", "Sanctum": "X*", "Reliquary": "uY",
+             "Changing room": "iie", "Hot room": "jwl", "Linen store": "iU", "Study": "WKf", "Dining room": "AACf",
+             "Library": "KKKW", "Stacks": "KKKK", "Archive": "KKQ", "Scriptorium": "WWl", "Loading bay": "vOU",
+             "Strongroom": "$Q", "Forge": "F!", "Back room": "ACv", "Cellar stairs": ">", "Stairs": "<"}
     for n, (label, (x0, y0, rw, rh)) in enumerate(zip(names, rooms), start=2):
         for ch in dress.get(label, "h"):
             for _ in range(20):

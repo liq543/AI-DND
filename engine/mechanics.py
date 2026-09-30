@@ -1263,7 +1263,8 @@ def move(g, ref, dest=None, path=None, dash=False, force=None, crawl=False, jump
         raise RuleError(f"{e['name']} isn't placed on a map. Use `place`.")
     m = g.state["maps"][e["token"]["map"]]
     start = token_pos(e)
-    others = {o["id"]: o for o in g.entities.values() if o["id"] != e["id"] and same_map(o, e) and alive(o)}
+    others = {o["id"]: o for o in g.entities.values()
+              if o["id"] != e["id"] and same_map(o, e) and alive(o) and not o.get("offstage")}  # left the scene: not in the way
     hostile_sq = set()
     for o in others.values():
         if hostile(e, o):
@@ -1962,6 +1963,13 @@ def next_dawn(t):
 
 def xp_threshold(lvl):
     return srd.data()["level_xp"].get(lvl, 10 ** 9)
+
+
+def party_xp(g, exclude=None):
+    """The XP (and milestones) a character joining now should have: the party's, i.e. the most any living member has,
+    so everyone crosses each level threshold together."""
+    others = [p for p in g.pcs() if p["id"] != exclude and not p.get("dead")]
+    return (max((p.get("xp", 0) for p in others), default=0), max((p.get("milestones", 0) for p in others), default=0))
 
 
 def award_xp(g, members, total, reason):

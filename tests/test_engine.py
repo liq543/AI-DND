@@ -283,6 +283,94 @@ class EngineTest(unittest.TestCase):
             self.ok("combat", "end")
             self.ok("npc", "remove", "oswin-hale,captain-rhosk")
 
+    def test_creatures_who_left_do_not_block_their_square(self):
+        self.ok("place", "kira", "3,3", "--map", "arena")
+        self.ok("npc", "add", "commoner", "--name", "Oswin Hale", "--at", "5,5", "--map", "arena")
+        try:
+            self.ok("npc", "leave", "oswin-hale")
+            self.ok("move", "kira", "5,5")          # the square he walked out of is free again
+            self.ok("move", "kira", "3,3")
+            self.ok("place", "kira", "5,5", "--map", "arena")
+        finally:
+            self.ok("npc", "remove", "oswin-hale")
+
+    def test_tiny_interior_is_refused_cleanly(self):
+        self.rule("map", "gen", "interior", "--w", "26", "--h", "10", "--id", "tiny-hall", contains="at least")
+
+    def test_room_numbers_are_never_drawn_for_players(self):
+        from engine import maps, render
+        m = maps.gen_interior(4417, 24, 18, kind="tavern")
+        m["id"] = "numbers-check"
+        player = render.render_battle(m, mode="player")
+        dm = render.render_battle(m, mode="dm")
+        self.assertNotIn('font-weight="bold" fill="#3a2a1a">1</text>', player)
+        self.assertIn('font-weight="bold" fill="#3a2a1a">1</text>', dm)
+
+    def test_furnishings_have_their_own_art_and_rules(self):
+        from engine import maps, render
+        m = maps.new_map("interior", "Study", 8, 6, fill=".", seed=3)
+        m["id"] = "study-check"
+        m["grid"] = ["########", "#KKKK..#", "#.CA...#", "#..W.Q.#", "#O.!&@.#", "########"]
+        svg = render.render_battle(m, mode="player")
+        self.assertIsNone(maps.move_cost(m, 3, 2))            # a table fills its square
+        self.assertEqual(maps.move_cost(m, 2, 2), 2)          # a chair is difficult terrain
+        self.assertTrue(maps.blocks_sight(m, 1, 1))           # a bookshelf blocks sight
+        self.assertNotIn('url(#felt)', svg)                   # plain tables aren't card tables
+        self.assertIn('#e0b448', svg)                         # the chest's brass lock
+        for c in "AKCWQO!&@":
+            self.assertIn(c, maps.TERRAIN)
+
+    def test_generated_rooms_use_the_right_furniture(self):
+        from engine import maps
+        lib = "".join(maps.gen_interior(11, 24, 18, kind="library")["grid"])
+        self.assertIn("K", lib)
+        smithy = "".join(maps.gen_interior(12, 24, 18, kind="smithy")["grid"])
+        self.assertTrue("F" in smithy or "!" in smithy)
+
+    def test_props_decorate_and_can_fill_a_square(self):
+        from engine import maps
+        self.ok("map", "gen", "interior", "--building", "shop", "--w", "18", "--h", "14", "--id", "prop-shop", "--seed", "5")
+        m = self.state().state["maps"]["prop-shop"]
+        x, y = next((x, y) for y in range(m["h"]) for x in range(m["w"]) if m["grid"][y][x] == "=" and maps.move_cost(m, x, y) == 1)
+        self.rule("map", "prop", "prop-shop", f"{x},{y}", "--icon", "not-a-real-icon", contains="No icon")
+        self.ok("map", "prop", "prop-shop", f"{x},{y}", "--icon", "globe", "--name", "Brass globe", "--blocks")
+        m = self.state().state["maps"]["prop-shop"]
+        self.assertIsNone(maps.move_cost(m, x, y))
+        self.assertEqual(m["props"][0]["name"], "Brass globe")
+        self.ok("map", "prop-remove", "prop-shop", "--id", "prop-1", "--reason", "sold")
+        m = self.state().state["maps"]["prop-shop"]
+        self.assertEqual(maps.move_cost(m, x, y), 1)
+        self.assertEqual(m["props"], [])
+
+    def test_npc_joining_the_party_keeps_its_face(self):
+        from engine import art
+        self.ok("npc", "add", "cultist", "--name", "Captain Rhosk", "--at", "2,2", "--map", "arena", "--side", "neutral")
+        self.ok("npc", "describe", "captain-rhosk", "--text", "A stooped man with grey eyes and thin silver hair.")
+        g = self.state()
+        before = art.look_of(g.state["entities"]["captain-rhosk"])
+        self.ok("char", "create", "--name", "Rhosk", "--player", "DM", "--class", "Fighter", "--species", "Human",
+                "--background", "Soldier", "--method", "standard", "--scores", "str=15,con=14,dex=13,wis=12,cha=10,int=8",
+                "--bonus", "str+2,con+1", "--skills", "perception,survival", "--equipment", "A", "--bg-equipment", "A",
+                "--species-skill", "insight", "--species-feat", "Alert", "--languages", "Elvish,Dwarvish",
+                "--fighting-style", "Defense", "--masteries", "longsword,javelin,greatsword")
+        self.ok("asset", "look", "rhosk", "--like", "captain-rhosk")
+        after = art.look_of(self.state().state["entities"]["rhosk"])
+        for k in ("skin", "hair_color", "hair_style", "eye_color", "outfit", "cloth", "bg", "seed"):
+            self.assertEqual(before[k], after[k], k)
+
+    def test_new_party_members_join_at_the_partys_xp(self):
+        from engine import mechanics as M
+        g = self.state()
+        party, _ = M.party_xp(g)
+        self.ok("char", "create", "--name", "Wren Tallow", "--player", "DM", "--class", "Fighter", "--species", "Human",
+                "--background", "Soldier", "--method", "standard", "--scores", "str=15,con=14,dex=13,wis=12,cha=10,int=8",
+                "--bonus", "str+2,con+1", "--skills", "perception,survival", "--equipment", "A", "--bg-equipment", "A",
+                "--species-skill", "insight", "--species-feat", "Alert", "--languages", "Elvish,Dwarvish",
+                "--fighting-style", "Defense", "--masteries", "longsword,javelin,greatsword")
+        wren = next(e for e in self.state().state["entities"].values() if e.get("name") == "Wren Tallow")
+        self.assertEqual(wren["xp"], max(party, wren["xp"]))
+        self.assertGreaterEqual(wren["xp"], party)
+
     def test_thrown_weapon_lands_by_the_target(self):
         from engine import mechanics as M
         self.ok("item", "add", "kira", "Handaxe", "--source", "found: a woodpile")

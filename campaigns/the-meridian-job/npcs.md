@@ -81,7 +81,7 @@
 
 ### Recruit leads (from Sera, Day 3)
 - **Corvin Asche** (wizard): a struck-off Collegium magister (sold exam answers). Forges guild licences and sells small curses from a bookbinder's on **Quire Street, the Gilt**. Clever and greedy; the Meridian's Acquisitions Office seized his library two winters ago, so he'd love to spite them. Not yet met. If recruited, make him a DM-run Wizard 3 (`char create`), Neutral Evil.
-- **Brakka "the Anchor" Holloway** (fighter): a half-orc prizefighter in the **Gutter Ring, the Tangle**; throws fights for the right purse. Loyal while paid, then anyone's. Not yet met. If recruited, a DM-run Fighter 3, Chaotic Neutral.
+- **Brakka "the Anchor" Holloway** (fighter): a half-orc prizefighter in the **Gutter Ring, the Tangle**; rumoured to throw fights for the right purse (in truth he refused Dace's booked fall last winter and has been paying for it since). Loyal while paid, then anyone's. Not yet met. If recruited, a DM-run Fighter 3, Chaotic Neutral.
 - **Fence:** **Dorothea Quill** (the Night Market auctioneer, see above). She lost her market and stock to the Collectors and is hungry; she takes magical goods with no questions, pays in gold, knows every buyer, and robs you on the price. Licensed (stamped) goods fetch less.
 - **Target:** **Hollis and Daughter, Alchemists**, Lantern Hill, at the edge of the Gilt. Meridian-licensed, so stock is stamped and logged. A good lock, a clerk who sleeps over the shop, an Acquisitions seal on the back door. Night work. Not yet scouted.
 - **Payment:** the crew has about 300 gp; Sera's idea is to pay them with their pick of the Undercroft stores (Cage Three's seized magic) on Gala night.
@@ -137,3 +137,45 @@
 - Day 3 11:10: Lettie saw through Kit's attendant disguise story. She's suspicious of the 'new boy' and about to call Crabbe.
 - Day 3 11:10: Sera talked Lettie round. She believes the 'new boy' is Tam, valet to Sera's brother (Corvell), and won't tell Madam or Crabbe.
 - **Day 3, 11:12: DEAD.** Kit cut Pell's throat in private bath B at the Rosewater. Lettie believes 'Tam the valet' went in to him; the body is in the tub.
+- Day 3, 11:18: Crabbe accepts "Tam" as Corvell's valet (Deception 22). He expects Master Corvell and Tam to leave together through the front doors, past him.
+- **Day 3, 11:24: DEAD.** Kit killed Crabbe in the gentlemen's changing room (opportunity attack as he fled). Body at the foot of the cabinets, 5,9.
+- **Day 3, 11:32: DEAD.** Lettie was killed by Kit in the foyer while fleeing; she screamed 'murder' first. Body at 19,20.
+- Hesper, the Alderman's Lady: DEAD, Day 3 11:32, killed by Kit's opportunity attack as she fled down the stoke-hole stair. Her body lies at the stair head in the linen room.
+- Vessie, the Alderman's Sister: DEAD, Day 3 11:33, killed by Kit's opportunity attack in the boiler cellar as she ran for the coal door. Her body lies by the great boiler (boiler-cellar 14,6).
+- Day 3: Dorothea Quill has gone to ground since the Night Market raid. She keeps two rooms over **Mother Tansy's lace-mending, Needle Row, the Tangle**, half an hour's walk east of the Rosewater by the Tanners' Cut. Sera knows the way.
+- **Nance Pettle** (`nance-pettle`), Neutral: a rag-woman with a clothes stall on the south towpath of the Tanners' Cut ("CLOTHES BOUGHT & SOLD — NO QUESTIONS NEEDED"). Stooped, gap-toothed, three shawls, a man's felt hat, a clay pipe. Day 3, 11:49: she swapped a drover's coat to Kit for Hesper's silver scent bottle (she was well overpaid), and noticed his other coat was on inside out. She'll remember the gentleman who paid silver for a rag.
+- Two tanners (`tanner-a` burly and eating an onion; `tanner-b` younger, with lime-burned hands) on the tanners' steps (28,10) at noon. They watched the trade.
+- Gorse (`gorse`, tough, Neutral): Quill's silent minder since the raid. Huge, cauliflower-eared, a cudgel in his belt.
+
+## The Gutter Ring
+- **Brakka "the Anchor" Holloway** (PARTY MEMBER from Day 4, 00:10: `brakka`, Orc Fighter 4 Champion, DM-run): half-orc prize-fighter (`warrior-veteran`, Chaotic Neutral). Loyal while paid. Lost to Black Sefton at second bell (Day 4, 00:05), knocked down in round two; didn't throw it. Recruitment target (the crew's fighter).
+- **Nib**: a boy of about 14, Brakka's sparring partner and runner.
+- **Dace Morrow**: runs the bar and the book at the Ring. Sharp-eyed, counts everything.
+- (Known to the crew, 12:54) Brakka has a cracked left rib; he owes Dace 40 gp (refused to throw a fight last winter), so Dace takes his purses; Nib is his late sister's boy, and Brakka wants him out of the Tangle. Sefton is the 2-to-1 favourite, a Saltgate docker.
+- (12:59) Brakka agreed to join (terms: 40 gp to Dace in front of him, 20 gp to him now for Nib, share of the job). Will fight Sefton at second bell first; won't be seen to run. Leaves with the crew and Nib after the bout.
+- (13:05) Brakka is crew: accepts Kit as leader, no qualms about methods. His one line: Nib is kept away from the violence. Debt to Dace cleared. Holds 20 gp retainer. Leaves with the crew after the Sefton bout at second bell.
+
+## Needle Row
+- **Mother Tansy**: ~70, tiny, stooped, spectacles in white hair, pincushion on her wrist; sweet talk, moneylender's prices (`commoner`, Neutral). Runs the lace-mending under Quill's rooms; mends for half the laundries in the Tangle, including the Rosewater's towels. Quill's landlady and creature.
+- **Pip**: ~12, Tansy's apprentice, lace-maker, watchful (`commoner`, Neutral Good).
+
+## Quire Street
+- **Man in grey — Fennick** (named by Asche at 14:25: Acquisitions Office, "not the Magistrates", in that window since spring, four sugars): thin, beak-nosed, good grey coat, broadsheet and black notebook, window seat of the Blotted Page (`spy`).
+- **Coffee-house keeper** of the Blotted Page: stout, bald, waxed moustache (`commoner`).
+- **Guild clerk**: nervous young Stationers' Guild clerk with a leather folder; went into Asche's at ~14:00 (`commoner`).
+- Lantern Watch patrol (2 `guard`), doubled in the Gilt today, carrying the Rosewater notice.
+- (14:27) **Corvin Asche** met: tall, stooped, ~50, velvet house-coat, inky hands, grey eyes behind half-moon spectacles, Collegium signet (crest filed flat) on a cord. Let the crew in after Sera's true-intentions note (Persuasion 25). Placeholder token is `cultist` stats; convert to a Wizard 3 with `char create` if recruited. Sharp: clocked Sera's Chancery copperplate and Kit's duellist's stance.
+- (14:33) Asche's terms: 100 gp now, a full share, his library off the top, and the Acquisitions seizure ledger. Accepts Kit's lead with one condition: "when I say stop, you stop" (on wards). Not yet agreed.
+- (14:51) Asche packed: Forgery Kit, blank licence stock, satchel. He keeps the Back Room shut even from the crew. He's dry about slumming it at a Tangle prize-fight.
+- (14:54, mentioned by Asche, not met) **Scrope**, millwright of the rag-mill on Vatman's Row, takes 'Mr Vell's' rent and asks nothing. **Widow Pargeter** lets rooms on Lantern Hill and reads every broadsheet.
+- (15:32) Nib is leaving the Ring with the crew on Brakka's orders. Brakka needs a new second (sponge boy) for the bout; Dace to find one.
+- (16:05) **Ambrose Tull** (`merchant-in-a-mustard-waistcoat`, noble, Neutral): florid, jovial tea importer, a regular at the Silver Ewer; brandy; gold watch-chain, fat purse. Told 'the laundress' his room: the Peony, first floor front. Other Ewer faces (unnamed to the crew): the desk clerk, the doorman, the bell-boy, the barman, the man with a broadsheet by the fire, the tanned gentleman at the card table, the young woman with a reticule, a waiter, two tea guests.
+- (16:08) Silver Ewer chambermaid (unnamed to the crew; Dorcas), brisk, grey dress, hot-water cans; told the 'porter' laundry uses the back stair. **Mrs Hartley**: the housekeeper (mentioned, not met).
+- **Harrow & Vane staff (Day 3):** the door porter (guard, bottle-green coat, old soldier, keys on a chain), the counter clerk (thin, spectacles, sleeve-guards), the counting clerk (stout, shirtsleeves), the chief clerk (noble, grey and exact, opened most accounts himself, passive Insight 14), the strongroom watchman (guard), the lamp boy, and the lamplighter on Goldsmith Row.
+- **Mr Pim** (Harrow & Vane counter clerk; thin, spectacles). Named by the porter on Day 3.
+- **Mr Stout** (Harrow & Vane counting clerk). Paid out the 300 crowns.
+- **Mr Faircloth** (tailor, Faircloth's, Silk Lane; small, neat, silver-haired, judges shoulders first; lawful neutral) and his **apprentice** (freckled, 15). Sold Asche Kit's charcoal suit for 15 gp on Day 3 at 18:24; he saw only Asche.
+- (Day 3, 18:34) **Mr Faircloth** was killed by Kit in his shop. The apprentice is asleep under Asche's Sleep.
+- (Day 3, 18:35) Faircloth's **apprentice** (15) was killed in his sleep by Kit.
+- (Day 3, 18:46) **Sera Lark / Seraphine Varne** was killed by Kit in Faircloth's shop after confessing she was the Curator's daughter. Party character, now dead.
+- **Ottilie Marsh** (not yet met; named by Asche on Day 3): prompter at the Gilded Lantern playhouse, Lampblack Row, the Tangle. Writes the playbills, forges box passes, does any voice. Venal, clever, short of money. A candidate to replace Sera as the crew's bard.

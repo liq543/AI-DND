@@ -136,6 +136,7 @@ item note kira longsword-1 --alias "Oathkeeper" --text "Her father's sword, the 
 #   (an heirloom blade, a weapon disguised as something else, a guild token, a cursed trinket). Mechanics still use the SRD base item.
 coins kira +25gp --source "loot: goblin pouches" | coins kira -5sp --source "spent: ferry"
 xp award --encounter | xp award --amount 200 --reason "negotiated the goblins' surrender" | xp milestone --reason "..."
+xp sync wren                                # a late joiner comes up to the party's XP (new characters join at it automatically)
 homebrew add monsters|items|subclasses|species|backgrounds --file thing.json --reason "..."   # public
 ```
 
@@ -147,6 +148,9 @@ map show <id> | map list | map ascii <id> | map render <id> [--dm]
 map reveal <id> --room 3 | --rect 0,0,10,10 | --all      map hide <id> --rect ...
 map poi <id> x,y --name "Weathered Statue" --text "What they perceive"   # pin a perceived notable object to its tile
 map poi <id> x,y --name "..." --id j12   # ...or link an existing journal entry; players click the marker to open it
+map icons <words>                          # search 4,100+ game-icons for props: `map icons cauldron`, `map icons book pile`
+map prop <id> x,y --icon globe --name "Brass globe" [--size small|large] [--color #hex] [--rotate 30] [--blocks]
+map prop-move <id> x,y --id prop-2 --reason "shoved aside" | map prop-remove <id> --id prop-2 --reason "smashed"
 map poi-move <id> x,y --id poi-2 --reason "dragged aside" | map poi-remove <id> --id poi-2 --reason "carted away"
 map set <id> --kv theme=bathhouse | walls=brick | floor=mosaic | wood=herringbone | stone=hex | accent=#8a1c2a   # look per map
 map door <id> 12,7 open|close|reveal|break                map feature <id> 5,5 reveal|add|remove
@@ -154,6 +158,7 @@ map crop <id> --room 4 --pad 2 --show                     map paint <id> "3,3 5,
 map set <id> --kv lighting=dark                           map party 40,30   map label <id> 10,10 --name "Old Mill"
 map from-image <asset-id> --w 30 --h 20
 asset look kira --hair "long auburn braid" --eyes green --marks "scar across left cheek" --outfit "crimson robes" [--headwear hood] [--clear eyes|all]
+asset look kira --like oswin-hale        # keep another creature's face: an NPC who joins the party as a character keeps the look the players know
 asset art kira [--crop face] [--out file.svg] | asset art kira:<item-id> | asset art srd:flame-tongue     # write the generated picture to look at
 asset portrait kira [--style heraldic] [--clear] | asset icon "dragon" | asset fetch <url> --name "Cave art" --license CC0 --credit "..." [--portrait kira] [--item kira:<item-id>]
 asset import path/to/file.png --license "own work" | asset draw drawing.svg --name "Sister Maren" --portrait maren

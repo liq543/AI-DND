@@ -408,7 +408,8 @@ def cmd_place(g, a):
     if maps.move_cost(m, x, y) is None:
         raise RuleError(f"({x},{y}) is {maps.TERRAIN.get(maps.cell(m, x, y), ('?',))[0]} — can't stand there.")
     for o in g.entities.values():
-        if o["id"] != e["id"] and o.get("token", {}).get("map") == mid and (o["token"]["x"], o["token"]["y"]) == (x, y):
+        if (o["id"] != e["id"] and not o.get("offstage") and o.get("token", {}).get("map") == mid
+                and (o["token"]["x"], o["token"]["y"]) == (x, y)):
             raise RuleError(f"({x},{y}) is occupied by {o['name']}.")
     if M.combat(g) and e.get("token") and not a.force:
         raise RuleError("In combat, creatures move with `move` (movement is validated). Use --force \"reason\" for teleport/forced moves.")
@@ -1210,6 +1211,18 @@ def cmd_xp(g, a):
             if a.override:
                 g.override(a.override, f"{a.amount} XP award")
             M.award_xp(g, members, a.amount, a.reason)
+    elif a.action == "sync":
+        # bring a character who joined late (or was made before this rule) up to the party's XP, never down
+        if not a.who:
+            raise RuleError("xp sync <character-id>")
+        e = g.get(a.who)
+        if e["kind"] != "pc":
+            raise RuleError(f"{e['name']} isn't a party character.")
+        xp, ms = M.party_xp(g, exclude=e["id"])
+        if xp <= e.get("xp", 0) and ms <= e.get("milestones", 0):
+            raise RuleError(f"{e['name']} already has the party's XP ({e.get('xp', 0)}).")
+        g.set(e, xp=max(xp, e.get("xp", 0)), milestones=max(ms, e.get("milestones", 0)))
+        g.say(f"⭐ {e['name']} is brought up to the party's XP ({max(xp, e.get('xp', 0))}), so the whole party levels together.", kind="xp")
     elif a.action == "milestone":
         if g.state["settings"].get("xp_mode") != "milestone":
             raise RuleError("Campaign uses XP, not milestones (`set xp_mode=milestone` before characters are made).")
@@ -1242,6 +1255,9 @@ def cmd_map(g, a):
             kw["kind"] = a.building
         if kind not in maps.GENERATORS:
             raise RuleError(f"map kinds: {', '.join(maps.GENERATORS)}")
+        if kind == "interior" and (kw.get("w", 24) < 16 or kw.get("h", 18) < 14):
+            raise RuleError("interior maps need at least --w 16 --h 14 (back rooms need the space); "
+                            "for a narrow place, generate at that size and `map paint` it into shape")
         m = maps.GENERATORS[kind](seed, **kw)
         mid = a.id or srd.slug(m["name"])[:40]
         while mid in s["maps"]:
@@ -1403,6 +1419,75 @@ def cmd_map(g, a):
                 pois = [q for q in pois if q["id"] != p["id"]]
                 g.say(f"📍 {p['name']} is no longer on {m['name']} — {a.reason}. (Its journal entry remains.)", kind="map")
             g.emit("map.set", id=m["id"], set={"pois": pois})
+    elif a.action == "icons":
+        # search the vendored icon library for props: `map icons globe` / `map icons "cooking pot"`
+        words = " ".join(w for w in (a.target, a.at, a.state) if w)
+        if not words:
+            raise RuleError("map icons <words> — e.g. `map icons cauldron`, `map icons book pile`")
+        hits = assets.search_icons(words, 30)
+        print(", ".join(hits) if hits else "No icons match; try a simpler word.")
+    elif a.action in ("prop", "prop-move", "prop-remove"):
+        # decoration drawn from an icon on a tile: a globe on a desk, a skull on a shelf, a harp in a corner.
+        # With --blocks the square is filled (impassable, half cover); without it the piece is set dressing.
+        m = s["maps"].get(a.target)
+        if not m:
+            raise RuleError(f"No map '{a.target}'.")
+        props = [dict(p) for p in m.get("props", [])]
+        grid = [list(r) for r in m["grid"]]
+        if a.action == "prop":
+            if not a.at or not a.icon:
+                raise RuleError('map prop <map> x,y --icon <name> [--name "Brass globe"] [--blocks] [--size small|large] [--color #hex] [--rotate 30]')
+            if not assets.has_icon(a.icon):
+                near = assets.search_icons(a.icon.replace("-", " "), 8)
+                raise RuleError(f"No icon '{a.icon}'." + (f" Close matches: {', '.join(near)}" if near else " Search with `map icons <words>`."))
+            if a.color and not re.fullmatch(r"#[0-9a-fA-F]{6}", a.color):
+                raise RuleError("--color: a colour like #6a4a2a")
+            x, y = xy(a.at)
+            if not (0 <= x < m["w"] and 0 <= y < m["h"]):
+                raise RuleError(f"({x},{y}) is outside {m['name']} ({m['w']}×{m['h']}).")
+            if any((p["x"], p["y"]) == (x, y) for p in props):
+                raise RuleError(f"({x},{y}) already has a prop; remove it first or use the next tile.")
+            n = 1
+            while any(p["id"] == f"prop-{n}" for p in props):
+                n += 1
+            pr = {"id": f"prop-{n}", "x": x, "y": y, "icon": a.icon, "name": a.name or a.icon.replace("-", " ")}
+            for k in ("size", "color", "rotate"):
+                if getattr(a, k):
+                    pr[k] = getattr(a, k)
+            change = {"props": props + [pr]}
+            if a.blocks:
+                if maps.move_cost(m, x, y) is None:
+                    pr["on"] = grid[y][x]          # sits on a piece that already fills the square
+                else:
+                    pr["floor"] = grid[y][x]
+                    grid[y][x] = "`"
+                    change["grid"] = ["".join(r) for r in grid]
+            g.emit("map.set", id=m["id"], set=change)
+            g.say(f"🪑 {pr['name']} placed at ({x},{y}) on {m['name']}" + (" (fills the square)" if a.blocks else "") + ".", kind="map")
+        else:
+            p = next((p for p in props if p["id"] == a.id), None)
+            if not p:
+                raise RuleError(f"No prop '{a.id}' on {m['name']} ({', '.join(q['id'] for q in props) or 'none'}).")
+            if not a.reason:
+                raise RuleError('--reason "what happened to it" (shown in the log)')
+            change = {}
+            if p.get("floor") and grid[p["y"]][p["x"]] == "`":
+                grid[p["y"]][p["x"]] = p["floor"]
+            if a.action == "prop-move":
+                x, y = xy(a.at)
+                q = dict(p, x=x, y=y)
+                q.pop("floor", None)
+                if p.get("floor"):
+                    q["floor"] = grid[y][x]
+                    grid[y][x] = "`"
+                props = [q if r["id"] == p["id"] else r for r in props]
+                g.say(f"🪑 {p['name']} moved to ({x},{y}) on {m['name']} — {a.reason}.", kind="map")
+            else:
+                props = [r for r in props if r["id"] != p["id"]]
+                g.say(f"🪑 {p['name']} is gone from {m['name']} — {a.reason}.", kind="map")
+            change["props"] = props
+            change["grid"] = ["".join(r) for r in grid]
+            g.emit("map.set", id=m["id"], set=change)
     elif a.action in ("container", "container-remove"):
         # a tile that holds things: a chest, a strongbox, a hidden cache. Items stashed there are listed inside it.
         m = s["maps"].get(a.target)
@@ -1598,6 +1683,16 @@ def cmd_asset(g, a):
     if a.action == "look":
         # What a creature looks like, feature by feature. The live table redraws its portrait and token from this.
         e = g.get(a.args[0])
+        if getattr(a, "like", None):
+            # keep another creature's face: an NPC who joins the party as a character, a double, a twin
+            other = g.get(a.like)
+            kept = other.get("art_of") or {"seed": other["id"], "name": other.get("name", ""),
+                                             "style": art._style_for(other), "species": art.species_of(other)}
+            g.set(e, art_of=kept)
+            desc = other.get("appearance") or (other.get("bio") or {}).get("appearance")
+            if desc and not (e.get("appearance") or (e.get("bio") or {}).get("appearance")):
+                g.set(e, appearance=desc)
+            g.note(f"🎨 {e['name']} now looks like {other['name']} did.")
         fields = {f: getattr(a, f"look_{f}") for f in art.LOOK_FIELDS if getattr(a, f"look_{f}", None)}
         if a.clear:
             drop = art.LOOK_FIELDS if a.clear == "all" else [x.strip() for x in a.clear.split(",")]
@@ -2390,8 +2485,9 @@ def build_parser():
     c.add_argument("amount")
     c.add_argument("--source")
     c.add_argument("--override")
-    c = sp.add_parser("xp", help="award|milestone")
-    c.add_argument("action", choices=["award", "milestone"])
+    c = sp.add_parser("xp", help="award|milestone|sync <id>")
+    c.add_argument("action", choices=["award", "milestone", "sync"])
+    c.add_argument("who", nargs="?", help="sync: the character to bring up to the party's XP")
     c.add_argument("--encounter", action="store_true")
     c.add_argument("--amount", type=int)
     c.add_argument("--reason")
@@ -2431,6 +2527,11 @@ def build_parser():
     c.add_argument("--out")
     c.add_argument("--text", help="map poi: what the characters perceive (becomes the journal entry)")
     c.add_argument("--reason", help="map poi-move/poi-remove: what changed")
+    c.add_argument("--icon", help="map prop: a game-icons name (find one with `map icons <words>`)")
+    c.add_argument("--blocks", action="store_true", help="map prop: the piece fills its square (impassable, half cover)")
+    c.add_argument("--size", choices=("small", "medium", "large"), help="map prop: how much of the tile it fills")
+    c.add_argument("--color", help="map prop: silhouette colour, #rrggbb")
+    c.add_argument("--rotate", type=int, help="map prop: degrees")
 
     c = sp.add_parser("asset", help="icon|fetch|import|draw|portrait|look|art|list")
     c.add_argument("action")
@@ -2440,6 +2541,7 @@ def build_parser():
     c.add_argument("--license")
     c.add_argument("--credit")
     c.add_argument("--portrait", help="set as this creature's portrait")
+    c.add_argument("--like", help="look: keep another creature's face (an NPC who joins the party as a character)")
     c.add_argument("--item", help="draw/fetch/import: use as this item's picture (owner:item-id)")
     c.add_argument("--private", action="store_true")
     c.add_argument("--style", choices=["art", "heraldic"], default="art", help="portrait: generated bust (default) or the old heraldic card")
