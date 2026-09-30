@@ -170,6 +170,8 @@ def cmd_char(g, a):
         chargen.levelup(g, e, a)
     elif a.action == "catch-up":
         chargen.catch_up(g, e, a)
+    elif a.action == "masteries":
+        chargen.set_masteries(g, e, a.masteries)
     elif a.action == "bio":
         field, text = a.args[1], " ".join(a.args[2:])
         if field not in ("appearance", "personality", "ideals", "bonds", "flaws", "backstory", "goals", "alignment", "notes"):
@@ -191,11 +193,23 @@ def cmd_char(g, a):
             raise RuleError(f"{e['name']} has no Heroic Inspiration.")
         g.set(e, inspiration=False)
         g.say(f"🌟 {e['name']} spends Heroic Inspiration to reroll — use the new roll.", kind="xp")
+    elif a.action in ("leave", "rejoin"):
+        # a character parts ways with the party (alive, sheet kept): off the table, out of XP, rests and the party panel.
+        # `rejoin` brings them back if the story does.
+        reason = " ".join(a.args[1:])
+        if len(reason) < 4:
+            raise RuleError(f'char {a.action} <id> "why" (shown to the player)')
+        if a.action == "leave":
+            g.set(e, departed=True, hidden=True, known=True, offstage=True)
+            g.say(f"👋 {e['name']} leaves the party — {reason}.", kind="party", who=e["id"])
+        else:
+            g.set(e, departed=False, hidden=False, offstage=False)
+            g.say(f"🤝 {e['name']} rejoins the party — {reason}.", kind="party", who=e["id"])
     elif a.action == "remove":
         g.emit("entity.remove", id=e["id"])
         g.say(f"{e['name']} leaves the party.")
     else:
-        raise RuleError("char roll-stats|create|levelup|bio|show|inspire|use-inspiration|remove")
+        raise RuleError("char roll-stats|create|levelup|catch-up|masteries|leave|rejoin|bio|show|inspire|use-inspiration|remove")
 
 
 def cmd_spells(g, a):
@@ -260,6 +274,10 @@ def instantiate_monster(g, mon, name=None, side="enemy", hidden=False, hp_mode="
     return g.get(eid)
 
 
+ALIGNMENTS = ("Lawful Good", "Neutral Good", "Chaotic Good", "Lawful Neutral", "Neutral", "Chaotic Neutral",
+              "Lawful Evil", "Neutral Evil", "Chaotic Evil", "Unaligned")
+
+
 def cmd_npc(g, a):
     if a.action == "resize":
         # SRD generic NPCs are "Medium or Small" humanoids; pick the one that fits the person
@@ -277,6 +295,17 @@ def cmd_npc(g, a):
             raise RuleError('npc describe <id> --text "what the characters can see"')
         g.set(e, appearance=a.text)
         g.note(f"  Described {e['name']}.")
+        return
+    if a.action == "alignment":
+        # the character's own alignment (their outlook), which replaces the stat block's generic one; shown on their info card
+        e = g.get(a.what)
+        if e["kind"] == "pc":
+            raise RuleError(f"{e['name']} is a player character: their alignment is the player's to play, not the table's to show.")
+        text = " ".join(w.capitalize() for w in (a.text or "").replace("-", " ").split())
+        if text not in ALIGNMENTS:
+            raise RuleError(f"npc alignment {a.what} --text \"{'|'.join(ALIGNMENTS)}\"")
+        g.set(e, alignment=text)
+        g.note(f"  {e['name']} is {text}.")
         return
     if a.action == "lore":
         # public knowledge the party has earned (a knowledge check, a clue, an NPC's word) — shown on the creature's info panel
@@ -310,10 +339,20 @@ def cmd_npc(g, a):
             if not e["hidden"]:
                 g.say(f"👁 {e['name']} appears{' (' + e['side'] + ')' if e['side'] != 'enemy' else ''}.", kind="creature", who=e["id"])
             g.note(f"  added {e['id']}: {e['srd_name']} AC {e['ac']} HP {e['hp']} CR {e['cr']}")
+    elif a.action in ("leave", "return"):
+        # a creature walks out of the scene (not hiding in it): off the table, out of any fight here. `return` brings it back.
+        for i in ids(a.what):
+            e = g.get(i)
+            if a.action == "leave":
+                g.set(e, hidden=True, offstage=True, **({"known": True} if not e.get("hidden") or e.get("known") else {}))
+                g.say(f"👋 {e['name']} leaves the scene.", kind="creature") if not e.get("hidden") else None
+            else:
+                g.set(e, hidden=False, offstage=False, known=True)
+                g.say(f"👁 {e['name']} is back.", kind="creature")
     elif a.action in ("reveal", "hide"):
         for i in ids(a.what):
             e = g.get(i)
-            g.set(e, hidden=(a.action == "hide"))
+            g.set(e, hidden=(a.action == "hide"), **({"known": True} if a.action == "reveal" or not e.get("hidden") else {}))
             if a.action == "reveal":
                 g.say(f"👁 {e['name']} is revealed!", kind="creature")
     elif a.action == "remove":
@@ -325,7 +364,8 @@ def cmd_npc(g, a):
         e = g.get(a.what)
         old = e["name"]
         g.set(e, name=a.name)
-        g.say(f"{old} is now known as {a.name}.")
+        # a creature the players can't see yet keeps its real name secret (the DM is often giving it a cover name)
+        g.say(f"{old} is now known as {a.name}.", **({"kind": "dm"} if e.get("hidden") else {}))
     elif a.action == "side":
         e = g.get(a.what)
         if a.side not in ("enemy", "ally", "neutral"):
@@ -396,7 +436,8 @@ def cmd_combat(g, a):
             raise RuleError("Combat is already running (`combat end` first).")
         mid = g.state["view"].get("map")
         members = [g.get(i) for i in ids(a.ids)] if a.ids else \
-            [e for e in g.entities.values() if e.get("token", {}).get("map") == mid and not e.get("dead")]
+            [e for e in g.entities.values() if e.get("token", {}).get("map") == mid and not e.get("dead")
+             and not e.get("departed") and not e.get("offstage")]   # those who have left the scene stay out of it
         if not members:
             raise RuleError("No combatants. Place tokens on the current map or pass --ids.")
         if a.ids:
@@ -427,6 +468,42 @@ def cmd_combat(g, a):
         raise RuleError("No combat running.")
     if c.get("pending_init") and a.action not in ("end", "status"):
         raise RuleError("Initiative rolls are still pending: " + ", ".join(c["pending_init"]))
+    if a.action == "swap":
+        # Alert (SRD feat): "Immediately after you roll Initiative, you can swap your Initiative with the Initiative of one
+        # willing ally in the same combat. You can't make this swap if you or the ally has the Incapacitated condition."
+        who = ids(a.ids)
+        if len(who) != 2:
+            raise RuleError("combat swap <alert-pc>,<ally>")
+        e, ally = g.get(who[0]), g.get(who[1])
+        if not M.has_feat(e, "Alert"):
+            raise RuleError(f"{e['name']} doesn't have the Alert feat (Initiative Swap).")
+        if c["round"] != 1 or c["turn"] != 0 or c["economy"].get(c["order"][0]["id"]) or c.get("swapped"):
+            raise RuleError("Initiative Swap happens immediately after Initiative is rolled, before anyone acts.")
+        if ally.get("side") not in ("pc", "ally") and ally["kind"] != "pc":
+            raise RuleError(f"{ally['name']} isn't an ally.")
+        for x in (e, ally):
+            if "incapacitated" in M.condition_names(x):
+                raise RuleError(f"{x['name']} is Incapacitated and can't swap Initiative.")
+        order = [dict(o) for o in c["order"]]
+        oe = next((o for o in order if o["id"] == e["id"]), None)
+        oa = next((o for o in order if o["id"] == ally["id"]), None)
+        if not oe or not oa:
+            raise RuleError("Both must be in this combat.")
+        oe["init"], oa["init"], oe["tie"], oa["tie"] = oa["init"], oe["init"], oa["tie"], oe["tie"]
+        order.sort(key=lambda o: (-o["init"], -o["tie"], o["id"]))
+        first_changed = order[0]["id"] != c["order"][0]["id"]
+        c = dict(c, order=order, swapped=True)
+        if first_changed:
+            c["economy"] = {order[0]["id"]: {}}
+        g.emit("combat.set", combat=c)
+        g.say(f"⚡ Alert: {e['name']} swaps Initiative with {ally['name']} ({oe['init']} ↔ {oa['init']}).", kind="combat")
+        g.say("Initiative order: " + " → ".join(f"{g.get(o['id'])['name']} ({o['init']})" for o in order
+                                               if not g.get(o['id']).get('hidden')), kind="combat")
+        if first_changed:
+            first = g.get(order[0]["id"])
+            g.say(f"▶ {first['name']}'s turn (round 1).", kind="turn", who=first["id"], round=1)
+            M.start_of_turn(g, first)
+        return
     if a.action == "next":
         cur = g.get(M.current_id(g)) if M.current_id(g) in g.entities else None
         if cur:
@@ -547,7 +624,7 @@ def finalize_initiative(g):
     M.start_of_turn(g, first)
 
 
-ACTIONS = {"dash", "disengage", "dodge", "help", "hide", "ready", "search", "study", "utilize", "influence", "magic", "attack", "grapple", "shove"}
+ACTIONS = {"dash", "disengage", "dodge", "help", "hide", "ready", "search", "study", "utilize", "influence", "magic", "attack", "grapple", "shove", "escape"}
 
 
 def cmd_action(g, a):
@@ -561,6 +638,21 @@ def cmd_action(g, a):
     if a.via and not __import__("engine.core", fromlist=["has_feature"]).has_feature(e, a.via) and \
             not any(x["name"].lower() == a.via.lower() for x in e.get("actions", [])):
         raise RuleError(f"{e['name']} doesn't have '{a.via}'.")
+    if name in ("grapple", "shove"):
+        M.grapple_or_shove(g, e, g.get(a.target) if a.target else None, name, prone=bool(getattr(a, "prone", False)),
+                           reaction=kind == "reaction")
+        return
+    if name == "escape":
+        # Ending a Grapple: an action, Strength (Athletics) or Dexterity (Acrobatics) vs the grapple's escape DC
+        gr = next((c for c in e.get("conditions", []) if c["name"] == "grappled"), None)
+        if not gr:
+            raise RuleError(f"{e['name']} isn't Grappled.")
+        M.use_action(g, e, kind, "escape a grapple")
+        skill = a.skill or ("athletics" if M.skill_mod(M.g_ent(g, e), "athletics") >= M.skill_mod(M.g_ent(g, e), "acrobatics") else "acrobatics")
+        r = M.ability_check(g, e, skill, dc=gr.get("escape_dc", 10), now=True, purpose="escape the grapple")
+        if r.get("success"):
+            M.remove_condition(g, g.get(e["id"]), "grappled")
+        return
     M.use_action(g, e, kind, name)
     if name == "dash":
         ec = M.economy(g, e["id"])
@@ -960,6 +1052,10 @@ def cmd_item(g, a):
         M.remove_item(g, e, a.item, a.qty, "dropped" if a.action == "drop" else a.source or "removed", sell=a.action == "sell", to=to)
     elif a.action == "pickup":
         M.pick_up(g, e, a.item)
+    elif a.action == "stash":
+        if not a.to:
+            raise RuleError("item stash <who> <item-id> --to <container-id> [--qty N]  (see `map container`)")
+        M.stash_item(g, e, a.item, a.to, a.qty)
     elif a.action == "floor-record":
         # beta fix: put an item that was dropped before floor tracking existed onto the map — only if the log shows that drop
         line = f"{e['name']}: {a.qty}× {a.item} dropped."
@@ -987,7 +1083,7 @@ def cmd_item(g, a):
     elif a.action == "identify":
         # the Identify spell (cast it first), or the DM confirming another in-world way (a sage, a clear clue, a potion taste)
         if not a.how:
-            raise RuleError('item identify <who> <item> --how "Identify spell (Tobias)" | "tasted it" | ... (a Short Rest: `rest short --focus who:item`)')
+            raise RuleError('item identify <who> <item> --how "Identify spell (cast by wren)" | "tasted it" | ... (a Short Rest: `rest short --focus who:item`)')
         M.identify_item(g, e, a.item, a.how)
     elif a.action == "obscure":
         # beta repair / DM: mark a magic item the characters don't actually understand yet as unidentified
@@ -1226,14 +1322,20 @@ def cmd_map(g, a):
     elif a.action == "set":
         m = s["maps"][a.target]
         k, _, v = a.kv.partition("=")
-        if k not in ("name", "lighting", "fog", "theme"):
-            raise RuleError("map set name=...|lighting=bright|dim|dark|fog=true|false|theme=" + "|".join(render.THEMES))
+        styles = {"walls": render.WALL_STYLES, "floor": render.FINE_STYLES, "wood": render.WOOD_STYLES, "stone": render.STONE_STYLES}
+        if k not in ("name", "lighting", "fog", "theme", "accent", *styles):
+            raise RuleError("map set name=...|lighting=bright|dim|dark|fog=true|false|theme=" + "|".join(render.THEMES) +
+                            "|" + "|".join(f"{s}={'/'.join(o)}" for s, o in styles.items()) + "|accent=#rrggbb")
+        if k in styles and v not in styles[k]:
+            raise RuleError(f"{k}: " + "|".join(styles[k]))
+        if k == "accent" and not re.fullmatch(r"#[0-9a-fA-F]{6}", v):
+            raise RuleError("accent: a colour like #c9a14a")
         val = v if k != "fog" else v.lower() == "true"
         if k == "lighting" and v not in ("bright", "dim", "dark"):
             raise RuleError("lighting: bright|dim|dark")
         if k == "theme" and v not in render.THEMES:
             raise RuleError("theme: " + "|".join(render.THEMES))
-        g.emit("map.set", id=m["id"], set={k: val})
+        g.emit("map.set", id=m["id"], set={(f"style_{k}" if k in styles else k): val})
         if k in ("lighting", "fog"):
             _reveal_pcs_on(g, m["id"])
     elif a.action == "party":
@@ -1282,6 +1384,35 @@ def cmd_map(g, a):
                 pois = [q for q in pois if q["id"] != p["id"]]
                 g.say(f"📍 {p['name']} is no longer on {m['name']} — {a.reason}. (Its journal entry remains.)", kind="map")
             g.emit("map.set", id=m["id"], set={"pois": pois})
+    elif a.action in ("container", "container-remove"):
+        # a tile that holds things: a chest, a strongbox, a hidden cache. Items stashed there are listed inside it.
+        m = s["maps"].get(a.target)
+        if not m:
+            raise RuleError(f"No map '{a.target}'.")
+        boxes = [dict(c) for c in m.get("containers", [])]
+        if a.action == "container":
+            if not a.at or not a.name:
+                raise RuleError('map container <map> x,y --name "Miller\'s chest" [--text "what it looks like"] [--id chest-1]')
+            x, y = xy(a.at)
+            if any((c["x"], c["y"]) == (x, y) for c in boxes):
+                raise RuleError(f"There's already a container at ({x},{y}).")
+            n = 1
+            while any(c["id"] == f"box-{n}" for c in boxes):
+                n += 1
+            box = {"id": a.id or f"box-{n}", "x": x, "y": y, "name": a.name, "text": a.text or ""}
+            # anything already lying on that tile goes into it
+            floor = [dict(f, **({"in": box["id"]} if (f["x"], f["y"]) == (x, y) and not f.get("in") else {})) for f in m.get("floor", [])]
+            g.emit("map.set", id=m["id"], set={"containers": boxes + [box], "floor": floor})
+            inside = sum(1 for f in floor if f.get("in") == box["id"])
+            g.say(f"🧰 {box['name']} at ({x},{y}) on {m['name']}" + (f", holding {inside} item(s) already there" if inside else "") + ".",
+                  kind="map")
+        else:
+            box = next((c for c in boxes if c["id"] == a.id), None)
+            if not box or not a.reason:
+                raise RuleError("map container-remove <map> --id box-1 --reason \"...\"  (its items stay on the floor)")
+            floor = [{k: v for k, v in f.items() if not (k == "in" and v == box["id"])} for f in m.get("floor", [])]
+            g.emit("map.set", id=m["id"], set={"containers": [c for c in boxes if c["id"] != box["id"]], "floor": floor})
+            g.say(f"🧰 {box['name']} is gone from {m['name']} — {a.reason}. Its contents are left on the floor.", kind="map")
     elif a.action == "label":
         m = s["maps"][a.target]
         x, y = xy(a.at)
@@ -1636,12 +1767,31 @@ def cmd_fx(g, a):
     g.say(f"🎞 {what}", kind="fx", **cue)
 
 
+def _anchor(g, ref):
+    """The creature a line belongs to (id, full name or first name; the current map's creatures first), if the players
+    can see it: its token gets the speech bubble or caption on the live table."""
+    if not ref:
+        return None
+    ents = list(g.entities.values())
+    here = (g.state.get("view") or {}).get("map")
+    ents.sort(key=lambda e: 0 if (e.get("token") or {}).get("map") == here else 1)
+    norm = lambda s: re.sub(r"[\s\-_']+", " ", s.strip().lower())  # noqa: E731  ('jory-brannock' == 'Jory Brannock')
+    r = norm(ref)
+    e = (g.entities.get(ref) or next((e for e in ents if norm(e["name"]) == r), None)
+         or next((e for e in ents if norm(e["name"]).split()[0] == r.split()[0]), None))
+    return e["id"] if e and not e.get("hidden") and e.get("token") else None
+
+
 def cmd_say(g, a):
     text = " ".join(a.text)
     if a.speaker:
-        g.say(f"“{text}”", kind="speech", speaker=a.speaker)
+        who = _anchor(g, a.speaker)
+        g.say(f"“{text}”", kind="speech", speaker=a.speaker, **({"who": who} if who else {}))
     else:
-        g.say(text, kind="narration")
+        who = _anchor(g, a.at)
+        if a.at and not who:
+            g.note(f"  (no visible token for '{a.at}': the line shows in the story strip only)")
+        g.say(text, kind="narration", **({"who": who} if who else {}))
 
 
 def cmd_scene(g, a):
@@ -1972,7 +2122,7 @@ def build_parser():
     c = sp.add_parser("session", help="start|end")
     c.add_argument("action", choices=["start", "end"])
 
-    c = sp.add_parser("char", help="roll-stats|create|levelup|catch-up|bio|show|inspire|use-inspiration|remove")
+    c = sp.add_parser("char", help="roll-stats|create|levelup|catch-up|masteries|leave|rejoin|bio|show|inspire|use-inspiration|remove")
     c.add_argument("action")
     c.add_argument("args", nargs="*")
     for opt in ("name", "player", "species", "background", "method", "scores", "bonus", "skills", "languages", "equipment",
@@ -1996,7 +2146,7 @@ def build_parser():
     c.add_argument("text", nargs="?")
     c.add_argument("--title")
 
-    c = sp.add_parser("npc", help="add <srd-monster>|reveal|hide|remove|rename|side|show|lore")
+    c = sp.add_parser("npc", help="add <srd-monster>|reveal|hide|leave|return|remove|rename|side|show|describe|lore|alignment")
     c.add_argument("action")
     c.add_argument("what")
     c.add_argument("--text", help="npc lore: public knowledge about the creature")
@@ -2025,7 +2175,7 @@ def build_parser():
     c = sp.add_parser("stand")
     c.add_argument("who")
 
-    c = sp.add_parser("combat", help="start|next|end|add|remove|status")
+    c = sp.add_parser("combat", help="start|next|end|add|remove|status|swap (Alert: combat swap kit,wren)")
     c.add_argument("action")
     c.add_argument("ids", nargs="?")
     c.add_argument("--surprised")
@@ -2040,6 +2190,7 @@ def build_parser():
     c.add_argument("--skill")
     c.add_argument("--dc", type=int)
     c.add_argument("--note")
+    c.add_argument("--prone", action="store_true", help="shove: knock Prone instead of pushing 5 ft")
 
     c = sp.add_parser("attack", help="weapon / monster attack, fully resolved")
     c.add_argument("attacker")
@@ -2171,7 +2322,7 @@ def build_parser():
     c.add_argument("--to")
     c.add_argument("--map")
 
-    c = sp.add_parser("item", help="add|remove|drop|sell|give|equip|unequip|attune|unattune|use|light|note|unpack|identify|obscure|refresh|recover-ammo|card")
+    c = sp.add_parser("item", help="add|remove|drop|stash|pickup|sell|give|equip|unequip|attune|unattune|use|light|note|unpack|identify|obscure|refresh|recover-ammo|card")
     c.add_argument("action")
     c.add_argument("who")
     c.add_argument("item")
@@ -2205,7 +2356,7 @@ def build_parser():
     c.add_argument("--hidden", action="store_true")
     c.add_argument("--override")
 
-    c = sp.add_parser("map", help="gen|list|show|reveal|hide|door|feature|crop|paint|set|party|label|poi|poi-move|poi-remove|from-image|render|ascii")
+    c = sp.add_parser("map", help="gen|list|show|reveal|hide|door|feature|crop|paint|set|party|label|poi|poi-move|poi-remove|container|container-remove|from-image|render|ascii")
     c.add_argument("action")
     c.add_argument("target", nargs="?")
     c.add_argument("at", nargs="?")
@@ -2265,6 +2416,7 @@ def build_parser():
     c = sp.add_parser("say", help="narration or NPC speech to the viewer feed")
     c.add_argument("text", nargs="+")
     c.add_argument("--as", dest="speaker")
+    c.add_argument("--at", dest="at", help="narration about a creature (id or name): shown by its token on the table")
     c = sp.add_parser("scene", help="set the scene banner in the viewer")
     c.add_argument("title")
     c.add_argument("--desc")
@@ -2325,7 +2477,8 @@ READ_ONLY = {"status", "audit", "log"}
 
 
 def main(argv=None):
-    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    if hasattr(sys.stdout, "reconfigure"):  # (not when a test runs the CLI in-process with captured output)
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     argv = sys.argv[1:] if argv is None else argv
     # `coins kira -5sp`: a negative amount looks like an option to argparse; pass it as a value instead
     argv = [f"={x}" if i and argv[0] == "coins" and re.match(r"^-\d", x) else x for i, x in enumerate(argv)]

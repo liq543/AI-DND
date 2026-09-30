@@ -485,6 +485,7 @@
     if (c.k === "turn") return s.turns !== "off" || s.camera !== "off";
     if (c.k === "combat") return s.turns !== "off";
     if (c.k === "die") return s.dice !== "off";
+    if (c.k === "speech" || c.k === "narration") return !!window.TableStory;   // the story plays in order with the action
     return c.k === "fx";
   }
   async function handle(c, i, list) {
@@ -502,6 +503,7 @@
       case "combat": return doCombat(c);
       case "die": return dice(c.rolls);
       case "fx": return doFx(c);
+      case "speech": case "narration": return wait(window.TableStory.live(c));
     }
   }
   async function loop() {

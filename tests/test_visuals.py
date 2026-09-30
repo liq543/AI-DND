@@ -3,6 +3,7 @@ live table receives. Cues must never show what the players can't see.
 
 Run:  python -m unittest discover -s tests -v
 """
+import _cli  # noqa: E402  (in-process CLI runner)
 import json
 import os
 import shutil
@@ -55,6 +56,20 @@ class ArtUnitTest(unittest.TestCase):
         self.assertEqual(L["hair_style"], "braid")
         self.assertTrue(L["eye_glow"])
         self.assertEqual(L["headwear"], "hood")
+
+    def test_headwear_needs_the_whole_word(self):
+        for text in ("A clerk, fifty crowns richer.", "The captain's cape snaps in the wind.", "She climbs out of the hatch."):
+            self.assertNotIn(art.read_description(text).get("headwear"), ("crown", "hat"), text)
+        self.assertEqual(art.read_description("A tarnished crown on his brow.")["headwear"], "crown")
+        self.assertEqual(art.read_description("Two battered caps.")["headwear"], "hat")
+        self.assertEqual(art.read_description("Sixty, grey hair wild and loose.")["age"], "old")
+
+    def test_body_scars_and_spectacles(self):
+        self.assertNotIn("scars", art.read_description("A thin white scar across his left palm, scarred knuckles."))
+        self.assertEqual(art.read_description("A duelling scar through one eyebrow.")["scars"][0]["where"], "eye")
+        L = art.look_of(self.pc(bio={"appearance": "Half-moon spectacles and a silver eyepatch over his left eye."}))
+        self.assertEqual((L["spectacles"], L["eyepatch"], L["eyepatch_color"]), ("half-moon", "left", "#c9cdd2"))
+        self.assertIn("<svg", art.portrait_svg(self.pc(bio={"appearance": "round spectacles"})))
 
     def test_worn_armor_sets_the_outfit(self):
         e = self.pc(inventory=[{"kind": "armor", "equipped": True, "category": "heavy", "name": "Plate Armor"}])
@@ -120,8 +135,7 @@ class VisualsCliTest(unittest.TestCase):
 
     @classmethod
     def run_engine(cls, *args):
-        p = subprocess.run([sys.executable, "-m", "engine", *args], cwd=ROOT, env=cls.env, capture_output=True, text=True, encoding="utf-8")
-        return p.returncode, p.stdout + p.stderr
+        return _cli.run(cls.env, *args)
 
     @classmethod
     def ok(cls, *args):
@@ -135,13 +149,7 @@ class VisualsCliTest(unittest.TestCase):
         return out
 
     def game(self):
-        from importlib import reload
-        os.environ.update({k: v for k, v in self.env.items() if k.startswith("DND_")})
-        import engine.store as st
-        reload(st)
-        import engine.core as core
-        reload(core)
-        return core.Game(st.active_dir())
+        return _cli.game(self.env)
 
     def view(self):
         from engine import views
@@ -191,23 +199,103 @@ class VisualsCliTest(unittest.TestCase):
             self.assertFalse(any(c.get("who") == "lurker" or c.get("target") == "lurker" for c in cues))
             self.assertFalse(any((c.get("at") or {}) == {"id": "lurker"} for c in cues if c["k"] == "fx"))
             self.assertTrue(any(c["k"] == "combat" and c.get("phase") == "start" for c in cues))
-            self.assertTrue(any(c["k"] == "turn" for c in cues))
+            from engine import mechanics as M
+            g = self.game()
+            if not g.get(M.current_id(g)).get("hidden"):  # a hidden creature's turn is (rightly) not announced
+                self.assertTrue(any(c["k"] == "turn" for c in cues))
             self.assertIn("art", v["party"][0])
             self.assertTrue(all("art" in i for i in v["party"][0]["inventory"]))
         finally:
             self.ok("combat", "end")
 
+    def test_story_lines_anchor_to_visible_tokens(self):
+        self.ok("place", "kira", "5,5", "--map", "arena")
+        self.ok("say", "--as", "Kira", "Stay behind me.")
+        self.ok("say", "--at", "snag", "The goblin edges toward the door.")
+        self.ok("say", "--at", "lurker", "Something moves in the dark.")     # hidden: no anchor, no leak
+        cues = [c for c in self.view()["cues"] if c["k"] in ("speech", "narration")][-3:]
+        self.assertEqual((cues[0]["k"], cues[0]["who"]), ("speech", "kira"))
+        self.assertEqual((cues[1]["k"], cues[1]["who"]), ("narration", "snag"))
+        self.assertIsNone(cues[2]["who"])
+        self.assertTrue(all(c.get("ts") for c in cues))
+        self.ok("say", "--at", "kira-vale", "Kira checks her straps.")        # a hyphenated name finds its token too
+        self.assertEqual([c for c in self.view()["cues"] if c["k"] == "narration"][-1]["who"], "kira")
+
+    def test_token_names_are_readable_and_never_overlap(self):
+        from engine import render
+        sl = lambda n: render.short_label({"name": n, "id": "x"})  # noqa: E731
+        self.assertEqual([sl("Old Brenna Holt"), sl("The Lamplighter"), sl("Goblin Warrior B"), sl("Stone Guardian (east)"),
+                          sl("Oswin Hale (Night Clerk)"), sl("Captain Rhosk"), sl("Kira Vale")],
+                         ["Brenna", "Lamplighter", "Warrior B", "Guardian E", "Oswin", "Rhosk", "Kira"])
+        # four creatures shoulder to shoulder, and a block of nine: no two name tags may overlap
+        for layout in ([(x, 5) for x in range(4)], [(x, y) for x in range(3) for y in range(3)]):
+            toks = []
+            for i, (x, y) in enumerate(layout):
+                e = {"id": f"t{i}", "name": f"Longname Person{i}", "kind": "pc", "token": {"x": x, "y": y}}
+                toks.append((e, x * 32 + 16, y * 32 + 16, 16))
+            placed = render._layout_labels(toks, 32)
+            boxes = [(lx - w / 2, ly - 8.5, lx + w / 2, ly + 2.5) for _, lx, ly, w in placed.values()]
+            for i, a in enumerate(boxes):
+                for b in boxes[i + 1:]:
+                    self.assertFalse(a[0] < b[2] and a[2] > b[0] and a[1] < b[3] and a[3] > b[1], (layout, a, b))
+
+    def test_containers_and_stacked_floor_items(self):
+        from engine import views
+        self.ok("place", "kira", "5,5", "--map", "arena")
+        self.ok("item", "add", "kira", "Torch", "--qty", "2", "--source", "found: a sconce")
+        self.ok("item", "add", "kira", "Rope", "--source", "found: a peg")
+        inv = self.game().get("kira")["inventory"]
+        torch = next(i["id"] for i in inv if i["name"] == "Torch")
+        rope = next(i["id"] for i in inv if i["name"].startswith("Rope"))
+        self.ok("item", "drop", "kira", torch)                 # two different items on one tile
+        self.ok("item", "drop", "kira", rope)
+        m = self.view()["maps"]["arena"]
+        self.assertEqual(sum(1 for f in m["floor"] if (f["x"], f["y"]) == (5, 5)), 2)
+        svg = views.map_svg(self.game(), "arena", "player")
+        self.assertEqual(svg.count('data-tile="5,5"'), 1)      # one marker for the tile, not one per item
+        # turning the tile into a chest puts what's already there inside it
+        self.ok("map", "container", "arena", "5,5", "--name", "Old sea-chest", "--id", "chest-t")
+        m = self.view()["maps"]["arena"]
+        self.assertEqual(m["containers"][0]["name"], "Old sea-chest")
+        self.assertTrue(all(f["in"] == "chest-t" for f in m["floor"] if (f["x"], f["y"]) == (5, 5)))
+        self.ok("item", "add", "kira", "Torch", "--source", "found: another sconce")
+        torch2 = next(i["id"] for i in self.game().get("kira")["inventory"] if i["name"] == "Torch")
+        self.ok("item", "stash", "kira", torch2, "--to", "chest-t")
+        self.assertEqual(sum(1 for f in self.view()["maps"]["arena"]["floor"] if f.get("in") == "chest-t"), 3)
+        self.assertIn('data-box="chest-t"', views.map_svg(self.game(), "arena", "player"))
+        self.rule("item", "stash", "kira", "longsword-1", "--to", "nope")
+        for f in [f for f in self.game().state["maps"]["arena"]["floor"] if (f["x"], f["y"]) == (5, 5)]:
+            self.ok("item", "pickup", "kira", f["id"])
+        self.ok("map", "container-remove", "arena", "--id", "chest-t", "--reason", "test cleanup")
+
+    def test_creatures_who_leave_keep_their_faces(self):
+        self.ok("npc", "add", "commoner", "--name", "Oswin Hale", "--at", "8,8", "--map", "arena")
+        self.ok("npc", "add", "bandit", "--name", "Never Seen", "--hidden", "--at", "9,9", "--map", "arena")
+        try:
+            self.ok("say", "--as", "Oswin Hale", "I'm off, then.")
+            self.ok("npc", "hide", "oswin-hale")                    # he walks off the table
+            from engine import views
+            off = {o["id"] for o in self.view()["offstage"]}
+            self.assertIn("oswin-hale", off)
+            self.assertNotIn("never-seen", off)
+            g = self.game()
+            self.assertTrue(views.seen_by_players(g, g.get("oswin-hale")))
+            self.assertFalse(views.seen_by_players(g, g.get("never-seen")))
+        finally:
+            self.ok("npc", "remove", "oswin-hale")
+            self.ok("npc", "remove", "never-seen")
+
+    def test_renaming_a_hidden_creature_stays_secret(self):
+        self.ok("npc", "add", "bandit", "--name", "Captain Rhosk", "--hidden", "--at", "3,3")
+        try:
+            self.ok("npc", "rename", "captain-rhosk", "--name", "A Hooded Stranger")
+            self.assertFalse(any("Rhosk" in (f.get("text") or "") for f in self.view()["feed"]))
+        finally:
+            self.ok("npc", "remove", "captain-rhosk")
+
     def test_server_serves_art(self):
-        from importlib import reload
-        os.environ.update({k: v for k, v in self.env.items() if k.startswith("DND_")})
-        import engine.store as st
-        reload(st)
-        import engine.core as core
-        reload(core)
-        import engine.views as views
-        reload(views)
+        _cli.point_at(self.env)
         import engine.server as server
-        reload(server)
         httpd = server.ThreadingHTTPServer(("127.0.0.1", 0), server.Handler)
         threading.Thread(target=httpd.serve_forever, daemon=True).start()
         base = f"http://127.0.0.1:{httpd.server_address[1]}"
@@ -222,6 +310,16 @@ class VisualsCliTest(unittest.TestCase):
                 urllib.request.urlopen(base + "/api/art/face/lurker.svg")      # hidden creatures stay hidden
             live_map = urllib.request.urlopen(base + "/api/map/arena.svg").read().decode()
             self.assertTrue("/api/art/face/kira.svg" in live_map, "live map tokens use generated faces")
+            # an item on the floor (or in a container) has an info card too
+            self.ok("place", "kira", "5,5", "--map", "arena")
+            self.ok("item", "add", "kira", "Crowbar", "--source", "found: a toolbox")
+            bar = next(i["id"] for i in self.game().get("kira")["inventory"] if i["name"] == "Crowbar")
+            self.ok("item", "drop", "kira", bar)
+            fl = next(f["id"] for f in self.game().state["maps"]["arena"]["floor"] if f["item"]["name"] == "Crowbar")
+            card = json.loads(urllib.request.urlopen(f"{base}/api/item/floor~arena/{fl}").read())
+            self.assertEqual(card["name"], "Crowbar")
+            self.assertTrue(well_formed(urllib.request.urlopen(f"{base}/api/art/floor/arena/{fl}.svg").read().decode()))
+            self.ok("item", "pickup", "kira", fl)
         finally:
             httpd.shutdown()
 

@@ -2,18 +2,18 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 1 · **In-world time:** Day 2, 02:48 · **Mode:** exploration
-**Current map:** The Undercroft Stores (`stores`) · **Events:** 3235 · **Log head:** `32e78a6a9f88b994`
+**Session:** 2 · **In-world time:** Day 3, 10:52 · **Mode:** exploration
+**Current map:** The Rosewater Baths (`rosewater`) · **Events:** 4899 · **Log head:** `de5f40bb3101a496`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=3
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 3 | 27/27 | 14 | — | — | stores (9,12) |
-| Hedda Vask (`hedda`) | 3 | 34/34 | 17 | — | — | stores (7,13) |
-| Tobias Fenwick (`tobias`) | 3 | 23/23 | 11 | — | L1:4/4 L2:2/2 | stores (9,13) |
-| Sera Lark (`sera`) | 3 | 21/21 | 13 | — | L1:0/4 L2:0/2 | stores (8,13) |
+| Kit Corvell (`kit`) | 3 | 27/27 | 14 | — | — | rosewater (17,20) |
+| Hedda Vask (`hedda`) | 3 | 34/34 | 17 | — | — | sluice (5,9) |
+| Tobias Fenwick (`tobias`) | 3 | 23/23 | 11 | — | L1:1/4 L2:2/2 | sluice (5,9) |
+| Sera Lark (`sera`) | 3 | 21/21 | 13 | — | L1:3/4 L2:2/2 | rosewater (18,20) |
 
 ## Other creatures (DM view)
 
@@ -21,16 +21,16 @@
 |---|---|---|---|---|---|---|
 | Dorothea Quill (`dorothea-quill`, commoner) | neutral | 4/4 | 10 | prone | chapel (8,3) |  |
 | Commoner A (`commoner-a`, commoner) | neutral | 4/4 | 10 | — | chapel (17,6) |  |
-| Sergeant Varga (`sergeant-varga`, warrior-veteran) | enemy | 15/65 | 17 | restrained, blinded | sluice (12,7) |  |
+| Sergeant Varga (`sergeant-varga`, warrior-veteran) | enemy | 15/65 | 17 | restrained, blinded | sluice (5,9) | yes |
 | Warden-blade A (`warden-blade-a`, animated-flying-sword) | enemy | 0/14 | 17 | — · DEAD | chapel (6,3) |  |
 | Warden-blade B (`warden-blade-b`, animated-flying-sword) | enemy | 0/14 | 17 | — · DEAD | chapel (8,4) |  |
 | Ferro (`ferro`, commoner) | neutral | 0/4 | 10 | — · DEAD | heron (5,13) |  |
 | Valentin Crane (`valentin-crane`, spy) | neutral | 0/27 | 12 | — · DEAD | heronlow (23,9) |  |
-| Bruno (`heron-bruiser-a`, tough) | ally | 32/32 | 12 | — | sluice (14,7) |  |
+| Bruno (`heron-bruiser-a`, tough) | ally | 32/32 | 12 | — | sluice (3,9) | yes |
 | Ilse (`heron-bruiser-b`, tough) | neutral | 0/32 | 12 | — · DEAD | heronlow (22,9) |  |
 | Gambler A (`gambler-a`, commoner) | neutral | 0/4 | 10 | — · DEAD | heron (16,15) |  |
 | Gambler B (`gambler-b`, commoner) | neutral | 0/4 | 10 | — · DEAD | heron (29,15) |  |
-| Old Mags Pritchard (`old-mags-pritchard`, guard) | ally | 11/11 | 16 | — | sluice (15,8) |  |
+| Old Mags Pritchard (`old-mags-pritchard`, guard) | ally | 11/11 | 16 | — | sluice (5,9) | yes |
 | Collector-Lieutenant Brask (`collector-lieutenant-brask`, bandit-captain) | enemy | 0/52 | 15 | — · DEAD | heronlow (21,9) |  |
 | The Chandler (`the-chandler`, commoner) | neutral | 4/4 | 10 | invisible | tallow (13,5) |  |
 | Brass Warden (east) (`brass-warden-east`, animated-armor) | neutral | 33/33 | 18 | — | meridian (22,4) |  |
@@ -41,6 +41,17 @@
 | Night Warden A (`night-warden-a`, guard) | enemy | 11/11 | 16 | — | meridian (16,12) | yes |
 | Night Warden B (`night-warden-b`, guard) | enemy | 11/11 | 16 | — | meridian (5,9) | yes |
 | Night Warden C (`night-warden-c`, guard) | enemy | 11/11 | 16 | — | meridian (28,10) | yes |
+| The Lamplighter (`the-lamplighter`, commoner) | neutral | 4/4 | 10 | — | lampwick (22,8) |  |
+| Wynn Dane (`wynn-dane`, commoner) | neutral | 4/4 | 10 | — | lampwick (15,3) |  |
+| Old Aggie Dunnock (`old-aggie-dunnock`, bandit) | neutral | 0/11 | 12 | — · DEAD | sluice (24,15) |  |
+| Wat Dunnock (`wat-dunnock`, bandit) | neutral | 0/11 | 12 | unconscious, restrained · DEAD | sluice (16,10) |  |
+| Col Dunnock (`col-dunnock`, bandit) | neutral | 0/11 | 12 | restrained · DEAD | sluice (14,15) |  |
+| Hal Brannock (`lighterman`, commoner) | neutral | 4/4 | 10 | — | bellwater (13,12) | yes |
+| Jory Brannock (`lightermans-son`, commoner) | neutral | 4/4 | 10 | — | bellwater (17,12) | yes |
+| Rosewater Doorman (`rosewater-doorman`, commoner) | neutral | 4/4 | 10 | — | rosewater (15,17) | yes |
+| Flower Seller (`flower-seller`, commoner) | neutral | 4/4 | 10 | — | bellwater (6,4) |  |
+| Lettie (`rosewater-attendant`, commoner) | neutral | 4/4 | 10 | — | rosewater (30,16) |  |
+| Departing Gentleman (`departing-gentleman`, noble) | neutral | 9/9 | 15 | — | rosewater (5,17) | yes |
 
 ## Maps (exact current contents — tokens and items stay where they were left)
 
@@ -74,21 +85,33 @@
 - doors: (4,4) closed, (13,4) closed, (26,4) closed
 - labels: Chandler's shop (9,1), Stair to Mags's room (15,2), Alley (21,1), Cinderwharf Cut (canal) (11,15), Collectors' skiff (5,14)
 
-### The Sluice House (`sluice`, wilderness 30×20, lighting dim)
-- Bruno (`heron-bruiser-a`, ally) at (14,7) — 32/32 HP
-- Old Mags Pritchard (`old-mags-pritchard`, ally) at (15,8) — 11/11 HP
-- Sergeant Varga (`sergeant-varga`, enemy) at (12,7) — 15/65 HP · restrained, blinded
-- item on floor `floor-3`: 1× Pistol at (13,5) — dropped by Kit Corvell
-- item on floor `floor-4`: 1× Firearm Bullets (6) at (13,5) — dropped by Kit Corvell
-- item on floor `floor-5`: 1× Scimitar at (13,5) — dropped by Kit Corvell
-- item on floor `floor-6`: 1× Shortsword at (13,5) — dropped by Kit Corvell
-- item on floor `floor-7`: 1× Warrant for Questioning at (13,5) — dropped by Kit Corvell
-- item on floor `floor-8`: 1× Sealed Note (L.V.) at (13,5) — dropped by Kit Corvell
-- item on floor `floor-9`: 1× Deed to the Gilded Heron at (13,5) — dropped by Kit Corvell
-- item on floor `floor-10`: 1× Crane's Promissory Note at (13,5) — dropped by Kit Corvell
-- item on floor `floor-11`: 1× Key to the Carrow Theatre at (13,5) — dropped by Kit Corvell
+### The Sluice House (`sluice`, wilderness 30×20, lighting bright)
+- Hedda Vask (`hedda`, pc) at (5,9) — 34/34 HP · hidden
+- Tobias Fenwick (`tobias`, pc) at (5,9) — 23/23 HP · hidden
+- Bruno (`heron-bruiser-a`, ally) at (3,9) — 32/32 HP · hidden
+- Col Dunnock (`col-dunnock`, neutral) at (14,15) — DEAD · restrained
+- Old Aggie Dunnock (`old-aggie-dunnock`, neutral) at (24,15) — DEAD
+- Old Mags Pritchard (`old-mags-pritchard`, ally) at (5,9) — 11/11 HP · hidden
+- Sergeant Varga (`sergeant-varga`, enemy) at (5,9) — 15/65 HP · restrained, blinded · hidden
+- Wat Dunnock (`wat-dunnock`, neutral) at (16,10) — DEAD · unconscious, restrained
+- container `stash-mill`: The crew's stash (miller's room) at (13,5)
+- in The crew's stash (miller's room) (`stash-mill`) `floor-3`: 1× Pistol at (13,5) — dropped by Kit Corvell
+- in The crew's stash (miller's room) (`stash-mill`) `floor-4`: 1× Firearm Bullets (6) at (13,5) — dropped by Kit Corvell
+- in The crew's stash (miller's room) (`stash-mill`) `floor-5`: 1× Scimitar at (13,5) — dropped by Kit Corvell
+- in The crew's stash (miller's room) (`stash-mill`) `floor-6`: 1× Shortsword at (13,5) — dropped by Kit Corvell
+- in The crew's stash (miller's room) (`stash-mill`) `floor-7`: 1× Warrant for Questioning at (13,5) — dropped by Kit Corvell
+- in The crew's stash (miller's room) (`stash-mill`) `floor-8`: 1× Sealed Note (L.V.) at (13,5) — dropped by Kit Corvell
+- in The crew's stash (miller's room) (`stash-mill`) `floor-9`: 1× Deed to the Gilded Heron at (13,5) — dropped by Kit Corvell
+- in The crew's stash (miller's room) (`stash-mill`) `floor-10`: 1× Crane's Promissory Note at (13,5) — dropped by Kit Corvell
+- in The crew's stash (miller's room) (`stash-mill`) `floor-11`: 1× Key to the Carrow Theatre at (13,5) — dropped by Kit Corvell
+- item on floor `floor-1`: 1× Rope at (20,14) — dropped by Kit Corvell
+- in The crew's stash (miller's room) (`stash-mill`) `floor-12`: 1× Lantern Watch Tabard at (13,5) — dropped by Kit Corvell
+- in The crew's stash (miller's room) (`stash-mill`) `floor-13`: 1× Smugglers' Tobacco Tin at (13,5) — dropped by Kit Corvell
+- in The crew's stash (miller's room) (`stash-mill`) `floor-14`: 3× Cask of Ironmoor Brandy at (13,5) — dropped by Kit Corvell
+- in The crew's stash (miller's room) (`stash-mill`) `floor-15`: 5× Lantern Watch Tabard at (13,5) — dropped by Kit Corvell
 - point of interest `poi-1`: The candle stub at (14,12) → journal j23
-- doors: (20,3) closed, (16,6) open, (17,13) open, (23,16) closed
+- point of interest `poi-3`: The smugglers' cache at (13,15) → journal j43
+- doors: (20,3) closed, (16,6) open, (17,13) open, (14,14) open, (23,16) closed
 - labels: Tide channel to Cinderwharf (2,10), Mill race (13,9), Jammed waterwheel (18,11), Sluice gate (rusted shut) (27,11), Miller's room (12,5), Grinding floor (20,6), Stair to loft (24,5), Sack store (12,12), Eel-trap room (21,13)
 
 ### The Meridian — Public Galleries (`meridian`, interior 36×25, lighting dark)
@@ -112,18 +135,14 @@
 - point of interest `poi-1`: The Receiving Ledger at (19,3) → journal j28
 - point of interest `poi-2`: The culvert grate at (7,17) → journal j34
 - point of interest `poi-3`: The iron stores door (Pim's keys) at (4,1) → journal j29
-- doors: (4,1) open, (7,17) closed
+- doors: (4,1) closed, (7,17) closed
 - labels: Channel (12,8), Turning basin (5,9), Ledger desk (19,2), Stair to watch-room (25,1), Lift to the museum (12,0), Iron door: Undercroft stores (4,0), Seized relics (14,16), Portcullis (raised) (28,9), Culvert grate (7,16), Culvert grate (loosened) (8,17)
 
 ### The Undercroft Stores (`stores`, dungeon 26×18, lighting dark)
-- Hedda Vask (`hedda`, pc) at (7,13) — 34/34 HP
-- Kit Corvell (`kit`, pc) at (9,12) — 27/27 HP
-- Sera Lark (`sera`, pc) at (8,13) — 21/21 HP
-- Tobias Fenwick (`tobias`, pc) at (9,13) — 23/23 HP
 - point of interest `poi-1`: The Statue in Cage Five at (20,8) → journal j36
 - point of interest `poi-2`: Weapon racks (Cage Three) at (4,12) → journal j35
 - point of interest `poi-3`: The Carrow crates at (19,3) → journal j30
-- doors: (10,3) closed, (15,3) open, (10,8) closed, (15,8) open, (10,13) open, (15,13) closed, (12,17) closed
+- doors: (10,3) closed, (15,3) closed, (10,8) closed, (15,8) closed, (10,13) closed, (15,13) closed, (12,17) closed
 - labels: Cage 1 (5,1), Cage 2 (5,6), Cage 3 (5,11), Cage 4 (20,1), Cage 5 (20,6), Cage 6 (20,11), Stair down (the Curator's door) (23,0), Iron door to the dock (12,17)
 
 ### The Curator's Stair (`cstair`, dungeon 10×9, lighting dark)
@@ -131,21 +150,55 @@
 - doors: (5,7) closed
 - labels: Up to Cage Four (1,0), The Curator's door (5,8), Pillar (old ward-glyphs) (6,2)
 
+### Lampwick Row (`lampwick`, battle 30×15, lighting bright)
+- The Lamplighter (`the-lamplighter`, neutral) at (22,8) — 4/4 HP
+- Wynn Dane (`wynn-dane`, neutral) at (15,3) — 4/4 HP
+- point of interest `poi-1`: Wanted poster at (5,8) → journal j38
+- point of interest `poi-2`: Emeric Dane's portrait at (16,1) → journal j40
+- doors: (3,4) closed, (9,4) closed, (15,4) closed, (22,4) closed, (27,4) closed
+- labels: The Dane house (14,2), Footbridge (5,11), Lampwick Cut (canal) (15,11), Lampwick Row (15,6)
+
+### The Gallowmere Flats - the Cinderwharf channel (`flats`, wilderness 32×16, lighting bright)
+- point of interest `poi-1`: A laden barge at (21,7) → journal j45
+- labels: Cinderwharf channel (16,8), Eel-staithe (jetty) (20,3), Mudbank from the Sluice House (1,3), Toward Cinderwharf (30,2)
+
+### The Bellwater Steps and Rosewater Lane (`bellwater`, battle 30×15, lighting bright)
+- Flower Seller (`flower-seller`, neutral) at (6,4) — 4/4 HP
+- Hal Brannock (`lighterman`, neutral) at (13,12) — 4/4 HP · hidden
+- Jory Brannock (`lightermans-son`, neutral) at (17,12) — 4/4 HP · hidden
+- point of interest `poi-1`: The Rosewater Baths at (15,2) → journal j46
+- doors: (15,2) closed, (16,2) closed, (4,5) closed, (25,5) closed, (6,8) closed, (23,8) closed
+- labels: The Rosewater Baths (15,1), Bellwater Steps (15,10), Rosewater Lane (uphill) (15,6), Bellwater Cut (15,12)
+
+### The Rosewater Baths (`rosewater`, interior 36×22, lighting bright)
+- Kit Corvell (`kit`, pc) at (17,20) — 27/27 HP
+- Sera Lark (`sera`, pc) at (18,20) — 21/21 HP
+- Departing Gentleman (`departing-gentleman`, neutral) at (5,17) — 9/9 HP · hidden
+- Lettie (`rosewater-attendant`, neutral) at (30,16) — 4/4 HP
+- Rosewater Doorman (`rosewater-doorman`, neutral) at (15,17) — 4/4 HP · hidden
+- point of interest `poi-1`: Gentlemen's changing room at (3,15) → journal j47
+- point of interest `poi-2`: Ladies' changing room at (30,15) → journal j48
+- point of interest `poi-3`: Staff door at (34,15) → journal j49
+- point of interest `poi-4`: The Nymph Fountain at (17,17) → journal j50
+- point of interest `poi-5`: The Towel Counter at (30,17) → journal j51
+- doors: (7,2) closed, (28,4) closed, (7,5) closed, (13,7) open, (14,7) open, (21,7) open, (22,7) open, (34,7) closed, (7,11) open, (28,11) open, (33,12) closed, (3,15) open, (30,15) open, (34,15) closed, (17,21) open, (18,21) open
+- labels: Foyer (17,18), Towel counter (30,18), Nymph fountain (17,19), Warm hall (17,11), Hot room (17,2)
+
 
 ## Recent events
 
-- 📍 Noted on The Meridian — Public Galleries: The Thief (29,3) — click it on the map for its journal entry.
-- 📍 Noted on The Meridian — Public Galleries: The seven plinths (4,2) — click it on the map for its journal entry.
-- 📍 Noted on The Meridian — Public Galleries: The Staff Only door (16,0) — click it on the map for its journal entry.
-- 📍 Noted on The Meridian — Public Galleries: The Great Orrery (16,8) — click it on the map for its journal entry.
-- 📍 Noted on The Meridian — Public Galleries: The water-gate (34,10) — click it on the map for its journal entry.
-- 📍 Noted on The Sluice House: The candle stub (14,12) — click it on the map for its journal entry.
-- 📍 Pim's keys: what they open is no longer on The Undercroft Stores — DM correction: pinned on the wrong map; it belongs on the dock's iron stores door. (Its journal entry remains.)
-- 📍 Noted on The Acquisitions Dock: The iron stores door (Pim's keys) (4,1) — click it on the map for its journal entry.
-- 🎬 The Undercroft Stores — A long cold vault of iron cages. Everything the Meridian has taken sits here in the dark, waiting to be catalogued.
-- 🗺 Map: The Undercroft Stores
-- ⭐ Kit Corvell gains 225 XP (The water-gate infiltration: talked past the gate, turned the ledger, bought the clerk, copied the keys, loosened the culvert and read the Curator's secrets without raising an alarm (Moderate non-combat challenge)) — total 1537.
-- ⭐ Hedda Vask gains 225 XP (The water-gate infiltration: talked past the gate, turned the ledger, bought the clerk, copied the keys, loosened the culvert and read the Curator's secrets without raising an alarm (Moderate non-combat challenge)) — total 1537.
-- ⭐ Tobias Fenwick gains 225 XP (The water-gate infiltration: talked past the gate, turned the ledger, bought the clerk, copied the keys, loosened the culvert and read the Curator's secrets without raising an alarm (Moderate non-combat challenge)) — total 1537.
-- ⭐ Sera Lark gains 225 XP (The water-gate infiltration: talked past the gate, turned the ledger, bought the clerk, copied the keys, loosened the culvert and read the Curator's secrets without raising an alarm (Moderate non-combat challenge)) — total 1537.
-- — Session 1 ends —
+- 📍 Noted on The Rosewater Baths: Staff door (26,14) — click it on the map for its journal entry.
+- 🎬 The Rosewater Baths — Pink marble, warm steam, rosewater and orange oil. Soft voices behind painted doors; somewhere deeper in, water laps against stone.
+- 🗺 Map: The Rosewater Baths
+- “Lettie, two private baths, the oils, the good linens. The lady and her brother had a misfortune on the water.”
+- “Oh, you poor dears! Gentlemen through the stag, ladies through the swan. Leave your things in a cabinet, take a key, and I'll bring your oils to the warm hall. Mind the floor, it's slippery.”
+- The doorman bowed himself back out to the portico. The fur-collared gentleman nodded to the attendant and strolled out after him, purse swinging, trailing bay rum and steam.
+- Rosewater Attendant is now known as Lettie.
+- Kit Corvell is at (17,20) on The Rosewater Baths.
+- Sera Lark is at (18,20) on The Rosewater Baths.
+- Lettie is at (30,16) on The Rosewater Baths.
+- 📍 Gentlemen's changing room moved to (3,15) on The Rosewater Baths — map redrawn.
+- 📍 Ladies' changing room moved to (30,15) on The Rosewater Baths — map redrawn.
+- 📍 Staff door moved to (34,15) on The Rosewater Baths — map redrawn.
+- 📍 Noted on The Rosewater Baths: The Nymph Fountain (17,17) — click it on the map for its journal entry.
+- 📍 Noted on The Rosewater Baths: The Towel Counter (30,17) — click it on the map for its journal entry.

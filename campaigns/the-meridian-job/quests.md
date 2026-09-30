@@ -8,10 +8,11 @@
 - **Assets:** the Magpie's Key (fits the inner vault lock), Varga's Warden ring and Brask's sigil (both die at the Day 2 dawn ledger check), wax impressions of the STORES, CAGE and LIFT keys, the loosened culvert grate at the dock (the way back in), Pim Hobb (a bought night clerk), and the Dagger of Venom (unidentified).
 - **Still need:** visors, invitations, the Gala guard rota, when the Curator carries the Eye up (probably the night of Day 7), the route from the dock to the Orrery works, and whether the Heart has changed.
 
-### Tonight (Day 2, 02:48)
-- Lock the cages and the stores door, get the key ring back on Pim's belt before 05:00, and leave past the gate watchman.
+### Tonight (Day 2, 02:48) — DONE
+- Cages and stores door locked, key ring back on Pim's belt (03:05), out past the gate watchman, back at the Sluice House at 04:48.
 
 ### Hedda: clear her name
+- **Emeric Dane's last letter** (Day 2): green light under the Rotunda doors at night tests, new statues and names gone off the duty roll, "Captain Thorne asked me to look away. I won't." It proves motive, not the act. Wynn lent it to "the chapel" and wants it back after the Saint's Night.
 - Varga saw Thorne kill Lt. Emeric Dane and perjured himself at her trial. He'll testify only if freed and out of the city first. He has "the night to think", and Sera has threatened him with the mill race. Mags knew Dane, so there may be another route through his widow.
 
 ### Tobias: the glass curse

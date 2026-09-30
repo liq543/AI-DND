@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Dwarf** · **Fighter 3** (Champion) · **Background:** Soldier · **XP:** 1537
+**Player:** DM · **Dwarf** · **Fighter 3** (Champion) · **Background:** Soldier · **XP:** 1555
 
 **HP** 34/34 · **AC** 17 (Chain Mail 16 + Defense style 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +2 · **Passive Perception** 13
 
@@ -41,13 +41,13 @@ Species traits: Darkvision, Dwarven Resilience, Dwarven Toughness, Stonecunning
 **Coins:** 54 GP
 
 - `chain-mail-1` 1× Chain Mail (equipped) · _starting equipment_
-- `greatsword-1` 1× Greatsword (equipped) · _starting equipment_
+- `greatsword-1` 1× Severance (Greatsword) (equipped) · _starting equipment_
+  - Hedda's greatsword from her Warden years: a plain, heavy, much-sharpened blade with a leather-wrapped grip worn black. She calls it Severance.
 - `flail-1` 1× Flail · _starting equipment_
 - `javelin-1` 8× Javelin · _starting equipment_
 - `dungeoneers-pack-1` 1× Dungeoneer's Pack · _starting equipment_
-- `wardens-sigil-ring-1` 1× Warden's Sigil Ring · _stolen: pried off Sergeant Varga's chained hand in the Heron's brig_
 
-Hit Point Dice: Fighter d10 2/3
+Hit Point Dice: Fighter d10 3/3
 Languages: Common, Dwarvish, Giant · Tools: *Choose one kind of Gaming Set* (see "Equipment") · Armor training: light, medium, heavy, shield
 
 ## HP history

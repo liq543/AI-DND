@@ -58,12 +58,23 @@ Prefer one well-chosen update per beat over constant churn.
   `h` furniture, `c` counter, `D` door, `d` open door, `S` secret door, `<` `>` stairs, `x` chasm, `b` bridge.
 - **More terrain codes:** `k` carpet, `q` marble floor, `a` gaming table (half cover), `g` railing (half cover),
   `v` crates/barrels (half cover), `l` lamp/candelabrum (a pool of light, walkable), `u` statue or display plinth
-  (¾ cover), `n` mast/column (¾ cover).
+  (¾ cover), `n` mast/column (¾ cover), `p` potted plant (half cover), `e` bench (difficult, half cover; joins its
+  neighbours), `i` cabinets/shelves/wardrobe (¾ cover, blocks sight), `y` bed, `j` tub/basin (half cover), `z` tiled floor.
+  Built pools and channels (`w`/`~` indoors) get a stone coping drawn automatically.
 - **Every place must look like itself.** Never reuse a generator layout for a different kind of place with the
-  furniture shuffled. Set a **theme** (`map set <id> --kv theme=stone|ship|sewer|marble`: palette, textures, trim,
-  backdrop) and give the map a shape that matches the fiction: a ship has a bow and a hold, a library has stacks and
-  reading nooks, a sewer has channels and ledges. For bespoke layouts, write the grid as a text file (one row per line)
-  and `map import-grid <id> --out grid.txt`. Add set dressing: lamps, crates, carpets, statues.
+  furniture shuffled. Set a **theme** (`map set <id> --kv theme=stone|ship|sewer|marble|bathhouse|timber|manor|temple|cellar`:
+  palette, textures, trim, backdrop) and override its textures per map so two places in the same theme still differ:
+  `walls=hatch|brick|ashlar|timber|plaster`, `floor=marble|mosaic|checker|terrazzo` (the `q` squares),
+  `wood=planks|herringbone|parquet` (`=`), `stone=flag|hex|slate` (`.`), `accent=#rrggbb` (trim, rugs, gilt).
+  `map gen interior --building tavern|inn|house|shop|temple|bathhouse|manor|library|warehouse|workshop` varies the
+  layout by seed (which side the back rooms are on, how many, their sizes, chamfered corners, where the door is) and
+  furnishes by kind, with a matching theme.
+- **Shape before furniture.** A generated interior is a starting point; for any place the story lingers in, draw it
+  (write the grid as a text file, one row per line, and `map import-grid <id> --out grid.txt`). Avoid the box-of-boxes
+  habit: vary room sizes, break the outline (apses, bays, chamfered corners, alcoves, a round pool or court, a
+  colonnade), put rooms where the building's work needs them (a kitchen by the hall, stores by the loading door,
+  private rooms off a passage), and give every room at least one thing only that room has. Before importing, compare
+  it with the last few maps you drew: if it could pass for one of them with the labels swapped, redraw it.
 - **Lighting drives fog of war**: `map set <id> --kv lighting=bright|dim|dark`. In the dark, characters see only
   with Darkvision or a lit torch/lantern (`item light kira torch-1`).
 
@@ -129,6 +140,15 @@ players. Each player can still pick "Reduced motion" or "Off" for themselves in 
 Match the ambient to the scene (`fx ambient none` when they leave the storm), and don't overuse `fx play`: one
 flourish at the dramatic beat is worth ten.
 
+## Containers and stashes
+
+Items on the floor share one marker per tile; clicking it lists **everything** on that tile. When a place holds things
+(a chest, a strongbox, a wardrobe, a hidden cache, the party's stash at their base), make the tile a container:
+`map container <map> x,y --name "Iron-bound chest" --text "what it looks like"` (anything already lying there goes
+inside). Put things in with `item stash <who> <item-id> --to <container-id> [--qty N]`, and take them out with
+`item pickup <who> <floor-id>`, both from in or next to that square. `map container-remove <map> --id ... --reason`
+leaves the contents on the floor. Players click the chest marker to see what's inside.
+
 ## Points of interest (perceived objects)
 
 **Whenever the characters perceive a notable object in a place, pin it.** Examples: a statue, a weapon rack, a desk with a
@@ -138,6 +158,9 @@ grid with `map ascii <map>` and pick the statue's plinth, the rack's tile, the d
 square beside it. Players see a small blue marker there (once that tile is revealed) and click it to open the journal entry.
 Markers are **permanent**. When you update a revisited place, move markers whose objects moved
 (`map poi-move ... --reason`) and remove those that are gone (`map poi-remove ... --reason`). The journal entry stays.
+**A `map label` is not enough for an object.** Labels name areas (a room, a street, a quay). Anything worth naming that
+the characters can walk up to and look at (a fountain, a counter, a shrine) also gets a `map poi` with a proper description,
+written the way you would describe it aloud.
 
 ## Handouts & cards
 

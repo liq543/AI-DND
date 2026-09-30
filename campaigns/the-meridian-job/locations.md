@@ -1,4 +1,4 @@
-# Locations — The Meridian Job
+﻿# Locations — The Meridian Job
 
 > One entry per place visited or named. Record what is established so descriptions stay consistent.
 
@@ -48,6 +48,26 @@
 - The Hall of Infamy (east wing): statues of villains and display cases. **The Thief** stands alone on a raised plinth at the head of the hall (29,3). A locked staff door (29,17) leads to the curatorial offices.
 - The Acquisitions cut (the east canal): the water-gate is a portcullised arch at canal level beneath the east wing.
 
+### Gallowmere Reach (not yet visited)
+- A stilt-hamlet of eel-runners out on the Gallowmere flats, about an hour's row south-west of the Sluice House, past the drowned church tower. A plank causeway runs out to the stilt-houses.
+- **Rook Dunnock's smokehouse** is at the causeway's far end: a red lantern, three dogs chained underneath. Eight families in all.
+
+### The Saltgate Stairs (not yet visited)
+- Water-stairs in the city where Silk Delacour's man Pins was to collect the six Watch tabards from the Dunnocks at midnight on the night of Day 4.
+
+### The Bellwater Steps and the Rosewater Baths (map `bellwater`, theme marble)
+- White stone water-stairs on the Bellwater Cut, below the Gilt, where barges put passengers off. Rosewater Lane climbs two short streets past window boxes to the **Rosewater Baths**: a marble portico with bathing-nymph statues and pink doors; hot rooms, steam, perfumed oils, private cabinets. A doorman in pink livery and white gloves. Expensive, and full of clean, rich people.
+
+### Lampwick Row (map `lampwick`, theme stone, bright by day)
+- A tidy canal street of narrow houses on the city side of the Bridge of Saints, home to Warden families. Scrubbed doorsteps, polished lamps, and a lamplighter who knows everyone.
+- North side: five narrow houses (doors at 3,4 / 9,4 / 15,4 / 22,4 / 27,4). **The Dane house** is the green door at 15,4 (rooms 12-17, 1-3). Widow Wynn Dane lives there.
+- The street runs east-west (rows 5-8), with a railing along the Lampwick Cut (canal, rows 10-12), a footbridge at 5-6, and a south quay (row 13) where the gondola ties up.
+- A wanted poster for Hedda and "a young thief" is on the lamp post at the footbridge (Day 2).
+
 ### The Acquisitions Dock (map `dock`, theme sewer, dim; linked to `meridian`)
 - A vaulted canal-level dock under the Meridian's east wing. The channel runs in from the portcullis (east) to a turning basin (west). The north quay is the receiving floor: the ledger desk and the Receiving Ledger, a lamp, and a clerk's stool. A stair (25,2) goes up to the gate watch-room. A lift shaft (12,1) goes up into the museum. The iron door to the Undercroft stores (4,1) has a sigil plate and a Brass Warden in its niche.
 - The south quay: crates of seized relics awaiting sorting, and a lamp at 6,16.
+
+### The Rosewater Baths, interior (map `rosewater`, linked to `bellwater`)
+- 36×22, theme bathhouse (rose ashlar walls, mosaic floors). **Foyer** (y16-20): front doors 17-18,21, a rose runner, the nymph fountain at 17-18,17, pillars, waiting benches, towel counter 29-31,17 with Lettie behind it at 30,16, staff door 34,15. **Gentlemen's changing** (stag door 3,15; x1-6, y8-14): cabinet walls, a bench, an arch to the warm hall at 7,11. **Ladies' changing** (swan door 30,15; x29-32, y8-14): cabinets, a bench, an arch to the warm hall at 28,11, a service door at 33,12 to the one-wide **service passage** (x34, y8-14). That passage runs from the staff door 34,15 up to the linen room door 34,7. **Warm hall** (x8-27, y8-14): a round warm pool, deep in the middle, with a statue in each corner and ferns. Two arches (13-14,7 and 21-22,7) lead up to the **Hot room** (x8-27, y1-6): apsidal north end with a statue at 17-18,1, a long hot pool with a deep channel, and pillars. **Private bath cabinets A** (x1-6, y1-2, door 7,2; one tub) and **B** (x1-6, y4-6, door 7,5; two tubs) open off the hot room. The two private baths they paid for. **Linen & staff room** (x29-34, y1-6): shelves, crates, and a stair down to the stoke-hole (34,1). Doors to the hot room at 28,4 and to the service passage at 34,7.
+- Points of interest pinned: the Nymph Fountain (17,17; coppers and a few silvers on the bottom, a Bathers' Guild plate); the Towel Counter (30,17; a pigeonhole board of numbered brass cabinet keys behind it).

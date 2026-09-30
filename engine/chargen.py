@@ -174,6 +174,54 @@ def parse_skilled(text, have_skills, have_tools):
     return skills, tools
 
 
+def weapon_mastery_count(cls, lvl=1):
+    """How many kinds of weapons the class masters at this level. Fighters and Barbarians have a Weapon Mastery column;
+    Paladins, Rangers and Rogues have only the feature, whose SRD text grants two kinds of weapons."""
+    row = cls["levels"][max(1, min(lvl, 20))]
+    n = srd.num(row.get("Weapon Mastery"), 0) or 0
+    if not n and any(f[1] == "Weapon Mastery" and f[0] <= lvl for f in cls.get("features", [])):
+        n = 2
+    return n
+
+
+def check_masteries(cls, n, names):
+    """Validate a --masteries list: exactly n SRD weapon kinds the class is proficient with.
+    Returns (mastery properties, weapon names)."""
+    picks = [m.strip() for m in (names or "").split(",") if m.strip()]
+    if len(picks) != n:
+        raise RuleError(f"{cls['name']} picks {n} kinds of weapons for Weapon Mastery: --masteries a,b")
+    weapons = []
+    for mname in picks:
+        w = srd.find("weapons", mname)
+        if not w:
+            raise RuleError(f"'{mname}' is not an SRD weapon.")
+        finesse_light = bool({"finesse", "light"} & set(w["properties"]))
+        if w["category"] == "martial" and not cls.get("weapons_martial") and not (cls.get("weapons_martial_finesse_light") and finesse_light):
+            raise RuleError(f"{w['name']} isn't a weapon {cls['name']}s are proficient with.")
+        if w["name"] in [x["name"] for x in weapons]:
+            raise RuleError(f"{w['name']} is listed twice.")
+        weapons.append(w)
+    return [w["mastery"] for w in weapons], [w["name"] for w in weapons]
+
+
+def set_masteries(g, e, names):
+    """rules/classes: 'Whenever you finish a Long Rest, you can change the kinds of weapons you chose.'"""
+    classes = [c for c in e.get("classes", {}) if weapon_mastery_count(srd.find("classes", c), e["classes"][c])]
+    if not classes:
+        raise RuleError(f"{e['name']} has no Weapon Mastery feature.")
+    cls = srd.find("classes", classes[0])
+    n = weapon_mastery_count(cls, e["classes"][classes[0]])
+    props, weapons = check_masteries(cls, n, names)
+    last_rest, changed = e.get("last_long_rest_end"), e.get("masteries_changed_at")
+    repair = len(e.get("mastery_weapons") or []) < n  # a character created before the engine recorded their picks
+    if not repair and (last_rest is None or (changed is not None and changed >= last_rest)):
+        raise RuleError(f"{e['name']} can change Weapon Mastery choices only after finishing a Long Rest "
+                        f"(once per Long Rest).")
+    g.set(e, masteries=props, mastery_weapons=weapons, masteries_changed_at=g.state["time"])
+    g.say(f"⚔ {e['name']} now uses the mastery properties of: " +
+          ", ".join(f"{w} ({p.title()})" for w, p in zip(weapons, props)) + ".", kind="info")
+
+
 def create(g, a):
     d = srd.data()
     name = a.name.strip()
@@ -245,19 +293,8 @@ def create(g, a):
                             "|".join(k for k, v in d["feats"].items() if v["category"] == "fighting style"))
         feats.append({"name": fs["name"], "source": "Fighting Style"})
     # weapon masteries
-    wm_n = srd.num(cls["levels"][1].get("Weapon Mastery"), 0) or 0
-    masteries = [m.strip() for m in (a.masteries or "").split(",") if m.strip()]
-    if wm_n:
-        if len(masteries) != wm_n:
-            raise RuleError(f"{cls['name']} picks {wm_n} weapons for Weapon Mastery: --masteries a,b")
-        for mname in masteries:
-            w = srd.find("weapons", mname)
-            if not w:
-                raise RuleError(f"'{mname}' is not an SRD weapon.")
-            if cls["name"] == "Rogue" and not ({"finesse", "light"} & set(w["properties"])) and w["category"] == "martial":
-                raise RuleError(f"{w['name']} isn't a weapon Rogues are proficient with.")
-    masteries = [srd.find("weapons", m)["mastery"] for m in masteries]
-    mastery_weapons = [srd.find("weapons", m)["name"] for m in (a.masteries or "").split(",") if m.strip()] if wm_n else []
+    wm_n = weapon_mastery_count(cls, 1)
+    masteries, mastery_weapons = check_masteries(cls, wm_n, a.masteries) if wm_n else ([], [])
     # languages
     langs = [l.strip() for l in (a.languages or "").split(",") if l.strip()]
     for l in langs:

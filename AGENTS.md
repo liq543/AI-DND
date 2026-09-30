@@ -110,13 +110,20 @@ Ambiguous opener ("hi", "let's play")? Check `campaigns/ACTIVE`: offer to contin
 4. Update visuals when the scene changes. **Entering a new area always means a new map, shown before you describe it**, and **re-entering or passing a known area means updating it first** for the time of day and for what has changed (crowds, closing hours, guards, doors). When the characters perceive a
    notable object, pin it to its tile with `map poi` (dm/visuals.md → Points of interest)
    (dm/visuals.md). Also reveal rooms, show handouts, and set a scene banner.
-5. Narrate the engine's result vividly (1–3 short paragraphs), then prompt: *"What do you do?"*
+5. **Simulate the rest of the world for the same span of time** (dm/dm-guide.md → The living world). While the player's
+   action plays out, everyone else in the scene keeps doing something: companions talk among themselves, tend the
+   wounded, keep watch, or wander off; NPCs move, work, react, and pursue their own wants. Move their tokens when they
+   move. Anything a party member could see or hear from where they stand gets narrated, every turn, even if it's small
+   ("the innkeeper is muttering at the cook while she bars the shutters"). Quiet beats are fine; a frozen world isn't.
+6. Narrate the engine's result vividly (1–3 short paragraphs), then prompt: *"What do you do?"*
    **Log the dialogue:** every line a character speaks, the player's own PC included, goes into the log with
    `say --as "<Name>" "..."`: the player's words for their PC (lightly cleaned up), plus the key lines of companions and NPCs.
    **Log the events too:** every beat of what happens in the world (what a character does, what they find, how a roll plays
    out) goes in as a 1–2 sentence narration line with `say "..."` (no --as), right after the engine resolves it. The
-   log should read as the story on its own, not just the dice.
-6. Keep narrative notes current: new NPC → `npcs.md`; new place → `locations.md`; plot → `quests.md`/`secrets.md`;
+   log should read as the story on its own, not just the dice. When a line is about one creature, anchor it with
+   `say --at <id> "..."`: the live table shows each beat on the map (speech bubbles over the speaker, captions by the
+   creature, a story strip), so the player can see what just happened without opening the log.
+7. Keep narrative notes current: new NPC → `npcs.md`; new place → `locations.md`; plot → `quests.md`/`secrets.md`;
    a bullet per scene in `log/session-NNN.md`.
 
 Combat: `dm/procedures/combat.md`. Map/art workflow: `dm/visuals.md`.
@@ -126,5 +133,8 @@ Combat: `dm/procedures/combat.md`. Map/art workflow: `dm/visuals.md`.
 This file is read by both. In Claude Code, `CLAUDE.md` imports it; `.claude/settings.json` pre-approves engine
 commands and **blocks** hand-editing engine data (signed logs, snapshots) or the signing keys; engine code is
 editable for beta bug fixes (§1.8); slash
-commands `/new-game`, `/resume-game`, `/save-game`, `/new-character`, `/table` wrap the procedures.
+commands `/new-game`, `/resume-game`, `/save-game`, `/new-character`, `/table` wrap the procedures. Hooks
+(`.claude/hooks/dm_rules.py`) inject `dm/turn-rules.md` (the most-broken rules, in short) on every prompt, before and after
+every tool call, at session start and after every compaction, and a Stop hook makes the DM check each turn against it
+before ending. Keep that digest in sync with this file, and add to it whenever the player has to correct the DM.
 In Codex the same rules apply by instruction: run only `python -m engine ...` for mechanics.

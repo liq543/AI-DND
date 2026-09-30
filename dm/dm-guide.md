@@ -13,6 +13,9 @@ How to run a game that is consistent *and* fun. Read once per chat when play beg
 - End every turn with a prompt. Occasionally offer 2–3 options when the player seems stuck — but always accept "something else".
 - In combat, open each round with a one-line status: `Round 2 — Kira 14/22 HP · Goblin A bloodied · Goblin B 7 HP`.
 - Never paste `secrets.md`, stat blocks, or DCs to the player unless out-of-character and asked (then give rules freely).
+- **Hidden rolls stay hidden.** Never mention a secret roll in chat: not that it happened, not its table, not its number,
+  and not the offscreen result. Hidden creatures stay unnamed until perceived. The player learns only what the
+  characters perceive, through the narration.
 
 ## Running the three pillars
 
@@ -39,6 +42,24 @@ not "never". **Run every social exchange by the rules, every time:**
 **Combat** — See `procedures/combat.md`. Make fights about more than HP: terrain, objectives, enemies that retreat,
 surrender, call for help, or bargain. Monsters act intelligently according to their nature.
 
+## The living world
+
+The world doesn't pause while the player acts. Every turn, after resolving what the player's character did, advance
+everyone else in the scene through the same span of time:
+
+- **Companions** act on their own personalities and goals: they chat, argue, keep watch, tend wounds, eat, search,
+  pocket things, get bored, wander to the window. They react to what the player's character just did, out loud if
+  that's who they are.
+- **NPCs** pursue their own wants. The shopkeeper serves the next customer, the guard changes shifts, the prisoner
+  tests his bonds, the barman sends a boy running. Hostile NPCs who haven't been noticed keep executing their plan.
+- **Move their tokens** when they move (`move`, `place`), and log what they say (`say --as`) and do (`say`).
+- **Perception gates narration.** Tell the player whatever a party member could see or hear from where they stand:
+  every turn, even small things ("Kira's sharpening her sword by the door and hasn't looked up"). Things out of sight
+  and earshot still happen (keep them in notes or the hidden log), but aren't narrated until someone could perceive
+  them. When noticing isn't automatic, use passive Perception or an honest hidden check.
+- Sometimes nothing of note happens. Say so briefly ("the others are quiet, waiting on you"), and don't freeze everyone.
+- Time spent means time passes for the villains too: check the clocks in `secrets.md` whenever hours go by.
+
 ## Rolls and DCs
 
 | DC | Difficulty |
@@ -61,6 +82,8 @@ surrender, call for help, or bargain. Monsters act intelligently according to th
 - Before naming a new NPC, shop, or place: grep `npcs.md`/`locations.md` — reuse beats duplicate.
 - Write a new NPC/place entry the moment it gets a name. 3–5 lines is enough. Give combat-capable NPCs an SRD
   stat block (`npc add <slug> --name "..."`) so the engine can run them.
+- **Every named NPC gets an alignment** of their own (`npc alignment <id> --text "Lawful Evil"`), set when they enter
+  play. It shows on their info card. Player characters never get one on the table: the player plays their outlook.
 - Prices, stat blocks, spell effects: the engine reads them from the SRD. Never eyeball them.
 - Time passes: `time`, `travel`, and `rest` keep the in-world clock; long rests need 16 hours between them.
 - Resource pressure creates drama: the engine tracks ammo, spell slots, Hit Dice, feature uses, coins and

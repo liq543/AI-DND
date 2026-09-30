@@ -230,9 +230,25 @@ class Store:
         bdir = self.engine_dir / "backups"
         bdir.mkdir(exist_ok=True)
         import shutil
-        shutil.copyfile(self.events_path, bdir / "latest.jsonl")
+        import sys
+        import time
+
+        def copy(dst):
+            # the events are already durably appended; a backup briefly locked by a reader (the live table,
+            # an antivirus scan on Windows) is retried, then skipped with a warning rather than failing the command
+            for attempt in range(5):
+                try:
+                    shutil.copyfile(self.events_path, dst)
+                    return
+                except OSError as err:
+                    if attempt == 4:
+                        print(f"⚠ backup {dst.name} not refreshed ({err}); the signed log itself is saved.", file=sys.stderr)
+                        return
+                    time.sleep(0.1 * (attempt + 1))
+
+        copy(bdir / "latest.jsonl")
         if seq // 50 != (seq - 1) // 50 or not (bdir / f"checkpoint-{seq // 50 % 5}.jsonl").exists():
-            shutil.copyfile(self.events_path, bdir / f"checkpoint-{seq // 50 % 5}.jsonl")
+            copy(bdir / f"checkpoint-{seq // 50 % 5}.jsonl")
 
     def restore_best_backup(self):
         bdir = self.engine_dir / "backups"

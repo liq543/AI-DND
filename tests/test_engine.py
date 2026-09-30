@@ -2,6 +2,7 @@
 
 Run:  python -m unittest discover -s tests -v
 """
+import _cli  # noqa: E402  (in-process CLI runner)
 import json
 import os
 import shutil
@@ -40,9 +41,7 @@ class EngineTest(unittest.TestCase):
 
     @classmethod
     def run_cli(cls, *args):
-        p = subprocess.run([sys.executable, "-m", "engine", *args], cwd=ROOT, env=cls.env, capture_output=True,
-                           text=True, encoding="utf-8")
-        return p.returncode, p.stdout + p.stderr
+        return _cli.run(cls.env, *args)
 
     @classmethod
     def ok(cls, *args):
@@ -59,13 +58,7 @@ class EngineTest(unittest.TestCase):
         return out
 
     def state(self):
-        from importlib import reload
-        os.environ.update({k: v for k, v in self.env.items() if k.startswith("DND_")})
-        import engine.store as st
-        reload(st)
-        import engine.core as core
-        reload(core)
-        return core.Game(st.active_dir())
+        return _cli.game(self.env)
 
     # ------------------------------------------------------------------ character creation
     def test_standard_array_enforced(self):
@@ -145,6 +138,190 @@ class EngineTest(unittest.TestCase):
         finally:
             self.ok("combat", "end")
         self.rule("rest", "long", contains=None) if False else None
+
+    def test_nick_mastery_keeps_the_bonus_action(self):
+        self.ok("char", "create", "--name", "Nix Quill", "--class", "Rogue", "--species", "Human", "--background", "Criminal",
+                "--method", "standard", "--scores", "str=8,dex=15,con=14,int=10,wis=12,cha=13", "--bonus", "dex+2,con+1",
+                "--skills", "perception,investigation,deception,acrobatics", "--languages", "Elvish,Halfling",
+                "--species-skill", "insight", "--species-feat", "Alert", "--expertise", "stealth,perception",
+                "--masteries", "dagger,shortbow")
+        g = self.state()
+        nix = g.get("nix")
+        self.assertEqual(nix["mastery_weapons"], ["Dagger", "Shortbow"])
+        self.ok("item", "add", "nix", "Dagger", "--source", "found: a second blade")
+        inv = self.state().get("nix")["inventory"]
+        daggers = [i["id"] for i in inv if i.get("base_name") == "Dagger"]
+        self.assertTrue(len(daggers) > 1 or next(i for i in inv if i["id"] == daggers[0])["qty"] >= 2)
+        for d in daggers:
+            self.ok("item", "equip", "nix", d)
+        self.ok("place", "nix", "3,3", "--map", "arena")
+        self.ok("npc", "add", "bandit", "--name", "Mark", "--at", "4,3", "--map", "arena")
+        self.ok("combat", "start")
+        try:
+            from engine import mechanics as M
+            for _ in range(6):
+                if M.current_id(self.state()) == "nix":
+                    break
+                self.ok("combat", "next")
+            if M.current_id(self.state()) == "nix":
+                self.rule("attack", "nix", "mark", daggers[0], "--offhand", contains="attacked with a Light weapon")
+                self.ok("attack", "nix", "mark", daggers[0])
+                out = self.ok("attack", "nix", "mark", daggers[-1], "--offhand")  # a second dagger from the pair
+                self.assertIn("Nick", out)
+                self.assertFalse(M.economy(self.state(), "nix").get("bonus_used"))
+                self.rule("attack", "nix", "mark", daggers[-1], "--offhand", contains="only one extra attack")
+        finally:
+            self.ok("combat", "end")
+            self.ok("npc", "remove", "mark")
+            self.ok("char", "remove", "nix")
+
+    def test_alert_initiative_swap(self):
+        self.ok("place", "kira", "5,5", "--map", "arena")
+        self.ok("place", "wren", "6,6", "--map", "arena")
+        self.ok("combat", "start")
+        try:
+            before = {o["id"]: o["init"] for o in self.state().state["combat"]["order"]}
+            self.rule("combat", "swap", "wren,kira", contains="Alert")      # Wren has no Alert feat
+            self.ok("combat", "swap", "kira,wren")
+            after = {o["id"]: o["init"] for o in self.state().state["combat"]["order"]}
+            self.assertEqual((after["kira"], after["wren"]), (before["wren"], before["kira"]))
+            self.rule("combat", "swap", "kira,wren", contains="immediately after")
+        finally:
+            self.ok("combat", "end")
+
+    def test_sleep_is_two_stage(self):
+        from engine import srd
+        fx = srd.find("spells", "Sleep")["effect"]
+        self.assertEqual((fx["condition"], fx.get("repeat"), fx.get("escalate")), ("incapacitated", True, "unconscious"))
+        from engine import mechanics as M
+        import engine.core as core
+        g = self.state()
+        e = g.get("kira")
+        M.add_condition(g, e, "incapacitated", source="Sleep", save="wis:30", escalate="unconscious", quiet=True)
+        M.end_of_turn(g, g.get("kira"))   # a DC 30 save fails: Incapacitated deepens to Unconscious
+        names = core.condition_names(g.get("kira"))
+        self.assertIn("unconscious", names)
+        self.assertNotIn("incapacitated", [c["name"] for c in g.get("kira")["conditions"]])
+
+    def test_sleep_cast_carries_the_second_stage(self):
+        # the real path: a cast Sleep's condition must remember that a second failure means Unconscious
+        self.ok("npc", "add", "commoner", "--name", "Sleepy Tam", "--at", "7,7", "--map", "arena")
+        self.ok("place", "wren", "6,6", "--map", "arena")
+        try:
+            self.ok("cast", "wren", "sleep", "--targets", "sleepy-tam")
+            t = self.state().get("sleepy-tam")
+            inc = [c for c in t["conditions"] if c["name"] == "incapacitated"]
+            if inc:   # it failed the first save
+                self.assertEqual(inc[0].get("escalate"), "unconscious")
+        finally:
+            self.ok("npc", "remove", "sleepy-tam")
+
+    def test_heavy_armor_stealth_disadvantage(self):
+        from engine import srd
+        self.assertTrue(srd.find("armor", "Chain Mail")["stealth_dis"])
+        self.assertFalse(srd.find("armor", "Leather Armor")["stealth_dis"])
+        inv = self.state().get("kira")["inventory"]
+        armor = next(i for i in inv if i.get("kind") == "armor")
+        self.ok("item", "equip", "kira", armor["id"])
+        out = self.ok("check", "kira", "stealth", "--dc", "10")
+        if srd.find("armor", armor.get("base_name") or armor["name"]).get("stealth_dis"):
+            self.assertIn("Stealth Disadvantage", out)
+
+    def test_grapple_and_shove(self):
+        self.ok("place", "kira", "3,3", "--map", "arena")
+        self.ok("npc", "add", "bandit", "--name", "Oswin Hale", "--at", "4,3", "--map", "arena")
+        try:
+            out = self.ok("action", "kira", "grapple", "--target", "oswin-hale")
+            self.assertIn("tries to grapple", out)
+            dc = 8 + 3 + 2   # Kira: STR 17 (+3), proficiency +2
+            self.assertIn(f"DC {dc}", out)
+            e = self.state().get("oswin-hale")
+            if any(c["name"] == "grappled" for c in e["conditions"]):
+                self.assertEqual(next(c for c in e["conditions"] if c["name"] == "grappled")["escape_dc"], dc)
+            self.rule("action", "kira", "escape", contains="isn't Grappled")
+            self.ok("place", "kira", "9,9", "--map", "arena")
+            self.rule("action", "kira", "shove", "--target", "oswin-hale", contains="out of reach")
+        finally:
+            self.ok("npc", "remove", "oswin-hale")
+
+    def test_dagger_of_venom_coats_once_per_dawn(self):
+        from engine.mechanics import next_dawn
+        self.assertEqual(next_dawn(300), 360)          # 05:00 -> 06:00 the same day
+        self.assertEqual(next_dawn(400), 1440 + 360)   # 06:40 -> 06:00 the next day
+        self.ok("item", "add", "wren", "Dagger of Venom", "--source", "loot: a cultist's belt", "--override", "test item")
+        dv = next(i["id"] for i in self.state().get("wren")["inventory"] if "Venom" in i["name"])
+        out = self.ok("item", "use", "wren", dv)
+        self.assertIn("coats", out)
+        self.rule("item", "use", "wren", dv, contains="next dawn")
+        self.ok("item", "remove", "wren", dv)
+
+    def test_a_character_can_leave_and_rejoin_the_party(self):
+        from engine import views
+        self.ok("char", "leave", "wren", "parts ways at the crossroads")
+        try:
+            g = self.state()
+            self.assertNotIn("wren", [p["id"] for p in g.pcs()])
+            v = views.player_view(g)
+            self.assertNotIn("wren", [p["id"] for p in v["party"]])
+            self.assertIn("wren", [o["id"] for o in v["offstage"]])     # her face stays in the log
+            self.rule("char", "leave", "wren", "")
+        finally:
+            self.ok("char", "rejoin", "wren", "back for the test")
+        self.assertIn("wren", [p["id"] for p in self.state().pcs()])
+
+    def test_creatures_who_left_stay_out_of_combat(self):
+        self.ok("place", "kira", "3,3", "--map", "arena")
+        self.ok("npc", "add", "commoner", "--name", "Oswin Hale", "--at", "5,5", "--map", "arena")
+        self.ok("npc", "add", "bandit", "--name", "Captain Rhosk", "--at", "6,6", "--map", "arena")
+        try:
+            self.ok("npc", "leave", "oswin-hale")
+            self.ok("combat", "start")
+            order = [o["id"] for o in self.state().state["combat"]["order"]]
+            self.assertNotIn("oswin-hale", order)
+            self.assertIn("captain-rhosk", order)
+        finally:
+            self.ok("combat", "end")
+            self.ok("npc", "remove", "oswin-hale,captain-rhosk")
+
+    def test_thrown_weapon_lands_by_the_target(self):
+        from engine import mechanics as M
+        self.ok("item", "add", "kira", "Handaxe", "--source", "found: a woodpile")
+        self.ok("place", "kira", "3,3", "--map", "arena")
+        self.ok("npc", "add", "bandit", "--name", "Oswin Hale", "--at", "6,3", "--map", "arena")
+        try:
+            self.ok("combat", "start")
+            for _ in range(6):
+                if M.current_id(self.state()) == "kira":
+                    break
+                self.ok("combat", "next")
+            if M.current_id(self.state()) == "kira":
+                inv = self.state().get("kira")["inventory"]
+                for i in inv:
+                    if i.get("equipped") and i.get("kind") == "weapon":
+                        self.ok("item", "unequip", "kira", i["id"])
+                axe = next(i for i in self.state().get("kira")["inventory"] if i["name"] == "Handaxe")
+                self.ok("item", "equip", "kira", axe["id"])
+                self.ok("attack", "kira", "oswin-hale", axe["id"])
+                g = self.state()
+                self.assertFalse(any(i["id"] == axe["id"] for i in g.get("kira")["inventory"]))
+                self.assertTrue(any(f["item"]["name"] == "Handaxe" and (f["x"], f["y"]) == (6, 3)
+                                    for f in g.state["maps"]["arena"]["floor"]))
+        finally:
+            self.ok("combat", "end")
+            self.ok("npc", "remove", "oswin-hale")
+
+    def test_npc_alignment(self):
+        self.ok("npc", "add", "bandit", "--name", "Captain Rhosk", "--at", "9,9", "--map", "arena")
+        try:
+            self.ok("npc", "alignment", "captain-rhosk", "--text", "chaotic evil")
+            g = self.state()
+            self.assertEqual(g.get("captain-rhosk")["alignment"], "Chaotic Evil")
+            from engine import views
+            self.assertEqual(views.creature_info(g, g.get("captain-rhosk"))["alignment"], "Chaotic Evil")
+            self.rule("npc", "alignment", "captain-rhosk", "--text", "grumpy")
+            self.rule("npc", "alignment", "kira", "--text", "neutral", contains="player character")
+        finally:
+            self.ok("npc", "remove", "captain-rhosk")
 
     def test_no_fighting_outside_combat(self):
         self.ok("place", "kira", "3,3", "--map", "arena")
@@ -281,6 +458,37 @@ class EngineTest(unittest.TestCase):
         for _ in range(20000):
             counts[dice.roll("1d20")["total"] - 1] += 1
         self.assertTrue(all(800 < c < 1200 for c in counts), counts)
+
+    def test_weapon_mastery_without_a_table_column(self):
+        from engine import chargen, srd
+        self.assertEqual(chargen.weapon_mastery_count(srd.find("classes", "Rogue"), 1), 2)
+        self.assertEqual(chargen.weapon_mastery_count(srd.find("classes", "Ranger"), 1), 2)
+        self.assertEqual(chargen.weapon_mastery_count(srd.find("classes", "Fighter"), 1), 3)
+        self.assertEqual(chargen.weapon_mastery_count(srd.find("classes", "Wizard"), 1), 0)
+        props, names = chargen.check_masteries(srd.find("classes", "Rogue"), 2, "rapier,dagger")
+        self.assertEqual((props, names), (["vex", "nick"], ["Rapier", "Dagger"]))
+        with self.assertRaises(Exception):
+            chargen.check_masteries(srd.find("classes", "Rogue"), 2, "longsword,dagger")  # not proficient
+        # one swap per Long Rest: after any change, a second one must wait for the next rest
+        self.run_cli("char", "masteries", "kira", "--masteries", "longsword,javelin,greatsword")
+        self.rule("char", "masteries", "kira", "--masteries", "longsword,javelin,dagger", contains="Long Rest")
+        self.rule("char", "masteries", "wren", "--masteries", "dagger,quarterstaff", contains="no Weapon Mastery")
+
+    def test_concentration_expires_with_duration(self):
+        from engine.mechanics import concentration_minutes
+        self.assertEqual(concentration_minutes({"duration": "Concentration, up to 1 minute"}), 1)
+        self.assertEqual(concentration_minutes({"duration": "Concentration, up to 10 minutes"}), 10)
+        self.assertEqual(concentration_minutes({"duration": "Concentration, up to 8 hours"}), 480)
+        self.assertIsNone(concentration_minutes({"duration": "Concentration, until dispelled"}))
+        if self.state().state.get("combat"):
+            self.ok("combat", "end")
+        self.ok("cast", "wren", "detect magic", "--ritual")
+        self.assertEqual(self.state().get("wren")["concentration"]["spell"], "detect-magic")
+        self.ok("time", "5m")
+        self.assertIsNotNone(self.state().get("wren")["concentration"])
+        out = self.ok("time", "5m")
+        self.assertIn("duration ran out", out)
+        self.assertIsNone(self.state().get("wren").get("concentration"))
 
 
 if __name__ == "__main__":

@@ -252,6 +252,10 @@ def read_description(text):
         out["eye_glow"] = True
     if re.search(r"eye ?patch|missing (an|one|his|her|their|the) (left |right )?eye|one-eyed", t):
         out["eyepatch"] = "left" if re.search(r"left eye|patch over (his|her|their|the) left", t) else "right"
+        if re.search(r"(silver|steel|gold|golden|brass)(en)? eye ?patch", t):
+            out["eyepatch_color"] = "#d4b460" if re.search(r"(gold|brass)(en)? eye ?patch", t) else "#c9cdd2"
+    if re.search(r"spectacles|eyeglasses|\bglasses\b|pince-nez|lenses", t):
+        out["spectacles"] = "half-moon" if "half-moon" in t or "half moon" in t else "round"
     if re.search(r"\bblind\b|milky eyes|clouded eyes", t):
         out["eye_color"] = EYE_COLORS["milky"]
     sc = _near(w, SKIN_NOUNS, SKIN_TONES)
@@ -264,7 +268,12 @@ def read_description(text):
     if "freckle" in t:
         out["freckles"] = True
     for m in re.finditer(r"scar(?:red|s)?\b([^.;,]{0,40})", t):
-        ctx = m.group(1) if re.search(r"eye|brow|lip|mouth|cheek|face|jaw|chin|nose", m.group(1)) else t[max(0, m.start() - 30):m.start()]
+        after = m.group(1)
+        body = re.search(r"palm|hand|knuckle|finger|wrist|arm|elbow|shoulder|back|chest|belly|side|leg|knee|thigh|foot|feet", after)
+        face = re.search(r"eye|brow|lip|mouth|cheek|face|jaw|chin|nose|temple|forehead", after)
+        if body and (not face or body.start() < face.start()):
+            continue  # a scar the bust doesn't show
+        ctx =m.group(1) if re.search(r"eye|brow|lip|mouth|cheek|face|jaw|chin|nose", m.group(1)) else t[max(0, m.start() - 30):m.start()]
         side = "left" if "left" in ctx else "right" if "right" in ctx else None
         hit = re.search(r"eye|brow|lip|mouth|cheek|jaw|chin", ctx)
         part = hit.group(0) if hit else "cheek"
@@ -276,7 +285,8 @@ def read_description(text):
         out["paint"] = True
     if re.search(r"tattoo|inked|tribal (marks|markings)|markings|runes? (on|across) (his|her|their) (face|cheek|brow)", t):
         out["tattoo"] = True
-    if re.search(r"\bold\b|elderly|aged\b|wrinkl|venerable|grizzled|ancient|weathered face|in (his|her|their) (sixties|seventies|eighties)", t):
+    if re.search(r"\bold\b|elderly|aged\b|wrinkl|venerable|grizzled|ancient|weathered face|in (his|her|their) (sixties|seventies|eighties)"
+                 r"|\b(sixty|seventy|eighty|ninety)\b|\b[6-9]\d(-| )years?(-| )old", t):
         out["age"] = "old"
     elif re.search(r"\byoung\b|youth|boyish|girlish|teen|barely an adult|fresh-faced", t):
         out["age"] = "young"
@@ -295,7 +305,9 @@ def read_description(text):
                      ("circlet", "circlet"), ("tiara", "circlet"), ("helm", "helm"), ("helmet", "helm"),
                      ("bandana", "bandana"), ("headscarf", "bandana"), ("kerchief", "bandana"), ("antler", "antlers"),
                      ("hood", "hood"), ("cowl", "hood"), ("hat", "hat"), ("cap", "hat"), ("veil", "veil")):
-        if re.search(r"\b" + re.escape(word), t) and not re.search(r"(hood|hat|helm)[a-z]* (down|off|thrown back|pushed back)", t):
+        # whole words only: "crowns" is money, "captain"/"cape" aren't caps, "hatch" isn't a hat
+        tail = r"(ed)?\b" if word == "crown" else r"(s|ed)?\b"
+        if re.search(r"\b" + re.escape(word) + tail, t) and not re.search(r"(hood|hat|helm)[a-z]* (down|off|thrown back|pushed back)", t):
             out["headwear"] = hw
             break
     if re.search(r"\b(no|without a|bare)[- ]?(hat|hood|helm)|bareheaded|hood (down|thrown back|pushed back)", t):
@@ -502,7 +514,7 @@ def _apply(L, found):
         if k == "species_hint":
             continue
         if k == "scars":
-            L["scars"] = L.get("scars", []) + v
+            L["scars"] = L.get("scars", []) + [s for s in v if s not in L.get("scars", [])]
         else:
             L[k] = v
 
@@ -556,7 +568,8 @@ def _read_field(field, text):
         return {"presentation": "feminine" if re.search(r"fem|woman|female", low) else "masculine" if re.search(r"masc|man|male", low) else None}
     if field in ("marks", "face"):
         f = read_description(t)
-        return {k: v for k, v in f.items() if k in ("scars", "freckles", "paint", "tattoo", "eyepatch", "earrings", "nosering",
+        return {k: v for k, v in f.items() if k in ("scars", "freckles", "paint", "tattoo", "eyepatch", "eyepatch_color",
+                                                     "spectacles", "earrings", "nosering",
                                                      "tusks", "ears", "expression", "eye_glow", "presentation")}
     if field == "headwear":
         if re.search(r"\bnone|bare|no hat", low):
@@ -612,6 +625,8 @@ def describe_look(e):
         extras.append(f"{L['horns']} horns")
     if L.get("eyepatch"):
         extras.append(f"eyepatch ({L['eyepatch']})")
+    if L.get("spectacles"):
+        extras.append(f"{L['spectacles']} spectacles")
     if L.get("scars"):
         extras.append("scars: " + ", ".join(f"{s['side']} {s['where']}" for s in L["scars"]))
     return f"{e['name']}: " + "; ".join(bits) + (f"; also {', '.join(extras)}" if extras else "")
@@ -850,7 +865,24 @@ def bust_svg(e, mode="portrait", size=None):
         s = 1 if L["eyepatch"] == "left" else -1
         x = CX + s * ex
         add(f'<path d="M{CX - s * w},{top + 38} L{CX + s * (w + 2)},{ey + 14}" stroke="#1a1410" stroke-width="3"/>')
-        add(f'<path d="M{x - 13},{ey - 6} Q{x},{ey - 12} {x + 13},{ey - 6} Q{x + 12},{ey + 12} {x},{ey + 13} Q{x - 12},{ey + 12} {x - 13},{ey - 6} Z" fill="#1a1410"/>')
+        pc = L.get("eyepatch_color") or "#1a1410"
+        add(f'<path d="M{x - 13},{ey - 6} Q{x},{ey - 12} {x + 13},{ey - 6} Q{x + 12},{ey + 12} {x},{ey + 13} Q{x - 12},{ey + 12} {x - 13},{ey - 6} Z" '
+            f'fill="{pc}" stroke="{darken(pc, .4)}" stroke-width="1.2"/>')
+    # spectacles
+    if L.get("spectacles"):
+        fr = "#c9a24a" if L["spectacles"] == "half-moon" else "#3a3036"
+        for s in (-1, 1):
+            x = CX + s * ex
+            if L.get("eyepatch") and ((L["eyepatch"] == "left") == (s == 1)):
+                continue
+            if L["spectacles"] == "half-moon":
+                add(f'<path d="M{x - 12},{ey + 2} L{x + 12},{ey + 2} A12,10 0 0 1 {x - 12},{ey + 2} Z" fill="#dfe8f0" fill-opacity=".18" '
+                    f'stroke="{fr}" stroke-width="2"/>')
+            else:
+                add(f'<circle cx="{x}" cy="{ey}" r="12.5" fill="#dfe8f0" fill-opacity=".15" stroke="{fr}" stroke-width="2.2"/>')
+            add(f'<path d="M{x + s * 12.5},{ey - 1} L{CX + s * (w - 2)},{ey - 4}" stroke="{fr}" stroke-width="1.8"/>')
+        by = ey + 2 if L["spectacles"] == "half-moon" else ey - 2
+        add(f'<path d="M{CX - ex + 12},{by} Q{CX},{by - 5} {CX + ex - 12},{by}" fill="none" stroke="{fr}" stroke-width="2"/>')
     # brows
     bcol = darken(hair, .15) if L["hair_style"] != "bald" or sp not in ("Dragonborn",) else darken(skin, .4)
     if L.get("reptile"):
@@ -1318,4 +1350,4 @@ def art_version(e):
     return hashlib.sha1(blob.encode()).hexdigest()[:10]
 
 
-ART_REV = 1
+ART_REV = 2

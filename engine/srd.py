@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 RULES = ROOT / "rules"
 CACHE = Path(__file__).resolve().parent / ".cache" / "srd.json"
-CACHE_VERSION = 13
+CACHE_VERSION = 14
 
 ABILITIES = ["str", "dex", "con", "int", "wis", "cha"]
 ABILITY_NAMES = {"strength": "str", "dexterity": "dex", "constitution": "con",
@@ -193,6 +193,13 @@ def parse_spell(path):
                      r"at the end of each of its turns, (?:the|a|each) (?:target|creature) (?:repeats|can repeat) the (?:save|saving throw)",
                      main, re.I):
             effect["repeat"] = True
+        # two-stage effects (Sleep): "...until the end of its next turn, at which point it must repeat the save.
+        # If the target fails the second save, the target has the Unconscious condition"
+        esc = re.search(r"until the end of its next turn, at which point it must repeat the save\. "
+                        r"If the target fails the second save, the target has the (\w+) condition", main, re.I)
+        if esc:
+            effect["repeat"] = True
+            effect["escalate"] = esc.group(1).lower()
     elif heal:
         effect = {"kind": "heal", "dice": heal.group(1), "add_mod": bool(heal.group(2))}
     if dmg and dmg.group(2).lower() in DAMAGE_TYPES and effect["kind"] in ("attack", "save", "other"):

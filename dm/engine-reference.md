@@ -33,6 +33,8 @@ spells set wren --cantrips "fire bolt,light,mage hand" --prepared "magic missile
 spells scribe wren --spell "fireball" --source "spell scroll found in the vault" | spells list wren
 char levelup kira [--class Rogue] [--hp avg|roll] [--subclass Champion] [--feat "Ability Score Improvement" --asi str+2]
          [--fighting-style Archery] [--expertise a,b]
+char masteries kira --masteries longsword,javelin,greatsword   # change Weapon Mastery weapons after a Long Rest
+char leave wren "parts ways at the crossroads" | char rejoin wren "back for the finale"   # alive, sheet kept, off the party panel
 char bio kira appearance "Scarred, braided red hair, soldier's posture"
 char inspire kira "Brilliant plan at the bridge" | char use-inspiration kira
 char show kira
@@ -42,7 +44,10 @@ char show kira
 ```
 npc add goblin-warrior --count 3 --at 12,8 [--map crypt] [--hidden] [--side enemy|ally|neutral] [--hp roll] [--name "Snag"]
 npc reveal|hide|remove <ids,...> | npc rename <id> --name "..." | npc side <id> --side ally | npc show <id>
+npc leave <ids,...> | npc return <id>   # walks out of the scene (off the table, out of fights here); faces stay in the log
 npc describe <id> --text "Tall, grey coat, a pistol on one hip"   # what anyone can SEE (info panel); do it whenever you describe them
+npc alignment <id> --text "Lawful Evil"   # every named NPC gets their own alignment (shown on their info card);
+                                          # PCs never do: the player plays their character's outlook
 npc lore <id> --text "Resistant to fire; hates mirrors"   # public knowledge the party has earned (knowledge check, clue)
                                                            # → shown on the creature's click-to-inspect panel
 encounter plan goblin-warrior:4 bugbear-warrior:1        # XP budget check vs party
@@ -57,12 +62,14 @@ stand kira                            # costs half Speed
 ## Combat
 ```
 combat start [--surprised goblin-warrior-a,goblin-warrior-b]   # everyone with a token on the current map
+combat swap kira,wren        # Alert feat: Initiative Swap with a willing ally, right after initiative (before anyone acts)
 combat next                  # end turn → next creature (recharges, conditions, death saves handled)
 combat status | combat add <id> | combat remove <id> | combat end
 attack kira goblin-warrior-a greatsword [--adv "reason"] [--dis "reason"] [--sneak] [--smite 1] [--offhand] [--versatile] [--reaction] [--knockout]
 attack goblin-warrior-a kira scimitar           # monster actions come from the stat block
 attack adult-red-dragon kira "fire breath"       # save-based actions: the target(s) roll saves
 action kira dash|disengage|dodge|help --target wren|hide|search|study|influence|utilize|ready|magic [--bonus --via "Cunning Action"]
+action kira grapple --target goblin-a | action kira shove --target goblin-a [--prone] | action goblin-a escape   # Unarmed Strike: Grapple/Shove
 cast wren "magic missile" --targets goblin-a,goblin-a,goblin-b [--level 2]
 cast wren "burning hands" --targets goblin-a,goblin-b
 cast cleric "hold person" --targets bandit --condition paralyzed
@@ -108,6 +115,8 @@ item equip|unequip|attune|unattune|use|light|drop|sell <who> <item-id> [--to <ta
 item give kira <item-id> --to wren | item recover-ammo kira Arrows | item card kira <item-id>
 item drop kira dagger-1 --qty 1      # lands on the map at the token's square (gold diamond marker, shown to players)
 item pickup kira floor-1             # must be in/next to that square; in combat uses the free object interaction
+map container crypt 12,7 --name "Iron-bound chest" [--text "..."] [--id chest-1]   # a tile that holds items (clickable)
+item stash kira rope-1 --to chest-1 [--qty 2]   # put an item into a container (in/next to it)
 item identify kira <item-id> --how "Identify spell (cast by wren)"   # magic items start UNIDENTIFIED unless bought, starting or --identified
 rest short --focus kira:<item-id>     # SRD: focus on one magic item through a Short Rest to learn its properties
 item obscure kira <item-id> --how "..." | item refresh kira <item-id>   # DM repair: mark unidentified / re-read an item from the SRD
@@ -129,6 +138,7 @@ map reveal <id> --room 3 | --rect 0,0,10,10 | --all      map hide <id> --rect ..
 map poi <id> x,y --name "Weathered Statue" --text "What they perceive"   # pin a perceived notable object to its tile
 map poi <id> x,y --name "..." --id j12   # ...or link an existing journal entry; players click the marker to open it
 map poi-move <id> x,y --id poi-2 --reason "dragged aside" | map poi-remove <id> --id poi-2 --reason "carted away"
+map set <id> --kv theme=bathhouse | walls=brick | floor=mosaic | wood=herringbone | stone=hex | accent=#8a1c2a   # look per map
 map door <id> 12,7 open|close|reveal|break                map feature <id> 5,5 reveal|add|remove
 map crop <id> --room 4 --pad 2 --show                     map paint <id> "3,3 5,5-9,5" --char "#"
 map set <id> --kv lighting=dark                           map party 40,30   map label <id> 10,10 --name "Old Mill"
@@ -137,7 +147,8 @@ asset look kira --hair "long auburn braid" --eyes green --marks "scar across lef
 asset art kira [--crop face] [--out file.svg] | asset art kira:<item-id> | asset art srd:flame-tongue     # write the generated picture to look at
 asset portrait kira [--style heraldic] [--clear] | asset icon "dragon" | asset fetch <url> --name "Cave art" --license CC0 --credit "..." [--portrait kira] [--item kira:<item-id>]
 asset import path/to/file.png --license "own work" | asset draw drawing.svg --name "Sister Maren" --portrait maren
-say "The torch gutters." | say --as "Brother Aldric" "Welcome, travellers."
+say "The torch gutters." | say --as "Brother Aldric" "Welcome, travellers." | say --at kira "Kira draws her sword."
+#   the live table shows each beat on the map: speech bubbles over the speaker, --at captions by that creature, a story strip
 scene "The Sunken Shrine" --desc "Rain hammers the broken roof." [--image <asset>] [--map shrine]
 journal add "What the note says" --title "..."   # players' Journal tab (every `show` is added automatically)
 show item kira:<item-id> | show creature <id> | show asset <id> | show text "The letter reads..." --title "Letter" | show srd-item "Bag of Holding" | show clear

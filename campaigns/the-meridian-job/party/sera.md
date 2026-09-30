@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Bard 3** (College of Lore) · **Background:** Acolyte · **XP:** 1537
+**Player:** DM · **Human** · **Bard 3** (College of Lore) · **Background:** Acolyte · **XP:** 1555
 
 **HP** 21/21 · **AC** 13 (Leather Armor 11 + Dex 2) · **Speed** 30 ft · **Initiative** +4 · **Proficiency** +2 · **Passive Perception** 13
 
@@ -14,7 +14,7 @@
 
 **Skills:** Acrobatics +3, Animal Handling +2, Arcana +1, Athletics +0, Deception +7**, History +1, Insight +3*, Intimidation +4, Investigation +2*, Medicine +2, Nature +1, Perception +3*, Performance +5*, Persuasion +7**, Religion +2*, Sleight Of Hand +4*, Stealth +4*, Survival +2
 
-**Conditions:** — · **Exhaustion:** 0 · **Concentrating on:** Hold Person
+**Conditions:** — · **Exhaustion:** 0
 
 ## Attacks
 
@@ -28,7 +28,7 @@ Attacks per Attack action: 1
 ## Spellcasting
 
 - **Bard:** save DC 13, attack +5, cantrips 2, prepared 6, up to level 2
-- **Slots:** L1 0/4, L2 0/2
+- **Slots:** L1 3/4, L2 2/2
 - **Cantrips:** vicious-mockery, minor-illusion
 - **Prepared:** healing-word, dissonant-whispers, disguise-self, suggestion, hold-person, heat-metal
 
@@ -53,12 +53,9 @@ Species traits: Resourceful, Skillful, Versatile
 - `entertainers-pack-1` 1× Entertainer's Pack · _starting equipment: Bard option A (replaces mis-parsed entry)_
 - `viol-1` 1× Viol · _starting equipment: Bard option A (chosen instrument)_
 - `calligraphers-supplies-1` 1× Calligrapher's Supplies · _purchased for 10 GP_
-- `forged-leave-request-var-1` 1× Forged Leave Request (Varga) · _crafted: Sera's forgery (Calligrapher's Supplies 20 vs DC 15)_
-- `black-gold-coin-1` 1× Black-Gold Coin · _gift: Valentin Crane, from his waistcoat_
-- `receiving-clerks-key-rin-1` 1× Receiving Clerk's Key Ring · _stolen: lifted off the sleeping Receiving Clerk's belt, Acquisitions Dock_
-  - Pim Hobb's brass ring: STORES opens the iron door to the Undercroft stores (the Brass Warden answers to the sigil plate, not the lock). CAGE opens stores cages 1 to 6, where Acquisitions keeps what it seizes. LIFT runs the lift up to the curatorial offices, no further. Pim says a stair behind Cage 4 goes down to a door with its own plate: 'the Curator's, nobody else's.'
+- `cask-of-ironmoor-brandy-1` 1× Cask of Ironmoor Brandy · _found: the smugglers' cache behind the sack-store panel_
 
-Hit Point Dice: Bard d8 2/3
+Hit Point Dice: Bard d8 3/3
 Languages: Common, Elvish, Dwarvish · Tools: Calligrapher's Supplies · Armor training: light
 
 ## HP history

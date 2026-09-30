@@ -3,6 +3,7 @@ target has already moved away. The opportunity-attack window must stay open unti
 
 Run:  python -m unittest discover -s tests -v
 """
+import _cli  # noqa: E402  (in-process CLI runner)
 import os
 import shutil
 import subprocess
@@ -33,20 +34,12 @@ class OpportunityAttackViewerTest(unittest.TestCase):
 
     @classmethod
     def ok(cls, *args):
-        p = subprocess.run([sys.executable, "-m", "engine", *args], cwd=ROOT, env=cls.env, capture_output=True,
-                           text=True, encoding="utf-8")
-        out = p.stdout + p.stderr
-        assert p.returncode == 0, f"{args} failed:\n{out}"
+        code, out = _cli.run(cls.env, *args)
+        assert code == 0, f"{args} failed:\n{out}"
         return out
 
     def state(self):
-        from importlib import reload
-        os.environ.update({k: v for k, v in self.env.items() if k.startswith("DND_")})
-        import engine.store as st
-        reload(st)
-        import engine.core as core
-        reload(core)
-        return core.Game(st.active_dir())
+        return _cli.game(self.env)
 
     def test_requested_opportunity_attack_resolves_after_target_left(self):
         self.ok("place", "kira", "5,5", "--map", "arena")

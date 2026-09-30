@@ -21,11 +21,11 @@ lost something to the Meridian, and each will learn it took more than they knew.
 - **Pacing:** plenty of combat (the player asked for it), mixed with legwork, infiltration and social play.
   Every legwork job carries a real chance of a fight.
 - **Difficulty:** standard. Death is possible but always telegraphed.
-- **Lines:** sexual content; harm to children. **Veils:** torture stays off-screen.
+- **Lines:** sexual content; harm to children. **Veils:** none (the torture veil was removed at the player's request on Day 3, Session 2).
 
 ## Party Setup
 - **Player character:** Kit Corvell, "the Jackdaw" (Rogue/Thief).
-- **DM-run crew (full PCs):** Hedda Vask (Fighter/Champion), Tobias Fenwick (Wizard/Evoker), Sera Lark (Bard/Lore).
+- **DM-run crew (full PCs):** Sera Lark (Bard/Lore). Hedda Vask and Tobias Fenwick parted ways on Day 3 (`char leave`; alive, sheets kept, now NPCs in the world). The player wants to play **evil**: build the rest of the campaign for a ruthless crew (no moral companions forced on them; recruits motivated by greed or grudges).
   They have their own opinions but defer the big decisions to Kit.
 - **Level 3**, standard array, class and background equipment packages, XP advancement.
 - **Dice:** player_rolls=auto (the engine rolls everything; every roll is logged and shown).

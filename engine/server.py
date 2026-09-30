@@ -122,7 +122,7 @@ class Handler(BaseHTTPRequestHandler):
         if path.startswith(("/api/portrait/", "/api/art/portrait/", "/api/art/face/", "/api/art/bust/")):
             eid = path.rsplit("/", 1)[-1].removesuffix(".svg")
             e = s["entities"].get(eid)
-            if not e or e.get("hidden"):
+            if not e or (e.get("hidden") and not views.seen_by_players(g, e)):
                 return self.json({"error": "unknown"}, 404)
             if e.get("portrait") and e["portrait"] in s["assets"] and s["assets"][e["portrait"]].get("public"):
                 return self.redirect(f"/asset/{e['portrait']}")
@@ -149,6 +149,9 @@ class Handler(BaseHTTPRequestHandler):
                 return self.send(200, itemart.item_svg({**it, "identified": True}), "image/svg+xml; charset=utf-8", cache=True)
             e = s["entities"].get(parts[0])
             it = next((i for i in (e or {}).get("inventory", []) if len(parts) > 1 and i["id"] == parts[1]), None) if e and e["kind"] == "pc" else None
+            if not it and len(parts) > 1:  # changed hands since it was shown: follow it if unambiguous
+                found = [i for o in s["entities"].values() if o["kind"] == "pc" for i in o.get("inventory", []) if i["id"] == parts[1]]
+                it = found[0] if len(found) == 1 else None
             if not it:
                 return self.json({"error": "unknown"}, 404)
             if it.get("art") in s["assets"] and s["assets"][it["art"]].get("public"):
@@ -179,8 +182,22 @@ class Handler(BaseHTTPRequestHandler):
                 if not it:
                     return self.json({"error": "unknown item"}, 404)
                 return self.json(views.item_info(g, {**it, "identified": True, "source": "SRD 5.2"}))
+            if parts[0].startswith("floor~") and len(parts) > 1:  # an item on the floor or in a container: floor~<map>/<floor-id>
+                m = s["maps"].get(parts[0][len("floor~"):])
+                if not m or m["id"] not in views.visible_maps(g):
+                    return self.json({"error": "unknown"}, 404)
+                f = next((x for x in m.get("floor", []) if x["id"] == parts[1]), None)
+                if not f or (m.get("fog") and m.get("revealed") and m["revealed"][f["y"]][f["x"]] != "1"):
+                    return self.json({"error": "unknown"}, 404)
+                return self.json(views.item_info(g, f["item"]))
             e = s["entities"].get(parts[0])
             it = next((i for i in (e or {}).get("inventory", []) if len(parts) > 1 and i["id"] == parts[1]), None) if e and e["kind"] == "pc" else None
+            if not it and len(parts) > 1:
+                # the item has changed hands since it was shown (a handout in the journal): follow it if it's unambiguous
+                found = [(o, i) for o in s["entities"].values() if o["kind"] == "pc"
+                         for i in o.get("inventory", []) if i["id"] == parts[1]]
+                if len(found) == 1:
+                    e, it = found[0]
             if not it:
                 return self.json({"error": "unknown"}, 404)
             return self.json(views.item_info(g, it, e["id"]))

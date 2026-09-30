@@ -98,7 +98,9 @@ FORMS = [
 
 
 def _text(item):
-    return " ".join(str(item.get(k) or "") for k in ("alias", "name", "base_name", "note", "meta")).lower()
+    # a custom item (a letter, a deed, a trinket) is described in its own text; SRD items only by their note
+    extra = item.get("description") if item.get("custom") else ""
+    return " ".join(str(item.get(k) or "") for k in ("alias", "name", "base_name", "note", "meta")).lower() + " " + str(extra or "").lower()
 
 
 def form_of(item):
@@ -827,11 +829,11 @@ def item_svg(item, size=None):
 
 
 def item_art_version(item):
-    keys = ("name", "alias", "base_name", "note", "rarity", "magic", "identified", "kind", "category", "meta")
+    keys = ("name", "alias", "base_name", "note", "rarity", "magic", "identified", "kind", "category", "meta", "custom", "description")
     return hashlib.sha1(repr([item.get(k) for k in keys] + [ITEM_ART_REV]).encode()).hexdigest()[:10]
 
 
-ITEM_ART_REV = 1
+ITEM_ART_REV = 2
 
 
 def _lint():  # every form keyword maps to something drawable

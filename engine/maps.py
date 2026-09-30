@@ -54,9 +54,15 @@ TERRAIN = {
     "l": ("lamp / candelabrum", 1, False, None),
     "u": ("statue / display plinth", None, True, "three-quarters"),
     "n": ("mast / column", None, True, "three-quarters"),
+    "p": ("potted plant", None, False, "half"),
+    "e": ("bench", 2, False, "half"),
+    "i": ("cabinets / shelves / wardrobe", None, True, "three-quarters"),
+    "y": ("bed", 2, False, "half"),
+    "j": ("tub / basin", None, False, "half"),
+    "z": ("tiled floor", 1, False, None),
     " ": ("void", None, True, "total"),
 }
-CORNER_BLOCKERS = set("#BTPDS oun")
+CORNER_BLOCKERS = set("#BTPDS ouni")
 
 BIOMES = {  # region map cell codes
     "O": ("deep ocean", "#1e3f66"), "C": ("shallow sea", "#2f6690"), "s": ("beach", "#e0cda0"),
@@ -612,47 +618,227 @@ def gen_town(seed, w=56, h=40, name=None):
 
 # ============================================================== interior
 
+# each kind of building: its look, its floors, the back rooms it has, and how its main hall is furnished
+INTERIOR_KINDS = {
+    "tavern":    {"theme": "timber", "floor": "=", "hall": "Common room", "back": ["Kitchen", "Storeroom", "Cellar stairs", "Snug"]},
+    "inn":       {"theme": "timber", "floor": "=", "hall": "Common room", "back": ["Kitchen", "Guest room", "Guest room", "Stairs"]},
+    "house":     {"theme": "timber", "floor": "=", "hall": "Parlour", "back": ["Bedroom", "Kitchen", "Pantry"]},
+    "shop":      {"theme": "timber", "floor": "=", "hall": "Shop floor", "back": ["Storeroom", "Workroom", "Office"]},
+    "temple":    {"theme": "temple", "floor": ".", "hall": "Nave", "back": ["Vestry", "Sanctum", "Reliquary"]},
+    "bathhouse": {"theme": "bathhouse", "floor": "q", "hall": "Great bath", "back": ["Changing room", "Hot room", "Linen store"]},
+    "manor":     {"theme": "manor", "floor": "=", "hall": "Great hall", "back": ["Study", "Bedchamber", "Dining room", "Library"]},
+    "library":   {"theme": "manor", "floor": "=", "hall": "Reading room", "back": ["Stacks", "Archive", "Scriptorium"]},
+    "warehouse": {"theme": "cellar", "floor": ".", "hall": "Warehouse floor", "back": ["Office", "Loading bay", "Strongroom"]},
+    "workshop":  {"theme": "cellar", "floor": ".", "hall": "Workshop", "back": ["Storeroom", "Forge", "Office"]},
+}
+INTERIOR_KINDS["baths"] = INTERIOR_KINDS["bathhouse"]
+INTERIOR_KINDS["townhouse"] = INTERIOR_KINDS["manor"]
+INTERIOR_KINDS["smithy"] = INTERIOR_KINDS["workshop"]
+
+
+def _cuts(rng, lo, hi, n, gap=3):
+    """n split lines between lo and hi, at least `gap` apart (so every room keeps some floor)."""
+    for _ in range(50):
+        cuts = sorted(rng.sample(range(lo, hi), n)) if hi - lo > n else []
+        if len(cuts) == n and all(b - a >= gap for a, b in zip([lo - gap] + cuts, cuts + [hi + gap])):
+            return cuts
+    step = (hi - lo) // (n + 1)
+    return [lo + step * (i + 1) for i in range(n)]
+
+
 def gen_interior(seed, w=24, h=18, name=None, kind="tavern"):
+    """A building interior shaped by its kind: the back rooms fall on a random side in a random number and size,
+    corners may be chamfered, the entrance moves, and the main hall is furnished for what the place is."""
     rng = random.Random(seed)
+    spec = INTERIOR_KINDS.get(kind, {"theme": "stone", "floor": ".", "hall": "Main hall", "back": ["Storeroom", "Office", "Back room"]})
     title = name or (rng.choice(TAVERN_NAMES) if kind == "tavern" else f"{place_name(rng)} {kind.title()}")
-    m = new_map("interior", title, w, h, fill="#", seed=seed, lighting="dim", building=kind)
+    m = new_map("interior", title, w, h, fill="#", seed=seed, lighting="dim", building=kind, theme=spec["theme"])
     G = Grid(m)
-    G.rect(1, 1, w - 2, h - 2, "=")
-    # back rooms
-    split_x = w - 7
-    for y in range(1, h - 1):
-        G.set(split_x, y, "#")
-    mid = h // 2
-    G.set(split_x, mid - 3, "D")
-    G.set(split_x, mid + 3, "D")
-    for x in range(split_x + 1, w - 1):
-        G.set(x, mid, "#")
-    m["rooms"] += [{"n": 1, "x": 1, "y": 1, "w": split_x - 1, "h": h - 2, "label": "Common room" if kind == "tavern" else "Main hall"},
-                   {"n": 2, "x": split_x + 1, "y": 1, "w": w - split_x - 2, "h": mid - 1, "label": "Kitchen" if kind == "tavern" else "Storeroom"},
-                   {"n": 3, "x": split_x + 1, "y": mid + 1, "w": w - split_x - 2, "h": h - mid - 2, "label": "Cellar stairs" if kind == "tavern" else "Office"}]
-    G.set(w - 3, h - 3, ">")
-    G.set(w // 3, 0, "D")  # front door
-    if kind == "tavern":
-        for y in range(3, h - 4):
-            G.set(split_x - 3, y, "c")
-        m["labels"].append({"x": split_x - 4, "y": 2, "text": "Bar"})
-        G.set(2, mid, "f")
-        for _ in range(7):
-            x, y = rng.randint(3, split_x - 6), rng.randint(3, h - 4)
-            if all(G.get(x + dx, y + dy) == "=" for dx in (-1, 0, 1) for dy in (-1, 0, 1)):
-                G.set(x, y, "h")
-    elif kind == "temple":
-        for y in range(3, h - 3, 3):
-            for x in (4, split_x - 4):
-                G.set(x, y, "P")
-        G.set(split_x - 2, mid, "c")
-        m["labels"].append({"x": split_x - 3, "y": mid - 1, "text": "Altar"})
+    fl = spec["floor"]
+    G.rect(1, 1, w - 2, h - 2, fl)
+    # back rooms: a band on the left, right or far side, split into 2-3 rooms of uneven size
+    side = rng.choice(("left", "right", "far"))
+    front_top = rng.random() < .5           # entrance on the top or bottom wall
+    depth = rng.randint(5, 8) if side != "far" else rng.randint(4, 6)
+    n_back = rng.choice((2, 3, 3))
+    names = rng.sample(spec["back"], min(n_back, len(spec["back"])))
+    hall = [1, 1, w - 2, h - 2]              # x, y, w, h of the main hall
+    rooms = []
+    if side in ("left", "right"):
+        wx = depth + 1 if side == "left" else w - depth - 2
+        for y in range(1, h - 1):
+            G.set(wx, y, "#")
+        bx0, bx1 = (1, wx - 1) if side == "left" else (wx + 1, w - 2)
+        cuts = _cuts(rng, 4, h - 4, n_back - 1)
+        ys = [1] + [c + 1 for c in cuts] + [h - 1]
+        for i in range(n_back):
+            y0, y1 = ys[i], h - 2
+            if i < n_back - 1:
+                for x in range(bx0, bx1 + 1):
+                    G.set(x, ys[i + 1] - 1, "#")
+                y1 = ys[i + 1] - 2
+            G.set(wx, rng.randint(y0, y1), "D")
+            rooms.append((bx0, y0, bx1 - bx0 + 1, y1 - y0 + 1))
+        hall = [1, 1, wx - 1, h - 2] if side == "right" else [wx + 1, 1, w - wx - 2, h - 2]
     else:
-        for x in range(3, split_x - 2):
-            G.set(x, 3, "c")
-        for _ in range(5):
-            G.set(rng.randint(3, split_x - 3), rng.randint(6, h - 3), "h")
-    m["start"] = [w // 3, 1]
+        wy = depth + 1 if not front_top else h - depth - 2
+        for x in range(1, w - 1):
+            G.set(x, wy, "#")
+        by0, by1 = (1, wy - 1) if not front_top else (wy + 1, h - 2)
+        cuts = _cuts(rng, 5, w - 5, n_back - 1)
+        xs = [1] + [c + 1 for c in cuts] + [w - 1]
+        for i in range(n_back):
+            x0, x1 = xs[i], (xs[i + 1] - 2 if i < n_back - 1 else w - 2)
+            if i < n_back - 1:
+                for y in range(by0, by1 + 1):
+                    G.set(xs[i + 1] - 1, y, "#")
+            G.set(rng.randint(x0, x1), wy, "D")
+            rooms.append((x0, by0, x1 - x0 + 1, by1 - by0 + 1))
+        hall = [1, wy + 1, w - 2, h - wy - 2] if not front_top else [1, 1, w - 2, wy - 1]
+    hx, hy, hw, hh = hall
+    # chamfer one or two outer corners of the hall so the building isn't a plain box
+    for _ in range(rng.choice((0, 1, 2))):
+        cx0 = rng.choice((hx, hx + hw - 1))
+        cy0 = rng.choice((hy, hy + hh - 1))
+        size = rng.randint(1, 2)
+        for i in range(size):
+            for j in range(size - i):
+                x, y = cx0 + (i if cx0 == hx else -i), cy0 + (j if cy0 == hy else -j)
+                if all(G.get(x + a, y + b) != "D" for a in (-1, 0, 1) for b in (-1, 0, 1)):
+                    G.set(x, y, "#")
+    # front door (sometimes double) on the hall's outer wall
+    door_y = 0 if front_top else h - 1
+    dx0 = rng.randint(hx + 2, hx + hw - 4)
+    G.set(dx0, door_y, "D")
+    if rng.random() < .4:
+        G.set(dx0 + 1, door_y, "D")
+    iny = 1 if front_top else h - 2
+    m["start"] = [dx0, iny]
+    doors = {(x, y) for y in range(h) for x in range(w) if G.get(x, y) == "D"}
+
+    def free(x, y, c=fl):
+        """A floor square away from every door, in the hall."""
+        return (hx <= x < hx + hw and hy <= y < hy + hh and G.get(x, y) == c and
+                all(max(abs(x - a), abs(y - b)) > 1 for a, b in doors) and abs(x - dx0) + abs(y - iny) > 2)
+
+    def scatter(ch, n, c=fl, pad=1, tries=80):
+        for _ in range(tries):
+            if n <= 0:
+                return
+            x, y = rng.randint(hx + pad, hx + hw - 1 - pad), rng.randint(hy + pad, hy + hh - 1 - pad)
+            if free(x, y, c) and all(G.get(x + a, y + b) not in "hecPaiyj" for a in (-1, 0, 1) for b in (-1, 0, 1)):
+                G.set(x, y, ch)
+                n -= 1
+
+    def hearth(x):
+        for y in sorted(range(hy + 1, hy + hh - 1), key=lambda y: abs(y - hy - hh // 2)):
+            if free(x, y):
+                G.set(x, y, "f")
+                return
+
+    far_y = hy if not front_top else hy + hh - 1     # the end of the hall away from the entrance
+    mid_x, mid_y = hx + hw // 2, hy + hh // 2
+    if kind in ("tavern", "inn"):
+        bx = rng.choice((hx + 2, hx + hw - 3))
+        for y in range(hy + 2, hy + hh - 3):
+            if free(bx, y):
+                G.set(bx, y, "c")
+        m["labels"].append({"x": bx, "y": hy + 1, "text": "Bar"})
+        hearth(hx + hw - 1 if bx < mid_x else hx)
+        for _ in range(rng.randint(4, 7)):
+            x, y = rng.randint(hx + 3, hx + hw - 4), rng.randint(hy + 2, hy + hh - 3)
+            if free(x, y) and free(x - 1, y) and free(x + 1, y) and G.get(x, y - 1) != "h":
+                G.set(x, y, "h")
+                G.set(x - 1, y, "e")
+                G.set(x + 1, y, "e")
+        scatter("l", 2)
+    elif kind in ("temple",):
+        for x in range(hx + 1, hx + hw - 1):
+            if G.get(x, far_y) == fl:
+                G.set(x, far_y, "k")
+        ax = next((x for x in sorted(range(hx + 1, hx + hw - 1), key=lambda x: abs(x - mid_x)) if free(x, far_y, "k")), mid_x)
+        G.set(ax, far_y, "c")
+        m["labels"].append({"x": ax, "y": far_y + (1 if not front_top else -1), "text": "Altar"})
+        for y in range(hy, hy + hh):
+            if G.get(mid_x, y) == fl:
+                G.set(mid_x, y, "k")
+        step = rng.choice((2, 3))
+        for y in range(hy + 2, hy + hh - 2, step):
+            for x in (mid_x - hw // 3, mid_x + hw // 3):
+                if free(x, y):
+                    G.set(x, y, "P")
+            for x in list(range(mid_x - hw // 3 + 2, mid_x - 1)) + list(range(mid_x + 2, mid_x + hw // 3 - 1)):
+                if free(x, y + 1):
+                    G.set(x, y + 1, "e")
+        scatter("l", 3)
+    elif kind in ("bathhouse", "baths"):
+        pw, ph = max(4, hw // 2), max(3, hh // 2 - 1)
+        px0, py0 = mid_x - pw // 2, mid_y - ph // 2
+        round_pool = rng.random() < .5
+        for y in range(py0, py0 + ph):
+            for x in range(px0, px0 + pw):
+                inside = ((x - mid_x + .5) / (pw / 2)) ** 2 + ((y - mid_y + .5) / (ph / 2)) ** 2 <= 1.05 if round_pool else True
+                if inside and free(x, y):
+                    G.set(x, y, "~" if pw > 5 and ph > 3 and abs(x - mid_x) < pw // 4 and abs(y - mid_y) < ph // 4 else "w")
+        for x in range(px0 - 1, px0 + pw + 1):
+            for y in (py0 - 2, py0 + ph + 1):
+                if rng.random() < .35 and free(x, y):
+                    G.set(x, y, "e")
+        for x, y in ((hx + 1, hy + 1), (hx + hw - 2, hy + 1), (hx + 1, hy + hh - 2), (hx + hw - 2, hy + hh - 2)):
+            if free(x, y):
+                G.set(x, y, rng.choice("pu"))
+        scatter("l", 3)
+        scatter("P", rng.choice((0, 2, 4)))
+    elif kind in ("manor", "townhouse", "house", "library"):
+        kx, ky = rng.randint(hx + 2, hx + hw // 3), rng.randint(hy + 2, hy + hh // 3)
+        for y in range(ky, ky + max(3, hh // 2)):
+            for x in range(kx, kx + max(4, hw // 2)):
+                if free(x, y):
+                    G.set(x, y, "k")
+        hearth(rng.choice((hx, hx + hw - 1)))
+        for x in range(hx + 1, hx + hw - 1):
+            if rng.random() < (.7 if kind == "library" else .3) and free(x, far_y):
+                G.set(x, far_y, "i")
+        scatter("h", rng.randint(3, 6), c="k")
+        scatter("h", 2)
+        scatter("p", 2)
+        scatter("l", 2)
+    elif kind in ("warehouse", "workshop", "smithy"):
+        for y in range(hy + 2, hy + hh - 2, rng.choice((2, 3))):
+            for x in range(hx + 2, hx + hw - 2):
+                if rng.random() < .55 and free(x, y):
+                    G.set(x, y, "v")
+        if kind != "warehouse":
+            hearth(rng.choice((hx, hx + hw - 1)))
+        scatter("c", 2)
+        scatter("l", 2)
+    else:  # shops and anything else: a counter facing the door, shelves along the walls
+        cy = far_y + (2 if not front_top else -2)
+        for x in range(hx + 2, hx + hw - 2):
+            if free(x, cy):
+                G.set(x, cy, "c")
+        for y in range(hy, hy + hh):
+            for x in (hx, hx + hw - 1):
+                if rng.random() < .5 and free(x, y):
+                    G.set(x, y, "i")
+        scatter("v", 3)
+        scatter("h", 2)
+        scatter("l", 2)
+    # back rooms: a touch of furniture each, by what they are
+    dress = {"Kitchen": "fcv", "Storeroom": "vv", "Pantry": "vi", "Snug": "hf", "Guest room": "yi", "Bedroom": "yi",
+             "Bedchamber": "yif", "Workroom": "ch", "Office": "hi", "Vestry": "ii", "Sanctum": "cl", "Reliquary": "uu",
+             "Changing room": "iie", "Hot room": "jwl", "Linen store": "iv", "Study": "hif", "Dining room": "hhf",
+             "Library": "iii", "Stacks": "iiii", "Archive": "iiv", "Scriptorium": "hhl", "Loading bay": "vv",
+             "Strongroom": "vi", "Forge": "fc", "Back room": "hv", "Cellar stairs": ">", "Stairs": "<"}
+    for n, (label, (x0, y0, rw, rh)) in enumerate(zip(names, rooms), start=2):
+        for ch in dress.get(label, "h"):
+            for _ in range(20):
+                x, y = rng.randint(x0, x0 + rw - 1), rng.randint(y0, y0 + rh - 1)
+                if G.get(x, y) == fl and all(G.get(x + a, y + b) != "D" for a in (-1, 0, 1) for b in (-1, 0, 1)):
+                    G.set(x, y, ch)
+                    break
+        m["rooms"].append({"n": n, "x": x0, "y": y0, "w": rw, "h": rh, "label": label})
+    m["rooms"].insert(0, {"n": 1, "x": hx, "y": hy, "w": hw, "h": hh, "label": spec["hall"]})
     return G.done()
 
 

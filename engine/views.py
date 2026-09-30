@@ -171,7 +171,7 @@ def creature_info(g, e):
     info = {"id": e["id"], "name": name, "side": e.get("side", "enemy"), "size": e.get("size"), "type": e.get("type"), "art": art.art_version(e),
             "status": status_band(e), "dead": e.get("dead") or e.get("hp", 1) <= 0,
             "conditions": [{"name": c["name"], "source": c.get("source"), "until": c.get("until")} for c in e.get("conditions", [])],
-            "lore": e.get("lore", []), "full": ally, "appearance": e.get("appearance", "")}
+            "lore": e.get("lore", []), "full": ally, "appearance": e.get("appearance", ""), "alignment": e.get("alignment") or ""}
     feed = [f.get("text", "") for f in s["feed"] if f.get("kind") != "dm"]
     ac, attacks, saves, dmg, hits, misses = None, [], [], 0, 0, 0
     for t in feed:
@@ -205,7 +205,7 @@ def visible_maps(g):
     linked as physically connected (another floor, the stair down) that the party has already seen."""
     s = g.state
     here = {s["view"].get("map")} | {e["token"]["map"] for e in s["entities"].values()
-                                      if e["kind"] == "pc" and e.get("token") and not e.get("dead")}
+                                      if e["kind"] == "pc" and e.get("token") and not e.get("dead") and not e.get("departed")}
     here.discard(None)
     vis = set(here)
     for mid in here:
@@ -213,6 +213,19 @@ def visible_maps(g):
             if s["maps"].get(other, {}).get("shown"):
                 vis.add(other)
     return {mid for mid in vis if s["maps"].get(mid, {}).get("shown")}
+
+
+def seen_by_players(g, e):
+    """Have the players ever seen this creature? (revealed at some point, or it spoke, moved or acted in the public log.)
+    A creature that has left the table keeps its face in the log and the journal; one never seen stays a secret."""
+    if not e:
+        return False
+    if not e.get("hidden") or e.get("known"):
+        return True
+    # only lines the players witnessed: what it said, what was narrated about it, or its appearing on the table
+    # (not moves or actions logged while it was hidden)
+    return any(f.get("who") == e["id"] and f.get("kind") in ("speech", "narration", "creature")
+               for f in g.state.get("feed", []))
 
 
 def _seen(g, e):
@@ -294,6 +307,10 @@ def animation_cues(g, feed):
             c.update(who=who["id"], round=f.get("round"))
         elif k == "combat" and f.get("phase"):
             c.update(phase=f["phase"], round=f.get("round"))
+        elif k in ("speech", "narration"):
+            # the story as it happens: a bubble over the speaker's token, a caption by the creature a line is about
+            c.update(text=f.get("text", ""), speaker=f.get("speaker"), ts=f.get("ts"),
+                     who=who["id"] if who and _seen(g, who) else None)
         elif k == "fx":
             pts = [f.get(p) for p in ("at", "from", "to") if isinstance(f.get(p), dict)]
             if any(not _seen(g, ent.get(p.get("id"))) for p in pts):
@@ -331,8 +348,11 @@ def player_view(g):
              for r in s["rolls"] if not r.get("hidden")][-60:]
     maps_known = {mid: {"id": mid, "name": m["name"], "kind": m["kind"], "w": m["w"], "h": m["h"],
                         "floor": [{"id": f["id"], "x": f["x"], "y": f["y"], "name": f["item"]["name"], "qty": f["item"].get("qty", 1),
-                                   "note": f.get("note", ""), "art": itemart.item_art_version(f["item"])} for f in m.get("floor", [])
+                                   "note": f.get("note", ""), "in": f.get("in"), "art": itemart.item_art_version(f["item"])}
+                                  for f in m.get("floor", [])
                                   if not m.get("fog") or (m.get("revealed") and m["revealed"][f["y"]][f["x"]] == "1")],
+                        "containers": [{k: c.get(k) for k in ("id", "x", "y", "name", "text")} for c in m.get("containers", [])
+                                       if not m.get("fog") or (m.get("revealed") and m["revealed"][c["y"]][c["x"]] == "1")],
                         "pois": [{k: p[k] for k in ("id", "x", "y", "name", "journal")} for p in m.get("pois", [])
                                  if not m.get("fog") or (m.get("revealed") and m["revealed"][p["y"]][p["x"]] == "1")]}
                   for mid, m in s["maps"].items() if mid in visible_maps(g)}
@@ -341,7 +361,10 @@ def player_view(g):
         "seq": s["seq"], "events": len(g.events), "head": g.events[-1]["hash"][:12] if g.events else "",
         "view": s["view"], "maps": maps_known,
         "party": [pc_view(g, e) for e in visible if e["kind"] == "pc"],
-        "others": [npc_view(g, e) for e in visible if e["kind"] != "pc" and e.get("token", {}).get("map") == s["view"].get("map")]
+        "others": [npc_view(g, e) for e in visible if e["kind"] != "pc" and e.get("token", {}).get("map") == s["view"].get("map")],
+        # creatures the players have met who have since left the table: their faces stay in the log and the journal
+        "offstage": [{"id": e["id"], "name": e["name"], "side": e.get("side", "neutral"), "art": art.art_version(e)}
+                     for e in s["entities"].values() if (e["kind"] != "pc" or e.get("departed")) and e.get("hidden") and seen_by_players(g, e)]
                   + [npc_view(g, e) for e in visible if e["kind"] != "pc" and e.get("side") == "ally" and e.get("token", {}).get("map") != s["view"].get("map")],
         "combat": {"round": c["round"], "order": order, "current": cur if cur and not s["entities"].get(cur, {}).get("hidden") else None,
                    "economy": econ} if c else None,
@@ -486,8 +509,12 @@ def map_state_md(g, mid):
         conds = ", ".join(c["name"] for c in e.get("conditions", []))
         lines.append(f"- {e['name']} (`{e['id']}`, {e['kind'] if e['kind'] == 'pc' else e.get('side', 'enemy')}) at ({t['x']},{t['y']}) — {state}"
                      + (f" · {conds}" if conds else "") + (" · hidden" if e.get("hidden") else ""))
+    boxes = {c["id"]: c for c in m.get("containers", [])}
+    for c in m.get("containers", []):
+        lines.append(f"- container `{c['id']}`: {c['name']} at ({c['x']},{c['y']})")
     for f in m.get("floor", []):
-        lines.append(f"- item on floor `{f['id']}`: {f['item'].get('qty', 1)}× {f['item']['name']} at ({f['x']},{f['y']}) — {f.get('note', '')}")
+        where = f"in {boxes[f['in']]['name']} (`{f['in']}`)" if f.get("in") in boxes else "item on floor"
+        lines.append(f"- {where} `{f['id']}`: {f['item'].get('qty', 1)}× {f['item']['name']} at ({f['x']},{f['y']}) — {f.get('note', '')}")
     for p in m.get("pois", []):
         lines.append(f"- point of interest `{p['id']}`: {p['name']} at ({p['x']},{p['y']}) → journal {p['journal']}")
     doors = []

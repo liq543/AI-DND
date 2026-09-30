@@ -3,6 +3,7 @@ items, coins and XP. Every public function validates against the SRD and raises 
 rather than bending a rule. Anything that benefits the party beyond what the rules produce
 requires an explicit, publicly-logged DM override.
 """
+import json
 import math
 import re
 
@@ -173,6 +174,12 @@ def ability_check(g, e, what, dc=None, adv=(), dis=(), hidden=False, purpose=Non
         dis.append(c)
     if any(fx.get("name") == "untrained armor" for fx in e.get("effects", [])) and (srd.SKILLS.get(what) in ("str", "dex") or what in ("str", "dex", "strength", "dexterity")):
         dis.append("armor without training")
+    if what == "stealth":  # rules/core/06-equipment.md: armor with "Disadvantage" in its Stealth column
+        for it in e.get("inventory", []):
+            if it.get("equipped") and it.get("kind") == "armor":
+                arm = srd.find("armor", it.get("base_name") or it["name"]) or {}
+                if arm.get("stealth_dis"):
+                    dis.append(f"{arm['name']} (Stealth Disadvantage)")
     m -= exhaustion_penalty(e)
     if wants_request(g, e, now) and not request:
         return {"request": make_request(g, e, f"{label}" + (f" DC {dc}" if dc and not hidden else ""),
@@ -253,7 +260,7 @@ def apply_save_effect(g, e, res, effect):
             apply_damage(g, e, parts, source=effect.get("source"))
     if effect.get("condition") and not res["success"]:
         add_condition(g, e, effect["condition"], source=effect.get("source"), caster=effect.get("caster"),
-                      spell=effect.get("spell"), save=effect.get("repeat_save"))
+                      spell=effect.get("spell"), save=effect.get("repeat_save"), escalate=effect.get("escalate"))
 
 
 # ====================================================================== damage & healing
@@ -387,7 +394,8 @@ def temp_hp(g, e, amount, source):
 
 # ====================================================================== conditions
 
-def add_condition(g, e, name, source=None, until=None, caster=None, spell=None, save=None, quiet=False, rounds=None):
+def add_condition(g, e, name, source=None, until=None, caster=None, spell=None, save=None, quiet=False, rounds=None,
+                  escalate=None):
     name = name.lower().strip()
     valid = set(srd.data()["conditions"]) | {"raging", "dodging", "concentrating", "hidden", "surprised", "blessed",
                                              "baned", "hasted", "slowed", "marked", "disengaged", "helped"}
@@ -400,7 +408,8 @@ def add_condition(g, e, name, source=None, until=None, caster=None, spell=None, 
         return False
     conds = [c for c in e.get("conditions", []) if c["name"] != name]
     entry = {"name": name}
-    for k, v in (("source", source), ("until", until), ("caster", caster), ("spell", spell), ("save", save), ("rounds", rounds)):
+    for k, v in (("source", source), ("until", until), ("caster", caster), ("spell", spell), ("save", save), ("rounds", rounds),
+                 ("escalate", escalate)):
         if v:
             entry[k] = v
     conds.append(entry)
@@ -585,7 +594,21 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
         elif offhand or bonus_action:
             if offhand and not ec.get("attacked_light"):
                 raise RuleError("An off-hand attack requires having attacked with a Light weapon this turn (Light property).")
-            use_action(g, att, "bonus", f"{'off-hand ' if offhand else ''}attack with {name}")
+            if offhand and "light" not in prof.get("properties", []):
+                raise RuleError(f"The Light property's extra attack must be made with a Light weapon — {name} isn't one.")
+            if offhand and item and ec.get("light_item") == item.get("id") and item.get("qty", 1) < 2:
+                raise RuleError(f"The extra attack must be made with a different Light weapon than {name}.")
+            if offhand and ec.get("light_extra_done"):
+                raise RuleError("The Light property grants only one extra attack per turn.")
+            if offhand and current_id(g) != att["id"]:
+                raise RuleError(f"It's not {att['name']}'s turn. Off-turn attacks must be reactions (--reaction).")
+            if offhand and prof.get("mastery") == "nick" and ec.get("attacks_left") is not None:
+                # Nick mastery: the Light extra attack is part of the Attack action instead of a Bonus Action (once per turn)
+                g.note(f"  Nick: {att['name']}'s extra attack is part of the Attack action — the Bonus Action stays free.")
+            else:
+                use_action(g, att, "bonus", f"{'off-hand ' if offhand else ''}attack with {name}")
+            if offhand:
+                set_economy(g, att["id"], light_extra_done=True)
         else:
             if current_id(g) != att["id"]:
                 raise RuleError(f"It's not {att['name']}'s turn. Off-turn attacks must be reactions (--reaction).")
@@ -593,8 +616,10 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
             if left is None or left <= 0:
                 use_action(g, att, "action", f"Attack ({name})")
                 left = attacks_per_action(att)
+            light = "light" in prof.get("properties", [])
             set_economy(g, att["id"], attacks_left=left - 1,
-                        attacked_light=ec.get("attacked_light") or ("light" in prof.get("properties", [])))
+                        attacked_light=ec.get("attacked_light") or light,
+                        light_item=(item or {}).get("id") if light else ec.get("light_item"))
     # ---------------------------------------------------------------- ammunition
     if att["kind"] == "pc" and prof.get("ammo") and not request:
         use_ammo(g, att, item)
@@ -622,6 +647,12 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
             ("CRITICAL HIT!" if crit else "HIT" if hit else "MISS" + (" (natural 1)" if r["nat"] == 1 else "")))
     g.say(line, kind="attack", roll=r["id"], who=att["id"], target=tgt["id"], hit=hit, crit=crit, ranged=bool(ranged),
           weapon=name, dtype=(dmg_parts[0][1] if dmg_parts else None), nat=r["nat"])
+    if item and ranged and prof.get("thrown") and not prof.get("ammo") and att.get("inventory") and att.get("token") and tgt.get("token"):
+        # a thrown weapon leaves the hand and ends up by the target (pick it up with `item pickup`)
+        remove_item(g, att, item["id"], 1, "thrown")
+        put_on_floor(g, tgt["token"]["map"], tgt["token"]["x"], tgt["token"]["y"],
+                     dict(item, qty=1, equipped=False, attuned=False, venom=bool(item.get("venom")) and not hit),
+                     f"thrown by {att['name']}")
     if not hit:
         if att["kind"] == "pc" and prof.get("mastery") == "graze" and prof["mastery"] in [m.lower() for m in att.get("masteries", [])]:
             gd = max(0, amod(att, prof["ability"]))
@@ -680,9 +711,68 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
         g.say("   + " + "; ".join(notes), kind="attack")
     apply_damage(g, tgt, parts, source=name, crit=crit, attacker=att, knockout=knockout,
                  melee_within_5=(not ranged and (d is None or d <= 5)))
+    if item and item.get("venom") and g.state["time"] <= item.get("venom_until", -1):
+        # the poison is spent on this hit (Dagger of Venom)
+        att = g.get(att["id"])
+        g.set(att, inventory=[dict(i, venom=False) if i["id"] == item["id"] else dict(i) for i in att["inventory"]])
+        t2 = g.get(tgt["id"])
+        if not t2.get("dead"):
+            pr = g.roll("2d10", f"{name} poison", att["id"])
+            saving_throw(g, t2, "con", 15, source=f"{name} poison", now=True,
+                         effect={"damage": [[pr["total"], "poison"]], "half": False, "condition": "poisoned",
+                                 "source": f"{name} poison (1 minute)"})
     if att["kind"] == "pc" and prof.get("mastery") and prof["mastery"] in [m.lower() for m in att.get("masteries", [])]:
         g.note(f"  Weapon Mastery available: {prof['mastery'].title()} (see rules/core/06-equipment.md → Mastery Properties)")
     return {"hit": True, "crit": crit, "roll": r}
+
+
+def grapple_or_shove(g, att, tgt, kind, prone=False, reaction=False):
+    """rules/core/08-rules-glossary.md → Unarmed Strike: Grapple / Shove. One attack of the Attack action. The target
+    makes a Strength or Dexterity save (its better one) against 8 + the attacker's Strength modifier + Proficiency Bonus."""
+    from .core import SIZE_ORDER
+    if not tgt:
+        raise RuleError(f"{kind.title()} needs --target.")
+    d = dist_ft(att, tgt)
+    if d is None or d > 5:
+        raise RuleError(f"{tgt['name']} is out of reach ({d} ft) — a {kind} needs the target within 5 ft.")
+    sz = lambda e: SIZE_ORDER.index(e.get("size", "Medium")) if e.get("size", "Medium") in SIZE_ORDER else 2  # noqa: E731
+    if sz(tgt) > sz(att) + 1:
+        raise RuleError(f"{tgt['name']} is too big to {kind} (more than one size larger than {att['name']}).")
+    if kind == "grapple" and any(c["name"] == "grappled" and c.get("grappler") == att["id"] for c in tgt.get("conditions", [])):
+        raise RuleError(f"{att['name']} is already grappling {tgt['name']}.")
+    c = combat(g)
+    if c and reaction:  # as an Opportunity Attack: an Unarmed Strike is a melee attack, and Grapple/Shove are its options
+        use_action(g, att, "reaction", f"opportunity {kind}")
+    elif c:  # it replaces one attack of the Attack action
+        if current_id(g) != att["id"]:
+            raise RuleError(f"It's not {att['name']}'s turn.")
+        ec = economy(g, att["id"])
+        left = ec.get("attacks_left")
+        if left is None or left <= 0:
+            use_action(g, att, "action", f"Attack ({kind})")
+            left = attacks_per_action(att)
+        set_economy(g, att["id"], attacks_left=left - 1)
+    dc = 8 + amod(att, "str") + pb(att)
+    ab = "str" if save_mod(tgt, "str") >= save_mod(tgt, "dex") else "dex"
+    g.say(f"🤼 {att['name']} tries to {kind} {tgt['name']} ({ab.upper()} save DC {dc}).", kind="attack", who=att["id"], target=tgt["id"])
+    res = saving_throw(g, tgt, ab, dc, source=f"{att['name']}'s {kind}", now=True)
+    if res.get("success"):
+        g.say(f"   {tgt['name']} breaks free of it.", kind="attack")
+        return res
+    tgt = g.get(tgt["id"])
+    if kind == "grapple":
+        conds = [x for x in tgt.get("conditions", []) if x["name"] != "grappled"]
+        conds.append({"name": "grappled", "source": f"grappled by {att['name']} (escape DC {dc})", "grappler": att["id"], "escape_dc": dc})
+        g.set(tgt, conditions=conds)
+        g.say(f"{tgt['name']} is now Grappled by {att['name']} (Speed 0; escape: Athletics or Acrobatics DC {dc}).",
+              kind="condition", who=tgt["id"], cond="grappled", on=True)
+    elif prone:
+        add_condition(g, tgt, "prone", source=f"shoved by {att['name']}")
+    else:
+        (ax, ay), (tx, ty) = token_pos(att), token_pos(tgt)
+        dest = (tx + (tx > ax) - (tx < ax), ty + (ty > ay) - (ty < ay))
+        move(g, tgt["id"], dest, force=f"shoved by {att['name']}")
+    return res
 
 
 def use_ammo(g, e, item):
@@ -1004,7 +1094,8 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
             saving_throw(g, t, fx["save"], sc["dc"], source=spell["name"], spell=True, now=now,
                          effect={"damage": parts, "half": fx.get("half"), "condition": condition, "source": spell["name"],
                                  "caster": e["id"], "spell": spell["slug"],
-                                 "repeat_save": f"{fx['save']}:{sc['dc']}" if fx.get("repeat") and condition else None})
+                                 "repeat_save": f"{fx['save']}:{sc['dc']}" if fx.get("repeat") and condition else None,
+                                 "escalate": fx.get("escalate") if condition == fx.get("condition") else None})
     elif kind == "darts":
         if not tgts:
             raise RuleError("Magic Missile needs targets (--targets a,b; repeat a name to send more darts).")
@@ -1145,6 +1236,12 @@ def end_of_turn(g, e):
             if res.get("success"):
                 remove_condition(g, e, c["name"])
                 release_spell_if_unused(g, c)
+            elif c.get("escalate"):
+                # second failed save: the effect deepens (Sleep: Incapacitated → Unconscious for the duration)
+                # the deeper condition first, so the spell still has a target and the caster keeps Concentration
+                add_condition(g, g.get(e["id"]), c["escalate"], source=c.get("source"), caster=c.get("caster"), spell=c.get("spell"))
+                ee = g.get(e["id"])
+                g.set(ee, conditions=[x for x in ee.get("conditions", []) if x is not c and x != c])
     rounds = [c for c in e.get("conditions", []) if c.get("rounds")]
     if rounds:
         new = []
@@ -1292,8 +1389,24 @@ def reveal_for(g, e):
 
 # ====================================================================== rests
 
+def concentration_minutes(conc):
+    """'Concentration, up to 1 minute' -> 1; None if the duration isn't a length of time."""
+    text = re.sub(r"(?i)^\s*concentration,\s*up to\s*", "", str(conc.get("duration") or ""))
+    if not re.match(r"\s*\d", text):
+        return None
+    return parse_duration(text)
+
+
 def after_time(g):
-    """Things that happen as in-world time passes: stable creatures regain 1 HP after 1d4 hours."""
+    """Things that happen as in-world time passes: concentration spells run out at the end of their duration,
+    and stable creatures regain 1 HP after 1d4 hours."""
+    for e in list(g.entities.values()):
+        conc = e.get("concentration")
+        if not conc or conc.get("since") is None:
+            continue
+        mins = concentration_minutes(conc)
+        if mins is not None and g.state["time"] >= conc["since"] + mins:
+            end_concentration(g, e, "its duration ran out")
     for e in g.pcs():
         wake = e.get("death", {}).get("wake_at")
         if e["hp"] == 0 and not e.get("dead") and wake is not None and g.state["time"] >= wake:
@@ -1374,6 +1487,7 @@ def long_rest(g, members):
             raise RuleError(f"{e['name']} has 0 HP — a creature needs at least 1 HP to start a Long Rest.")
     g.emit("time.set", minutes=now + 8 * 60)
     g.say(f"🌙 The party takes a Long Rest (8 hours). Now {fmt_time(g.state['time'])}.", kind="rest")
+    after_time(g)
     for e in members:
         if e.get("dead"):
             continue
@@ -1554,6 +1668,11 @@ def add_item(g, e, name, qty=1, source="found", price=None, purchase=False, over
             sug = srd.suggest("gear", name) + srd.suggest("magic_items", name) + srd.suggest("weapons", name)
             raise RuleError(f"'{name}' isn't an SRD item" + (f" (did you mean: {', '.join(sug[:5])}?)" if sug else "") +
                             ". For a mundane oddity use --custom \"description\" (worth nothing unless priced) or register homebrew.")
+        if str(custom).lstrip().startswith("{"):  # a homebrew-style JSON blob passed as --custom: keep just its text
+            try:
+                custom = json.loads(custom).get("description") or custom
+            except (ValueError, AttributeError):
+                pass
         item = {"name": name, "kind": "gear", "custom": True, "description": custom, "value_cp": 0}
     if item.get("magic"):
         check_magic_allowed(g, item, override)
@@ -1731,16 +1850,42 @@ def remove_item(g, e, ref, qty=1, reason="dropped", sell=False, to=None):
                          f"dropped by {e['name']}")
 
 
-def put_on_floor(g, map_id, x, y, item, note):
+def put_on_floor(g, map_id, x, y, item, note, into=None):
     m = g.state["maps"][map_id]
     floor = [dict(f) for f in m.get("floor", [])]
     n = 1
     while any(f["id"] == f"floor-{n}" for f in floor):
         n += 1
-    floor.append({"id": f"floor-{n}", "x": x, "y": y, "item": item, "note": note})
+    entry = {"id": f"floor-{n}", "x": x, "y": y, "item": item, "note": note}
+    if into:
+        entry["in"] = into["id"]
+    floor.append(entry)
     g.emit("map.set", id=map_id, set={"floor": floor})
-    g.say(f"⬇ {item.get('qty', 1)}× {item['name']} lies on the floor at ({x},{y}) — {note}.", kind="item")
+    g.say(f"⬇ {item.get('qty', 1)}× {item['name']} " + (f"goes into the {into['name']}" if into else f"lies on the floor at ({x},{y})")
+          + f" — {note}.", kind="item")
     return f"floor-{n}"
+
+
+def stash_item(g, e, ref, box_id, qty=1):
+    """Put an item into a container on the map (a chest, a strongbox, a cache): it stays on that tile, listed inside it."""
+    t = e.get("token")
+    if not t:
+        raise RuleError(f"{e['name']} isn't on a map.")
+    m = g.state["maps"][t["map"]]
+    box = next((c for c in m.get("containers", []) if c["id"] == box_id), None)
+    if not box:
+        raise RuleError(f"No container '{box_id}' on this map. Containers: " +
+                        (", ".join(f"{c['id']} {c['name']} at ({c['x']},{c['y']})" for c in m.get("containers", [])) or "none"))
+    if max(abs(box["x"] - t["x"]), abs(box["y"] - t["y"])) > 1:
+        raise RuleError(f"{e['name']} must be in or next to square ({box['x']},{box['y']}) to reach the {box['name']}.")
+    it = find_item(e, ref)
+    if combat(g):
+        ec = economy(g, e["id"])
+        if ec.get("object_used"):
+            raise RuleError(f"{e['name']} has already used their free object interaction this turn.")
+        set_economy(g, e["id"], object_used=True)
+    remove_item(g, e, it["id"], qty, "stashed")
+    put_on_floor(g, t["map"], box["x"], box["y"], dict(it, qty=qty, equipped=False, attuned=False), f"stashed by {e['name']}", into=box)
 
 
 def pick_up(g, e, floor_id):
@@ -1790,7 +1935,27 @@ def use_item(g, e, ref, target=None):
         remove_item(g, e, it["id"], 1, "used")
         g.note(f"  Effect of {it['name']}: see rules/magic-items/{it.get('ref', '')}.md — adjudicate.")
         return
+    if it.get("ref") == "dagger-of-venom" or (it.get("base_name") == "Dagger" and "venom" in (it.get("name") or "").lower()):
+        # rules/magic-items: "You can take a Bonus Action to magically coat the blade with poison. The poison remains for
+        # 1 minute or until an attack using this weapon hits a creature... can't be used this way again until the next dawn."
+        now = g.state["time"]
+        used = it.get("venom_used_at")
+        if used is not None and now < next_dawn(used):
+            raise RuleError(f"{it['name']} can't coat itself again until the next dawn ({fmt_time(next_dawn(used))}).")
+        if combat(g):
+            use_action(g, e, "bonus", f"coat {it['name']} with poison")
+        inv = [dict(i, venom_used_at=now, venom_until=now + 1, venom=True) if i["id"] == it["id"] else dict(i) for i in e["inventory"]]
+        g.set(e, inventory=inv)
+        g.say(f"🐍 {e['name']} coats the {it['name']} with poison (1 minute, or until it hits: DC 15 Con save or 2d10 poison and Poisoned).",
+              kind="action", who=e["id"])
+        return
     raise RuleError(f"{it['name']} isn't a consumable. Use `feature` or narrate its use.")
+
+
+def next_dawn(t):
+    """The first dawn (06:00) after in-world minute t."""
+    dawn = (t // 1440) * 1440 + 360
+    return dawn if t < dawn else dawn + 1440
 
 
 # ====================================================================== XP

@@ -34,6 +34,7 @@ NAME_ICONS = {"goblin": "goblin-head", "hobgoblin": "goblin-head", "orc": "orc-h
               "werewolf": "werewolf", "bear": "bear-head", "spider": "spider-alt", "snake": "snake", "bat": "bat",
               "rat": "rat", "boar": "boar", "horse": "horse-head", "eagle": "eagle-head", "shark": "shark-jaws",
               "crab": "crab", "troll": "troll", "ogre": "ogre", "golem": "golem-head", "mimic": "mimic-chest",
+              "animated armor": "black-knight-helm", "flying sword": "bouncing-sword",
               "bandit": "bandit", "knight": "black-knight-helm", "guard": "black-knight-helm", "mage": "wizard-face",
               "priest": "sun-priest", "cultist": "hood", "dwarf": "dwarf-face", "elf": "woman-elf-face",
               "harpy": "harpy", "minotaur": "minotaur", "centaur": "centaur", "cyclops": "cyclops",

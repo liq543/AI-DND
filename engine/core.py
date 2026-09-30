@@ -246,7 +246,7 @@ class Game:
         self.emit("entity.set", id=ent["id"], set=patch)
 
     def pcs(self):
-        return [e for e in self.entities.values() if e["kind"] == "pc"]
+        return [e for e in self.entities.values() if e["kind"] == "pc" and not e.get("departed")]
 
     def party_level(self):
         pcs = [p for p in self.pcs() if not p.get("dead")]

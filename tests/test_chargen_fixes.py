@@ -2,6 +2,7 @@
 
 Run:  python -m unittest discover -s tests -v
 """
+import _cli  # noqa: E402  (in-process CLI runner)
 import os
 import shutil
 import subprocess
@@ -27,9 +28,7 @@ class ChargenFixesTest(unittest.TestCase):
 
     @classmethod
     def run_cli(cls, *args):
-        p = subprocess.run([sys.executable, "-m", "engine", *args], cwd=ROOT, env=cls.env, capture_output=True,
-                           text=True, encoding="utf-8")
-        return p.returncode, p.stdout + p.stderr
+        return _cli.run(cls.env, *args)
 
     @classmethod
     def ok(cls, *args):
@@ -106,7 +105,8 @@ class ChargenFixesTest(unittest.TestCase):
         self.assertEqual(srd.find("spells", "sleep")["effect"].get("condition"), "incapacitated")
         self.assertEqual(srd.find("spells", "hold person")["effect"].get("condition"), "paralyzed")
         self.assertTrue(srd.find("spells", "hold person")["effect"].get("repeat"))
-        self.assertFalse(srd.find("spells", "sleep")["effect"].get("repeat"))
+        # Sleep repeats its save once at the end of the target's next turn; a second failure means Unconscious
+        self.assertEqual(srd.find("spells", "sleep")["effect"].get("escalate"), "unconscious")
 
     def test_creature_info_reads_ac_through_cover(self):
         sys.path.insert(0, str(ROOT))
@@ -158,6 +158,39 @@ class ChargenFixesTest(unittest.TestCase):
         bad = self.tmp / "bad.txt"
         bad.write_text("##Z#\n", encoding="utf-8")
         self.rule("map", "import-grid", "barge", "--out", str(bad), contains="Unknown terrain")
+
+    def test_interior_styles_and_new_furnishings(self):
+        grid = self.tmp / "baths.txt"
+        grid.write_text("#########\n#qqwwwqq#\n#pewww.j#\n#zziyccl#\n####dd###\n", encoding="utf-8")
+        self.ok("map", "gen", "interior", "--building", "shop", "--seed", "3", "--id", "baths")
+        self.ok("map", "import-grid", "baths", "--out", str(grid))
+        self.ok("map", "set", "baths", "--kv", "theme=bathhouse")
+        self.ok("map", "set", "baths", "--kv", "walls=brick")
+        self.ok("map", "set", "baths", "--kv", "accent=#aa3355")
+        self.rule("map", "set", "baths", "--kv", "walls=wallpaper", contains="walls")
+        self.rule("map", "set", "baths", "--kv", "accent=pink", contains="accent")
+        svg = Path(self.ok("map", "render", "baths").strip().splitlines()[-1]).read_text(encoding="utf-8")
+        self.assertIn('id="wallface"', svg)      # brick wall faces
+        self.assertIn("url(#fine)", svg)         # the bathhouse's mosaic floor
+        self.assertIn("url(#tiles)", svg)        # the tiled 'z' squares
+        self.assertIn("#fbf6ee", svg)            # stone coping round the built pool
+        self.assertIn("#aa3355", svg)            # the map's own accent colour
+
+    def test_generated_interiors_vary_and_connect(self):
+        from engine import maps
+        for kind in ("tavern", "temple", "bathhouse", "manor", "shop", "warehouse", "library", "tower"):
+            shapes = set()
+            for seed in range(12):
+                m = maps.gen_interior(seed, kind=kind)
+                shapes.add(tuple(m["grid"]))
+                walk = dict(m, grid=["".join("." if c == "D" else c for c in r) for r in m["grid"]])
+                dist, _ = maps.pathfind(walk, tuple(m["start"]))
+                for r in m["rooms"]:
+                    cells = [(x, y) for y in range(r["y"], r["y"] + r["h"]) for x in range(r["x"], r["x"] + r["w"])]
+                    self.assertTrue(any(c in dist for c in cells), f"{kind} seed {seed}: {r['label']} can't be reached")
+            self.assertEqual(len(shapes), 12, f"{kind} interiors repeat")
+        self.assertEqual(maps.gen_interior(1, kind="bathhouse")["theme"], "bathhouse")
+        self.assertEqual(maps.gen_interior(1, kind="tavern")["theme"], "timber")
 
     def test_journal_collects_handouts(self):
         self.ok("show", "text", "The butler did it.", "--title", "A Note")

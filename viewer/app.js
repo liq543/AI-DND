@@ -11,7 +11,7 @@
   const zoom = {}; // per map: {s, x, y, user, userAt}
 
   // ------------------------------------------------------------ lookups & art
-  const entity = (id) => S && (S.party.find(p => p.id === id) || S.others.find(o => o.id === id));
+  const entity = (id) => S && (S.party.find(p => p.id === id) || S.others.find(o => o.id === id) || (S.offstage || []).find(o => o.id === id));
   const nameOf = (id) => (entity(id) || {}).name || id || "DM";
   const faceUrl = (id) => `/api/art/face/${encodeURIComponent(id)}.svg?v=${(entity(id) || {}).art || ""}`;
   const portraitUrl = (id) => `/api/art/portrait/${encodeURIComponent(id)}.svg?v=${(entity(id) || {}).art || ""}`;
@@ -54,6 +54,7 @@
     if (FX.playing) return;                            // the queue's own .then() commits when it drains
     renderPanels();
     renderMapTabs(); renderMap();
+    if (window.TableStory) window.TableStory.update(S);
   }
   function renderPanels() {
     $("#title").textContent = S.campaign || "Live Table";
@@ -140,7 +141,7 @@
     const conds = c.conditions.map(x => `${chipCond(x.name)}<span class="muted small"> ${esc(x.source || "")}${x.until ? " · until " + esc(x.until) : ""}</span>`).join("<br>");
     const st = String(c.status).split(" ")[0];
     let h = `<div class="ccard ${esc(c.side)}"><div class="chead"><img class="cport" src="/api/art/portrait/${esc(c.id)}.svg?v=${esc(c.art || "")}" alt="">
-      <div class="ctitle"><h2>${esc(c.name)}</h2><div class="csub">${esc(c.size || "")} ${esc(c.type || "")}</div>
+      <div class="ctitle"><h2>${esc(c.name)}</h2><div class="csub">${esc(c.size || "")} ${esc(c.type || "")}${c.alignment ? ", " + esc(c.alignment) : ""}</div>
       <div class="cchips"><span class="sidechip ${esc(c.side)}">${esc(c.side)}</span><span class="status ${esc(st)}">${esc(c.status)}</span></div>
       ${c.appearance ? `<p class="looks">${(() => { const r = linkify(esc(c.appearance), { kind: "e", id: c.id }); return restoreTokens(r.text, r.tokens); })()}</p>` : `<p class="looks muted">No description yet.</p>`}
       </div></div><div class="cbody"><table class="t ckv">`;
@@ -220,10 +221,18 @@
     });
     $("#map").querySelectorAll(".flooritem").forEach(t => t.onclick = (ev) => {
       ev.stopPropagation();
-      const f = (S.maps[viewMap].floor || []).find(x => x.id === t.dataset.floor); if (!f) return;
-      openModal(`<div class="info floor"><div class="ihead"><img class="iart" src="/api/art/floor/${esc(viewMap)}/${esc(f.id)}.svg?v=${esc(f.art || "")}" alt="">
-        <div><h2>${esc(f.name)}</h2><div class="muted">On the floor at (${f.x},${f.y}) · ${esc(f.note)}</div></div></div>
-        <p>${f.qty > 1 ? f.qty + "× " : ""}${esc(f.name)}. Anyone standing in or next to that square can pick it up (a free object interaction on their turn). Just tell the DM.</p></div>`);
+      // everything on this tile: the container's contents, or every item lying there
+      const M_ = S.maps[viewMap] || {}, [tx, ty] = String(t.dataset.tile || "").split(",").map(Number);
+      const box = (M_.containers || []).find(c => c.id === t.dataset.box);
+      const here = (M_.floor || []).filter(f => f.x === tx && f.y === ty);
+      if (!here.length && !box) return;
+      const rows = here.map(f => `<li class="flrow" data-flitem="${esc(f.id)}" title="View this item"><img class="flart" src="/api/art/floor/${esc(viewMap)}/${esc(f.id)}.svg?v=${esc(f.art || "")}" alt="">
+        <div><b>${f.qty > 1 ? f.qty + "× " : ""}${esc(f.name)}</b><div class="muted small">${esc(f.note || "")}${f.in && !box ? " · in a container" : ""}</div></div></li>`).join("");
+      const title = box ? esc(box.name) : (here.length === 1 ? esc(here[0].name) : `${here.length} items on the floor`);
+      openModal(`<div class="info floor"><h2>${title}</h2><div class="muted">${box ? "A container" : "On the floor"} at (${tx},${ty})${box && box.text ? " · " + esc(box.text) : ""}</div>
+        ${here.length ? `<ul class="fllist">${rows}</ul>` : `<p class="muted">Empty.</p>`}
+        <p class="muted small">Anyone in or next to that square can ${box ? "take things out or put things in" : "pick these up"} (a free object interaction on their turn). Just tell the DM.</p></div>`);
+      document.querySelectorAll("#modal [data-flitem]").forEach(li => li.onclick = () => openItem(`floor~${viewMap}`, li.dataset.flitem));
     });
   }
   function svgSize() { const s = $("#map svg"); return s ? [s.width.baseVal.value, s.height.baseVal.value] : [1, 1]; }
@@ -400,7 +409,7 @@
   const LOG_PAGE = 30; let logPage = 0, logFilter = null, logKey = "";
   function speakerId(name) {
     const n = String(name || "").toLowerCase();
-    const all = [...S.party, ...S.others];
+    const all = [...S.party, ...S.others, ...(S.offstage || [])];
     return (all.find(e => e.name.toLowerCase() === n) || all.find(e => e.name.toLowerCase().split(/\s+/)[0] === n.split(/\s+/)[0]) || {}).id;
   }
   function renderLog() {
@@ -421,7 +430,7 @@
         return `<div class="feed speech">${sid ? avatar(sid) : `<span class="av dm">${esc(String(f.speaker || "?")[0])}</span>`}<div class="bub"><b>${esc(f.speaker)}</b>${esc(f.text)}</div></div>`; }
       if (f.kind === "turn") return `<div class="feed turn"><span>${linkSpells(f)}</span></div>`;
       if (f.kind === "combat" && /^— Round/.test(f.text)) return `<div class="feed round"><span>${esc(f.text.replace(/—/g, "").trim())}</span></div>`;
-      return `<div class="feed ${esc(f.kind)}">${linkSpells(f)}</div>`;
+      return `<div class="feed k-${esc(f.kind)}">${linkSpells(f)}</div>`;
     }).join("") || `<div class="empty"><p class="muted">Nothing here yet.</p></div>`) + pager;
     el.querySelectorAll(".pager button").forEach(b => b.onclick = () => {
       logPage = b.dataset.p === "first" ? 0 : b.dataset.p === "prev" ? logPage - 1 : logPage + 1; renderLog(); el.scrollTop = 0; });
@@ -733,7 +742,10 @@
       it.attunement ? "Requires attunement" : ""].filter(Boolean);
     const stats = (it.stats || []).map(([k, v]) => `<div class="st"><small>${esc(k)}</small><b>${esc(v)}</b></div>`).join("");
     const pc = S.party.find(p => p.id === owner), pit = pc && pc.inventory.find(i => i.id === id);
-    const art = owner === "srd" ? `/api/art/item/srd/${encodeURIComponent(id)}.svg` : `/api/art/item/${encodeURIComponent(owner)}/${encodeURIComponent(id)}.svg?v=${pit ? pit.art : ""}`;
+    const onFloor = String(owner).startsWith("floor~");
+    const art = owner === "srd" ? `/api/art/item/srd/${encodeURIComponent(id)}.svg`
+      : onFloor ? `/api/art/floor/${encodeURIComponent(owner.slice(6))}/${encodeURIComponent(id)}.svg`
+      : `/api/art/item/${encodeURIComponent(owner)}/${encodeURIComponent(id)}.svg?v=${pit ? pit.art : ""}`;
     openModal(`<div class="icard2 ${it.magic ? "magic" : ""}" style="--rc:${clr}">
       <div class="ihead"><div class="iicon"><img src="${art}" alt=""></div>
         <div class="ititle"><h2>${esc(it.name)}</h2><div class="isub">${esc(it.subtitle || "")}</div>
@@ -903,5 +915,6 @@
 
   FX.init({ esc, nameOf, entity: (id) => entity(id), faceUrl, camera, fit: (a) => fit(a), viewMap: () => viewMap,
     scale: () => (zoom[viewMap] || {}).s || 1 });
+  if (window.TableStory) window.TableStory.init({ esc, avatar, speakerId, openModal });
   connect(); refresh();
 })();
