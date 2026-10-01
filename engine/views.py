@@ -8,7 +8,7 @@ from pathlib import Path
 import re as _re
 
 from . import art, itemart, render, srd
-from .core import derive, fmt_time, item_display_name, item_known, level, pb, resources
+from .core import derive, fmt_time, item_display_name, item_known, journal_cat, level, pb, resources
 from .mechanics import coins_total_cp, combat, current_id, economy, fmt_cp, xp_threshold
 
 
@@ -371,7 +371,10 @@ def player_view(g):
         "requests": [{"id": r["id"], "who": r["who"], "name": s["entities"].get(r["who"], {}).get("name"), "label": r["label"]}
                      for r in s["requests"].values()],
         "feed": feed, "rolls": rolls, "roll_count": s["roll_count"], "cues": animation_cues(g, feed),
-        "journal": s.get("journal", []),
+        # each entry carries its section (clue / place) and, for map objects, the name of the place it was seen
+        "journal": [{**e, "cat": journal_cat(e),
+                     **({"where": s["maps"].get(e["poi"]["map"], {}).get("name", e["poi"]["map"])} if e.get("poi") else {})}
+                    for e in s.get("journal", [])],
         "lore": [{"id": e["id"], "name": e["name"], "facts": e.get("lore", [])} for e in s["entities"].values()
                  if e.get("lore") and not e.get("hidden")],
         "overrides": s["overrides"][-20:], "settings": {k: v for k, v in s["settings"].items() if k in ("player_rolls", "xp_mode", "difficulty")},

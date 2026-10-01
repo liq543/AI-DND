@@ -196,6 +196,11 @@ grid with `map ascii <map>` and pick the statue's plinth, the rack's tile, the d
 square beside it. Players see a small blue marker there (once that tile is revealed) and click it to open the journal entry.
 Markers are **permanent**. When you update a revisited place, move markers whose objects moved
 (`map poi-move ... --reason`) and remove those that are gone (`map poi-remove ... --reason`). The journal entry stays.
+**The journal keeps map objects apart from clues.** A poi's entry is filed under **Places & objects** (grouped by place),
+never under **Handouts & clues**, so room furniture doesn't bury the story. Handouts & clues holds what matters to quests and
+the plot: everything you `show`, `journal add`, and pois made with `--clue` (a body, a hidden cache, a sigil plate, a clue
+written on a wall). If a plain object turns out to matter later, refile it: `journal file <id> --as clue`. Linking a poi to
+an existing handout (`--id`) leaves that handout where it is.
 **A `map label` is not enough for an object.** Labels name areas (a room, a street, a quay). Anything worth naming that
 the characters can walk up to and look at (a fountain, a counter, a shrine) also gets a `map poi` with a proper description,
 written the way you would describe it aloud.

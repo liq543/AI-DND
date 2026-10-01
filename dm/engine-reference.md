@@ -148,6 +148,8 @@ map show <id> | map list | map ascii <id> | map render <id> [--dm]
 map reveal <id> --room 3 | --rect 0,0,10,10 | --all      map hide <id> --rect ...
 map poi <id> x,y --name "Weathered Statue" --text "What they perceive"   # pin a perceived notable object to its tile
 map poi <id> x,y --name "..." --id j12   # ...or link an existing journal entry; players click the marker to open it
+map poi <id> x,y --name "..." --text "..." --clue   # a story clue: filed under Handouts & clues (default: Places & objects)
+journal file j36,j40 --as clue|place     # move journal entries between Handouts & clues and Places & objects
 map icons <words>                          # search 4,100+ game-icons for props: `map icons cauldron`, `map icons book pile`
 map prop <id> x,y --icon globe --name "Brass globe" [--size small|large] [--color #hex] [--rotate 30] [--blocks]
 map prop-move <id> x,y --id prop-2 --reason "shoved aside" | map prop-remove <id> --id prop-2 --reason "smashed"

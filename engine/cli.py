@@ -1400,7 +1400,10 @@ def cmd_map(g, a):
                 if not a.text:
                     raise RuleError('map poi needs --text "what the characters perceive" (creates the journal entry) or --id <journal-id>')
                 jid = f"j{len(s.get('journal', [])) + 1}"
-                journal_add(g, {"kind": "text", "title": a.name, "text": a.text, "ref": a.text, "poi": {"map": m["id"], "x": x, "y": y}})
+                # a map object is filed under the journal's "Places & objects", not "Handouts & clues",
+                # unless the DM marks it as a story clue (--clue) or files it there later (`journal file`)
+                journal_add(g, {"kind": "text", "title": a.name, "text": a.text, "ref": a.text,
+                                "poi": {"map": m["id"], "x": x, "y": y}, "cat": "clue" if a.clue else "place"})
             pid = f"poi-{max([int(p['id'].split('-')[1]) for p in pois] + [0]) + 1}"
             pois.append({"id": pid, "x": x, "y": y, "name": a.name, "journal": jid})
             g.emit("map.set", id=m["id"], set={"pois": pois})
@@ -1962,8 +1965,21 @@ def journal_add(g, handout, note=None):
 
 
 def cmd_journal(g, a):
+    if a.action == "file":
+        # move entries between the journal's sections: `journal file j36,j40 --as clue`
+        if not a.text or a.file_as not in ("clue", "place"):
+            raise RuleError("journal file <ids,...> --as clue|place")
+        known = {e["id"]: e for e in g.state.get("journal", [])}
+        ids = [i.strip() for i in a.text.split(",") if i.strip()]
+        missing = [i for i in ids if i not in known]
+        if missing:
+            raise RuleError(f"No journal entry {', '.join(missing)}.")
+        g.emit("journal.set", ids=ids, set={"cat": a.file_as})
+        where = "Handouts & clues" if a.file_as == "clue" else "Places & objects"
+        g.say(f"📓 Filed under {where}: {', '.join(known[i]['title'] for i in ids)}", kind="handout")
+        return
     if a.action != "add":
-        raise RuleError('journal add "text" --title "..." (adds a note to the players\' journal)')
+        raise RuleError('journal add "text" --title "..." | journal file <ids,...> --as clue|place')
     if not a.text or not a.title:
         raise RuleError('journal add "text" --title "..."')
     journal_add(g, {"kind": "text", "title": a.title, "text": a.text, "ref": a.text})
@@ -2284,10 +2300,12 @@ def build_parser():
     c.add_argument("--spell")
     c.add_argument("--source")
 
-    c = sp.add_parser("journal", help="add \"text\" --title — a note in the players' journal (handouts are added automatically)")
+    c = sp.add_parser("journal", help="add \"text\" --title — a note in the players' journal (handouts are added automatically); "
+                                      "file <ids> --as clue|place — move entries between Handouts & clues and Places & objects")
     c.add_argument("action")
     c.add_argument("text", nargs="?")
     c.add_argument("--title")
+    c.add_argument("--as", dest="file_as", choices=("clue", "place"))
 
     c = sp.add_parser("npc", help="add <srd-monster>|reveal|hide|leave|return|remove|rename|side|show|describe|lore|alignment")
     c.add_argument("action")
@@ -2526,6 +2544,7 @@ def build_parser():
     c.add_argument("--dm", action="store_true")
     c.add_argument("--out")
     c.add_argument("--text", help="map poi: what the characters perceive (becomes the journal entry)")
+    c.add_argument("--clue", action="store_true", help="map poi: a story clue, filed under Handouts & clues (default: Places & objects)")
     c.add_argument("--reason", help="map poi-move/poi-remove: what changed")
     c.add_argument("--icon", help="map prop: a game-icons name (find one with `map icons <words>`)")
     c.add_argument("--blocks", action="store_true", help="map prop: the piece fills its square (impassable, half cover)")

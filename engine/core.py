@@ -77,6 +77,10 @@ def apply(state, ev):
         state["view"].update(d)
     elif t == "journal.add":
         state.setdefault("journal", []).append(d["entry"])
+    elif t == "journal.set":
+        for e in state.get("journal", []):
+            if e["id"] in d["ids"]:
+                e.update(d["set"])
     elif t == "time.set":
         state["time"] = d["minutes"]
     elif t == "session.set":
@@ -93,6 +97,12 @@ def apply(state, ev):
     elif t == "encounter.log":
         state["encounters"].append(d)
     return state
+
+
+def journal_cat(e):
+    """Which journal section an entry belongs in: 'clue' (Handouts & clues) or 'place' (Places & objects).
+    Map points of interest are places unless filed as clues; everything shown or added on purpose is a clue."""
+    return e.get("cat") or ("place" if e.get("poi") else "clue")
 
 
 def replay(events):

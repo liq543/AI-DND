@@ -2,8 +2,8 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 3 · **In-world time:** Day 4, 08:27 · **Mode:** exploration
-**Current map:** Scrope's Rag-Mill Loft (`ragmill`) · **Events:** 9864 · **Log head:** `c669ec26e0ccaa4c`
+**Session:** 4 · **In-world time:** Day 4, 08:27 · **Mode:** exploration
+**Current map:** Scrope's Rag-Mill Loft (`ragmill`) · **Events:** 9884 · **Log head:** `5a605d1741450d44`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=3
 
 ## Party
@@ -14,7 +14,7 @@
 | Hedda Vask (`hedda`) | 3 | 34/34 | 17 | — | — | sluice (5,9) |
 | Tobias Fenwick (`tobias`) | 3 | 23/23 | 11 | — | L1:1/4 L2:2/2 | sluice (5,9) |
 | Sera Lark (`sera`) | 4 | 0/27 | 13 | unconscious · DEAD | L1:2/4 L2:2/3 | faircloths (12,8) |
-| Corvin Asche (`corvin`) | 4 | 26/26 | 12 | — | L1:4/4 L2:3/3 | ragmill (2,2) |
+| Corvin Asche (`corvin`) | 4 | 26/26 | 12 | — | L1:4/4 L2:3/3 | ragmill (4,2) |
 | Brakka Holloway (`brakka`) | 4 | 36/36 | 16 | — | — | ragmill (4,4) |
 
 ## Other creatures (DM view)
@@ -509,7 +509,7 @@
 
 ### Scrope's Rag-Mill Loft (`ragmill`, interior 24×15, lighting dim)
 - Brakka Holloway (`brakka`, pc) at (4,4) — 36/36 HP
-- Corvin Asche (`corvin`, pc) at (2,2) — 26/26 HP
+- Corvin Asche (`corvin`, pc) at (4,2) — 26/26 HP
 - Kit Corvell (`kit`, pc) at (3,4) — 35/35 HP
 - container `asche-chests`: Asche's paper chests at (12,4)
 - point of interest `poi-1`: Outside stair at (1,12) → journal j247
@@ -532,18 +532,18 @@
 
 ## Recent events
 
--    Brakka Holloway: HP 36/36, spell slots and features restored.
-- 📍 Drying racks is no longer on Scrope's Rag-Mill Loft — clarified: the loft is Asche's; the mill hands work below. (Its journal entry remains.)
-- 📍 Sorting bench is no longer on Scrope's Rag-Mill Loft — clarified: disused. (Its journal entry remains.)
-- 📍 Noted on Scrope's Rag-Mill Loft: Drying racks (12,9) — click it on the map for its journal entry.
-- 📍 Noted on Scrope's Rag-Mill Loft: Old sorting bench (18,7) — click it on the map for its journal entry.
-- Dawn comes grey through the loading-door cracks. At some point the stove goes cold.
-- By eight the mill below is awake. The wheel groans into motion, the vats thump, and mill hands shout at each other through the floorboards. Nobody comes up the outside stair.
-- Brakka wakes stiff, peels the tape off his ribs and prods them. The swelling round his eye has gone down to a yellow bruise. He's already lacing his boots.
-- “Right. Where's this hotel, then?”
-- Asche is up before any of them, shaved, dressed in yesterday's velvet, and relighting the stove for tea.
 - 🎬 Scrope's Rag-Mill Loft, Morning — Day 4, half past eight. Grey light through the cracks, the mill wheel grinding below, the tea just on.
 - 🗺 Map: Scrope's Rag-Mill Loft
 - 🗺 Map: Scrope's Rag-Mill Loft
 - “No, I know. The Silver Ewer, up Lantern Hill. I'll see the lad before anything else, then I'm yours.”
 - — Session 3 ends —
+- — Session 4 begins — Day 4, 08:27
+- 🗺 Map: Scrope's Rag-Mill Loft
+- 🎬 Scrope's Rag-Mill Loft — Day 4, morning. Grey light through the loading-door cracks; the stampers thud below like a slow heart.
+- 🗺 Map: Scrope's Rag-Mill Loft
+- Morning on Vatman's Row. Below the loft the mill hands are at work, and the stampers pound rag to pulp in a steady, floor-shaking rhythm.
+- Brakka is already up and laced into his chain mail, sitting on the edge of a pallet and watching Kit.
+- Asche is at the deal table in his shirtsleeves, coaxing the cold stove back to life with a snap of Prestidigitation and grumbling at the kettle.
+- “Morning, boss. The hotel. Where is it? I want to see the boy before he's out the door.”
+- 🚶 Corvin Asche moves 15 ft to (4,2).
+- 📓 Filed under Handouts & clues: The Statue in Cage Five, Wanted poster, Emeric Dane's portrait, The smugglers' cache

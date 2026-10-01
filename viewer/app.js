@@ -475,20 +475,31 @@
   function renderJournal() {
     const el = $("#panel-journal"), j = S.journal || [], lore = S.lore || [];
     if (pins === null) { pins = []; loadPins(); }
-    const key = JSON.stringify([j.length, lore.map(l => l.facts.length), pins]);
+    const key = JSON.stringify([j.length, j.map(e => e.cat === "place" ? "p" : "c").join(""), lore.map(l => l.facts.length), pins]);
     if (key === journalKey && el.innerHTML) return;
     journalKey = key;
-    const recent = [...j].reverse();
-    const pinned = recent.filter(e => pins.includes(e.id));
+    // Handouts & clues: what the DM showed on purpose (story items, letters, clues). Map objects (points of interest)
+    // live apart under "Places & objects", grouped by where they were seen, so room furniture never buries the clues.
+    const recentAll = [...j].reverse();
+    const recent = recentAll.filter(e => e.cat !== "place"), places = recentAll.filter(e => e.cat === "place");
+    const pinned = recentAll.filter(e => pins.includes(e.id));
     const entries = recent.slice(0, 4).map(jRow).join("") || `<p class="muted small">Nothing yet. Every handout, item card and clue the DM shows you lands here.</p>`;
     const older = recent.length > 4 ? `<button class="jolder" id="jolder">All entries (${recent.length}) ▾</button>` : "";
+    const byPlace = [];
+    places.forEach(e => { const w = e.where || "Elsewhere"; let g = byPlace.find(x => x[0] === w); if (!g) byPlace.push(g = [w, []]); g[1].push(e); });
+    const placesBtn = places.length ? `<h4 class="sect">Places &amp; objects</h4><button class="jolder" id="jplaces">${places.length} things noticed in ${byPlace.length} places ▾</button>` : "";
     const facts = lore.map(l => `<button class="jchip" data-lore="${esc(l.id)}"><span class="av tiny ${sideOf(entity(l.id))}"><img src="/api/art/face/${esc(l.id)}.svg" alt=""></span>${esc(l.name)} <span class="muted">${l.facts.length}</span></button>`).join("");
     const notesVal = $("#mynotes") ? $("#mynotes").value : null, notesH = $("#mynotes") ? $("#mynotes").style.height : "";
     el.innerHTML = `<div class="jtop">${pinned.length ? `<h4 class="sect">📌 Pinned</h4>${pinned.map(jRow).join("")}` : ""}<h4 class="sect">Handouts &amp; clues</h4>${entries}${older}
-      ${facts ? `<h4 class="sect">What you know</h4><div class="jchips">${facts}</div>` : ""}</div>
+      ${facts ? `<h4 class="sect">What you know</h4><div class="jchips">${facts}</div>` : ""}${placesBtn}</div>
       <h4 class="sect">My notes</h4><textarea id="mynotes" placeholder="Your own notes. Saved automatically with the campaign."></textarea><div id="notesaved" class="muted small"></div>`;
     if (older) $("#jolder").onclick = () => {
-      openModal(`<div class="info"><h2>Journal</h2><div class="muted">Everything you've been shown, newest first. 📌 to pin.</div><div class="jall">${recent.map(jRow).join("")}</div></div>`);
+      openModal(`<div class="info"><h2>Handouts &amp; clues</h2><div class="muted">Everything you've been shown, newest first. 📌 to pin.</div><div class="jall">${recent.map(jRow).join("")}</div></div>`);
+      wireJournal($("#modalbody"), j);
+    };
+    if (placesBtn) $("#jplaces").onclick = () => {
+      openModal(`<div class="info"><h2>Places &amp; objects</h2><div class="muted">What you noticed on the maps, by place, most recent first. Click a marker on the map, or an entry here. 📌 to pin.</div>
+        <div class="jall">${byPlace.map(([w, es]) => `<h4 class="sect">${esc(w)}</h4>${es.map(jRow).join("")}`).join("")}</div></div>`);
       wireJournal($("#modalbody"), j);
     };
     el.querySelectorAll("[data-lore]").forEach(b => b.onclick = () => {

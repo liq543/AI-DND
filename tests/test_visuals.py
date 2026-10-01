@@ -1,4 +1,4 @@
-"""Generated art (characters, creatures, items), DM-controlled table animation (`fx`), and the animation cues the
+﻿"""Generated art (characters, creatures, items), DM-controlled table animation (`fx`), and the animation cues the
 live table receives. Cues must never show what the players can't see.
 
 Run:  python -m unittest discover -s tests -v
@@ -154,6 +154,25 @@ class VisualsCliTest(unittest.TestCase):
     def view(self):
         from engine import views
         return views.player_view(self.game())
+
+    def test_journal_files_map_objects_apart_from_clues(self):
+        # map objects (points of interest) go to "Places & objects", never into "Handouts & clues"
+        self.ok("map", "poi", "arena", "1,1", "--name", "Old Well", "--text", "A mossy well with a rusted chain.")
+        self.ok("map", "poi", "arena", "2,1", "--name", "Bloodied Altar", "--text", "Fresh blood on the stone.", "--clue")
+        self.ok("journal", "add", "The ferryman owes money to the guild.", "--title", "The Ferryman's Debt")
+        j = {e["title"]: e for e in self.view()["journal"]}
+        self.assertEqual(j["Old Well"]["cat"], "place")
+        self.assertTrue(j["Old Well"]["where"])
+        self.assertEqual(j["Bloodied Altar"]["cat"], "clue")
+        self.assertEqual(j["The Ferryman's Debt"]["cat"], "clue")
+        # the DM can refile an entry either way
+        self.ok("journal", "file", j["Old Well"]["id"], "--as", "clue")
+        self.ok("journal", "file", j["The Ferryman's Debt"]["id"], "--as", "place")
+        j = {e["title"]: e for e in self.view()["journal"]}
+        self.assertEqual(j["Old Well"]["cat"], "clue")
+        self.assertEqual(j["The Ferryman's Debt"]["cat"], "place")
+        self.rule("journal", "file", "j9999", "--as", "clue")
+        self.rule("journal", "file", j["Old Well"]["id"])
 
     def test_asset_look_and_art(self):
         out = self.ok("asset", "look", "kira", "--hair", "long silver braid", "--eyes", "green")
