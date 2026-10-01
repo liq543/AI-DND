@@ -52,3 +52,12 @@
 - (Day 3, 18:46) Sera is dead (killed by Kit). Nib is still at the Silver Ewer, alone. Three bodies are in Faircloth's, Silk Lane. Crew: Kit, Asche, and Brakka after tonight.
 - (Day 4, 00:10) Brakka lost to Sefton and joined the party as a character. Sera has left the party (dead). Crew: Kit, Asche, Brakka. Hideout: Scrope's rag-mill loft, Vatman's Row. (08:27) Long rest done; Brakka wants to see Nib at the Silver Ewer first thing.
 - **NEXT SESSION (player's stated goal):** find a new bard to replace Sera, one who can deceive, persuade and forge. Asche's candidate: **Ottilie Marsh**, prompter at the Gilded Lantern playhouse, Lampblack Row (the Tangle). Not yet met; she has to be found, approached and won over in play. Brakka also wants to see Nib at the Silver Ewer first thing.
+
+- (Day 4, 09:23) DONE: Nib got out of the Lantern Hill watch-house. Kit, disguised as 'Peregrine Lowe', talked the desk sergeant round; Brakka signed for him. Constable Wilkes is to walk Brakka and Nib down to the Tanners' Cut. Nib still needs a safe place to stay.
+- (Day 4 10:05) **Ottilie Marsh RECRUITED**: a full equal share counted in the open, 100 gp paid up front. Her line: no murder. Doesn't yet know the target, the crew or Kit's real name.
+
+### THE PLAN CHANGED (Day 4, 10:40): steal the Eye and sell it
+- Kit's decision, announced to the crew: STEAL the Ysmeran Eye on Gala night and SELL it to the Emissary for 60,000 crowns. No breaking it, no freeing anyone. Asche gets his library and the seizure ledger off the top; shares are equal, counted in the open.
+- To do: (1) find and meet the Emissary (Crane is dead; Ferro, who knew the drop point, is dead; Kit holds Crane's black-gold coin); (2) visors for the Heart; (3) a way in on Gala night: Ottilie's forged Alcazar Players passes (the masque rehearses inside the Meridian on the afternoon of Day 7), the wine route as Pellow's stand-in, or the culvert; (4) the guard rota; (5) when the Curator carries the Eye up (11:30 on Gala night, per Pim); (6) the dock-to-Orrery route; (7) Quill's Book (200 gp, promised).
+- Today: deliver the Lowe and Strand letter to the Lantern Hill watch-house by noon, carried by someone the Watch doesn't know.
+- **Reaching the Emissary:** the Blue Lamp, a lamp-maker's on Gilder's Row in the Gilt. Leave a letter under the blue lamp in the window (Crane, Session 1). The black-gold coin proves the sender.

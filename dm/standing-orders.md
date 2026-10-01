@@ -53,9 +53,9 @@ challenge). Each one is a promise: the player should never have to give it again
 - **The party levels together.** Every character who joins starts at the party's XP (the engine does this on
   `char create`; `xp sync <id>` fixes anyone who joined before), is levelled to the party's level on the spot, and
   shares every XP award equally, so all of them cross each level threshold at the same moment.
-- **Check the sheets before recapping who holds what, or where gear is.** Before any recap, list of options or open
-  threads that says a character has, carries or has delivered something, or says where their luggage or gear is, confirm it
-  in the character's inventory (party/*.md) and the quest notes. A job accepted is not an item in hand: a promised prize
+- **Check the sheets and the journal before recapping.** Before any recap, list of options or open threads that says a
+  character has, carries or has delivered something, or what the party does or doesn't know (a contact, a place, a
+  password), confirm it in the inventory (party/*.md), the players' journal handouts and the quest notes. A job accepted is not an item in hand: a promised prize
   stays where the notes put it until the characters take it in play.
 - **When the party splits, everyone stays on the board.** Every party member (a party character, PC or DM-run) who goes
   somewhere else gets a map for where they are (build it if it doesn't exist) and their token placed there. Every time time

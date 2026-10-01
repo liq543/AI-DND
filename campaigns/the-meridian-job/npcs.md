@@ -179,3 +179,15 @@
 - (Day 3, 18:35) Faircloth's **apprentice** (15) was killed in his sleep by Kit.
 - (Day 3, 18:46) **Sera Lark / Seraphine Varne** was killed by Kit in Faircloth's shop after confessing she was the Curator's daughter. Party character, now dead.
 - **Ottilie Marsh** (not yet met; named by Asche on Day 3): prompter at the Gilded Lantern playhouse, Lampblack Row, the Tangle. Writes the playbills, forges box passes, does any voice. Venal, clever, short of money. A candidate to replace Sera as the crew's bard.
+
+- **Lantern Watch constable** (lantern-watch-constable, guard, Lawful Neutral). Blue greatcoat, brass-badged helmet, lantern-pole, notebook. At the Silver Ewer on Day 4 morning asking the desk clerk about the boy the Watch took in last night.
+
+- **Sergeant Odile Pask** (sergeant-odile-pask, warrior-veteran, Lawful Neutral). Desk sergeant of the Lantern Hill watch-house: broad, grey-cropped, spectacles on a cord, tea, a quill used as a pointer. Fair but nobody's fool; wants her day-book tidy and no trouble on her hill. Shown to players as 'Desk sergeant' until her name is learned.
+- **Night constables A and B** (guard). Finishing the night shift in the watch-house guardroom; off at the 10:00 change.
+
+- **Old Wenna** (not yet met). Keeps the bakehouse on Chandler's Row in the Tangle. Took Nib in last winter while Brakka fought out of town. Feeds him and works him at the ovens, asks nothing, a crown a week (Brakka's word).
+  - MET Day 4 09:45 (old-wenna, commoner, Neutral Good): tiny, wiry, floured to the elbows, red kerchief, a burn scar on one hand. Took Nib for two weeks at 2 gp; 'nobody asks anything in my bakehouse'.
+
+- **Fitch** (fitch, commoner, Neutral): the Gilded Lantern's old one-legged stage-door keeper. Clay pipe, keys on a cord, a moth-eaten Admiral's coat. Lets in no one who isn't company without a coin or a name he knows. Shown as 'Stage-door keeper' until named.
+- **Ottilie Marsh** truth and the Gala leverage: see secrets.md (set Day 4 09:31).
+  - Ottilie Marsh MET Day 4 10:02 (ottilie-marsh, spy stat block, Chaotic Neutral) at the Gilded Lantern stage door.

@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Orc** · **Fighter 4** (Champion) · **Background:** Soldier · **XP:** 4030
+**Player:** DM · **Orc** · **Fighter 4** (Champion) · **Background:** Soldier · **XP:** 4780
 
 **HP** 36/36 · **AC** 16 (Chain Mail 16) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +2 · **Passive Perception** 13
 
@@ -37,7 +37,7 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 
 ## Inventory
 
-**Coins:** 43 GP
+**Coins:** 60 GP 9 SP
 
 - `chain-mail-1` 1× Chain Mail (equipped) · _starting equipment_
 - `greatsword-1` 1× Greatsword · _starting equipment_

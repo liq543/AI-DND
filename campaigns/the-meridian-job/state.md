@@ -2,20 +2,21 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 4 · **In-world time:** Day 4, 08:27 · **Mode:** exploration
-**Current map:** Scrope's Rag-Mill Loft (`ragmill`) · **Events:** 9884 · **Log head:** `5a605d1741450d44`
+**Session:** 4 · **In-world time:** Day 4, 11:00 · **Mode:** exploration
+**Current map:** Scrope's Rag-Mill Loft (`ragmill`) · **Events:** 10544 · **Log head:** `39b882ac5cec673d`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=3
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 4 | 35/35 | 15 | — | — | ragmill (3,4) |
+| Kit Corvell (`kit`) | 4 | 35/35 | 15 | — | — | ragmill (4,3) |
 | Hedda Vask (`hedda`) | 3 | 34/34 | 17 | — | — | sluice (5,9) |
 | Tobias Fenwick (`tobias`) | 3 | 23/23 | 11 | — | L1:1/4 L2:2/2 | sluice (5,9) |
 | Sera Lark (`sera`) | 4 | 0/27 | 13 | unconscious · DEAD | L1:2/4 L2:2/3 | faircloths (12,8) |
-| Corvin Asche (`corvin`) | 4 | 26/26 | 12 | — | L1:4/4 L2:3/3 | ragmill (4,2) |
+| Corvin Asche (`corvin`) | 4 | 26/26 | 12 | — | L1:4/4 L2:2/3 | ragmill (3,2) |
 | Brakka Holloway (`brakka`) | 4 | 36/36 | 16 | — | — | ragmill (4,4) |
+| Ottilie Marsh (`ottilie`) | 4 | 27/27 | 12 | — | L1:4/4 L2:3/3 | ragmill (6,3) |
 
 ## Other creatures (DM view)
 
@@ -62,7 +63,7 @@
 | Tanner B (`tanner-b`, commoner) | neutral | 4/4 | 10 | — | tanners-cut (28,11) |  |
 | Gorse (`gorse`, tough) | neutral | 32/32 | 12 | — | quills-rooms (6,9) |  |
 | Brakka Holloway (`brakka-holloway`, warrior-veteran) | neutral | 65/65 | 11 | — | gutter-ring (3,13) | yes |
-| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | silver-ewer-second (5,11) |  |
+| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | wennas-bakehouse (8,2) |  |
 | Dace Morrow (`dace-morrow`, bandit) | neutral | 11/11 | 12 | — | gutter-ring (23,6) |  |
 | Mother Tansy (`mother-tansy`, commoner) | neutral | 4/4 | 10 | — | tansys-mending (12,2) |  |
 | Pip (`pip`, commoner) | neutral | 4/4 | 10 | — | tansys-mending (3,3) |  |
@@ -78,8 +79,8 @@
 | Barman (`barman`, commoner) | neutral | 4/4 | 10 | — | silver-ewer (11,13) |  |
 | Man with a broadsheet (`man-with-a-broadsheet`, warrior-veteran) | neutral | 65/65 | 17 | — | silver-ewer (5,14) |  |
 | Ambrose Tull (`merchant-in-a-mustard-waistcoat`, noble) | neutral | 9/9 | 15 | — | silver-ewer-first (22,25) |  |
-| Gentleman at the card table (`gentleman-at-the-card-table`, spy) | neutral | 27/27 | 12 | — | silver-ewer (1,19) |  |
-| Young woman with a reticule (`young-woman-with-a-reticule`, commoner) | neutral | 4/4 | 10 | — | silver-ewer (28,19) |  |
+| Gentleman at the card table (`gentleman-at-the-card-table`, spy) | neutral | 27/27 | 12 | — | silver-ewer (30,15) |  |
+| Young woman with a reticule (`young-woman-with-a-reticule`, commoner) | neutral | 4/4 | 10 | — | silver-ewer (33,20) |  |
 | Waiter (`waiter`, commoner) | neutral | 4/4 | 10 | — | silver-ewer (33,16) |  |
 | Guest in lavender (`guest-in-lavender`, commoner) | neutral | 4/4 | 10 | — | silver-ewer (34,16) |  |
 | Guest with a monocle (`guest-with-a-monocle`, commoner) | neutral | 4/4 | 10 | — | silver-ewer (38,17) |  |
@@ -101,6 +102,15 @@
 | Carter (`carter`, commoner) | neutral | 4/4 | 10 | — | gutter-ring (8,11) |  |
 | Apprentice lads (`apprentice-lads`, commoner) | neutral | 4/4 | 10 | — | gutter-ring (19,10) |  |
 | Barkeep (`barkeep`, commoner) | neutral | 4/4 | 10 | — | gutter-ring (21,3) |  |
+| Lantern Watch constable (`lantern-watch-constable`, guard) | neutral | 11/11 | 16 | — | silver-ewer (20,19) |  |
+| Desk sergeant (`sergeant-odile-pask`, warrior-veteran) | neutral | 65/65 | 17 | — | watchhouse (3,2) |  |
+| Constable Wilkes (`night-constable-a`, guard) | neutral | 11/11 | 16 | — | lamplighters-stair (8,8) | yes |
+| Night constable B (`night-constable-b`, guard) | neutral | 11/11 | 16 | — | watchhouse (12,2) | yes |
+| Old Wenna (`old-wenna`, commoner) | neutral | 4/4 | 10 | — | wennas-bakehouse (2,2) |  |
+| Fitch (`fitch`, commoner) | neutral | 4/4 | 10 | — | prompters-alley (10,5) |  |
+| Stagehand A (`stagehand-a`, commoner) | neutral | 4/4 | 10 | — | prompters-alley (13,4) |  |
+| Stagehand B (`stagehand-b`, commoner) | neutral | 4/4 | 10 | — | prompters-alley (14,5) |  |
+| Ropewalk porter (`ropewalk-porter`, commoner) | neutral | 4/4 | 10 | — | ragmill (2,13) | yes |
 
 ## Maps (exact current contents — tokens and items stay where they were left)
 
@@ -402,13 +412,14 @@
 - Cook (`cook`, neutral) at (6,2) — 4/4 HP
 - Desk clerk (`desk-clerk`, neutral) at (25,17) — 4/4 HP
 - Doorman (`doorman`, neutral) at (18,24) — 11/11 HP
-- Gentleman at the card table (`gentleman-at-the-card-table`, neutral) at (1,19) — 27/27 HP
+- Gentleman at the card table (`gentleman-at-the-card-table`, neutral) at (30,15) — 27/27 HP
 - Guest in lavender (`guest-in-lavender`, neutral) at (34,16) — 4/4 HP
 - Guest with a monocle (`guest-with-a-monocle`, neutral) at (38,17) — 4/4 HP
+- Lantern Watch constable (`lantern-watch-constable`, neutral) at (20,19) — 11/11 HP
 - Man with a broadsheet (`man-with-a-broadsheet`, neutral) at (5,14) — 65/65 HP
 - Tobias (`bell-boy`, neutral) at (18,14) — 4/4 HP
 - Waiter (`waiter`, neutral) at (33,16) — 4/4 HP
-- Young woman with a reticule (`young-woman-with-a-reticule`, neutral) at (28,19) — 4/4 HP
+- Young woman with a reticule (`young-woman-with-a-reticule`, neutral) at (33,20) — 4/4 HP
 - point of interest `poi-1`: The Porte-Cochère at (18,24) → journal j171
 - point of interest `poi-2`: The Front Doors at (19,23) → journal j172
 - point of interest `poi-3`: The Silver Ewer at (20,17) → journal j173
@@ -450,7 +461,6 @@
 - labels: Bar (9,2)
 
 ### The Silver Ewer, Second Floor (`silver-ewer-second`, interior 24×14, lighting dim)
-- Nib (`nib`, neutral) at (5,11) — 4/4 HP
 - point of interest `poi-1`: The Cornflower Door at (5,2) → journal j201
 - point of interest `poi-2`: Nib's Bed at (3,5) → journal j202
 - point of interest `poi-3`: The Hip Bath at (7,9) → journal j203
@@ -509,8 +519,10 @@
 
 ### Scrope's Rag-Mill Loft (`ragmill`, interior 24×15, lighting dim)
 - Brakka Holloway (`brakka`, pc) at (4,4) — 36/36 HP
-- Corvin Asche (`corvin`, pc) at (4,2) — 26/26 HP
-- Kit Corvell (`kit`, pc) at (3,4) — 35/35 HP
+- Corvin Asche (`corvin`, pc) at (3,2) — 26/26 HP
+- Kit Corvell (`kit`, pc) at (4,3) — 35/35 HP
+- Ottilie Marsh (`ottilie`, pc) at (6,3) — 27/27 HP
+- Ropewalk porter (`ropewalk-porter`, neutral) at (2,13) — 4/4 HP · hidden
 - container `asche-chests`: Asche's paper chests at (12,4)
 - point of interest `poi-1`: Outside stair at (1,12) → journal j247
 - point of interest `poi-2`: Loft door at (5,10) → journal j248
@@ -527,23 +539,64 @@
 - point of interest `poi-15`: Trimming bench at (15,3) → journal j261
 - point of interest `poi-16`: Drying racks at (12,9) → journal j262
 - point of interest `poi-17`: Old sorting bench at (18,7) → journal j263
-- doors: (5,5) closed, (16,5) closed, (23,9) closed, (5,10) closed
+- doors: (5,5) open, (16,5) closed, (23,9) closed, (5,10) closed
+
+### Lantern Hill Watch-House (`watchhouse`, interior 30×12, lighting bright)
+- Desk sergeant (`sergeant-odile-pask`, neutral) at (3,2) — 65/65 HP
+- Night constable B (`night-constable-b`, neutral) at (12,2) — 11/11 HP · hidden
+- point of interest `poi-1`: The watch-house doors at (4,6) → journal j264
+- point of interest `poi-2`: Notice board at (5,7) → journal j265
+- point of interest `poi-3`: The charge counter at (3,3) → journal j266
+- point of interest `poi-4`: Charge-sheet pigeonholes at (1,1) → journal j267
+- point of interest `poi-5`: Inner door at (8,3) → journal j268
+- point of interest `poi-6`: Horse trough at (2,9) → journal j269
+- point of interest `poi-7`: Square benches at (20,9) → journal j270
+- doors: (8,3) closed, (16,3) closed, (4,6) open, (5,6) open
+
+### The Lamplighters' Stair (`lamplighters-stair`, interior 14×17, lighting bright)
+- Constable Wilkes (`night-constable-a`, neutral) at (8,8) — 11/11 HP · hidden
+- point of interest `poi-1`: The Lamplighter's statue at (12,4) → journal j271
+- point of interest `poi-2`: Lamp-trimmers' niche at (1,9) → journal j272
+- point of interest `poi-3`: Stone bench at (3,9) → journal j273
+- point of interest `poi-4`: Drinking fountain at (6,12) → journal j274
+- point of interest `poi-5`: Stair lamp at (1,5) → journal j275
+
+### Prompter's Alley (Gilded Lantern stage door) (`prompters-alley`, interior 22×10, lighting dim)
+- Fitch (`fitch`, neutral) at (10,5) — 4/4 HP
+- Stagehand A (`stagehand-a`, neutral) at (13,4) — 4/4 HP
+- Stagehand B (`stagehand-b`, neutral) at (14,5) — 4/4 HP
+- point of interest `poi-1`: The stage door at (5,4) → journal j281
+- point of interest `poi-2`: Scenery dock at (13,4) → journal j282
+- point of interest `poi-3`: Playbill board at (7,5) → journal j283
+- point of interest `poi-4`: Rain barrel at (17,5) → journal j284
+- point of interest `poi-5`: Prop crates at (4,5) → journal j285
+- doors: (7,2) closed, (5,4) closed, (12,4) open, (13,4) open, (14,4) open
+
+### Wenna's Bakehouse, Chandler's Row (`wennas-bakehouse`, interior 16×10, lighting bright)
+- Nib (`nib`, neutral) at (8,2) — 4/4 HP
+- Old Wenna (`old-wenna`, neutral) at (2,2) — 4/4 HP
+- point of interest `poi-1`: The bread ovens at (2,1) → journal j276
+- point of interest `poi-2`: Kneading bench at (7,2) → journal j277
+- point of interest `poi-3`: Flour sacks at (6,1) → journal j278
+- point of interest `poi-4`: Shop counter at (5,6) → journal j279
+- point of interest `poi-5`: Street door at (8,8) → journal j280
+- doors: (6,5) closed, (8,8) open, (9,8) open
 
 
 ## Recent events
 
-- 🎬 Scrope's Rag-Mill Loft, Morning — Day 4, half past eight. Grey light through the cracks, the mill wheel grinding below, the tea just on.
+- ⬆ Brakka Holloway picks up 1× Letter from Lowe and Strand.
+- 🚪 The door at (5,5) is opened.
+- 🚪 The door at (5,10) is opened.
+- 🚪 The door at (5,10) is closed.
+- 👁 Ropewalk porter appears (neutral).
+- Brakka Holloway gives 1× Letter from Lowe and Strand to Ropewalk porter.
+- A Ropewalk porter Brakka fetched off the corner takes the sealed letter and a silver bit, repeats 'Lantern Hill watch-house, the desk sergeant, by noon', and trots off up Vatman's Row.
+- 🚶 Brakka Holloway moves 5 ft to (4,4).
+- “Done. Lad off the Ropewalk, never seen me before. Said nothing about who.”
+- While Brakka was out, Ottilie has pulled a stool to the deal table beside Asche, and the two of them have spread his blank licence stock between them like a hand of cards.
+- “Miss Marsh thinks an Alcazar company pass is a two-colour job with a blind stamp. I think she's showing off.”
+- “I think he's never seen one. I'll need a real pass to copy, and Peel's the only man in the city who'll lend me his.”
+- 🎬 Scrope's Rag-Mill Loft — Day 4, 11:00. The stampers thud below; four of them round the deal table now, and a letter on its way up Lantern Hill.
 - 🗺 Map: Scrope's Rag-Mill Loft
-- 🗺 Map: Scrope's Rag-Mill Loft
-- “No, I know. The Silver Ewer, up Lantern Hill. I'll see the lad before anything else, then I'm yours.”
-- — Session 3 ends —
-- — Session 4 begins — Day 4, 08:27
-- 🗺 Map: Scrope's Rag-Mill Loft
-- 🎬 Scrope's Rag-Mill Loft — Day 4, morning. Grey light through the loading-door cracks; the stampers thud below like a slow heart.
-- 🗺 Map: Scrope's Rag-Mill Loft
-- Morning on Vatman's Row. Below the loft the mill hands are at work, and the stampers pound rag to pulp in a steady, floor-shaking rhythm.
-- Brakka is already up and laced into his chain mail, sitting on the edge of a pallet and watching Kit.
-- Asche is at the deal table in his shirtsleeves, coaxing the cold stove back to life with a snap of Prestidigitation and grumbling at the kettle.
-- “Morning, boss. The hotel. Where is it? I want to see the boy before he's out the door.”
-- 🚶 Corvin Asche moves 15 ft to (4,2).
-- 📓 Filed under Handouts & clues: The Statue in Cage Five, Wanted poster, Emeric Dane's portrait, The smugglers' cache
+- — Session 4 ends —

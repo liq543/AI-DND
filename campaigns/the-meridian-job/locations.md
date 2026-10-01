@@ -154,3 +154,28 @@
 - (Day 3, 23:50) Gutter Ring on fight night: benches full, crowd at the ropes, lanterns round the ring, pipe smoke. Slate: SEFTON 5-2 on, ANCHOR 2-1. NPCs: Black Sefton (north corner), Brakka (south ropes), Dace at the bookies' table, the one-eyed bell-ringer at the ring bell (13,3), the barkeep at the bar, and a crowd of a tanner, a docker's wife, a gossiping carter and three apprentice lads.
 - (Day 4, 00:07) After the bout: Sefton won. Slate (23,1) now shows ANCHOR struck through, SEFTON ringed, and a tombstone drawn by the cracked anchor. Ring lamp poi re-added at 12,6 for fight night. Sefton at 13,8 in the ring; Brakka at 3,13 by the crew (Kit 2,14, Asche 1,15).
 - Map `ragmill` 24×15, timber theme. **Stair head** (1-4,6-13): outside stair down to Vatman's Row (1,12, creaky treads), coat pegs (1,7), loft door (5,10, Asche's brass padlock, 'Mr Vell' chalked on the frame). **Drying loft** (6-22,6-13): three drying racks of Asche's own paper (x8-15, y7/9/11), old sorting bench with chained shears (18-19,7), rag bales (19-21,11-12), crates (20-21,13), loading door and hoist over the canal (23,9; the quick way out). **Stove room** (1-9,1-4; door 5,5): iron stove (1,1), deal table and stools (5-6,2; teapot, tallow stub; 'SCROPE IS A THIEF' carved), four straw pallets (1-2,4; 9,3-4), water butt (9,1). **Paper store** (11-22,1-4; door 16,5): shelves of fine and watermarked paper (y1), two locked chests (container `asche-chests`, 12-13,4), trimming bench (15-16,3), clerk's desk (21,3). The mill works below from dawn to 18:00; the hands don't come up.
+
+- **The Silver Ewer, Day 4 morning (09:07):** doors open to the drive; doorman at the porte-cochere (18,24); a Lantern Watch constable inside the doors (20,19) with the desk clerk; Grice at his lounge post (5,14); breakfast guests in the dining room (east). The crew stands on Lantern Hill at the foot of the drive (17-19,26-27).
+
+## Lantern Hill Watch-House (map `watchhouse`, 30x12)
+At the top of Lantern Hill by the Lamplighters' Stair. A squat grey ashlar block (rows 0-6) on a small cobbled square (rows 7-11).
+- **Charge room** (x1-7, y1-5), public: charge counter (2-5,3) with the day-book; the sergeant's stool behind it (3,2); charge-sheet pigeonholes (1-2,1); writing desk (5,1); stove (1,5). Front doors (4-5,6), iron-studded oak, hooked open by day, the blue Watch lamp above.
+- **Guardroom** (x9-15, y1-5), staff: inner door (8,3) from the charge room; weapon racks (10,1),(12,1); mess table (12,3-4); the constables' kit chest (14,5). Door to the cells (16,3).
+- **Cell block** (x17-28, y1-4): eight barred cells along the north and south walls. Not visible from outside.
+- **Square:** lamp posts (2,7),(26,7); notice board (5,7) with the Alderman's 50-crown Rosewater reward and the old bill for Hedda Vask; horse trough (2-3,9); iron benches (20,9),(22,9).
+- Pois: doors, notice board (filed as a clue), charge counter, pigeonholes, inner door, horse trough, benches.
+
+## The Lamplighters' Stair (map `lamplighters-stair`, 14x17)
+A stepped slate lane between brick walls, from the watch-house square (top, rows 0-1) down to the Tanners' side streets (bottom, row 16). Upper landing (row 4-5): the Lamplighter's statue (12,4), a bronze in a niche with lucky-bright boots and a candle stub; a stair lamp (1,5). Middle landing (rows 8-9): the lamp-trimmers' niche (1,9) with oil cans, wick-reels and a ladder; a stone bench (3,9). Lower landing (rows 12-13): a lion-mouthed drinking fountain (6,12); a lamp (9,13). Quiet mid-morning, with an occasional porter. Linked to the watch-house map.
+
+- **The Marchmont, the Promenade** (not visited; Asche's word): the Gilt's most expensive hotel. Asks no questions, ten crowns a night, wants a grown-up's name on the book.
+- **Wenna's bakehouse, Chandler's Row, the Tangle** (not visited).
+
+- **Saltgate** (district, not visited): merchants' and clerks' terraces. To buy a plain terraced house ~1,500 gp; to rent a furnished one ~20 gp a month, a quarter in advance, with a name and a reference. The Gilt starts at 5,000 gp to buy.
+- **Renting in the Gilt** (Asche's word): a furnished house is 80-100 gp a month, a quarter in advance (~300 gp down). The agent wants a banker's letter or a Gilt family's word; the better houses come with staff (a cook and a maid).
+
+## Wenna's Bakehouse, Chandler's Row, the Tangle (map `wennas-bakehouse`, 16x10)
+Bakery (rows 1-4): three bread ovens (1-3,1), flour sacks with a cat (6-7,1), barrels (10-11,1), the kneading bench with Nib's stool (7,2), a mess table (3-5,3). Inner door (6,5). Shop (rows 6-7): counter (5-7,6), bread shelves (1,7),(12,7). Split street door (8-9,8) onto Chandler's Row. Nib boards here from Day 4 for two weeks.
+
+## Prompter's Alley, behind the Gilded Lantern, Lampblack Row (map `prompters-alley`, 22x10)
+The playhouse's back wall (row 4): stage door (5,4) and the scenery-dock double doors (12-14,4), open, with flats inside. Backstage (rows 1-3) is unseen. Alley (rows 5-7): crates (4,5),(12-13,5), a playbill board (7,5), a rain barrel (17,5); alley mouth to Lampblack Row (10-13,8-9).

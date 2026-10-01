@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** Player · **Human** · **Rogue 4** (Thief) · **Background:** Criminal · **XP:** 4030
+**Player:** Player · **Human** · **Rogue 4** (Thief) · **Background:** Criminal · **XP:** 4780
 
 **HP** 35/35 · **AC** 15 (Leather Armor 11 + Dex 4) · **Speed** 30 ft · **Initiative** +6 · **Proficiency** +2 · **Passive Perception** 13
 
@@ -26,7 +26,7 @@
 
 Attacks per Attack action: 1
 
-**Granted spells:** mage-hand (Magic Initiate (Wizard)), minor-illusion (Magic Initiate (Wizard)), disguise-self (Magic Initiate (Wizard))
+**Granted spells:** mage-hand (Magic Initiate (Wizard)), minor-illusion (Magic Initiate (Wizard)), disguise-self (Magic Initiate (Wizard), free cast used)
 
 ## Features & feats
 
@@ -36,7 +36,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 498 GP 5 SP
+**Coins:** 378 GP 5 SP
 
 - `cabinet-key-1` 1× Cabinet key · _gift: loaned by the attendant_
 - `dagger-1` 1× Dagger (equipped) · _starting equipment_
@@ -64,7 +64,6 @@ Species traits: Resourceful, Skillful, Versatile
 - `black-gold-coin-1` 1× Black-Gold Coin · _gift: Valentin Crane, from his waistcoat_
 - `wardens-sigil-ring-1` 1× Warden's Sigil Ring · _stolen: pried off Sergeant Varga's chained hand in the Heron's brig_
 - `emeric-danes-last-letter-1` 1× Emeric Dane's Last Letter · _gift: lent by Wynn Dane to 'the chapel' for the Saint's Book of Remembrance; she wants it back_
-- `tobiass-notes-on-the-bli-1` 1× Tobias's Notes on the Blink and the Heart · _gift: written by Tobias Fenwick in exchange for the Codex_
 - `wine-delivery-order-1` 1× Wine delivery order · _stolen: coat pocket in Pell's cabinet 8, Rosewater Baths_
 - `ring-of-shop-keys-1` 1× Ring of shop keys · _stolen: coat pocket in Pell's cabinet 8, Rosewater Baths_
 - `thieves-tools-1` 1× Thieves' Tools · _starting equipment_

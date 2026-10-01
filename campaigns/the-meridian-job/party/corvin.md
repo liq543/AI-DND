@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Wizard 4** (Evoker) · **Background:** Sage · **XP:** 4030
+**Player:** DM · **Human** · **Wizard 4** (Evoker) · **Background:** Sage · **XP:** 4780
 
 **HP** 26/26 · **AC** 12 (unarmored 10 + Dex 2) · **Speed** 30 ft · **Initiative** +4 · **Proficiency** +2 · **Passive Perception** 11
 
@@ -27,7 +27,7 @@ Attacks per Attack action: 1
 ## Spellcasting
 
 - **Wizard:** save DC 14, attack +6, cantrips 4, prepared 7, up to level 2
-- **Slots:** L1 4/4, L2 3/3
+- **Slots:** L1 4/4, L2 2/3
 - **Cantrips:** fire-bolt, mage-hand, minor-illusion, light
 - **Prepared:** detect-magic, identify, shield, sleep, misty-step, knock, invisibility
 - **Spellbook:** detect-magic, identify, shield, sleep, magic-missile, alarm, feather-fall, disguise-self, misty-step, knock, invisibility, suggestion
@@ -46,7 +46,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 242 GP 3 SP
+**Coins:** 240 GP 3 SP
 
 - `dagger-1` 2× Dagger · _starting equipment_
 - `quarterstaff-1` 2× Quarterstaff · _starting equipment (Arcane Focus)_
@@ -61,6 +61,9 @@ Species traits: Resourceful, Skillful, Versatile
 - `silver-pocket-watch-1` 1× Silver pocket watch · _loot: Mr Faircloth's waistcoat_
 - `faircloths-shop-keys-1` 1× Faircloth's shop keys · _loot: Mr Faircloth's waistcoat_
 - `page-from-faircloths-led-1` 1× Page from Faircloth's ledger · _stolen: Faircloth's measurements ledger_
+- `tobiass-notes-on-the-bli-1` 1× Tobias's Notes on the Blink and the Heart · _gift: written by Tobias Fenwick in exchange for the Codex_
+- `clothes-travelers-1` 1× Nance's drab coat and cap (Clothes, Traveler's) · _purchased for 2 GP_
+  - Second-hand from Nance Pettle's rag stall: a long brown wool coat gone shiny at the elbows, a grey waistcoat, a flat cloth cap. A clerk's clothes, not a magister's.
 
 Hit Point Dice: Wizard d6 4/4
 Languages: Common, Elvish, Draconic · Tools: Calligrapher's Supplies · Armor training: none
