@@ -44,7 +44,7 @@
           {
             "type": "command",
             "shell": "bash",
-            "command": "H=\"$CLAUDE_PROJECT_DIR/.claude/hooks/dm_rules.py\"; py \"$H\" UserPromptSubmit 2>/dev/null || python3 \"$H\" UserPromptSubmit 2>/dev/null || python \"$H\" UserPromptSubmit 2>/dev/null || cat \"$CLAUDE_PROJECT_DIR/dm/turn-rules.md\" \"$CLAUDE_PROJECT_DIR/dm/standing-orders.md\"",
+            "command": "H=\"$CLAUDE_PROJECT_DIR/.claude/hooks/dm_rules.py\"; py \"$H\" UserPromptSubmit 2>/dev/null || python3 \"$H\" UserPromptSubmit 2>/dev/null || python \"$H\" UserPromptSubmit 2>/dev/null || cat \"$CLAUDE_PROJECT_DIR/dm/turn-rules.md\"",
             "timeout": 15
           }
         ]
@@ -65,25 +65,12 @@
     ],
     "PreToolUse": [
       {
-        "matcher": "*",
+        "matcher": "Bash|PowerShell",
         "hooks": [
           {
             "type": "command",
             "shell": "bash",
             "command": "H=\"$CLAUDE_PROJECT_DIR/.claude/hooks/dm_rules.py\"; py \"$H\" PreToolUse 2>/dev/null || python3 \"$H\" PreToolUse 2>/dev/null || python \"$H\" PreToolUse",
-            "timeout": 15
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "shell": "bash",
-            "command": "H=\"$CLAUDE_PROJECT_DIR/.claude/hooks/dm_rules.py\"; py \"$H\" PostToolUse 2>/dev/null || python3 \"$H\" PostToolUse 2>/dev/null || python \"$H\" PostToolUse",
             "timeout": 15
           }
         ]

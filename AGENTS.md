@@ -139,7 +139,10 @@ This file is read by both. In Claude Code, `CLAUDE.md` imports it; `.claude/sett
 commands and **blocks** hand-editing engine data (signed logs, snapshots) or the signing keys; engine code is
 editable for beta bug fixes (§1.8); slash
 commands `/new-game`, `/resume-game`, `/save-game`, `/new-character`, `/table` wrap the procedures. Hooks
-(`.claude/hooks/dm_rules.py`) inject `dm/turn-rules.md` (the most-broken rules, in short) on every prompt, before and after
-every tool call, at session start and after every compaction, and a Stop hook makes the DM check each turn against it
-before ending. Keep that digest in sync with this file, and add to it whenever the player has to correct the DM.
+(`.claude/hooks/dm_rules.py`) inject `dm/turn-rules.md` (the most-broken rules, in short) on every prompt and
+`dm/standing-orders.md` at session start and after every compaction. Before engine commands that build an area or add
+creatures, they add just that checklist. On turns that changed the game, a short Stop check makes the DM review the turn
+before ending. Keep the digest in sync with this file, add standing orders whenever the player has to correct the DM, and
+keep each file under ~9 KB (bigger hook payloads get cut to a preview). How to restore the older, heavier setup:
+`.claude/hooks/REVERT.md`.
 In Codex the same rules apply by instruction: run only `python -m engine ...` for mechanics.

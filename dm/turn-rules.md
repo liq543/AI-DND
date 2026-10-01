@@ -1,4 +1,4 @@
-# DM rules: injected before EVERY prompt, EVERY tool call, every session start and after every compaction
+# DM rules: injected before every prompt (dm/standing-orders.md comes at session start and after every compaction)
 
 Full text: AGENTS.md, dm/dm-guide.md, dm/visuals.md. These are the rules most easily broken. **The player should never have to
 correct me. A correction means the game wasn't played right.** Check every action and every reply against this list.
@@ -51,5 +51,7 @@ correct me. A correction means the game wasn't played right.** Check every actio
 9. **Beta fixes.** Fix genuine engine or SRD bugs in `engine/`, `viewer/` or `tests/`, add a test, run the suite, and
    tell the player in one line. Fixes must match the SRD and never change a rolled outcome.
 10. **Every correction becomes a rule, the same turn.** When the player corrects anything, fix it, then add the lesson to
-    this file or dm/standing-orders.md (generically worded; both are in the repo and injected everywhere), and to memory. Never make the same mistake twice.
+    dm/standing-orders.md (generically worded, in the repo, injected each session; this file only for the very top rules),
+    and to memory. Never make the same mistake twice. Keep each file under ~9 KB: a hook payload over ~10 KB gets cut to a
+    preview and the rules stop reaching the model, so merge or tighten orders instead of only appending.
 11. **Before sending any reply**, walk this list against what I did this turn. Fix every miss before the reply goes out.
