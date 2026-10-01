@@ -21,7 +21,6 @@ lost something to the Meridian, and each will learn it took more than they knew.
 - **Pacing:** plenty of combat (the player asked for it), mixed with legwork, infiltration and social play.
   Every legwork job carries a real chance of a fight.
 - **Difficulty:** standard. Death is possible but always telegraphed.
-- **Lines:** sexual content; harm to children. **Veils:** none (the torture veil was removed at the player's request on Day 3, Session 2).
 
 ## Party Setup
 - **Player character:** Kit Corvell, "the Jackdaw" (Rogue/Thief).

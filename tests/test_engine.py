@@ -216,6 +216,25 @@ class EngineTest(unittest.TestCase):
         finally:
             self.ok("npc", "remove", "sleepy-tam")
 
+    def test_upcast_target_cap(self):
+        # SRD: "You can target one additional creature for each spell slot level above 2" — Invisibility is one
+        # creature at level 2, two at level 3; Bless is three, plus one per level above 1
+        from engine import srd
+        self.assertEqual(srd.find("spells", "invisibility")["effect"].get("max_targets"), 1)
+        self.assertEqual(srd.find("spells", "bless")["effect"].get("max_targets"), 3)
+        if "longstrider" not in self.state().get("wren").get("spells", {}).get("spellbook", []):
+            self.ok("coins", "wren", "+50gp", "--source", "gift: test ink money")
+            self.ok("spells", "scribe", "wren", "--spell", "longstrider", "--source", "test: a borrowed spellbook")
+        self.ok("spells", "set", "wren", "--cantrips", "fire bolt,ray of frost,minor illusion",
+                "--prepared", "magic missile,sleep,burning hands,longstrider")
+        try:
+            self.ok("place", "kira", "5,5", "--map", "arena")
+            self.ok("place", "wren", "6,5", "--map", "arena")
+            self.rule("cast", "wren", "longstrider", "--targets", "kira,wren", contains="at most 1 creature")
+        finally:
+            self.ok("spells", "set", "wren", "--cantrips", "fire bolt,ray of frost,minor illusion",
+                    "--prepared", "magic missile,sleep,burning hands,mage armor")
+
     def test_heavy_armor_stealth_disadvantage(self):
         from engine import srd
         self.assertTrue(srd.find("armor", "Chain Mail")["stealth_dis"])
@@ -296,6 +315,12 @@ class EngineTest(unittest.TestCase):
 
     def test_tiny_interior_is_refused_cleanly(self):
         self.rule("map", "gen", "interior", "--w", "26", "--h", "10", "--id", "tiny-hall", contains="at least")
+
+    def test_smallest_allowed_interior_generates_for_every_kind(self):
+        from engine import maps
+        for kind in ("house", "manor", "library", "tavern", "shop", "temple", "bathhouse", "warehouse", "workshop"):
+            for seed in range(40):
+                maps.gen_interior(seed, 16, 14, kind=kind)   # must never crash at the minimum size
 
     def test_room_numbers_are_never_drawn_for_players(self):
         from engine import maps, render
@@ -397,6 +422,56 @@ class EngineTest(unittest.TestCase):
         finally:
             self.ok("combat", "end")
             self.ok("npc", "remove", "oswin-hale")
+
+    def test_ammo_recovery_counts_the_whole_fight(self):
+        # SRD Ammunition: recover half the ammunition used in the fight, not just the last turn's
+        from engine import mechanics as M
+        self.ok("item", "add", "kira", "Shortbow", "--source", "found: a hunter's lodge")
+        self.ok("item", "add", "kira", "Arrows", "--source", "found: a hunter's lodge", "--qty", "20")
+        self.ok("place", "kira", "3,3", "--map", "arena")
+        self.ok("npc", "add", "ogre", "--name", "Captain Rhosk", "--at", "9,3", "--map", "arena")
+
+        def arrows():
+            return sum(i.get("qty", 1) for i in self.state().get("kira")["inventory"] if i["name"] == "Arrows")
+        try:
+            self.ok("combat", "start")
+            shots = 0
+            for _ in range(12):
+                if M.current_id(self.state()) == "kira":
+                    if shots == 0:
+                        for i in self.state().get("kira")["inventory"]:
+                            if i.get("equipped") and i.get("kind") == "weapon":
+                                self.ok("item", "unequip", "kira", i["id"])
+                        bow = next(i for i in self.state().get("kira")["inventory"] if i["name"] == "Shortbow")
+                        self.ok("item", "equip", "kira", bow["id"])
+                    self.ok("attack", "kira", "captain-rhosk", "shortbow")
+                    shots += 1
+                    if shots == 2:
+                        break
+                self.ok("combat", "next")
+            self.assertEqual(shots, 2)
+            before = arrows()
+            self.ok("combat", "end")
+            self.ok("item", "recover-ammo", "kira", "Arrows")
+            self.assertEqual(arrows(), before + 1)   # two shot over two turns: half, rounded down
+        finally:
+            if self.state().state.get("combat"):
+                self.ok("combat", "end")
+            for i in self.state().get("kira")["inventory"]:
+                if i["name"] == "Shortbow" and i.get("equipped"):
+                    self.ok("item", "unequip", "kira", i["id"])
+            self.ok("npc", "remove", "captain-rhosk")
+
+    def test_coins_hand_over_between_characters(self):
+        # moving money between party members isn't a loot award, so the tier cap doesn't block it
+        from engine import mechanics as M
+        self.ok("coins", "kira", "+299gp", "--source", "loot: a test hoard")
+        before_k = M.coins_total_cp(self.state().get("kira"))
+        before_w = M.coins_total_cp(self.state().get("wren"))
+        self.ok("coins", "wren", "+250gp", "--from", "kira")
+        self.assertEqual(M.coins_total_cp(self.state().get("kira")), before_k - 25000)
+        self.assertEqual(M.coins_total_cp(self.state().get("wren")), before_w + 25000)
+        self.rule("coins", "wren", "+999999gp", "--from", "kira", contains="can't afford")
 
     def test_npc_alignment(self):
         self.ok("npc", "add", "bandit", "--name", "Captain Rhosk", "--at", "9,9", "--map", "arena")

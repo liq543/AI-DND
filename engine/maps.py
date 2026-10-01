@@ -675,10 +675,17 @@ def _cuts(rng, lo, hi, n, gap=3):
     return [lo + step * (i + 1) for i in range(n)]
 
 
+class _ClampedRandom(random.Random):
+    """randint that never fails on an empty range (a small building squeezes a layout's spans to nothing):
+    it returns the lower bound instead. Ranges that were valid roll exactly as before, so seeds are unchanged."""
+    def randint(self, a, b):
+        return a if b < a else super().randint(a, b)
+
+
 def gen_interior(seed, w=24, h=18, name=None, kind="tavern"):
     """A building interior shaped by its kind: the back rooms fall on a random side in a random number and size,
     corners may be chamfered, the entrance moves, and the main hall is furnished for what the place is."""
-    rng = random.Random(seed)
+    rng = _ClampedRandom(seed)
     spec = INTERIOR_KINDS.get(kind, {"theme": "stone", "floor": ".", "hall": "Main hall", "back": ["Storeroom", "Office", "Back room"]})
     title = name or (rng.choice(TAVERN_NAMES) if kind == "tavern" else f"{place_name(rng)} {kind.title()}")
     m = new_map("interior", title, w, h, fill="#", seed=seed, lighting="dim", building=kind, theme=spec["theme"])

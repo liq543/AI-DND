@@ -2,9 +2,9 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Bard 4** (College of Lore) · **Background:** Sage · **XP:** 4780
+**Player:** DM · **Human** · **Bard 4** (College of Lore) · **Background:** Sage · **XP:** 5380
 
-**HP** 27/27 · **AC** 12 (Leather Armor 11 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +2 · **Passive Perception** 12
+**HP** 27/27 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +2 · **Passive Perception** 12
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
@@ -31,7 +31,7 @@ Attacks per Attack action: 1
 - **Cantrips:** vicious-mockery, message, mage-hand
 - **Prepared:** charm-person, disguise-self, dissonant-whispers, healing-word, silent-image, suggestion, invisibility
 
-**Granted spells:** minor-illusion (Magic Initiate (Wizard)), prestidigitation (Magic Initiate (Wizard)), disguise-self (Magic Initiate (Wizard))
+**Granted spells:** minor-illusion (Magic Initiate (Wizard)), prestidigitation (Magic Initiate (Wizard)), disguise-self (Magic Initiate (Wizard), free cast used)
 
 ## Limited features
 
@@ -45,17 +45,22 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 127 GP
+**Coins:** 46 GP
 
-- `leather-armor-1` 1× Leather Armor (equipped) · _starting equipment_
-- `dagger-1` 2× Dagger · _starting equipment_
+- `leather-armor-1` 1× Leather Armor · _starting equipment_
 - `pan-flute-1` 1× Pan flute · _starting equipment_
 - `entertainers-pack-1` 1× Entertainer's Pack · _starting equipment_
-- `quarterstaff-1` 1× Quarterstaff · _starting equipment_
 - `calligraphers-supplies-1` 1× Calligrapher's Supplies · _starting equipment_
 - `book-1` 1× Book · _starting equipment_
 - `parchment-1` 1× Parchment · _starting equipment_
 - `robe-1` 1× Robe · _starting equipment_
+- `scropes-pocketbook-1` 1× Scrope's pocketbook · _loot: Jos Scrope's coat_
+- `letters-from-maud-1` 1× Letters from Maud · _stolen: Hester Scrope's sewing table, the Scropes' cottage_
+- `cart-shed-padlock-key-1` 1× Cart-shed padlock key · _loot: Jos Scrope's key ring_
+- `cottage-key-1` 1× Cottage key · _loot: Hester Scrope's apron pocket_
+- `pass-tracings-1` 1× Pass tracings · _crafted: Ottilie's tracings of Peel's pass, the rag-mill paper store_
+- `studded-leather-armor-1` 1× Studded Leather Armor (equipped) · _purchased for 90 GP_
+- `disguise-kit-1` 1× Disguise Kit · _purchased for 25 GP_
 
 Hit Point Dice: Bard d8 4/4
 Languages: Common, Elvish, Halfling · Tools: Calligrapher's Supplies, Forgery Kit, Disguise Kit · Armor training: light

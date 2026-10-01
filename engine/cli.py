@@ -616,7 +616,7 @@ def cmd_combat(g, a):
         defeated = c.get("defeated", [])
         xp = sum(g.entities[i]["xp"] for i in defeated if i in g.entities)
         g.emit("encounter.log", defeated=defeated, xp=xp, awarded=False, time=g.state["time"],
-               rounds=c["round"], ammo={k: v.get("ammo_spent", 0) for k, v in c.get("economy", {}).items() if v.get("ammo_spent")})
+               rounds=c["round"], ammo=c.get("ammo_total") or {k: v.get("ammo_spent", 0) for k, v in c.get("economy", {}).items() if v.get("ammo_spent")})
         g.emit("time.set", minutes=g.state["time"] + max(1, c["round"] // 10))
         for e in g.entities.values():
             conds = [x for x in e.get("conditions", []) if x["name"] in ("dodging", "helped", "raging", "disengaged")]
@@ -1173,6 +1173,18 @@ def cmd_item(g, a):
 def cmd_coins(g, a):
     e = g.get(a.who)
     delta = M.parse_coins(a.amount)
+    if getattr(a, "from_who", None):
+        # a hand-over between characters moves existing money, so the loot cap doesn't apply
+        giver = g.get(a.from_who)
+        if delta <= 0:
+            raise RuleError("coins <to> <amount> --from <giver>: the amount must be positive.")
+        if giver["id"] == e["id"]:
+            raise RuleError("A character can't hand coins to themselves.")
+        M.change_coins(g, giver, -delta, a.source or f"given to {e['name']}")
+        M.change_coins(g, e, delta, a.source or f"from {giver['name']}")
+        g.say(f"💰 {giver['name']} hands {M.fmt_cp(delta)} to {e['name']}. Purses: {giver['name']} "
+              f"{M.fmt_cp(M.coins_total_cp(g.get(giver['id'])))}, {e['name']} {M.fmt_cp(M.coins_total_cp(g.get(e['id'])))}.", kind="item")
+        return
     if not a.source:
         raise RuleError("Coins need --source (loot: ..., reward: ..., spent: ..., sold: ...).")
     if delta > 0:
@@ -2503,6 +2515,7 @@ def build_parser():
     c.add_argument("amount")
     c.add_argument("--source")
     c.add_argument("--override")
+    c.add_argument("--from", dest="from_who", help="hand coins over from another character (no loot cap: nothing new enters the game)")
     c = sp.add_parser("xp", help="award|milestone|sync <id>")
     c.add_argument("action", choices=["award", "milestone", "sync"])
     c.add_argument("who", nargs="?", help="sync: the character to bring up to the party's XP")

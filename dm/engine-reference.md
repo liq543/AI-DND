@@ -66,6 +66,7 @@ combat start [--surprised goblin-warrior-a,goblin-warrior-b]   # everyone with a
 combat swap kira,wren        # Alert feat: Initiative Swap with a willing ally, right after initiative (before anyone acts)
 combat next                  # end turn → next creature (recharges, conditions, death saves handled)
 combat status | combat add <id> | combat remove <id> | combat end
+combat reset-turn --reason "..."   # public repair: restore the current creature's action economy (e.g. after voiding a mistaken roll with `ruling`)
 attack kira goblin-warrior-a greatsword [--adv "reason"] [--dis "reason"] [--sneak] [--smite 1] [--offhand] [--versatile] [--reaction] [--knockout]
 attack goblin-warrior-a kira scimitar           # monster actions come from the stat block
 attack adult-red-dragon kira "fire breath"       # save-based actions: the target(s) roll saves
@@ -135,6 +136,7 @@ item note kira longsword-1 --alias "Oathkeeper" --text "Her father's sword, the 
 #   ALWAYS do this for notable items: anything with a story, a disguise, a maker, or a look the rules name does not capture
 #   (an heirloom blade, a weapon disguised as something else, a guild token, a cursed trinket). Mechanics still use the SRD base item.
 coins kira +25gp --source "loot: goblin pouches" | coins kira -5sp --source "spent: ferry"
+coins wren +40gp --from kira              # hand money between characters (no loot cap; nothing new enters the game)
 xp award --encounter | xp award --amount 200 --reason "negotiated the goblins' surrender" | xp milestone --reason "..."
 xp sync wren                                # a late joiner comes up to the party's XP (new characters join at it automatically)
 homebrew add monsters|items|subclasses|species|backgrounds --file thing.json --reason "..."   # public

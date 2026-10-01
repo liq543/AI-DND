@@ -209,6 +209,14 @@ def parse_spell(path):
     up = re.search(r"Using a Higher-Level Spell Slot.{0,40}?increases by (\d+d\d+) for each spell slot level above (\d)", higher, re.S)
     if up:
         effect["upcast"] = up.group(1)
+    # "You can target one additional creature for each spell slot level above 2" (Invisibility, Hold Person, Bless...):
+    # the base count comes from the main text ("up to three creatures" → 3), otherwise one creature.
+    at = re.search(r"target one additional creature for each spell slot level above (\d)", higher)
+    if at:
+        words = {"two": 2, "three": 3, "four": 4, "five": 5, "six": 6}
+        bm = re.search(r"\bup to (two|three|four|five|six)\b|\b(two|three|four|five|six) (?:creatures|Humanoids|targets)", main, re.I)
+        effect["max_targets"] = words[(bm.group(1) or bm.group(2)).lower()] if bm else 1
+        effect["targets_per_level"] = 1
     cu = re.search(r"Cantrip Upgrade.{0,20}?increases by (\d+d\d+)", higher, re.S)
     if cu:
         effect["cantrip_scaling"] = True

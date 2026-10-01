@@ -790,6 +790,12 @@ def use_ammo(g, e, item):
             g.set(e, inventory=new_inv)
             if combat(g):
                 set_economy(g, e["id"], ammo_spent=economy(g, e["id"]).get("ammo_spent", 0) + 1, ammo_item=it["name"])
+                # the turn economy resets every turn, so keep a fight-long tally for recovering ammunition afterwards
+                c = dict(combat(g))
+                tally = dict(c.get("ammo_total", {}))
+                tally[e["id"]] = tally.get(e["id"], 0) + 1
+                c["ammo_total"] = tally
+                g.emit("combat.set", combat=c)
             return
     raise RuleError(f"{e['name']} is out of ammunition ({want}s) for the {item['name']}.")
 
@@ -945,6 +951,14 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
             if used >= int(m1.group(1)):
                 raise RuleError(f"{e['name']} can cast {spell['name']} only {m1.group(1)}/day.")
             g.set(e, **{f"per_day_used__{key}": used + 1})
+    # --------------------------------------------------------------- how many creatures the slot allows
+    maxt = spell["effect"].get("max_targets")
+    if maxt:
+        lvl = base if (ritual or free or scroll) else (slot_level or base)
+        allowed = maxt + max(0, lvl - base) * spell["effect"].get("targets_per_level", 1)
+        if len(tgts) > allowed:
+            raise RuleError(f"{spell['name']} at level {lvl} affects at most {allowed} creature(s); you listed {len(tgts)}. "
+                            f"Each slot level above {base} adds one more.")
     # --------------------------------------------------------------- slot / ritual / free cast
     if base == 0:
         slot_level = 0

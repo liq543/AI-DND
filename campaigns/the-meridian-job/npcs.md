@@ -191,3 +191,67 @@
 - **Fitch** (fitch, commoner, Neutral): the Gilded Lantern's old one-legged stage-door keeper. Clay pipe, keys on a cord, a moth-eaten Admiral's coat. Lets in no one who isn't company without a coin or a name he knows. Shown as 'Stage-door keeper' until named.
 - **Ottilie Marsh** truth and the Gala leverage: see secrets.md (set Day 4 09:31).
   - Ottilie Marsh MET Day 4 10:02 (ottilie-marsh, spy stat block, Chaotic Neutral) at the Gilded Lantern stage door.
+
+### The Lamp-maker of the Blue Lamp (`lamp-maker`), Neutral
+- An old, bald man in a black velvet skullcap and an oil-spotted grey apron, trimming wicks behind the counter. Keeps the Blue Lamp on Gilder's Row and the letter drop in its window.
+
+### Gilder's Row street people
+- Broadsheet boy (`broadsheet-boy`) at the kiosk; the glazier's boy (`glaziers-boy`) at Prism's Glass; a Lantern Watch constable (`watch-constable-gilders-row`, guard) walking the Gilt beat.
+- Gilder's daughters (gilders-daughter-a/b, commoners) work inside Aurum & Daughters, visible through the open door.
+
+### Mother Ruddock (`mother-ruddock`), Neutral Good
+- Keeper of the Kettle and Key, Museum Steps. Broad, red-armed, about sixty, in a starched cap, with a ladle and a tally-slate. Knows every Meridian regular by name and tab. Told the 'pawnshop girl' where Pim Hobb lodges.
+
+### Kettle and Key regulars (Day 4 noon)
+- Pot-girl (`pot-girl`), the cook (`kettle-cook`), two Meridian porters in brown smocks (`meridian-porter-a/b`), two docents in grey coats (`meridian-docent-a/b`), and an off-duty Night Warden eating by the hearth (`off-duty-warden`, guard, unarmoured; unnamed to the party; DM: Warden Corley, Lawful Neutral, shares the night watch with Pim).
+
+### Widow Agatha Sallow (`widow-sallow`), Lawful Neutral
+- Keeps the lodging house in Cobweb Court. Small, upright, in widow's black and a white lace cap; darns all day at her parlour window and watches the court. No callers upstairs without her say, ladies never, and never while the night lodgers sleep.
+- **Mr Bellamy** (`mr-bellamy`, commoner, Neutral): Widow Sallow's top-floor front lodger, a huge retired lighterman; her 'man of the house' for trouble. Asleep and snoring.
+- Pim Hobb lodges at Widow Sallow's, Cobweb Court, top back room (found Day 4).
+
+### Mrs Danby (`mrs-danby`), Lawful Neutral
+- The Alcazar's stage-door keeper: grey hair, steel spectacles, a black stuff gown, knitting in her glass box. CALLERS WAIT. NO EXCEPTIONS.
+
+### Mr Aurelius Peel (`mr-peel`), Neutral
+- The Alcazar's prompter. Bald, precise, fifties, plum-purple waistcoat, inky cuffs, reading-glasses on his forehead, clutches his red prompt-book. Ottilie's old colleague and rival ('Tilly'). Afraid of the Curator, who sits in on rehearsals. DM: 30 gp short of a cottage lease for his retirement; covets Ottilie's 'Drowned Duke' prompt-book.
+
+### Alcazar mews people
+- Two scene-painters (`scene-painter-a/b`) gilding the seven-planet flat; a theatre carpenter (`theatre-carpenter`) in the old stable.
+
+### Tenter Basin traders
+- **Gully** (`gully`, Neutral): bandy-legged horse-dealer, moleskin waistcoat, hard hat, a straw in his teeth. Carts, horses, livery.
+- **Isaac Fell** (`isaac-fell`, Lawful Neutral): stooped carpet-dealer in a velvet skullcap and fingerless mittens; secondhand rugs 'from the best houses'.
+- **Keelson** (`keelson`, Neutral Good): huge, slow boatwright with pitch to the elbows; whistles through a gap in his teeth.
+
+### Hester Scrope (`hester-scrope`), Neutral Good
+- The millwright's wife, in the cottage across the yard from the mill. Stout, pink-cheeked, mob-cap, flowered apron; nosy and delighted by anything new; gossips at the Tangle pump. Not an informer.
+  - Day 4 14:27: Ottilie is fully in on the crew's methods, including killing; she follows Kit's lead (correction). Greedy and ruthless, like the rest of the crew.
+
+### Jos Scrope (`jos-scrope`), Neutral
+- The millwright who owns the rag-mill and rents the loft to 'Mr Vell' (Asche). Lean, stooped, sixty, rag-dust in his eyebrows, leather apron, ledger-pencil behind his ear; small counting eyes. Skinflint: takes the rent and asks nothing ('SCROPE IS A THIEF' is carved in the loft table). Husband of Hester. Offers his old cart-shed at 1 gp a week, muck it out yourselves.
+
+### Silas Whitlow (`silas-whitlow`, noble), Neutral
+- Manager of the Alcazar Players. Florid, big-bellied, fifty, fur-collared coat, gold watch-chain, carnation; a voice for the gallery. Greedy; sharp. Didn't believe 'Mr Vell' (Day 5) but stayed for the money; wants the fee in writing.
+
+### Hob (`hob`, tough), Neutral
+- The Alcazar's doorman: huge, broken-nosed, green doorman's coat, cudgel. Brought by Whitlow to the audition after Mrs Danby's murder; watches hands.
+
+### The Alcazar principals (`alcazar-principal-a`..`g`, commoners)
+- A: silver-templed leading man in a velvet cape. B: Miss Lascelles, the leading lady (fur tippet), the Queen of the Spheres. C: a red-nosed comic. D: a nervous juvenile lead. E: a character actress of sixty in widow's lace. F: a villain with painted eyebrows and a cane. G: a singing ingenue in a straw bonnet.
+- Dick Farrow (dead, Day 4): a carter's man and Painted Lady regular, shot in Lamplight Mews.
+
+### Josiah Garrow (`josiah-garrow`), Lawful Evil
+- Ropewalk moneylender and pledge-broker: gaunt, yellowish, sixty, black stock, fingerless mittens, a jeweller's glass on a ribbon. Pays a third of value, asks nothing. Ottilie's debt (80 gp) paid in full Day 5. Got the Reach's word about heron-marked brandy. Clerk: **Wicks** (`wicks`, Neutral), pale, inky.
+
+### Arsenal Steps traders
+- **Hobday** (`hobday`, Neutral), armourer; **Fathom** (`fathom`, Neutral Good), one-legged ships' chandler; **Bitterwell** (`bitterwell`, Lawful Neutral), apothecary (healing draughts).
+
+### The Emissary (`the-emissary`, stat `mage` as a stand-in), Lawful Evil
+- The foreign buyer Crane dealt with. Met Day 5, 23:00 in the Old Customs House north room. Tall, slender, high-collared old-fashioned black coat, grey kid gloves, a black-gold closed-eye pin; a lean ageless face; eyes catch the light a beat late; smells faintly of myrrh. Courteous, precise, old-fashioned speech. Candle flames lean away from him. Comes and goes by boat.
+
+### The woman in dove-grey (`sabine-roux`, spy), Lawful Evil
+- The Emissary's watcher (her name, Sabine Roux, is not known to the crew). The grey lady from the second fisherman's hut on the Mole with the spyglass; came in with the Emissary at 23:00 carrying a shuttered lantern.
+
+### Two hooded guards (`hooded-guard-a`, `hooded-guard-b`, bandit-captain), Neutral Evil
+- The Emissary's escort: long oiled hooded cloaks, swords under them; stand on the landing either side of the north room door.

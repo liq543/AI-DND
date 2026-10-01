@@ -68,7 +68,8 @@ game needs real stakes; protecting the rules is protecting their fun.
 |---|---|
 | "new game" / `/new-game` | `dm/procedures/new-game.md` (in a **fresh chat**) |
 | "continue" / "resume" / `/resume-game` | `dm/procedures/resume-game.md` |
-| "save" / "end session" / `/save-game` | `dm/procedures/save-game.md` |
+| "save" / "save the game" / "quicksave" | `python -m engine quicksave [name]` (a save point; the session goes on) |
+| "end session" / "stop here" / `/save-game` | `dm/procedures/save-game.md` |
 | "new character" / "level up" / `/new-character` | `dm/procedures/character-creation.md` |
 | "show me the map / my sheet / the item" | `map show`, point to the Sheet tab, `show item owner:item-id` |
 | "roll for me" | `python -m engine request roll <id>` |

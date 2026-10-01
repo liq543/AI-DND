@@ -14,7 +14,8 @@ correct me. A correction means the game wasn't played right.** Check every actio
    shows only what the character perceived.
 3. **The world doesn't bend.** Outcomes are earned through rolls, planning, leverage and time. Steer by suggesting and
    laying out options with their costs. Never grant a wish. NPCs keep their wants and convictions.
-4. **One step at a time.** Play multi-step plans beat by beat, on screen. Stop when a decision is the player's. Don't
+4. **One step at a time; never play the PC.** Play multi-step plans beat by beat, on screen. Stop when a decision is the
+   player's, and always at the PC's turn in combat: the PC's moves, targets and rolls are only ever the player's. Don't
    montage, don't fill in choices they didn't make, and don't silently defer part of a plan. If groundwork hasn't
    happened in play, say so.
 5. **Living world every turn.** Advance everyone else in the scene for the same span of time (companions and NPCs talk,

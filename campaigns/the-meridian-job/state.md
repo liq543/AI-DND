@@ -2,27 +2,26 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 4 · **In-world time:** Day 4, 11:00 · **Mode:** exploration
-**Current map:** Scrope's Rag-Mill Loft (`ragmill`) · **Events:** 10544 · **Log head:** `39b882ac5cec673d`
+**Session:** 5 · **In-world time:** Day 5, 23:02 · **Mode:** exploration
+**Current map:** Old Customs House, upper floor (`customs-upper`) · **Events:** 14485 · **Log head:** `3c6ecedeea61bace`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=3
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 4 | 35/35 | 15 | — | — | ragmill (4,3) |
+| Kit Corvell (`kit`) | 4 | 30/35 | 16 | — | — | customs-upper (3,3) |
 | Hedda Vask (`hedda`) | 3 | 34/34 | 17 | — | — | sluice (5,9) |
 | Tobias Fenwick (`tobias`) | 3 | 23/23 | 11 | — | L1:1/4 L2:2/2 | sluice (5,9) |
 | Sera Lark (`sera`) | 4 | 0/27 | 13 | unconscious · DEAD | L1:2/4 L2:2/3 | faircloths (12,8) |
-| Corvin Asche (`corvin`) | 4 | 26/26 | 12 | — | L1:4/4 L2:2/3 | ragmill (3,2) |
-| Brakka Holloway (`brakka`) | 4 | 36/36 | 16 | — | — | ragmill (4,4) |
-| Ottilie Marsh (`ottilie`) | 4 | 27/27 | 12 | — | L1:4/4 L2:3/3 | ragmill (6,3) |
+| Corvin Asche (`corvin`) | 4 | 26/26 | 12 | — | L1:4/4 L2:3/3 | ragmill (3,1) |
+| Brakka Holloway (`brakka`) | 4 | 36/36 | 17 | — | — | the-mole (1,9) |
+| Ottilie Marsh (`ottilie`) | 4 | 27/27 | 13 | — | L1:4/4 L2:3/3 | customs-upper (2,3) |
 
 ## Other creatures (DM view)
 
 | Creature | Side | HP | AC | Conditions | Position | Hidden |
 |---|---|---|---|---|---|---|
-| Dorothea Quill (`dorothea-quill`, commoner) | neutral | 4/4 | 10 | — | quills-rooms (11,8) |  |
 | Commoner A (`commoner-a`, commoner) | neutral | 4/4 | 10 | — | chapel (17,6) |  |
 | Sergeant Varga (`sergeant-varga`, warrior-veteran) | enemy | 15/65 | 17 | restrained, blinded | sluice (5,9) | yes |
 | Warden-blade A (`warden-blade-a`, animated-flying-sword) | enemy | 0/14 | 17 | — · DEAD | chapel (6,3) |  |
@@ -39,7 +38,7 @@
 | Brass Warden (east) (`brass-warden-east`, animated-armor) | neutral | 33/33 | 18 | — | meridian (22,4) |  |
 | Brass Warden (west) (`brass-warden-west`, animated-armor) | neutral | 33/33 | 18 | — | meridian (11,4) |  |
 | Gate Watchman (`gate-watchman`, guard) | enemy | 11/11 | 16 | — | dock (25,2) | yes |
-| Pim Hobb (Receiving Clerk) (`receiving-clerk`, commoner) | ally | 4/4 | 10 | — | dock (19,4) |  |
+| Pim Hobb (Receiving Clerk) (`receiving-clerk`, commoner) | ally | 4/4 | 10 | — | sallows-top (1,2) | yes |
 | Brass Warden (stores door) (`brass-warden-stores-door`, animated-armor) | neutral | 33/33 | 18 | — | dock (5,4) |  |
 | Night Warden A (`night-warden-a`, guard) | enemy | 11/11 | 16 | — | meridian (16,12) | yes |
 | Night Warden B (`night-warden-b`, guard) | enemy | 11/11 | 16 | — | meridian (5,9) | yes |
@@ -61,12 +60,12 @@
 | Nance Pettle (`nance-pettle`, commoner) | neutral | 4/4 | 10 | — | tanners-cut (26,12) |  |
 | Tanner A (`tanner-a`, commoner) | neutral | 4/4 | 10 | — | tanners-cut (27,10) |  |
 | Tanner B (`tanner-b`, commoner) | neutral | 4/4 | 10 | — | tanners-cut (28,11) |  |
-| Gorse (`gorse`, tough) | neutral | 32/32 | 12 | — | quills-rooms (6,9) |  |
+| Gorse (`gorse`, tough) | enemy | 0/32 | 12 | — · DEAD | quills-rooms (18,3) |  |
 | Brakka Holloway (`brakka-holloway`, warrior-veteran) | neutral | 65/65 | 11 | — | gutter-ring (3,13) | yes |
 | Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | wennas-bakehouse (8,2) |  |
 | Dace Morrow (`dace-morrow`, bandit) | neutral | 11/11 | 12 | — | gutter-ring (23,6) |  |
-| Mother Tansy (`mother-tansy`, commoner) | neutral | 4/4 | 10 | — | tansys-mending (12,2) |  |
-| Pip (`pip`, commoner) | neutral | 4/4 | 10 | — | tansys-mending (3,3) |  |
+| Mother Tansy (`mother-tansy`, commoner) | enemy | 0/4 | 10 | — · DEAD | tansys-mending (12,2) |  |
+| Pip (`pip`, commoner) | neutral | 4/4 | 10 | — | tansys-mending (3,3) | yes |
 | Guard A (`guard-a`, guard) | neutral | 11/11 | 16 | — | quire-street (24,7) |  |
 | Guard B (`guard-b`, guard) | neutral | 11/11 | 16 | — | quire-street (24,6) |  |
 | Man in grey (`man-in-grey`, spy) | neutral | 27/27 | 12 | — | quire-street (13,11) |  |
@@ -111,6 +110,59 @@
 | Stagehand A (`stagehand-a`, commoner) | neutral | 4/4 | 10 | — | prompters-alley (13,4) |  |
 | Stagehand B (`stagehand-b`, commoner) | neutral | 4/4 | 10 | — | prompters-alley (14,5) |  |
 | Ropewalk porter (`ropewalk-porter`, commoner) | neutral | 4/4 | 10 | — | ragmill (2,13) | yes |
+| Lamp-maker (`lamp-maker`, commoner) | neutral | 4/4 | 10 | — | gilders-row (12,2) |  |
+| Broadsheet boy (`broadsheet-boy`, commoner) | neutral | 4/4 | 10 | — | gilders-row (11,9) |  |
+| Glazier's boy (`glaziers-boy`, commoner) | neutral | 4/4 | 10 | — | gilders-row (23,6) |  |
+| Watch constable (Gilder's Row) (`watch-constable-gilders-row`, guard) | neutral | 11/11 | 16 | — | gilders-row (22,8) |  |
+| Gilder's daughter A (`gilders-daughter-a`, commoner) | neutral | 4/4 | 10 | — | gilders-row (2,4) |  |
+| Gilder's daughter B (`gilders-daughter-b`, commoner) | neutral | 4/4 | 10 | — | gilders-row (2,2) |  |
+| Mother Ruddock (`mother-ruddock`, commoner) | neutral | 4/4 | 10 | — | kettle-and-key (12,3) |  |
+| Pot-girl (`pot-girl`, commoner) | neutral | 4/4 | 10 | — | kettle-and-key (16,9) | yes |
+| Kettle cook (`kettle-cook`, commoner) | neutral | 4/4 | 10 | — | kettle-and-key (22,2) |  |
+| Meridian porter A (`meridian-porter-a`, commoner) | neutral | 4/4 | 10 | — | kettle-and-key (4,9) |  |
+| Meridian porter B (`meridian-porter-b`, commoner) | neutral | 4/4 | 10 | — | kettle-and-key (5,9) | yes |
+| Meridian docent A (`meridian-docent-a`, commoner) | neutral | 4/4 | 10 | — | kettle-and-key (12,9) | yes |
+| Meridian docent B (`meridian-docent-b`, commoner) | neutral | 4/4 | 10 | — | kettle-and-key (11,9) | yes |
+| Off-duty Warden (`off-duty-warden`, guard) | neutral | 11/11 | 11 | — | kettle-and-key (3,9) | yes |
+| Widow Sallow (`widow-sallow`, commoner) | neutral | 4/4 | 10 | — | sallows (7,5) |  |
+| Mr Bellamy (`mr-bellamy`, commoner) | neutral | 4/4 | 10 | — | sallows-top (3,8) | yes |
+| Mrs Danby (`mrs-danby`, commoner) | neutral | 0/4 | 10 | — · DEAD | lamplight-mews (1,9) |  |
+| Scene-painter A (`scene-painter-a`, commoner) | neutral | 4/4 | 10 | — | lamplight-mews (19,7) | yes |
+| Scene-painter B (`scene-painter-b`, commoner) | neutral | 4/4 | 10 | — | lamplight-mews (18,7) | yes |
+| Theatre carpenter (`theatre-carpenter`, commoner) | neutral | 4/4 | 10 | — | lamplight-mews (3,13) | yes |
+| Gully (`gully`, commoner) | neutral | 4/4 | 10 | — | tenter-basin (7,6) |  |
+| Isaac Fell (`isaac-fell`, commoner) | neutral | 4/4 | 10 | — | tenter-basin (25,4) |  |
+| Keelson (`keelson`, commoner) | neutral | 4/4 | 10 | — | tenter-basin (25,12) |  |
+| Abel Rudd (`abel-rudd`, commoner) | neutral | 4/4 | 10 | — | vatmans-row (9,3) | yes |
+| Mill hand A (`mill-hand-a`, commoner) | neutral | 4/4 | 10 | — | vatmans-row (11,2) | yes |
+| Mill hand B (`mill-hand-b`, commoner) | neutral | 4/4 | 10 | — | vatmans-row (12,2) | yes |
+| Mill hand C (`mill-hand-c`, commoner) | neutral | 4/4 | 10 | — | vatmans-row (10,2) | yes |
+| Departing actor A (`departing-actor-a`, commoner) | neutral | 4/4 | 10 | — | lamplight-mews (9,7) | yes |
+| Departing actor B (`departing-actor-b`, commoner) | neutral | 4/4 | 10 | — | lamplight-mews (9,6) | yes |
+| Drinker outside the Painted Lady (`drinker-outside-the-painted-lady`, commoner) | neutral | 0/4 | 10 | — · DEAD | lamplight-mews (18,9) |  |
+| Silas Whitlow (`silas-whitlow`, noble) | neutral | 9/9 | 15 | — | ragmill (6,10) | yes |
+| Hob (`hob`, tough) | neutral | 32/32 | 12 | — | ragmill (7,11) | yes |
+| Mr Peel (`mr-peel`, commoner) | neutral | 4/4 | 10 | — | ragmill (9,9) | yes |
+| Alcazar principal A (`alcazar-principal-a`, commoner) | neutral | 4/4 | 10 | — | ragmill (12,9) | yes |
+| Alcazar principal B (`alcazar-principal-b`, commoner) | neutral | 4/4 | 10 | — | ragmill (12,8) | yes |
+| Alcazar principal C (`alcazar-principal-c`, commoner) | neutral | 4/4 | 10 | — | ragmill (13,9) | yes |
+| Alcazar principal D (`alcazar-principal-d`, commoner) | neutral | 4/4 | 10 | — | ragmill (11,9) | yes |
+| Alcazar principal E (`alcazar-principal-e`, commoner) | neutral | 4/4 | 10 | — | ragmill (12,10) | yes |
+| Alcazar principal F (`alcazar-principal-f`, commoner) | neutral | 4/4 | 10 | — | ragmill (11,8) | yes |
+| Alcazar principal G (`alcazar-principal-g`, commoner) | neutral | 4/4 | 10 | — | ragmill (13,8) | yes |
+| Josiah Garrow (`josiah-garrow`, commoner) | neutral | 4/4 | 10 | — | garrows (9,5) |  |
+| Wicks (`wicks`, commoner) | neutral | 4/4 | 10 | — | garrows (14,5) |  |
+| Hobday (`hobday`, commoner) | neutral | 4/4 | 10 | — | arsenal-steps (4,3) |  |
+| Fathom (`fathom`, commoner) | neutral | 4/4 | 10 | — | arsenal-steps (13,4) |  |
+| Bitterwell (`bitterwell`, commoner) | neutral | 4/4 | 10 | — | arsenal-steps (22,4) |  |
+| Old Pocock (`net-mender-a`, commoner) | neutral | 4/4 | 10 | — | the-mole (8,10) |  |
+| Net-mender B (`net-mender-b`, commoner) | neutral | 4/4 | 10 | — | the-mole (7,10) |  |
+| Lighthouse keeper (`lighthouse-keeper`, commoner) | neutral | 4/4 | 10 | — | the-mole (28,9) |  |
+| Customs officer (`customs-officer`, guard) | neutral | 11/11 | 16 | — | the-mole (10,11) |  |
+| Woman in dove-grey (`sabine-roux`, spy) | neutral | 27/27 | 12 | — | customs-upper (7,3) |  |
+| The Emissary (`the-emissary`, mage) | neutral | 81/81 | 15 | — | customs-upper (6,3) |  |
+| Hooded guard A (`hooded-guard-a`, bandit-captain) | neutral | 52/52 | 15 | — | customs-upper (3,5) |  |
+| Hooded guard B (`hooded-guard-b`, bandit-captain) | neutral | 52/52 | 15 | — | customs-upper (5,5) |  |
 
 ## Maps (exact current contents — tokens and items stay where they were left)
 
@@ -189,7 +241,6 @@
 ### The Acquisitions Dock (`dock`, dungeon 30×19, lighting dim)
 - Brass Warden (stores door) (`brass-warden-stores-door`, neutral) at (5,4) — 33/33 HP
 - Gate Watchman (`gate-watchman`, enemy) at (25,2) — 11/11 HP · hidden
-- Pim Hobb (Receiving Clerk) (`receiving-clerk`, ally) at (19,4) — 4/4 HP
 - point of interest `poi-1`: The Receiving Ledger at (19,3) → journal j28
 - point of interest `poi-2`: The culvert grate at (7,17) → journal j34
 - point of interest `poi-3`: The iron stores door (Pim's keys) at (4,1) → journal j29
@@ -216,8 +267,10 @@
 - doors: (3,4) closed, (9,4) closed, (15,4) closed, (22,4) closed, (27,4) closed
 - labels: The Dane house (14,2), Footbridge (5,11), Lampwick Cut (canal) (15,11), Lampwick Row (15,6)
 
-### The Gallowmere Flats - the Cinderwharf channel (`flats`, wilderness 32×16, lighting bright)
-- point of interest `poi-1`: A laden barge at (21,7) → journal j45
+### The Gallowmere Flats - the Cinderwharf channel (`flats`, wilderness 32×16, lighting dark)
+- item on floor `floor-1`: 4× Cast-iron press plate at (28,8) — dropped by Brakka Holloway
+- item on floor `floor-2`: 1× Rusty chain at (28,8) — dropped by Brakka Holloway
+- item on floor `floor-3`: 1× Rope at (28,8) — dropped by Brakka Holloway
 - labels: Cinderwharf channel (16,8), Eel-staithe (jetty) (20,3), Mudbank from the Sluice House (1,3), Toward Cinderwharf (30,2)
 
 ### The Bellwater Steps and Rosewater Lane (`bellwater`, battle 30×15, lighting bright)
@@ -317,22 +370,23 @@
 - doors: (6,1) closed, (24,1) closed, (30,1) open, (7,13) closed, (18,13) closed
 - labels: from Soap Lane (1,2), The Cut (canal) (8,7), on to the Tangle (31,11)
 
-### Quill's Rooms, Needle Row (`quills-rooms`, interior 22×14, lighting dim)
-- Dorothea Quill (`dorothea-quill`, neutral) at (11,8) — 4/4 HP
-- Gorse (`gorse`, neutral) at (6,9) — 32/32 HP
+### Quill's Rooms, Needle Row (`quills-rooms`, interior 22×14, lighting dark)
+- Gorse (`gorse`, enemy) at (18,3) — DEAD
 - point of interest `poi-1`: Needle Row at (2,1) → journal j117
 - point of interest `poi-2`: The Outside Stair at (3,9) → journal j118
 - point of interest `poi-3`: Quill's Door at (4,9) → journal j119
 - point of interest `poi-4`: Crates of Salvage at (6,2) → journal j120
 - point of interest `poi-5`: The Headless Saint at (13,4) → journal j121
-- point of interest `poi-6`: The Card Table at (10,6) → journal j122
 - point of interest `poi-7`: Oil Lamp at (5,5) → journal j123
 - point of interest `poi-8`: The Settle at (6,11) → journal j124
 - point of interest `poi-9`: Potted Fern at (9,12) → journal j125
-- point of interest `poi-10`: Quill's Bed at (18,3) → journal j126
-- point of interest `poi-11`: The Strongbox at (16,11) → journal j127
-- point of interest `poi-12`: Tea Chest at (20,10) → journal j128
-- doors: (14,6) open, (4,9) open
+- point of interest `poi-16`: The strongbox (emptied) at (16,11) → journal j394
+- point of interest `poi-17`: The card table at (10,6) → journal j395
+- point of interest `poi-18`: Tea chest (emptied) at (20,10) → journal j396
+- point of interest `poi-19`: Wall panel beside the bed at (20,6) → journal j397
+- point of interest `poi-20`: The settle at (7,11) → journal j398
+- point of interest `poi-21`: Quill's bed at (18,3) → journal j399
+- doors: (14,6) open, (20,7) closed, (4,9) closed
 - labels: Bar (12,2), Outside stair (2,5), Parlour (9,4), Back room (17,8)
 
 ### The Gutter Ring (`gutter-ring`, interior 28×18, lighting dim)
@@ -361,17 +415,18 @@
 - labels: The Gutter Ring (13,13)
 
 ### Mother Tansy's Lace-Mending (`tansys-mending`, interior 18×14, lighting bright)
-- Mother Tansy (`mother-tansy`, neutral) at (12,2) — 4/4 HP
-- Pip (`pip`, neutral) at (3,3) — 4/4 HP
+- Mother Tansy (`mother-tansy`, enemy) at (12,2) — DEAD
+- Pip (`pip`, neutral) at (3,3) — 4/4 HP · hidden
 - point of interest `poi-1`: Mending counter at (12,3) → journal j141
-- point of interest `poi-2`: Laundry shelves at (16,6) → journal j142
 - point of interest `poi-3`: Hanging lamp at (11,5) → journal j143
 - point of interest `poi-4`: Window bench at (9,11) → journal j144
 - point of interest `poi-5`: Street door at (12,13) → journal j145
 - point of interest `poi-6`: Lace pillows at (3,2) → journal j146
 - point of interest `poi-8`: Kitchen hearth at (5,12) → journal j148
 - point of interest `poi-9`: Laundry bundles at (3,8) → journal j149
-- doors: (7,3) closed, (7,6) closed, (7,11) closed, (12,13) closed
+- point of interest `poi-10`: Behind the mending counter at (11,2) → journal j400
+- point of interest `poi-11`: The laundry shelves (burning) at (16,6) → journal j401
+- doors: (7,3) closed, (7,6) closed, (7,11) open, (12,13) closed
 - labels: Mending Shop (12,1), Workroom (3,1), Bundle Store (3,6), Back Kitchen (3,10)
 
 ### Quire Street (`quire-street`, interior 30×16, lighting bright)
@@ -518,12 +573,26 @@
 - doors: (16,2) open, (8,4) open, (12,9) closed
 
 ### Scrope's Rag-Mill Loft (`ragmill`, interior 24×15, lighting dim)
-- Brakka Holloway (`brakka`, pc) at (4,4) — 36/36 HP
-- Corvin Asche (`corvin`, pc) at (3,2) — 26/26 HP
-- Kit Corvell (`kit`, pc) at (4,3) — 35/35 HP
-- Ottilie Marsh (`ottilie`, pc) at (6,3) — 27/27 HP
+- Corvin Asche (`corvin`, pc) at (3,1) — 26/26 HP
+- Alcazar principal A (`alcazar-principal-a`, neutral) at (12,9) — 4/4 HP · hidden
+- Alcazar principal B (`alcazar-principal-b`, neutral) at (12,8) — 4/4 HP · hidden
+- Alcazar principal C (`alcazar-principal-c`, neutral) at (13,9) — 4/4 HP · hidden
+- Alcazar principal D (`alcazar-principal-d`, neutral) at (11,9) — 4/4 HP · hidden
+- Alcazar principal E (`alcazar-principal-e`, neutral) at (12,10) — 4/4 HP · hidden
+- Alcazar principal F (`alcazar-principal-f`, neutral) at (11,8) — 4/4 HP · hidden
+- Alcazar principal G (`alcazar-principal-g`, neutral) at (13,8) — 4/4 HP · hidden
+- Hob (`hob`, neutral) at (7,11) — 32/32 HP · hidden
+- Mr Peel (`mr-peel`, neutral) at (9,9) — 4/4 HP · hidden
 - Ropewalk porter (`ropewalk-porter`, neutral) at (2,13) — 4/4 HP · hidden
+- Silas Whitlow (`silas-whitlow`, neutral) at (6,10) — 9/9 HP · hidden
 - container `asche-chests`: Asche's paper chests at (12,4)
+- container `kits-stash`: Kit's stash (under a loose floorboard) at (3,4)
+- item on floor `floor-1`: 10× Large drugget rug at (12,9) — dropped by Kit Corvell
+- in Kit's stash (under a loose floorboard) (`kits-stash`) `floor-2`: 6× Garnet at (3,4) — stashed by Kit Corvell
+- in Kit's stash (under a loose floorboard) (`kits-stash`) `floor-3`: 1× Dragon's-tooth gavel at (3,4) — stashed by Kit Corvell
+- in Kit's stash (under a loose floorboard) (`kits-stash`) `floor-4`: 1× Cask of Ironmoor Brandy at (3,4) — stashed by Kit Corvell
+- in Kit's stash (under a loose floorboard) (`kits-stash`) `floor-5`: 1× Quill's sale-book at (3,4) — stashed by Kit Corvell
+- in Kit's stash (under a loose floorboard) (`kits-stash`) `floor-6`: 1× Tansy's IOUs at (3,4) — stashed by Kit Corvell
 - point of interest `poi-1`: Outside stair at (1,12) → journal j247
 - point of interest `poi-2`: Loft door at (5,10) → journal j248
 - point of interest `poi-3`: Coat pegs at (1,7) → journal j249
@@ -537,9 +606,11 @@
 - point of interest `poi-13`: Paper chests at (12,4) → journal j259
 - point of interest `poi-14`: Clerk's desk at (21,3) → journal j260
 - point of interest `poi-15`: Trimming bench at (15,3) → journal j261
-- point of interest `poi-16`: Drying racks at (12,9) → journal j262
-- point of interest `poi-17`: Old sorting bench at (18,7) → journal j263
-- doors: (5,5) open, (16,5) closed, (23,9) closed, (5,10) closed
+- point of interest `poi-23`: Eight rugs on the loft floor at (12,8) → journal j359
+- point of interest `poi-25`: Rug over the bloodstain at (9,10) → journal j360
+- point of interest `poi-27`: Old sorting bench at (18,7) → journal j381
+- point of interest `poi-28`: Drying racks (moved) at (11,13) → journal j356
+- doors: (4,5) open, (16,5) closed, (23,9) closed, (5,10) closed
 
 ### Lantern Hill Watch-House (`watchhouse`, interior 30×12, lighting bright)
 - Desk sergeant (`sergeant-odile-pask`, neutral) at (3,2) — 65/65 HP
@@ -582,21 +653,252 @@
 - point of interest `poi-5`: Street door at (8,8) → journal j280
 - doors: (6,5) closed, (8,8) open, (9,8) open
 
+### Gilder's Row, the Gilt (`gilders-row`, interior 30×16, lighting bright)
+- Broadsheet boy (`broadsheet-boy`, neutral) at (11,9) — 4/4 HP
+- Gilder's daughter A (`gilders-daughter-a`, neutral) at (2,4) — 4/4 HP
+- Gilder's daughter B (`gilders-daughter-b`, neutral) at (2,2) — 4/4 HP
+- Glazier's boy (`glaziers-boy`, neutral) at (23,6) — 4/4 HP
+- Lamp-maker (`lamp-maker`, neutral) at (12,2) — 4/4 HP
+- Watch constable (Gilder's Row) (`watch-constable-gilders-row`, neutral) at (22,8) — 11/11 HP
+- point of interest `poi-1`: The Blue Lamp's window at (11,5) → journal j287
+- point of interest `poi-2`: The Blue Lamp's door at (12,5) → journal j288
+- point of interest `poi-3`: Aurum & Daughters, Gilders at (4,5) → journal j289
+- point of interest `poi-4`: Prism's Glass at (23,5) → journal j290
+- point of interest `poi-5`: Gas lamp at (11,6) → journal j291
+- point of interest `poi-6`: Signpost at (28,6) → journal j292
+- point of interest `poi-7`: Broadsheet stand at (11,10) → journal j293
+- point of interest `poi-8`: Canal-side bench at (1,10) → journal j294
+- point of interest `poi-9`: The Gilt Cut footbridge at (4,12) → journal j295
+- point of interest `poi-10`: Canal railing at (15,11) → journal j296
+- point of interest `poi-11`: The blue lamp at (11,4) → journal j389
+- doors: (4,5) open, (12,5) closed, (23,5) open
+- labels: Aurum & Daughters, Gilders (4,0), The Blue Lamp (13,0), Prism's Glass (24,0), Gilder's Row (15,8), The Gilt Cut (15,13)
+
+### The Kettle and Key, Museum Steps (`kettle-and-key`, interior 28×18, lighting dim)
+- Kettle cook (`kettle-cook`, neutral) at (22,2) — 4/4 HP
+- Meridian docent A (`meridian-docent-a`, neutral) at (12,9) — 4/4 HP · hidden
+- Meridian docent B (`meridian-docent-b`, neutral) at (11,9) — 4/4 HP · hidden
+- Meridian porter A (`meridian-porter-a`, neutral) at (4,9) — 4/4 HP
+- Meridian porter B (`meridian-porter-b`, neutral) at (5,9) — 4/4 HP · hidden
+- Mother Ruddock (`mother-ruddock`, neutral) at (12,3) — 4/4 HP
+- Off-duty Warden (`off-duty-warden`, neutral) at (3,9) — 11/11 HP · hidden
+- Pot-girl (`pot-girl`, neutral) at (16,9) — 4/4 HP · hidden
+- point of interest `poi-1`: The Kettle and Key's door at (13,13) → journal j298
+- point of interest `poi-2`: The counter and the great kettle at (12,4) → journal j299
+- point of interest `poi-3`: The hearth at (1,6) → journal j300
+- point of interest `poi-4`: The staff notice board at (24,10) → journal j301
+- point of interest `poi-5`: The snug at (3,5) → journal j302
+- point of interest `poi-6`: Kitchen door at (18,3) → journal j303
+- point of interest `poi-7`: The crates by the lane at (2,14) → journal j304
+- point of interest `poi-8`: The Museum Cut at (14,16) → journal j305
+- point of interest `poi-9`: Street lamp at (6,14) → journal j306
+- doors: (18,3) open, (13,13) closed
+- labels: Museum Steps (13,15), The Museum Cut (14,17), Snug (2,0), Kitchen (22,0)
+
+### Cobweb Court and Widow Sallow's (`sallows`, interior 26×16, lighting bright)
+- Widow Sallow (`widow-sallow`, neutral) at (7,5) — 4/4 HP
+- point of interest `poi-1`: Widow Sallow's parlour window at (8,6) → journal j307
+- point of interest `poi-2`: Widow Sallow's front door at (13,6) → journal j308
+- point of interest `poi-3`: Court pump at (17,10) → journal j309
+- point of interest `poi-4`: Washing line at (7,9) → journal j310
+- point of interest `poi-5`: Neighbour's door at (3,6) → journal j311
+- point of interest `poi-6`: The house opposite at (20,6) → journal j312
+- point of interest `poi-7`: Court entrance at (12,15) → journal j313
+- doors: (11,3) open, (14,3) closed, (3,6) closed, (13,6) closed, (20,6) closed
+- labels: Cobweb Court (12,12), to the Museum Steps (12,15)
+
+### Widow Sallow's, top floor (`sallows-top`, interior 20×14, lighting dim)
+- Mr Bellamy (`mr-bellamy`, neutral) at (3,8) — 4/4 HP · hidden
+- Pim Hobb (Receiving Clerk) (`receiving-clerk`, ally) at (1,2) — 4/4 HP · hidden
+- point of interest `poi-1`: Stair head at (17,5) → journal j314
+- point of interest `poi-2`: Pim's door at (5,4) → journal j315
+- point of interest `poi-3`: Mr Bellamy's door at (5,7) → journal j316
+- point of interest `poi-4`: Lumber-room door at (13,4) → journal j317
+- point of interest `poi-5`: Landing skylight at (9,6) → journal j318
+- point of interest `poi-6`: Pim's bed at (1,1) → journal j319
+- point of interest `poi-7`: Pim's writing desk at (6,1) → journal j320
+- point of interest `poi-8`: Chair with spectacles at (4,1) → journal j321
+- point of interest `poi-9`: Washstand at (1,3) → journal j322
+- point of interest `poi-10`: Pim's box at (11,3) → journal j323
+- point of interest `poi-11`: Pim's window at (8,0) → journal j324
+- doors: (5,4) closed, (13,4) closed, (5,7) closed
+
+### Lamplight Mews (the Alcazar's stage door) (`lamplight-mews`, interior 28×16, lighting dark)
+- Departing actor A (`departing-actor-a`, neutral) at (9,7) — 4/4 HP · hidden
+- Departing actor B (`departing-actor-b`, neutral) at (9,6) — 4/4 HP · hidden
+- Drinker outside the Painted Lady (`drinker-outside-the-painted-lady`, neutral) at (18,9) — DEAD
+- Mrs Danby (`mrs-danby`, neutral) at (1,9) — DEAD
+- Scene-painter A (`scene-painter-a`, neutral) at (19,7) — 4/4 HP · hidden
+- Scene-painter B (`scene-painter-b`, neutral) at (18,7) — 4/4 HP · hidden
+- Theatre carpenter (`theatre-carpenter`, neutral) at (3,13) — 4/4 HP · hidden
+- point of interest `poi-1`: The Alcazar's stage door at (7,5) → journal j325
+- point of interest `poi-2`: The keeper's window at (3,5) → journal j326
+- point of interest `poi-3`: Playbill board at (3,6) → journal j327
+- point of interest `poi-4`: The scenery dock at (20,5) → journal j328
+- point of interest `poi-7`: The carpentry shop at (7,11) → journal j331
+- point of interest `poi-8`: The Painted Lady at (23,11) → journal j332
+- point of interest `poi-9`: Prop crates at (18,10) → journal j333
+- point of interest `poi-10`: Empty trestles at (19,6) → journal j380
+- point of interest `poi-11`: Mrs Danby's ladder-stair at (0,10) → journal j382
+- point of interest `poi-15`: Mews lamp (lit) at (7,6) → journal j383
+- point of interest `poi-16`: The smoker at the crates at (18,9) → journal j386
+- point of interest `poi-17`: Mrs Danby at her stair at (1,9) → journal j387
+- doors: (7,5) closed, (19,5) closed, (20,5) closed, (21,5) closed, (22,5) closed, (7,11) open, (14,11) closed, (23,11) closed
+- labels: Lamplight Mews (14,8), The wings (15,2)
+
+### Tenter Basin, the Tangle (`tenter-basin`, interior 30×18, lighting bright)
+- Gully (`gully`, neutral) at (7,6) — 4/4 HP
+- Isaac Fell (`isaac-fell`, neutral) at (25,4) — 4/4 HP
+- Keelson (`keelson`, neutral) at (25,12) — 4/4 HP
+- point of interest `poi-1`: Gully's yard gate at (5,7) → journal j334
+- point of interest `poi-2`: The stalls at (2,1) → journal j335
+- point of interest `poi-3`: The carter's cart at (6,5) → journal j336
+- point of interest `poi-4`: Water trough at (2,3) → journal j337
+- point of interest `poi-5`: Fell's Remnants door at (20,7) → journal j338
+- point of interest `poi-6`: Carpet pyramids at (17,1) → journal j339
+- point of interest `poi-7`: Fell's counter at (26,3) → journal j340
+- point of interest `poi-8`: Basin signpost at (27,8) → journal j341
+- point of interest `poi-9`: Keelson's Slip at (21,13) → journal j342
+- point of interest `poi-10`: Boatwright's bench at (26,11) → journal j343
+- point of interest `poi-11`: Basin edge at (10,11) → journal j344
+- doors: (20,7) closed
+- labels: Gully's Yard (6,0), Fell's Remnants (21,0), Keelson's Slip (25,10), Tenter Basin (10,14)
+
+### Vatman's Row, outside Scrope's mill (`vatmans-row`, interior 26×14, lighting bright)
+- Abel Rudd (`abel-rudd`, neutral) at (9,3) — 4/4 HP · hidden
+- Mill hand A (`mill-hand-a`, neutral) at (11,2) — 4/4 HP · hidden
+- Mill hand B (`mill-hand-b`, neutral) at (12,2) — 4/4 HP · hidden
+- Mill hand C (`mill-hand-c`, neutral) at (10,2) — 4/4 HP · hidden
+- point of interest `poi-1`: The outside stair at (2,6) → journal j345
+- point of interest `poi-2`: Scrope's mill door at (6,5) → journal j346
+- point of interest `poi-3`: Mill lamp at (7,6) → journal j347
+- point of interest `poi-4`: Rag notice at (17,6) → journal j348
+- point of interest `poi-5`: The Cut under the hoist at (24,7) → journal j349
+- point of interest `poi-6`: The Scropes' door at (4,10) → journal j350
+- point of interest `poi-7`: The yard at (12,11) → journal j351
+- point of interest `poi-9`: Mounting bench at (6,9) → journal j353
+- point of interest `poi-10`: Rain barrel at (14,9) → journal j354
+- point of interest `poi-11`: The old cart-shed at (18,11) → journal j373
+- doors: (6,5) closed, (20,5) closed, (4,10) closed, (20,12) closed
+
+### The Scropes' cottage (`scropes-cottage`, interior 16×14, lighting dark)
+- container `dresser`: The dresser at (7,1)
+- container `bedroom-chest`: Bedroom chest at (8,8)
+- container `under-bed`: Under the bed at (2,8)
+- point of interest `poi-1`: The dresser at (7,1) → journal j361
+- point of interest `poi-2`: Jos's armchair at (13,1) → journal j362
+- point of interest `poi-6`: Ladder-stair at (14,4) → journal j366
+- point of interest `poi-7`: Front door at (11,5) → journal j367
+- point of interest `poi-10`: Washstand at (2,10) → journal j370
+- point of interest `poi-11`: Sewing table at (9,10) → journal j371
+- point of interest `poi-12`: The range (cold) at (1,1) → journal j375
+- point of interest `poi-13`: Kitchen table (cleared) at (3,3) → journal j376
+- point of interest `poi-14`: The settle at (13,2) → journal j377
+- point of interest `poi-15`: Bedroom chest (half empty) at (8,8) → journal j378
+- point of interest `poi-16`: The Scropes' bed at (2,8) → journal j379
+- doors: (6,2) closed, (11,5) closed
+- labels: Kitchen (3,0), Front room (10,0), Bedroom (up the ladder) (7,7), the yard (8,6)
+
+### Garrow's pledge-shop, the Ropewalk (`garrows`, interior 20×14, lighting dim)
+- Josiah Garrow (`josiah-garrow`, neutral) at (9,5) — 4/4 HP
+- Wicks (`wicks`, neutral) at (14,5) — 4/4 HP
+- point of interest `poi-1`: Garrow's counter at (9,6) → journal j402
+- point of interest `poi-2`: Notice board at (10,8) → journal j403
+- point of interest `poi-3`: Waiting bench at (3,8) → journal j404
+- point of interest `poi-4`: Shop door at (9,10) → journal j405
+- point of interest `poi-5`: The Ropewalk at (10,12) → journal j406
+- point of interest `poi-6`: Strongroom door at (4,4) → journal j407
+- doors: (4,4) closed, (14,4) closed, (9,10) open
+
+### The Arsenal Steps, Saltgate (`arsenal-steps`, interior 26×14, lighting bright)
+- Bitterwell (`bitterwell`, neutral) at (22,4) — 4/4 HP
+- Fathom (`fathom`, neutral) at (13,4) — 4/4 HP
+- Hobday (`hobday`, neutral) at (4,3) — 4/4 HP
+- point of interest `poi-1`: Hobday & Son, Armourers at (4,5) → journal j408
+- point of interest `poi-2`: Fathom's Chandlery at (14,5) → journal j409
+- point of interest `poi-3`: Bitterwell's Apothecary at (24,5) → journal j410
+- point of interest `poi-4`: Arsenal Steps signpost at (12,6) → journal j411
+- point of interest `poi-5`: The steps up at (1,6) → journal j412
+- point of interest `poi-6`: The steps down at (23,6) → journal j413
+- point of interest `poi-7`: Harbour railing at (12,10) → journal j414
+- doors: (4,5) closed, (14,5) closed, (24,5) closed
+- labels: Hobday & Son, Armourers (4,0), Fathom's Chandlery (14,0), Bitterwell's Apothecary (22,0), Saltgate harbour (12,12)
+
+### The Mole and the Old Customs House (`the-mole`, interior 32×16, lighting dark)
+- Brakka Holloway (`brakka`, pc) at (1,9) — 36/36 HP
+- Customs officer (`customs-officer`, neutral) at (10,11) — 11/11 HP
+- Lighthouse keeper (`lighthouse-keeper`, neutral) at (28,9) — 4/4 HP
+- Net-mender B (`net-mender-b`, neutral) at (7,10) — 4/4 HP
+- Old Pocock (`net-mender-a`, neutral) at (8,10) — 4/4 HP
+- point of interest `poi-1`: Customs House front door at (22,6) → journal j416
+- point of interest `poi-2`: Boarded windows at (20,6) → journal j417
+- point of interest `poi-3`: The quay stair at (15,4) → journal j418
+- point of interest `poi-4`: Net-menders' hut at (6,9) → journal j419
+- point of interest `poi-5`: Second hut at (12,8) → journal j420
+- point of interest `poi-6`: The lighthouse at (29,9) → journal j421
+- point of interest `poi-7`: Inner steps at (9,12) → journal j422
+- point of interest `poi-8`: The Mole's parapet at (2,6) → journal j423
+- point of interest `poi-9`: Inside the grey lady's hut (glimpsed) at (13,9) → journal j424
+- point of interest `poi-10`: Customs House side door at (17,4) → journal j425
+- point of interest `poi-11`: Pigeonholes at (19,3) → journal j426
+- point of interest `poi-12`: The old long-room counter at (23,4) → journal j427
+- point of interest `poi-13`: A swept path at (21,5) → journal j428
+- point of interest `poi-14`: The stair up at (26,3) → journal j429
+- point of interest `poi-15`: The crew's cart at (0,10) → journal j455
+- doors: (17,4) open, (22,6) closed, (11,8) closed, (6,9) closed, (29,9) closed
+- labels: Old Customs House (22,1), Lighthouse (30,6), Inner harbour (4,14), Open sea (6,1)
+
+### Old Customs House, upper floor (`customs-upper`, interior 16×14, lighting dim)
+- Kit Corvell (`kit`, pc) at (3,3) — 30/35 HP
+- Ottilie Marsh (`ottilie`, pc) at (2,3) — 27/27 HP
+- Hooded guard A (`hooded-guard-a`, neutral) at (3,5) — 52/52 HP
+- Hooded guard B (`hooded-guard-b`, neutral) at (5,5) — 52/52 HP
+- The Emissary (`the-emissary`, neutral) at (6,3) — 81/81 HP
+- Woman in dove-grey (`sabine-roux`, neutral) at (7,3) — 27/27 HP
+- point of interest `poi-1`: Head of the stair at (13,5) → journal j430
+- point of interest `poi-2`: The swept track on the landing at (6,6) → journal j431
+- point of interest `poi-3`: Hole in the roof at (8,5) → journal j432
+- point of interest `poi-4`: The north room door at (4,4) → journal j433
+- point of interest `poi-6`: Clerks' room door at (3,7) → journal j435
+- point of interest `poi-7`: Store-room door at (11,7) → journal j436
+- point of interest `poi-9`: Chair facing the window at (3,2) → journal j438
+- point of interest `poi-10`: Chair with its back to the window at (6,2) → journal j439
+- point of interest `poi-11`: Black cloth over the window at (4,1) → journal j440
+- point of interest `poi-12`: Cold hearth at (1,3) → journal j441
+- point of interest `poi-13`: Ledger shelves at (10,1) → journal j442
+- point of interest `poi-14`: The Collector's desk at (12,2) → journal j443
+- point of interest `poi-15`: Collector's chair at (12,3) → journal j444
+- point of interest `poi-16`: Fallen slate at (10,3) → journal j445
+- point of interest `poi-17`: Iron-bound chest at (13,3) → journal j446
+- point of interest `poi-18`: Collector's office door at (10,4) → journal j447
+- point of interest `poi-19`: Clerks' sloped desks at (1,8) → journal j448
+- point of interest `poi-20`: Pigeonhole shelf at (5,8) → journal j449
+- point of interest `poi-21`: Clerks' stools at (4,9) → journal j450
+- point of interest `poi-22`: Staved casks at (9,8) → journal j451
+- point of interest `poi-23`: Rotten sacks at (9,9) → journal j452
+- point of interest `poi-24`: Slate and gull mess at (12,8) → journal j453
+- point of interest `poi-25`: Coil of tarred rope at (13,9) → journal j454
+- point of interest `poi-26`: The meeting table (candles lit) at (4,2) → journal j456
+- doors: (4,4) open, (10,4) open, (3,7) open, (11,7) open
+
+### Old Customs House, upper floor (`customs-upper-2`, interior 16×14, lighting dim)
+- doors: (2,7) closed, (11,7) closed, (3,13) closed, (4,13) closed
+
 
 ## Recent events
 
-- ⬆ Brakka Holloway picks up 1× Letter from Lowe and Strand.
-- 🚪 The door at (5,5) is opened.
-- 🚪 The door at (5,10) is opened.
-- 🚪 The door at (5,10) is closed.
-- 👁 Ropewalk porter appears (neutral).
-- Brakka Holloway gives 1× Letter from Lowe and Strand to Ropewalk porter.
-- A Ropewalk porter Brakka fetched off the corner takes the sealed letter and a silver bit, repeats 'Lantern Hill watch-house, the desk sergeant, by noon', and trots off up Vatman's Row.
-- 🚶 Brakka Holloway moves 5 ft to (4,4).
-- “Done. Lad off the Ropewalk, never seen me before. Said nothing about who.”
-- While Brakka was out, Ottilie has pulled a stool to the deal table beside Asche, and the two of them have spread his blank licence stock between them like a hand of cards.
-- “Miss Marsh thinks an Alcazar company pass is a two-colour job with a blind stamp. I think she's showing off.”
-- “I think he's never seen one. I'll need a real pass to copy, and Peel's the only man in the city who'll lend me his.”
-- 🎬 Scrope's Rag-Mill Loft — Day 4, 11:00. The stampers thud below; four of them round the deal table now, and a letter on its way up Lantern Hill.
-- 🗺 Map: Scrope's Rag-Mill Loft
-- — Session 4 ends —
+- 🎬 The north room — Day 5, 23:00 — Two candles leaning away from the man in the seaward chair; hooded men on the landing; the sea under the window.
+- 🗺 Map: Old Customs House, upper floor
+- 🗺 Map: Old Customs House, upper floor
+- Ottilie knows the woman in dove-grey at once: the grey lady from the hut, the one with the spyglass. The lantern sits on the floor at the grey lady's feet.
+- Kit holds up the Magpie's Key in the candlelight, then flips Crane's black-gold coin across the table.
+- “Would you expect your thief to not case the joint? It's a plus to be thorough. We took a peek inside earlier. Your woman there didn't notice a thing from her little perch.”
+- The Emissary catches the coin without looking at it, turns it once in his gloved fingers, and his eyes go to the key and stay there a long moment. The candle flames lean a little further from him.
+- The woman in dove-grey's face doesn't move, but she looks at Kit properly for the first time, as if fixing his face.
+- “No. I'd think less of you if you hadn't. And she didn't need to see you; the room told her. It's a talkative room, if you don't know the word. Now you know that, and I know you'll own a thing when asked. A fair start.”
+- He slides the coin back across the table to Kit.
+- “Keep it. It was Mr Crane's token; it's yours now, like his arrangement. Sixty thousand crowns for the Eye, in your hands, within a night of the Gala. I don't need the key; I needed to see that you hold it. That door will open for nothing else.”
+- “So. You have the key and, I gather, a plan. What do you need from me, and what do you want to know?”
+- ⏳ 2m passes — the opening of the meeting. Now Day 5, 23:02.
+- Ottilie stays standing by the cold hearth, gloved hands folded, watching the candle flames rather than the man.
+- At the landward end Brakka shifts on his bollard and pulls his collar up against the sea wind; the Customs House shows no light.
