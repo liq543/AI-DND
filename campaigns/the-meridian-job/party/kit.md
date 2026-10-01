@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** Player · **Human** · **Rogue 4** (Thief) · **Background:** Criminal · **XP:** 5380
+**Player:** Player · **Human** · **Rogue 4** (Thief) · **Background:** Criminal · **XP:** 5567
 
 **HP** 30/35 · **AC** 16 (Studded Leather Armor 12 + Dex 4) · **Speed** 30 ft · **Initiative** +6 · **Proficiency** +2 · **Passive Perception** 13
 
@@ -20,6 +20,7 @@
 
 | Attack | To hit | Damage | Notes |
 |---|---|---|---|
+| Dagger of Venom | +7 | 1d4+5 piercing | range 20/60 ft, mastery nick |
 | Unarmed Strike | +1 | 0 bludgeoning | reach 5 ft |
 
 Attacks per Attack action: 1
@@ -81,6 +82,15 @@ Species traits: Resourceful, Skillful, Versatile
 - `studded-leather-armor-1` 1× Studded Leather Armor (equipped) · _purchased for 90 GP_
 - `paper-1` 30× Blank harbour customs forms (Paper) · _found: oilcloth bundle in the clerks' pigeonholes, Old Customs House_
   - About thirty blank customs clearance forms from before the Council's new quay, kept dry in an oilcloth wrap. Each is headed with the old harbour customs crest and has spaces for vessel, master, cargo, duty paid and the Collector's seal. Good stock for a forger.
+- `shortbow-1` 1× Shortbow · _starting equipment_
+- `arrows-1` 1× Arrows · _starting equipment_
+- `dagger-1` 1× Dagger · _starting equipment_
+- `rapier-1` 1× Heron-head Sword-cane (Rapier) · _loot: the blade hidden inside Crane's heron's-head cane (a sword-cane)_
+  - Valentin Crane's walking cane: black lacquered wood with a silver heron's-head handle. A twist of the handle draws a slim, needle-pointed blade. It passes for a gentleman's cane anywhere a sword would draw looks. The engine treats it as a Rapier.
+- `dagger-of-venom-1` 1× Dagger of Venom (Dagger of Venom) (equipped) — Rare · _stolen: Acquisitions case A-148, Cage Three, Undercroft Stores (swapped for a plain dagger)_
+  - Acquisitions exhibit A-148, lifted from its glass case in the Undercroft Stores. A slim blade of blued black steel with a green-enamelled hilt, faintly oily to the touch. A plain dagger lies on the black felt in its place, under an unbroken Acquisitions seal.
+- `arrows-2` 6× Arrows · _starting equipment_
+- `arrows-3` 1× Arrows · _starting equipment_
 
 Hit Point Dice: Rogue d8 4/4
 Languages: Common, Elvish, Halfling, Thieves' Cant · Tools: Thieves' Tools · Armor training: light

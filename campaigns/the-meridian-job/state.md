@@ -2,21 +2,21 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 5 · **In-world time:** Day 5, 23:02 · **Mode:** exploration
-**Current map:** Old Customs House, upper floor (`customs-upper`) · **Events:** 14485 · **Log head:** `3c6ecedeea61bace`
+**Session:** 6 · **In-world time:** Day 5, 23:57 · **Mode:** exploration
+**Current map:** Scrope's Rag-Mill Loft (`ragmill`) · **Events:** 14585 · **Log head:** `bdf1d495820c31bd`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=3
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 4 | 30/35 | 16 | — | — | customs-upper (3,3) |
+| Kit Corvell (`kit`) | 4 | 30/35 | 16 | — | — | ragmill (4,3) |
 | Hedda Vask (`hedda`) | 3 | 34/34 | 17 | — | — | sluice (5,9) |
 | Tobias Fenwick (`tobias`) | 3 | 23/23 | 11 | — | L1:1/4 L2:2/2 | sluice (5,9) |
 | Sera Lark (`sera`) | 4 | 0/27 | 13 | unconscious · DEAD | L1:2/4 L2:2/3 | faircloths (12,8) |
-| Corvin Asche (`corvin`) | 4 | 26/26 | 12 | — | L1:4/4 L2:3/3 | ragmill (3,1) |
-| Brakka Holloway (`brakka`) | 4 | 36/36 | 17 | — | — | the-mole (1,9) |
-| Ottilie Marsh (`ottilie`) | 4 | 27/27 | 13 | — | L1:4/4 L2:3/3 | customs-upper (2,3) |
+| Corvin Asche (`corvin`) | 4 | 26/26 | 12 | — | L1:4/4 L2:3/3 | ragmill (3,2) |
+| Brakka Holloway (`brakka`) | 4 | 36/36 | 17 | — | — | ragmill (5,4) |
+| Ottilie Marsh (`ottilie`) | 4 | 27/27 | 13 | — | L1:4/4 L2:3/3 | ragmill (6,3) |
 
 ## Other creatures (DM view)
 
@@ -159,10 +159,10 @@
 | Net-mender B (`net-mender-b`, commoner) | neutral | 4/4 | 10 | — | the-mole (7,10) |  |
 | Lighthouse keeper (`lighthouse-keeper`, commoner) | neutral | 4/4 | 10 | — | the-mole (28,9) |  |
 | Customs officer (`customs-officer`, guard) | neutral | 11/11 | 16 | — | the-mole (10,11) |  |
-| Woman in dove-grey (`sabine-roux`, spy) | neutral | 27/27 | 12 | — | customs-upper (7,3) |  |
-| The Emissary (`the-emissary`, mage) | neutral | 81/81 | 15 | — | customs-upper (6,3) |  |
-| Hooded guard A (`hooded-guard-a`, bandit-captain) | neutral | 52/52 | 15 | — | customs-upper (3,5) |  |
-| Hooded guard B (`hooded-guard-b`, bandit-captain) | neutral | 52/52 | 15 | — | customs-upper (5,5) |  |
+| Woman in dove-grey (`sabine-roux`, spy) | neutral | 27/27 | 12 | — | customs-upper (7,3) | yes |
+| The Emissary (`the-emissary`, mage) | neutral | 81/81 | 15 | — | customs-upper (6,3) | yes |
+| Hooded guard A (`hooded-guard-a`, bandit-captain) | neutral | 52/52 | 15 | — | customs-upper (3,5) | yes |
+| Hooded guard B (`hooded-guard-b`, bandit-captain) | neutral | 52/52 | 15 | — | customs-upper (5,5) | yes |
 
 ## Maps (exact current contents — tokens and items stay where they were left)
 
@@ -573,7 +573,10 @@
 - doors: (16,2) open, (8,4) open, (12,9) closed
 
 ### Scrope's Rag-Mill Loft (`ragmill`, interior 24×15, lighting dim)
-- Corvin Asche (`corvin`, pc) at (3,1) — 26/26 HP
+- Brakka Holloway (`brakka`, pc) at (5,4) — 36/36 HP
+- Corvin Asche (`corvin`, pc) at (3,2) — 26/26 HP
+- Kit Corvell (`kit`, pc) at (4,3) — 30/35 HP
+- Ottilie Marsh (`ottilie`, pc) at (6,3) — 27/27 HP
 - Alcazar principal A (`alcazar-principal-a`, neutral) at (12,9) — 4/4 HP · hidden
 - Alcazar principal B (`alcazar-principal-b`, neutral) at (12,8) — 4/4 HP · hidden
 - Alcazar principal C (`alcazar-principal-c`, neutral) at (13,9) — 4/4 HP · hidden
@@ -825,7 +828,6 @@
 - labels: Hobday & Son, Armourers (4,0), Fathom's Chandlery (14,0), Bitterwell's Apothecary (22,0), Saltgate harbour (12,12)
 
 ### The Mole and the Old Customs House (`the-mole`, interior 32×16, lighting dark)
-- Brakka Holloway (`brakka`, pc) at (1,9) — 36/36 HP
 - Customs officer (`customs-officer`, neutral) at (10,11) — 11/11 HP
 - Lighthouse keeper (`lighthouse-keeper`, neutral) at (28,9) — 4/4 HP
 - Net-mender B (`net-mender-b`, neutral) at (7,10) — 4/4 HP
@@ -849,12 +851,10 @@
 - labels: Old Customs House (22,1), Lighthouse (30,6), Inner harbour (4,14), Open sea (6,1)
 
 ### Old Customs House, upper floor (`customs-upper`, interior 16×14, lighting dim)
-- Kit Corvell (`kit`, pc) at (3,3) — 30/35 HP
-- Ottilie Marsh (`ottilie`, pc) at (2,3) — 27/27 HP
-- Hooded guard A (`hooded-guard-a`, neutral) at (3,5) — 52/52 HP
-- Hooded guard B (`hooded-guard-b`, neutral) at (5,5) — 52/52 HP
-- The Emissary (`the-emissary`, neutral) at (6,3) — 81/81 HP
-- Woman in dove-grey (`sabine-roux`, neutral) at (7,3) — 27/27 HP
+- Hooded guard A (`hooded-guard-a`, neutral) at (3,5) — 52/52 HP · hidden
+- Hooded guard B (`hooded-guard-b`, neutral) at (5,5) — 52/52 HP · hidden
+- The Emissary (`the-emissary`, neutral) at (6,3) — 81/81 HP · hidden
+- Woman in dove-grey (`sabine-roux`, neutral) at (7,3) — 27/27 HP · hidden
 - point of interest `poi-1`: Head of the stair at (13,5) → journal j430
 - point of interest `poi-2`: The swept track on the landing at (6,6) → journal j431
 - point of interest `poi-3`: Hole in the roof at (8,5) → journal j432
@@ -887,18 +887,18 @@
 
 ## Recent events
 
-- 🎬 The north room — Day 5, 23:00 — Two candles leaning away from the man in the seaward chair; hooded men on the landing; the sea under the window.
-- 🗺 Map: Old Customs House, upper floor
-- 🗺 Map: Old Customs House, upper floor
-- Ottilie knows the woman in dove-grey at once: the grey lady from the hut, the one with the spyglass. The lantern sits on the floor at the grey lady's feet.
-- Kit holds up the Magpie's Key in the candlelight, then flips Crane's black-gold coin across the table.
-- “Would you expect your thief to not case the joint? It's a plus to be thorough. We took a peek inside earlier. Your woman there didn't notice a thing from her little perch.”
-- The Emissary catches the coin without looking at it, turns it once in his gloved fingers, and his eyes go to the key and stay there a long moment. The candle flames lean a little further from him.
-- The woman in dove-grey's face doesn't move, but she looks at Kit properly for the first time, as if fixing his face.
-- “No. I'd think less of you if you hadn't. And she didn't need to see you; the room told her. It's a talkative room, if you don't know the word. Now you know that, and I know you'll own a thing when asked. A fair start.”
-- He slides the coin back across the table to Kit.
-- “Keep it. It was Mr Crane's token; it's yours now, like his arrangement. Sixty thousand crowns for the Eye, in your hands, within a night of the Gala. I don't need the key; I needed to see that you hold it. That door will open for nothing else.”
-- “So. You have the key and, I gather, a plan. What do you need from me, and what do you want to know?”
-- ⏳ 2m passes — the opening of the meeting. Now Day 5, 23:02.
-- Ottilie stays standing by the cold hearth, gloved hands folded, watching the candle flames rather than the man.
-- At the landward end Brakka shifts on his bollard and pulls his collar up against the sea wind; the Customs House shows no light.
+- Brakka unrolls the drugget under the cart seat and hands the blades back one at a time, the way you'd return borrowed tools. Then he clicks his tongue to the bay, and the cart rolls off the Mole into Saltgate.
+- ⏳ 45m passes — driving the cart back from the Mole to Vatman's Row. Now Day 5, 23:57.
+- Kit Corvell is at (4,3) on Scrope's Rag-Mill Loft.
+- Ottilie Marsh is at (6,3) on Scrope's Rag-Mill Loft.
+- Brakka Holloway is at (5,4) on Scrope's Rag-Mill Loft.
+- 🎬 Scrope's Rag-Mill Loft — Day 5, 23:57. The mill is silent tonight; the stove ticks, and Asche has kept a lamp lit.
+- 🗺 Map: Scrope's Rag-Mill Loft
+- Two knocks and one. Asche unbars the loft door in his shirtsleeves, a pen still in his hand and the blank customs forms spread over the deal table behind him.
+- “Four of you went out and four came back, which in this crew counts as a triumph. Well? Is he real?”
+- “Real as the tide, and twice as cold. The candles leaned away from him, Corvin. Both of them. And when he left, the chair was empty before the lantern was open.”
+- “Boat went out past the lighthouse. Never saw a face on it.”
+- “Then tomorrow. Day six, and two nights before the Gala. Whitlow's letter adding four stagehands to the rehearsal must be in the Steward's hand, and Miss Marsh says the Household checks names against a company list at the staff door, so we need four real names that won't turn up. That's my evening's work, if someone fetches me a list.”
+- “And Garrow's eighty is due tomorrow, Saturday, on the Ropewalk. I can pay it now. I'd like to pay it now, in front of him, very slowly.”
+- “Visors. You said anyone in that Heart without one goes to stone. Where do we get four of them?”
+- 🚶 Corvin Asche moves 5 ft to (3,2).

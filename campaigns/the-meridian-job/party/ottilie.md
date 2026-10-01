@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Bard 4** (College of Lore) · **Background:** Sage · **XP:** 5380
+**Player:** DM · **Human** · **Bard 4** (College of Lore) · **Background:** Sage · **XP:** 5567
 
 **HP** 27/27 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +2 · **Passive Perception** 12
 
@@ -61,6 +61,8 @@ Species traits: Resourceful, Skillful, Versatile
 - `pass-tracings-1` 1× Pass tracings · _crafted: Ottilie's tracings of Peel's pass, the rag-mill paper store_
 - `studded-leather-armor-1` 1× Studded Leather Armor (equipped) · _purchased for 90 GP_
 - `disguise-kit-1` 1× Disguise Kit · _purchased for 25 GP_
+- `dagger-1` 2× Dagger · _starting equipment_
+- `quarterstaff-1` 1× Quarterstaff · _starting equipment_
 
 Hit Point Dice: Bard d8 4/4
 Languages: Common, Elvish, Halfling · Tools: Calligrapher's Supplies, Forgery Kit, Disguise Kit · Armor training: light

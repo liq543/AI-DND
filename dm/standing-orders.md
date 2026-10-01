@@ -1,4 +1,4 @@
-# Standing orders from the player (injected at session start and after every compaction; travels with the repo)
+﻿# Standing orders from the player (injected at session start and after every compaction; travels with the repo)
 
 Lessons from past corrections, on top of dm/turn-rules.md. Each one is a promise: the player should never have to
 give it again.
