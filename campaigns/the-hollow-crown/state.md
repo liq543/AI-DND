@@ -2,8 +2,8 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 1 · **In-world time:** Day 1, 12:26 · **Mode:** exploration
-**Current map:** The Pens (`the-pens`) · **Events:** 1669 · **Log head:** `c4c4dee0fb3a523f`
+**Session:** 1 · **In-world time:** Day 1, 12:28 · **Mode:** exploration
+**Current map:** The Pens (`the-pens`) · **Events:** 1685 · **Log head:** `567e9aa844d6cc1f`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6 · **Party position (region):** [21, 62]
 
 ## Party
@@ -11,7 +11,7 @@
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
 | Kit Corvell (`kit`) | 6 | 51/51 | 16 | — | — | the-pens (12,7) |
-| Brakka Holloway (`brakka`) | 6 | 58/58 | 19 | — | — | the-pens (11,7) |
+| Brakka Holloway (`brakka`) | 6 | 58/58 | 19 | — | — | the-pens (13,8) |
 | Corvin Asche (`corvin`) | 6 | 38/38 | 14 | — | L1:4/4 L2:3/3 L3:3/3 | the-pens (14,8) |
 | Ottilie Marsh (`ottilie`) | 6 | 39/39 | 13 | — | L1:4/4 L2:3/3 L3:3/3 | the-pens (15,7) |
 
@@ -27,7 +27,7 @@
 | Tobin Rudge (`tobin-rudge`, commoner) | neutral | 4/4 | 10 | — | rookery (10,5) |  |
 | Corlis (`corlis`, commoner) | neutral | 4/4 | 10 | — | barrow-gate (37,10) |  |
 | Harl (`harl`, tough) | neutral | 32/32 | 12 | — | barrow-gate (21,7) |  |
-| Bastian (`bastian`, tough) | neutral | 32/32 | 12 | — | the-pens (16,8) |  |
+| Bastian (`bastian`, tough) | neutral | 32/32 | 12 | — | the-pens (11,7) |  |
 | Mercy Fulk (`mercy-fulk`, commoner) | enemy | 3/4 | 10 | restrained | the-pens (11,3) |  |
 | Amos Pettigrew (`amos-pettigrew`, commoner) | neutral | 1/4 | 10 | — | barrow-gate (26,5) |  |
 | Garrick Webb (`garrick-webb`, tough) | neutral | 32/32 | 12 | — | crowsfoot (44,17) |  |
@@ -203,11 +203,11 @@
 - doors: (22,8) closed, (35,9) closed, (43,9) closed, (40,16) open, (8,17) closed, (40,17) open, (40,18) open, (40,19) open, (23,26) closed, (56,26) closed, (43,27) closed, (8,28) closed, (30,29) open, (37,29) open, (26,34) open, (30,35) open, (23,36) closed, (44,36) open
 
 ### The Pens (`the-pens`, interior 30×16, lighting dark)
-- Brakka Holloway (`brakka`, pc) at (11,7) — 58/58 HP
+- Brakka Holloway (`brakka`, pc) at (13,8) — 58/58 HP
 - Corvin Asche (`corvin`, pc) at (14,8) — 38/38 HP
 - Kit Corvell (`kit`, pc) at (12,7) — 51/51 HP
 - Ottilie Marsh (`ottilie`, pc) at (15,7) — 39/39 HP
-- Bastian (`bastian`, neutral) at (16,8) — 32/32 HP
+- Bastian (`bastian`, neutral) at (11,7) — 32/32 HP
 - Mercy Fulk (`mercy-fulk`, enemy) at (11,3) — 3/4 HP · restrained
 - container `gaolers-chest`: The gaoler's chest at (8,11)
 - point of interest `poi-1`: The stair up at (1,7) → journal j161
@@ -224,18 +224,18 @@
 
 ## Recent events
 
-- “That'll want a mop, before the dungeon master starts.”
-- Asche drifts along the bars, reading the old scratches on the cell wall by the brazier light, quite uninterested in the woman beneath them.
-- 🚶 Harl moves 20 ft to (21,7).
-- Harl is at (21,7) on The Grey Barrow.
-- Bastian is at (20,8) on The Grey Barrow.
-- Up in the porter's lodge Ottilie whistles both sellswords in from the forecourt and the quarters, and puts the offer to them with a curtsey: jailer or dungeon master, below stairs, the master's own pleasure.
-- “Gate's mine.”
-- “Dungeon master. Obviously. What's it pay, lovely?”
-- “More than the gate, darling. The Jackdaw will name the sum himself.”
-- ⏳ 10m passes — Ottilie fetches a sellsword from the gate. Now Day 1, 12:26.
 - Ottilie Marsh is at (15,7) on The Pens.
 - Bastian is at (16,8) on The Pens.
 - Bastian follows her down the Coil Stair and through the Quiet Gallery. Halfway along he stops dead in front of the stone master mason with his mallet raised, and whistles low.
 - “Odo Fletch. Owed me three crowns at dice, he did. So that's where the masons went.”
 - Then he comes on down into the Pens, looks at the woman in the cell, and smiles.
+- “Bastian, is it? This room is now your responsibility, and so are its inhabitants. If you're up for the task, the job is yours. Do be sure to torture them sufficiently, but keep them alive. For each prisoner that dies, you lose one head. And your salary is henceforth doubled. Do we have a deal?”
+- “One head's all I've got, boss, so I'll take very good care of them. Double pay? We have a deal.”
+- Bastian clasps Kit's hand, then goes to the gaoler's chest, fishes out the great ring of cell keys, and hangs it from his own belt with a jingle. He strolls to the bars of Mercy's cell and crouches to her eye level.
+- “Hello, darling. You and me are going to get to know each other ever so well.”
+- ⏳ 2m passes — Bastian takes the post. Now Day 1, 12:28.
+- 🚶 Bastian moves 30 ft to (10,7).
+- 🚶 Brakka Holloway moves 10 ft to (13,8).
+- 🚶 Bastian moves 5 ft to (11,7).
+- 🪑 The cell keys on their ring moved to (8,11) on The Pens — the key ring now hangs from Bastian's belt.
+- 🪑 The cell keys on their ring is gone from The Pens — Bastian took the key ring.

@@ -19,8 +19,8 @@
 ### The Rookery: keep the house
 - **The Stillness must be fed at every new moon.** A living creature meets the Eye's gaze in the Socket and turns to
   stone. **The next new moon is Day 7.** (The player has the rules: journal → The Stillness.)
-- **The household's wages:** 355 crowns a month, due at each month's end (Day 30 first). With the carts, the house runs at
-  about 650 crowns a month.
+- **The household's wages:** 430 crowns a month (Bastian's doubled to 150 as dungeon master), due at each month's end
+  (Day 30 first). With the carts, the house runs at about 725 crowns a month.
 - **The supply carts** from Thornbury need protecting: the Hanged Men have robbed them twice this winter.
 
 ### Road money (the Hanged Men)

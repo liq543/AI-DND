@@ -99,4 +99,7 @@
   wrists on her bonds and wet herself. Brakka: "That'll want a mop."
 - In the lodge Harl kept the gate. **Bastian chose "dungeon master. Obviously,"** and asked the pay; Ottilie told him the
   Jackdaw would name it. On the way down he recognised the stone **Odo Fletch** ("owed me three crowns at dice... so
-  that's where the masons went"). *(12:26, in the Pens. Waiting on the player: Bastian's wage and terms, Mercy.)*
+  that's where the masons went"). 
+- Kit's terms to Bastian: the Pens and their inmates are his; torture them sufficiently but keep them alive; "for each
+  prisoner that dies you lose one head"; his pay is doubled (150 a month; wages now 430). Bastian accepted ("One head's all
+  I've got"), took the cell keys, and introduced himself to Mercy. *(12:28. Waiting on the player.)*

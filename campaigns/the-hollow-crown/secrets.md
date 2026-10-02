@@ -366,9 +366,10 @@ The rules below are the player's (journal → The Stillness), except the last bu
 - **Two house-guards:** **Harl and Bastian** (`tough`), foreign sellswords. Neutral Evil. Loyal to the pay.
 - **Asche's undead** (once he uses Animate Dead): the skeletal porters of the lower stair. The servants pretend not to
   see them.
-- **Wages** (SRD hirelings: skilled 2 GP a day at least, untrained 2 SP a day; the Rookery pays over the odds), **355
-  crowns a month**, due at each month's end (Day 30, 60, 90), paid from Kit's purse with `coins`:
-  - Quist 90; Mother Hobday 75; Harl and Bastian 75 each; Ada, Bel, Tobin and Corlis 10 each.
+- **Wages** (SRD hirelings: skilled 2 GP a day at least, untrained 2 SP a day; the Rookery pays over the odds), **430
+  crowns a month** (355 before Bastian's promotion), due at each month's end (Day 30, 60, 90), paid from Kit's purse with `coins`:
+  - Quist 90; Mother Hobday 75; Harl 75; Bastian 150 (dungeon master of the Pens from Day 1); Ada, Bel, Tobin and
+    Corlis 10 each. Total **430 crowns a month**.
   - Supplies come on the carts, about 150 crowns a cart. The house runs at about **650 crowns a month** in all.
   - The supply carts come from Thornbury twice a month on the March Road. The Hanged Men have robbed them twice.
 
