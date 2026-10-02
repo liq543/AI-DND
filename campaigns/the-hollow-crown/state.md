@@ -3,7 +3,7 @@
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
 **Session:** 1 · **In-world time:** Day 1, 12:28 · **Mode:** exploration
-**Current map:** The Pens (`the-pens`) · **Events:** 1685 · **Log head:** `567e9aa844d6cc1f`
+**Current map:** The Pens (`the-pens`) · **Events:** 1687 · **Log head:** `7c6698c4473d49cb`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6 · **Party position (region):** [21, 62]
 
 ## Party
@@ -224,7 +224,6 @@
 
 ## Recent events
 
-- Ottilie Marsh is at (15,7) on The Pens.
 - Bastian is at (16,8) on The Pens.
 - Bastian follows her down the Coil Stair and through the Quiet Gallery. Halfway along he stops dead in front of the stone master mason with his mallet raised, and whistles low.
 - “Odo Fletch. Owed me three crowns at dice, he did. So that's where the masons went.”
@@ -239,3 +238,4 @@
 - 🚶 Bastian moves 5 ft to (11,7).
 - 🪑 The cell keys on their ring moved to (8,11) on The Pens — the key ring now hangs from Bastian's belt.
 - 🪑 The cell keys on their ring is gone from The Pens — Bastian took the key ring.
+- 🎒 Bastian gains 1× Ring of cell keys — gift: the post of dungeon master, from Kit.
