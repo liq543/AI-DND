@@ -125,4 +125,15 @@
   the mule's cracked near-hind shoe leaves a **forked print**. The ride met the Gallows track two miles on (15:11).
 - They followed the trail north all afternoon, and it was full dark by 20:25 at a log bridge (new map), with about twelve
   miles still to Gallows Oak. No moon until the small hours. Brakka: they'd be walking the horses. Ottilie: "sleep under
-  the stars like vagabonds." *(Waiting on the player: press on in the dark, or camp.)*
+  the stars like vagabonds." 
+- Kit: "Night is our friend. We press on." They led the horses north without a light, slow pace, Brakka in front by
+  darkvision.
+  - Brakka's tracking roll was voided and rolled straight (DM error: Advantage from the slow pace cancels the
+    Disadvantage for darkness): 15, success.
+  - The march ran to 04:04 on Day 2. The forced-march saves rolled for it were **voided by ruling**, because the player
+    had not been warned; nobody gained Exhaustion.
+  - Engine fix: `travel` now refuses a leg that runs past 8 hours in a day, and prints each character's odds of tiring.
+    Standing order: always warn.
+- **Day 2, 04:04, the turn-off** (new map): the forked trail leaves the track north-west down a deer path. There's stale
+  woodsmoke on the air and a dog barking far off. Brakka: Gallows Oak is a mile on, their fire a mile or two down the
+  path, "and they've got dogs". *(Waiting on the player: how to approach.)*

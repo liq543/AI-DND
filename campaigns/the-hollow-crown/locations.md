@@ -82,6 +82,9 @@
     miles north.
 - **The log bridge on the Gallows track** (about 24,56; map `gallows-track-night`), roughly twelve miles short of Gallows
   Oak: a three-log bridge over a black brook (11,6), and a boundary stone with a carved hand and a scratched noose (6,8).
+- **The turn-off** (about 25,51; map `gallows-turnoff2`), a mile short of Gallows Oak: the deer path where the cart's trail
+  leaves the Gallows track north-west toward the Withy Pond (18,11), a lichened boulder with a stubbed-out pipe on it (21,2),
+  and a fallen ash with its root plate standing up, a good place to tie horses (25,14).
 - **Ashpole** (13,67), hamlet: charcoal clamps and huts. Old Nan Thistle's hut with its carved hearthstone; Dunstan Cole.
 - **Harrowgate** (31,67), castle:
   - A square keep on a crag over the March Road: a curtain wall, a gatehouse with a portcullis, and a well.

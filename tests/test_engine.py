@@ -352,6 +352,20 @@ class EngineTest(unittest.TestCase):
         self.assertEqual(srd.find("monsters", "Commoner")["xp"], 10)
         self.assertEqual(srd.find("monsters", "Bandit")["xp"], 25)
 
+    def test_travel_past_eight_hours_is_a_forced_march(self):
+        # rules/core/09-gameplay-toolbox.md: each hour past 8 in a day: Con save DC 10 + hours past 8, or Exhaustion
+        self.ok("travel", "18")                                    # 6 hours at a normal pace
+        out = self.rule("travel", "9", contains="forced march")   # 3 more would run past 8 hours
+        self.assertIn("--push", out)
+        self.assertIn("Chance of tiring", out)
+        out = self.ok("travel", "9", "--push")
+        self.assertIn("CON save DC 11", out)                      # one extra hour: DC 10 + 1
+        self.assertNotIn("DC 12", out)
+        for who in ("kira", "wren"):                                # put things back for the other tests
+            e = self.state().get(who)
+            if e.get("exhaustion"):
+                self.ok("exhaustion", who, f"-{e['exhaustion']}", "--source", "test cleanup", "--override", "test cleanup")
+
     def test_alert_initiative_swap(self):
         self.ok("place", "kira", "5,5", "--map", "arena")
         self.ok("place", "wren", "6,6", "--map", "arena")

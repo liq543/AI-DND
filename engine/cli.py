@@ -1270,6 +1270,32 @@ def cmd_travel(g, a):
     hours = miles / pace
     days, rem = divmod(hours, 8)
     total_min = int(days * 1440 + rem * 60)
+    # rules/core/09-gameplay-toolbox.md: past 8 hours of travel in a day, a Constitution save at the end of each extra
+    # hour (DC 10 + hours past 8) or 1 Exhaustion level. The day's hours count until a Long Rest or 24 hours pass.
+    now = g.state["time"]
+    walkers = [e for e in g.pcs() if not e.get("dead")]
+    day = dict(g.state["view"].get("travel_day") or {})
+    rested = max([e.get("last_long_rest_end") or -1 for e in walkers] or [-1])
+    if not day or now - day["start"] >= 1440 or rested >= day["start"]:
+        day = {"start": now, "hours": 0.0}
+    done, push = day["hours"], False
+    if hours <= 8 and done + hours > 8:
+        if not getattr(a, "push", False):
+            from engine.core import save_mod
+            dcs = [10 + (h - 8) for h in range(max(9, int(done) + 1), int(done + hours) + 1)]
+            odds = []
+            for e in walkers:
+                ok = 1.0
+                for dc in dcs:   # chance of passing every save (a natural 20 isn't an automatic success on a save)
+                    ok *= min(1.0, max(0.0, (21 - (dc - save_mod(e, "con"))) / 20))
+                odds.append(f"{e['name']} {round((1 - ok) * 100)}%")
+            raise RuleError(f"The party has travelled {done:.1f} h today; this leg takes {hours:.1f} h and runs "
+                            f"{done + hours - 8:.1f} h past 8 hours. That's a forced march: at the end of each extra hour "
+                            f"everyone makes a Constitution save ({', '.join(f'DC {d}' for d in dcs) or 'none completed'}) or "
+                            f"gains 1 Exhaustion level (each level: -2 to every d20 test and -5 ft Speed; 6 levels kill; a Long "
+                            f"Rest removes one). Chance of tiring at least once: {', '.join(odds)}. Add --push to march on, "
+                            f"travel {max(0.0, 8 - done) * pace:.0f} miles or less, or rest first.")
+        total_min, push = int(hours * 60), True
     g.emit("time.set", minutes=g.state["time"] + total_min)
     if region:
         g.emit("view.set", party_pos=[tx, ty])
@@ -1280,6 +1306,25 @@ def cmd_travel(g, a):
         g.say("   Fast pace: Disadvantage on Wisdom (Perception/Survival) and Dexterity (Stealth) checks while travelling.")
     if a.pace == "slow":
         g.say("   Slow pace: Advantage on Wisdom (Perception/Survival) checks; the party can travel stealthily.")
+    if push:
+        for hour in range(max(9, int(done) + 1), int(done + hours) + 1):
+            dc = 10 + (hour - 8)
+            for e in walkers:
+                res = M.saving_throw(g, g.get(e["id"]), "con", dc, source=f"forced march, hour {hour}", now=True)
+                if res and res.get("success") is False:
+                    cur = g.get(e["id"])
+                    new = min(6, cur.get("exhaustion", 0) + 1)
+                    g.set(cur, exhaustion=new)
+                    g.say(f"   {cur['name']}'s Exhaustion is now {new} (forced march).", kind="condition")
+                    if new >= 6:
+                        g.set(cur, dead=True)
+                        g.say(f"   {cur['name']} DIES from exhaustion.", kind="condition")
+        day["hours"] = done + hours
+    else:
+        day["hours"] = rem if days else done + hours
+    if days:
+        day["start"] = g.state["time"] - int(rem * 60)
+    g.emit("view.set", travel_day=day)
 
 
 def _reveal_pcs_on(g, mid):
@@ -2957,6 +3002,7 @@ def build_parser():
     c.add_argument("--pace", default="normal", choices=["fast", "normal", "slow"])
     c.add_argument("--to")
     c.add_argument("--map")
+    c.add_argument("--push", action="store_true", help="march past 8 hours in a day (Con saves or Exhaustion)")
 
     c = sp.add_parser("item", help="add|remove|drop|stash|pickup|sell|give|equip|unequip|attune|unattune|use|venom-hit|recover-thrown|light|note|unpack|identify|obscure|refresh|recover-ammo|card")
     c.add_argument("--with-attack", action="store_true", help="pickup: pick up a weapon as part of an attack (one per attack)")

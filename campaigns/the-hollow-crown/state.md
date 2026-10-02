@@ -2,18 +2,18 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 1 · **In-world time:** Day 1, 20:25 · **Mode:** exploration
-**Current map:** The Gallows track, by night (`gallows-track-night`) · **Events:** 1919 · **Log head:** `9fd2165ef6a41d3f`
-**Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6 · **Party position (region):** [24, 56]
+**Session:** 1 · **In-world time:** Day 2, 04:04 · **Mode:** exploration
+**Current map:** The Gallows track, the turn-off (`gallows-turnoff2`) · **Events:** 2036 · **Log head:** `bb0837a1d4f7cbd7`
+**Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6 · **Party position (region):** [25, 51]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 6 | 51/51 | 16 | — | — | gallows-track-night (15,6) |
-| Brakka Holloway (`brakka`) | 6 | 58/58 | 19 | — | — | gallows-track-night (16,6) |
-| Corvin Asche (`corvin`) | 6 | 38/38 | 14 | — | L1:4/4 L2:3/3 L3:3/3 | gallows-track-night (15,7) |
-| Ottilie Marsh (`ottilie`) | 6 | 39/39 | 13 | — | L1:4/4 L2:3/3 L3:3/3 | gallows-track-night (16,5) |
+| Kit Corvell (`kit`) | 6 | 51/51 | 16 | — | — | gallows-turnoff2 (17,10) |
+| Brakka Holloway (`brakka`) | 6 | 58/58 | 19 | — | — | gallows-turnoff2 (18,10) |
+| Corvin Asche (`corvin`) | 6 | 38/38 | 14 | — | L1:4/4 L2:3/3 L3:3/3 | gallows-turnoff2 (16,10) |
+| Ottilie Marsh (`ottilie`) | 6 | 39/39 | 13 | — | L1:4/4 L2:3/3 L3:3/3 | gallows-turnoff2 (16,11) |
 
 ## Other creatures (DM view)
 
@@ -239,31 +239,41 @@
 - point of interest `poi-7`: The lonely hollow at (12,7) → journal j176
 
 ### The Gallows track, by night (`gallows-track-night`, wilderness 30×20, lighting dark)
-- Brakka Holloway (`brakka`, pc) at (16,6) — 58/58 HP
-- Corvin Asche (`corvin`, pc) at (15,7) — 38/38 HP
-- Kit Corvell (`kit`, pc) at (15,6) — 51/51 HP
-- Ottilie Marsh (`ottilie`, pc) at (16,5) — 39/39 HP
 - point of interest `poi-1`: The log bridge at (11,6) → journal j177
 - point of interest `poi-2`: The Gallows track at (18,4) → journal j178
 - point of interest `poi-3`: A boundary stone at (6,8) → journal j179
 - point of interest `poi-4`: The brook at (11,10) → journal j180
 - labels: Stream (11,10), Road (1,5)
 
+### The Gallows track, the turn-off (`gallows-turnoff`, wilderness 30×20, lighting bright)
+- labels: Stream (15,10), Road (1,13)
+
+### The Gallows track, the turn-off (`gallows-turnoff2`, wilderness 30×20, lighting dark)
+- Brakka Holloway (`brakka`, pc) at (18,10) — 58/58 HP
+- Corvin Asche (`corvin`, pc) at (16,10) — 38/38 HP
+- Kit Corvell (`kit`, pc) at (17,10) — 51/51 HP
+- Ottilie Marsh (`ottilie`, pc) at (16,11) — 39/39 HP
+- point of interest `poi-1`: The deer path at (18,11) → journal j181
+- point of interest `poi-2`: The Gallows track at (12,10) → journal j182
+- point of interest `poi-3`: A lichened boulder at (21,2) → journal j183
+- point of interest `poi-4`: A fallen ash at (25,14) → journal j184
+- labels: Road (1,13)
+
 
 ## Recent events
 
-- 📍 Noted on The Gallows track, by night: The log bridge (11,6) — click it on the map for its journal entry.
-- 📍 Noted on The Gallows track, by night: The Gallows track (18,4) — click it on the map for its journal entry.
-- 📍 Noted on The Gallows track, by night: A boundary stone (6,8) — click it on the map for its journal entry.
-- 📍 Noted on The Gallows track, by night: The brook (11,10) — click it on the map for its journal entry.
-- Kit Corvell is at (15,6) on The Gallows track, by night.
-- Brakka Holloway is at (16,6) on The Gallows track, by night.
-- Corvin Asche is at (15,7) on The Gallows track, by night.
-- Ottilie Marsh is at (16,5) on The Gallows track, by night.
-- 🗺 Map: The Gallows track, by night
-- 🎬 The Gallows track — Day 1, night — A log bridge over a black brook, the forest closing in, and the cart's forked trail running on north into the dark.
-- 🗺 Map: The Gallows track, by night
-- They follow the forked print north along the Gallows track all afternoon. Dusk catches them in the deep wood, and they ride the last hour by the failing light, until it's full dark at a log bridge over a black brook. Under the trees there's no moon to speak of, only a thin old crescent that won't rise until the small hours.
-- At the bridge the cart's tyres have scored the logs, and the forked print is pressed in the mud at both ends. A boundary stone by the track has a hand pointing north, and a noose scratched under it.
-- “Gallows Oak's maybe twelve miles on. In this dark we'll be walking the horses.”
-- “Or we sleep under the stars like vagabonds. How thrilling.”
+- ⚖ DM ruling: The night march's forced-march saves are void: no one gains Exhaustion — DM error: the player wasn't warned before pressing on that it was a forced march, with its odds and consequences; the player rules they don't tire this time
+- 📍 Noted on The Gallows track, the turn-off: The deer path (18,11) — click it on the map for its journal entry.
+- 📍 Noted on The Gallows track, the turn-off: The Gallows track (12,10) — click it on the map for its journal entry.
+- 📍 Noted on The Gallows track, the turn-off: A lichened boulder (21,2) — click it on the map for its journal entry.
+- 📍 Noted on The Gallows track, the turn-off: A fallen ash (25,14) — click it on the map for its journal entry.
+- Kit Corvell is at (17,10) on The Gallows track, the turn-off.
+- Brakka Holloway is at (18,10) on The Gallows track, the turn-off.
+- Corvin Asche is at (16,10) on The Gallows track, the turn-off.
+- Ottilie Marsh is at (16,11) on The Gallows track, the turn-off.
+- 🗺 Map: The Gallows track, the turn-off
+- 🎬 Near Gallows Oak — Day 2, before dawn — Black forest an hour before dawn; the cart's trail turns off the Gallows track down a deer path, and woodsmoke hangs on the air.
+- 🗺 Map: The Gallows track, the turn-off
+- Hours of black wood, Brakka in front with a hand back on Kit's bridle. At four in the morning he stops where the cart's ruts and the forked print turn off the Gallows track and push north-west down a deer path through broken bracken.
+- The air has changed: woodsmoke, faint and stale, from somewhere ahead along the path. Very far off a dog barks twice and is quiet. The thin crescent moon has risen behind the trees, and the east hasn't begun to grey.
+- “Cart went this way. Gallows Oak's a mile on up the track. Their fire's that way, a mile or two. And they've got dogs.”

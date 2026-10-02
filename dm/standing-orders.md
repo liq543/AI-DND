@@ -79,3 +79,5 @@ give it again.
   mistake: redraw it to scale before combat starts.
 - **Every known part of a place stays on the table.** All explored areas connected to where the party is (other floors,
   rooms beyond a stair) show as map tabs at all times: `map link` them, and mark any already known with `map set <id> --kv known=on`.
+- **Warn before any long march.** Before offering travel that runs past 8 hours in a day, say how long it takes, each
+  character's chance of tiring (the engine's `travel` refusal gives the odds) and what Exhaustion does. Never roll it unwarned.
