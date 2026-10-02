@@ -186,6 +186,20 @@ class VisualsCliTest(unittest.TestCase):
         self.rule("journal", "edit", "j9999", "--text", "nothing")
         self.rule("journal", "edit", jid)
 
+    def test_doors_line_up_with_the_wall_or_bars_they_hang_in(self):
+        from engine.render import door_horizontal
+        grid = ["#######",
+                "#.....#",
+                "#NNDNN#",     # a cell door in a row of bars
+                "#.....#",
+                "##ddd##",     # a triple door in a wall
+                "#.....#",
+                "d.....#",     # a door in a side wall
+                "#######"]
+        self.assertTrue(door_horizontal(grid, 3, 2))
+        self.assertTrue(all(door_horizontal(grid, x, 4) for x in (2, 3, 4)))
+        self.assertFalse(door_horizontal(grid, 0, 6))
+
     def test_map_unlabel_removes_a_stale_label(self):
         self.ok("map", "label", "arena", "3,3", "--name", "Gate (down)")
         self.ok("map", "label", "arena", "4,4", "--name", "Old Mill")

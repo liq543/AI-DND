@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Bard 6** (College of Lore) · **Background:** Sage · **XP:** 14002
+**Player:** DM · **Human** · **Bard 6** (College of Lore) · **Background:** Sage · **XP:** 14102
 
 **HP** 39/39 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
 

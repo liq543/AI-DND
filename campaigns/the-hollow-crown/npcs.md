@@ -33,6 +33,8 @@ All hired abroad. None have been below the Great Hall. All `commoner`, Neutral.
 - **Look:** foreign sellswords in good mail. Harl has a broken nose and is quiet; Bastian is pretty and talks.
 - **Loyalty:** to the pay, which is very good.
 - **Stat block:** `tough`. **Alignment:** Neutral Evil.
+- **Day 1:** Bastian took the post of **dungeon master** of the Pens (wage to be named by Kit). He now knows what
+  happened to the Twelve, and is amused. Harl keeps the gate alone.
 
 ### Nib (16), Brakka's nephew *(from chapter 1)*
 - **Look:** shot up tall and rangy in two years, all elbows and knuckles, his uncle's jaw coming in under a first beard.

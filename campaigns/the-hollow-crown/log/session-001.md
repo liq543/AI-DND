@@ -93,4 +93,10 @@
 - **New: the Pens**, the temple's old holding cells under the Quiet Gallery (a lair feature at the player's call, by
   ruling). Quist met them in the Hall of Spoils: "Shall I lay a place for the lady at luncheon, or not?"
 - 12:16: Mercy is locked in the first north cell, bound and gagged. Asche: "Six days to the new moon, and now the
-  larder's stocked." *(Waiting on the player.)*
+  larder's stocked."
+- Map/engine fixes: the cell doors now draw in line with the bars, and petrified creatures no longer roll initiative.
+- Kit sent Ottilie to find a sellsword for "jailer or dungeon master; one sounds kinkier." Mercy, hearing it, bloodied her
+  wrists on her bonds and wet herself. Brakka: "That'll want a mop."
+- In the lodge Harl kept the gate. **Bastian chose "dungeon master. Obviously,"** and asked the pay; Ottilie told him the
+  Jackdaw would name it. On the way down he recognised the stone **Odo Fletch** ("owed me three crowns at dice... so
+  that's where the masons went"). *(12:26, in the Pens. Waiting on the player: Bastian's wage and terms, Mercy.)*

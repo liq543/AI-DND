@@ -598,7 +598,8 @@ def cmd_combat(g, a):
         mid = g.state["view"].get("map")
         members = [g.get(i) for i in ids(a.ids)] if a.ids else \
             [e for e in g.entities.values() if e.get("token", {}).get("map") == mid and not e.get("dead")
-             and not e.get("departed") and not e.get("offstage")]   # those who have left the scene stay out of it
+             and not e.get("departed") and not e.get("offstage")    # those who have left the scene stay out of it
+             and "petrified" not in M.condition_names(e)]          # stone is out of the fight: no initiative
         if not members:
             raise RuleError("No combatants. Place tokens on the current map or pass --ids.")
         if a.ids:

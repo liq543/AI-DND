@@ -84,6 +84,26 @@ WOOD_STYLES = ("planks", "herringbone", "parquet")
 STONE_STYLES = ("flag", "hex", "slate")
 
 
+
+WALLISH = set("#BNKi%g")   # walls and the barriers a door can hang in: bars, shelving, hedges, railings
+
+
+def door_horizontal(grid, x, y):
+    """Does the door at (x, y) sit in a wall running left-right? It lines up with the walls (or bars) it hangs between;
+    in a double or triple door it lines up with the other leaves."""
+    h, w = len(grid), len(grid[0])
+    at = lambda xx, yy: grid[yy][xx] if 0 <= xx < w and 0 <= yy < h else " "
+    left, right, up, down = at(x - 1, y), at(x + 1, y), at(x, y - 1), at(x, y + 1)
+    across = left in WALLISH or right in WALLISH
+    along = up in WALLISH or down in WALLISH
+    if across != along:
+        return across
+    if left in "DdS" or right in "DdS":
+        return True
+    if up in "DdS" or down in "DdS":
+        return False
+    return across
+
 def _styles(m, t):
     """The texture choices for a map: its theme's defaults, overridden per map."""
     m = m or {}
@@ -360,7 +380,7 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
             elif c == "f":
                 parts.append(f'<rect x="{cx + 3}" y="{cy + 3}" width="{s - 6}" height="{s - 6}" fill="#555"/><circle cx="{cx + s / 2}" cy="{cy + s / 2}" r="{s * .25}" fill="#f08a24" filter="url(#glow)"/>')
             elif c in "Dd":
-                horiz = (x > 0 and grid[y][x - 1] in "#B") or (x < w - 1 and grid[y][x + 1] in "#B")
+                horiz = door_horizontal(grid, x, y)
                 door = (f'<rect x="{cx + 1}" y="{cy + s * .3}" width="{s - 2}" height="{s * .4}"' if horiz else
                         f'<rect x="{cx + s * .3}" y="{cy + 1}" width="{s * .4}" height="{s - 2}"')
                 parts.append(door + (' fill="#7a4a1e" stroke="#3a2008" stroke-width="2"/>' if c == "D" else ' fill="none" stroke="#7a4a1e" stroke-width="2" stroke-dasharray="3 2"/>'))

@@ -2,8 +2,8 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 1 · **In-world time:** Day 1, 12:16 · **Mode:** exploration
-**Current map:** The Pens (`the-pens`) · **Events:** 1634 · **Log head:** `3b5c5a615ad4d311`
+**Session:** 1 · **In-world time:** Day 1, 12:26 · **Mode:** exploration
+**Current map:** The Pens (`the-pens`) · **Events:** 1669 · **Log head:** `c4c4dee0fb3a523f`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6 · **Party position (region):** [21, 62]
 
 ## Party
@@ -26,8 +26,8 @@
 | Bel Crisp (`bel-crisp`, commoner) | neutral | 4/4 | 10 | — | barrow-gate (27,6) |  |
 | Tobin Rudge (`tobin-rudge`, commoner) | neutral | 4/4 | 10 | — | rookery (10,5) |  |
 | Corlis (`corlis`, commoner) | neutral | 4/4 | 10 | — | barrow-gate (37,10) |  |
-| Harl (`harl`, tough) | neutral | 32/32 | 12 | — | barrow-gate (25,8) |  |
-| Bastian (`bastian`, tough) | neutral | 32/32 | 12 | — | barrow-gate (22,17) |  |
+| Harl (`harl`, tough) | neutral | 32/32 | 12 | — | barrow-gate (21,7) |  |
+| Bastian (`bastian`, tough) | neutral | 32/32 | 12 | — | the-pens (16,8) |  |
 | Mercy Fulk (`mercy-fulk`, commoner) | enemy | 3/4 | 10 | restrained | the-pens (11,3) |  |
 | Amos Pettigrew (`amos-pettigrew`, commoner) | neutral | 1/4 | 10 | — | barrow-gate (26,5) |  |
 | Garrick Webb (`garrick-webb`, tough) | neutral | 32/32 | 12 | — | crowsfoot (44,17) |  |
@@ -111,10 +111,9 @@
 
 ### The Grey Barrow (`barrow-gate`, interior 44×30, lighting bright)
 - Amos Pettigrew (`amos-pettigrew`, neutral) at (26,5) — 1/4 HP
-- Bastian (`bastian`, neutral) at (22,17) — 32/32 HP
 - Bel Crisp (`bel-crisp`, neutral) at (27,6) — 4/4 HP
 - Corlis (`corlis`, neutral) at (37,10) — 4/4 HP
-- Harl (`harl`, neutral) at (25,8) — 32/32 HP
+- Harl (`harl`, neutral) at (21,7) — 32/32 HP
 - point of interest `poi-1`: The tomb door at (19,16) → journal j32
 - point of interest `poi-2`: The robbed sarcophagus at (19,13) → journal j33
 - point of interest `poi-3`: The serpent door at (19,11) → journal j34
@@ -208,6 +207,7 @@
 - Corvin Asche (`corvin`, pc) at (14,8) — 38/38 HP
 - Kit Corvell (`kit`, pc) at (12,7) — 51/51 HP
 - Ottilie Marsh (`ottilie`, pc) at (15,7) — 39/39 HP
+- Bastian (`bastian`, neutral) at (16,8) — 32/32 HP
 - Mercy Fulk (`mercy-fulk`, enemy) at (11,3) — 3/4 HP · restrained
 - container `gaolers-chest`: The gaoler's chest at (8,11)
 - point of interest `poi-1`: The stair up at (1,7) → journal j161
@@ -224,18 +224,18 @@
 
 ## Recent events
 
-- Kit Corvell is at (12,7) on The Pens.
-- Brakka Holloway is at (11,7) on The Pens.
-- Corvin Asche is at (14,8) on The Pens.
+- “That'll want a mop, before the dungeon master starts.”
+- Asche drifts along the bars, reading the old scratches on the cell wall by the brazier light, quite uninterested in the woman beneath them.
+- 🚶 Harl moves 20 ft to (21,7).
+- Harl is at (21,7) on The Grey Barrow.
+- Bastian is at (20,8) on The Grey Barrow.
+- Up in the porter's lodge Ottilie whistles both sellswords in from the forecourt and the quarters, and puts the offer to them with a curtsey: jailer or dungeon master, below stairs, the master's own pleasure.
+- “Gate's mine.”
+- “Dungeon master. Obviously. What's it pay, lovely?”
+- “More than the gate, darling. The Jackdaw will name the sum himself.”
+- ⏳ 10m passes — Ottilie fetches a sellsword from the gate. Now Day 1, 12:26.
 - Ottilie Marsh is at (15,7) on The Pens.
-- 🚪 The door at (11,6) is opened.
-- Mercy Fulk is at (11,3) on The Pens.
-- 🚪 The door at (11,6) is closed.
-- 🗺 Map: The Pens
-- 🎬 The Pens — Day 1, noon — Under the Quiet Gallery, the serpent temple's old holding cells: green stone sweating in the brazier light, new iron in old rock.
-- 🗺 Map: The Pens
-- Down the Coil Stair, along the Quiet Gallery between the Twelve in their stone poses, and down the narrow stair at its end: the Pens, the serpent temple's old holding cells, barred new in iron a year ago and never used until today.
-- Brakka carries Mercy down the cell corridor, swings open the first barred door, and drops her on the straw. The lock turns with a sound like a bone breaking.
-- Mercy lies on the pallet in her shift, bound and gagged, staring up at the carved serpent over her cell. Her breath comes fast and wet through the apron.
-- ⏳ 20m passes — settling Pettigrew; down through the Rookery and the Quiet Gallery to the Pens. Now Day 1, 12:16.
-- “Six days to the new moon, and now the larder's stocked.”
+- Bastian is at (16,8) on The Pens.
+- Bastian follows her down the Coil Stair and through the Quiet Gallery. Halfway along he stops dead in front of the stone master mason with his mallet raised, and whistles low.
+- “Odo Fletch. Owed me three crowns at dice, he did. So that's where the masons went.”
+- Then he comes on down into the Pens, looks at the woman in the cell, and smiles.
