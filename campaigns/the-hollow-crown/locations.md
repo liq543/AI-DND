@@ -172,3 +172,12 @@ Three maps, all to the detail standard (every object a point of interest; the fu
 - The passage to **the Socket door** (14,12), with the visor pegs (14,11).
 - **The Socket:** a round chamber of green stone and serpent columns. The lead-weighted curtain (21,12) rings the
   black-iron cradle (25,12), where the Eye sits open, facing inward. The sealed serpent-door (25,19) leads to deeper dark.
+
+### The Pens (`the-pens`, 30×16, under the Socket level)
+- Reached by the narrow stair at the south end of the Quiet Gallery (socket 7,23). Added by public ruling on Day 1: the
+  serpent temple's old holding cells for the Eye's offerings, barred new by the masons a year ago.
+- **The gaolers' room** (x1–8, y4–11): the stair up (1,7), the gaolers' table (4,5), the brazier (8,4), the rack of irons
+  (x1, y9–11), **the oubliette** grate (4,10), and the gaoler's chest (8,11), holding rope, gags, hoods and the cell keys.
+- Iron double doors (9,7–8) open onto **the cell corridor** (x9–28, y7–8).
+- **Eight cells**, four along the north side (x10–13, 15–18, 20–23, 25–28; y1–5; barred doors at y6) and four along the
+  south (y10–14; barred doors at y9). Each has straw and a slop bucket. **Mercy Fulk is in the first north cell (11,3).**

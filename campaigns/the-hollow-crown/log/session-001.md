@@ -69,4 +69,28 @@
     cup!"
   - Combat ended after one round. XP for Mercy overcome: 10, split (2 each).
 - 10:47: Brakka planted Mercy on a stool (23,28) in front of Kit at the door, still holding her hair. Ottilie came out
-  and perched on the dice table: "Isn't this cosy." *(Waiting on the player.)*
+  and perched on the dice table: "Isn't this cosy."
+- Kit: "Who are you selling our business to, Mercy?" She denied it ("a bit of gossip over the counter"). Her Deception (18) beat
+  Kit's Insight (10): to Kit she seems sincere.
+- "Brakka. Face, meet table." Brakka slammed her face into the table, holding back (1 damage, a bloody nose). Kit asked
+  again; his Intimidation (natural 20, 21 against DC 15) broke her.
+  - She is a **Watcher**: Brother Ennis of Thornbury pays her a silver penny a week. He has asked about the barrow
+    household since Midwinter.
+  - She has reported the foreigners, their coin, the fortnightly carts, and **the masons who never came back**. She sends
+    her reports with the Thornbury carrier on market day.
+  - Asche: "The masons. How very observant of her."
+- Kit thanked her and asked if she keeps any rope. Terrified, she said there's a long coil on the peg by the cob in the
+  inn stable, and some in the cellar for the barrels, and begged, swearing she'd tell Ennis nothing ever again. 
+- "Too far away." Kit cut Mercy's dress into strips; Brakka bound her hand and foot (Restrained). She screamed once before
+  Ottilie gagged her with her apron. Kit's plan: take Mercy and Pettigrew back to the Rookery and leave Pettigrew to the
+  household's care before moving on. Pettigrew called from the back room, afraid the Hanged Men were back. 
+- Asche drew the short straw (1d3) and carried Pettigrew. Brakka took the horses round to the yard and slung Mercy over
+  his saddle, and they left by the back way. Nobody saw (Garrick kept hammering). Back at the barrow at 11:56.
+- Bastian: "I didn't mean it literal, boss." Harl put Pettigrew to bed in the servants' quarters, and Bel Crisp is
+  nursing him: "There was only a hill."
+- Map fixes by public ruling: the Socket's two-wide passage now has a double door, and a plinth that blocked the great
+  hall's middle door was moved.
+- **New: the Pens**, the temple's old holding cells under the Quiet Gallery (a lair feature at the player's call, by
+  ruling). Quist met them in the Hall of Spoils: "Shall I lay a place for the lady at luncheon, or not?"
+- 12:16: Mercy is locked in the first north cell, bound and gagged. Asche: "Six days to the new moon, and now the
+  larder's stocked." *(Waiting on the player.)*

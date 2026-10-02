@@ -494,6 +494,17 @@ Gallery.
     good horses, to see the carter. Her report reaches Thornbury chapel by Day 3.
     She listened at the back-room door (the crew heard her and she fled). She heard Kit call the goods "very valuable",
     and nothing more.
+    Day 1, 10:48: Kit asked who she sells their business to. She lied (gossip only) and he believed her.
+    10:50: under Brakka's fist she confessed to being Ennis's Watcher (journal: Mercy's confession). Her next report
+    would go with the Thornbury carrier on market day (Day 3), if she's alive and willing to send it.
+    10:56: bound and gagged; Kit means to take her to the Rookery. Her scream wasn't heard across the green (Garrick missed it).
+    If she never sends her market-day report, Ennis notices her silence by Day 10 (§5.1).
+    12:16: locked in the Pens, bound and gagged. Nobody in Crowsfoot saw her taken (Garrick missed the riders twice).
+    **Crowsfoot finds the Crow and Kettle empty by early afternoon**: blood on a table, a smashed jug, Mercy's dress
+    in rags, the carter gone. The last strangers seen were the barrow gentlemen riding in at half past ten (Garrick saw
+    that). Reeve Alys Brinn will come asking at the post-box by Day 2; Brother Cuthbert adds Mercy to his list.
+  - **Pettigrew** was led through the Stillness by the hand and is in the servants' quarters, nursed by Bel Crisp. He
+    has seen the barrow open. Without a grey token he couldn't find it again alone.
 - **Act I set pieces:**
   1. **The first feeding:** who? A Watcher? A Hanged Man? A Crowsfoot nobody? The first victim chosen, taken and
      turned. Ysmera's first words (stage 2).

@@ -59,7 +59,7 @@ All hired abroad. None have been below the Great Hall. All `commoner`, Neutral.
 ### Mercy Fulk, alewife of the Crow and Kettle
 - **Look:** quick, sly, forty, with a missing front tooth.
 - **Wants:** coin, gossip, and a husband who isn't dead.
-- **Quirk:** knows everyone's business and sells it.
+- **Quirk:** knows everyone's business and sells it. Her commoner Training skill is Insight.
 - **Secret:** she is one of **Brother Ennis's Watchers** (a silver penny a week).
 - **Stat block:** `commoner`. **Alignment:** Neutral.
 

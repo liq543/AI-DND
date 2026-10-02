@@ -2,43 +2,42 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 1 · **In-world time:** Day 1, 10:47 · **Mode:** exploration
-**Current map:** Crowsfoot (`crowsfoot`) · **Events:** 1427 · **Log head:** `0d71f0e1f7a70313`
-**Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6 · **Party position (region):** [22, 63]
+**Session:** 1 · **In-world time:** Day 1, 12:16 · **Mode:** exploration
+**Current map:** The Pens (`the-pens`) · **Events:** 1634 · **Log head:** `3b5c5a615ad4d311`
+**Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6 · **Party position (region):** [21, 62]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 6 | 51/51 | 16 | — | — | crowsfoot (23,27) |
-| Brakka Holloway (`brakka`) | 6 | 58/58 | 19 | — | — | crowsfoot (24,28) |
-| Corvin Asche (`corvin`) | 6 | 38/38 | 14 | — | L1:4/4 L2:3/3 L3:3/3 | crowsfoot (25,32) |
-| Ottilie Marsh (`ottilie`) | 6 | 39/39 | 13 | — | L1:4/4 L2:3/3 L3:3/3 | crowsfoot (25,29) |
+| Kit Corvell (`kit`) | 6 | 51/51 | 16 | — | — | the-pens (12,7) |
+| Brakka Holloway (`brakka`) | 6 | 58/58 | 19 | — | — | the-pens (11,7) |
+| Corvin Asche (`corvin`) | 6 | 38/38 | 14 | — | L1:4/4 L2:3/3 L3:3/3 | the-pens (14,8) |
+| Ottilie Marsh (`ottilie`) | 6 | 39/39 | 13 | — | L1:4/4 L2:3/3 L3:3/3 | the-pens (15,7) |
 
 ## Other creatures (DM view)
 
 | Creature | Side | HP | AC | Conditions | Position | Hidden |
 |---|---|---|---|---|---|---|
 | Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | rookery (15,8) |  |
-| Mr Fennimore Quist (`mr-fennimore-quist`, spy) | neutral | 27/27 | 12 | — | rookery (36,10) |  |
+| Mr Fennimore Quist (`mr-fennimore-quist`, spy) | neutral | 27/27 | 12 | — | rookery (12,18) |  |
 | Mother Hobday (`mother-hobday`, commoner) | neutral | 4/4 | 10 | — | rookery (4,2) |  |
 | Ada Crisp (`ada-crisp`, commoner) | neutral | 4/4 | 10 | — | rookery (20,5) |  |
-| Bel Crisp (`bel-crisp`, commoner) | neutral | 4/4 | 10 | — | rookery (10,6) |  |
+| Bel Crisp (`bel-crisp`, commoner) | neutral | 4/4 | 10 | — | barrow-gate (27,6) |  |
 | Tobin Rudge (`tobin-rudge`, commoner) | neutral | 4/4 | 10 | — | rookery (10,5) |  |
-| Corlis (`corlis`, commoner) | neutral | 4/4 | 10 | — | barrow-gate (21,19) |  |
-| Harl (`harl`, tough) | neutral | 32/32 | 12 | — | barrow-gate (19,7) |  |
+| Corlis (`corlis`, commoner) | neutral | 4/4 | 10 | — | barrow-gate (37,10) |  |
+| Harl (`harl`, tough) | neutral | 32/32 | 12 | — | barrow-gate (25,8) |  |
 | Bastian (`bastian`, tough) | neutral | 32/32 | 12 | — | barrow-gate (22,17) |  |
-| Mercy Fulk (`mercy-fulk`, commoner) | enemy | 4/4 | 10 | grappled | crowsfoot (23,28) |  |
-| Amos Pettigrew (`amos-pettigrew`, commoner) | neutral | 1/4 | 10 | — | crowsfoot (34,34) |  |
+| Mercy Fulk (`mercy-fulk`, commoner) | enemy | 3/4 | 10 | restrained | the-pens (11,3) |  |
+| Amos Pettigrew (`amos-pettigrew`, commoner) | neutral | 1/4 | 10 | — | barrow-gate (26,5) |  |
 | Garrick Webb (`garrick-webb`, tough) | neutral | 32/32 | 12 | — | crowsfoot (44,17) |  |
 
 ## Maps (exact current contents — tokens and items stay where they were left)
 
 ### The Rookery (`rookery`, interior 52×36, lighting dim)
 - Ada Crisp (`ada-crisp`, neutral) at (20,5) — 4/4 HP
-- Bel Crisp (`bel-crisp`, neutral) at (10,6) — 4/4 HP
 - Mother Hobday (`mother-hobday`, neutral) at (4,2) — 4/4 HP
-- Mr Fennimore Quist (`mr-fennimore-quist`, neutral) at (36,10) — 27/27 HP
+- Mr Fennimore Quist (`mr-fennimore-quist`, neutral) at (12,18) — 27/27 HP
 - Nib (`nib`, neutral) at (15,8) — 4/4 HP
 - Tobin Rudge (`tobin-rudge`, neutral) at (10,5) — 4/4 HP
 - container `kits-strongbox`: Kit's strongbox at (41,14)
@@ -111,9 +110,11 @@
 - doors: (9,4) closed, (11,8) open, (45,8) open, (39,10) closed, (9,12) closed, (10,16) closed, (24,16) open, (25,16) open, (26,16) open, (45,16) closed, (39,18) closed, (12,20) closed, (21,20) closed, (35,20) closed, (42,24) closed, (21,28) open, (46,28) closed, (6,32) closed, (24,32) closed
 
 ### The Grey Barrow (`barrow-gate`, interior 44×30, lighting bright)
+- Amos Pettigrew (`amos-pettigrew`, neutral) at (26,5) — 1/4 HP
 - Bastian (`bastian`, neutral) at (22,17) — 32/32 HP
-- Corlis (`corlis`, neutral) at (21,19) — 4/4 HP
-- Harl (`harl`, neutral) at (19,7) — 32/32 HP
+- Bel Crisp (`bel-crisp`, neutral) at (27,6) — 4/4 HP
+- Corlis (`corlis`, neutral) at (37,10) — 4/4 HP
+- Harl (`harl`, neutral) at (25,8) — 32/32 HP
 - point of interest `poi-1`: The tomb door at (19,16) → journal j32
 - point of interest `poi-2`: The robbed sarcophagus at (19,13) → journal j33
 - point of interest `poi-3`: The serpent door at (19,11) → journal j34
@@ -158,16 +159,11 @@
 - point of interest `poi-18`: The lead curtain at (21,12) → journal j119
 - point of interest `poi-19`: The serpent columns of the Socket at (19,9) → journal j120
 - point of interest `poi-20`: The sealed serpent-door at (25,19) → journal j121
-- doors: (14,12) closed, (25,19) closed
+- point of interest `poi-21`: The stair to the Pens at (7,23) → journal j160
+- doors: (14,12) closed, (14,13) closed, (25,19) closed
 
 ### Crowsfoot (`crowsfoot`, interior 60×40, lighting bright)
-- Brakka Holloway (`brakka`, pc) at (24,28) — 58/58 HP
-- Corvin Asche (`corvin`, pc) at (25,32) — 38/38 HP
-- Kit Corvell (`kit`, pc) at (23,27) — 51/51 HP
-- Ottilie Marsh (`ottilie`, pc) at (25,29) — 39/39 HP
-- Amos Pettigrew (`amos-pettigrew`, neutral) at (34,34) — 1/4 HP
 - Garrick Webb (`garrick-webb`, neutral) at (44,17) — 32/32 HP
-- Mercy Fulk (`mercy-fulk`, enemy) at (23,28) — 4/4 HP · grappled
 - container `mercys-coin-bowl`: Mercy's coin bowl at (28,32)
 - container `the-linen-chest`: The linen chest at (32,37)
 - point of interest `poi-1`: The post-box at (14,10) → journal j124
@@ -207,21 +203,39 @@
 - point of interest `poi-35`: The inn stable at (46,36) → journal j158
 - doors: (22,8) closed, (35,9) closed, (43,9) closed, (40,16) open, (8,17) closed, (40,17) open, (40,18) open, (40,19) open, (23,26) closed, (56,26) closed, (43,27) closed, (8,28) closed, (30,29) open, (37,29) open, (26,34) open, (30,35) open, (23,36) closed, (44,36) open
 
+### The Pens (`the-pens`, interior 30×16, lighting dark)
+- Brakka Holloway (`brakka`, pc) at (11,7) — 58/58 HP
+- Corvin Asche (`corvin`, pc) at (14,8) — 38/38 HP
+- Kit Corvell (`kit`, pc) at (12,7) — 51/51 HP
+- Ottilie Marsh (`ottilie`, pc) at (15,7) — 39/39 HP
+- Mercy Fulk (`mercy-fulk`, enemy) at (11,3) — 3/4 HP · restrained
+- container `gaolers-chest`: The gaoler's chest at (8,11)
+- point of interest `poi-1`: The stair up at (1,7) → journal j161
+- point of interest `poi-2`: The gaolers' table at (4,5) → journal j162
+- point of interest `poi-3`: The brazier at (8,4) → journal j163
+- point of interest `poi-4`: The rack of irons at (1,10) → journal j164
+- point of interest `poi-5`: The oubliette at (4,10) → journal j165
+- point of interest `poi-6`: The guard-room doors at (9,7) → journal j166
+- point of interest `poi-7`: The cell corridor at (18,7) → journal j167
+- point of interest `poi-8`: The cell doors at (11,6) → journal j168
+- point of interest `poi-9`: The cells at (10,1) → journal j169
+- doors: (11,6) closed, (16,6) closed, (21,6) closed, (26,6) closed, (9,7) open, (9,8) open, (11,9) closed, (16,9) closed, (21,9) closed, (26,9) closed
+
 
 ## Recent events
 
-- ▶ Brakka Holloway's turn (round 1).
-- 🏁 Combat ends after 1 round(s). Defeated: none (0 XP available — `xp award --encounter`).
-- 🚶 Brakka Holloway moves 40 ft to (24,28).
-- Mercy Fulk is at (23,28) on Crowsfoot.
-- Brakka hauls her out from behind the counter by the hair, her slippers skidding in the wine, and plants her on the stool in front of Kit, keeping a fistful of hair.
-- 🚶 Ottilie Marsh moves 70 ft to (25,29).
-- Ottilie strolls out of the passage, steps daintily round the broken jug, and settles on the edge of the dice table.
-- “Well. Isn't this cosy.”
-- “Slippery as an eel, this one.”
-- ⏳ 1m passes — the scuffle in the taproom. Now Day 1, 10:47.
-- 🎬 Crowsfoot — the Crow and Kettle — The alewife on a stool with an orc's fist in her hair, wine on the flags, and the barrow gentlemen standing over her.
-- ⭐ Kit Corvell gains 2 XP (Mercy Fulk caught and held after bolting from the crew: Mercy Fulk (10)) — total 14002.
-- ⭐ Brakka Holloway gains 2 XP (Mercy Fulk caught and held after bolting from the crew: Mercy Fulk (10)) — total 14002.
-- ⭐ Corvin Asche gains 2 XP (Mercy Fulk caught and held after bolting from the crew: Mercy Fulk (10)) — total 14002.
-- ⭐ Ottilie Marsh gains 2 XP (Mercy Fulk caught and held after bolting from the crew: Mercy Fulk (10)) — total 14002.
+- Kit Corvell is at (12,7) on The Pens.
+- Brakka Holloway is at (11,7) on The Pens.
+- Corvin Asche is at (14,8) on The Pens.
+- Ottilie Marsh is at (15,7) on The Pens.
+- 🚪 The door at (11,6) is opened.
+- Mercy Fulk is at (11,3) on The Pens.
+- 🚪 The door at (11,6) is closed.
+- 🗺 Map: The Pens
+- 🎬 The Pens — Day 1, noon — Under the Quiet Gallery, the serpent temple's old holding cells: green stone sweating in the brazier light, new iron in old rock.
+- 🗺 Map: The Pens
+- Down the Coil Stair, along the Quiet Gallery between the Twelve in their stone poses, and down the narrow stair at its end: the Pens, the serpent temple's old holding cells, barred new in iron a year ago and never used until today.
+- Brakka carries Mercy down the cell corridor, swings open the first barred door, and drops her on the straw. The lock turns with a sound like a bone breaking.
+- Mercy lies on the pallet in her shift, bound and gagged, staring up at the carved serpent over her cell. Her breath comes fast and wet through the apron.
+- ⏳ 20m passes — settling Pettigrew; down through the Rookery and the Quiet Gallery to the Pens. Now Day 1, 12:16.
+- “Six days to the new moon, and now the larder's stocked.”
