@@ -346,6 +346,12 @@ class EngineTest(unittest.TestCase):
             self.ok("place", "kira", "5,5", "--map", "arena")
             self.ok("map", "show", "arena")
 
+    def test_cr_zero_xp_depends_on_having_an_attack(self):
+        # SRD CR 0 stat blocks read "XP 0 or 10": a creature with an attack is worth 10
+        from engine import srd
+        self.assertEqual(srd.find("monsters", "Commoner")["xp"], 10)
+        self.assertEqual(srd.find("monsters", "Bandit")["xp"], 25)
+
     def test_alert_initiative_swap(self):
         self.ok("place", "kira", "5,5", "--map", "arena")
         self.ok("place", "wren", "6,6", "--map", "arena")

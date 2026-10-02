@@ -59,4 +59,14 @@
   - Initiative: Asche 22, Kit 20, Mercy 20, Brakka 13, Ottilie 13, Pettigrew 6. Garrick Webb is across the green and
     out of it.
   - Asche dashed down the passage into the taproom (25,32).
-  - It's Kit's turn, from the back room. *(Waiting on the player.)*
+  - It's Kit's turn, from the back room.
+  - Kit dashed twice (Cunning Action and his action) through the taproom to the front doorway: "Really, Brakka, bested
+    by a cup-bearer?... settle down."
+  - Map fix by public ruling: a cask had been drawn across the kitchen doorway behind the counter. It's clear now, and the
+    kitchen's yard door stands propped open, as described.
+  - Mercy ran for the kitchen doorway. Brakka's opportunity grab caught her by the hair (Strength save 11 against DC
+    16), and her escape attempt failed (13 against DC 16). She begged: "I'm settled! I only wanted to know if you'd take a
+    cup!"
+  - Combat ended after one round. XP for Mercy overcome: 10, split (2 each).
+- 10:47: Brakka planted Mercy on a stool (23,28) in front of Kit at the door, still holding her hair. Ottilie came out
+  and perched on the dice table: "Isn't this cosy." *(Waiting on the player.)*

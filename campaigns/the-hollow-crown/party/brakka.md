@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Orc** · **Fighter 6** (Champion) · **Background:** Soldier · **XP:** 14000
+**Player:** DM · **Orc** · **Fighter 6** (Champion) · **Background:** Soldier · **XP:** 14002
 
 **HP** 58/58 · **AC** 19 (Plate Armor 18 + items 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
 

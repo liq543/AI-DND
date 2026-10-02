@@ -1471,10 +1471,11 @@ def cmd_xp(g, a):
                     raise RuleError(f"{e['name']} is a party character.")
                 if e.get("xp_awarded") or (e.get("dead") and e["id"] in done):
                     raise RuleError(f"XP for {e['name']} was already awarded.")
-                if not e.get("xp"):
+                xp = e.get("xp") or (srd.find("monsters", e["srd"]) or {}).get("xp", 0) if e.get("srd") else e.get("xp")
+                if not xp:
                     raise RuleError(f"{e['name']} has no XP value in its stat block.")
-                total += e["xp"]
-                names.append(f"{e['name']} ({e['xp']})")
+                total += xp
+                names.append(f"{e['name']} ({xp})")
                 g.set(e, xp_awarded=True)
             M.award_xp(g, members, total, f"{a.reason}: " + ", ".join(names))
         else:

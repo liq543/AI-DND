@@ -368,7 +368,7 @@ def parse_monster(path):
         "resist": res, "immune": imm, "vulnerable": vul, "condition_immune": cimm,
         "darkvision": int(dv.group(1)) if dv else 0,
         "passive_perception": int(pp.group(1)) if pp else 10,
-        "cr": cr_m.group(1) if cr_m else "0", "xp": int(cr_m.group(2).replace(",", "")) if cr_m else 0,
+        "cr": cr_m.group(1) if cr_m else "0", "xp": _stat_block_xp(cr_m, text, actions),
         "pb": int(cr_m.group(3)) if cr_m and cr_m.group(3) else 2,
         "languages": stat("Languages"), "multiattack": multi, "actions": actions,
     }
@@ -538,6 +538,15 @@ def parse_magic_items():
 
 
 # ---------------------------------------------------------------- build / cache
+
+def _stat_block_xp(cr_m, text, actions):
+    """XP from the CR line. SRD CR 0 creatures read "XP 0 or 10": 10 if it has an attack worth making, else 0."""
+    if not cr_m:
+        return 0
+    if re.search(r"\(XP 0 or 10", text):
+        return 10 if any(a.get("kind") == "attack" for a in actions) else 0
+    return int(cr_m.group(2).replace(",", ""))
+
 
 def _signature():
     files = list(RULES.rglob("*.md"))

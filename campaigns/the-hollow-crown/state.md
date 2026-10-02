@@ -2,18 +2,18 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 1 · **In-world time:** Day 1, 10:45 · **Mode:** COMBAT round 1
-**Current map:** Crowsfoot (`crowsfoot`) · **Events:** 1348 · **Log head:** `d682dbfac6814fc8`
+**Session:** 1 · **In-world time:** Day 1, 10:47 · **Mode:** exploration
+**Current map:** Crowsfoot (`crowsfoot`) · **Events:** 1427 · **Log head:** `0d71f0e1f7a70313`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6 · **Party position (region):** [22, 63]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 6 | 51/51 | 16 | — | — | crowsfoot (33,34) |
-| Brakka Holloway (`brakka`) | 6 | 58/58 | 19 | — | — | crowsfoot (28,31) |
+| Kit Corvell (`kit`) | 6 | 51/51 | 16 | — | — | crowsfoot (23,27) |
+| Brakka Holloway (`brakka`) | 6 | 58/58 | 19 | — | — | crowsfoot (24,28) |
 | Corvin Asche (`corvin`) | 6 | 38/38 | 14 | — | L1:4/4 L2:3/3 L3:3/3 | crowsfoot (25,32) |
-| Ottilie Marsh (`ottilie`) | 6 | 39/39 | 13 | — | L1:4/4 L2:3/3 L3:3/3 | crowsfoot (33,36) |
+| Ottilie Marsh (`ottilie`) | 6 | 39/39 | 13 | — | L1:4/4 L2:3/3 L3:3/3 | crowsfoot (25,29) |
 
 ## Other creatures (DM view)
 
@@ -28,18 +28,9 @@
 | Corlis (`corlis`, commoner) | neutral | 4/4 | 10 | — | barrow-gate (21,19) |  |
 | Harl (`harl`, tough) | neutral | 32/32 | 12 | — | barrow-gate (19,7) |  |
 | Bastian (`bastian`, tough) | neutral | 32/32 | 12 | — | barrow-gate (22,17) |  |
-| Mercy Fulk (`mercy-fulk`, commoner) | enemy | 4/4 | 10 | — | crowsfoot (28,30) |  |
+| Mercy Fulk (`mercy-fulk`, commoner) | enemy | 4/4 | 10 | grappled | crowsfoot (23,28) |  |
 | Amos Pettigrew (`amos-pettigrew`, commoner) | neutral | 1/4 | 10 | — | crowsfoot (34,34) |  |
 | Garrick Webb (`garrick-webb`, tough) | neutral | 32/32 | 12 | — | crowsfoot (44,17) |  |
-
-## Initiative — round 1
-
-  22  Corvin Asche
-➤ 20  Kit Corvell
-  20  Mercy Fulk
-  13  Brakka Holloway
-  13  Ottilie Marsh
-   6  Amos Pettigrew
 
 ## Maps (exact current contents — tokens and items stay where they were left)
 
@@ -170,13 +161,13 @@
 - doors: (14,12) closed, (25,19) closed
 
 ### Crowsfoot (`crowsfoot`, interior 60×40, lighting bright)
-- Brakka Holloway (`brakka`, pc) at (28,31) — 58/58 HP
+- Brakka Holloway (`brakka`, pc) at (24,28) — 58/58 HP
 - Corvin Asche (`corvin`, pc) at (25,32) — 38/38 HP
-- Kit Corvell (`kit`, pc) at (33,34) — 51/51 HP
-- Ottilie Marsh (`ottilie`, pc) at (33,36) — 39/39 HP
+- Kit Corvell (`kit`, pc) at (23,27) — 51/51 HP
+- Ottilie Marsh (`ottilie`, pc) at (25,29) — 39/39 HP
 - Amos Pettigrew (`amos-pettigrew`, neutral) at (34,34) — 1/4 HP
 - Garrick Webb (`garrick-webb`, neutral) at (44,17) — 32/32 HP
-- Mercy Fulk (`mercy-fulk`, enemy) at (28,30) — 4/4 HP
+- Mercy Fulk (`mercy-fulk`, enemy) at (23,28) — 4/4 HP · grappled
 - container `mercys-coin-bowl`: Mercy's coin bowl at (28,32)
 - container `the-linen-chest`: The linen chest at (32,37)
 - point of interest `poi-1`: The post-box at (14,10) → journal j124
@@ -198,7 +189,7 @@
 - point of interest `poi-17`: The inglenook hearth at (14,29) → journal j140
 - point of interest `poi-18`: The settles at (15,28) → journal j141
 - point of interest `poi-19`: The counter at (27,30) → journal j142
-- point of interest `poi-20`: The ale casks at (29,29) → journal j143
+- point of interest `poi-20`: The ale casks at (29,28) → journal j143
 - point of interest `poi-21`: The dice table at (25,30) → journal j144
 - point of interest `poi-22`: The taproom tables at (22,32) → journal j145
 - point of interest `poi-23`: The pot shelf at (29,33) → journal j146
@@ -214,23 +205,23 @@
 - point of interest `poi-33`: The snug at (17,36) → journal j156
 - point of interest `poi-34`: The horse trough at (40,35) → journal j157
 - point of interest `poi-35`: The inn stable at (46,36) → journal j158
-- doors: (22,8) closed, (35,9) closed, (43,9) closed, (40,16) open, (8,17) closed, (40,17) open, (40,18) open, (40,19) open, (23,26) closed, (56,26) closed, (43,27) closed, (8,28) closed, (30,29) open, (37,29) closed, (26,34) open, (30,35) open, (23,36) closed, (44,36) open
+- doors: (22,8) closed, (35,9) closed, (43,9) closed, (40,16) open, (8,17) closed, (40,17) open, (40,18) open, (40,19) open, (23,26) closed, (56,26) closed, (43,27) closed, (8,28) closed, (30,29) open, (37,29) open, (26,34) open, (30,35) open, (23,36) closed, (44,36) open
 
 
 ## Recent events
 
-- ⚔ Roll for initiative! Combat begins.
-- Initiative order: Corvin Asche (22) → Kit Corvell (20) → Mercy Fulk (20) → Brakka Holloway (13) → Ottilie Marsh (13) → Amos Pettigrew (6) → Garrick Webb (5)
-- ▶ Corvin Asche's turn (round 1).
-- Garrick Webb leaves combat.
-- 🚶 Corvin Asche moves 25 ft to (27,35).
-- Corvin Asche takes the Dash action (extra movement equal to Speed).
-- 🚶 Corvin Asche moves 20 ft to (25,32).
-- Asche hurries down the passage and into the taproom, sleeves flapping, looking for a clear line to the woman.
-- ▶ Kit Corvell's turn (round 1).
-- “Very good, Pettigrew. Your valiant whipping efforts are... noted. I'll have to talk to that steward about hiring cart boys whose whips work, and some more guards.”
-- Mercy backs against the casks with her hands up and her eyes white, glass and wine around her feet. Her gaze flicks past the orc to the front door.
-- In the back room Pettigrew has pulled the quilt up to his chin.
-- 🎬 Crowsfoot — the Crow and Kettle — Broken glass and spilled wine behind the counter, an orc's hand full of hair, and the alewife with her back to the casks.
-- 🪑 A smashed jug in a puddle of wine placed at (28,29) on Crowsfoot.
-- 🗺 Map: Crowsfoot
+- ▶ Brakka Holloway's turn (round 1).
+- 🏁 Combat ends after 1 round(s). Defeated: none (0 XP available — `xp award --encounter`).
+- 🚶 Brakka Holloway moves 40 ft to (24,28).
+- Mercy Fulk is at (23,28) on Crowsfoot.
+- Brakka hauls her out from behind the counter by the hair, her slippers skidding in the wine, and plants her on the stool in front of Kit, keeping a fistful of hair.
+- 🚶 Ottilie Marsh moves 70 ft to (25,29).
+- Ottilie strolls out of the passage, steps daintily round the broken jug, and settles on the edge of the dice table.
+- “Well. Isn't this cosy.”
+- “Slippery as an eel, this one.”
+- ⏳ 1m passes — the scuffle in the taproom. Now Day 1, 10:47.
+- 🎬 Crowsfoot — the Crow and Kettle — The alewife on a stool with an orc's fist in her hair, wine on the flags, and the barrow gentlemen standing over her.
+- ⭐ Kit Corvell gains 2 XP (Mercy Fulk caught and held after bolting from the crew: Mercy Fulk (10)) — total 14002.
+- ⭐ Brakka Holloway gains 2 XP (Mercy Fulk caught and held after bolting from the crew: Mercy Fulk (10)) — total 14002.
+- ⭐ Corvin Asche gains 2 XP (Mercy Fulk caught and held after bolting from the crew: Mercy Fulk (10)) — total 14002.
+- ⭐ Ottilie Marsh gains 2 XP (Mercy Fulk caught and held after bolting from the crew: Mercy Fulk (10)) — total 14002.
