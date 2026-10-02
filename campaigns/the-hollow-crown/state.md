@@ -2,18 +2,18 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 1 · **In-world time:** Day 1, 12:28 · **Mode:** exploration
-**Current map:** The Pens (`the-pens`) · **Events:** 1687 · **Log head:** `7c6698c4473d49cb`
-**Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6 · **Party position (region):** [21, 62]
+**Session:** 1 · **In-world time:** Day 1, 20:25 · **Mode:** exploration
+**Current map:** The Gallows track, by night (`gallows-track-night`) · **Events:** 1919 · **Log head:** `9fd2165ef6a41d3f`
+**Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6 · **Party position (region):** [24, 56]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 6 | 51/51 | 16 | — | — | the-pens (12,7) |
-| Brakka Holloway (`brakka`) | 6 | 58/58 | 19 | — | — | the-pens (13,8) |
-| Corvin Asche (`corvin`) | 6 | 38/38 | 14 | — | L1:4/4 L2:3/3 L3:3/3 | the-pens (14,8) |
-| Ottilie Marsh (`ottilie`) | 6 | 39/39 | 13 | — | L1:4/4 L2:3/3 L3:3/3 | the-pens (15,7) |
+| Kit Corvell (`kit`) | 6 | 51/51 | 16 | — | — | gallows-track-night (15,6) |
+| Brakka Holloway (`brakka`) | 6 | 58/58 | 19 | — | — | gallows-track-night (16,6) |
+| Corvin Asche (`corvin`) | 6 | 38/38 | 14 | — | L1:4/4 L2:3/3 L3:3/3 | gallows-track-night (15,7) |
+| Ottilie Marsh (`ottilie`) | 6 | 39/39 | 13 | — | L1:4/4 L2:3/3 L3:3/3 | gallows-track-night (16,5) |
 
 ## Other creatures (DM view)
 
@@ -30,7 +30,13 @@
 | Bastian (`bastian`, tough) | neutral | 32/32 | 12 | — | the-pens (11,7) |  |
 | Mercy Fulk (`mercy-fulk`, commoner) | enemy | 3/4 | 10 | restrained | the-pens (11,3) |  |
 | Amos Pettigrew (`amos-pettigrew`, commoner) | neutral | 1/4 | 10 | — | barrow-gate (26,5) |  |
-| Garrick Webb (`garrick-webb`, tough) | neutral | 32/32 | 12 | — | crowsfoot (44,17) |  |
+| Garrick Webb (`garrick-webb`, tough) | neutral | 32/32 | 12 | — | crowsfoot (27,22) |  |
+| Alys Brinn (`alys-brinn`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (21,24) |  |
+| Brother Cuthbert (`brother-cuthbert`, priest-acolyte) | neutral | 11/11 | 13 | — | crowsfoot (24,24) |  |
+| Villager (`villager`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (20,24) |  |
+| Villager (`villager-2`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (21,23) |  |
+| Villager (`villager-3`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (25,23) |  |
+| Villager (`villager-4`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (26,24) |  |
 
 ## Maps (exact current contents — tokens and items stay where they were left)
 
@@ -162,7 +168,13 @@
 - doors: (14,12) closed, (14,13) closed, (25,19) closed
 
 ### Crowsfoot (`crowsfoot`, interior 60×40, lighting bright)
-- Garrick Webb (`garrick-webb`, neutral) at (44,17) — 32/32 HP
+- Alys Brinn (`alys-brinn`, neutral) at (21,24) — 4/4 HP
+- Brother Cuthbert (`brother-cuthbert`, neutral) at (24,24) — 11/11 HP
+- Garrick Webb (`garrick-webb`, neutral) at (27,22) — 32/32 HP
+- Villager (`villager`, neutral) at (20,24) — 4/4 HP
+- Villager (`villager-2`, neutral) at (21,23) — 4/4 HP
+- Villager (`villager-3`, neutral) at (25,23) — 4/4 HP
+- Villager (`villager-4`, neutral) at (26,24) — 4/4 HP
 - container `mercys-coin-bowl`: Mercy's coin bowl at (28,32)
 - container `the-linen-chest`: The linen chest at (32,37)
 - point of interest `poi-1`: The post-box at (14,10) → journal j124
@@ -203,10 +215,6 @@
 - doors: (22,8) closed, (35,9) closed, (43,9) closed, (40,16) open, (8,17) closed, (40,17) open, (40,18) open, (40,19) open, (23,26) closed, (56,26) closed, (43,27) closed, (8,28) closed, (30,29) open, (37,29) open, (26,34) open, (30,35) open, (23,36) closed, (44,36) open
 
 ### The Pens (`the-pens`, interior 30×16, lighting dark)
-- Brakka Holloway (`brakka`, pc) at (13,8) — 58/58 HP
-- Corvin Asche (`corvin`, pc) at (14,8) — 38/38 HP
-- Kit Corvell (`kit`, pc) at (12,7) — 51/51 HP
-- Ottilie Marsh (`ottilie`, pc) at (15,7) — 39/39 HP
 - Bastian (`bastian`, neutral) at (11,7) — 32/32 HP
 - Mercy Fulk (`mercy-fulk`, enemy) at (11,3) — 3/4 HP · restrained
 - container `gaolers-chest`: The gaoler's chest at (8,11)
@@ -221,21 +229,41 @@
 - point of interest `poi-9`: The cells at (10,1) → journal j169
 - doors: (11,6) closed, (16,6) closed, (21,6) closed, (26,6) closed, (9,7) open, (9,8) open, (11,9) closed, (16,9) closed, (21,9) closed, (26,9) closed
 
+### The Beech Holloway (`beech-holloway`, interior 40×24, lighting bright)
+- point of interest `poi-1`: The felled beech at (14,11) → journal j170
+- point of interest `poi-2`: The stump at (13,10) → journal j171
+- point of interest `poi-3`: The churned mud at (16,12) → journal j172
+- point of interest `poi-4`: The snapped whip at (18,14) → journal j173
+- point of interest `poi-5`: The trampled bank at (7,9) → journal j174
+- point of interest `poi-6`: The woodcutters' ride at (21,9) → journal j175
+- point of interest `poi-7`: The lonely hollow at (12,7) → journal j176
+
+### The Gallows track, by night (`gallows-track-night`, wilderness 30×20, lighting dark)
+- Brakka Holloway (`brakka`, pc) at (16,6) — 58/58 HP
+- Corvin Asche (`corvin`, pc) at (15,7) — 38/38 HP
+- Kit Corvell (`kit`, pc) at (15,6) — 51/51 HP
+- Ottilie Marsh (`ottilie`, pc) at (16,5) — 39/39 HP
+- point of interest `poi-1`: The log bridge at (11,6) → journal j177
+- point of interest `poi-2`: The Gallows track at (18,4) → journal j178
+- point of interest `poi-3`: A boundary stone at (6,8) → journal j179
+- point of interest `poi-4`: The brook at (11,10) → journal j180
+- labels: Stream (11,10), Road (1,5)
+
 
 ## Recent events
 
-- Bastian is at (16,8) on The Pens.
-- Bastian follows her down the Coil Stair and through the Quiet Gallery. Halfway along he stops dead in front of the stone master mason with his mallet raised, and whistles low.
-- “Odo Fletch. Owed me three crowns at dice, he did. So that's where the masons went.”
-- Then he comes on down into the Pens, looks at the woman in the cell, and smiles.
-- “Bastian, is it? This room is now your responsibility, and so are its inhabitants. If you're up for the task, the job is yours. Do be sure to torture them sufficiently, but keep them alive. For each prisoner that dies, you lose one head. And your salary is henceforth doubled. Do we have a deal?”
-- “One head's all I've got, boss, so I'll take very good care of them. Double pay? We have a deal.”
-- Bastian clasps Kit's hand, then goes to the gaoler's chest, fishes out the great ring of cell keys, and hangs it from his own belt with a jingle. He strolls to the bars of Mercy's cell and crouches to her eye level.
-- “Hello, darling. You and me are going to get to know each other ever so well.”
-- ⏳ 2m passes — Bastian takes the post. Now Day 1, 12:28.
-- 🚶 Bastian moves 30 ft to (10,7).
-- 🚶 Brakka Holloway moves 10 ft to (13,8).
-- 🚶 Bastian moves 5 ft to (11,7).
-- 🪑 The cell keys on their ring moved to (8,11) on The Pens — the key ring now hangs from Bastian's belt.
-- 🪑 The cell keys on their ring is gone from The Pens — Bastian took the key ring.
-- 🎒 Bastian gains 1× Ring of cell keys — gift: the post of dungeon master, from Kit.
+- 📍 Noted on The Gallows track, by night: The log bridge (11,6) — click it on the map for its journal entry.
+- 📍 Noted on The Gallows track, by night: The Gallows track (18,4) — click it on the map for its journal entry.
+- 📍 Noted on The Gallows track, by night: A boundary stone (6,8) — click it on the map for its journal entry.
+- 📍 Noted on The Gallows track, by night: The brook (11,10) — click it on the map for its journal entry.
+- Kit Corvell is at (15,6) on The Gallows track, by night.
+- Brakka Holloway is at (16,6) on The Gallows track, by night.
+- Corvin Asche is at (15,7) on The Gallows track, by night.
+- Ottilie Marsh is at (16,5) on The Gallows track, by night.
+- 🗺 Map: The Gallows track, by night
+- 🎬 The Gallows track — Day 1, night — A log bridge over a black brook, the forest closing in, and the cart's forked trail running on north into the dark.
+- 🗺 Map: The Gallows track, by night
+- They follow the forked print north along the Gallows track all afternoon. Dusk catches them in the deep wood, and they ride the last hour by the failing light, until it's full dark at a log bridge over a black brook. Under the trees there's no moon to speak of, only a thin old crescent that won't rise until the small hours.
+- At the bridge the cart's tyres have scored the logs, and the forked print is pressed in the mud at both ends. A boundary stone by the track has a hand pointing north, and a noose scratched under it.
+- “Gallows Oak's maybe twelve miles on. In this dark we'll be walking the horses.”
+- “Or we sleep under the stars like vagabonds. How thrilling.”

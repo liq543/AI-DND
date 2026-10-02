@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** Player · **Human** · **Rogue 6** (Thief) · **Background:** Criminal · **XP:** 14102
+**Player:** Player · **Human** · **Rogue 6** (Thief) · **Background:** Criminal · **XP:** 14152
 
 **HP** 51/51 · **AC** 16 (Studded Leather Armor 12 + Dex 4) · **Speed** 30 ft · **Initiative** +7 · **Proficiency** +3 · **Passive Perception** 17
 
@@ -88,6 +88,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `potion-of-healing-1` 2× Potion of Healing — Common · _purchased for 400 GP_
 - `horse-riding-1` 5× Horse, Riding · _purchased for 375 GP_
 - `saddle-riding-1` 5× Saddle - Riding · _purchased for 50 GP_
+- `whittled-beech-twig-crow-1` 1× Whittled beech-twig crow · _found: on the stump at the beech holloway_
 
 Hit Point Dice: Rogue d8 6/6
 Languages: Common, Elvish, Halfling, Thieves' Cant · Tools: Thieves' Tools · Armor training: light

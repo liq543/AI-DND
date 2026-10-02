@@ -102,4 +102,27 @@
   that's where the masons went"). 
 - Kit's terms to Bastian: the Pens and their inmates are his; torture them sufficiently but keep them alive; "for each
   prisoner that dies you lose one head"; his pay is doubled (150 a month; wages now 430). Bastian accepted ("One head's all
-  I've got"), took the cell keys, and introduced himself to Mercy. *(12:28. Waiting on the player.)*
+  I've got"), took the cell keys, and introduced himself to Mercy.
+- Kit to Bastian: miss a single Socket deadline and "you lose two heads, upper and lower". Asche explained the new-moon
+  offering and the visors to him: six days.
+- "Back to the robbing." The crew rode down again and reached Crowsfoot's post-box at 13:33. Mercy's disappearance has
+  been found: the reeve, Brother Cuthbert, Garrick and four villagers are at the Crow and Kettle's door.
+- **Alys Brinn** came up the road: blood on the table, Mercy's dress in rags, the carter gone. "Garrick says you rode in
+  to see him this morning... Was she well when you left her?" Cuthbert is watching them closely.
+- Ottilie lied: "We left her pouring wine." Her Deception (26) beat the reeve's Insight (16) and Cuthbert's (19). She
+  told the truth about Pettigrew (taken up to the house to be nursed). The village now blames **the Hanged Men**, come back
+  for the carter. Cuthbert: "Ride carefully on the March Road."
+- 13:56, the beech holloway (new map):
+  - The beech was cut to fall across the road and later hauled half aside. Dried blood and a tooth lie in the mud, and
+    Pettigrew's whip is snapped in the ditch.
+  - Kit noticed a **whittled beech-twig crow** left on the stump (by passive Perception), and left it there.
+  - Asche: the ruts, the mule and many boots go north up the **woodcutters' ride**, not through the village.
+  - Brakka: someone lay up on the bank a long time, chewing tobacco.
+- Kit: "That'll be Amos's tooth." He searched the bank (Investigation 11 against DC 15): seven men lay up there, six
+  together behind the beeches and one alone above the stump, with **beech shavings** round his hollow. Ottilie: "Our
+  artist."
+- Kit pocketed the whittled crow. The crew rode quietly up the woodcutters' ride. Asche's Survival (20) read the trail:
+  the mule's cracked near-hind shoe leaves a **forked print**. The ride met the Gallows track two miles on (15:11).
+- They followed the trail north all afternoon, and it was full dark by 20:25 at a log bridge (new map), with about twelve
+  miles still to Gallows Oak. No moon until the small hours. Brakka: they'd be walking the horses. Ottilie: "sleep under
+  the stars like vagabonds." *(Waiting on the player: press on in the dark, or camp.)*

@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Wizard 6** (Evoker) · **Background:** Sage · **XP:** 14102
+**Player:** DM · **Human** · **Wizard 6** (Evoker) · **Background:** Sage · **XP:** 14152
 
 **HP** 38/38 · **AC** 14 (unarmored 10 + Dex 2 + bracers 2) · **Speed** 30 ft · **Initiative** +5 · **Proficiency** +3 · **Passive Perception** 11
 

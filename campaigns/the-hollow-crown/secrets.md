@@ -479,7 +479,9 @@ Gallery.
     **Kester Brinn**, the reeve's son, nineteen, who kept his hood up and said nothing.
   - **The ambush:** they dropped a beech across the holloway to stop the cart, and came out of the banks.
   - **What happened:** they beat the carter **Amos Pettigrew** (two teeth out, ribs stove in), took the cart, the mule and
-    the load, and drove it north up the Gallows track. Jessamy gave him the message herself: *"Tell whoever pays for this:
+    the load, and drove it north up the **woodcutters' ride** out of the holloway, which joins the Gallows track two
+    miles north of Crowsfoot (Pettigrew assumed the Gallows track). Kester left one of his whittled crows on the stump. Findable at the site (DC 15, missed on Day 1): a snag of red
+    hangman's cord on the holly, and a cracked shoe on the mule's near hind, which makes its track easy to follow. Jessamy gave him the message herself: *"Tell whoever pays for this:
     road money. A hundred crowns, at the Gallows Oak by the full moon. Or the next one burns, and the carter with it."*
     He heard the others call her "Jess".
   - **Where it went:** Jessamy's camp at **the Withy Pond**, a mile west of Gallows Oak (about 26,50). The candles and oil
@@ -503,7 +505,9 @@ Gallery.
     12:16: locked in the Pens, bound and gagged. Nobody in Crowsfoot saw her taken (Garrick missed the riders twice).
     **Crowsfoot finds the Crow and Kettle empty by early afternoon**: blood on a table, a smashed jug, Mercy's dress
     in rags, the carter gone. The last strangers seen were the barrow gentlemen riding in at half past ten (Garrick saw
-    that). Reeve Alys Brinn will come asking at the post-box by Day 2; Brother Cuthbert adds Mercy to his list.
+    that). **Happened at 13:30 on Day 1:** a girl came for small beer and raised the alarm. The reeve met the crew at the
+    post-box as they rode back through. Brother Cuthbert adds Mercy to his list. Ottilie's lie held (both believed her): **Crowsfoot blames the Hanged Men**.
+    Ennis may not: his Watcher has gone silent the day the barrow folk came down (§5.1).
   - **Pettigrew** was led through the Stillness by the hand and is in the servants' quarters, nursed by Bel Crisp. He
     has seen the barrow open. Without a grey token he couldn't find it again alone.
 - **Act I set pieces:**

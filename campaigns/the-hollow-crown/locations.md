@@ -70,6 +70,18 @@
       (x14–22, y35–37; door 23,36).
     - **The yard and inn stable** (x38–49, y33–38): the trough (40,35), four stalls (46,36).
   - Four cottages: (x2–8, y14–19), (x2–8, y26–31), (x40–46, y27–32), (x54–58, y26–31).
+- **The beech holloway** (map `beech-holloway`, 40×24), a mile east of Crowsfoot on the March Road (y10–14, between banks
+  at y8–9 and y15–16):
+  - the felled beech (14,11), cut to fall and hauled half aside;
+  - the stump (13,10), with a whittled beech-twig crow on it;
+  - the churned mud where the cart stopped (16,12);
+  - the snapped whip (18,14);
+  - the trampled bank where the robbers lay up (7,9), and the lonely hollow above the stump (12,7) with its beech
+    shavings;
+  - **the woodcutters' ride** north (x21–22, y0–9), which carries the cart's ruts and joins the Gallows track about two
+    miles north.
+- **The log bridge on the Gallows track** (about 24,56; map `gallows-track-night`), roughly twelve miles short of Gallows
+  Oak: a three-log bridge over a black brook (11,6), and a boundary stone with a carved hand and a scratched noose (6,8).
 - **Ashpole** (13,67), hamlet: charcoal clamps and huts. Old Nan Thistle's hut with its carved hearthstone; Dunstan Cole.
 - **Harrowgate** (31,67), castle:
   - A square keep on a crag over the March Road: a curtain wall, a gatehouse with a portcullis, and a well.

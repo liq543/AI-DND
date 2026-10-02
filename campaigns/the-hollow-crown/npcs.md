@@ -35,7 +35,8 @@ All hired abroad. None have been below the Great Hall. All `commoner`, Neutral.
 - **Stat block:** `tough`. **Alignment:** Neutral Evil.
 - **Day 1:** Bastian took the post of **dungeon master** of the Pens at **double pay (150 crowns a month)**. Terms (Kit's):
   torture the prisoners sufficiently but keep them alive; "for each prisoner that dies you lose one head". He holds the
-  cell keys. He now knows what
+  cell keys. He also delivers each new moon's offering to the Socket: miss one and he "loses two heads". Asche told him
+  about the visors. He now knows what
   happened to the Twelve, and is amused. Harl keeps the gate alone.
 
 ### Nib (16), Brakka's nephew *(from chapter 1)*
