@@ -46,17 +46,14 @@ give it again.
 - **Furnish with the right piece, and dress it.** Every object gets its own tile code (`A` tables, `C` chairs, `W` desks,
   `K` shelving, `J` workbenches, `Q` chests, `O` barrels, `&` stoves; dm/visuals.md lists all). `a` is a felt card table only,
   `i` a cupboard only. Add icon props for what's on them; if the palette lacks a thing, make it a prop or add a tile.
-- **No arbitrary numbers.** Don't number rooms, cabinets, lockers, lots, cages or keys in narration, pois or notes unless
-  the world itself shows that number and it matters. Name things by owner, contents or look instead. Room numbers are
-  the DM's key and never appear on the players' table.
+- **No arbitrary numbers.** Don't number rooms, lockers, cages or keys unless the world shows that number and it matters;
+  name things by owner, contents or look.
 - **Recruits join as characters and keep their faces:** `char create` at party level, `asset look <new> --like <npc>`, swap tokens.
 - **XP counts every foe overcome.** Charmed, captured or routed foes give their full stat-block XP (`xp award --overcome`,
   never capped), plus a milestone for the objective won (`--amount`, capped at the High budget, which scales with level).
 - **The party levels together.** Joiners start at the party's XP (`xp sync <id>`), level up on the spot, and share every award.
-- **Check the sheets and the journal before recapping.** Before any recap, list of options or open threads that says a
-  character has, carries or has delivered something, or what the party does or doesn't know (a contact, a place, a
-  password), confirm it in the inventory (party/*.md), the players' journal handouts and the quest notes. A job accepted is not an item in hand: a promised prize
-  stays where the notes put it until the characters take it in play.
+- **Check the sheets and the journal before recapping.** Anything a recap or option list says a character holds, has
+  delivered or knows is confirmed first in party/*.md, the journal and quests.md. A promised prize isn't in hand until taken in play.
 - **Vague moves keep the plan.** "Reposition", "hang back" and the like keep the character's declared role (behind the
   fighter, the Eye in view). Check line of sight on the map before placing anyone whose job is to be seen.
 - **Tokens go where the characters go.** Place each token where the narration puts that character (at the door they knock
@@ -74,8 +71,9 @@ give it again.
   short line of in-character objection, and never stalling or re-arguing a declared action. They carry out orders unless the
   order is a direct attack on themselves. The player sets the crew's direction. Companions add flavour and competence (in a fight, check their whole sheet, potions included, every turn), not
   friction: no refusals, no 'lines they won't cross', no secret plans to warn, sabotage or desert. (Anyone the player targets can of course defend themselves.)
-- **The world knows only what it could know.** Every clue the authorities or NPCs hold must trace to something that
-  happened in play: a living witness who saw or heard it, a document or object that exists, a trail really left. Before
-  narrating what the Watch or a rumour knows, check who survived and what they perceived. Never invent a record (a sign-in
-  book, a register, a sketch) that was never established, and never hand a dead witness's knowledge to the living.
+- **The world knows only what it could know.** Every clue NPCs hold traces to play: a living witness, a real document, a
+  trail really left. Never invent a record, and never hand a dead witness's knowledge to the living.
 - **Keep the journal's clues clean.** Pois are Places & objects; only story items are Handouts & clues (`journal file`).
+- **Build maps big enough to fight in.** Any place a scene could turn violent in gets an open area of at least 20×14
+  squares, with a main room where everyone present can move round each other. A meeting room drawn as a closet is a
+  mistake: redraw it to scale before combat starts.

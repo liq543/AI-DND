@@ -8,6 +8,7 @@ Refer to creatures by id (`kira`, `goblin-warrior-a`) — ids are shown when the
 ```
 campaign new "The Sunken Crown" --set player_rolls=viewer --set xp_mode=xp --set difficulty=standard --set start_level=1
 campaign list | switch <slug> | archive <slug>
+campaign new "The Iron Vale" --from the-sunken-crown --set start_level=6   # the next chapter of a saga (writes chronicle.md)
 set player_rolls=viewer|auto        # viewer: the player clicks Roll for their own d20s; auto: engine rolls immediately
 session start | session end
 status                              # full DM snapshot (also in campaigns/<slug>/state.md)
@@ -31,6 +32,8 @@ char create --name "Kira Vale" --player "Sam" --class Fighter --species Human --
   [--mi-cantrips "light,mage hand" --mi-spell shield --mi-list Wizard] (Magic Initiate)
 spells set wren --cantrips "fire bolt,light,mage hand" --prepared "magic missile,sleep" [--spellbook six,level-1,...]
 spells scribe wren --spell "fireball" --source "spell scroll found in the vault" | spells list wren
+spells refund wren --level 1 --source "the spell was countered"   # public: a spent slot comes back (Counterspell, a DM error)
+spells refund wren --spell "shield" --source "..."                 # public: a spent free cast (Magic Initiate) comes back
 char levelup kira [--class Rogue] [--hp avg|roll] [--subclass Champion] [--feat "Ability Score Improvement" --asi str+2]
          [--fighting-style Archery] [--expertise a,b]
 char masteries kira --masteries longsword,javelin,greatsword   # change Weapon Mastery weapons after a Long Rest
@@ -38,6 +41,8 @@ char leave wren "parts ways at the crossroads" | char rejoin wren "back for the 
 char bio kira appearance "Scarred, braided red hair, soldier's posture"
 char inspire kira "Brilliant plan at the bridge" | char use-inspiration kira
 char show kira
+char import kira [--from the-sunken-crown]   # carry a character or companion over from the previous chapter: the
+                                            # same sheet (items, coins, XP, spells, look), rested; XP up to start_level
 ```
 
 ## Creatures & tokens
@@ -123,6 +128,8 @@ item add kira "Potion of Healing" --purchase                    # Common magic i
 item add kira "Longsword +1" --source "reward: the Duke"        # rarity capped by party tier unless --override
 item add kira "Spell Scroll (Fireball)" --source "loot: ..."
 item equip|unequip|attune|unattune|use|light|drop|sell <who> <item-id> [--to <target>] [--qty N]
+item use kira dagger-of-venom-1     # Bonus Action: coat the blade BEFORE the attack (it poisons the next hit)
+item venom-hit kira dagger-of-venom-1 --to goblin-a --how "..."   # repair: the coat came first but was recorded after the hit
 item give kira <item-id> --to wren | item recover-ammo kira Arrows | item card kira <item-id>
 item drop kira dagger-1 --qty 1      # lands on the map at the token's square (gold diamond marker, shown to players)
 item pickup kira floor-1             # must be in/next to that square; in combat uses the free object interaction
@@ -148,6 +155,13 @@ homebrew add monsters|items|subclasses|species|backgrounds --file thing.json --r
 map gen region|town|dungeon|cave|wilderness|interior|arena [--preset road-ambush] [--biome swamp] [--building tavern]
         [--name "..."] [--id crypt] [--seed 42] [--w 40 --h 30] [--show]
 map show <id> | map list | map ascii <id> | map render <id> [--dm]
+map set <region> --kv world=on           # the world map of record: always open on the table, travel uses it
+map import-grid <region> --out land.txt  # hand-drawn region terrain (codes: O C s p g f F h M K w d L); clears generated towns/roads
+map settlement <region> 12,8 --name "Oakhollow" --type hamlet|village|town|city|capital|castle|abbey [--text "known"] [--hidden]
+map site <region> 30,14 --name "The Grey Barrow" --type ruins|dungeon|tower|cave|shrine|camp|lair|battlefield|grove|barrow|mine|bridge|inn|mill|stones [--text] [--hidden]
+map route <region> road|river --path "12,8 20,10 31,15" [--name "the King's Road"]   # straight runs between waypoints
+map discover <region> <id> [--text "what they learn"]   # a hidden town or site appears on the players' map (+ journal)
+map region-remove <region> --id <id|road-N|river-N> --reason "burned"
 map reveal <id> --room 3 | --rect 0,0,10,10 | --all      map hide <id> --rect ...
 map poi <id> x,y --name "Weathered Statue" --text "What they perceive"   # pin a perceived notable object to its tile
 map poi <id> x,y --name "..." --id j12   # ...or link an existing journal entry; players click the marker to open it
@@ -171,6 +185,7 @@ say "The torch gutters." | say --as "Brother Aldric" "Welcome, travellers." | sa
 #   the live table shows each beat on the map: speech bubbles over the speaker, --at captions by that creature, a story strip
 scene "The Sunken Shrine" --desc "Rain hammers the broken roof." [--image <asset>] [--map shrine]
 journal add "What the note says" --title "..."   # players' Journal tab (every `show` is added automatically)
+journal edit j12 --text "..." [--title "..."]     # correct a handout's wording in place (the revision is announced)
 show item kira:<item-id> | show creature <id> | show asset <id> | show text "The letter reads..." --title "Letter" | show srd-item "Bag of Holding" | show clear
 fx status | fx preset cinematic|standard|quick|off | fx set speed=1.5 camera=off dice=off tokens=art|icon ...
 fx ambient rain|snow|fog|embers|ash|motes|storm|none [--intensity 0.1-1]

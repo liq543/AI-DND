@@ -171,7 +171,8 @@ def creature_info(g, e):
     info = {"id": e["id"], "name": name, "side": e.get("side", "enemy"), "size": e.get("size"), "type": e.get("type"), "art": art.art_version(e),
             "status": status_band(e), "dead": e.get("dead") or e.get("hp", 1) <= 0,
             "conditions": [{"name": c["name"], "source": c.get("source"), "until": c.get("until")} for c in e.get("conditions", [])],
-            "lore": e.get("lore", []), "full": ally, "appearance": e.get("appearance", ""), "alignment": e.get("alignment") or ""}
+            "lore": e.get("lore", []), "full": ally,
+            "appearance": e.get("appearance") or (e.get("bio") or {}).get("appearance") or "", "alignment": e.get("alignment") or ""}
     feed = [f.get("text", "") for f in s["feed"] if f.get("kind") != "dm"]
     ac, attacks, saves, dmg, hits, misses = None, [], [], 0, 0, 0
     for t in feed:
@@ -207,7 +208,7 @@ def visible_maps(g):
     here = {s["view"].get("map")} | {e["token"]["map"] for e in s["entities"].values()
                                       if e["kind"] == "pc" and e.get("token") and not e.get("dead") and not e.get("departed")}
     here.discard(None)
-    vis = set(here)
+    vis = set(here) | {mid for mid, m in s["maps"].items() if m.get("world")}   # the world map is always open
     for mid in here:
         for other in s["maps"].get(mid, {}).get("links", []):
             if s["maps"].get(other, {}).get("shown"):
@@ -346,15 +347,17 @@ def player_view(g):
     feed = [f for f in s["feed"] if f.get("kind") != "dm"][-1000:]
     rolls = [{k: r.get(k) for k in ("id", "who", "purpose", "expr", "mode", "crit", "total", "nat", "terms", "text", "seq")}
              for r in s["rolls"] if not r.get("hidden")][-60:]
-    maps_known = {mid: {"id": mid, "name": m["name"], "kind": m["kind"], "w": m["w"], "h": m["h"],
+    maps_known = {mid: {"id": mid, "name": m["name"], "kind": m["kind"], "w": m["w"], "h": m["h"], "world": bool(m.get("world")),
                         "floor": [{"id": f["id"], "x": f["x"], "y": f["y"], "name": f["item"]["name"], "qty": f["item"].get("qty", 1),
                                    "note": f.get("note", ""), "in": f.get("in"), "art": itemart.item_art_version(f["item"])}
                                   for f in m.get("floor", [])
                                   if not m.get("fog") or (m.get("revealed") and m["revealed"][f["y"]][f["x"]] == "1")],
                         "containers": [{k: c.get(k) for k in ("id", "x", "y", "name", "text")} for c in m.get("containers", [])
                                        if not m.get("fog") or (m.get("revealed") and m["revealed"][c["y"]][c["x"]] == "1")],
-                        "pois": [{k: p[k] for k in ("id", "x", "y", "name", "journal")} for p in m.get("pois", [])
-                                 if not m.get("fog") or (m.get("revealed") and m["revealed"][p["y"]][p["x"]] == "1")]}
+                        "pois": [{k: p.get(k) for k in ("id", "x", "y", "name", "journal")}
+                                 for p in m.get("pois", []) + (m.get("settlements", []) if m.get("kind") == "region" else [])
+                                 if p.get("id") and not p.get("hidden")
+                                 and (not m.get("fog") or (m.get("revealed") and m["revealed"][p["y"]][p["x"]] == "1"))]}
                   for mid, m in s["maps"].items() if mid in visible_maps(g)}
     return {
         "campaign": s["campaign"].get("title"), "session": s["session"], "time": fmt_time(s["time"]), "minutes": s["time"],

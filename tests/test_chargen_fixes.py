@@ -137,6 +137,27 @@ class ChargenFixesTest(unittest.TestCase):
         self.assertIn("picks up 2× Javelin", self.ok("item", "pickup", "dex", "floor-1"))
         self.rule("item", "floor-record", "dex", "Javelin", "--to", "3,3", contains="no unrecorded drop")
 
+    def test_reaction_attack_never_becomes_a_throw_and_a_mistaken_throw_can_be_recovered(self):
+        self._rogue("Pell Throw")
+        self.ok("map", "gen", "arena", "--preset", "crypt", "--seed", "5", "--id", "throwroom", "--show")
+        self.ok("place", "pell", "3,3", "--map", "throwroom")
+        self.ok("item", "equip", "pell", "dagger-1")
+        self.ok("npc", "add", "bandit", "--at", "6,3", "--map", "throwroom", "--name", "Far Bandit")
+        # an opportunity attack is melee: out of reach it's refused, never silently thrown
+        self.ok("combat", "start")
+        self.rule("attack", "pell", "far-bandit", "dagger", "--reaction", contains="opportunity attack is a melee attack")
+        # a throw the DM made by mistake: the dagger goes back into the thrower's hand by public ruling
+        for _ in range(4):
+            if "➤" in next(l for l in self.ok("combat", "status").splitlines() if "Pell" in l):
+                break
+            self.ok("combat", "next")
+        self.ok("attack", "pell", "far-bandit", "dagger")
+        self.ok("combat", "end")
+        self.rule("item", "recover-thrown", "pell", "floor-1", contains="--how")
+        out = self.ok("item", "recover-thrown", "pell", "floor-1", "--how", "it was meant as a melee strike")
+        self.assertIn("DM ruling", out)
+        self.assertIn("| Dagger |", self.ok("char", "show", "pell"))
+
     def test_switching_maps_snapshots_the_old_one(self):
         self.ok("map", "gen", "arena", "--preset", "crypt", "--seed", "8", "--id", "roomone", "--show")
         out = self.ok("map", "gen", "arena", "--preset", "ruins", "--seed", "9", "--id", "roomtwo", "--show")
@@ -149,7 +170,7 @@ class ChargenFixesTest(unittest.TestCase):
         grid = self.tmp / "barge.txt"
         grid.write_text("~~~~~~\n~####~\n~#ka#~\n~#ld#~\n~~~~~~\n", encoding="utf-8")
         self.ok("map", "gen", "arena", "--preset", "crypt", "--seed", "4", "--id", "barge")
-        self.assertIn("6×5", self.ok("map", "import-grid", "barge", "--out", str(grid)))
+        self.assertIn("6×5", self.ok("map", "import-grid", "barge", "--out", str(grid), "--small", "a barge cabin"))
         self.ok("map", "set", "barge", "--kv", "theme=ship")
         self.rule("map", "set", "barge", "--kv", "theme=disco", contains="theme")
         svg = Path(self.ok("map", "render", "barge").strip().splitlines()[-1]).read_text(encoding="utf-8")
@@ -157,13 +178,25 @@ class ChargenFixesTest(unittest.TestCase):
         self.assertIn("url(#felt)", svg)
         bad = self.tmp / "bad.txt"
         bad.write_text("##9#\n", encoding="utf-8")
-        self.rule("map", "import-grid", "barge", "--out", str(bad), contains="Unknown terrain")
+        self.rule("map", "import-grid", "barge", "--out", str(bad), "--small", "test", contains="Unknown terrain")
+
+    def test_import_grid_refuses_a_map_too_small_to_fight_in(self):
+        # a tiny room padded out with solid wall rows is still a tiny room: the open area is what's measured
+        tiny = self.tmp / "tiny.txt"
+        rows = ["#" * 16, "#" + "=" * 8 + "#" * 7, "#" + "=" * 8 + "#" * 7, "#" * 16] + ["#" * 16] * 10
+        tiny.write_text("\n".join(rows) + "\n", encoding="utf-8")
+        self.ok("map", "gen", "interior", "--building", "shop", "--seed", "3", "--id", "cramped")
+        self.rule("map", "import-grid", "cramped", "--out", str(tiny), contains="playable map needs at least")
+        self.ok("map", "import-grid", "cramped", "--out", str(tiny), "--small", "a ship's cabin")
+        roomy = self.tmp / "roomy.txt"
+        roomy.write_text("\n".join(["#" * 24] + ["#" + "=" * 22 + "#"] * 14 + ["#" * 24]) + "\n", encoding="utf-8")
+        self.assertIn("24×16", self.ok("map", "import-grid", "cramped", "--out", str(roomy)))
 
     def test_interior_styles_and_new_furnishings(self):
         grid = self.tmp / "baths.txt"
         grid.write_text("#########\n#qqwwwqq#\n#pewww.j#\n#zziyccl#\n####dd###\n", encoding="utf-8")
         self.ok("map", "gen", "interior", "--building", "shop", "--seed", "3", "--id", "baths")
-        self.ok("map", "import-grid", "baths", "--out", str(grid))
+        self.ok("map", "import-grid", "baths", "--out", str(grid), "--small", "a small bath-room test")
         self.ok("map", "set", "baths", "--kv", "theme=bathhouse")
         self.ok("map", "set", "baths", "--kv", "walls=brick")
         self.ok("map", "set", "baths", "--kv", "accent=#aa3355")
@@ -277,7 +310,7 @@ class ChargenFixesTest(unittest.TestCase):
         rows = ["#" * 24, "#" + "." * 22 + "#", "#" * 24, "#" + "." * 5 + "#" * 18, "#" * 24]
         grid.write_text("\n".join(rows) + "\n", encoding="utf-8")
         self.ok("map", "gen", "dungeon", "--name", "Dim Hall", "--id", "dimhall", "--w", "30", "--h", "20")
-        self.ok("map", "import-grid", "dimhall", "--out", str(grid))
+        self.ok("map", "import-grid", "dimhall", "--out", str(grid), "--small", "a narrow test hall")
         self.ok("map", "set", "dimhall", "--kv", "lighting=dim")
         self.ok("char", "create", "--name", "Seer Human", "--class", "Rogue", "--species", "Human", "--background", "Criminal",
                 "--method", "standard", "--scores", "str=8,dex=15,con=14,int=10,wis=12,cha=13", "--bonus", "dex+1,con+2",
@@ -325,6 +358,20 @@ class ChargenFixesTest(unittest.TestCase):
         self.assertIsNone(info["rarity"])
         self.assertEqual(info["rules_md"], "")
         self.assertEqual(json.loads(json.dumps(info))["stats"][0][0], "Damage")   # no +1 shown while unidentified
+
+    def test_venom_hit_applies_a_coat_recorded_after_the_hit(self):
+        self._rogue("Ossa Venn")
+        self.ok("item", "add", "ossa", "Dagger of Venom", "--source", "loot: a drowned smuggler", "--override", "test: rare item",
+                "--identified")
+        self.ok("npc", "add", "bandit", "--at", "3,3", "--name", "Snag Venom")
+        self.rule("item", "venom-hit", "ossa", "dagger-of-venom-1", "--to", "snag-venom", "--how", "coated first", contains="isn't coated")
+        self.ok("item", "use", "ossa", "dagger-of-venom-1")
+        self.rule("item", "venom-hit", "ossa", "dagger-of-venom-1", "--to", "snag-venom", contains="--how")
+        out = self.ok("item", "venom-hit", "ossa", "dagger-of-venom-1", "--to", "snag-venom", "--how", "the player coated it before the stab")
+        self.assertIn("DM ruling", out)
+        self.assertIn("CON", out.upper())
+        # the coat is spent: it can't poison a second time
+        self.rule("item", "venom-hit", "ossa", "dagger-of-venom-1", "--to", "snag-venom", "--how", "again", contains="isn't coated")
 
     def test_points_of_interest(self):
         self.ok("map", "gen", "arena", "--preset", "crypt", "--seed", "3", "--id", "poiroom", "--show")

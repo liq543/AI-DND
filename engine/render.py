@@ -761,19 +761,40 @@ def render_region(m, mode="player", cell=8, party_pos=None):
     for r in m.get("roads", []):
         pts = " ".join(f"{(x + .5) * cell},{(y + .5) * cell}" for x, y in r)
         parts.append(f'<polyline points="{pts}" fill="none" stroke="#6b4a2a" stroke-width="{cell * .3}" stroke-dasharray="{cell * .8} {cell * .4}" stroke-linejoin="round"/>')
+    def clickable(p, inner):
+        # a town or site with an id opens its journal entry on the table (what the party knows of it)
+        if p.get("id"):
+            return f'<g class="poi" data-poi="{esc(p["id"])}" style="cursor:pointer"><title>{esc(p["name"])}</title>{inner}</g>'
+        return inner
     for p in m.get("pois", []):
         if player and p.get("hidden"):
             continue
         px, py = (p["x"] + .5) * cell, (p["y"] + .5) * cell
-        glyph = {"ruins": "⌂", "dungeon": "☗", "tower": "♜", "cave": "◓", "shrine": "✚", "camp": "⛺"}.get(p["kind"], "★")
-        parts.append(f'<text x="{px}" y="{py + 4}" text-anchor="middle" font-size="{cell * 1.6}" fill="#3a1a0a" stroke="#f6e7c1" stroke-width="2" paint-order="stroke">{glyph}</text>'
-                     f'<text x="{px}" y="{py + cell * 2.4}" text-anchor="middle" font-size="{cell * 1.1}" font-style="italic" fill="#2b1d0e" stroke="#f6e7c1" stroke-width="2.5" paint-order="stroke">{esc(p["name"])}</text>')
+        glyph = {"ruins": "⌂", "dungeon": "☗", "tower": "♜", "cave": "◓", "shrine": "✚", "camp": "⛺", "lair": "☠",
+                 "battlefield": "⚔", "grove": "♣", "barrow": "∩", "mine": "⚒", "bridge": "≍", "inn": "⌂", "mill": "✣",
+                 "stones": "⁂"}.get(p["kind"], "★")
+        parts.append(clickable(p, f'<text x="{px}" y="{py + 4}" text-anchor="middle" font-size="{cell * 1.6}" fill="#3a1a0a" stroke="#f6e7c1" stroke-width="2" paint-order="stroke">{glyph}</text>'
+                     f'<text x="{px}" y="{py + cell * 2.4}" text-anchor="middle" font-size="{cell * 1.1}" font-style="italic" fill="#2b1d0e" stroke="#f6e7c1" stroke-width="2.5" paint-order="stroke">{esc(p["name"])}</text>'))
+    sizes = {"hamlet": (.4, 1.0, "normal"), "village": (.55, 1.2, "normal"), "town": (.85, 1.5, "bold"),
+             "city": (1.2, 1.9, "bold"), "capital": (1.5, 2.2, "bold"), "castle": (.8, 1.4, "bold"), "abbey": (.7, 1.3, "normal")}
     for s in m.get("settlements", []):
+        if player and s.get("hidden"):
+            continue
         px, py = (s["x"] + .5) * cell, (s["y"] + .5) * cell
-        r = {"city": cell * 1.2, "town": cell * .85, "village": cell * .55}[s["kind"]]
-        parts.append(f'<circle cx="{px}" cy="{py}" r="{r}" fill="{"#b0302a" if s["kind"] == "city" else "#f6e7c1"}" stroke="#2b1d0e" stroke-width="1.5"/>')
-        fs = {"city": 1.9, "town": 1.5, "village": 1.2}[s["kind"]] * cell
-        parts.append(f'<text x="{px}" y="{py - r - 3}" text-anchor="middle" font-size="{fs}" font-weight="{"bold" if s["kind"] != "village" else "normal"}" fill="#2b1d0e" stroke="#f6e7c1" stroke-width="3" paint-order="stroke">{esc(s["name"])}</text>')
+        rr, fsz, weight = sizes.get(s["kind"], sizes["village"])
+        r, fs = cell * rr, cell * fsz
+        if s["kind"] == "castle":
+            mark = (f'<rect x="{px - r}" y="{py - r}" width="{2 * r}" height="{2 * r}" fill="#d9c9a0" stroke="#2b1d0e" stroke-width="1.5"/>'
+                    f'<path d="M{px - r} {py - r} v{-r * .5} h{r * .5} v{r * .5} h{r * .5} v{-r * .5} h{r * .5} v{r * .5} h{r * .5} v{-r * .5} h{r * .5} v{r * .5}" fill="#d9c9a0" stroke="#2b1d0e" stroke-width="1.2"/>')
+        elif s["kind"] == "abbey":
+            mark = (f'<circle cx="{px}" cy="{py}" r="{r}" fill="#f6e7c1" stroke="#2b1d0e" stroke-width="1.5"/>'
+                    f'<path d="M{px} {py - r * .7} v{r * 1.4} M{px - r * .5} {py - r * .2} h{r}" stroke="#2b1d0e" stroke-width="1.4"/>')
+        else:
+            fill = "#b0302a" if s["kind"] in ("city", "capital") else "#f6e7c1"
+            mark = f'<circle cx="{px}" cy="{py}" r="{r}" fill="{fill}" stroke="#2b1d0e" stroke-width="1.5"/>'
+            if s["kind"] == "capital":
+                mark += f'<circle cx="{px}" cy="{py}" r="{r * .45}" fill="#f6e7c1" stroke="#2b1d0e" stroke-width="1"/>'
+        parts.append(clickable(s, mark + f'<text x="{px}" y="{py - r - 3}" text-anchor="middle" font-size="{fs}" font-weight="{weight}" fill="#2b1d0e" stroke="#f6e7c1" stroke-width="3" paint-order="stroke">{esc(s["name"])}</text>'))
     for lb in m.get("labels", []):
         if player and lb.get("hidden"):
             continue

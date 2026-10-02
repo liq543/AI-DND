@@ -166,11 +166,12 @@
   function renderMapTabs() {
     const maps = Object.values(S.maps);
     const active = S.view.map;
-    if (followActive || !viewMap || !S.maps[viewMap]) viewMap = active;
+    const world = (maps.find(m => m.world) || {}).id;     // the world map of record: always open, the default view
+    if (followActive || !viewMap || !S.maps[viewMap]) viewMap = active || world;
     const key = JSON.stringify([maps.map(m => [m.id, m.name]), viewMap, active]);
     if ($("#maptabs").dataset.key === key) return;
     $("#maptabs").dataset.key = key;
-    $("#maptabs").innerHTML = maps.map(m => `<button data-map="${esc(m.id)}" class="${m.id === viewMap ? "on" : ""}">${m.id === active ? '<span class="cur" title="On the table"></span>' : ""}${esc(m.name)}</button>`).join("");
+    $("#maptabs").innerHTML = maps.map(m => `<button data-map="${esc(m.id)}" class="${m.id === viewMap ? "on" : ""}${m.world ? " world" : ""}" ${m.world ? 'title="The world map: open it any time"' : ""}>${m.id === active ? '<span class="cur" title="On the table"></span>' : ""}${m.world ? "🗺 " : ""}${esc(m.name)}</button>`).join("");
     $("#maptabs").querySelectorAll("button").forEach(b => b.onclick = () => { viewMap = b.dataset.map; followActive = viewMap === S.view.map; renderMapTabs(); renderMap(true); });
   }
   let mapKey = "", prefetched = {};

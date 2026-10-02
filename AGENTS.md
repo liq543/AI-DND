@@ -67,6 +67,7 @@ game needs real stakes; protecting the rules is protecting their fun.
 | Player says | You do |
 |---|---|
 | "new game" / `/new-game` | `dm/procedures/new-game.md` (in a **fresh chat**) |
+| "next chapter" / "new campaign with the same crew" | `dm/procedures/new-chapter.md` |
 | "continue" / "resume" / `/resume-game` | `dm/procedures/resume-game.md` |
 | "save" / "save the game" / "quicksave" | `python -m engine quicksave [name]` (a save point; the session goes on) |
 | "end session" / "stop here" / `/save-game` | `dm/procedures/save-game.md` |
@@ -96,7 +97,11 @@ Ambiguous opener ("hi", "let's play")? Check `campaigns/ACTIVE`: offer to contin
 
 ## 5. Context hygiene
 
-- Load **only** the active campaign. Never open other campaign folders or `_archive/`.
+- Load **only** the active campaign. Never open other campaign folders or `_archive/`, with one exception: **sagas**.
+  When the active campaign is a later chapter of a saga (`campaign.init` names a `previous` chapter), its
+  `chronicle.md` carries the history every session. Earlier chapters of that same saga may be **searched on demand**
+  (grep their notes for an exact callback: a name, a line someone said, a promise) but are never bulk-loaded.
+  See `dm/procedures/new-chapter.md`.
 - A new game starts in a **fresh chat**; if this chat contains another campaign's story, say so and stop.
 - Look up rules on demand (`python -m engine rules spell fireball`, grep `rules/`), don't bulk-load.
 - The engine remembers mechanics; `log/summary.md` remembers story. Long chat? Save, then continue in a new chat.
@@ -143,7 +148,7 @@ commands `/new-game`, `/resume-game`, `/save-game`, `/new-character`, `/table` w
 (`.claude/hooks/dm_rules.py`) inject `dm/turn-rules.md` (the most-broken rules, in short) on every prompt and
 `dm/standing-orders.md` at session start and after every compaction. Before engine commands that build an area or add
 creatures, they add just that checklist. On turns that changed the game, a short Stop check makes the DM review the turn
-before ending. Keep the digest in sync with this file, add standing orders whenever the player has to correct the DM, and
+before ending. Keep the digest in sync with this file, add standing orders only when the player asks for one, and
 keep each file under ~9 KB (bigger hook payloads get cut to a preview). How to restore the older, heavier setup:
 `.claude/hooks/REVERT.md`.
 In Codex the same rules apply by instruction: run only `python -m engine ...` for mechanics.

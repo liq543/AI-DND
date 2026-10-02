@@ -2,9 +2,9 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Orc** · **Fighter 5** (Champion) · **Background:** Soldier · **XP:** 11463
+**Player:** DM · **Orc** · **Fighter 5** (Champion) · **Background:** Soldier · **XP:** 13912
 
-**HP** 44/44 (+3 temp) · **AC** 11 (unarmored 10 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
+**HP** 40/44 · **AC** 17 (Splint Armor 17) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
@@ -20,7 +20,7 @@
 
 | Attack | To hit | Damage | Notes |
 |---|---|---|---|
-| Mace | +7 | 1d6+4 bludgeoning | reach 5 ft |
+| Greatsword | +7 | 2d6+4 slashing | reach 5 ft, mastery graze |
 | Unarmed Strike | +7 | 5 bludgeoning | reach 5 ft |
 
 Attacks per Attack action: 2
@@ -60,15 +60,16 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 - `waterskin-1` 1× Waterskin · _starting equipment (unpacked from Dungeoneer's Pack)_
 - `heavy-crossbow-1` 1× Heavy Crossbow · _loot: Gorse_
 - `bolts-1` 12× Bolts · _loot: Gorse_
-- `splint-armor-1` 1× Splint Armor · _purchased for 200 GP_
+- `splint-armor-1` 1× Splint Armor (equipped) · _purchased for 200 GP_
 - `rope-1` 1× Rope · _purchased for 1 GP_
 - `signal-whistle-1` 1× Signal Whistle · _purchased for 5 CP_
 - `sack-1` 1× Sack · _purchased for 1 CP_
-- `greatsword-1` 1× Greatsword · _starting equipment_
+- `greatsword-1` 1× Greatsword (equipped) · _starting equipment_
 - `ring-of-three-little-ste-1` 1× Ring of three little steel keys · _loot: from the Curator's gown pocket_
 - `smoked-glass-visor-1` 1× Smoked-glass visor · _gift: Kit, from the Eye's vault_
 - `thornes-smoked-glass-vis-1` 1× Thorne's smoked-glass visor · _loot: torn off Captain Thorne's helm_
-- `mace-1` 1× Mace (equipped) · _loot: Gorse_
+- `mace-1` 1× Mace · _loot: Gorse_
+- `black-lacquer-casket-of--1` 1× Black lacquer casket of cut gems · _loot: the Emissary's casket, the north room_
 
 Hit Point Dice: Fighter d10 5/5
 Languages: Common, Orc, Giant · Tools: *Choose one kind of Gaming Set* (see "Equipment") · Armor training: light, medium, heavy, shield

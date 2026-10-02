@@ -2,9 +2,9 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** Player · **Human** · **Rogue 5** (Thief) · **Background:** Criminal · **XP:** 11463
+**Player:** Player · **Human** · **Rogue 5** (Thief) · **Background:** Criminal · **XP:** 13912
 
-**HP** 43/43 · **AC** 16 (Studded Leather Armor 12 + Dex 4) · **Speed** 30 ft · **Initiative** +7 · **Proficiency** +3 · **Passive Perception** 14
+**HP** 29/43 · **AC** 16 (Studded Leather Armor 12 + Dex 4) · **Speed** 30 ft · **Initiative** +7 · **Proficiency** +3 · **Passive Perception** 14
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
@@ -20,8 +20,8 @@
 
 | Attack | To hit | Damage | Notes |
 |---|---|---|---|
-| Dagger | +7 | 1d4+4 piercing | range 20/60 ft, mastery nick |
 | Dagger of Venom | +8 | 1d4+5 piercing | range 20/60 ft, mastery nick |
+| Dagger | +7 | 1d4+4 piercing | range 20/60 ft, mastery nick |
 | Unarmed Strike | +2 | 0 bludgeoning | reach 5 ft |
 
 Attacks per Attack action: 1
@@ -97,7 +97,6 @@ Species traits: Resourceful, Skillful, Versatile
 - `oilcloth-wrap-1` 4× Oilcloth wrap · _purchased for 5 GP_
 - `rope-1` 1× Rope · _purchased for 1 GP_
 - `collectors-brass-sigil-1` 1× Collector's Brass Sigil · _stolen: off the hook by the ledger desk while Mallory signed_
-- `dagger-1` 1× Dagger (equipped) · _starting equipment_
 - `the-curators-ring-1` 1× The Curator's Ring · _stolen: tossed to Kit by the charmed Curator, Cage Four_
 - `the-gala-seating-chart-1` 1× The Gala seating chart · _loot: the Curator's strongbox_
 - `the-curators-daybook-1` 1× The Curator's daybook · _loot: the Curator's strongbox_
@@ -107,6 +106,12 @@ Species traits: Resourceful, Skillful, Versatile
 - `the-ysmeran-eye-in-its-i-1` 1× The Ysmeran Eye (in its iron reliquary) · _stolen: the Eye's vault under the Meridian_
 - `dagger-of-venom-1` 1× Dagger of Venom (Dagger of Venom) (equipped) — Rare · _stolen: Acquisitions case A-148, Cage Three, Undercroft Stores (swapped for a plain dagger)_
   - Acquisitions exhibit A-148, lifted from its glass case in the Undercroft Stores. A slim blade of blued black steel with a green-enamelled hilt, faintly oily to the touch. A plain dagger lies on the black felt in its place, under an unbroken Acquisitions seal.
+- `black-gold-closed-eye-pi-1` 1× Black-gold closed-eye pin · _loot: the Emissary's throat_
+- `letter-of-passage-lidles-1` 1× Letter of passage (Lidless Court) · _loot: the Emissary's wallet_
+- `foreign-gold-sun-coins-1` 3× Foreign gold 'sun' coins · _loot: the Emissary's wallet_
+- `silver-vial-case-1` 1× Silver vial-case · _loot: the Emissary's coat_
+- `casket-key-on-a-cord-1` 1× Casket key on a cord · _loot: the Emissary's neck_
+- `dagger-1` 1× Dagger (equipped) · _starting equipment_
 
 Hit Point Dice: Rogue d8 5/5
 Languages: Common, Elvish, Halfling, Thieves' Cant · Tools: Thieves' Tools · Armor training: light

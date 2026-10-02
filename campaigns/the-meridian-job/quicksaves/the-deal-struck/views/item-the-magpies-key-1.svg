@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 520" width="360" height="520">
+<defs><linearGradient id="p" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7ecd2"/><stop offset="1" stop-color="#e6d3a8"/></linearGradient></defs>
+<rect width="360" height="520" rx="16" fill="#8a7a5a"/><rect x="8" y="8" width="344" height="504" rx="12" fill="url(#p)"/>
+<text x="24" y="44" font-family="Georgia,serif" font-size="22" font-weight="bold" fill="#2b1d0e">The Magpie&#x27;s Key</text>
+<text x="24" y="66" font-family="Georgia,serif" font-size="13" font-style="italic" fill="#5a4630">Gear</text>
+<line x1="24" y1="78" x2="336" y2="78" stroke="#8a7a5a" stroke-width="2"/>
+<rect x="110" y="92" width="140" height="140" rx="70" fill="#8a7a5a" fill-opacity=".15" stroke="#8a7a5a" stroke-width="3"/>
+<g transform="translate(128 110) scale(0.203125)" fill="#2b1d0e"><path fill="#2b1d0e" d="M226.878 16v243.274a120.023 120.023 0 0 0 30 236.71a119.996 119.996 0 0 0 29.998-236.242v-93.747h59.998v-44.998h-59.998v-45h89.997V16zm25.312 299.99a60 60 0 0 1 2.343 0a60 60 0 0 1 2.343 0a59.998 59.998 0 0 1 0 119.996a60.044 60.044 0 0 1-4.688-119.996z"/></g>
+<text x="24" y="262" font-family="Georgia,serif" font-size="13.5" fill="#2b1d0e"><tspan x="24" dy="0">Lot 9. A masterwork skeleton key of blued</tspan><tspan x="24" dy="19">steel, its bow shaped like a bird in flight:</tspan><tspan x="24" dy="19">the Magpie&#x27;s own. Catalogued as &#x27;removed</tspan><tspan x="24" dy="19">from exhibit The Thief during routine</tspan><tspan x="24" dy="19">cleaning.&#x27;</tspan></text>
+<text x="180" y="498" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#6a5438">Source: stolen: Lot 9, lifted from Dorothea Quill mid-raid</text>
+</svg>

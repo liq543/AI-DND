@@ -76,7 +76,7 @@ TERRAIN = {
     "@": ("cauldron / vat", None, False, "half"),
     "*": ("brazier", None, False, "half"),
     "X": ("altar", None, False, "half"),
-    "H": ("throne / great chair", None, False, "half"),
+    "H": ("throne / great chair", 2, False, "half"),   # a seat: sit in it (difficult terrain); the high back is cover
     "Y": ("coffin / sarcophagus", None, False, "half"),
     "$": ("strongbox / safe", None, False, "half"),
     "N": ("cage", None, False, "half"),

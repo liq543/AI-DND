@@ -34,6 +34,105 @@ def ids(text):
 
 # ====================================================================== campaign management
 
+CHRONICLE_TEMPLATE = """# Chronicle: {saga}
+
+> The saga's history so far, read at the start of every session of chapter {chapter} ({title}).
+> Earlier chapters keep their full notes in their own folders: search them (grep) for an exact callback,
+> never load them wholesale. Chapter {chapter} continues from `campaigns/{previous}/` ({previous_title}).
+
+## The chapters so far
+
+## The crew: who they are now, and what they will never forget
+
+## What they carry (the important things; the sheets have the rest)
+
+## Who wants them, and why
+
+## Promises, debts and grudges
+
+## Threads left hanging (and where the full story lives)
+"""
+
+
+def chapter_source(slug):
+    """An earlier chapter of a saga, loaded read-only. Its signed log must verify (a TamperError stops everything)."""
+    src = CAMPAIGNS / (slug or "")
+    if not slug or slug.startswith(("_", ".")) or not src.is_dir() or not (src / "engine").is_dir():
+        raise RuleError(f"No campaign '{slug}' to continue from. An archived campaign has to be brought back "
+                        "with `campaign switch` first.")
+    return Game(src, verify=True)
+
+
+# a carried-over sheet keeps everything the character owns and knows; these belong to the scene they left behind
+CARRY_DROP = ("token", "temp_hp", "concentration", "last_long_rest_end", "masteries_changed_at", "wake_at", "departed",
+              "offstage", "hidden", "dead")
+ITEM_CARRY_DROP = ("lit", "venom", "venom_until", "venom_used_at")
+
+
+def import_entity(g, a):
+    """`char import <id> [--from <earlier-campaign>]`: bring a character or companion over from an earlier chapter of
+    the saga with the sheet exactly as the signed log has it (classes, features, spells, inventory, coins, XP, look),
+    fresh from the journey between chapters (rested: full HP, spell slots and Hit Dice; no conditions)."""
+    if not a.args:
+        raise RuleError("char import <id> [--from <earlier-campaign>]")
+    slug = getattr(a, "from_slug", None) or g.state["campaign"].get("previous")
+    if not slug:
+        raise RuleError('This campaign doesn\'t continue an earlier one (`campaign new "Title" --from <slug>`); '
+                        "pass --from <slug>.")
+    src = chapter_source(slug)
+    found = src.get(a.args[0])
+    if found.get("dead"):
+        raise RuleError(f"{found['name']} died in '{slug}'; the dead don't carry over.")
+    e = json.loads(json.dumps(found))
+    if e["id"] in g.entities:
+        raise RuleError(f"{e['name']} ({e['id']}) is already in this campaign.")
+    for k in CARRY_DROP:
+        e.pop(k, None)
+    # `appearance` is what anyone sees at a glance. For a character with a lasting description (`bio.appearance`) it is
+    # the look of the old chapter's last scene (a disguise, that night's clothes), so it stays behind; a companion's
+    # only description comes along, to be checked against the time skip.
+    has_bio_look = bool((e.get("bio") or {}).get("appearance"))
+    scene_look = e.pop("appearance", None) if has_bio_look else None
+    e["conditions"], e["effects"] = [], []
+    e["hp"] = e.get("hp_max", e.get("hp"))
+    if e["kind"] == "pc":
+        # the time between chapters counts as a Long Rest, with everything one restores (mechanics.long_rest)
+        e.update(hd_spent={}, slots_used={}, resources_used={}, pact_used=0, exhaustion=0,
+                 death={"success": 0, "fail": 0, "stable": False})
+        if e.get("granted_spells"):
+            e["granted_spells"] = [dict(x, free_used=False) for x in e["granted_spells"]]
+        if "Resourceful" in e.get("species_traits", []):
+            e["inspiration"] = True  # Human: Resourceful
+    e["inventory"] = [{k: v for k, v in i.items() if k not in ITEM_CARRY_DROP} for i in e.get("inventory", [])]
+    e["chronicle"] = {"from": slug, "title": src.state["campaign"].get("title"), "seq": src.state["seq"]}
+    # pictures the sheet points at (a pinned portrait, an item's own art) come along with it
+    for aid in sorted({e.get("portrait")} | {i.get("art") for i in e["inventory"]} - {None}):
+        asset = src.state["assets"].get(aid)
+        if not asset or aid in g.state["assets"]:
+            continue
+        f = Path(src.dir) / "assets" / asset["file"]
+        if f.exists():
+            assets.assets_dir(g.dir).joinpath(asset["file"]).write_bytes(f.read_bytes())
+            g.emit("asset.add", asset=asset)
+    g.emit("entity.add", entity=e)
+    e = g.get(e["id"])
+    extra = ""
+    start = g.state["settings"].get("start_level", 1)
+    if e["kind"] == "pc" and level(e) < start and e.get("xp", 0) < M.xp_threshold(start):
+        g.set(e, xp=M.xp_threshold(start))
+        extra = (f" This chapter starts at level {start}: XP set to {M.xp_threshold(start)}; "
+                 f"`char levelup {e['id']}` until level {start}.")
+    items = sum(i.get("qty", 1) for i in e.get("inventory", []))
+    g.say(f"📜 {e['name']} carries over from {e['chronicle']['title']}: the full sheet, {items} items, "
+          f"{M.fmt_cp(M.coins_total_cp(e))}." + extra, kind="party", who=e["id"])
+    if scene_look:
+        g.note(f"  ✎ {e['name']}'s look from the last scene stayed behind (their lasting description came along). "
+               f'Describe them as they are now: npc describe {e["id"]} --text "..."')
+    elif e.get("appearance"):
+        g.note(f"  ✎ Check that {e['name']}'s look still fits after the time skip: \"{e['appearance']}\" "
+               f'(npc describe {e["id"]} --text "..." to change it)')
+
+
 def cmd_campaign(a):
     CAMPAIGNS.mkdir(exist_ok=True)
     if a.action == "new":
@@ -44,6 +143,13 @@ def cmd_campaign(a):
         dest = CAMPAIGNS / slug
         if dest.exists() or (CAMPAIGNS / "_archive" / slug).exists():
             raise RuleError(f"Campaign '{slug}' already exists.")
+        chapter = None
+        if getattr(a, "from_slug", None):
+            # the next chapter of a saga: the earlier campaign's signed log must verify before anything carries over
+            prev = chapter_source(a.from_slug)
+            pc = prev.state["campaign"]
+            chapter = {"saga": getattr(a, "saga", None) or pc.get("saga") or pc.get("title"), "chapter": (pc.get("chapter") or 1) + 1,
+                       "previous": a.from_slug, "previous_title": pc.get("title"), "previous_seq": prev.state["seq"]}
         for src in (TEMPLATES / "campaign").rglob("*"):
             target = dest / src.relative_to(TEMPLATES / "campaign")
             if src.is_dir():
@@ -59,11 +165,19 @@ def cmd_campaign(a):
         ACTIVE_FILE.write_text(slug + "\n", encoding="utf-8")
         g = Game(dest)
         g.cmdline = f"campaign new {title}"
-        g.emit("campaign.init", title=title, slug=slug, ruleset="SRD 5.2")
+        g.emit("campaign.init", title=title, slug=slug, ruleset="SRD 5.2", **(chapter or {}))
         for kv in a.set or []:
             k, _, v = kv.partition("=")
             set_setting(g, k, v)
         g.say(f"📜 New campaign: {title}", kind="scene")
+        if chapter:
+            g.say(f"📜 Chapter {chapter['chapter']} of {chapter['saga']}, continuing from {chapter['previous_title']}.",
+                  kind="scene")
+            chron = dest / "chronicle.md"
+            if not chron.exists():
+                chron.write_text(CHRONICLE_TEMPLATE.format(saga=chapter["saga"], chapter=chapter["chapter"], title=title,
+                                                           previous=chapter["previous"],
+                                                           previous_title=chapter["previous_title"]), encoding="utf-8")
         g.commit()
         views.write_snapshots(g)
         print(f"Created and activated campaigns/{slug}/ (signed engine log initialised).")
@@ -165,6 +279,9 @@ def cmd_char(g, a):
     if a.action == "create":
         chargen.create(g, a)
         return
+    if a.action == "import":
+        import_entity(g, a)
+        return
     e = g.get(a.args[0]) if a.args else None
     if a.action == "levelup":
         chargen.levelup(g, e, a)
@@ -209,7 +326,7 @@ def cmd_char(g, a):
         g.emit("entity.remove", id=e["id"])
         g.say(f"{e['name']} leaves the party.")
     else:
-        raise RuleError("char roll-stats|create|levelup|catch-up|masteries|leave|rejoin|bio|show|inspire|use-inspiration|remove")
+        raise RuleError("char roll-stats|create|import|levelup|catch-up|masteries|leave|rejoin|bio|show|inspire|use-inspiration|remove")
 
 
 def cmd_spells(g, a):
@@ -243,6 +360,30 @@ def cmd_spells(g, a):
         book.append(sp["slug"])
         g.set(e, spells={**e.get("spells", {}), "spellbook": book})
         g.say(f"📖 {e['name']} scribes {sp['name']} into their spellbook ({source}).", kind="spell")
+    elif a.action == "refund":
+        # rules/spells/counterspell: a countered spell "cast with a spell slot" doesn't expend it; also a public repair for
+        # a slot the DM spent by mistake. Needs the level and a public reason.
+        if getattr(a, "spell", None) and not a.level:
+            # a once-per-Long-Rest free cast (Magic Initiate and the like) given back, publicly
+            if not a.source:
+                raise RuleError('spells refund <who> --spell "<name>" --source "why the free cast comes back" (shown publicly)')
+            slug = srd.slug(a.spell)
+            spent = [x for x in e.get("granted_spells", []) if x["slug"] == slug and x.get("free_used")]
+            if not spent:
+                raise RuleError(f"{e['name']} has no spent free cast of {a.spell} to refund.")
+            g.set(e, granted_spells=[dict(x, free_used=False) if x is spent[0] else x for x in e["granted_spells"]])
+            g.override(a.source, f"the free cast of {a.spell} ({spent[0]['source']}) refunded to {e['name']}")
+            g.say(f"⚖ {e['name']}: the free cast of {a.spell} ({spent[0]['source']}) is back — {a.source}.", kind="info")
+            return
+        if not a.level or not a.source:
+            raise RuleError('spells refund <who> --level N --source "why the slot comes back" (shown publicly) | '
+                            'spells refund <who> --spell "<name>" --source "..." (a free cast)')
+        used = e.get("slots_used", {}).get(str(a.level), 0)
+        if used < 1:
+            raise RuleError(f"{e['name']} has no spent level {a.level} slot to refund.")
+        g.set(e, **{f"slots_used__{a.level}": used - 1})
+        g.override(a.source, f"one level {a.level} spell slot refunded to {e['name']}")
+        g.say(f"⚖ {e['name']}: one level {a.level} spell slot refunded — {a.source}.", kind="info")
     elif a.action == "list":
         cls = a.cls or next(iter(e["classes"]))
         sc = derive(e)["spellcasting"].get(cls)
@@ -1092,7 +1233,7 @@ def cmd_travel(g, a):
     miles = a.miles
     region = None
     if a.to:
-        mid = a.map or next((k for k, m in g.state["maps"].items() if m["kind"] == "region"), None)
+        mid = a.map or next((k for k, m in g.state["maps"].items() if m.get("world")), None) or             next((k for k, m in g.state["maps"].items() if m["kind"] == "region"), None)
         if not mid:
             raise RuleError("No region map. `map gen region`")
         region = g.state["maps"][mid]
@@ -1198,6 +1339,12 @@ def cmd_item(g, a):
         M.attune(g, e, a.item, False)
     elif a.action == "use":
         M.use_item(g, e, a.item, a.to)
+    elif a.action == "recover-thrown":
+        M.recover_thrown(g, e, a.item, a.how)
+    elif a.action == "venom-hit":
+        if not a.to:
+            raise RuleError('item venom-hit <who> <item> --to <target> --how "..."')
+        M.venom_hit(g, e, a.item, a.to, a.how)
     elif a.action == "identify":
         # the Identify spell (cast it first), or the DM confirming another in-world way (a sage, a clear clue, a potion taste)
         if not a.how:
@@ -1367,9 +1514,17 @@ def cmd_xp(g, a):
 def _map_set_one(g, s, m, kv):
     k, _, v = kv.partition("=")
     styles = {"walls": render.WALL_STYLES, "floor": render.FINE_STYLES, "wood": render.WOOD_STYLES, "stone": render.STONE_STYLES}
+    if k == "world":
+        # the region map of record: always one click away on the table, whatever map the scene is on
+        if m["kind"] != "region":
+            raise RuleError("Only a region map can be the world map (`map gen region`).")
+        on = v.lower() in ("on", "true", "yes", "1")
+        g.emit("map.set", id=m["id"], set={"world": on, **({"shown": True} if on else {})})
+        g.say(f"🗺 {m['name']} is {'now the world map: always open on the table' if on else 'no longer the world map'}.", kind="map")
+        return
     if k not in ("name", "lighting", "fog", "theme", "accent", *styles):
         raise RuleError("map set name=...|lighting=bright|dim|dark|fog=true|false|theme=" + "|".join(render.THEMES) +
-                        "|" + "|".join(f"{s}={'/'.join(o)}" for s, o in styles.items()) + "|accent=#rrggbb")
+                        "|" + "|".join(f"{s}={'/'.join(o)}" for s, o in styles.items()) + "|accent=#rrggbb|world=on|off")
     if k in styles and v not in styles[k]:
         raise RuleError(f"{k}: " + "|".join(styles[k]))
     if k == "accent" and not re.fullmatch(r"#[0-9a-fA-F]{6}", v):
@@ -1382,6 +1537,114 @@ def _map_set_one(g, s, m, kv):
     g.emit("map.set", id=m["id"], set={(f"style_{k}" if k in styles else k): val})
     if k in ("lighting", "fog"):
         _reveal_pcs_on(g, m["id"])
+
+
+# smallest open area (in 5 ft squares) a hand-drawn map may have without --small: room for a fight
+MIN_PLAY_W, MIN_PLAY_H = 20, 14
+
+
+REGION_SETTLEMENTS = ("hamlet", "village", "town", "city", "capital", "castle", "abbey")
+REGION_SITES = ("ruins", "dungeon", "tower", "cave", "shrine", "camp", "lair", "battlefield", "grove", "barrow", "mine",
+                "bridge", "inn", "mill", "stones")
+
+
+def _line_cells(x0, y0, x1, y1):
+    """Every square on the straight line between two waypoints (Bresenham), so roads and rivers stay connected."""
+    cells, dx, dy = [], abs(x1 - x0), -abs(y1 - y0)
+    sx, sy, err = (1 if x0 < x1 else -1), (1 if y0 < y1 else -1), abs(x1 - x0) - abs(y1 - y0)
+    while True:
+        cells.append([x0, y0])
+        if (x0, y0) == (x1, y1):
+            return cells
+        e2 = 2 * err
+        if e2 >= dy:
+            err += dy
+            x0 += sx
+        if e2 <= dx:
+            err += dx
+            y0 += sy
+
+
+def region_edit(g, a):
+    """Author a region map by hand: the world map of record. Towns and sites can be clicked on the table for what the
+    party knows of them (their journal entry); hidden ones stay off the players' map until `map discover`."""
+    s = g.state
+    if a.target not in s["maps"] or s["maps"][a.target]["kind"] != "region":
+        raise RuleError(f"map {a.action} works on a region map (`map gen region`); '{a.target}' isn't one.")
+    m = s["maps"][a.target]
+    settlements = [dict(x) for x in m.get("settlements", [])]
+    sites = [dict(x) for x in m.get("pois", [])]
+    if a.action in ("settlement", "site"):
+        kinds = REGION_SETTLEMENTS if a.action == "settlement" else REGION_SITES
+        a.ftype = getattr(a, "stype", None) or a.ftype
+        if not a.at or not a.name or (a.ftype or "") not in kinds:
+            raise RuleError(f'map {a.action} <region> x,y --name "Name" --type {"|".join(kinds)} [--text "what is known"] [--hidden]')
+        x, y = xy(a.at)
+        if not (0 <= x < m["w"] and 0 <= y < m["h"]):
+            raise RuleError(f"({x},{y}) is outside {m['name']} ({m['w']}×{m['h']}).")
+        if any((o["x"], o["y"]) == (x, y) for o in settlements + sites):
+            raise RuleError(f"({x},{y}) already holds a town or site on {m['name']}.")
+        pid = srd.slug(a.name)[:40] or f"{a.action}-{len(settlements) + len(sites) + 1}"
+        while any(o.get("id") == pid for o in settlements + sites):
+            pid += "-2"
+        entry = {"id": pid, "x": x, "y": y, "kind": a.ftype, "name": a.name, "hidden": bool(a.hidden)}
+        if a.text and not a.hidden:
+            entry["journal"] = f"j{len(s.get('journal', [])) + 1}"
+            journal_add(g, {"kind": "text", "title": a.name, "text": a.text, "ref": a.text,
+                            "poi": {"map": m["id"], "x": x, "y": y}, "cat": "place"})
+        elif a.text:
+            entry["text"] = a.text   # kept for when it's discovered
+        (settlements if a.action == "settlement" else sites).append(entry)
+        g.emit("map.set", id=m["id"], set={"settlements": settlements, "pois": sites})
+        g.say(f"🗺 {a.name} ({a.ftype}) marked at ({x},{y}) on {m['name']}" + (" (hidden from the players)." if a.hidden else "."),
+              kind="map")
+    elif a.action == "route":
+        # map route <region> road|river --path "x,y x,y ..." : straight runs between the waypoints
+        kind, way = a.at, getattr(a, "route_path", None) or a.rect
+        if kind not in ("road", "river") or not way:
+            raise RuleError('map route <region> road|river --path "x,y x,y x,y ..." (waypoints, in order)')
+        pts = [xy(t) for t in way.replace(";", " ").split() if t.strip()]
+        if len(pts) < 2:
+            raise RuleError("A road or river needs at least two waypoints.")
+        cells = []
+        for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
+            seg = _line_cells(x0, y0, x1, y1)
+            cells += seg if not cells else seg[1:]
+        key = "roads" if kind == "road" else "rivers"
+        g.emit("map.set", id=m["id"], set={key: m.get(key, []) + [cells]})
+        g.say(f"🗺 A {kind} drawn on {m['name']} through {len(pts)} waypoints ({len(cells)} squares)" +
+              (f": {a.name}." if a.name else "."), kind="map")
+    elif a.action == "discover":
+        # the party learns of a hidden town or site: it appears on their map, with what they now know
+        ref = a.at
+        hit = next((o for o in settlements + sites if o.get("id") == ref), None)
+        if not hit:
+            raise RuleError(f"No town or site '{ref}' on {m['name']}.")
+        hit["hidden"] = False
+        text = a.text or hit.pop("text", None)
+        if text and not hit.get("journal"):
+            hit["journal"] = f"j{len(s.get('journal', [])) + 1}"
+            journal_add(g, {"kind": "text", "title": hit["name"], "text": text, "ref": text,
+                            "poi": {"map": m["id"], "x": hit["x"], "y": hit["y"]}, "cat": "place"})
+        g.emit("map.set", id=m["id"], set={"settlements": settlements, "pois": sites})
+        g.say(f"🗺 {hit['name']} is now on the party's map.", kind="map")
+    else:  # region-remove
+        if not a.id or not a.reason:
+            raise RuleError('map region-remove <region> --id <town|site|road-N|river-N> --reason "what happened"')
+        if a.id.startswith(("road-", "river-")) and a.id.split("-")[1].isdigit():
+            key, n = ("roads" if a.id.startswith("road-") else "rivers"), int(a.id.split("-")[1])
+            lst = list(m.get(key, []))
+            if not 1 <= n <= len(lst):
+                raise RuleError(f"No {a.id} on {m['name']} ({len(lst)} {key}).")
+            lst.pop(n - 1)
+            g.emit("map.set", id=m["id"], set={key: lst})
+        else:
+            keep_s = [o for o in settlements if o.get("id") != a.id]
+            keep_p = [o for o in sites if o.get("id") != a.id]
+            if len(keep_s) + len(keep_p) == len(settlements) + len(sites):
+                raise RuleError(f"No town or site '{a.id}' on {m['name']}.")
+            g.emit("map.set", id=m["id"], set={"settlements": keep_s, "pois": keep_p})
+        g.say(f"🗺 {a.id} removed from {m['name']}: {a.reason}.", kind="map")
 
 
 def cmd_map(g, a):
@@ -1656,6 +1919,8 @@ def cmd_map(g, a):
             floor = [{k: v for k, v in f.items() if not (k == "in" and v == box["id"])} for f in m.get("floor", [])]
             g.emit("map.set", id=m["id"], set={"containers": [c for c in boxes if c["id"] != box["id"]], "floor": floor})
             g.say(f"🧰 {box['name']} is gone from {m['name']} — {a.reason}. Its contents are left on the floor.", kind="map")
+    elif a.action in ("settlement", "site", "route", "discover", "region-remove"):
+        region_edit(g, a)
     elif a.action == "label":
         m = s["maps"][a.target]
         x, y = xy(a.at)
@@ -1708,9 +1973,33 @@ def cmd_map(g, a):
         rows = [r.rstrip("\n") for r in Path(a.out).read_text(encoding="utf-8").splitlines() if r.strip() and not r.startswith(";")]
         width = max(len(r) for r in rows)
         rows = [r.ljust(width, "#") for r in rows]
-        bad = sorted({ch for r in rows for ch in r if ch not in maps.TERRAIN})
+        region = s["maps"][mid]["kind"] == "region"
+        bad = sorted({ch for r in rows for ch in r if ch not in (maps.BIOMES if region else maps.TERRAIN)})
         if bad:
-            raise RuleError(f"Unknown terrain codes in grid: {' '.join(repr(b) for b in bad)}")
+            raise RuleError(f"Unknown terrain codes in grid: {' '.join(repr(b) for b in bad)}" +
+                            (f" (region codes: {' '.join(maps.BIOMES)})" if region else ""))
+        if region:
+            # a hand-drawn region replaces the generator's land: its random towns, roads, rivers and labels go with it;
+            # towns and sites placed by hand (`map settlement` / `map site`) stay
+            m = s["maps"][mid]
+            g.emit("map.set", id=mid, set={"grid": rows, "w": width, "h": len(rows), "revealed": ["1" * width] * len(rows),
+                                           "roads": [], "rivers": [], "labels": [],
+                                           "settlements": [x for x in m.get("settlements", []) if x.get("id")],
+                                           "pois": [x for x in m.get("pois", []) if x.get("id")]})
+            print(f"Imported a {width}×{len(rows)} region grid into '{m['name']}' "
+                  f"({m.get('miles_per_cell', 2)} miles a square). The generator's towns, roads and rivers were cleared; "
+                  "draw your own with `map settlement`, `map site` and `map route`.")
+            return
+        # a playable map needs room to fight in: measure the open area (everything that isn't solid wall), so a tiny
+        # room padded out with wall rows doesn't pass. Genuinely small places (a skiff, a cell) say so with --small.
+        open_cells = [(x, y) for y, r in enumerate(rows) for x, ch in enumerate(r) if ch != "#"]
+        if open_cells and not a.small:
+            ow = max(x for x, _ in open_cells) - min(x for x, _ in open_cells) + 1
+            oh = max(y for _, y in open_cells) - min(y for _, y in open_cells) + 1
+            if ow < MIN_PLAY_W or oh < MIN_PLAY_H:
+                raise RuleError(f"the open area of this grid is only {ow}×{oh} squares; a playable map needs at least "
+                                f"{MIN_PLAY_W}×{MIN_PLAY_H} (5 ft squares) so a fight has room. Draw it bigger, or pass "
+                                f"--small \"why\" for a place that truly is that small (a skiff, a cell)")
         m = s["maps"][mid]
         g.emit("map.set", id=mid, set={"grid": rows, "w": width, "h": len(rows), "rooms": [], "features": [], "labels": [], "floor": [],
                                         "revealed": ["1" * width] * len(rows) if not m.get("fog") else ["0" * width] * len(rows)})
@@ -2122,8 +2411,27 @@ def cmd_journal(g, a):
         where = "Handouts & clues" if a.file_as == "clue" else "Places & objects"
         g.say(f"📓 Filed under {where}: {', '.join(known[i]['title'] for i in ids)}", kind="handout")
         return
+    if a.action == "edit":
+        # correct a handout's wording in place: `journal edit j12 --text "..." [--title "..."]`.
+        # The revision is announced in the feed, so the players see that the entry changed.
+        new_text = a.new_text
+        if not a.text or not (new_text or a.title):
+            raise RuleError('journal edit <id> --text "new text" [--title "new title"]')
+        entry = next((e for e in g.state.get("journal", []) if e["id"] == a.text), None)
+        if not entry:
+            raise RuleError(f"No journal entry {a.text}.")
+        if entry.get("kind", "text") != "text" and new_text:
+            raise RuleError(f"{a.text} is a {entry.get('kind')} handout; only text entries can be reworded.")
+        changes = {}
+        if new_text:
+            changes.update(text=new_text, ref=new_text)
+        if a.title:
+            changes["title"] = a.title
+        g.emit("journal.set", ids=[a.text], set=changes)
+        g.say(f"📓 Journal entry revised: {a.title or entry['title']}", kind="handout")
+        return
     if a.action != "add":
-        raise RuleError('journal add "text" --title "..." | journal file <ids,...> --as clue|place')
+        raise RuleError('journal add "text" --title "..." | journal file <ids,...> --as clue|place | journal edit <id> --text "..."')
     if not a.text or not a.title:
         raise RuleError('journal add "text" --title "..."')
     journal_add(g, {"kind": "text", "title": a.title, "text": a.text, "ref": a.text})
@@ -2420,22 +2728,27 @@ def build_parser():
     c.add_argument("action")
     c.add_argument("args", nargs="*")
     c.add_argument("--set", action="append", help="setting=value at creation (player_rolls, xp_mode, difficulty, start_level)")
+    c.add_argument("--from", dest="from_slug", help="campaign new: the next chapter of a saga, continuing this earlier campaign")
+    c.add_argument("--saga", help="campaign new --from: the saga's name (default: the earlier chapter's saga, or its title)")
     c = sp.add_parser("set", help="change a campaign setting: key=value")
     c.add_argument("kv")
     c = sp.add_parser("session", help="start|end")
     c.add_argument("action", choices=["start", "end"])
 
-    c = sp.add_parser("char", help="roll-stats|create|levelup|catch-up|masteries|leave|rejoin|bio|show|inspire|use-inspiration|remove")
+    c = sp.add_parser("char", help="roll-stats|create|import|levelup|catch-up|masteries|leave|rejoin|bio|show|inspire|use-inspiration|remove")
     c.add_argument("action")
     c.add_argument("args", nargs="*")
+    c.add_argument("--from", dest="from_slug", help="char import: the earlier chapter to bring the character over from")
     for opt in ("name", "player", "species", "background", "method", "scores", "bonus", "skills", "languages", "equipment",
                 "bg-equipment", "species-skill", "species-feat", "expertise", "fighting-style", "masteries", "mi-cantrips",
-                "mi-spell", "mi-list", "size", "ancestry", "hp", "subclass", "asi", "feat", "instrument", "skilled", "bonus-skills", "scholar"):
+                "mi-spell", "mi-list", "size", "ancestry", "hp", "subclass", "asi", "feat", "instrument", "skilled", "bonus-skills", "scholar",
+                "discoveries"):
         c.add_argument(f"--{opt}", dest=opt.replace("-", "_"))
     c.add_argument("--class", dest="cls")
 
-    c = sp.add_parser("spells", help="set|scribe|list")
-    c.add_argument("action", choices=["set", "scribe", "list"])
+    c = sp.add_parser("spells", help="set|scribe|list|refund")
+    c.add_argument("action", choices=["set", "scribe", "list", "refund"])
+    c.add_argument("--level", type=int, help="refund: the slot level to give back")
     c.add_argument("who")
     c.add_argument("--class", dest="cls")
     c.add_argument("--cantrips")
@@ -2445,11 +2758,13 @@ def build_parser():
     c.add_argument("--source")
 
     c = sp.add_parser("journal", help="add \"text\" --title — a note in the players' journal (handouts are added automatically); "
-                                      "file <ids> --as clue|place — move entries between Handouts & clues and Places & objects")
+                                      "file <ids> --as clue|place — move entries between Handouts & clues and Places & objects; "
+                                      "edit <id> --text \"...\" [--title] — correct an entry's wording (announced)")
     c.add_argument("action")
     c.add_argument("text", nargs="?")
     c.add_argument("--title")
     c.add_argument("--as", dest="file_as", choices=("clue", "place"))
+    c.add_argument("--text", dest="new_text", help="journal edit: the corrected text")
 
     c = sp.add_parser("npc", help="add <srd-monster>|reveal|hide|leave|return|remove|rename|side|show|describe|lore|alignment")
     c.add_argument("action")
@@ -2634,7 +2949,7 @@ def build_parser():
     c.add_argument("--to")
     c.add_argument("--map")
 
-    c = sp.add_parser("item", help="add|remove|drop|stash|pickup|sell|give|equip|unequip|attune|unattune|use|light|note|unpack|identify|obscure|refresh|recover-ammo|card")
+    c = sp.add_parser("item", help="add|remove|drop|stash|pickup|sell|give|equip|unequip|attune|unattune|use|venom-hit|recover-thrown|light|note|unpack|identify|obscure|refresh|recover-ammo|card")
     c.add_argument("--with-attack", action="store_true", help="pickup: pick up a weapon as part of an attack (one per attack)")
     c.add_argument("action")
     c.add_argument("who")
@@ -2672,7 +2987,7 @@ def build_parser():
     c.add_argument("--hidden", action="store_true")
     c.add_argument("--override")
 
-    c = sp.add_parser("map", help="gen|list|show|reveal|hide|door|feature|crop|paint|set|party|label|unlabel|poi|poi-move|poi-remove|container|container-remove|from-image|render|ascii")
+    c = sp.add_parser("map", help="gen|list|show|reveal|hide|door|feature|crop|paint|set|party|label|unlabel|poi|poi-move|poi-remove|container|container-remove|from-image|render|ascii|settlement|site|route|discover|region-remove")
     c.add_argument("action")
     c.add_argument("target", nargs="?")
     c.add_argument("at", nargs="?")
@@ -2705,6 +3020,9 @@ def build_parser():
     c.add_argument("--size", choices=("small", "medium", "large"), help="map prop: how much of the tile it fills")
     c.add_argument("--color", help="map prop: silhouette colour, #rrggbb")
     c.add_argument("--rotate", type=int, help="map prop: degrees")
+    c.add_argument("--type", dest="stype", help="map settlement/site: hamlet|village|town|city|capital|castle|abbey, or ruins|lair|grove|...")
+    c.add_argument("--path", dest="route_path", help='map route <region> road|river --path "x,y x,y ..." (waypoints)')
+    c.add_argument("--small", help="map import-grid: why this place is genuinely smaller than a playable map (a skiff, a cell)")
 
     c = sp.add_parser("asset", help="icon|fetch|import|draw|portrait|look|art|list")
     c.add_argument("action")

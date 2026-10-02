@@ -2,9 +2,9 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Bard 5** (College of Lore) · **Background:** Sage · **XP:** 11463
+**Player:** DM · **Human** · **Bard 5** (College of Lore) · **Background:** Sage · **XP:** 13912
 
-**HP** 33/33 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 13
+**HP** 25/33 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 13
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
@@ -27,7 +27,7 @@ Attacks per Attack action: 1
 ## Spellcasting
 
 - **Bard:** save DC 14, attack +6, cantrips 3, prepared 9, up to level 3
-- **Slots:** L1 4/4, L2 3/3, L3 2/2
+- **Slots:** L1 0/4, L2 1/3, L3 2/2
 - **Cantrips:** vicious-mockery, message, mage-hand
 - **Prepared:** charm-person, disguise-self, dissonant-whispers, healing-word, silent-image, suggestion, invisibility, hypnotic-pattern, cure-wounds
 
@@ -35,7 +35,7 @@ Attacks per Attack action: 1
 
 ## Limited features
 
-- **Bardic Inspiration:** 3/3
+- **Bardic Inspiration:** 1/3
 
 ## Features & feats
 
@@ -45,7 +45,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 71 GP
+**Coins:** 70 GP 9 SP 6 CP
 
 - `leather-armor-1` 1× Leather Armor · _starting equipment_
 - `pan-flute-1` 1× Pan flute · _starting equipment_
@@ -69,6 +69,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `oilcloth-wrap-1` 1× Oilcloth wrap · _purchased for 5 GP_
 - `dressing-case-bandages-l-1` 1× Dressing case (bandages, lint, smelling salts, brandy) · _loot: the Curator's travelling trunk_
 - `smoked-glass-visor-1` 1× Smoked-glass visor · _gift: Kit, from the Eye's vault_
+- `black-velvet-pouch-of-cu-1` 1× Black velvet pouch of cut gems · _loot: the Emissary's pouch on the meeting table_
 
 Hit Point Dice: Bard d8 5/5
 Languages: Common, Elvish, Halfling · Tools: Calligrapher's Supplies, Forgery Kit, Disguise Kit · Armor training: light

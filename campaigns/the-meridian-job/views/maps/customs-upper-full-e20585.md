@@ -1,0 +1,43 @@
+# Snapshot — party moved to The Mole and the Old Customs House at Day 7, 23:02 (event 20585)
+
+### Old Customs House, upper floor (to scale) (`customs-upper-full`, interior 36×22, lighting bright)
+- Brakka Holloway (`brakka`, pc) at (9,8) — 40/44 HP
+- Corvin Asche (`corvin`, pc) at (10,8) — 32/32 HP
+- Kit Corvell (`kit`, pc) at (8,3) — 29/43 HP
+- Ottilie Marsh (`ottilie`, pc) at (9,7) — 25/33 HP
+- Hooded guard A (`hooded-guard-a`, enemy) at (8,4) — 32/52 HP · restrained, blinded, petrified
+- Hooded guard B (`hooded-guard-b`, enemy) at (10,10) — DEAD · blinded
+- Nib (`nib`, neutral) at (9,9) — 4/4 HP
+- The Emissary (`the-emissary`, enemy) at (18,2) — DEAD · poisoned, blinded
+- Woman in dove-grey (`sabine-roux`, enemy) at (29,12) — 27/27 HP · blinded · hidden
+- point of interest `poi-1`: Head of the stair at (32,11) → journal j538
+- point of interest `poi-2`: The swept track at (20,12) → journal j539
+- point of interest `poi-3`: Hole in the roof at (18,12) → journal j540
+- point of interest `poi-4`: The north room door at (10,10) → journal j541
+- point of interest `poi-6`: Cold hearth at (1,4) → journal j543
+- point of interest `poi-8`: Chair with its back to the window at (10,3) → journal j545
+- point of interest `poi-9`: Chair facing the window at (10,6) → journal j546
+- point of interest `poi-10`: Iron column at (5,5) → journal j547
+- point of interest `poi-11`: Iron column (east) at (17,5) → journal j548
+- point of interest `poi-12`: Seized cargo at (18,7) → journal j549
+- point of interest `poi-13`: Partition wall at (21,5) → journal j550
+- point of interest `poi-14`: Collector's office door at (26,10) → journal j551
+- point of interest `poi-15`: The Collector's desk at (27,4) → journal j552
+- point of interest `poi-16`: Ledger shelves at (22,1) → journal j553
+- point of interest `poi-17`: Iron-bound chest (office) at (32,8) → journal j554
+- point of interest `poi-18`: Fallen slate at (24,7) → journal j555
+- point of interest `poi-19`: Clerks' room door at (6,14) → journal j556
+- point of interest `poi-20`: Clerks' sloped desks at (2,16) → journal j557
+- point of interest `poi-21`: Pigeonhole shelf at (13,15) → journal j558
+- point of interest `poi-22`: Store-room door at (24,14) → journal j559
+- point of interest `poi-23`: Staved casks at (17,16) → journal j560
+- point of interest `poi-24`: Rotten sacks at (17,18) → journal j561
+- point of interest `poi-25`: Slate and gull mess at (27,17) → journal j562
+- point of interest `poi-28`: Shuttered lantern at (12,12) → journal j565
+- point of interest `poi-29`: Broken customs scales at (15,8) → journal j566
+- point of interest `poi-31`: Burning cloth over the window at (10,1) → journal j568
+- point of interest `poi-32`: The stone guard at (7,4) → journal j570
+- point of interest `poi-35`: The meeting table (cleared) at (10,4) → journal j573
+- point of interest `poi-36`: The Emissary's body (searched) at (19,2) → journal j574
+- point of interest `poi-37`: The dead guard in the doorway (stripped) at (10,9) → journal j575
+- doors: (10,10) open, (26,10) open, (6,14) open, (24,14) open

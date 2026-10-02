@@ -2,21 +2,21 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 6 · **In-world time:** Day 7, 21:30 · **Mode:** exploration
-**Current map:** Scrope's Rag-Mill Loft (`ragmill`) · **Events:** 19381 · **Log head:** `b98f017d7405f19c`
+**Session:** 7 · **In-world time:** Day 7, 23:43 · **Mode:** exploration
+**Current map:** The Saltmarsh Causeway toll-gate (`saltmarsh-causeway`) · **Events:** 20765 · **Log head:** `67aa53531ffe4224`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=3
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 5 | 43/43 | 16 | — | — | ragmill (5,3) |
+| Kit Corvell (`kit`) | 5 | 29/43 | 16 | — | — | saltmarsh-causeway (33,7) |
 | Hedda Vask (`hedda`) | 3 | 34/34 | 17 | — | — | sluice (5,9) |
 | Tobias Fenwick (`tobias`) | 3 | 23/23 | 11 | — | L1:1/4 L2:2/2 | sluice (5,9) |
 | Sera Lark (`sera`) | 4 | 0/27 | 13 | unconscious · DEAD | L1:2/4 L2:2/3 | faircloths (12,8) |
-| Corvin Asche (`corvin`) | 5 | 32/32 | 12 | — | L1:4/4 L2:3/3 L3:2/2 | ragmill (8,3) |
-| Brakka Holloway (`brakka`) | 5 | 44/44 +3 | 11 | — | — | ragmill (3,2) |
-| Ottilie Marsh (`ottilie`) | 5 | 33/33 | 13 | — | L1:4/4 L2:3/3 L3:2/2 | ragmill (6,3) |
+| Corvin Asche (`corvin`) | 5 | 32/32 | 12 | — | L1:3/4 L2:3/3 L3:2/2 | saltmarsh-causeway (33,8) |
+| Brakka Holloway (`brakka`) | 5 | 40/44 | 17 | — | — | saltmarsh-causeway (32,8) |
+| Ottilie Marsh (`ottilie`) | 5 | 25/33 | 13 | — | L1:0/4 L2:1/3 L3:2/2 | saltmarsh-causeway (34,7) |
 
 ## Other creatures (DM view)
 
@@ -62,7 +62,7 @@
 | Tanner B (`tanner-b`, commoner) | neutral | 4/4 | 10 | — | tanners-cut (28,11) |  |
 | Gorse (`gorse`, tough) | enemy | 0/32 | 12 | — · DEAD | quills-rooms (18,3) |  |
 | Brakka Holloway (`brakka-holloway`, warrior-veteran) | neutral | 65/65 | 11 | — | gutter-ring (3,13) | yes |
-| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | ragmill (4,3) |  |
+| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | saltmarsh-causeway (32,7) |  |
 | Dace Morrow (`dace-morrow`, bandit) | neutral | 11/11 | 12 | — | gutter-ring (23,6) |  |
 | Mother Tansy (`mother-tansy`, commoner) | enemy | 0/4 | 10 | — · DEAD | tansys-mending (12,2) |  |
 | Pip (`pip`, commoner) | neutral | 4/4 | 10 | — | tansys-mending (3,3) | yes |
@@ -159,10 +159,10 @@
 | Net-mender B (`net-mender-b`, commoner) | neutral | 4/4 | 10 | — | the-mole (7,10) |  |
 | Lighthouse keeper (`lighthouse-keeper`, commoner) | neutral | 4/4 | 10 | — | the-mole (28,9) |  |
 | Customs officer (`customs-officer`, guard) | neutral | 11/11 | 16 | — | the-mole (10,11) |  |
-| Woman in dove-grey (`sabine-roux`, spy) | neutral | 27/27 | 12 | — | customs-upper (7,3) | yes |
-| The Emissary (`the-emissary`, mage) | neutral | 81/81 | 15 | — | customs-upper (6,3) | yes |
-| Hooded guard A (`hooded-guard-a`, bandit-captain) | neutral | 52/52 | 15 | — | customs-upper (3,5) | yes |
-| Hooded guard B (`hooded-guard-b`, bandit-captain) | neutral | 52/52 | 15 | — | customs-upper (5,5) | yes |
+| Woman in dove-grey (`sabine-roux`, spy) | enemy | 27/27 | 12 | blinded | customs-upper-full (29,12) | yes |
+| The Emissary (`the-emissary`, mage) | enemy | 0/81 | 15 | poisoned, blinded · DEAD | customs-upper-full (18,2) |  |
+| Hooded guard A (`hooded-guard-a`, bandit-captain) | enemy | 32/52 | 15 | restrained, blinded, petrified | customs-upper-full (8,4) |  |
+| Hooded guard B (`hooded-guard-b`, bandit-captain) | enemy | 0/52 | 15 | blinded · DEAD | customs-upper-full (10,10) |  |
 | Old eel-fisher (`old-eel-fisher`, commoner) | neutral | 4/4 | 10 | — | acq-cut (17,9) | yes |
 | Pie-woman (`pie-woman`, commoner) | neutral | 4/4 | 10 | — | acq-cut (12,9) | yes |
 | Collector A (`collector-a`, tough) | neutral | 32/32 | 12 | — | acq-cut (24,8) | yes |
@@ -203,6 +203,8 @@
 | Gala Warden F (`gala-warden-f`, guard) | enemy | 11/11 | 16 | — | dock (16,6) |  |
 | Gala Warden G (`gala-warden-g`, guard) | enemy | 11/11 | 16 | — | dock (15,6) |  |
 | Gala Warden H (`gala-warden-h`, guard) | enemy | 11/11 | 16 | incapacitated | dock (16,4) |  |
+| Toll-man (gate) (`toll-man-gate`, guard) | neutral | 11/11 | 16 | — | saltmarsh-causeway (10,7) |  |
+| Toll-man (desk) (`toll-man-desk`, guard) | neutral | 11/11 | 16 | — | saltmarsh-causeway (8,4) |  |
 
 ## Maps (exact current contents — tokens and items stay where they were left)
 
@@ -661,11 +663,7 @@
 - point of interest `poi-20`: The Fire at (12,2) → journal j242
 - doors: (16,2) open, (8,4) open, (12,9) closed
 
-### Scrope's Rag-Mill Loft (`ragmill`, interior 24×15, lighting dark)
-- Brakka Holloway (`brakka`, pc) at (3,2) — 44/44 HP
-- Corvin Asche (`corvin`, pc) at (8,3) — 32/32 HP
-- Kit Corvell (`kit`, pc) at (5,3) — 43/43 HP
-- Ottilie Marsh (`ottilie`, pc) at (6,3) — 33/33 HP
+### Scrope's Rag-Mill Loft (`ragmill`, interior 24×15, lighting dim)
 - Alcazar principal A (`alcazar-principal-a`, neutral) at (12,9) — 4/4 HP · hidden
 - Alcazar principal B (`alcazar-principal-b`, neutral) at (12,8) — 4/4 HP · hidden
 - Alcazar principal C (`alcazar-principal-c`, neutral) at (13,9) — 4/4 HP · hidden
@@ -675,7 +673,6 @@
 - Alcazar principal G (`alcazar-principal-g`, neutral) at (13,8) — 4/4 HP · hidden
 - Hob (`hob`, neutral) at (7,11) — 32/32 HP · hidden
 - Mr Peel (`mr-peel`, neutral) at (9,9) — 4/4 HP · hidden
-- Nib (`nib`, neutral) at (4,3) — 4/4 HP
 - Ropewalk porter (`ropewalk-porter`, neutral) at (2,13) — 4/4 HP · hidden
 - Silas Whitlow (`silas-whitlow`, neutral) at (6,10) — 9/9 HP · hidden
 - container `asche-chests`: Asche's paper chests at (12,4)
@@ -856,7 +853,7 @@
 - doors: (20,7) closed
 - labels: Gully's Yard (6,0), Fell's Remnants (21,0), Keelson's Slip (25,10), Tenter Basin (10,14)
 
-### Vatman's Row, outside Scrope's mill (`vatmans-row`, interior 26×14, lighting bright)
+### Vatman's Row, outside Scrope's mill (`vatmans-row`, interior 26×14, lighting dark)
 - Abel Rudd (`abel-rudd`, neutral) at (9,3) — 4/4 HP · hidden
 - Mill hand A (`mill-hand-a`, neutral) at (11,2) — 4/4 HP · hidden
 - Mill hand B (`mill-hand-b`, neutral) at (12,2) — 4/4 HP · hidden
@@ -917,18 +914,13 @@
 - doors: (4,5) closed, (14,5) open, (24,5) open
 - labels: Hobday & Son, Armourers (4,0), Fathom's Chandlery (14,0), Bitterwell's Apothecary (22,0), Saltgate harbour (12,12)
 
-### The Mole and the Old Customs House (`the-mole`, interior 32×16, lighting dark)
+### The Mole and the Old Customs House (`the-mole`, interior 32×16, lighting dim)
 - Customs officer (`customs-officer`, neutral) at (10,11) — 11/11 HP
 - Lighthouse keeper (`lighthouse-keeper`, neutral) at (28,9) — 4/4 HP
 - Net-mender B (`net-mender-b`, neutral) at (7,10) — 4/4 HP
 - Old Pocock (`net-mender-a`, neutral) at (8,10) — 4/4 HP
 - point of interest `poi-1`: Customs House front door at (22,6) → journal j416
-- point of interest `poi-2`: Boarded windows at (20,6) → journal j417
-- point of interest `poi-3`: The quay stair at (15,4) → journal j418
 - point of interest `poi-4`: Net-menders' hut at (6,9) → journal j419
-- point of interest `poi-5`: Second hut at (12,8) → journal j420
-- point of interest `poi-6`: The lighthouse at (29,9) → journal j421
-- point of interest `poi-7`: Inner steps at (9,12) → journal j422
 - point of interest `poi-8`: The Mole's parapet at (2,6) → journal j423
 - point of interest `poi-9`: Inside the grey lady's hut (glimpsed) at (13,9) → journal j424
 - point of interest `poi-10`: Customs House side door at (17,4) → journal j425
@@ -937,14 +929,16 @@
 - point of interest `poi-13`: A swept path at (21,5) → journal j428
 - point of interest `poi-14`: The stair up at (26,3) → journal j429
 - point of interest `poi-15`: The crew's cart at (0,10) → journal j455
+- point of interest `poi-16`: Second hut (night) at (12,8) → journal j530
+- point of interest `poi-17`: Inner steps (night) at (9,12) → journal j531
+- point of interest `poi-18`: The lighthouse (night) at (29,9) → journal j532
+- point of interest `poi-19`: The Customs House, burning at (20,6) → journal j576
+- point of interest `poi-20`: The quay stair (fire-lit) at (15,4) → journal j577
+- point of interest `poi-21`: The long black boat at (7,0) → journal j578
 - doors: (17,4) open, (22,6) closed, (11,8) closed, (6,9) closed, (29,9) closed
 - labels: Old Customs House (22,1), Lighthouse (30,6), Inner harbour (4,14), Open sea (6,1)
 
-### Old Customs House, upper floor (`customs-upper`, interior 16×14, lighting dim)
-- Hooded guard A (`hooded-guard-a`, neutral) at (3,5) — 52/52 HP · hidden
-- Hooded guard B (`hooded-guard-b`, neutral) at (5,5) — 52/52 HP · hidden
-- The Emissary (`the-emissary`, neutral) at (6,3) — 81/81 HP · hidden
-- Woman in dove-grey (`sabine-roux`, neutral) at (7,3) — 27/27 HP · hidden
+### Old Customs House, upper floor (`customs-upper`, interior 16×14, lighting dark)
 - point of interest `poi-1`: Head of the stair at (13,5) → journal j430
 - point of interest `poi-2`: The swept track on the landing at (6,6) → journal j431
 - point of interest `poi-3`: Hole in the roof at (8,5) → journal j432
@@ -968,7 +962,10 @@
 - point of interest `poi-23`: Rotten sacks at (9,9) → journal j452
 - point of interest `poi-24`: Slate and gull mess at (12,8) → journal j453
 - point of interest `poi-25`: Coil of tarred rope at (13,9) → journal j454
-- point of interest `poi-26`: The meeting table (candles lit) at (4,2) → journal j456
+- point of interest `poi-27`: Black lacquer casket at (5,3) → journal j534
+- point of interest `poi-28`: Shuttered lantern at (5,6) → journal j535
+- point of interest `poi-29`: Iron-bound chest at (4,5) → journal j536
+- point of interest `poi-30`: The meeting table, with the Eye at (4,2) → journal j537
 - doors: (4,4) open, (10,4) open, (3,7) open, (11,7) open
 
 ### Old Customs House, upper floor (`customs-upper-2`, interior 16×14, lighting dim)
@@ -1034,21 +1031,76 @@
 - point of interest `poi-5`: The winch, wound up at (4,2) → journal j526
 - doors: (3,5) open
 
+### Old Customs House, upper floor (to scale) (`customs-upper-full`, interior 36×22, lighting bright)
+- Hooded guard A (`hooded-guard-a`, enemy) at (8,4) — 32/52 HP · restrained, blinded, petrified
+- Hooded guard B (`hooded-guard-b`, enemy) at (10,10) — DEAD · blinded
+- The Emissary (`the-emissary`, enemy) at (18,2) — DEAD · poisoned, blinded
+- Woman in dove-grey (`sabine-roux`, enemy) at (29,12) — 27/27 HP · blinded · hidden
+- point of interest `poi-1`: Head of the stair at (32,11) → journal j538
+- point of interest `poi-2`: The swept track at (20,12) → journal j539
+- point of interest `poi-3`: Hole in the roof at (18,12) → journal j540
+- point of interest `poi-4`: The north room door at (10,10) → journal j541
+- point of interest `poi-6`: Cold hearth at (1,4) → journal j543
+- point of interest `poi-8`: Chair with its back to the window at (10,3) → journal j545
+- point of interest `poi-9`: Chair facing the window at (10,6) → journal j546
+- point of interest `poi-10`: Iron column at (5,5) → journal j547
+- point of interest `poi-11`: Iron column (east) at (17,5) → journal j548
+- point of interest `poi-12`: Seized cargo at (18,7) → journal j549
+- point of interest `poi-13`: Partition wall at (21,5) → journal j550
+- point of interest `poi-14`: Collector's office door at (26,10) → journal j551
+- point of interest `poi-15`: The Collector's desk at (27,4) → journal j552
+- point of interest `poi-16`: Ledger shelves at (22,1) → journal j553
+- point of interest `poi-17`: Iron-bound chest (office) at (32,8) → journal j554
+- point of interest `poi-18`: Fallen slate at (24,7) → journal j555
+- point of interest `poi-19`: Clerks' room door at (6,14) → journal j556
+- point of interest `poi-20`: Clerks' sloped desks at (2,16) → journal j557
+- point of interest `poi-21`: Pigeonhole shelf at (13,15) → journal j558
+- point of interest `poi-22`: Store-room door at (24,14) → journal j559
+- point of interest `poi-23`: Staved casks at (17,16) → journal j560
+- point of interest `poi-24`: Rotten sacks at (17,18) → journal j561
+- point of interest `poi-25`: Slate and gull mess at (27,17) → journal j562
+- point of interest `poi-28`: Shuttered lantern at (12,12) → journal j565
+- point of interest `poi-29`: Broken customs scales at (15,8) → journal j566
+- point of interest `poi-31`: Burning cloth over the window at (10,1) → journal j568
+- point of interest `poi-32`: The stone guard at (7,4) → journal j570
+- point of interest `poi-35`: The meeting table (cleared) at (10,4) → journal j573
+- point of interest `poi-36`: The Emissary's body (searched) at (19,2) → journal j574
+- point of interest `poi-37`: The dead guard in the doorway (stripped) at (10,9) → journal j575
+- doors: (10,10) open, (26,10) open, (6,14) open, (24,14) open
+
+### The Saltmarsh Causeway toll-gate (`saltmarsh-causeway`, battle 36×16, lighting dark)
+- Brakka Holloway (`brakka`, pc) at (32,8) — 40/44 HP
+- Corvin Asche (`corvin`, pc) at (33,8) — 32/32 HP
+- Kit Corvell (`kit`, pc) at (33,7) — 29/43 HP
+- Ottilie Marsh (`ottilie`, pc) at (34,7) — 25/33 HP
+- Nib (`nib`, neutral) at (32,7) — 4/4 HP
+- Toll-man (desk) (`toll-man-desk`, neutral) at (8,4) — 11/11 HP
+- Toll-man (gate) (`toll-man-gate`, neutral) at (10,7) — 11/11 HP
+- point of interest `poi-1`: The toll-house door at (9,6) → journal j579
+- point of interest `poi-2`: The toll-men's desk at (9,4) → journal j580
+- point of interest `poi-4`: Toll board at (12,6) → journal j582
+- point of interest `poi-5`: Causeway lamp at (13,6) → journal j583
+- point of interest `poi-6`: Stacked barrels at (3,4) → journal j584
+- point of interest `poi-7`: The causeway, eastward at (30,8) → journal j585
+- point of interest `poi-8`: The gate bar (raised) at (12,7) → journal j586
+- doors: (9,6) closed
+- labels: Saltgate (3,7)
+
 
 ## Recent events
 
-- ⏳ 25m passes — back through the Tangle to the rag-mill with Nib. Now Day 7, 11:48.
-- Nib is at (4,3) on Scrope's Rag-Mill Loft.
-- Kit Corvell is at (5,3) on Scrope's Rag-Mill Loft.
-- Ottilie Marsh is at (6,3) on Scrope's Rag-Mill Loft.
-- Up the outside stair with the boy between them, in through the loft door. Brakka is across the stove room before the door has shut, and lifts Nib clean off the floor.
-- “There's my lad. There's my lad.”
-- “You smell like smoke, Uncle.”
-- The afternoon goes by slow and quiet in the loft. The stampers thump below until the sixth bell, then stop. Criers go up and down Vatman's Row twice more with the Meridian news and the five thousand crowns. Nib sleeps most of it on Brakka's coat by the stove. Asche reads. Ottilie mends her cloak. Kit watches the Row through a gap in the shutters, and nobody comes up the stair.
-- ⏳ 9h42m passes — lying low in the loft until evening. Now Day 7, 21:30.
-- 🎬 Night at the rag-mill loft — Day 7, 21:30. The mill is dark and empty below. The crew and Nib wait in the stove room with the Eye under Kit's pallet. The meeting is at the eleventh bell at the old Customs House.
-- 🗺 Map: Scrope's Rag-Mill Loft
-- 🗺 Map: Scrope's Rag-Mill Loft
-- Brakka Holloway is at (3,2) on Scrope's Rag-Mill Loft.
-- Corvin Asche is at (8,3) on Scrope's Rag-Mill Loft.
-- — Session 6 ends —
+- Corvin Asche is at (33,8) on The Saltmarsh Causeway toll-gate.
+- Brakka Holloway is at (32,8) on The Saltmarsh Causeway toll-gate.
+- Nib is at (32,7) on The Saltmarsh Causeway toll-gate.
+- 🪑 The crew's cart (drugget rugs piled in the bed) moved to (33,8) on The Saltmarsh Causeway toll-gate — the cart drove out along the causeway.
+- 🪑 The bay draft horse moved to (35,7) on The Saltmarsh Causeway toll-gate — the horse drew the cart east.
+- ⏳ 20m passes — a mile of causeway in the fog, then onto the mainland coast road. Now Day 7, 23:43.
+- ⭐ Kit Corvell gains 550 XP (escaped Vessarine with the Eye, 70,000 in gems and Nib, past the causeway toll-gate) — total 13912.
+- ⭐ Corvin Asche gains 550 XP (escaped Vessarine with the Eye, 70,000 in gems and Nib, past the causeway toll-gate) — total 13912.
+- ⭐ Brakka Holloway gains 550 XP (escaped Vessarine with the Eye, 70,000 in gems and Nib, past the causeway toll-gate) — total 13912.
+- ⭐ Ottilie Marsh gains 550 XP (escaped Vessarine with the Eye, 70,000 in gems and Nib, past the causeway toll-gate) — total 13912.
+- 🎬 The mainland shore — Day 7, 23:43 — The last causeway lamp behind them, the coast road ahead in the fog, and the orange smudge of Vessarine burning low on the water at their backs.
+- 🗺 Map: The Saltmarsh Causeway toll-gate
+- Toll-man (gate) is at (10,7) on The Saltmarsh Causeway toll-gate.
+- Back at the toll-house the gate toll-man stamps over to the brazier by the door and holds his hands to it, glancing once at the glow over Saltgate.
+- — Session 7 ends —

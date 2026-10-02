@@ -355,6 +355,27 @@ class EngineTest(unittest.TestCase):
         self.assertIn("unconscious", names)
         self.assertNotIn("incapacitated", [c["name"] for c in g.get("kira")["conditions"]])
 
+    def test_shield_stops_magic_missile(self):
+        # rules/spells: Shield — "you take no damage from Magic Missile" until the start of your next turn
+        self.ok("place", "wren", "6,6", "--map", "arena")
+        before = self.state().get("wren")["hp"]
+        self.ok("cast", "wren", "shield", "--free", "Magic Initiate")
+        out = self.ok("cast", "wren", "magic missile", "--targets", "wren")
+        self.assertIn("no damage from Magic Missile", out)
+        self.assertEqual(self.state().get("wren")["hp"], before)
+        # a free cast can be given back publicly (a DM repair), and only when it was spent
+        self.assertIn("is back", self.ok("spells", "refund", "wren", "--spell", "shield", "--source", "a DM mistake"))
+        self.assertFalse(any(x.get("free_used") for x in self.state().get("wren")["granted_spells"]))
+        self.rule("spells", "refund", "wren", "--spell", "shield", "--source", "again", contains="no spent free cast")
+
+    def test_spell_slot_refund(self):
+        # a countered Counterspell keeps its slot (rules/spells/counterspell); the refund is public and needs a spent slot
+        self.rule("spells", "refund", "wren", "--level", "1", contains="--source")
+        self.run_cli("cast", "wren", "magic missile", "--targets", "wren")   # spends a slot if one is left
+        used = self.state().get("wren").get("slots_used", {}).get("1", 0)
+        self.assertIn("refunded", self.ok("spells", "refund", "wren", "--level", "1", "--source", "the spell was countered"))
+        self.assertEqual(self.state().get("wren").get("slots_used", {}).get("1", 0), used - 1)
+
     def test_sleep_cast_carries_the_second_stage(self):
         # the real path: a cast Sleep's condition must remember that a second failure means Unconscious
         self.ok("npc", "add", "commoner", "--name", "Sleepy Tam", "--at", "7,7", "--map", "arena")
@@ -491,6 +512,10 @@ class EngineTest(unittest.TestCase):
         svg = render.render_battle(m, mode="player")
         self.assertIsNone(maps.move_cost(m, 3, 2))            # a table fills its square
         self.assertEqual(maps.move_cost(m, 2, 2), 2)          # a chair is difficult terrain
+        m["grid"][2] = "#.HA...#"
+        self.assertEqual(maps.move_cost(m, 2, 2), 2)          # so is a throne: someone can sit in it
+        self.assertEqual(maps.TERRAIN["H"][3], "half")        # and its high back is half cover
+        m["grid"][2] = "#.CA...#"
         self.assertTrue(maps.blocks_sight(m, 1, 1))           # a bookshelf blocks sight
         self.assertNotIn('url(#felt)', svg)                   # plain tables aren't card tables
         self.assertIn('#e0b448', svg)                         # the chest's brass lock

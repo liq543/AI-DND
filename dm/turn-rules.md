@@ -51,8 +51,7 @@ correct me. A correction means the game wasn't played right.** Check every actio
       states kept live as the fiction changes them.
 9. **Beta fixes.** Fix genuine engine or SRD bugs in `engine/`, `viewer/` or `tests/`, add a test, run the suite, and
    tell the player in one line. Fixes must match the SRD and never change a rolled outcome.
-10. **Every correction becomes a rule, the same turn.** When the player corrects anything, fix it, then add the lesson to
-    dm/standing-orders.md (generically worded, in the repo, injected each session; this file only for the very top rules),
-    and to memory. Never make the same mistake twice. Keep each file under ~9 KB: a hook payload over ~10 KB gets cut to a
-    preview and the rules stop reaching the model, so merge or tighten orders instead of only appending.
+10. **Corrections: fix them, and write a standing order only when the player asks for one.** When the player corrects
+    anything, fix it and don't repeat it. Add to dm/standing-orders.md (generically worded) only when the player asks for
+    a rule. Keep each file under ~9 KB: a hook payload over ~10 KB gets cut to a preview.
 11. **Before sending any reply**, walk this list against what I did this turn. Fix every miss before the reply goes out.

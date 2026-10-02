@@ -92,3 +92,6 @@
 - (Day 7 00:20) **THE YSMERAN EYE IS STOLEN.** Kit carries it in its iron reliquary. Every member of the crew has a smoked-glass visor; Kit has 4 spares and the Curator's gilded one.
 - **Day 7, 01:28: the crew is home at the rag-mill loft with the Ysmeran Eye.** The Curator, Thorne and the Master of Wards are dead. Next: sell it to the Emissary (a letter under the Blue Lamp; 60,000 crowns); pay Pim 200 gp; lie low. The Meridian has their descriptions (and the names Kit and Brakka from Merrow).
 - (Day 7) Nib is with the crew at the rag-mill loft (left Old Wenna's at 11:00). Pim's 200 gp delivered via Widow Sallow.
+
+### UPDATE (Day 7, 23:02): the Eye sold and not sold
+- The crew agreed 70,000 for the Ysmeran Eye with the Emissary at the Old Customs House, then killed him and his guards and kept both the Eye and the price: 60 gems (Brakka's casket), 10 gems (Ottilie's pouch), 500 gp (Asche). The gems still have to be fenced. The woman in dove-grey escaped toward the boat and knows their faces; the Emissary's masters (the "Lidless Court" of the Obsidian Coast) will want both the Eye and revenge. The Customs House is burning; the Watch is coming. Next: get off the Mole, then out of Vessarine with the Eye, the gems and Nib.

@@ -456,6 +456,24 @@ def apply_level_choices(e, cls, cls_name, new_cl, feats_here, patch, a):
             raise RuleError("College of Lore 3 Bonus Proficiencies: three new skills (--bonus-skills a,b,c).")
         skills += picks
         choices["lore_bonus"] = picks
+    if "Magical Discoveries" in subf and cls_name == "Bard":
+        # rules/classes/bard.md, College of Lore 6: two spells from the Cleric, Druid or Wizard lists, each a cantrip or a
+        # level the Bard has slots for; always prepared
+        picks = [srd.find("spells", x.strip()) for x in (getattr(a, "discoveries", None) or "").split(",") if x.strip()]
+        row = cls["levels"][new_cl]
+        top = max((int(k) for k in "123456789" if str(row.get(k, "")).strip().isdigit() and int(row[k]) > 0), default=1)
+        if len(picks) != 2 or None in picks:
+            raise RuleError("College of Lore 6 Magical Discoveries: two spells from the Cleric, Druid or Wizard lists "
+                            "(--discoveries \"spell one,spell two\").")
+        for sp in picks:
+            if not ({"Cleric", "Druid", "Wizard"} & set(sp["classes"])):
+                raise RuleError(f"{sp['name']} isn't on the Cleric, Druid or Wizard spell list.")
+            if sp["level"] > top:
+                raise RuleError(f"{sp['name']} is level {sp['level']}; a level-{new_cl} Bard has slots up to level {top}.")
+        patch["granted_spells"] = e.get("granted_spells", []) + [
+            {"slug": sp["slug"], "source": "Magical Discoveries (College of Lore)", **({"cantrip": True} if sp["level"] == 0 else {})}
+            for sp in picks]
+        choices["discoveries"] = [sp["slug"] for sp in picks]
     if skills != e["skills"]:
         patch["skills"] = sorted(skills)
     if expertise != e.get("expertise", []):

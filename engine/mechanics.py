@@ -598,6 +598,10 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
                 set_economy(g, att["id"], oa_window=None)
             d = min(d, reach or 5)  # resolved at the moment the target stepped out of reach
         if not ranged and d > (reach or 5):
+            if prof.get("thrown") and rng and reaction:
+                # rules glossary, Opportunity Attacks: "make one melee attack". Never turn a reaction into a throw.
+                raise RuleError(f"{tgt['name']} is {d} ft away, out of {name}'s {reach or 5} ft reach. An opportunity attack is a "
+                                "melee attack made as the target leaves reach: resolve it before moving the target on.")
             if prof.get("thrown") and rng:
                 ranged = True
             else:
@@ -1149,7 +1153,9 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
         g.say(f"   {count} darts × {r['total']} force damage (one roll for all darts).")
         for tref in seq:
             t = g.get(tref)
-            if any(c["name"] == "shielded" for c in t.get("conditions", [])):
+            # rules/spells: Shield — "you take no damage from Magic Missile" while it lasts
+            if any(c["name"] == "shielded" for c in t.get("conditions", [])) or                     any(x.get("spell") == "shield" for x in t.get("effects", [])):
+                g.say(f"   🛡 {t['name']}'s Shield: no damage from Magic Missile.")
                 continue
             apply_damage(g, t, [[r["total"], "force"]], source="Magic Missile")
     elif kind == "damage" and tgts and spell["slug"] != "divine-smite":
@@ -1990,6 +1996,27 @@ def pick_up(g, e, floor_id, with_attack=False):
     g.say(f"⬆ {e['name']} picks up {item.get('qty', 1)}× {item['name']}.", kind="item", who=e["id"])
 
 
+def recover_thrown(g, e, floor_id, how):
+    """Public repair: a weapon the engine treated as thrown when the attacker meant a melee strike goes back into the
+    attacker's hand (the roll itself stands). Only for a weapon on the floor marked as thrown by this creature."""
+    t = e.get("token")
+    if not t:
+        raise RuleError(f"{e['name']} isn't on a map.")
+    m = g.state["maps"][t["map"]]
+    f = next((x for x in m.get("floor", []) if x["id"] == floor_id), None)
+    if not f or f.get("note") != f"thrown by {e['name']}":
+        raise RuleError(f"No weapon '{floor_id}' thrown by {e['name']} on this map.")
+    if not how:
+        raise RuleError('item recover-thrown <who> <floor-id> --how "why it was never thrown" (shown publicly)')
+    item = dict(f["item"], equipped=True)
+    item["id"] = new_item_id(e, item["name"])
+    g.set(e, inventory=[dict(i) for i in e.get("inventory", [])] + [item])
+    g.emit("map.set", id=t["map"], set={"floor": [x for x in m.get("floor", []) if x["id"] != floor_id]})
+    what = f"{e['name']}'s {item['name']} was never thrown; it stays in hand (the attack roll stands)"
+    g.override(how, what)
+    g.say(f"⚖ DM ruling: {what} — {how}", kind="info")
+
+
 def use_item(g, e, ref, target=None):
     it = find_item(e, ref)
     tgt = g.get(target) if target else e
@@ -2021,6 +2048,28 @@ def use_item(g, e, ref, target=None):
               kind="action", who=e["id"])
         return
     raise RuleError(f"{it['name']} isn't a consumable. Use `feature` or narrate its use.")
+
+
+def venom_hit(g, e, item_id, tgt_id, how):
+    """Public repair: the blade was coated (Bonus Action) BEFORE an attack that already hit, but the coat was recorded
+    after it. Resolve that hit's poison now, exactly as the attack would have, and spend the coat (Dagger of Venom)."""
+    it = next((i for i in e["inventory"] if i["id"] == item_id), None)
+    if not it:
+        raise RuleError(f"{e['name']} has no item '{item_id}'.")
+    if not (it.get("venom") and g.state["time"] <= it.get("venom_until", -1)):
+        raise RuleError(f"{it['name']} isn't coated with poison right now (`item use` it first, as the Bonus Action it took).")
+    if not how:
+        raise RuleError('item venom-hit <who> <item> --to <target> --how "why the coat came first" (shown publicly)')
+    tgt = g.get(tgt_id)
+    g.set(e, inventory=[dict(i, venom=False) if i["id"] == item_id else dict(i) for i in e["inventory"]])
+    what = f"{e['name']}'s {it['name']} was already coated when it hit {tgt['name']}; the poison applies to that hit"
+    g.override(how, what)
+    g.say(f"⚖ DM ruling: {what} — {how}", kind="info")
+    if not tgt.get("dead"):
+        pr = g.roll("2d10", f"{it['name']} poison", e["id"])
+        saving_throw(g, tgt, "con", 15, source=f"{it['name']} poison", now=True,
+                     effect={"damage": [[pr["total"], "poison"]], "half": False, "condition": "poisoned",
+                             "source": f"{it['name']} poison (1 minute)"})
 
 
 def next_dawn(t):

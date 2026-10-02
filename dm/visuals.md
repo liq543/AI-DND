@@ -88,7 +88,7 @@ Prefer one well-chosen update per beat over constant churn.
   layout by seed (which side the back rooms are on, how many, their sizes, chamfered corners, where the door is) and
   furnishes by kind, with a matching theme.
 - **Shape before furniture.** A generated interior is a starting point; for any place the story lingers in, draw it
-  (write the grid as a text file, one row per line, and `map import-grid <id> --out grid.txt`). Avoid the box-of-boxes
+  (write the grid as a text file, one row per line, and `map import-grid <id> --out grid.txt`). **Draw to fight in:** any place a scene could turn violent in needs an open area of at least 20×14 squares (100×70 ft), and its main room should be big enough for everyone present to move round each other. The engine refuses smaller grids unless you pass `--small "why"` for a place that truly is that small (a skiff, a cell). Avoid the box-of-boxes
   habit: vary room sizes, break the outline (apses, bays, chamfered corners, alcoves, a round pool or court, a
   colonnade), put rooms where the building's work needs them (a kitchen by the hall, stores by the loading door,
   private rooms off a passage), and give every room at least one thing only that room has. Before importing, compare
@@ -113,6 +113,11 @@ Prefer one well-chosen update per beat over constant churn.
   6. **State kept live.** When the fiction changes something (opened, picked, bloodied, barricaded, emptied), replace
      its poi with the new state and `map show`. The map is always the truth of the room *now*.
   7. **locations.md mirrors it**: zones with coordinates, every poi, who owns what, the posts and the exits.
+- **The world map of record.** A campaign that travels gets one hand-authored region map as its source of truth
+  (`map import-grid` the terrain, then `map settlement`, `map site`, `map route`, and `map label` for regions), set with
+  `map set <id> --kv world=on` so it is always one click away on the table. Every town and site gets `--text` for what
+  the party knows (players click it for the journal entry); places the party hasn't heard of are `--hidden` until
+  `map discover`. Local maps (towns, lairs, roadside ambushes) are cut to match what the world map shows there.
 - **Lighting drives fog of war**: `map set <id> --kv lighting=bright|dim|dark`. In the dark, characters see only
   with Darkvision or a lit torch/lantern (`item light kira torch-1`).
 

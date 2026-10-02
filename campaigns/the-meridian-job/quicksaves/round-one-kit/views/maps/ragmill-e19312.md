@@ -1,0 +1,42 @@
+# Snapshot — party moved to Gilder's Row, the Gilt at Day 7, 10:08 (event 19312)
+
+### Scrope's Rag-Mill Loft (`ragmill`, interior 24×15, lighting dim)
+- Brakka Holloway (`brakka`, pc) at (3,3) — 44/44 HP
+- Corvin Asche (`corvin`, pc) at (8,3) — 32/32 HP
+- Alcazar principal A (`alcazar-principal-a`, neutral) at (12,9) — 4/4 HP · hidden
+- Alcazar principal B (`alcazar-principal-b`, neutral) at (12,8) — 4/4 HP · hidden
+- Alcazar principal C (`alcazar-principal-c`, neutral) at (13,9) — 4/4 HP · hidden
+- Alcazar principal D (`alcazar-principal-d`, neutral) at (11,9) — 4/4 HP · hidden
+- Alcazar principal E (`alcazar-principal-e`, neutral) at (12,10) — 4/4 HP · hidden
+- Alcazar principal F (`alcazar-principal-f`, neutral) at (11,8) — 4/4 HP · hidden
+- Alcazar principal G (`alcazar-principal-g`, neutral) at (13,8) — 4/4 HP · hidden
+- Hob (`hob`, neutral) at (7,11) — 32/32 HP · hidden
+- Mr Peel (`mr-peel`, neutral) at (9,9) — 4/4 HP · hidden
+- Ropewalk porter (`ropewalk-porter`, neutral) at (2,13) — 4/4 HP · hidden
+- Silas Whitlow (`silas-whitlow`, neutral) at (6,10) — 9/9 HP · hidden
+- container `asche-chests`: Asche's paper chests at (12,4)
+- container `kits-stash`: Kit's stash (under a loose floorboard) at (3,4)
+- item on floor `floor-1`: 10× Large drugget rug at (12,9) — dropped by Kit Corvell
+- in Kit's stash (under a loose floorboard) (`kits-stash`) `floor-2`: 6× Garnet at (3,4) — stashed by Kit Corvell
+- in Kit's stash (under a loose floorboard) (`kits-stash`) `floor-3`: 1× Dragon's-tooth gavel at (3,4) — stashed by Kit Corvell
+- in Kit's stash (under a loose floorboard) (`kits-stash`) `floor-4`: 1× Cask of Ironmoor Brandy at (3,4) — stashed by Kit Corvell
+- in Kit's stash (under a loose floorboard) (`kits-stash`) `floor-5`: 1× Quill's sale-book at (3,4) — stashed by Kit Corvell
+- in Kit's stash (under a loose floorboard) (`kits-stash`) `floor-6`: 1× Tansy's IOUs at (3,4) — stashed by Kit Corvell
+- point of interest `poi-1`: Outside stair at (1,12) → journal j247
+- point of interest `poi-2`: Loft door at (5,10) → journal j248
+- point of interest `poi-3`: Coat pegs at (1,7) → journal j249
+- point of interest `poi-6`: Rag bales at (20,11) → journal j252
+- point of interest `poi-7`: Loading door and hoist at (23,9) → journal j253
+- point of interest `poi-8`: Iron stove at (1,1) → journal j254
+- point of interest `poi-9`: Deal table at (5,2) → journal j255
+- point of interest `poi-10`: Pallets at (1,4) → journal j256
+- point of interest `poi-11`: Water butt at (9,1) → journal j257
+- point of interest `poi-12`: Paper shelves at (13,1) → journal j258
+- point of interest `poi-13`: Paper chests at (12,4) → journal j259
+- point of interest `poi-14`: Clerk's desk at (21,3) → journal j260
+- point of interest `poi-15`: Trimming bench at (15,3) → journal j261
+- point of interest `poi-23`: Eight rugs on the loft floor at (12,8) → journal j359
+- point of interest `poi-25`: Rug over the bloodstain at (9,10) → journal j360
+- point of interest `poi-27`: Old sorting bench at (18,7) → journal j381
+- point of interest `poi-28`: Drying racks (moved) at (11,13) → journal j356
+- doors: (4,5) open, (16,5) closed, (23,9) closed, (5,10) closed

@@ -174,6 +174,18 @@ class VisualsCliTest(unittest.TestCase):
         self.rule("journal", "file", "j9999", "--as", "clue")
         self.rule("journal", "file", j["Old Well"]["id"])
 
+    def test_journal_edit_corrects_a_handout_and_says_so(self):
+        self.ok("journal", "add", "The ferry runs at dawn.", "--title", "Ferry Times")
+        jid = next(e["id"] for e in self.view()["journal"] if e["title"] == "Ferry Times")
+        out = self.ok("journal", "edit", jid, "--text", "The ferry runs at dusk.")
+        self.assertIn("revised", out)
+        j = {e["title"]: e for e in self.view()["journal"]}
+        self.assertEqual(j["Ferry Times"]["text"], "The ferry runs at dusk.")
+        self.ok("journal", "edit", jid, "--title", "Ferry Timetable")
+        self.assertIn("Ferry Timetable", {e["title"] for e in self.view()["journal"]})
+        self.rule("journal", "edit", "j9999", "--text", "nothing")
+        self.rule("journal", "edit", jid)
+
     def test_map_unlabel_removes_a_stale_label(self):
         self.ok("map", "label", "arena", "3,3", "--name", "Gate (down)")
         self.ok("map", "label", "arena", "4,4", "--name", "Old Mill")

@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Wizard 5** (Evoker) · **Background:** Sage · **XP:** 11463
+**Player:** DM · **Human** · **Wizard 5** (Evoker) · **Background:** Sage · **XP:** 13912
 
 **HP** 32/32 · **AC** 12 (unarmored 10 + Dex 2) · **Speed** 30 ft · **Initiative** +5 · **Proficiency** +3 · **Passive Perception** 11
 
@@ -27,7 +27,7 @@ Attacks per Attack action: 1
 ## Spellcasting
 
 - **Wizard:** save DC 15, attack +7, cantrips 4, prepared 9, up to level 3
-- **Slots:** L1 4/4, L2 3/3, L3 2/2
+- **Slots:** L1 3/4, L2 3/3, L3 2/2
 - **Cantrips:** fire-bolt, mage-hand, minor-illusion, light
 - **Prepared:** detect-magic, shield, sleep, magic-missile, misty-step, knock, invisibility, fireball, counterspell
 - **Spellbook:** detect-magic, identify, shield, sleep, magic-missile, alarm, feather-fall, disguise-self, misty-step, knock, invisibility, suggestion, fireball, counterspell
@@ -46,7 +46,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 240 GP 3 SP
+**Coins:** 754 GP 3 SP
 
 - `dagger-1` 2× Dagger · _starting equipment_
 - `quarterstaff-1` 2× Quarterstaff · _starting equipment (Arcane Focus)_
@@ -73,6 +73,8 @@ Species traits: Resourceful, Skillful, Versatile
 - `signal-whistle-1` 1× Signal Whistle · _purchased for 5 CP_
 - `smoked-glass-visor-1` 1× Smoked-glass visor · _gift: Kit, from the Eye's vault_
 - `a-stone-finger-1` 1× A stone finger · _loot: the Curator's remains, her sanctum_
+- `scimitar-1` 1× Scimitar · _loot: the dead hooded guard in the doorway_
+- `pistol-1` 1× Pistol · _loot: the dead hooded guard in the doorway_
 
 Hit Point Dice: Wizard d6 5/5
 Languages: Common, Elvish, Draconic · Tools: Calligrapher's Supplies · Armor training: none
