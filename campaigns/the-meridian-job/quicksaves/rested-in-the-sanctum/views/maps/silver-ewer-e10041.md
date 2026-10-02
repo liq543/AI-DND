@@ -1,0 +1,32 @@
+# Snapshot — party moved to Lantern Hill Watch-House at Day 4, 09:16 (event 10041)
+
+### The Silver Ewer (`silver-ewer`, interior 40×28, lighting bright)
+- Barman (`barman`, neutral) at (11,13) — 4/4 HP
+- Chambermaid (`chambermaid`, neutral) at (3,5) — 4/4 HP
+- Cook (`cook`, neutral) at (6,2) — 4/4 HP
+- Desk clerk (`desk-clerk`, neutral) at (25,17) — 4/4 HP
+- Doorman (`doorman`, neutral) at (18,24) — 11/11 HP
+- Gentleman at the card table (`gentleman-at-the-card-table`, neutral) at (30,15) — 27/27 HP
+- Guest in lavender (`guest-in-lavender`, neutral) at (34,16) — 4/4 HP
+- Guest with a monocle (`guest-with-a-monocle`, neutral) at (38,17) — 4/4 HP
+- Lantern Watch constable (`lantern-watch-constable`, neutral) at (20,19) — 11/11 HP
+- Man with a broadsheet (`man-with-a-broadsheet`, neutral) at (5,14) — 65/65 HP
+- Tobias (`bell-boy`, neutral) at (18,14) — 4/4 HP
+- Waiter (`waiter`, neutral) at (33,16) — 4/4 HP
+- Young woman with a reticule (`young-woman-with-a-reticule`, neutral) at (33,20) — 4/4 HP
+- point of interest `poi-1`: The Porte-Cochère at (18,24) → journal j171
+- point of interest `poi-2`: The Front Doors at (19,23) → journal j172
+- point of interest `poi-3`: The Silver Ewer at (20,17) → journal j173
+- point of interest `poi-4`: The Twin Staircases at (16,12) → journal j174
+- point of interest `poi-6`: The Courtyard Doors at (19,11) → journal j176
+- point of interest `poi-7`: The Ewer Fountain at (20,6) → journal j177
+- point of interest `poi-8`: The Lounge Fireplace at (1,14) → journal j178
+- point of interest `poi-9`: The Lounge Bar at (10,13) → journal j179
+- point of interest `poi-10`: The Pianoforte at (7,17) → journal j180
+- point of interest `poi-11`: The Card Table at (3,19) → journal j181
+- point of interest `poi-12`: The Tea Sideboard at (28,12) → journal j182
+- point of interest `poi-13`: The Service Screens at (35,13) → journal j183
+- point of interest `poi-14`: The Dining Room at (32,16) → journal j184
+- point of interest `poi-15`: The Front Desk at (24,17) → journal j185
+- doors: (32,4) closed, (29,6) closed, (36,6) closed, (32,8) open, (13,9) open, (26,9) open, (39,9) closed, (6,11) open, (19,11) open, (20,11) open, (35,11) open, (13,17) open, (26,17) open, (13,18) open, (26,18) open, (19,23) open, (20,23) open
+- labels: Bar (36,2)

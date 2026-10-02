@@ -2,17 +2,17 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Orc** · **Fighter 4** (Champion) · **Background:** Soldier · **XP:** 5567
+**Player:** DM · **Orc** · **Fighter 5** (Champion) · **Background:** Soldier · **XP:** 11463
 
-**HP** 36/36 · **AC** 17 (Splint Armor 17) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +2 · **Passive Perception** 13
+**HP** 44/44 (+3 temp) · **AC** 11 (unarmored 10 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
 | 19 (+4) | 13 (+1) | 15 (+2) | 8 (-1) | 12 (+1) | 10 (+0) |
 
-**Saves:** STR +6*, DEX +1, CON +4*, INT -1, WIS +1, CHA +0
+**Saves:** STR +7*, DEX +1, CON +5*, INT -1, WIS +1, CHA +0
 
-**Skills:** Acrobatics +1, Animal Handling +1, Arcana -1, Athletics +6*, Deception +0, History -1, Insight +3*, Intimidation +2*, Investigation -1, Medicine +1, Nature -1, Perception +3*, Performance +0, Persuasion +0, Religion -1, Sleight Of Hand +1, Stealth +1, Survival +1
+**Skills:** Acrobatics +1, Animal Handling +1, Arcana -1, Athletics +7*, Deception +0, History -1, Insight +4*, Intimidation +3*, Investigation -1, Medicine +1, Nature -1, Perception +4*, Performance +0, Persuasion +0, Religion -1, Sleight Of Hand +1, Stealth +1, Survival +1
 
 **Conditions:** — · **Exhaustion:** 0
 
@@ -20,10 +20,10 @@
 
 | Attack | To hit | Damage | Notes |
 |---|---|---|---|
-| Greatsword | +6 | 2d6+4 slashing | reach 5 ft, mastery graze |
-| Unarmed Strike | +6 | 5 bludgeoning | reach 5 ft |
+| Mace | +7 | 1d6+4 bludgeoning | reach 5 ft |
+| Unarmed Strike | +7 | 5 bludgeoning | reach 5 ft |
 
-Attacks per Attack action: 1
+Attacks per Attack action: 2
 
 ## Limited features
 
@@ -41,7 +41,6 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 **Coins:** 63 GP 2 SP
 
 - `chain-mail-1` 1× Chain Mail · _starting equipment_
-- `greatsword-1` 1× Greatsword (equipped) · _starting equipment_
 - `flail-1` 1× Flail · _starting equipment_
 - `javelin-1` 8× Javelin · _starting equipment_
 - `spear-1` 1× Spear · _starting equipment_
@@ -59,12 +58,19 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 - `tinderbox-1` 1× Tinderbox · _starting equipment (unpacked from Dungeoneer's Pack)_
 - `torch-1` 10× Torch · _starting equipment (unpacked from Dungeoneer's Pack)_
 - `waterskin-1` 1× Waterskin · _starting equipment (unpacked from Dungeoneer's Pack)_
-- `mace-1` 1× Mace · _loot: Gorse_
 - `heavy-crossbow-1` 1× Heavy Crossbow · _loot: Gorse_
 - `bolts-1` 12× Bolts · _loot: Gorse_
-- `splint-armor-1` 1× Splint Armor (equipped) · _purchased for 200 GP_
+- `splint-armor-1` 1× Splint Armor · _purchased for 200 GP_
+- `rope-1` 1× Rope · _purchased for 1 GP_
+- `signal-whistle-1` 1× Signal Whistle · _purchased for 5 CP_
+- `sack-1` 1× Sack · _purchased for 1 CP_
+- `greatsword-1` 1× Greatsword · _starting equipment_
+- `ring-of-three-little-ste-1` 1× Ring of three little steel keys · _loot: from the Curator's gown pocket_
+- `smoked-glass-visor-1` 1× Smoked-glass visor · _gift: Kit, from the Eye's vault_
+- `thornes-smoked-glass-vis-1` 1× Thorne's smoked-glass visor · _loot: torn off Captain Thorne's helm_
+- `mace-1` 1× Mace (equipped) · _loot: Gorse_
 
-Hit Point Dice: Fighter d10 4/4
+Hit Point Dice: Fighter d10 5/5
 Languages: Common, Orc, Giant · Tools: *Choose one kind of Gaming Set* (see "Equipment") · Armor training: light, medium, heavy, shield
 
 ## HP history
@@ -73,3 +79,4 @@ Languages: Common, Orc, Giant · Tools: *Choose one kind of Gaming Set* (see "Eq
 - Level 2: +8 (fixed average)
 - Level 3: +8 (fixed average)
 - Level 4: +8 (fixed average)
+- Level 5: +8 (fixed average)

@@ -2,17 +2,17 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Bard 4** (College of Lore) · **Background:** Sage · **XP:** 5567
+**Player:** DM · **Human** · **Bard 5** (College of Lore) · **Background:** Sage · **XP:** 11463
 
-**HP** 27/27 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +2 · **Passive Perception** 12
+**HP** 33/33 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 13
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
 | 8 (-1) | 13 (+1) | 12 (+1) | 16 (+3) | 11 (+0) | 17 (+3) |
 
-**Saves:** STR -1, DEX +3*, CON +1, INT +3, WIS +0, CHA +5*
+**Saves:** STR -1, DEX +4*, CON +1, INT +3, WIS +0, CHA +6*
 
-**Skills:** Acrobatics +2, Animal Handling +1, Arcana +5*, Athletics +0, Deception +7**, History +5*, Insight +2*, Intimidation +4, Investigation +5*, Medicine +1, Nature +4, Perception +2*, Performance +5*, Persuasion +7**, Religion +4, Sleight Of Hand +3*, Stealth +3*, Survival +1
+**Skills:** Acrobatics +2, Animal Handling +1, Arcana +6*, Athletics +0, Deception +9**, History +6*, Insight +3*, Intimidation +4, Investigation +6*, Medicine +1, Nature +4, Perception +3*, Performance +6*, Persuasion +9**, Religion +4, Sleight Of Hand +4*, Stealth +4*, Survival +1
 
 **Conditions:** — · **Exhaustion:** 0
 
@@ -20,16 +20,16 @@
 
 | Attack | To hit | Damage | Notes |
 |---|---|---|---|
-| Unarmed Strike | +1 | 0 bludgeoning | reach 5 ft |
+| Unarmed Strike | +2 | 0 bludgeoning | reach 5 ft |
 
 Attacks per Attack action: 1
 
 ## Spellcasting
 
-- **Bard:** save DC 13, attack +5, cantrips 3, prepared 7, up to level 2
-- **Slots:** L1 4/4, L2 3/3
+- **Bard:** save DC 14, attack +6, cantrips 3, prepared 9, up to level 3
+- **Slots:** L1 4/4, L2 3/3, L3 2/2
 - **Cantrips:** vicious-mockery, message, mage-hand
-- **Prepared:** charm-person, disguise-self, dissonant-whispers, healing-word, silent-image, suggestion, invisibility
+- **Prepared:** charm-person, disguise-self, dissonant-whispers, healing-word, silent-image, suggestion, invisibility, hypnotic-pattern, cure-wounds
 
 **Granted spells:** minor-illusion (Magic Initiate (Wizard)), prestidigitation (Magic Initiate (Wizard)), disguise-self (Magic Initiate (Wizard), free cast used)
 
@@ -45,7 +45,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 46 GP
+**Coins:** 71 GP
 
 - `leather-armor-1` 1× Leather Armor · _starting equipment_
 - `pan-flute-1` 1× Pan flute · _starting equipment_
@@ -63,8 +63,14 @@ Species traits: Resourceful, Skillful, Versatile
 - `disguise-kit-1` 1× Disguise Kit · _purchased for 25 GP_
 - `dagger-1` 2× Dagger · _starting equipment_
 - `quarterstaff-1` 1× Quarterstaff · _starting equipment_
+- `lantern-hooded-1` 1× Swamped hooded lantern (Lantern, Hooded) · _purchased for 5 GP_
+  - Ottilie's hooded lantern, swamped going under the arch: the wick and the oil reservoir are full of canal water. It won't light tonight.
+- `signal-whistle-1` 1× Signal Whistle · _purchased for 5 CP_
+- `oilcloth-wrap-1` 1× Oilcloth wrap · _purchased for 5 GP_
+- `dressing-case-bandages-l-1` 1× Dressing case (bandages, lint, smelling salts, brandy) · _loot: the Curator's travelling trunk_
+- `smoked-glass-visor-1` 1× Smoked-glass visor · _gift: Kit, from the Eye's vault_
 
-Hit Point Dice: Bard d8 4/4
+Hit Point Dice: Bard d8 5/5
 Languages: Common, Elvish, Halfling · Tools: Calligrapher's Supplies, Forgery Kit, Disguise Kit · Armor training: light
 
 ## HP history
@@ -73,3 +79,4 @@ Languages: Common, Elvish, Halfling · Tools: Calligrapher's Supplies, Forgery K
 - Level 2: +6 (fixed average)
 - Level 3: +6 (fixed average)
 - Level 4: +6 (fixed average)
+- Level 5: +6 (fixed average)

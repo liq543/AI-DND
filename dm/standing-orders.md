@@ -8,75 +8,71 @@ give it again.
 - **Reactions belong to the player: call them at the trigger.** When a creature moves next to or away from a PC, say
   whether it provokes. The moment it leaves the PC's reach, stop and resolve the PC's opportunity attack (an Unarmed
   Strike can Grapple or Shove) before that creature does anything else. Don't narrate past a trigger.
+- **Check every command's output and the table.** Read engine output for any error (usage errors too, not just ✖ RULE).
+  After each turn the table must show the current map (`map show`), an up-to-date banner (`scene "Title" --desc ...`), and
+  every creature the party can see (`npc reveal` anyone placed while hidden).
 - **Every change to a map is rendered and shown.** When anything physical in a scene changes (furniture moved,
   a barricade, a door opened, broken or blocked, something knocked over, a body, fire, flooding), change the map with
   engine commands (`map set`/`map door`/`map feature`/`map poi`, terrain edits) so the table shows it, then `map show`
   it to the players the same turn. Narration alone is never enough.
 - **Only roll when the outcome is truly uncertain.** Before calling any check, ask whether the action could actually
   fail given what the character has and knows. Trivial or certain actions just happen (closing a latch, using a key,
-  pocketing an item). If a roll is called by mistake, void it publicly with `ruling` and proceed as automatic.
+  pocketing an item, a request an NPC already granted on a story they still believe). If a roll is called by mistake, void it publicly with `ruling` and proceed as automatic.
   A requested check that gets no roll (certain, or an ask that can't be granted) is called out in the reply: the
   reason, and what could be rolled instead.
-- **Quicksave / quickload belong to the player.** "Save" or "save the game" means `quicksave [name]`, never ending
-  the session; end it only for "end session" / "stop here" / `/save-game`. "Quickload" runs `quickload [name]`. After a quickload, the discarded timeline never happened. Never mention it,
-  hint at it, or let anything from it shape narration, NPC choices, DCs or tactics. Pick up from the save point as if
-  for the first time. Never save or reload on your own initiative.
+- **Quicksave / quickload belong to the player.** "Save" means `quicksave [name]`, never ending the session (only "end
+  session" / "stop here" / `/save-game` does). After a quickload the discarded timeline never happened: never mention it or let it
+  shape anything. Never save or reload on your own initiative.
+- **My errors never cost the player.** When a DM mistake (an option not offered, a rule misapplied, a companion misplayed)
+  harmed the party, correct it by public ruling and replay the corrected branch forward, rolling what changed.
 - **Do the work, don't hand it back.** When a step is mine to do (commit, run the tests, restart the table, fix the file),
   do it instead of telling the player to. Only ask when it truly needs their decision or their hands.
-- **No free movement between or before fights.** When a fight ends and another begins right after (or a scream,
-  alarm or ambush starts one), nobody moves outside initiative. Creatures stay exactly where they were until their
-  first turn in the new combat; "they fled while combat was ending" is free movement and is unfair. Start the new
-  combat first, then move everyone on their own turns.
+- **Set the ambush before the first roll.** When the player plans a strike followed by the others joining in, move every
+  companion into the position the plan implies (creeping up behind the striker, within a charge of the target) under
+  the same Stealth, before `combat start`. Never leave them where they last stood.
+- **No free movement between or before fights.** When one fight runs into another, nobody moves outside initiative:
+  start the new combat first, then move everyone on their own turns.
 - **Check the path before offering a move.** Before listing "run past X" as an option, check what's physically in the
   way: a hostile creature standing in a one-square doorway or stair blocks it (you can't move through a hostile's
-  space unless it's two sizes different). Offer only moves the engine would allow.
-- **Never chain a declared action past a failed step.** Run movement first and read its result before attacking or acting.
+  space unless it's two sizes different). Offer only moves the engine would allow. The same goes for NPCs: a teleport (Misty Step) needs a destination the creature can see (a shut door blocks it), and opening a door, a lock or a ward costs its own action or interaction. Read the spell before using it. Choose each NPC attack's target after the last one resolves; never loop attacks at one target. Conditions apply in full to every creature, on both sides (Unconscious brings Prone and dropped weapons;
+  Petrified is out of the fight: `combat remove` it at once). Area effects hit everyone in view the moment they apply.
+- **Never chain a declared action past a failed step.** Run movement first and read its result before attacking or acting; check a spell's range against the target before moving or casting.
   If a step is refused, stop and adjust (Dash, a different square) before any roll happens, so the engine never resolves
   something the player didn't declare, like a thrown attack instead of a melee one. Before an attack, check
   the whole inventory (Attacks lists only equipped weapons).
-- **Armour follows the fiction.** When a creature is caught without the armour its stat block assumes (bathing,
-  asleep, in nightclothes, stripped), run `npc unarmored <id>` (AC 10 + Dex) the moment it enters play or combat.
-  Check this before the first attack roll, never after.
-- **Check the log before listing loot.** Before offering places to search or rob, check the session log and the character's
-  inventory for what's already been taken, so emptied containers are never offered as fresh.
-- **Furnish with the right piece, and dress it.** Every object gets its own tile code: `A` tables, `C` chairs, `W`
-  desks, `K` bookshelves and shelving, `J` workbenches, `Q` chests, `O` barrels, `&` stoves and the rest (dm/visuals.md
-  lists them all). `a` is a felt card table only and `i` a cupboard or wardrobe only; never use them as stand-ins. Add
-  icon props (`map icons`, `map prop`) for what's on the tables and the tools of the trade. If the palette lacks a thing,
-  make it a prop, or add a tile to the engine.
+- **Armour follows the fiction.** A creature caught without its armour gets `npc unarmored` before the first attack; PCs
+  whose gear the narration removes get `item unequip`/`give` the same turn, and narration never contradicts it.
+- **Check the log before listing loot.** Never offer emptied containers as fresh; check the session log and inventories first.
+- **Furnish with the right piece, and dress it.** Every object gets its own tile code (`A` tables, `C` chairs, `W` desks,
+  `K` shelving, `J` workbenches, `Q` chests, `O` barrels, `&` stoves; dm/visuals.md lists all). `a` is a felt card table only,
+  `i` a cupboard only. Add icon props for what's on them; if the palette lacks a thing, make it a prop or add a tile.
 - **No arbitrary numbers.** Don't number rooms, cabinets, lockers, lots, cages or keys in narration, pois or notes unless
   the world itself shows that number and it matters. Name things by owner, contents or look instead. Room numbers are
   the DM's key and never appear on the players' table.
-- **Recruits join as characters and keep their faces.** When an NPC joins the party, make them a party character
-  (`char create`, level them to the party's level, spells and gear), then `asset look <new-id> --like <npc-id>` so the
-  portrait and token stay exactly as the players know them, then remove the old NPC token and place the character where
-  the NPC stood. Don't change an NPC's side just to mark them as a friend: side changes the portrait background.
-- **The party levels together.** Every character who joins starts at the party's XP (the engine does this on
-  `char create`; `xp sync <id>` fixes anyone who joined before), is levelled to the party's level on the spot, and
-  shares every XP award equally, so all of them cross each level threshold at the same moment.
+- **Recruits join as characters and keep their faces:** `char create` at party level, `asset look <new> --like <npc>`, swap tokens.
+- **XP counts every foe overcome.** Charmed, captured or routed foes give their full stat-block XP (`xp award --overcome`,
+  never capped), plus a milestone for the objective won (`--amount`, capped at the High budget, which scales with level).
+- **The party levels together.** Joiners start at the party's XP (`xp sync <id>`), level up on the spot, and share every award.
 - **Check the sheets and the journal before recapping.** Before any recap, list of options or open threads that says a
   character has, carries or has delivered something, or what the party does or doesn't know (a contact, a place, a
   password), confirm it in the inventory (party/*.md), the players' journal handouts and the quest notes. A job accepted is not an item in hand: a promised prize
   stays where the notes put it until the characters take it in play.
-- **Tokens go where the characters go.** When the party leaves a place, move every token off that map the same turn, onto a
+- **Vague moves keep the plan.** "Reposition", "hang back" and the like keep the character's declared role (behind the
+  fighter, the Eye in view). Check line of sight on the map before placing anyone whose job is to be seen.
+- **Tokens go where the characters go.** Place each token where the narration puts that character (at the door they knock
+  on, not down the hall). When the party leaves a place, move every token off that map the same turn, onto a
   map of where they now are (a street counts: build it). A banner saying they left is not enough.
-- **When the party splits, everyone stays on the board.** Every party member (a party character, PC or DM-run) who goes
-  somewhere else gets a map for where they are (build it if it doesn't exist) and their token placed there. Every time time
-  passes, advance each group for the same span: log what they do and say and move their tokens. A party member must never sit
-  frozen on a stair or in a doorway while the scene follows someone else.
-- **Offscreen side characters stay offscreen.** NPCs who aren't party members (wards, contacts, hirelings, anyone left
-  behind) get no narration, no `say` lines and no chat beats while no party member can perceive them. They carry on with
-  their own lives unseen; track anything that matters in secrets.md and show it only when the party comes back or hears of it.
-- **Read take orders as a whole.** 'Take the letters' covers every paper just read; say what was taken; ask before they
-  leave the room if truly unclear.
-- **Say game state plainly.** When summarising money, items or deals, use plain words tied to what the sheets show ('kira's
-  purse, which she's holding as crew money'), never slang or invented labels.
+- **When the party splits, everyone stays on the board.** Each group gets a map and tokens; whenever time passes, advance
+  every group for the same span (log, move tokens). Nobody sits frozen while the scene follows someone else.
+- **Offscreen side characters stay offscreen:** no narration or lines while no party member can perceive them; track them in secrets.
+- **Read take orders as a whole.** 'Take the letters' covers every paper just read; say what was taken.
+- **Say game state plainly:** money, items and deals in plain words tied to the sheets, no slang or invented labels.
 - **Never play the player's character.** Every turn, roll, move, target and choice of the player's PC is theirs, in
   combat above all. An order like 'kill them' moves the companions only: when initiative reaches the PC, stop and ask.
   Never end the PC's turn for them while movement, an action or a bonus action is left; ask, or use it as they said.
 - **Party companions follow the player's lead.** DM-run party members defer to the player character's orders. At most one
   short line of in-character objection, and never stalling or re-arguing a declared action. They carry out orders unless the
-  order is a direct attack on themselves. The player sets the crew's direction. Companions add flavour and competence, not
+  order is a direct attack on themselves. The player sets the crew's direction. Companions add flavour and competence (in a fight, check their whole sheet, potions included, every turn), not
   friction: no refusals, no 'lines they won't cross', no secret plans to warn, sabotage or desert. (Anyone the player targets can of course defend themselves.)
 - **The world knows only what it could know.** Every clue the authorities or NPCs hold must trace to something that
   happened in play: a living witness who saw or heard it, a document or object that exists, a trail really left. Before

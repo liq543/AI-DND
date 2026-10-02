@@ -2,17 +2,17 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Wizard 4** (Evoker) · **Background:** Sage · **XP:** 5567
+**Player:** DM · **Human** · **Wizard 5** (Evoker) · **Background:** Sage · **XP:** 11463
 
-**HP** 26/26 · **AC** 12 (unarmored 10 + Dex 2) · **Speed** 30 ft · **Initiative** +4 · **Proficiency** +2 · **Passive Perception** 11
+**HP** 32/32 · **AC** 12 (unarmored 10 + Dex 2) · **Speed** 30 ft · **Initiative** +5 · **Proficiency** +3 · **Passive Perception** 11
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
 | 8 (-1) | 14 (+2) | 14 (+2) | 19 (+4) | 12 (+1) | 10 (+0) |
 
-**Saves:** STR -1, DEX +2, CON +2, INT +6*, WIS +3*, CHA +0
+**Saves:** STR -1, DEX +2, CON +2, INT +7*, WIS +4*, CHA +0
 
-**Skills:** Acrobatics +2, Animal Handling +1, Arcana +6*, Athletics -1, Deception +2*, History +6*, Insight +3*, Intimidation +0, Investigation +8**, Medicine +1, Nature +4, Perception +1, Performance +0, Persuasion +0, Religion +4, Sleight Of Hand +2, Stealth +2, Survival +1
+**Skills:** Acrobatics +2, Animal Handling +1, Arcana +7*, Athletics -1, Deception +3*, History +7*, Insight +4*, Intimidation +0, Investigation +10**, Medicine +1, Nature +4, Perception +1, Performance +0, Persuasion +0, Religion +4, Sleight Of Hand +2, Stealth +2, Survival +1
 
 **Conditions:** — · **Exhaustion:** 0
 
@@ -20,17 +20,17 @@
 
 | Attack | To hit | Damage | Notes |
 |---|---|---|---|
-| Unarmed Strike | +1 | 0 bludgeoning | reach 5 ft |
+| Unarmed Strike | +2 | 0 bludgeoning | reach 5 ft |
 
 Attacks per Attack action: 1
 
 ## Spellcasting
 
-- **Wizard:** save DC 14, attack +6, cantrips 4, prepared 7, up to level 2
-- **Slots:** L1 4/4, L2 3/3
+- **Wizard:** save DC 15, attack +7, cantrips 4, prepared 9, up to level 3
+- **Slots:** L1 4/4, L2 3/3, L3 2/2
 - **Cantrips:** fire-bolt, mage-hand, minor-illusion, light
-- **Prepared:** detect-magic, identify, shield, sleep, misty-step, knock, invisibility
-- **Spellbook:** detect-magic, identify, shield, sleep, magic-missile, alarm, feather-fall, disguise-self, misty-step, knock, invisibility, suggestion
+- **Prepared:** detect-magic, shield, sleep, magic-missile, misty-step, knock, invisibility, fireball, counterspell
+- **Spellbook:** detect-magic, identify, shield, sleep, magic-missile, alarm, feather-fall, disguise-self, misty-step, knock, invisibility, suggestion, fireball, counterspell
 
 **Granted spells:** prestidigitation (Magic Initiate (Wizard)), message (Magic Initiate (Wizard)), comprehend-languages (Magic Initiate (Wizard))
 
@@ -69,8 +69,12 @@ Species traits: Resourceful, Skillful, Versatile
 - `ink-1` 2× Ink · _purchased for 20 GP_
 - `paper-1` 20× Paper · _purchased for 4 GP_
 - `iron-press-plate-1` 4× Iron press plate · _purchased for 4 GP_
+- `oilcloth-wrap-1` 1× Oilcloth wrap · _purchased for 2 SP_
+- `signal-whistle-1` 1× Signal Whistle · _purchased for 5 CP_
+- `smoked-glass-visor-1` 1× Smoked-glass visor · _gift: Kit, from the Eye's vault_
+- `a-stone-finger-1` 1× A stone finger · _loot: the Curator's remains, her sanctum_
 
-Hit Point Dice: Wizard d6 4/4
+Hit Point Dice: Wizard d6 5/5
 Languages: Common, Elvish, Draconic · Tools: Calligrapher's Supplies · Armor training: none
 
 ## HP history
@@ -79,3 +83,4 @@ Languages: Common, Elvish, Draconic · Tools: Calligrapher's Supplies · Armor t
 - Level 2: +6 (fixed average)
 - Level 3: +6 (fixed average)
 - Level 4: +6 (fixed average)
+- Level 5: +6 (fixed average)

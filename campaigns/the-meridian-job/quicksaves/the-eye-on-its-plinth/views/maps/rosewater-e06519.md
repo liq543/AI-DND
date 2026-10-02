@@ -1,0 +1,48 @@
+# Snapshot — party moved to Soap Lane at Day 3, 11:43 (event 6519)
+
+### The Rosewater Baths (`rosewater`, interior 36×22, lighting bright)
+- Crabbe, the Rosewater Doorman (`rosewater-doorman`, neutral) at (5,9) — DEAD
+- Departing Gentleman (`departing-gentleman`, neutral) at (5,17) — 9/9 HP · hidden
+- Hesper, the Alderman's Lady (`the-aldermans-lady`, neutral) at (34,1) — DEAD
+- Lettie (`rosewater-attendant`, neutral) at (18,20) — DEAD
+- Master Pellow (`master-pellow`, neutral) at (3,4) — DEAD
+- container `cab-9`: Cabinet 9 at (5,8)
+- point of interest `poi-1`: Gentlemen's changing room at (3,15) → journal j47
+- point of interest `poi-2`: Ladies' changing room at (30,15) → journal j48
+- point of interest `poi-3`: Staff door at (34,15) → journal j49
+- point of interest `poi-4`: The Nymph Fountain at (17,17) → journal j50
+- point of interest `poi-5`: The Towel Counter at (30,17) → journal j51
+- point of interest `poi-6`: Gentlemen's Cabinets at (3,8) → journal j52
+- point of interest `poi-7`: Ladies' Cabinets at (30,8) → journal j53
+- point of interest `poi-8`: Arch to the Warm Hall at (7,11) → journal j54
+- point of interest `poi-9`: Arch to the Warm Hall at (28,11) → journal j55
+- point of interest `poi-10`: Service Door at (33,12) → journal j56
+- point of interest `poi-11`: The Warm Pool at (17,11) → journal j58
+- point of interest `poi-12`: Statue: Spring at (9,8) → journal j59
+- point of interest `poi-13`: Statue: Summer at (26,8) → journal j60
+- point of interest `poi-14`: Statue: Autumn at (9,14) → journal j61
+- point of interest `poi-15`: Statue: Winter at (26,14) → journal j62
+- point of interest `poi-16`: Arches to the Hot Room at (13,7) → journal j63
+- point of interest `poi-17`: The Hot Pool at (17,4) → journal j64
+- point of interest `poi-18`: The Apse Statue at (17,1) → journal j65
+- point of interest `poi-19`: Private Bath A at (7,2) → journal j66
+- point of interest `poi-22`: Slatted Bench at (5,5) → journal j70
+- point of interest `poi-23`: Wall Lamp at (1,6) → journal j71
+- point of interest `poi-24`: Private Bath B (door) at (7,5) → journal j72
+- point of interest `poi-25`: Plain Door (Hot Room) at (28,4) → journal j73
+- point of interest `poi-26`: Cabinet 8 (Pell's) at (4,8) → journal j76
+- point of interest `poi-27`: Twin Copper Tubs (bloodied) at (2,5) → journal j77
+- point of interest `poi-28`: The Front Doors at (17,21) → journal j78
+- point of interest `poi-29`: Cabinet 10 (gouged) at (6,8) → journal j79
+- point of interest `poi-30`: Crabbe, half in cabinet 9 at (5,9) → journal j81
+- point of interest `poi-31`: Robe pegs (bare) at (1,11) → journal j82
+- point of interest `poi-32`: Bench barricade at (6,11) → journal j83
+- point of interest `poi-33`: Spilled oils at (18,19) → journal j84
+- point of interest `poi-34`: Lettie's body at (19,20) → journal j85
+- point of interest `poi-35`: The Stoke-hole Stair at (34,1) → journal j86
+- point of interest `poi-36`: Copper Laundry Tub at (31,4) → journal j87
+- point of interest `poi-37`: Hesper's Body at (33,1) → journal j88
+- point of interest `poi-38`: Cabinets 12, 14 and 15 (open) at (31,8) → journal j99
+- point of interest `poi-39`: The Till (emptied) at (31,16) → journal j100
+- doors: (7,2) closed, (28,4) open, (7,5) closed, (13,7) open, (14,7) open, (21,7) open, (22,7) open, (34,7) open, (7,11) closed, (28,11) open, (33,12) open, (3,15) closed, (30,15) open, (34,15) open, (17,21) closed, (18,21) closed
+- labels: Foyer (17,18), Towel counter (30,18), Nymph fountain (17,19), Warm hall (17,11), Hot room (17,2)

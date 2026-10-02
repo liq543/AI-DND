@@ -175,6 +175,158 @@ class EngineTest(unittest.TestCase):
             self.ok("npc", "remove", "mark")
             self.ok("char", "remove", "nix")
 
+    def test_invisibility_ends_after_an_attack_roll(self):
+        # Invisibility (the spell) ends right after the target makes an attack roll; Greater Invisibility doesn't
+        self.ok("place", "kira", "8,8", "--map", "arena")
+        self.ok("npc", "add", "bandit", "--name", "Mark", "--at", "9,8", "--map", "arena")
+        self.ok("condition", "add", "kira", "invisible", "--spell", "invisibility", "--source", "Invisibility")
+        self.ok("condition", "add", "mark", "unconscious", "--source", "Sleep")  # Unconscious brings Prone with it
+        from engine import mechanics as M
+        self.assertIn("prone", M.condition_names(self.state().get("mark")))
+        self.ok("condition", "remove", "mark", "unconscious")
+        self.ok("condition", "remove", "mark", "prone")
+        self.ok("combat", "start")
+        try:
+            from engine import mechanics as M
+            for _ in range(6):
+                if M.current_id(self.state()) == "kira":
+                    break
+                self.ok("combat", "next")
+            if M.current_id(self.state()) == "kira":
+                out = self.ok("attack", "kira", "mark")
+                self.assertIn("attacker invisible", out)
+                self.assertNotIn("invisible", M.condition_names(self.state().get("kira")))
+                self.assertIn("no longer Invisible", out)
+        finally:
+            self.ok("combat", "end")
+            self.ok("npc", "remove", "mark")
+
+    def test_adrenaline_rush_dashes_and_grants_temp_hp(self):
+        # Orc trait: Dash as a Bonus Action, gaining Temporary HP equal to the Proficiency Bonus
+        self.ok("char", "create", "--name", "Grom Tusk", "--class", "Fighter", "--species", "Orc", "--background", "Soldier",
+                "--method", "standard", "--scores", "str=15,dex=13,con=14,int=8,wis=12,cha=10", "--bonus", "str+2,con+1",
+                "--skills", "acrobatics,perception", "--languages", "Orc,Dwarvish", "--masteries", "greatsword,longbow,spear", "--fighting-style", "Defense")
+        try:
+            self.ok("feature", "grom", "adrenaline rush")
+            self.assertEqual(self.state().get("grom").get("temp_hp"), 2)
+            # Relentless Endurance: the first drop to 0 HP leaves the orc at 1 HP; the next one doesn't
+            hp = self.state().get("grom")["hp"]
+            self.ok("damage", "grom", str(hp + 2 + 1), "slashing", "--source", "falling rocks")
+            self.assertEqual(self.state().get("grom")["hp"], 1)
+            self.ok("damage", "grom", "1", "slashing", "--source", "falling rocks")
+            self.assertEqual(self.state().get("grom")["hp"], 0)
+        finally:
+            self.ok("char", "remove", "grom")
+
+    def test_falling_unconscious_drops_weapons_and_knocks_prone(self):
+        # rules glossary, Unconscious: Incapacitated and Prone, and you drop whatever you're holding
+        self.ok("char", "create", "--name", "Vell Marr", "--class", "Rogue", "--species", "Human", "--background", "Criminal",
+                "--method", "standard", "--scores", "str=8,dex=15,con=14,int=10,wis=12,cha=13", "--bonus", "dex+2,con+1",
+                "--skills", "perception,investigation,deception,acrobatics", "--languages", "Elvish,Halfling",
+                "--species-skill", "insight", "--species-feat", "Alert", "--expertise", "stealth,perception",
+                "--masteries", "dagger,shortbow")
+        try:
+            self.ok("place", "vell", "11,11", "--map", "arena")
+            g = self.state()
+            held = [i["name"] for i in g.get("vell")["inventory"] if i.get("equipped") and i.get("kind") == "weapon"]
+            self.ok("damage", "vell", str(g.get("vell")["hp"]), "slashing", "--source", "falling rocks")
+            g = self.state()
+            from engine import mechanics as M
+            self.assertIn("prone", M.condition_names(g.get("vell")))
+            self.assertFalse([i for i in g.get("vell")["inventory"] if i.get("equipped") and i.get("kind") == "weapon"])
+            floor = [f["item"]["name"] for f in g.state["maps"]["arena"].get("floor", []) if (f["x"], f["y"]) == (11, 11)]
+            for name in held:
+                self.assertIn(name, floor)
+        finally:
+            self.ok("char", "remove", "vell")
+
+    def test_pick_up_a_weapon_as_part_of_an_attack(self):
+        # rules glossary, Attack action: equipping a weapon (including picking it up) can go with each attack
+        self.ok("place", "kira", "10,10", "--map", "arena")
+        self.ok("npc", "add", "bandit", "--name", "Mark", "--at", "11,10", "--map", "arena")
+        self.ok("item", "add", "kira", "Sickle", "--source", "found: a spare sickle")
+        self.ok("item", "add", "kira", "Light Hammer", "--source", "found: a spare hammer")
+        inv = self.state().get("kira")["inventory"]
+        dagger = next(i["id"] for i in inv if i.get("base_name") == "Sickle")
+        axe = next(i["id"] for i in inv if i.get("base_name") == "Light Hammer")
+        self.ok("item", "drop", "kira", dagger)
+        self.ok("item", "drop", "kira", axe)
+        self.ok("combat", "start")
+        try:
+            from engine import mechanics as M
+            for _ in range(6):
+                if M.current_id(self.state()) == "kira":
+                    break
+                self.ok("combat", "next")
+            if M.current_id(self.state()) == "kira":
+                floor = [f["id"] for f in self.state().state["maps"]["arena"]["floor"] if (f["x"], f["y"]) == (10, 10)]
+                self.ok("item", "pickup", "kira", floor[0])
+                self.rule("item", "pickup", "kira", floor[1], contains="with-attack")
+                self.ok("item", "pickup", "kira", floor[1], "--with-attack")
+                # a third pickup needs the Utilize action
+                self.ok("item", "add", "kira", "Club", "--source", "found: a club")
+                club = next(i["id"] for i in self.state().get("kira")["inventory"] if i.get("base_name") == "Club")
+                self.ok("item", "drop", "kira", club)
+                fl = [f["id"] for f in self.state().state["maps"]["arena"]["floor"] if f["item"]["name"] == "Club"]
+                self.rule("item", "pickup", "kira", fl[0])
+                self.ok("action", "kira", "utilize")
+                self.ok("item", "pickup", "kira", fl[0])
+                picked = [i for i in self.state().get("kira")["inventory"] if i.get("base_name") in ("Sickle", "Light Hammer")]
+                self.assertTrue(all(i.get("equipped") for i in picked))
+        finally:
+            self.ok("combat", "end")
+            self.ok("npc", "remove", "mark")
+            for i in [i["id"] for i in self.state().get("kira")["inventory"] if i.get("base_name") in ("Sickle", "Light Hammer", "Club")]:
+                self.ok("item", "give", "kira", i, "--to", "wren") if self.state().entities.get("wren") else self.ok("item", "drop", "kira", i)
+
+    def test_deathsave_void_fails_needs_a_reason(self):
+        self.rule("deathsave", "kira", "--void-fails", "1")
+
+    def test_undo_death_needs_an_override_and_a_dead_creature(self):
+        self.rule("heal", "kira", "0", "--undo-death")
+        self.rule("heal", "kira", "0", "--undo-death", "--override", "test", contains="isn't dead")
+
+    def test_overcome_foes_give_their_full_stat_block_xp(self):
+        # a captured or routed foe is worth its stat-block XP, uncapped by the story-award budget (a dragon is a dragon)
+        self.ok("npc", "add", "adult-red-dragon", "--name", "Ember", "--at", "20,20", "--map", "arena")
+        try:
+            before = {e["id"]: e.get("xp", 0) for e in self.state().pcs()}
+            self.rule("xp", "award", "--overcome", "ember")  # needs a reason
+            self.ok("xp", "award", "--overcome", "ember", "--reason", "driven off for good")
+            after = {e["id"]: e.get("xp", 0) for e in self.state().pcs()}
+            gained = sum(after[k] - before[k] for k in after)
+            self.assertGreaterEqual(gained, 18000 - len(after))  # Adult Red Dragon, CR 17: 18,000 XP split
+            self.rule("xp", "award", "--overcome", "ember", "--reason", "again", contains="already")
+        finally:
+            self.ok("npc", "remove", "ember")
+
+    def test_hit_dice_stop_at_full_hp(self):
+        g = self.state()
+        hp = g.get("kira")["hp"]
+        self.ok("damage", "kira", "1", "slashing", "--source", "a paper cut")
+        out = self.ok("rest", "short", "--who", "kira", "--hd", "kira:3")
+        self.assertIn("keeps the rest", out)
+        self.rule("rest", "short", "--refund-hd", "kira:1")  # needs a reason
+
+    def test_feature_refund_needs_a_spent_use(self):
+        self.ok("feature", "kira", "second wind")
+        self.ok("feature", "kira", "second wind", "--refund", "used by mistake")
+        self.rule("feature", "kira", "action surge", "--refund", "never used")
+
+    def test_petrified_creatures_get_no_turns(self):
+        self.ok("place", "kira", "15,15", "--map", "arena")
+        self.ok("npc", "add", "bandit", "--name", "Statue", "--at", "16,15", "--map", "arena")
+        self.ok("condition", "add", "statue", "petrified", "--source", "a basilisk")
+        self.ok("combat", "start")
+        try:
+            from engine import mechanics as M
+            for _ in range(4):
+                self.assertNotEqual(M.current_id(self.state()), "statue")
+                self.ok("combat", "next")
+        finally:
+            self.ok("combat", "end")
+            self.ok("npc", "remove", "statue")
+
     def test_alert_initiative_swap(self):
         self.ok("place", "kira", "5,5", "--map", "arena")
         self.ok("place", "wren", "6,6", "--map", "arena")

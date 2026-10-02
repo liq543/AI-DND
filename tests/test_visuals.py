@@ -174,6 +174,20 @@ class VisualsCliTest(unittest.TestCase):
         self.rule("journal", "file", "j9999", "--as", "clue")
         self.rule("journal", "file", j["Old Well"]["id"])
 
+    def test_map_unlabel_removes_a_stale_label(self):
+        self.ok("map", "label", "arena", "3,3", "--name", "Gate (down)")
+        self.ok("map", "label", "arena", "4,4", "--name", "Old Mill")
+        self.ok("map", "unlabel", "arena", "3,3")
+        texts = [l["text"] for l in self.game().state["maps"]["arena"]["labels"]]
+        self.assertNotIn("Gate (down)", texts)
+        self.assertIn("Old Mill", texts)
+        self.rule("map", "unlabel", "arena", "3,3")
+
+    def test_map_set_takes_several_settings(self):
+        self.ok("map", "set", "arena", "--kv", "theme=stone", "--kv", "walls=ashlar", "--kv", "lighting=dim")
+        m = self.game().state["maps"]["arena"]
+        self.assertEqual((m.get("theme"), m.get("style_walls"), m.get("lighting")), ("stone", "ashlar", "dim"))
+
     def test_asset_look_and_art(self):
         out = self.ok("asset", "look", "kira", "--hair", "long silver braid", "--eyes", "green")
         self.assertIn("hair braid", out)

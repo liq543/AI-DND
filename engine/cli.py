@@ -539,7 +539,8 @@ def cmd_combat(g, a):
                 # reactions refresh at the start of each creature's turn; reset per-turn economy
             nid = c["order"][c["turn"]]["id"]
             ne = g.entities.get(nid)
-            if ne and not ne.get("dead") and not (ne["kind"] != "pc" and ne["hp"] <= 0):
+            # the dead, the downed foes and the petrified (stone: out of the fight) get no turns
+            if ne and not ne.get("dead") and not (ne["kind"] != "pc" and ne["hp"] <= 0)                     and "petrified" not in M.condition_names(ne):
                 break
         c["economy"] = {**c.get("economy", {}), nid: {}}
         g.emit("combat.set", combat=c)
@@ -549,9 +550,16 @@ def cmd_combat(g, a):
         return
     if a.action == "add":
         e = g.get(a.ids)
-        r = M.roll_initiative(g, e, now=True)
+        if getattr(a, "init", None) is not None:
+            # repair: a creature removed by mistake rejoins at the initiative it already rolled (logged publicly)
+            if not a.reason:
+                raise RuleError('combat add <id> --init N --reason "..." (restoring an initiative already rolled)')
+            r = {"total": int(a.init)}
+            g.override(a.reason, f"{e['name']} rejoins at initiative {a.init}")
+        else:
+            r = M.roll_initiative(g, e, now=True)
         c = dict(c)
-        c["order"] = sorted(c["order"] + [{"id": e["id"], "init": r["total"], "tie": derive(e)["init"]}],
+        c["order"] = sorted([o for o in c["order"] if o["id"] != e["id"]] + [{"id": e["id"], "init": r["total"], "tie": derive(e)["init"]}],
                             key=lambda o: (-o["init"], -o["tie"]))
         cur = M.current_id(g)
         c["turn"] = next(i for i, o in enumerate(c["order"]) if o["id"] == cur)
@@ -678,6 +686,12 @@ def cmd_action(g, a):
         ec = M.economy(g, e["id"])
         g and M.combat(g) and M.set_economy(g, e["id"], **({"dashed2": True} if ec.get("dashed") else {"dashed": True}))
         g.say(f"{e['name']} takes the Dash action (extra movement equal to Speed).", kind="action")
+    elif name == "utilize":
+        # the Utilize action covers an object interaction beyond the free one (picking up a second item, etc.)
+        if M.combat(g):
+            ec = M.economy(g, e["id"])
+            M.set_economy(g, e["id"], utilize_credit=ec.get("utilize_credit", 0) + 1)
+        g.say(f"{e['name']} takes the Utilize action" + (f" ({a.note})" if a.note else "") + ".", kind="action")
     elif name == "disengage":
         M.combat(g) and M.set_economy(g, e["id"], disengaged=True)
         g.say(f"{e['name']} Disengages — no Opportunity Attacks this turn.", kind="action")
@@ -795,6 +809,24 @@ def cmd_damage(g, a):
 
 def cmd_heal(g, a):
     e = g.get(a.who)
+    if getattr(a, "undo_death", False):
+        # repair: a death that came from a voided DM error is undone (public; never a substitute for a resurrection)
+        if not a.override:
+            raise RuleError('heal <id> <hp> --undo-death --override "the DM error being corrected"')
+        if not e.get("dead"):
+            raise RuleError(f"{e['name']} isn't dead.")
+        g.override(a.override, f"death of {e['name']} undone")
+        hp = int(a.amount) if re.fullmatch(r"\d+", a.amount) else 0
+        g.set(e, dead=False, hp=hp, death={"success": 0, "fail": 0, "stable": False})
+        c = M.combat(g)
+        if c and e["id"] in c.get("defeated", []):
+            cc = dict(c)
+            cc["defeated"] = [x for x in c["defeated"] if x != e["id"]]
+            g.emit("combat.set", combat=cc)
+        if hp == 0 and e["kind"] == "pc":
+            M.add_condition(g, g.get(e["id"]), "unconscious", source="0 HP", quiet=True)
+        g.say(f"⚖ {e['name']} is not dead after all: {hp} HP" + (", Unconscious and dying" if hp == 0 and e["kind"] == "pc" else "") + ".", kind="info")
+        return
     if e["kind"] == "pc" or e.get("side") == "ally":
         if not a.override:
             raise RuleError("Healing a party member must come from a mechanic: `cast` (healing spell), `item use` (potion), "
@@ -851,7 +883,7 @@ def cmd_exhaustion(g, a):
     g.say(msg, kind="condition")
 
 
-FEATURE_ACTIONS = {"Second Wind": "bonus", "Rage": "bonus", "Lay On Hands": "bonus", "Bardic Inspiration": "bonus",
+FEATURE_ACTIONS = {"Second Wind": "bonus", "Adrenaline Rush": "bonus", "Rage": "bonus", "Lay On Hands": "bonus", "Bardic Inspiration": "bonus",
                    "Channel Divinity": "action", "Wild Shape": "bonus", "Action Surge": None, "Innate Sorcery": "bonus",
                    "Indomitable": None, "Arcane Recovery": None, "Magical Cunning": None, "Favored Enemy": None,
                    "Focus Points": None, "Sorcery Points": None, "Divine Intervention": "action",
@@ -867,6 +899,13 @@ def cmd_feature(g, a):
     if not key and not has_feature(e, name):
         raise RuleError(f"{e['name']} doesn't have the feature '{name}' (check the class table in rules/classes/).")
     amount = a.amount or 1
+    if getattr(a, "refund", None):
+        if not key or not res[key]["used"]:
+            raise RuleError(f"{e['name']} has no spent use of '{name}' to refund.")
+        g.set(e, **{f"resources_used__{key}": res[key]["used"] - 1})
+        g.override(a.refund, f"one use of {key} refunded to {e['name']}")
+        g.say(f"⚖ {e['name']}: one use of {key} refunded.", kind="info")
+        return
     if key:
         info = res[key]
         if key == "Lay On Hands":
@@ -896,6 +935,31 @@ def cmd_feature(g, a):
     elif k == "lay on hands":
         t = g.get(a.target) if a.target else e
         M.heal(g, t, amount, "Lay On Hands")
+    elif k == "adrenaline rush":
+        # rules/core/04-character-origins.md (Orc): Dash as a Bonus Action, gaining Temporary HP equal to Proficiency Bonus
+        if M.combat(g):
+            ec = M.economy(g, e["id"])
+            M.set_economy(g, e["id"], **({"dashed2": True} if ec.get("dashed") else {"dashed": True}))
+        from .core import pb_for_level, level as level_of
+        pb = pb_for_level(level_of(e))
+        g.say(f"✦ {e['name']} uses Adrenaline Rush: Dash as a Bonus Action.", kind="action")
+        M.temp_hp(g, e, pb, "Adrenaline Rush")
+    elif k == "arcane recovery":
+        # rules/classes/wizard.md: on a Short Rest, recover expended slots whose levels total up to half the wizard level
+        # (rounded up), none of level 6+. --note lists the slot levels, e.g. "1,1" or "2".
+        wiz = e["classes"].get("Wizard", 0)
+        levels = [int(x) for x in re.findall(r"\d+", a.note or "")]
+        if not levels:
+            raise RuleError('Arcane Recovery: say which slots, e.g. --note "1,1" or --note "2"')
+        if sum(levels) > (wiz + 1) // 2 or any(l >= 6 for l in levels):
+            raise RuleError(f"Arcane Recovery recovers slots totalling at most {(wiz + 1) // 2} levels, none of level 6+.")
+        used = dict(e.get("slots_used", {}))
+        for l in levels:
+            if used.get(str(l), 0) <= 0:
+                raise RuleError(f"{e['name']} has no expended level {l} slot to recover.")
+            used[str(l)] -= 1
+        g.set(e, slots_used=used)
+        g.say(f"📖 {e['name']} uses Arcane Recovery: regains level {', '.join(map(str, levels))} slot(s).", kind="action")
     elif k == "action surge":
         if not M.combat(g) or M.current_id(g) != e["id"]:
             raise RuleError("Action Surge is used on your turn in combat.")
@@ -929,7 +993,22 @@ def cmd_bardic(g, a):
 
 
 def cmd_deathsave(g, a):
-    M.death_save(g, g.get(a.who), now=a.now)
+    e = g.get(a.who)
+    if a.void_fails is not None:
+        if a.void_fails < 1:
+            raise RuleError("--void-fails needs a number of failures (1-3).")
+        # repair: strike death save failures that came from a voided roll (logged publicly)
+        if not a.reason:
+            raise RuleError('deathsave <who> --void-fails N --reason "..." (after voiding the roll with `ruling`)')
+        d = dict(e.get("death") or {})
+        if e.get("dead"):
+            raise RuleError(f"{e['name']} is dead; use quickload if the player asks, or a ruling first.")
+        d["fail"] = max(0, d.get("fail", 0) - a.void_fails)
+        g.set(e, death=d)
+        g.override(a.reason, f"{a.void_fails} death save failure(s) struck from {e['name']}")
+        g.say(f"⚖ {e['name']}: {a.void_fails} death save failure(s) struck ({d['fail']} remain).", kind="info")
+        return
+    M.death_save(g, e, now=a.now)
 
 
 def cmd_stabilize(g, a):
@@ -954,6 +1033,25 @@ def cmd_legendary(g, a):
 
 
 def cmd_rest(g, a):
+    if getattr(a, "refund_hd", None):
+        # repair: give back Hit Point Dice spent by mistake (logged publicly); no rest is taken
+        if not a.reason:
+            raise RuleError('rest short --refund-hd kira:1 --reason "..."')
+        for part in ids(a.refund_hd):
+            k, _, n = part.partition(":")
+            e = g.get(k)
+            spent = dict(e.get("hd_spent", {}))
+            left = int(n or 1)
+            for cls in sorted(spent, key=lambda c: -spent[c]):
+                take = min(left, spent[cls])
+                spent[cls] -= take
+                left -= take
+            if left:
+                raise RuleError(f"{e['name']} hasn't spent that many Hit Point Dice.")
+            g.set(e, hd_spent=spent)
+            g.override(a.reason, f"{n or 1} Hit Point Die refunded to {e['name']}")
+            g.say(f"⚖ {e['name']}: {n or 1} Hit Point Die refunded.", kind="info")
+        return
     members = [g.get(i) for i in ids(a.who)] if a.who else [e for e in g.pcs() if not e.get("dead")]
     if a.kind == "short":
         hd = {}
@@ -1071,7 +1169,7 @@ def cmd_item(g, a):
             raise RuleError("give needs --to")
         M.remove_item(g, e, a.item, a.qty, "dropped" if a.action == "drop" else a.source or "removed", sell=a.action == "sell", to=to)
     elif a.action == "pickup":
-        M.pick_up(g, e, a.item)
+        M.pick_up(g, e, a.item, with_attack=getattr(a, 'with_attack', False))
     elif a.action == "stash":
         if not a.to:
             raise RuleError("item stash <who> <item-id> --to <container-id> [--qty N]  (see `map container`)")
@@ -1213,9 +1311,28 @@ def cmd_xp(g, a):
                                 "— for routed/captured foes use `npc` damage/conditions first, or --amount with a reason).")
             M.award_xp(g, members, last["xp"], "combat encounter")
             g.emit("encounter.log", awarded_encounter=len(encs))
+        elif a.overcome:
+            # stat-block XP for foes overcome without being killed (captured, charmed and taken, routed, surrendered).
+            # This is the creatures' own XP, so it isn't capped by the story-award budget: a dragon is worth a dragon.
+            if not a.reason:
+                raise RuleError('xp award --overcome <ids> --reason "how they were overcome (captured, routed...)"')
+            done = {d for x in g.state["encounters"] for d in x.get("defeated", [])}
+            total, names = 0, []
+            for cid in ids(a.overcome):
+                e = g.get(cid)
+                if e["kind"] == "pc":
+                    raise RuleError(f"{e['name']} is a party character.")
+                if e.get("xp_awarded") or (e.get("dead") and e["id"] in done):
+                    raise RuleError(f"XP for {e['name']} was already awarded.")
+                if not e.get("xp"):
+                    raise RuleError(f"{e['name']} has no XP value in its stat block.")
+                total += e["xp"]
+                names.append(f"{e['name']} ({e['xp']})")
+                g.set(e, xp_awarded=True)
+            M.award_xp(g, members, total, f"{a.reason}: " + ", ".join(names))
         else:
             if not a.amount or not a.reason:
-                raise RuleError("xp award --encounter, or --amount N --reason \"quest/trap/social encounter overcome\"")
+                raise RuleError("xp award --encounter, --overcome <ids>, or --amount N --reason \"quest/trap/social encounter overcome\"")
             budget = srd.data()["xp_budget"][g.party_level()]["high"] * len(members)
             if a.amount > budget and not a.override:
                 raise RuleError(f"{a.amount} XP exceeds a High-difficulty encounter's budget for this party ({budget}). "
@@ -1246,6 +1363,26 @@ def cmd_xp(g, a):
 
 
 # ====================================================================== maps
+
+def _map_set_one(g, s, m, kv):
+    k, _, v = kv.partition("=")
+    styles = {"walls": render.WALL_STYLES, "floor": render.FINE_STYLES, "wood": render.WOOD_STYLES, "stone": render.STONE_STYLES}
+    if k not in ("name", "lighting", "fog", "theme", "accent", *styles):
+        raise RuleError("map set name=...|lighting=bright|dim|dark|fog=true|false|theme=" + "|".join(render.THEMES) +
+                        "|" + "|".join(f"{s}={'/'.join(o)}" for s, o in styles.items()) + "|accent=#rrggbb")
+    if k in styles and v not in styles[k]:
+        raise RuleError(f"{k}: " + "|".join(styles[k]))
+    if k == "accent" and not re.fullmatch(r"#[0-9a-fA-F]{6}", v):
+        raise RuleError("accent: a colour like #c9a14a")
+    val = v if k != "fog" else v.lower() == "true"
+    if k == "lighting" and v not in ("bright", "dim", "dark"):
+        raise RuleError("lighting: bright|dim|dark")
+    if k == "theme" and v not in render.THEMES:
+        raise RuleError("theme: " + "|".join(render.THEMES))
+    g.emit("map.set", id=m["id"], set={(f"style_{k}" if k in styles else k): val})
+    if k in ("lighting", "fog"):
+        _reveal_pcs_on(g, m["id"])
+
 
 def cmd_map(g, a):
     s = g.state
@@ -1368,23 +1505,10 @@ def cmd_map(g, a):
         g.emit("map.set", id=m["id"], set={"grid": ["".join(r) for r in grid]})
     elif a.action == "set":
         m = s["maps"][a.target]
-        k, _, v = a.kv.partition("=")
-        styles = {"walls": render.WALL_STYLES, "floor": render.FINE_STYLES, "wood": render.WOOD_STYLES, "stone": render.STONE_STYLES}
-        if k not in ("name", "lighting", "fog", "theme", "accent", *styles):
-            raise RuleError("map set name=...|lighting=bright|dim|dark|fog=true|false|theme=" + "|".join(render.THEMES) +
-                            "|" + "|".join(f"{s}={'/'.join(o)}" for s, o in styles.items()) + "|accent=#rrggbb")
-        if k in styles and v not in styles[k]:
-            raise RuleError(f"{k}: " + "|".join(styles[k]))
-        if k == "accent" and not re.fullmatch(r"#[0-9a-fA-F]{6}", v):
-            raise RuleError("accent: a colour like #c9a14a")
-        val = v if k != "fog" else v.lower() == "true"
-        if k == "lighting" and v not in ("bright", "dim", "dark"):
-            raise RuleError("lighting: bright|dim|dark")
-        if k == "theme" and v not in render.THEMES:
-            raise RuleError("theme: " + "|".join(render.THEMES))
-        g.emit("map.set", id=m["id"], set={(f"style_{k}" if k in styles else k): val})
-        if k in ("lighting", "fog"):
-            _reveal_pcs_on(g, m["id"])
+        if not a.kv:
+            raise RuleError("map set <id> --kv key=value [--kv key=value ...]")
+        for kv in a.kv:
+            _map_set_one(g, s, m, kv)
     elif a.action == "party":
         x, y = xy(a.target)
         g.emit("view.set", party_pos=[x, y])
@@ -1536,6 +1660,14 @@ def cmd_map(g, a):
         m = s["maps"][a.target]
         x, y = xy(a.at)
         g.emit("map.set", id=m["id"], set={"labels": m["labels"] + [{"x": x, "y": y, "text": a.name, "hidden": a.hidden}]})
+    elif a.action == "unlabel":
+        m = s["maps"][a.target]
+        x, y = xy(a.at)
+        keep = [l for l in m["labels"] if (l["x"], l["y"]) != (x, y)]
+        if len(keep) == len(m["labels"]):
+            raise RuleError(f"No label at ({x},{y}) on {m['id']}.")
+        g.emit("map.set", id=m["id"], set={"labels": keep})
+        print(f"🏷 Label removed at ({x},{y}) on {m['name']}.")
     elif a.action == "from-image":
         asset = s["assets"].get(a.target)
         if not asset:
@@ -2353,6 +2485,7 @@ def build_parser():
     c.add_argument("ids", nargs="?")
     c.add_argument("--surprised")
     c.add_argument("--reason")
+    c.add_argument("--init", type=int, help="repair: rejoin at an initiative already rolled (needs --reason)")
     c = sp.add_parser("action", help="take an SRD action (dash, dodge, help, hide, ...)")
     c.add_argument("who")
     c.add_argument("name")
@@ -2445,6 +2578,7 @@ def build_parser():
     c.add_argument("amount")
     c.add_argument("--source")
     c.add_argument("--override")
+    c.add_argument("--undo-death", action="store_true", help="repair: undo a death caused by a voided DM error (needs --override)")
     c = sp.add_parser("temphp")
     c.add_argument("who")
     c.add_argument("amount")
@@ -2471,11 +2605,14 @@ def build_parser():
     c.add_argument("--amount", type=int)
     c.add_argument("--target")
     c.add_argument("--note")
+    c.add_argument("--refund", help='repair: give back one use spent by mistake (the reason, shown publicly)')
     c = sp.add_parser("bardic", help="spend a Bardic Inspiration die")
     c.add_argument("who")
     c = sp.add_parser("deathsave")
     c.add_argument("who")
     c.add_argument("--now", action="store_true")
+    c.add_argument("--void-fails", type=int, help="repair: strike failures from a voided roll (needs --reason)")
+    c.add_argument("--reason")
     c = sp.add_parser("stabilize")
     c.add_argument("helper")
     c.add_argument("who")
@@ -2486,6 +2623,8 @@ def build_parser():
     c.add_argument("--who")
     c.add_argument("--hd", help="hit dice to spend: kira:2,bob:1")
     c.add_argument("--focus", help="short rest: identify a magic item by focusing on it, kira:item-id (one per creature)")
+    c.add_argument("--refund-hd", help="repair: refund Hit Point Dice spent by mistake, kira:1 (needs --reason; takes no rest)")
+    c.add_argument("--reason")
     c = sp.add_parser("time", help="advance in-world time")
     c.add_argument("amount")
     c.add_argument("--reason")
@@ -2496,6 +2635,7 @@ def build_parser():
     c.add_argument("--map")
 
     c = sp.add_parser("item", help="add|remove|drop|stash|pickup|sell|give|equip|unequip|attune|unattune|use|light|note|unpack|identify|obscure|refresh|recover-ammo|card")
+    c.add_argument("--with-attack", action="store_true", help="pickup: pick up a weapon as part of an attack (one per attack)")
     c.add_argument("action")
     c.add_argument("who")
     c.add_argument("item")
@@ -2520,6 +2660,7 @@ def build_parser():
     c.add_argument("action", choices=["award", "milestone", "sync"])
     c.add_argument("who", nargs="?", help="sync: the character to bring up to the party's XP")
     c.add_argument("--encounter", action="store_true")
+    c.add_argument("--overcome", help="ids of foes overcome without being killed (captured, routed): their stat-block XP, uncapped")
     c.add_argument("--amount", type=int)
     c.add_argument("--reason")
     c.add_argument("--override")
@@ -2531,7 +2672,7 @@ def build_parser():
     c.add_argument("--hidden", action="store_true")
     c.add_argument("--override")
 
-    c = sp.add_parser("map", help="gen|list|show|reveal|hide|door|feature|crop|paint|set|party|label|poi|poi-move|poi-remove|container|container-remove|from-image|render|ascii")
+    c = sp.add_parser("map", help="gen|list|show|reveal|hide|door|feature|crop|paint|set|party|label|unlabel|poi|poi-move|poi-remove|container|container-remove|from-image|render|ascii")
     c.add_argument("action")
     c.add_argument("target", nargs="?")
     c.add_argument("at", nargs="?")
@@ -2551,7 +2692,7 @@ def build_parser():
     c.add_argument("--rect")
     c.add_argument("--pad", type=int, default=2)
     c.add_argument("--char")
-    c.add_argument("--kv")
+    c.add_argument("--kv", action="append", help="map set: key=value; repeat --kv for several settings")
     c.add_argument("--ftype")
     c.add_argument("--hidden", action="store_true")
     c.add_argument("--dm", action="store_true")

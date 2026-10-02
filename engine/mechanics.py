@@ -319,6 +319,12 @@ def apply_damage(g, e, parts, source=None, crit=False, attacker=None, melee_with
             if overflow >= hp_max(e):
                 patch["dead"] = True
                 msg += f" — massive damage ({overflow} over 0 ≥ max HP {hp_max(e)}): {e['name']} DIES instantly."
+            elif "relentless endurance" in [t.lower() for t in e.get("species_traits", [])]                     and not e.get("resources_used", {}).get("Relentless Endurance"):
+                # Orc trait (rules/core/04-character-origins.md): drop to 1 HP instead, once per Long Rest
+                new_hp = 1
+                patch["hp"] = 1
+                patch["resources_used"] = {**e.get("resources_used", {}), "Relentless Endurance": 1}
+                msg += f" and would drop to 0 HP — Relentless Endurance: {e['name']} stays up at 1 HP."
             else:
                 msg += f" and drops to 0 HP — Unconscious, making death saving throws."
                 patch["death"] = {"success": 0, "fail": 0, "stable": False}
@@ -342,8 +348,9 @@ def apply_damage(g, e, parts, source=None, crit=False, attacker=None, melee_with
             frac = new_hp / max(1, hp_max(e))
             msg += " — " + ("bloodied." if frac <= .5 else "still standing.")
     g.set(e, **{k.replace(".", "__"): v for k, v in patch.items()})
-    if new_hp == 0 and not patch.get("dead") and e["kind"] == "pc":
+    if new_hp == 0 and not patch.get("dead") and e["kind"] == "pc" and hp_before > 0:
         add_condition(g, e, "unconscious", source="0 HP", quiet=True)
+        fall_inert(g, g.get(e["id"]))
     if patch.get("dead"):
         end_concentration(g, e, "died")
     g.say(msg, kind="damage", who=e["id"], amount=total, dtype=(parts[0][1] if parts else None), crit=bool(crit),
@@ -419,7 +426,29 @@ def add_condition(g, e, name, source=None, until=None, caster=None, spell=None, 
               who=e["id"], cond=name, on=True)
     if name in ("incapacitated", "paralyzed", "stunned", "unconscious", "petrified") and e.get("concentration"):
         end_concentration(g, e, f"became {name.title()}")
+    if name == "unconscious" and "prone" not in [c["name"] for c in g.get(e["id"]).get("conditions", [])]:
+        # rules glossary, Unconscious (Inert): the creature also has the Prone condition and drops what it's holding
+        add_condition(g, g.get(e["id"]), "prone", source="fell Unconscious", quiet=quiet)
+        if e["kind"] != "pc":
+            g.say(f"  {e['name']} drops whatever it was holding (pick it up again with an object interaction).", kind="condition")
     return True
+
+
+def break_invisibility(g, e, why):
+    """The Invisibility spell and the Hide action end right after the creature makes an attack roll (rules/spells/
+    invisibility.md; Hide in rules/core). Greater Invisibility and innate invisibility don't."""
+    for c in list(e.get("conditions", [])):
+        if c["name"] != "invisible":
+            continue
+        src, sp = (c.get("source") or "").lower(), (c.get("spell") or "").lower()
+        if sp == "invisibility" or src.startswith("hide") or ("invisibility" in src and "greater" not in src):
+            remove_condition(g, e, "invisible", quiet=True)
+            g.say(f"{e['name']} is no longer Invisible ({why}).", kind="condition", who=e["id"], cond="invisible", on=False)
+            if sp == "invisibility" and c.get("caster"):
+                ce = g.entities.get(c["caster"])
+                if ce and (ce.get("concentration") or {}).get("spell") == "invisibility":
+                    end_concentration(g, ce, "the invisible creature attacked")
+            return
 
 
 def remove_condition(g, e, name, quiet=False):
@@ -647,6 +676,7 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
             ("CRITICAL HIT!" if crit else "HIT" if hit else "MISS" + (" (natural 1)" if r["nat"] == 1 else "")))
     g.say(line, kind="attack", roll=r["id"], who=att["id"], target=tgt["id"], hit=hit, crit=crit, ranged=bool(ranged),
           weapon=name, dtype=(dmg_parts[0][1] if dmg_parts else None), nat=r["nat"])
+    break_invisibility(g, att, "made an attack roll")
     if item and ranged and prof.get("thrown") and not prof.get("ammo") and att.get("inventory") and att.get("token") and tgt.get("token"):
         # a thrown weapon leaves the hand and ends up by the target (pick it up with `item pickup`)
         remove_item(g, att, item["id"], 1, "thrown")
@@ -1162,6 +1192,7 @@ def spell_attack(g, e, t, spell, sc, expr, fx, adv, dis, now):
     g.say(f"✨ {spell['name']} → {t['name']}{_fmt_mode(mode, a_adv, a_dis)}: {r['text']} vs AC {ac} → " +
           ("CRITICAL HIT!" if crit else "HIT" if hit else "MISS"), kind="attack", roll=r["id"], who=e["id"], target=t["id"],
           hit=hit, crit=crit, ranged=ranged, spell=spell["slug"], dtype=fx.get("type"), nat=r["nat"])
+    break_invisibility(g, e, "made an attack roll")
     if hit and expr:
         dr = g.roll(expr, f"{spell['name']} damage", e["id"], crit=crit)
         apply_damage(g, t, [[dr["total"], fx["type"]]], source=spell["name"], crit=crit)
@@ -1466,6 +1497,9 @@ def short_rest(g, members, hit_dice=None, focus=None):
                 heal(g, g.get(e["id"]), max(0, r["total"]), f"Hit Point Die ({r['text']})")
             n = 0
         for _ in range(n):
+            if g.get(e["id"])["hp"] >= hp_max(e):
+                g.say(f"{e['name']} is at full HP and keeps the rest of their Hit Point Dice.", kind="info")
+                break
             cls = max(e["classes"], key=lambda c: e["classes"][c] - spent.get(c, 0))
             if e["classes"][cls] - spent.get(cls, 0) <= 0:
                 raise RuleError(f"{e['name']} has no Hit Point Dice left.")
@@ -1831,6 +1865,13 @@ def attune(g, e, ref, on=True):
     g.say(f"{e['name']} {'attunes to' if on else 'ends attunement with'} {it['name']}" + (" (1 hour)." if on else "."), kind="item")
 
 
+def fall_inert(g, e):
+    """Unconscious (rules/core/08-rules-glossary.md): Incapacitated and Prone, and you drop whatever you're holding."""
+    add_condition(g, e, "prone", source="fell Unconscious", quiet=True)
+    for it in [i for i in e.get("inventory", []) if i.get("equipped") and i.get("kind") == "weapon"]:
+        remove_item(g, g.get(e["id"]), it["id"], min(it.get("qty", 1), 2), "dropped")
+
+
 def remove_item(g, e, ref, qty=1, reason="dropped", sell=False, to=None):
     it = find_item(e, ref)
     have = it.get("qty", 1)
@@ -1903,7 +1944,7 @@ def stash_item(g, e, ref, box_id, qty=1):
     put_on_floor(g, t["map"], box["x"], box["y"], dict(it, qty=qty, equipped=False, attuned=False), f"stashed by {e['name']}", into=box)
 
 
-def pick_up(g, e, floor_id):
+def pick_up(g, e, floor_id, with_attack=False):
     t = e.get("token")
     if not t:
         raise RuleError(f"{e['name']} isn't on a map.")
@@ -1914,14 +1955,29 @@ def pick_up(g, e, floor_id):
                         (", ".join(f"{x['id']} {x['item']['name']} at ({x['x']},{x['y']})" for x in m.get("floor", [])) or "nothing"))
     if max(abs(f["x"] - t["x"]), abs(f["y"] - t["y"])) > 1:
         raise RuleError(f"{e['name']} must be in or next to square ({f['x']},{f['y']}) to pick up the {f['item']['name']}.")
-    if combat(g):
+    if combat(g) and with_attack:
+        # rules glossary, Attack action: equip (draw or pick up) one weapon with each attack you make, before or after it
+        ec = economy(g, e["id"])
+        if f["item"].get("kind") != "weapon":
+            raise RuleError("Only a weapon can be picked up as part of an attack.")
+        if ec.get("action_used") and ec.get("action_used_for", "").startswith("Attack") is False:
+            raise RuleError(f"{e['name']} used their action for something other than the Attack action.")
+        allowed = (derive(e).get("attacks_per_action", 1) if e["kind"] == "pc" else 1) + 1  # +1: a Light/Nick extra attack
+        if ec.get("attack_equips", 0) >= allowed:
+            raise RuleError(f"{e['name']} has already equipped a weapon with each attack this turn.")
+        set_economy(g, e["id"], attack_equips=ec.get("attack_equips", 0) + 1)
+    elif combat(g) and economy(g, e["id"]).get("object_used") and economy(g, e["id"]).get("utilize_credit"):
+        set_economy(g, e["id"], utilize_credit=economy(g, e["id"])["utilize_credit"] - 1)  # paid for with the Utilize action
+    elif combat(g):
         ec = economy(g, e["id"])
         if ec.get("object_used"):
             raise RuleError(f"{e['name']} has already used their free object interaction this turn (picking something up needs it, "
-                            "or the Utilize action).")
+                            "the Utilize action, or `--with-attack` to pick up a weapon as part of an attack).")
         set_economy(g, e["id"], object_used=True)
     inv = [dict(i) for i in e.get("inventory", [])]
     item = dict(f["item"])
+    if item.get("kind") == "weapon":
+        item["equipped"] = True  # picking a weapon up puts it in hand (rules glossary: equipping includes picking it up)
     same = next((i for i in inv if i["name"] == item["name"] and not i.get("custom") and item.get("kind") in ("weapon", "gear", "consumable")
                  and not item.get("magic")), None)
     if same:

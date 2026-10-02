@@ -2,17 +2,17 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** Player · **Human** · **Rogue 4** (Thief) · **Background:** Criminal · **XP:** 5567
+**Player:** Player · **Human** · **Rogue 5** (Thief) · **Background:** Criminal · **XP:** 11463
 
-**HP** 30/35 · **AC** 16 (Studded Leather Armor 12 + Dex 4) · **Speed** 30 ft · **Initiative** +6 · **Proficiency** +2 · **Passive Perception** 13
+**HP** 43/43 · **AC** 16 (Studded Leather Armor 12 + Dex 4) · **Speed** 30 ft · **Initiative** +7 · **Proficiency** +3 · **Passive Perception** 14
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
 | 8 (-1) | 18 (+4) | 16 (+3) | 10 (+0) | 12 (+1) | 13 (+1) |
 
-**Saves:** STR -1, DEX +6*, CON +3, INT +2*, WIS +1, CHA +1
+**Saves:** STR -1, DEX +7*, CON +3, INT +3*, WIS +1, CHA +1
 
-**Skills:** Acrobatics +6*, Animal Handling +1, Arcana +0, Athletics -1, Deception +3*, History +0, Insight +3*, Intimidation +1, Investigation +2*, Medicine +1, Nature +0, Perception +3*, Performance +1, Persuasion +1, Religion +0, Sleight Of Hand +8**, Stealth +8**, Survival +1
+**Skills:** Acrobatics +7*, Animal Handling +1, Arcana +0, Athletics -1, Deception +4*, History +0, Insight +4*, Intimidation +1, Investigation +3*, Medicine +1, Nature +0, Perception +4*, Performance +1, Persuasion +1, Religion +0, Sleight Of Hand +10**, Stealth +10**, Survival +1
 
 **Conditions:** — · **Exhaustion:** 0
 
@@ -20,12 +20,13 @@
 
 | Attack | To hit | Damage | Notes |
 |---|---|---|---|
-| Dagger of Venom | +7 | 1d4+5 piercing | range 20/60 ft, mastery nick |
-| Unarmed Strike | +1 | 0 bludgeoning | reach 5 ft |
+| Dagger | +7 | 1d4+4 piercing | range 20/60 ft, mastery nick |
+| Dagger of Venom | +8 | 1d4+5 piercing | range 20/60 ft, mastery nick |
+| Unarmed Strike | +2 | 0 bludgeoning | reach 5 ft |
 
 Attacks per Attack action: 1
 
-**Granted spells:** mage-hand (Magic Initiate (Wizard)), minor-illusion (Magic Initiate (Wizard)), disguise-self (Magic Initiate (Wizard))
+**Granted spells:** mage-hand (Magic Initiate (Wizard)), minor-illusion (Magic Initiate (Wizard)), disguise-self (Magic Initiate (Wizard), free cast used)
 
 ## Features & feats
 
@@ -35,12 +36,11 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 371 GP 5 SP
+**Coins:** 185 GP 6 CP
 
 - `cabinet-key-1` 1× Cabinet key · _gift: loaned by the attendant_
 - `cabinet-key-8-1` 1× Cabinet key (8) · _loot: from Pellow's wrist, bath B, Rosewater Baths_
 - `leather-armor-1` 1× Leather Armor · _starting equipment: Rogue option A (replaces mis-parsed entry)_
-- `potion-of-healing-1` 2× Potion of Healing — Common · _reward: Crane's strongbox_
 - `the-magpies-key-1` 1× The Magpie's Key · _stolen: Lot 9, lifted from Dorothea Quill mid-raid_
 - `quiver-1` 1× Quiver · _starting equipment_
 - `backpack-1` 1× Backpack · _starting equipment (unpacked from Burglar's Pack)_
@@ -48,7 +48,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `bell-1` 1× Bell · _starting equipment (unpacked from Burglar's Pack)_
 - `candle-1` 10× Candle · _starting equipment (unpacked from Burglar's Pack)_
 - `crowbar-1` 1× Crowbar · _starting equipment (unpacked from Burglar's Pack)_
-- `oil-1` 7× Oil · _starting equipment (unpacked from Burglar's Pack)_
+- `oil-1` 11× Oil · _starting equipment (unpacked from Burglar's Pack)_
 - `rations-1` 5× Rations · _starting equipment (unpacked from Burglar's Pack)_
 - `tinderbox-1` 1× Tinderbox · _starting equipment (unpacked from Burglar's Pack)_
 - `waterskin-1` 1× Waterskin · _starting equipment (unpacked from Burglar's Pack)_
@@ -84,15 +84,31 @@ Species traits: Resourceful, Skillful, Versatile
   - About thirty blank customs clearance forms from before the Council's new quay, kept dry in an oilcloth wrap. Each is headed with the old harbour customs crest and has spaces for vessel, master, cargo, duty paid and the Collector's seal. Good stock for a forger.
 - `shortbow-1` 1× Shortbow · _starting equipment_
 - `arrows-1` 1× Arrows · _starting equipment_
-- `dagger-1` 1× Dagger · _starting equipment_
 - `rapier-1` 1× Heron-head Sword-cane (Rapier) · _loot: the blade hidden inside Crane's heron's-head cane (a sword-cane)_
   - Valentin Crane's walking cane: black lacquered wood with a silver heron's-head handle. A twist of the handle draws a slim, needle-pointed blade. It passes for a gentleman's cane anywhere a sword would draw looks. The engine treats it as a Rapier.
-- `dagger-of-venom-1` 1× Dagger of Venom (Dagger of Venom) (equipped) — Rare · _stolen: Acquisitions case A-148, Cage Three, Undercroft Stores (swapped for a plain dagger)_
-  - Acquisitions exhibit A-148, lifted from its glass case in the Undercroft Stores. A slim blade of blued black steel with a green-enamelled hilt, faintly oily to the touch. A plain dagger lies on the black felt in its place, under an unbroken Acquisitions seal.
 - `arrows-2` 6× Arrows · _starting equipment_
 - `arrows-3` 1× Arrows · _starting equipment_
+- `lantern-hooded-1` 1× Lantern, Hooded · _purchased for 5 GP_
+- `lantern-bullseye-1` 1× Lantern, Bullseye · _purchased for 10 GP_
+- `sack-1` 3× Sack · _purchased for 1 CP_
+- `grappling-hook-1` 1× Grappling Hook · _purchased for 2 GP_
+- `signal-whistle-1` 1× Signal Whistle · _purchased for 5 CP_
+- `blanket-1` 1× Blanket · _purchased for 5 SP_
+- `oilcloth-wrap-1` 4× Oilcloth wrap · _purchased for 5 GP_
+- `rope-1` 1× Rope · _purchased for 1 GP_
+- `collectors-brass-sigil-1` 1× Collector's Brass Sigil · _stolen: off the hook by the ledger desk while Mallory signed_
+- `dagger-1` 1× Dagger (equipped) · _starting equipment_
+- `the-curators-ring-1` 1× The Curator's Ring · _stolen: tossed to Kit by the charmed Curator, Cage Four_
+- `the-gala-seating-chart-1` 1× The Gala seating chart · _loot: the Curator's strongbox_
+- `the-curators-daybook-1` 1× The Curator's daybook · _loot: the Curator's strongbox_
+- `small-brass-key-on-a-fin-1` 1× Small brass key on a fine chain · _loot: from round the Curator's neck, in her sanctum_
+- `smoked-glass-visor-gilde-1` 1× Smoked-glass visor (gilded, sun-and-key) · _stolen: the Eye's vault_
+- `smoked-glass-visor-1` 4× Smoked-glass visor · _stolen: the Eye's vault_
+- `the-ysmeran-eye-in-its-i-1` 1× The Ysmeran Eye (in its iron reliquary) · _stolen: the Eye's vault under the Meridian_
+- `dagger-of-venom-1` 1× Dagger of Venom (Dagger of Venom) (equipped) — Rare · _stolen: Acquisitions case A-148, Cage Three, Undercroft Stores (swapped for a plain dagger)_
+  - Acquisitions exhibit A-148, lifted from its glass case in the Undercroft Stores. A slim blade of blued black steel with a green-enamelled hilt, faintly oily to the touch. A plain dagger lies on the black felt in its place, under an unbroken Acquisitions seal.
 
-Hit Point Dice: Rogue d8 4/4
+Hit Point Dice: Rogue d8 5/5
 Languages: Common, Elvish, Halfling, Thieves' Cant · Tools: Thieves' Tools · Armor training: light
 
 ## HP history
@@ -101,3 +117,4 @@ Languages: Common, Elvish, Halfling, Thieves' Cant · Tools: Thieves' Tools · A
 - Level 2: +8 (fixed average)
 - Level 3: +8 (fixed average)
 - Level 4: +8 (fixed average)
+- Level 5: +8 (fixed average)
