@@ -23,6 +23,14 @@
   about 650 crowns a month.
 - **The supply carts** from Thornbury need protecting: the Hanged Men have robbed them twice this winter.
 
+### Road money (the Hanged Men)
+- **The demand** (Day 1, by way of the beaten carter Amos Pettigrew): *"Road money. A hundred crowns, at the Gallows Oak
+  by the full moon. Or the next one burns, and the carter with it."*
+- **Deadline:** the full moon, **Day 22**. The Gallows Oak is at (27,50), about a day and a half up the Gallows track.
+- **Lost so far:** two carts' loads this winter. Yesterday's: the cart, the mule, a fortnight of candles and lamp oil,
+  flour, salt, a cask of ale, oats, and Ottilie's midnight-blue silk.
+- **Leads:** Pettigrew is laid up at the Crow and Kettle in Crowsfoot. Mercy Fulk has been asking who pays for the carts.
+
 ### Harrowgate's war-tax
 - Expected any day: Sir Gerold Ambry taxes every free landholder in the Marchwood for the war.
 

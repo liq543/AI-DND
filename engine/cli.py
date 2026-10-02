@@ -1522,9 +1522,16 @@ def _map_set_one(g, s, m, kv):
         g.emit("map.set", id=m["id"], set={"world": on, **({"shown": True} if on else {})})
         g.say(f"🗺 {m['name']} is {'now the world map: always open on the table' if on else 'no longer the world map'}.", kind="map")
         return
+    if k == "known":
+        # a place the party already knows (explored before play, or on an earlier visit): its tab stays on the table
+        # whenever they're anywhere connected to it (`map link`), without the table switching to it now
+        on = v.lower() in ("on", "true", "yes", "1")
+        g.emit("map.set", id=m["id"], set={"shown": on})
+        g.say(f"🗺 {m['name']} is {'known to the party' if on else 'no longer on the table'}.", kind="map")
+        return
     if k not in ("name", "lighting", "fog", "theme", "accent", *styles):
         raise RuleError("map set name=...|lighting=bright|dim|dark|fog=true|false|theme=" + "|".join(render.THEMES) +
-                        "|" + "|".join(f"{s}={'/'.join(o)}" for s, o in styles.items()) + "|accent=#rrggbb|world=on|off")
+                        "|" + "|".join(f"{s}={'/'.join(o)}" for s, o in styles.items()) + "|accent=#rrggbb|world=on|off|known=on|off")
     if k in styles and v not in styles[k]:
         raise RuleError(f"{k}: " + "|".join(styles[k]))
     if k == "accent" and not re.fullmatch(r"#[0-9a-fA-F]{6}", v):

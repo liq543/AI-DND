@@ -242,6 +242,21 @@ class ChargenFixesTest(unittest.TestCase):
         self.assertIn('"links":["cellar"]', events)
         self.assertIn('"links":["upstairs"]', events)
 
+    def test_every_connected_known_area_stays_on_the_table(self):
+        from engine import views
+        for i, mid in enumerate(("gatehouse", "hall", "crypt-below")):
+            self.ok("map", "gen", "arena", "--preset", "crypt", "--seed", str(40 + i), "--id", mid)
+        self.ok("map", "link", "gatehouse", "hall")
+        self.ok("map", "link", "hall", "crypt-below")
+        self.ok("map", "show", "hall")
+        self.assertNotIn("crypt-below", views.visible_maps(_cli.game(self.env)))      # not explored yet
+        self.ok("map", "set", "crypt-below", "--kv", "known=on")
+        self.ok("map", "set", "gatehouse", "--kv", "known=on")
+        self.ok("map", "show", "gatehouse")
+        vis = views.visible_maps(_cli.game(self.env))
+        self.assertTrue({"gatehouse", "hall", "crypt-below"} <= vis)          # two links away still shows
+        self.assertEqual(_cli.game(self.env).state["view"]["map"], "gatehouse")
+
     def test_contest_lie_vs_insight(self):
         self.ok("char", "create", "--name", "Ivo Ear", "--class", "Fighter", "--species", "Dwarf", "--background", "Soldier",
                 "--method", "standard", "--scores", "str=15,dex=13,con=14,int=8,wis=12,cha=10", "--bonus", "str+2,con+1",

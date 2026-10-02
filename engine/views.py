@@ -202,17 +202,20 @@ def creature_info(g, e):
 
 
 def visible_maps(g):
-    """Maps the players can look at now: the one on the table, every map a PC stands on (split party), and maps the DM
-    linked as physically connected (another floor, the stair down) that the party has already seen."""
+    """Maps the players can look at now: the one on the table, every map a PC stands on (split party), and every map
+    connected to those through `map link` (other floors, the stair down, the rooms beyond them) that the party has
+    already seen or knows."""
     s = g.state
     here = {s["view"].get("map")} | {e["token"]["map"] for e in s["entities"].values()
                                       if e["kind"] == "pc" and e.get("token") and not e.get("dead") and not e.get("departed")}
     here.discard(None)
     vis = set(here) | {mid for mid, m in s["maps"].items() if m.get("world")}   # the world map is always open
-    for mid in here:
-        for other in s["maps"].get(mid, {}).get("links", []):
-            if s["maps"].get(other, {}).get("shown"):
+    todo = list(here)
+    while todo:   # the whole connected place, however many links away
+        for other in s["maps"].get(todo.pop(), {}).get("links", []):
+            if other not in vis and s["maps"].get(other, {}).get("shown"):
                 vis.add(other)
+                todo.append(other)
     return {mid for mid in vis if s["maps"].get(mid, {}).get("shown")}
 
 

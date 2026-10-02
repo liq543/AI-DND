@@ -77,3 +77,5 @@ give it again.
 - **Build maps big enough to fight in.** Any place a scene could turn violent in gets an open area of at least 20×14
   squares, with a main room where everyone present can move round each other. A meeting room drawn as a closet is a
   mistake: redraw it to scale before combat starts.
+- **Every known part of a place stays on the table.** All explored areas connected to where the party is (other floors,
+  rooms beyond a stair) show as map tabs at all times: `map link` them, and mark any already known with `map set <id> --kv known=on`.

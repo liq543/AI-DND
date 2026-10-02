@@ -74,14 +74,16 @@
   for anyone who must face it.
 - **The Magpie's Key** (Kit): the key that opened the Eye's vault. Its full nature is unknown.
 - **The treasury:**
-  - The Emissary's black lacquer casket, holding **fifteen cut gems** (about 15,000 crowns), with Brakka.
+  - The Emissary's black lacquer casket, holding **fifteen cut gems** (about 15,000 crowns), in the Rookery's great
+    strongbox in the Counting Room. Kit wears its key on a cord.
   - About **4,500 crowns** in coin, with Kit.
   - Everything else went into the lair and the crew's gear.
-- **Lidless tokens** (Kit): the Emissary's black-gold closed-eye pin, his letter of passage, three foreign gold "sun" coins,
-  and Crane's black-gold coin.
-- **Trophies for the hall of spoils:** the Curator's sun-and-key ring and her daybook, Thorne's smoked-glass visor, the
-  gilded visor, a Warden's sigil ring, the Gala seating chart, the Curator's stone finger (Asche), and Emeric Dane's last
-  letter (Kit). The letter was Hedda's proof that Thorne killed Dane, and Kit kept it.
+- **Lidless tokens** (Kit): the Emissary's black-gold closed-eye pin, his letter of passage, and three foreign gold "sun"
+  coins.
+- **Trophies in the Hall of Spoils:** the Curator's sun-and-key ring and her daybook, Thorne's smoked-glass visor, the
+  gilded visor, a Warden's sigil ring, the Gala seating chart, and Crane's black-gold coin. Elsewhere: the Curator's stone
+  finger (in Asche's pocket), and Emeric Dane's last letter (in Kit's strongbox). The letter was Hedda's proof that Thorne
+  killed Dane, and Kit kept it.
 - **Gear bought in the lost years:**
   - Kit's elvenkind cloak and boots and his Ring of Mind Shielding.
   - Brakka's plate and Flame Tongue.

@@ -3,7 +3,7 @@
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
 **Session:** 1 · **In-world time:** Day 1, 09:15 · **Mode:** exploration
-**Current map:** The Rookery (`rookery`) · **Events:** 1018 · **Log head:** `f4e05291c4c7b8df`
+**Current map:** The Rookery (`rookery`) · **Events:** 1022 · **Log head:** `fd54c4923e40d0c9`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6 · **Party position (region):** [21, 62]
 
 ## Party
@@ -164,8 +164,6 @@
 
 ## Recent events
 
-- “Road money. I never paid a man for a road in my life, Kit. Wasn't planning to start.”
-- Asche waits until Bel Crisp has gone out through the serving door with the empty dishes, then leans in over his eggs.
 - “Six days to the new moon. The Eye will want feeding, and I'd rather it weren't anyone we've trained. A man who robs carts for a living seems a natural candidate.”
 - Nib is at (15,8) on The Rookery.
 - Nib comes in from the yard, sweat-dark and sanded to the knees, takes a heel of bread off the board and drops into the chair at the far end of the table, listening hard.
@@ -179,3 +177,5 @@
 - ⚖ Kit Corvell: the free cast of disguise self (Magic Initiate (Wizard)) is back — two years between chapters count as a Long Rest; char import didn't reset the free cast (engine bug, now fixed).
 - ⚠ DM override — the free cast of disguise self (Magic Initiate (Wizard)) refunded to Ottilie Marsh. Reason: two years between chapters count as a Long Rest; char import didn't reset the free cast (engine bug, now fixed)
 - ⚖ Ottilie Marsh: the free cast of disguise self (Magic Initiate (Wizard)) is back — two years between chapters count as a Long Rest; char import didn't reset the free cast (engine bug, now fixed).
+- 🗺 The Grey Barrow is known to the party.
+- 🗺 The Socket is known to the party.
