@@ -327,6 +327,25 @@ class EngineTest(unittest.TestCase):
             self.ok("combat", "end")
             self.ok("npc", "remove", "statue")
 
+    def test_a_long_move_says_why_it_costs_what_it_costs(self):
+        # an open door is ordinary terrain; a refusal names difficult terrain only when the path has some
+        grid = self.tmp / "doorway.txt"
+        grid.write_text("\n".join(["############", "#.....#....#", "#.....d....#", "#.....#....#", "############"]) + "\n",
+                        encoding="utf-8")
+        self.ok("map", "gen", "interior", "--id", "doorway", "--w", "16", "--h", "14")
+        self.ok("map", "import-grid", "doorway", "--out", str(grid), "--small", "a test corridor")
+        self.ok("map", "show", "doorway")
+        self.ok("place", "kira", "1,1", "--map", "doorway")
+        self.ok("combat", "start")
+        try:
+            out = self.rule("move", "kira", "10,3")
+            self.assertIn("door frame", out)
+            self.assertNotIn("difficult terrain", out)
+        finally:
+            self.ok("combat", "end")
+            self.ok("place", "kira", "5,5", "--map", "arena")
+            self.ok("map", "show", "arena")
+
     def test_alert_initiative_swap(self):
         self.ok("place", "kira", "5,5", "--map", "arena")
         self.ok("place", "wren", "6,6", "--map", "arena")

@@ -2,18 +2,18 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 1 · **In-world time:** Day 1, 09:15 · **Mode:** exploration
-**Current map:** The Rookery (`rookery`) · **Events:** 1022 · **Log head:** `fd54c4923e40d0c9`
-**Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6 · **Party position (region):** [21, 62]
+**Session:** 1 · **In-world time:** Day 1, 10:45 · **Mode:** COMBAT round 1
+**Current map:** Crowsfoot (`crowsfoot`) · **Events:** 1348 · **Log head:** `d682dbfac6814fc8`
+**Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6 · **Party position (region):** [22, 63]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 6 | 51/51 | 16 | — | — | rookery (37,8) |
-| Brakka Holloway (`brakka`) | 6 | 58/58 | 19 | — | — | rookery (34,7) |
-| Corvin Asche (`corvin`) | 6 | 38/38 | 14 | — | L1:4/4 L2:3/3 L3:3/3 | rookery (34,9) |
-| Ottilie Marsh (`ottilie`) | 6 | 39/39 | 13 | — | L1:4/4 L2:3/3 L3:3/3 | rookery (33,7) |
+| Kit Corvell (`kit`) | 6 | 51/51 | 16 | — | — | crowsfoot (33,34) |
+| Brakka Holloway (`brakka`) | 6 | 58/58 | 19 | — | — | crowsfoot (28,31) |
+| Corvin Asche (`corvin`) | 6 | 38/38 | 14 | — | L1:4/4 L2:3/3 L3:3/3 | crowsfoot (25,32) |
+| Ottilie Marsh (`ottilie`) | 6 | 39/39 | 13 | — | L1:4/4 L2:3/3 L3:3/3 | crowsfoot (33,36) |
 
 ## Other creatures (DM view)
 
@@ -25,17 +25,25 @@
 | Ada Crisp (`ada-crisp`, commoner) | neutral | 4/4 | 10 | — | rookery (20,5) |  |
 | Bel Crisp (`bel-crisp`, commoner) | neutral | 4/4 | 10 | — | rookery (10,6) |  |
 | Tobin Rudge (`tobin-rudge`, commoner) | neutral | 4/4 | 10 | — | rookery (10,5) |  |
-| Corlis (`corlis`, commoner) | neutral | 4/4 | 10 | — | barrow-gate (37,10) |  |
+| Corlis (`corlis`, commoner) | neutral | 4/4 | 10 | — | barrow-gate (21,19) |  |
 | Harl (`harl`, tough) | neutral | 32/32 | 12 | — | barrow-gate (19,7) |  |
-| Bastian (`bastian`, tough) | neutral | 32/32 | 12 | — | barrow-gate (20,18) |  |
+| Bastian (`bastian`, tough) | neutral | 32/32 | 12 | — | barrow-gate (22,17) |  |
+| Mercy Fulk (`mercy-fulk`, commoner) | enemy | 4/4 | 10 | — | crowsfoot (28,30) |  |
+| Amos Pettigrew (`amos-pettigrew`, commoner) | neutral | 1/4 | 10 | — | crowsfoot (34,34) |  |
+| Garrick Webb (`garrick-webb`, tough) | neutral | 32/32 | 12 | — | crowsfoot (44,17) |  |
+
+## Initiative — round 1
+
+  22  Corvin Asche
+➤ 20  Kit Corvell
+  20  Mercy Fulk
+  13  Brakka Holloway
+  13  Ottilie Marsh
+   6  Amos Pettigrew
 
 ## Maps (exact current contents — tokens and items stay where they were left)
 
 ### The Rookery (`rookery`, interior 52×36, lighting dim)
-- Brakka Holloway (`brakka`, pc) at (34,7) — 58/58 HP
-- Corvin Asche (`corvin`, pc) at (34,9) — 38/38 HP
-- Kit Corvell (`kit`, pc) at (37,8) — 51/51 HP
-- Ottilie Marsh (`ottilie`, pc) at (33,7) — 39/39 HP
 - Ada Crisp (`ada-crisp`, neutral) at (20,5) — 4/4 HP
 - Bel Crisp (`bel-crisp`, neutral) at (10,6) — 4/4 HP
 - Mother Hobday (`mother-hobday`, neutral) at (4,2) — 4/4 HP
@@ -112,8 +120,8 @@
 - doors: (9,4) closed, (11,8) open, (45,8) open, (39,10) closed, (9,12) closed, (10,16) closed, (24,16) open, (25,16) open, (26,16) open, (45,16) closed, (39,18) closed, (12,20) closed, (21,20) closed, (35,20) closed, (42,24) closed, (21,28) open, (46,28) closed, (6,32) closed, (24,32) closed
 
 ### The Grey Barrow (`barrow-gate`, interior 44×30, lighting bright)
-- Bastian (`bastian`, neutral) at (20,18) — 32/32 HP
-- Corlis (`corlis`, neutral) at (37,10) — 4/4 HP
+- Bastian (`bastian`, neutral) at (22,17) — 32/32 HP
+- Corlis (`corlis`, neutral) at (21,19) — 4/4 HP
 - Harl (`harl`, neutral) at (19,7) — 32/32 HP
 - point of interest `poi-1`: The tomb door at (19,16) → journal j32
 - point of interest `poi-2`: The robbed sarcophagus at (19,13) → journal j33
@@ -161,21 +169,68 @@
 - point of interest `poi-20`: The sealed serpent-door at (25,19) → journal j121
 - doors: (14,12) closed, (25,19) closed
 
+### Crowsfoot (`crowsfoot`, interior 60×40, lighting bright)
+- Brakka Holloway (`brakka`, pc) at (28,31) — 58/58 HP
+- Corvin Asche (`corvin`, pc) at (25,32) — 38/38 HP
+- Kit Corvell (`kit`, pc) at (33,34) — 51/51 HP
+- Ottilie Marsh (`ottilie`, pc) at (33,36) — 39/39 HP
+- Amos Pettigrew (`amos-pettigrew`, neutral) at (34,34) — 1/4 HP
+- Garrick Webb (`garrick-webb`, neutral) at (44,17) — 32/32 HP
+- Mercy Fulk (`mercy-fulk`, enemy) at (28,30) — 4/4 HP
+- container `mercys-coin-bowl`: Mercy's coin bowl at (28,32)
+- container `the-linen-chest`: The linen chest at (32,37)
+- point of interest `poi-1`: The post-box at (14,10) → journal j124
+- point of interest `poi-2`: The Barrow track's end at (12,9) → journal j125
+- point of interest `poi-3`: The lightning-split oak at (29,16) → journal j126
+- point of interest `poi-4`: The village well at (23,19) → journal j127
+- point of interest `poi-5`: The oak bench at (34,20) → journal j128
+- point of interest `poi-6`: The reeve's longhouse at (22,8) → journal j129
+- point of interest `poi-7`: The chapel of the Dawn at (35,9) → journal j130
+- point of interest `poi-8`: The mill at (43,9) → journal j131
+- point of interest `poi-9`: The mill wheel at (50,8) → journal j132
+- point of interest `poi-10`: The smithy at (40,17) → journal j133
+- point of interest `poi-11`: The forge at (45,16) → journal j134
+- point of interest `poi-12`: The anvil at (43,17) → journal j135
+- point of interest `poi-13`: The plank bridge at (52,23) → journal j136
+- point of interest `poi-14`: The Harrow Brook at (51,18) → journal j137
+- point of interest `poi-15`: The Crow and Kettle at (23,26) → journal j138
+- point of interest `poi-16`: The hitching rails at (17,25) → journal j139
+- point of interest `poi-17`: The inglenook hearth at (14,29) → journal j140
+- point of interest `poi-18`: The settles at (15,28) → journal j141
+- point of interest `poi-19`: The counter at (27,30) → journal j142
+- point of interest `poi-20`: The ale casks at (29,29) → journal j143
+- point of interest `poi-21`: The dice table at (25,30) → journal j144
+- point of interest `poi-22`: The taproom tables at (22,32) → journal j145
+- point of interest `poi-23`: The pot shelf at (29,33) → journal j146
+- point of interest `poi-24`: The kitchen range at (36,28) → journal j147
+- point of interest `poi-25`: The kitchen table at (33,29) → journal j148
+- point of interest `poi-26`: The kitchen door at (37,29) → journal j149
+- point of interest `poi-27`: The passage door at (26,34) → journal j150
+- point of interest `poi-28`: The back-room door at (30,35) → journal j151
+- point of interest `poi-29`: The sickbed at (35,34) → journal j152
+- point of interest `poi-30`: The washstand at (35,36) → journal j153
+- point of interest `poi-31`: The stair up at (29,37) → journal j154
+- point of interest `poi-32`: The cellar hatch at (24,37) → journal j155
+- point of interest `poi-33`: The snug at (17,36) → journal j156
+- point of interest `poi-34`: The horse trough at (40,35) → journal j157
+- point of interest `poi-35`: The inn stable at (46,36) → journal j158
+- doors: (22,8) closed, (35,9) closed, (43,9) closed, (40,16) open, (8,17) closed, (40,17) open, (40,18) open, (40,19) open, (23,26) closed, (56,26) closed, (43,27) closed, (8,28) closed, (30,29) open, (37,29) closed, (26,34) open, (30,35) open, (23,36) closed, (44,36) open
+
 
 ## Recent events
 
-- “Six days to the new moon. The Eye will want feeding, and I'd rather it weren't anyone we've trained. A man who robs carts for a living seems a natural candidate.”
-- Nib is at (15,8) on The Rookery.
-- Nib comes in from the yard, sweat-dark and sanded to the knees, takes a heel of bread off the board and drops into the chair at the far end of the table, listening hard.
-- “I can send to Thornbury for another cart today, sir. It would come up the same road in about four days. Or not, as you wish. How would you like it handled?”
-- ⏳ 15m passes — breakfast and Quist's report. Now Day 1, 09:15.
-- 🎬 The Rookery — Day 1, morning — Breakfast in the great hall under the Grey Barrow: the hearth roaring, silver on black oak, half the candles pinched out, and the steward's bad news on the table.
-- 🗺 Map: The Rookery
-- 🚶 Bel Crisp moves 110 ft to (10,6).
-- Kit Corvell is at (37,8) on The Rookery.
-- ⚠ DM override — the free cast of disguise self (Magic Initiate (Wizard)) refunded to Kit Corvell. Reason: two years between chapters count as a Long Rest; char import didn't reset the free cast (engine bug, now fixed)
-- ⚖ Kit Corvell: the free cast of disguise self (Magic Initiate (Wizard)) is back — two years between chapters count as a Long Rest; char import didn't reset the free cast (engine bug, now fixed).
-- ⚠ DM override — the free cast of disguise self (Magic Initiate (Wizard)) refunded to Ottilie Marsh. Reason: two years between chapters count as a Long Rest; char import didn't reset the free cast (engine bug, now fixed)
-- ⚖ Ottilie Marsh: the free cast of disguise self (Magic Initiate (Wizard)) is back — two years between chapters count as a Long Rest; char import didn't reset the free cast (engine bug, now fixed).
-- 🗺 The Grey Barrow is known to the party.
-- 🗺 The Socket is known to the party.
+- ⚔ Roll for initiative! Combat begins.
+- Initiative order: Corvin Asche (22) → Kit Corvell (20) → Mercy Fulk (20) → Brakka Holloway (13) → Ottilie Marsh (13) → Amos Pettigrew (6) → Garrick Webb (5)
+- ▶ Corvin Asche's turn (round 1).
+- Garrick Webb leaves combat.
+- 🚶 Corvin Asche moves 25 ft to (27,35).
+- Corvin Asche takes the Dash action (extra movement equal to Speed).
+- 🚶 Corvin Asche moves 20 ft to (25,32).
+- Asche hurries down the passage and into the taproom, sleeves flapping, looking for a clear line to the woman.
+- ▶ Kit Corvell's turn (round 1).
+- “Very good, Pettigrew. Your valiant whipping efforts are... noted. I'll have to talk to that steward about hiring cart boys whose whips work, and some more guards.”
+- Mercy backs against the casks with her hands up and her eyes white, glass and wine around her feet. Her gaze flicks past the orc to the front door.
+- In the back room Pettigrew has pulled the quilt up to his chin.
+- 🎬 Crowsfoot — the Crow and Kettle — Broken glass and spilled wine behind the counter, an orc's hand full of hair, and the alewife with her back to the casks.
+- 🪑 A smashed jug in a puddle of wine placed at (28,29) on Crowsfoot.
+- 🗺 Map: Crowsfoot

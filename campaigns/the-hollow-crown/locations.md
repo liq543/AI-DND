@@ -52,15 +52,24 @@
 
 ### The Marchwood (act one)
 - **The Grey Barrow** (21,62), the crew's lair. See below and `secrets.md` §4.
-- **Crowsfoot** (22,63), village (pop. about 250):
-  - **The green**, with a lightning-split oak.
-  - **The Crow and Kettle alehouse**, kept by Mercy Fulk.
-  - **The smithy**, Garrick Webb's.
-  - **The mill on the Harrow Brook.**
-  - **The chapel of the Dawn**, with a cracked bell, kept by Brother Cuthbert.
-  - **The reeve's longhouse**, Alys Brinn's.
-  - **The post-box at the Barrow track's end:** a weathered box on a pole where the carts unload and letters for "the
-    Gentlemen of the Grey Barrow" are left.
+- **Crowsfoot** (22,63), village (pop. about 250). Map `crowsfoot` (60×40, timber theme), drawn Day 1:
+  - **The Barrow track** comes out of the oaks at the north-west (12,9) by **the post-box** (14,10).
+  - **The green** (x13–39, y10–22): **the lightning-split oak** (29,16), **the village well** (23,19), the oak bench (34,20).
+  - **The reeve's longhouse** (x17–28, y2–8; door 22,8), Alys Brinn's. **The chapel of the Dawn** (x31–39, y2–9; door
+    35,9) with its cracked bell, Brother Cuthbert's.
+  - **The mill** on the Harrow Brook (x43–49, y5–12; door 43,9; the wheel 50,8). **The smithy**, open-fronted onto the green
+    (x40–47, y14–21; forge 45,16; anvil 43,17), Garrick Webb's.
+  - **The March Road** runs west–east along y23–24 and crosses the brook (x51–53) by **the plank bridge** (52,23).
+  - **The Crow and Kettle** (x13–37, y26–38), south of the road behind its hitching rails (y25), Mercy Fulk's:
+    - **The taproom** (x14–29, y27–33): the inglenook hearth (14,29) with settles, the counter (x27, y28–32), the ale casks
+      (x29), Mercy's coin bowl under the counter (28,32), the dice table (25,30), the pot shelf (29,33).
+    - **The kitchen** (x31–36, y27–31), door to the yard (37,29).
+    - **The back room** (x31–36, y33–37), door (30,35): the sickbed (35,34) where Pettigrew lies, the washstand, the
+      linen chest (32,37).
+    - **The passage** (x24–29, y35–37): the stair up to the loft rooms (29,37) and the cellar hatch (24,37). **The snug**
+      (x14–22, y35–37; door 23,36).
+    - **The yard and inn stable** (x38–49, y33–38): the trough (40,35), four stalls (46,36).
+  - Four cottages: (x2–8, y14–19), (x2–8, y26–31), (x40–46, y27–32), (x54–58, y26–31).
 - **Ashpole** (13,67), hamlet: charcoal clamps and huts. Old Nan Thistle's hut with its carved hearthstone; Dunstan Cole.
 - **Harrowgate** (31,67), castle:
   - A square keep on a crag over the March Road: a curtain wall, a gatehouse with a portcullis, and a well.

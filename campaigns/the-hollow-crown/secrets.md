@@ -476,6 +476,7 @@ Gallery.
     dips through a holloway of beeches.
   - **Who:** **Jessamy Crook** and six Hanged Men (`bandit`), red hangman's-knot cords on their sleeves. One of them is
     **Kester Brinn**, the reeve's son, nineteen, who kept his hood up and said nothing.
+  - **The ambush:** they dropped a beech across the holloway to stop the cart, and came out of the banks.
   - **What happened:** they beat the carter **Amos Pettigrew** (two teeth out, ribs stove in), took the cart, the mule and
     the load, and drove it north up the Gallows track. Jessamy gave him the message herself: *"Tell whoever pays for this:
     road money. A hundred crowns, at the Gallows Oak by the full moon. Or the next one burns, and the carter with it."*
@@ -487,8 +488,12 @@ Gallery.
   - **What the Hanged Men know:** a rich foreign household on the Barrow track pays for good carts. They've never found
     the barrow (the Stillness). Jessamy wants to know who these people are before her mother does.
   - **The full moon is Day 22** (the new moons fall on Days 7, 37, 67 and 97).
-  - **Pettigrew** is at the Crow and Kettle in Crowsfoot, in Mercy Fulk's back room, paid for by Quist until he can walk
-    (about a tenday). Mercy has already asked him everything, and Harl too.
+  - **Pettigrew** is at the Crow and Kettle in Crowsfoot, in Mercy Fulk's back room. Harl paid two nights in advance, and
+    Quist will go on paying until he can walk (about a tenday). Mercy has already asked him everything, and Harl too.
+  - **Mercy reports to Brother Ennis** (§5.1): on Day 1 the barrow gentlemen came down in person, all four, armed and on
+    good horses, to see the carter. Her report reaches Thornbury chapel by Day 3.
+    She listened at the back-room door (the crew heard her and she fled). She heard Kit call the goods "very valuable",
+    and nothing more.
 - **Act I set pieces:**
   1. **The first feeding:** who? A Watcher? A Hanged Man? A Crowsfoot nobody? The first victim chosen, taken and
      turned. Ysmera's first words (stage 2).

@@ -1363,8 +1363,16 @@ def move(g, ref, dest=None, path=None, dash=False, force=None, crawl=False, jump
         budget = sp * (2 if ec.get("dashed") else 1) + (sp if ec.get("dashed2") else 0)
         used = ec.get("move_used", 0)
         if used + feet > budget:
+            steps = len(full) - 1
+            why = []
+            if cost_sq > steps * mult:
+                why.append("difficult terrain on the way costs double")
+            if mult == 2:
+                why.append("crawling costs double")
+            route = " ".join(f"{x},{y}" for x, y in full[1:])
+            why.append(f"route: {route}; no cutting diagonally past a wall corner or door frame")
             raise RuleError(f"{e['name']} has {budget - used} ft of movement left this turn; that path costs {feet} ft "
-                            f"(difficult terrain costs double{', crawling double' if mult == 2 else ''}). Dash to move farther.")
+                            f"({'; '.join(why)}). Dash to move farther.")
         # opportunity attack warnings: leaving a hostile's reach
         if not ec.get("disengaged"):
             for o in others.values():
