@@ -703,3 +703,4 @@ Gallery.
   Wheatsheaf and carries urgent Watcher word to Ennis the same day. Mercy was told to send to him "if ever the barrow folk
   did something worth a gold piece". She confessed it to Bastian on the night of Day 1 (she never learned his name).
 - **Alys Brinn** was knocked out at 15:04 on Day 2. The sheet kept her unconscious until the morning bookkeeping. At Day 3, 05:54 she is awake at 1/4 HP, still ironed in the first south cell, opposite Mercy. The crew has not seen her.
+- **Bastian and Jess (DM boundary, Day 3):** Bastian's work on Jess is interrogation and intimidation only (questions, irons, no sleep). No sexual abuse of any prisoner is depicted or run. Jess is afraid, not broken, and still wants a bargain that keeps her alive.

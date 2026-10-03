@@ -3,7 +3,7 @@
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
 **Session:** 1 · **In-world time:** Day 3, 05:54 · **Mode:** exploration
-**Current map:** The Rookery (`rookery`) · **Events:** 3662 · **Log head:** `811cc7c9c44bb09d`
+**Current map:** The Rookery (`rookery`) · **Events:** 3682 · **Log head:** `2e412c200409b810`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated · **Party position (region):** [21, 62]
 
 ## Party
@@ -19,10 +19,10 @@
 
 | Creature | Side | HP | AC | Conditions | Position | Hidden |
 |---|---|---|---|---|---|---|
-| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | rookery (15,8) |  |
+| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | rookery (22,10) |  |
 | Mr Fennimore Quist (`mr-fennimore-quist`, spy) | neutral | 27/27 | 12 | — | rookery (12,18) |  |
 | Mother Hobday (`mother-hobday`, commoner) | neutral | 4/4 | 10 | — | rookery (4,2) |  |
-| Ada Crisp (`ada-crisp`, commoner) | neutral | 4/4 | 10 | — | rookery (20,5) |  |
+| Ada Crisp (`ada-crisp`, commoner) | neutral | 4/4 | 10 | — | rookery (19,5) |  |
 | Bel Crisp (`bel-crisp`, commoner) | neutral | 4/4 | 10 | — | barrow-gate (27,6) |  |
 | Tobin Rudge (`tobin-rudge`, commoner) | neutral | 4/4 | 10 | — | rookery (10,5) |  |
 | Corlis (`corlis`, commoner) | neutral | 4/4 | 10 | — | barrow-gate (37,10) |  |
@@ -62,10 +62,10 @@
 - Corvin Asche (`corvin`, pc) at (21,24) — 38/38 HP
 - Kit Corvell (`kit`, pc) at (46,3) — 51/51 HP
 - Ottilie Marsh (`ottilie`, pc) at (3,31) — 39/39 HP
-- Ada Crisp (`ada-crisp`, neutral) at (20,5) — 4/4 HP
+- Ada Crisp (`ada-crisp`, neutral) at (19,5) — 4/4 HP
 - Mother Hobday (`mother-hobday`, neutral) at (4,2) — 4/4 HP
 - Mr Fennimore Quist (`mr-fennimore-quist`, neutral) at (12,18) — 27/27 HP
-- Nib (`nib`, neutral) at (15,8) — 4/4 HP
+- Nib (`nib`, neutral) at (22,10) — 4/4 HP
 - Tobin Rudge (`tobin-rudge`, neutral) at (10,5) — 4/4 HP
 - container `kits-strongbox`: Kit's strongbox at (41,14)
 - container `hall-of-spoils`: The Hall of Spoils at (13,17)
@@ -315,18 +315,18 @@
 
 ## Recent events
 
-- Kit's door closes on the bedchamber. Ottilie takes the chaise in her salon. Asche sits a while by the reading table with a lamp, then lets it burn down. Brakka lies on a bench at the edge of the sand pit, boots off, sword in reach. Above them the household keeps its own hours. Below, the Pens' door shuts behind Bastian.
-- ⏳ 5h passes — supper and turning in. Now Day 2, 21:54.
-- 🎬 The Rookery, turned in — The crew is in their rooms. Bastian has gone down to the Pens with the keys. The house is quiet.
-- 🗺 Map: The Rookery
-- 🌙 The party takes a Long Rest (8 hours). Now Day 3, 05:54.
--    Kit Corvell: HP 51/51, spell slots and features restored.
--    Brakka Holloway: HP 58/58, spell slots and features restored.
--    Corvin Asche: HP 38/38, spell slots and features restored.
--    Ottilie Marsh: HP 39/39, spell slots and features restored.
-- 💚 Alys Brinn regains 1 HP from the knockout has worn off in the night (1/4).
-- Alys Brinn is no longer Unconscious.
 - Alys Brinn is no longer Prone.
 - Kit wakes in his own bed. The bedchamber is dark the way the Rookery is always dark, and the hour, by the glass Asche keeps, is just before six on the third day. The house is quiet. Ottilie is on the chaise in her salon. Asche is in the library. Brakka is on the bench by the sand pit, already sitting up, boots in his hands. The stair down to the Pens has not opened. Bastian has not come up.
 - 🎬 The Rookery, daybreak — Day 3, just before six. The crew is awake in their rooms. Bastian is still below.
 - 🗺 Map: The Rookery
+- 🗺 Map: The Rookery
+- 🎬 The Rookery, first light — Day 3, just before six. Under the Grey Barrow the lamps are trimmed up for morning; bread in the oven, steel on the sand.
+- 🗺 Map: The Rookery
+- 🚶 Ada Crisp moves 5 ft to (19,5).
+- 🚶 Nib moves 40 ft to (22,10).
+- Day 3, a little before six. The Rookery wakes: Mother Hobday has the bread oven roaring, Ada Crisp lights the candelabra in the great hall, and Nib lays the long table for breakfast.
+- Brakka is already on the sand by the pit, working through her forms in shirtsleeves.
+- Mr Quist comes out of the household stair with his ledger under his arm, on his way to the counting room.
+- “Bread in a quarter hour! And nobody's had a word from the Pens, if anyone's asking.”
+- Kit wakes in the great bed. The brazier has burned low.
+- (Correction to the line above: Brakka is working through his forms, not hers.)
