@@ -672,3 +672,34 @@ Gallery.
   - **the Dowager of Fernwick** in Gildford;
   - **Sister Imelda** of the Dawn, forged papers and all.
 - **Kit** had a villa in Morrowgate for a winter and left it burning.
+
+### Day 2, 04:55: the fireball at the Withy Pond (consequences)
+- **Kester Brinn is dead** (Kit's arrow, while on watch). His half-carved crow lies in the ashes. Reeve Alys Brinn doesn't
+  know he ran with the Hanged Men, let alone that he's dead.
+- **Gallows Oak heard the fireball** (a mile off, a still pre-dawn wood). Mother Gallows sends a party to look: six
+  Hanged Men and a `tough` with two mastiffs, arriving at the Withy Pond about **05:40** by the path from the north-east
+  (the Oak side), not the deer path. Advance this if the crew lingers.
+- **Jessamy** is captured asleep (Sleep, then Unconscious for up to 1 minute while Asche concentrates). Awake, she wants
+  first to live, then to know who they are, then to make a deal that gets her the band.
+- **05:40:** the Oak's party (six Hanged Men, a `tough` dog-handler, two mastiffs) reached the Withy Pond and found the
+  dead. The fresh cart ruts lead up the deer path. They put the dogs on the trail about **05:50**: on foot at a trot with the
+  dogs, they gain on a mule-cart. The handler is cautious (a fireball did this): they follow and watch before they strike,
+  and send a runner back to Mother Gallows.
+- **06:09, the turn-off:** all nine trackers dead (the second fireball). **The runner** sent from the Withy Pond at about
+  05:50 reaches Gallows Oak by about 06:15: Mother Gallows learns her daughter's camp was burned by a wizard's fire, Jess is
+  missing, and her trackers followed a cart's trail toward the Gallows track. When they don't come back she'll know the
+  rest. Nobody alive heard Jess say "the Barrow folk" except the crew.
+- **Day 2, 15:02, Crowsfoot:** Alys Brinn has just learned from Jess that her son Kester rode with the Hanged Men and that
+  the Barrow folk shot him. She doesn't yet know whether to believe a Hanged Man, but Kit's story already rang false to her.
+  Jess has also denied taking Mercy. Alys wants: her boy's body, the truth about Mercy, and the prisoner judged in Crowsfoot.
+- **Day 2, 15:05: Crowsfoot after the reeve was taken.** The whole village saw it. Garrick and Cuthbert know Kester ran
+  with the Hanged Men, and that the Barrow folk killed fifteen of them and carried off the reeve. Cuthbert writes that night
+  to **Brother Ennis at Thornbury** and to **Sir Gerold at Harrowgate** (letters go with the Day 3 carrier): the Barrow
+  gentlemen have taken the reeve. Expect Ennis's step 2 (Day 10) to come early (about Day 5) and Harrowgate's tax-party to
+  come with a second purpose. Garrick wants Alys back and will go to Harrowgate himself if she isn't returned within two
+  days. Crowsfoot's attitude to the crew: Hostile and afraid. (Ottilie's story about Kester is believed: the village now
+  half-suspects its reeve's son was a robber.)
+- **Ennis's runner at the Wheatsheaf (Thornbury):** a lay-brother called **Tam Orrin** (`commoner`), who drinks at the
+  Wheatsheaf and carries urgent Watcher word to Ennis the same day. Mercy was told to send to him "if ever the barrow folk
+  did something worth a gold piece". She confessed it to Bastian on the night of Day 1 (she never learned his name).
+- **Alys Brinn** was knocked out at 15:04 on Day 2. The sheet kept her unconscious until the morning bookkeeping. At Day 3, 05:54 she is awake at 1/4 HP, still ironed in the first south cell, opposite Mercy. The crew has not seen her.

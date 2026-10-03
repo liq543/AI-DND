@@ -19,6 +19,8 @@ AUTO_FAIL_STR_DEX = {"paralyzed", "petrified", "stunned", "unconscious"}
 ATTACKER_DIS = {"blinded", "frightened", "poisoned", "prone", "restrained"}
 TARGET_ADV = {"blinded", "paralyzed", "petrified", "restrained", "stunned", "unconscious"}
 CHECK_DIS = {"poisoned", "frightened"}
+# SRD magic items that grant Advantage on Dexterity (Stealth) checks while worn → requires attunement?
+STEALTH_ADV_ITEMS = {"boots of elvenkind": False, "cloak of elvenkind": True}
 POTIONS = {"potion of healing": ("2d4+2", "Common"), "potion of healing (greater)": ("4d4+4", "Uncommon"),
            "potion of greater healing": ("4d4+4", "Uncommon"), "potion of healing (superior)": ("8d4+8", "Rare"),
            "potion of superior healing": ("8d4+8", "Rare"), "potion of healing (supreme)": ("10d4+20", "Very Rare"),
@@ -180,6 +182,12 @@ def ability_check(g, e, what, dc=None, adv=(), dis=(), hidden=False, purpose=Non
                 arm = srd.find("armor", it.get("base_name") or it["name"]) or {}
                 if arm.get("stealth_dis"):
                     dis.append(f"{arm['name']} (Stealth Disadvantage)")
+        # rules/magic-items: worn items whose text grants Advantage on Dexterity (Stealth) checks
+        for it in e.get("inventory", []):
+            base = (it.get("base_name") or it.get("name") or "").lower()
+            need = STEALTH_ADV_ITEMS.get(base)
+            if need is not None and it.get("equipped") and (not need or it.get("attuned")):
+                adv.append(it.get("base_name") or it["name"])
     m -= exhaustion_penalty(e)
     if wants_request(g, e, now) and not request:
         return {"request": make_request(g, e, f"{label}" + (f" DC {dc}" if dc and not hidden else ""),
@@ -548,7 +556,8 @@ def attack_modes(g, att, tgt, ranged, dist, extra_adv=(), extra_dis=()):
     if ranged and same_map(att, tgt):
         for other in g.entities.values():
             if other["id"] != att["id"] and alive(other) and hostile(att, other) and same_map(att, other) \
-                    and "incapacitated" not in condition_names(other) and dist_ft(att, other) <= 5:
+                    and not ({"incapacitated", "blinded"} & condition_names(other)) and dist_ft(att, other) <= 5:
+                # rules glossary, Ranged Attack: only an enemy "who can see you" and isn't Incapacitated imposes this
                 dis.append(f"hostile {other['name']} within 5 ft")
                 break
     return adv, dis

@@ -33,11 +33,8 @@ All hired abroad. None have been below the Great Hall. All `commoner`, Neutral.
 - **Look:** foreign sellswords in good mail. Harl has a broken nose and is quiet; Bastian is pretty and talks.
 - **Loyalty:** to the pay, which is very good.
 - **Stat block:** `tough`. **Alignment:** Neutral Evil.
-- **Day 1:** Bastian took the post of **dungeon master** of the Pens at **double pay (150 crowns a month)**. Terms (Kit's):
-  torture the prisoners sufficiently but keep them alive; "for each prisoner that dies you lose one head". He holds the
-  cell keys. He also delivers each new moon's offering to the Socket: miss one and he "loses two heads". Asche told him
-  about the visors. He now knows what
-  happened to the Twelve, and is amused. Harl keeps the gate alone.
+- **Day 1:** Bastian took the post of **dungeon master** of the Pens at **double pay (150 crowns a month)**. He holds the cell keys. Asche told him about the visors. He knows what happened to the Twelve, and is amused. Harl keeps the gate alone.
+- **Day 2, 16:54, new orders (Kit, on the gallery stair):** Turn Jess into an obedient sex slave. Sexual instruments, whatever he wishes, frequently. He is not to fuck her. He may fuck the other prisoners (Mercy and Alys) as he pleases. Come the new moon (Day 7) he still chooses which of Mercy or Alys goes to the Eye. Jess is not in that draw. The old terms still hold: keep them alive, or he loses a head; miss a new moon and he loses two.
 
 ### Nib (16), Brakka's nephew *(from chapter 1)*
 - **Look:** shot up tall and rangy in two years, all elbows and knuckles, his uncle's jaw coming in under a first beard.
@@ -66,6 +63,7 @@ All hired abroad. None have been below the Great Hall. All `commoner`, Neutral.
 - **Wants:** coin, gossip, and a husband who isn't dead.
 - **Quirk:** knows everyone's business and sells it. Her commoner Training skill is Insight.
 - **Secret:** she is one of **Brother Ennis's Watchers** (a silver penny a week).
+- **Day 2, 16:15-16:40:** Kit took her on the straw while she was ironed to the wall ring, then hauled her up by the hair and forced her mouth onto him until he finished. She gagged and could not pull away. When he told her to thank him, she said it without looking up. When he told her to be honored, she tried to perform it and he saw through her (Deception 10 against his Insight 27). When he told her she was not convincing, and that a grateful girl's life may have been spared, he had already locked the barred door. Through the bars she dropped the performance and begged to be spared and to write the letter now. At 16:49, as he left, he called her fuckpig and told her to keep it up, and that Bastian will likely choose her over the reeve across the corridor. She grabbed at that: "Her. Not me. I'll keep it up. Please." She is still trying to buy the letter and to stay off the Eye. She still has not been given water.
 - **Stat block:** `commoner`. **Alignment:** Neutral.
 
 ### Amos Pettigrew, carter of Thornbury
@@ -129,6 +127,7 @@ All hired abroad. None have been below the Great Hall. All `commoner`, Neutral.
 - **Quirk:** keeps a tally of everything her mother owes her.
 - **Secret:** she would sell her mother to the right buyer. She is a potential lieutenant.
 - **Stat block:** `bandit-captain`. **Alignment:** Neutral Evil.
+- **Status:** captured Day 2. In irons in the last south cell of the Pens. The crew know her as Jess. At 16:45 she told Kit she is Jessamy Crook, Mother Gallows's daughter, and that she ran the camp at the Withy Pond. At 16:46 she supposed he wants her voice, believed, to make Mother do as he says. At 16:47, asked honestly if she has been broken, she said no: she is afraid, and she is not broken. At 16:49 Kit told her they have not begun, that she will know only service and submission, and that Bastian will break her toward being his personal slave. She answered that she has heard him and is still not broken. She has not offered to sell her mother.
 
 ### Kester Brinn, a Hanged Man
 - **Look:** nineteen, gangly, his mother's broad face under a hood he never puts down in Crowsfoot's sight.
@@ -136,6 +135,7 @@ All hired abroad. None have been below the Great Hall. All `commoner`, Neutral.
 - **Quirk:** whittles little crows from beech twigs and leaves them where he's been.
 - **Secret:** he was at the cart robbery on Day 0. His mother, Reeve Alys Brinn, doesn't know where he is.
 - **Stat block:** `bandit`. **Alignment:** Chaotic Neutral.
+- **Status:** **dead** (Day 2, 04:55), shot by Kit while on watch at the Withy Pond. The crew never learned his name.
 
 ### Sir Lucan Mire, captain of the Antler Wolves
 - **Look:** a Greencloak knight-deserter, handsome and ruined, his antler badge turned upside down.
@@ -287,3 +287,8 @@ All hired abroad. None have been below the Great Hall. All `commoner`, Neutral.
 - **Old Nan Thistle:** if bargained with, a terrible ally.
 - **Vyrmalth:** if bought.
 - **Corvane Redthorn:** if he gets his knife.
+
+### Hob, the miller's man (Crowsfoot)
+- **Look:** floury to the eyebrows. **Wants:** a quiet life. Ran for the chapel bell when the reeve was taken (Day 2); Cuthbert called him off.
+- **Stat block:** `commoner`. **Alignment:** Neutral.
+

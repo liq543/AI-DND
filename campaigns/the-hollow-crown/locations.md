@@ -196,3 +196,25 @@ Three maps, all to the detail standard (every object a point of interest; the fu
 - Iron double doors (9,7–8) open onto **the cell corridor** (x9–28, y7–8).
 - **Eight cells**, four along the north side (x10–13, 15–18, 20–23, 25–28; y1–5; barred doors at y6) and four along the
   south (y10–14; barred doors at y9). Each has straw and a slop bucket. **Mercy Fulk is in the first north cell (11,3).**
+
+### The Withy Pond (about 26,50; map `withy-pond`), Jessamy Crook's camp
+- A black pond (centre about 11,15) ringed by pollarded willows (withies) and reeds; mist on the water before dawn.
+- **The camp clearing** on the north-east bank (x17-33, y2-13):
+  - the banked campfire (25,8), with logs to sit on at (23,8), (27,8) and (25,10);
+  - Jessamy's big patched tent (29,5), door-flap tied; the stolen candles and lamp oil are stacked inside;
+  - the low canvas lean-to (21,6), boots in a row outside;
+  - the horse line (x20-23, y3) with the mule (22,2), the cracked near-hind shoe; the mastiff's rope from its end (20,4);
+  - the stolen cart by the water (17,8), a Thornbury carter's mark and old blood on the near wheel;
+  - the broached ale cask (22,12), drunk dry; sacks of flour, oats and salt under a hide (28,11).
+- **The deer path** comes in from the south-east corner (39,26) to the clearing (29,13). The breeze blows from the camp
+  down the path (the dogs can't smell anyone coming that way).
+- Pois: campfire, big tent, low tent, cart, horse line, mule, ale cask, sacks, the pond, the withies, the deer path.
+- **Day 2, 05:16:** the lean-to burned to embers (21,6); the big tent ransacked (29,5); the cart loaded with the sacks, candles and oil, the mule hitched beside it (17-18,8); the stores pile gone (28,11). Seven bodies lie where they fell.
+- **Day 2, 05:16:** the lean-to burned to embers (21,6); the big tent ransacked (29,5); the cart loaded with the sacks, candles and oil, the mule hitched beside it (17-18,8); the stores pile gone (28,11). Seven bodies lie where they fell.
+
+### The deer path (map `deer-path`), between the Withy Pond and the turn-off
+- A two-wide deer path through beech and bracken, north-west (3,4, toward the pond) to south-east (28,13, toward the
+  turn-off, about three-quarters of a mile on). A mossy boulder (8,9). The cart's ruts are fresh and easy to follow.
+- **The turn-off, Day 2, 06:09:** a ring of scorched, smouldering beeches and bracken at the deer path's mouth (about 13,6, forty feet across) with nine dead (the Oak's dog-handler, two mastiffs, six Hanged Men). The cart and mule stand by the track (21-22,12); the horses are untied and mounted.
+- **Crowsfoot, Day 2, 15:01:** the Crow and Kettle shut (door 23,26 closed; Mercy missing). Alys Brinn at her longhouse door, then in the lane (16,9); Garrick at his anvil (44,17); Cuthbert on the chapel step (35,10); a woman at the well (23,20); the miller's man at the mill (45,7).
+- **Day 3, 05:54:** The crew is awake in the Rookery. Kit in his bedchamber (46,3). Ottilie on the chaise in her salon (3,31). Asche in the library (21,24). Brakka on a bench by the sand pit (33,26). Bastian is in the Pens gaolers' room (4,7) with the cell keys; he went down at 21:54 to carry out the night's orders. Jess, Mercy and Alys are still in their cells. Alys is awake at 1 HP, ironed. The crew has not been below.

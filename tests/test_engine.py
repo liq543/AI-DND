@@ -218,6 +218,61 @@ class EngineTest(unittest.TestCase):
         finally:
             self.ok("char", "remove", "grom")
 
+    def test_hidden_creatures_turn_is_announced_without_its_name(self):
+        self.ok("place", "kira", "2,2", "--map", "arena")
+        self.ok("npc", "add", "bandit", "--name", "Lurking Oswin", "--at", "12,12", "--map", "arena", "--hidden")
+        try:
+            out = self.ok("combat", "start")
+            for _ in range(4):
+                if "Lurking Oswin" in out or "hidden creature's turn" in out:
+                    break
+                out = self.ok("combat", "next")
+            self.assertNotIn("Lurking Oswin's turn", out)
+        finally:
+            self.ok("combat", "end")
+            self.ok("npc", "remove", "lurking-oswin")
+
+    def test_blinded_enemy_adjacent_does_not_hamper_ranged_attacks(self):
+        # rules glossary: Disadvantage on ranged attacks only from an enemy within 5 ft who can see you
+        from engine import mechanics as M
+        self.ok("place", "kira", "2,2", "--map", "arena")
+        self.ok("npc", "add", "bandit", "--name", "Hooded Rhosk", "--at", "3,2", "--map", "arena")
+        self.ok("npc", "add", "bandit", "--name", "Far Target", "--at", "8,2", "--map", "arena")
+        try:
+            g = self.state()
+            _, dis = M.attack_modes(g, g.get("kira"), g.get("far-target"), True, 30)
+            self.assertTrue(any("Hooded Rhosk" in d for d in dis))
+            self.ok("condition", "add", "hooded-rhosk", "blinded", "--source", "a sack over his head")
+            g = self.state()
+            _, dis = M.attack_modes(g, g.get("kira"), g.get("far-target"), True, 30)
+            self.assertFalse(any("Hooded Rhosk" in d for d in dis))
+        finally:
+            self.ok("npc", "remove", "hooded-rhosk")
+            self.ok("npc", "remove", "far-target")
+
+    def test_narrated_travel_house_rule_skips_forced_march_saves(self):
+        self.ok("set", "forced_march=narrated")
+        try:
+            out = self.ok("travel", "30", "--pace", "normal")
+            self.assertIn("House rule", out)
+            self.assertNotIn("forced march, hour", out)
+        finally:
+            self.ok("set", "forced_march=srd")
+
+    def test_elvenkind_boots_give_stealth_advantage(self):
+        # rules/magic-items: Boots of Elvenkind give Advantage on Dexterity (Stealth) checks while worn
+        self.ok("item", "add", "wren", "Boots of Elvenkind", "--source", "found: test boots", "--override", "test item")
+        boots = next(i["id"] for i in self.state().get("wren")["inventory"] if i.get("base_name") == "Boots of Elvenkind" or i["name"] == "Boots of Elvenkind")
+        try:
+            out = self.ok("check", "wren", "stealth", "--dc", "10")
+            self.assertNotIn("Boots of Elvenkind", out)
+            self.ok("item", "equip", "wren", boots)
+            out = self.ok("check", "wren", "stealth", "--dc", "10")
+            self.assertIn("Advantage", out)
+            self.assertIn("Boots of Elvenkind", out)
+        finally:
+            self.ok("item", "drop", "wren", boots)
+
     def test_falling_unconscious_drops_weapons_and_knocks_prone(self):
         # rules glossary, Unconscious: Incapacitated and Prone, and you drop whatever you're holding
         self.ok("char", "create", "--name", "Vell Marr", "--class", "Rogue", "--species", "Human", "--background", "Criminal",

@@ -1,4 +1,4 @@
-# The Hollow Crown
+﻿# The Hollow Crown
 
 Created: 2026-10-02  ·  Ruleset: D&D 5.2 SRD (2024)  ·  Status: in play (chapter 2 of **The Jackdaw Saga**)
 Previous chapter: `campaigns/the-meridian-job/` (The Meridian Job). The saga's history lives in `chronicle.md`.
@@ -59,6 +59,7 @@ allies) and climb. By the end of this chapter, Kit wants a crown. Any crown. Pre
 - SRD 5.2 as enforced by the engine. Beta engine bugs are fixed mid-play (AGENTS.md §1.8).
 - DM-run crew never become a loophole for extra loot or healing.
 - Quicksave and quickload are the player's tools.
+- **Travel is narrated** (player's choice, Day 2): no forced-march saves on ordinary journeys (`set forced_march=narrated`). The DM summarises the road, keeps the clock honest and stops for encounters and arrivals. Travel Exhaustion only on a deliberate, punishing push (`travel --push`), always warned first. Applies to everyone, enemies included.
 - **The Stillness** (the lair's ward) has written rules: `secrets.md` → The Stillness. They are shared with the player as a
   journal handout once the lair is final.
 

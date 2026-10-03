@@ -18,7 +18,8 @@
 
 ### The Rookery: keep the house
 - **The Stillness must be fed at every new moon.** A living creature meets the Eye's gaze in the Socket and turns to
-  stone. **The next new moon is Day 7.** (The player has the rules: journal → The Stillness.)
+  stone. **The next new moon is Day 7.** (The player has the rules: journal → The Stillness.) As of 16:54 on Day 2, Bastian
+  chooses which of Mercy Fulk or Alys Brinn is the offering. Jessamy Crook is not in that draw.
 - **The household's wages:** 430 crowns a month (Bastian's doubled to 150 as dungeon master), due at each month's end
   (Day 30 first). With the carts, the house runs at about 725 crowns a month.
 - **The supply carts** from Thornbury need protecting: the Hanged Men have robbed them twice this winter.
@@ -47,3 +48,9 @@
 - **The deserter-knight Sir Lucan Mire** and his Antler Wolves rob the Pilgrim Road west of Thornbury.
 
 ## Completed / Failed
+
+### The player's notes (to act on in play)
+- **Kit wants a better shortbow and plenty of arrows.** The player notes that, with the lavish Rookery, Kit should have
+  a deep supply of arrows and such in the lair's armoury (the weapon racks). Next time he's home, give him stocked
+  ammunition from the armoury (bought with the build money, so a purchase at SRD price is fine), and treat a magic bow as
+  a shopping or loot goal (tier cap applies).

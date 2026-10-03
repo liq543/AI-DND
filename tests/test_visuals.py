@@ -1,4 +1,4 @@
-﻿"""Generated art (characters, creatures, items), DM-controlled table animation (`fx`), and the animation cues the
+"""Generated art (characters, creatures, items), DM-controlled table animation (`fx`), and the animation cues the
 live table receives. Cues must never show what the players can't see.
 
 Run:  python -m unittest discover -s tests -v
@@ -279,6 +279,9 @@ class VisualsCliTest(unittest.TestCase):
         self.assertTrue(all(c.get("ts") for c in cues))
         self.ok("say", "--at", "kira-vale", "Kira checks her straps.")        # a hyphenated name finds its token too
         self.assertEqual([c for c in self.view()["cues"] if c["k"] == "narration"][-1]["who"], "kira")
+        self.ok("npc", "add", "commoner", "--name", "Marta, the smith", "--at", "8,5", "--map", "arena")
+        self.ok("say", "--as", "Marta", "I heard every word.")               # a comma after the first name still finds her
+        self.assertEqual([c for c in self.view()["cues"] if c["k"] == "speech"][-1]["who"], "marta-the-smith")
 
     def test_token_names_are_readable_and_never_overlap(self):
         from engine import render

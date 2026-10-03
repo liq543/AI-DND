@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** Player · **Human** · **Rogue 6** (Thief) · **Background:** Criminal · **XP:** 14152
+**Player:** Player · **Human** · **Rogue 6** (Thief) · **Background:** Criminal · **XP:** 14484
 
 **HP** 51/51 · **AC** 16 (Studded Leather Armor 12 + Dex 4) · **Speed** 30 ft · **Initiative** +7 · **Proficiency** +3 · **Passive Perception** 17
 
@@ -20,8 +20,7 @@
 
 | Attack | To hit | Damage | Notes |
 |---|---|---|---|
-| Dagger of Venom | +8 | 1d4+5 piercing | range 20/60 ft, mastery nick |
-| Dagger +1 | +8 | 1d4+5 piercing | range 20/60 ft, mastery nick |
+| Shortbow | +7 | 1d6+4 piercing | range 80/320 ft, mastery vex |
 | Unarmed Strike | +2 | 0 bludgeoning | reach 5 ft |
 
 Attacks per Attack action: 1
@@ -36,43 +35,42 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 4568 GP 6 CP
+**Coins:** 4591 GP 7 SP 6 CP
 
 - `the-magpies-key-1` 1× The Magpie's Key · _stolen: Lot 9, lifted from Dorothea Quill mid-raid_
 - `quiver-1` 1× Quiver · _starting equipment_
 - `backpack-1` 1× Backpack · _starting equipment (unpacked from Burglar's Pack)_
 - `ball-bearings-1` 1× Ball Bearings · _starting equipment (unpacked from Burglar's Pack)_
 - `bell-1` 1× Bell · _starting equipment (unpacked from Burglar's Pack)_
-- `candle-1` 10× Candle · _starting equipment (unpacked from Burglar's Pack)_
+- `candle-1` 50× Candle · _starting equipment (unpacked from Burglar's Pack)_
 - `crowbar-1` 1× Crowbar · _starting equipment (unpacked from Burglar's Pack)_
-- `oil-1` 11× Oil · _starting equipment (unpacked from Burglar's Pack)_
+- `oil-1` 21× Oil · _starting equipment (unpacked from Burglar's Pack)_
 - `rations-1` 5× Rations · _starting equipment (unpacked from Burglar's Pack)_
 - `tinderbox-1` 1× Tinderbox · _starting equipment (unpacked from Burglar's Pack)_
 - `waterskin-1` 1× Waterskin · _starting equipment (unpacked from Burglar's Pack)_
 - `thieves-tools-1` 1× Thieves' Tools · _starting equipment_
 - `fine-clothes-charcoal-1` 1× Fine clothes (charcoal) · _gift: bought by Asche at Faircloth's for 15 gp_
 - `calligraphers-supplies-1` 1× Calligrapher's Supplies · _purchased for 10 GP_
-- `cart-1` 1× Cart · _purchased for 15 GP_
+- `cart-1` 2× Cart · _purchased for 15 GP_
 - `horse-draft-1` 1× Horse, Draft · _purchased for 50 GP_
 - `studded-leather-armor-1` 1× Studded Leather Armor (equipped) · _purchased for 90 GP_
 - `paper-1` 30× Blank harbour customs forms (Paper) · _found: oilcloth bundle in the clerks' pigeonholes, Old Customs House_
   - About thirty blank customs clearance forms from before the Council's new quay, kept dry in an oilcloth wrap. Each is headed with the old harbour customs crest and has spaces for vessel, master, cargo, duty paid and the Collector's seal. Good stock for a forger.
-- `shortbow-1` 1× Shortbow · _starting equipment_
-- `arrows-1` 1× Arrows · _starting equipment_
+- `shortbow-1` 1× Shortbow (equipped) · _starting equipment_
 - `rapier-1` 1× Heron-head Sword-cane (Rapier) · _loot: the blade hidden inside Crane's heron's-head cane (a sword-cane)_
   - Valentin Crane's walking cane: black lacquered wood with a silver heron's-head handle. A twist of the handle draws a slim, needle-pointed blade. It passes for a gentleman's cane anywhere a sword would draw looks. The engine treats it as a Rapier.
-- `arrows-2` 6× Arrows · _starting equipment_
+- `arrows-2` 4× Arrows · _starting equipment_
 - `arrows-3` 1× Arrows · _starting equipment_
 - `lantern-hooded-1` 1× Lantern, Hooded · _purchased for 5 GP_
 - `lantern-bullseye-1` 1× Lantern, Bullseye · _purchased for 10 GP_
-- `sack-1` 3× Sack · _purchased for 1 CP_
+- `sack-1` 6× Sack · _purchased for 1 CP_
 - `grappling-hook-1` 1× Grappling Hook · _purchased for 2 GP_
 - `signal-whistle-1` 1× Signal Whistle · _purchased for 5 CP_
 - `blanket-1` 1× Blanket · _purchased for 5 SP_
 - `oilcloth-wrap-1` 4× Oilcloth wrap · _purchased for 5 GP_
 - `rope-1` 1× Rope · _purchased for 1 GP_
 - `smoked-glass-visor-1` 1× Smoked-glass visor · _stolen: the Eye's vault_
-- `dagger-of-venom-1` 1× Dagger of Venom (Dagger of Venom) (equipped) — Rare · _stolen: Acquisitions case A-148, Cage Three, Undercroft Stores (swapped for a plain dagger)_
+- `dagger-of-venom-1` 1× Dagger of Venom (Dagger of Venom) — Rare · _stolen: Acquisitions case A-148, Cage Three, Undercroft Stores (swapped for a plain dagger)_
   - Acquisitions exhibit A-148, lifted from its glass case in the Undercroft Stores. A slim blade of blued black steel with a green-enamelled hilt, faintly oily to the touch. A plain dagger lies on the black felt in its place, under an unbroken Acquisitions seal.
 - `black-gold-closed-eye-pi-1` 1× Black-gold closed-eye pin · _loot: the Emissary's throat_
 - `letter-of-passage-lidles-1` 1× Letter of passage (Lidless Court) · _loot: the Emissary's wallet_
@@ -82,13 +80,17 @@ Species traits: Resourceful, Skillful, Versatile
 - `cloak-of-elvenkind-1` 1× Cloak of Elvenkind (equipped) (attuned) — Uncommon · _purchased for 400 GP_
 - `boots-of-elvenkind-1` 1× Boots of Elvenkind (equipped) — Uncommon · _purchased for 400 GP_
 - `ring-of-mind-shielding-1` 1× Ring of Mind Shielding (equipped) (attuned) — Uncommon · _purchased for 400 GP_
-- `dagger-1-1` 1× Dagger +1 (equipped) — Uncommon · _purchased for 402 GP_
+- `dagger-1-1` 1× Dagger +1 — Uncommon · _purchased for 402 GP_
 - `bag-of-holding-1` 1× Bag of Holding — Uncommon · _purchased for 400 GP_
 - `potion-of-greater-healin-1` 1× Potion of Greater Healing — Uncommon · _purchased for 200 GP_
 - `potion-of-healing-1` 2× Potion of Healing — Common · _purchased for 400 GP_
 - `horse-riding-1` 5× Horse, Riding · _purchased for 375 GP_
 - `saddle-riding-1` 5× Saddle - Riding · _purchased for 50 GP_
-- `whittled-beech-twig-crow-1` 1× Whittled beech-twig crow · _found: on the stump at the beech holloway_
+- `mule-1` 1× The Rookery's grey mule (Mule) · _stolen: the Rookery's own mule, back from the Hanged Men's horse line_
+  - The grey mule taken with the cart on the March Road. Its near-hind shoe is cracked, leaving a forked print: it wants a farrier.
+- `book-1` 1× A little tally-book (Book) · _found: under the woman's pillow in the big tent_
+  - A thumb-sized book bound in greasy calfskin, its pages ruled in columns in a small neat hand, with a stub of pencil tied to the spine. It was under the pillow in the big tent, wrapped in a stocking.
+- `the-reeves-ring-of-keys-1` 1× The reeve's ring of keys · _loot: taken off the reeve by Bastian in the Pens_
 
 Hit Point Dice: Rogue d8 6/6
 Languages: Common, Elvish, Halfling, Thieves' Cant · Tools: Thieves' Tools · Armor training: light

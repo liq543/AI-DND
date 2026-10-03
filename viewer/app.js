@@ -408,10 +408,15 @@
     rolls: (f) => ["roll", "request", "roll-hidden"].includes(f.kind) || /\d+d\d+/.test(f.text || ""),
     loot: (f) => ["item", "xp", "rest", "coins"].includes(f.kind) };
   const LOG_PAGE = 30; let logPage = 0, logFilter = null, logKey = "";
+  function nameWords(s) {
+    return String(s || "").toLowerCase().replace(/['’]/g, "").split(/[^a-z0-9]+/).filter(Boolean);
+  }
   function speakerId(name) {
-    const n = String(name || "").toLowerCase();
+    const n = nameWords(name);
+    if (!n.length) return;
     const all = [...S.party, ...S.others, ...(S.offstage || [])];
-    return (all.find(e => e.name.toLowerCase() === n) || all.find(e => e.name.toLowerCase().split(/\s+/)[0] === n.split(/\s+/)[0]) || {}).id;
+    const words = (e) => nameWords(e.name);
+    return (all.find(e => words(e).join(" ") === n.join(" ")) || all.find(e => words(e)[0] === n[0]) || {}).id;
   }
   function renderLog() {
     if (logFilter === null) logFilter = lsGet("logFilter", "all");
@@ -427,7 +432,7 @@
     const pager = pages > 1 ? `<div class="pager"><button data-p="first" ${logPage === 0 ? "disabled" : ""}>⏮ Latest</button><button data-p="prev" ${logPage === 0 ? "disabled" : ""}>‹ Newer</button>
       <span>Page ${logPage + 1} / ${pages}</span><button data-p="next" ${logPage >= pages - 1 ? "disabled" : ""}>Older ›</button></div>` : "";
     el.innerHTML = chips + pager + (rows.map(f => {
-      if (f.kind === "speech") { const sid = speakerId(f.speaker);
+      if (f.kind === "speech") { const sid = (f.who && entity(f.who)) ? f.who : speakerId(f.speaker);
         return `<div class="feed speech">${sid ? avatar(sid) : `<span class="av dm">${esc(String(f.speaker || "?")[0])}</span>`}<div class="bub"><b>${esc(f.speaker)}</b>${esc(f.text)}</div></div>`; }
       if (f.kind === "turn") return `<div class="feed turn"><span>${linkSpells(f)}</span></div>`;
       if (f.kind === "combat" && /^— Round/.test(f.text)) return `<div class="feed round"><span>${esc(f.text.replace(/—/g, "").trim())}</span></div>`;
