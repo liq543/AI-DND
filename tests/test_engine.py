@@ -409,7 +409,8 @@ class EngineTest(unittest.TestCase):
 
     def test_travel_past_eight_hours_is_a_forced_march(self):
         # rules/core/09-gameplay-toolbox.md: each hour past 8 in a day: Con save DC 10 + hours past 8, or Exhaustion
-        self.ok("travel", "18")                                    # 6 hours at a normal pace
+        self.ok("time", "24h", "--reason", "start a fresh travel day")   # other tests may have travelled today
+        self.ok("travel", "18")                                  # 6 hours at a normal pace
         out = self.rule("travel", "9", contains="forced march")   # 3 more would run past 8 hours
         self.assertIn("--push", out)
         self.assertIn("Chance of tiring", out)
