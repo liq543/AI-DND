@@ -216,7 +216,9 @@ def cmd_campaign(a):
 
 
 SETTINGS = {"player_rolls": ("auto", "viewer"), "xp_mode": ("xp", "milestone"), "difficulty": ("forgiving", "standard", "deadly"),
-            "start_level": None, "hp_mode": ("avg", "roll")}
+            "start_level": None, "hp_mode": ("avg", "roll"),
+            # house rule: "narrated" = no forced-march saves on ordinary journeys; `travel --push` still rolls them
+            "forced_march": ("srd", "narrated")}
 
 
 def set_setting(g, key, value):
@@ -663,7 +665,7 @@ def cmd_combat(g, a):
                                                if not g.get(o['id']).get('hidden')), kind="combat")
         if first_changed:
             first = g.get(order[0]["id"])
-            g.say(f"▶ {first['name']}'s turn (round 1).", kind="turn", who=first["id"], round=1)
+            _announce_turn(g, first, 1)
             M.start_of_turn(g, first)
         return
     if a.action == "next":
@@ -687,7 +689,7 @@ def cmd_combat(g, a):
         c["economy"] = {**c.get("economy", {}), nid: {}}
         g.emit("combat.set", combat=c)
         ne = g.get(nid)
-        g.say(f"▶ {ne['name']}'s turn (round {c['round']}).", kind="turn", who=nid, round=c["round"])
+        _announce_turn(g, ne, c["round"])
         M.start_of_turn(g, ne)
         return
     if a.action == "add":
@@ -721,7 +723,7 @@ def cmd_combat(g, a):
         c["economy"] = {**c.get("economy", {}), e["id"]: {}}
         g.emit("combat.set", combat=c)
         g.override(a.reason, f"turn returned to {e['name']}")
-        g.say(f"▶ {e['name']}'s turn (round {c['round']}) — returned after a skip.", kind="turn", who=e["id"], round=c["round"])
+        _announce_turn(g, e, c["round"], " — returned after a skip")
         return
     if a.action == "oa-window":
         # beta repair: open the opportunity-attack window a move warning should have opened (logged publicly)
@@ -759,7 +761,7 @@ def cmd_combat(g, a):
         g.say(f"{e['name']} leaves combat.", kind="combat")
         if was_current:
             ne = g.get(c["order"][c["turn"]]["id"])
-            g.say(f"▶ {ne['name']}'s turn (round {c['round']}).", kind="turn", who=ne["id"], round=c["round"])
+            _announce_turn(g, ne, c["round"])
             M.start_of_turn(g, ne)
         return
     if a.action == "end":
@@ -790,8 +792,17 @@ def finalize_initiative(g):
     g.emit("combat.set", combat=c)
     g.say("Initiative order: " + " → ".join(f"{g.get(o['id'])['name']} ({o['init']})" for o in order if not g.get(o['id']).get('hidden')), kind="combat")
     first = g.get(order[0]["id"])
-    g.say(f"▶ {first['name']}'s turn (round 1).", kind="turn", who=first["id"], round=1)
+    _announce_turn(g, first, 1)
     M.start_of_turn(g, first)
+
+
+def _announce_turn(g, e, rnd, suffix=""):
+    """Public turn marker. A hidden creature's turn is announced without its name (the DM's note keeps it)."""
+    if e.get("hidden"):
+        g.say(f"▶ A hidden creature's turn (round {rnd}){suffix}.", kind="turn", round=rnd)
+        g.note(f"[secret] {e['name']}'s turn (round {rnd}){suffix}.")
+    else:
+        g.say(f"▶ {e['name']}'s turn (round {rnd}){suffix}.", kind="turn", who=e["id"], round=rnd)
 
 
 ACTIONS = {"dash", "disengage", "dodge", "help", "hide", "ready", "search", "study", "utilize", "influence", "magic", "attack", "grapple", "shove", "escape"}
@@ -1279,7 +1290,10 @@ def cmd_travel(g, a):
     if not day or now - day["start"] >= 1440 or rested >= day["start"]:
         day = {"start": now, "hours": 0.0}
     done, push = day["hours"], False
-    if hours <= 8 and done + hours > 8:
+    narrated = g.state["settings"].get("forced_march", "srd") == "narrated"
+    if narrated and not getattr(a, "push", False):
+        total_min = int(hours * 60) if hours <= 16 else total_min
+    elif hours <= 8 and done + hours > 8:
         if not getattr(a, "push", False):
             from engine.core import save_mod
             dcs = [10 + (h - 8) for h in range(max(9, int(done) + 1), int(done + hours) + 1)]
@@ -1301,11 +1315,16 @@ def cmd_travel(g, a):
         g.emit("view.set", party_pos=[tx, ty])
     M.after_time(g)
     g.say(f"🧭 The party travels {miles} miles at a {a.pace} pace ({pace} mph, 8 hours a day"
-          f"{', difficult terrain counted' if region else ''}) — {int(days)} day(s) {rem:.1f} h. Now {fmt_time(g.state['time'])}.", kind="time")
+          f"{', difficult terrain counted' if region else ''}) — "
+          f"{f'{hours:.1f} h' if narrated and not push and hours <= 16 else f'{int(days)} day(s) {rem:.1f} h'}. Now {fmt_time(g.state['time'])}.", kind="time")
     if a.pace == "fast":
         g.say("   Fast pace: Disadvantage on Wisdom (Perception/Survival) and Dexterity (Stealth) checks while travelling.")
     if a.pace == "slow":
         g.say("   Slow pace: Advantage on Wisdom (Perception/Survival) checks; the party can travel stealthily.")
+    if narrated and not push and done + hours > 8:
+        g.say("   House rule (travel is narrated): no forced-march saves for an ordinary journey.")
+    if narrated and getattr(a, "push", False) and done + hours > 8:
+        push = True   # a deliberate, punishing push: the SRD saves apply
     if push:
         for hour in range(max(9, int(done) + 1), int(done + hours) + 1):
             dc = 10 + (hour - 8)
@@ -2371,6 +2390,13 @@ def cmd_fx(g, a):
     g.say(f"🎞 {what}", kind="fx", **cue)
 
 
+def _name_words(s):
+    """Name words for matching speech to a token. Punctuation is not part of the word, so a spoken 'Marta' finds
+    'Marta, the smith', and a hyphenated id still matches the two-word name."""
+    raw = re.sub(r"[\s\-_']+", " ", str(s).strip().lower())
+    return [w for w in (re.sub(r"[^a-z0-9]", "", p) for p in raw.split()) if w]
+
+
 def _anchor(g, ref):
     """The creature a line belongs to (id, full name or first name; the current map's creatures first), if the players
     can see it: its token gets the speech bubble or caption on the live table."""
@@ -2379,10 +2405,12 @@ def _anchor(g, ref):
     ents = list(g.entities.values())
     here = (g.state.get("view") or {}).get("map")
     ents.sort(key=lambda e: 0 if (e.get("token") or {}).get("map") == here else 1)
-    norm = lambda s: re.sub(r"[\s\-_']+", " ", s.strip().lower())  # noqa: E731  ('jory-brannock' == 'Jory Brannock')
-    r = norm(ref)
-    e = (g.entities.get(ref) or next((e for e in ents if norm(e["name"]) == r), None)
-         or next((e for e in ents if norm(e["name"]).split()[0] == r.split()[0]), None))
+    r = _name_words(ref)
+    if not r:
+        return None
+    words = lambda e: _name_words(e.get("name", ""))  # noqa: E731
+    e = (g.entities.get(ref) or next((e for e in ents if words(e) == r), None)
+         or next((e for e in ents if words(e)[:1] == r[:1]), None))
     return e["id"] if e and not e.get("hidden") and e.get("token") else None
 
 

@@ -2,18 +2,18 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 1 · **In-world time:** Day 2, 04:04 · **Mode:** exploration
-**Current map:** The Gallows track, the turn-off (`gallows-turnoff2`) · **Events:** 2036 · **Log head:** `bb0837a1d4f7cbd7`
-**Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6 · **Party position (region):** [25, 51]
+**Session:** 1 · **In-world time:** Day 2, 16:02 · **Mode:** exploration
+**Current map:** The Pens (`the-pens`) · **Events:** 3369 · **Log head:** `fdba72d947896a25`
+**Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated · **Party position (region):** [21, 62]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 6 | 51/51 | 16 | — | — | gallows-turnoff2 (17,10) |
-| Brakka Holloway (`brakka`) | 6 | 58/58 | 19 | — | — | gallows-turnoff2 (18,10) |
-| Corvin Asche (`corvin`) | 6 | 38/38 | 14 | — | L1:4/4 L2:3/3 L3:3/3 | gallows-turnoff2 (16,10) |
-| Ottilie Marsh (`ottilie`) | 6 | 39/39 | 13 | — | L1:4/4 L2:3/3 L3:3/3 | gallows-turnoff2 (16,11) |
+| Kit Corvell (`kit`) | 6 | 51/51 | 16 | — | — | the-pens (6,7) |
+| Brakka Holloway (`brakka`) | 6 | 58/58 | 19 | — | — | the-pens (7,8) |
+| Corvin Asche (`corvin`) | 6 | 38/38 | 14 | — | L1:3/4 L2:3/3 L3:1/3 | the-pens (4,8) |
+| Ottilie Marsh (`ottilie`) | 6 | 39/39 | 13 | — | L1:4/4 L2:3/3 L3:3/3 | the-pens (5,6) |
 
 ## Other creatures (DM view)
 
@@ -30,13 +30,30 @@
 | Bastian (`bastian`, tough) | neutral | 32/32 | 12 | — | the-pens (11,7) |  |
 | Mercy Fulk (`mercy-fulk`, commoner) | enemy | 3/4 | 10 | restrained | the-pens (11,3) |  |
 | Amos Pettigrew (`amos-pettigrew`, commoner) | neutral | 1/4 | 10 | — | barrow-gate (26,5) |  |
-| Garrick Webb (`garrick-webb`, tough) | neutral | 32/32 | 12 | — | crowsfoot (27,22) |  |
-| Alys Brinn (`alys-brinn`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (21,24) |  |
-| Brother Cuthbert (`brother-cuthbert`, priest-acolyte) | neutral | 11/11 | 13 | — | crowsfoot (24,24) |  |
-| Villager (`villager`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (20,24) |  |
-| Villager (`villager-2`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (21,23) |  |
-| Villager (`villager-3`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (25,23) |  |
-| Villager (`villager-4`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (26,24) |  |
+| Garrick Webb (`garrick-webb`, tough) | neutral | 32/32 | 12 | — | crowsfoot (20,9) |  |
+| Alys Brinn (`alys-brinn`, commoner) | neutral | 0/4 | 10 | unconscious, prone | the-pens (6,9) |  |
+| Brother Cuthbert (`brother-cuthbert`, priest-acolyte) | neutral | 11/11 | 13 | — | crowsfoot (17,9) |  |
+| Villager (`villager`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (26,16) |  |
+| Hob, the miller's man (`villager-2`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (36,10) |  |
+| Villager (`villager-3`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (18,15) |  |
+| Villager (`villager-4`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (33,18) |  |
+| Jess, the bound woman (`jessamy-crook`, bandit-captain) | enemy | 52/52 | 15 | prone, restrained | the-pens (7,6) |  |
+| Kes, the boy on watch (`kester-brinn`, bandit) | enemy | 0/11 | 12 | — · DEAD | withy-pond (28,8) |  |
+| Bandit A (`bandit-a`, bandit) | enemy | 0/11 | 12 | — · DEAD | withy-pond (24,7) |  |
+| Bandit B (`bandit-b`, bandit) | enemy | 0/11 | 12 | — · DEAD | withy-pond (26,6) |  |
+| Bandit C (`bandit-c`, bandit) | enemy | 0/11 | 12 | — · DEAD | withy-pond (20,6) |  |
+| Bandit D (`bandit-d`, bandit) | enemy | 0/11 | 12 | — · DEAD | withy-pond (22,6) |  |
+| Bandit E (`bandit-e`, bandit) | enemy | 0/11 | 12 | — · DEAD | withy-pond (28,6) |  |
+| Mastiff (`mastiff`, mastiff) | enemy | 0/5 | 12 | — · DEAD | withy-pond (20,4) |  |
+| Dog-handler (`dog-handler`, tough) | enemy | 0/32 | 12 | — · DEAD | gallows-turnoff2 (13,6) |  |
+| Mastiff A (`mastiff-a`, mastiff) | enemy | 0/5 | 12 | — · DEAD | gallows-turnoff2 (14,6) |  |
+| Mastiff B (`mastiff-b`, mastiff) | enemy | 0/5 | 12 | — · DEAD | gallows-turnoff2 (14,7) |  |
+| Bandit A (`bandit-a-2`, bandit) | enemy | 0/11 | 12 | — · DEAD | gallows-turnoff2 (11,6) |  |
+| Bandit B (`bandit-b-2`, bandit) | enemy | 0/11 | 12 | — · DEAD | gallows-turnoff2 (12,4) |  |
+| Bandit C (`bandit-c-2`, bandit) | enemy | 0/11 | 12 | — · DEAD | gallows-turnoff2 (15,5) |  |
+| Bandit D (`bandit-d-2`, bandit) | enemy | 0/11 | 12 | — · DEAD | gallows-turnoff2 (10,8) |  |
+| Bandit E (`bandit-e-2`, bandit) | enemy | 0/11 | 12 | — · DEAD | gallows-turnoff2 (16,7) |  |
+| Bandit F (`bandit-f`, bandit) | enemy | 0/11 | 12 | — · DEAD | gallows-turnoff2 (13,8) |  |
 
 ## Maps (exact current contents — tokens and items stay where they were left)
 
@@ -168,13 +185,12 @@
 - doors: (14,12) closed, (14,13) closed, (25,19) closed
 
 ### Crowsfoot (`crowsfoot`, interior 60×40, lighting bright)
-- Alys Brinn (`alys-brinn`, neutral) at (21,24) — 4/4 HP
-- Brother Cuthbert (`brother-cuthbert`, neutral) at (24,24) — 11/11 HP
-- Garrick Webb (`garrick-webb`, neutral) at (27,22) — 32/32 HP
-- Villager (`villager`, neutral) at (20,24) — 4/4 HP
-- Villager (`villager-2`, neutral) at (21,23) — 4/4 HP
-- Villager (`villager-3`, neutral) at (25,23) — 4/4 HP
-- Villager (`villager-4`, neutral) at (26,24) — 4/4 HP
+- Brother Cuthbert (`brother-cuthbert`, neutral) at (17,9) — 11/11 HP
+- Garrick Webb (`garrick-webb`, neutral) at (20,9) — 32/32 HP
+- Hob, the miller's man (`villager-2`, neutral) at (36,10) — 4/4 HP
+- Villager (`villager`, neutral) at (26,16) — 4/4 HP
+- Villager (`villager-3`, neutral) at (18,15) — 4/4 HP
+- Villager (`villager-4`, neutral) at (33,18) — 4/4 HP
 - container `mercys-coin-bowl`: Mercy's coin bowl at (28,32)
 - container `the-linen-chest`: The linen chest at (32,37)
 - point of interest `poi-1`: The post-box at (14,10) → journal j124
@@ -215,7 +231,13 @@
 - doors: (22,8) closed, (35,9) closed, (43,9) closed, (40,16) open, (8,17) closed, (40,17) open, (40,18) open, (40,19) open, (23,26) closed, (56,26) closed, (43,27) closed, (8,28) closed, (30,29) open, (37,29) open, (26,34) open, (30,35) open, (23,36) closed, (44,36) open
 
 ### The Pens (`the-pens`, interior 30×16, lighting dark)
+- Brakka Holloway (`brakka`, pc) at (7,8) — 58/58 HP
+- Corvin Asche (`corvin`, pc) at (4,8) — 38/38 HP
+- Kit Corvell (`kit`, pc) at (6,7) — 51/51 HP
+- Ottilie Marsh (`ottilie`, pc) at (5,6) — 39/39 HP
+- Alys Brinn (`alys-brinn`, neutral) at (6,9) — 0/4 HP · unconscious, prone
 - Bastian (`bastian`, neutral) at (11,7) — 32/32 HP
+- Jess, the bound woman (`jessamy-crook`, enemy) at (7,6) — 52/52 HP · prone, restrained
 - Mercy Fulk (`mercy-fulk`, enemy) at (11,3) — 3/4 HP · restrained
 - container `gaolers-chest`: The gaoler's chest at (8,11)
 - point of interest `poi-1`: The stair up at (1,7) → journal j161
@@ -248,32 +270,62 @@
 ### The Gallows track, the turn-off (`gallows-turnoff`, wilderness 30×20, lighting bright)
 - labels: Stream (15,10), Road (1,13)
 
-### The Gallows track, the turn-off (`gallows-turnoff2`, wilderness 30×20, lighting dark)
-- Brakka Holloway (`brakka`, pc) at (18,10) — 58/58 HP
-- Corvin Asche (`corvin`, pc) at (16,10) — 38/38 HP
-- Kit Corvell (`kit`, pc) at (17,10) — 51/51 HP
-- Ottilie Marsh (`ottilie`, pc) at (16,11) — 39/39 HP
+### The Gallows track, the turn-off (`gallows-turnoff2`, wilderness 30×20, lighting dim)
+- Bandit A (`bandit-a-2`, enemy) at (11,6) — DEAD
+- Bandit B (`bandit-b-2`, enemy) at (12,4) — DEAD
+- Bandit C (`bandit-c-2`, enemy) at (15,5) — DEAD
+- Bandit D (`bandit-d-2`, enemy) at (10,8) — DEAD
+- Bandit E (`bandit-e-2`, enemy) at (16,7) — DEAD
+- Bandit F (`bandit-f`, enemy) at (13,8) — DEAD
+- Dog-handler (`dog-handler`, enemy) at (13,6) — DEAD
+- Mastiff A (`mastiff-a`, enemy) at (14,6) — DEAD
+- Mastiff B (`mastiff-b`, enemy) at (14,7) — DEAD
 - point of interest `poi-1`: The deer path at (18,11) → journal j181
 - point of interest `poi-2`: The Gallows track at (12,10) → journal j182
 - point of interest `poi-3`: A lichened boulder at (21,2) → journal j183
 - point of interest `poi-4`: A fallen ash at (25,14) → journal j184
+- point of interest `poi-6`: The scorched beeches at (13,6) → journal j205
 - labels: Road (1,13)
+
+### The Withy Pond (`withy-pond`, wilderness 40×28, lighting dim)
+- Bandit A (`bandit-a`, enemy) at (24,7) — DEAD
+- Bandit B (`bandit-b`, enemy) at (26,6) — DEAD
+- Bandit C (`bandit-c`, enemy) at (20,6) — DEAD
+- Bandit D (`bandit-d`, enemy) at (22,6) — DEAD
+- Bandit E (`bandit-e`, enemy) at (28,6) — DEAD
+- Kes, the boy on watch (`kester-brinn`, enemy) at (28,8) — DEAD
+- Mastiff (`mastiff`, enemy) at (20,4) — DEAD
+- item on floor `floor-1`: 1× Whittled beech-twig crow at (29,7) — dropped by Kit Corvell
+- item on floor `floor-2`: 1× Whittled beech crow at (29,7) — dropped by Kit Corvell
+- point of interest `poi-1`: The banked campfire at (25,8) → journal j185
+- point of interest `poi-5`: The horse line at (21,3) → journal j189
+- point of interest `poi-7`: The broached ale cask at (22,12) → journal j191
+- point of interest `poi-9`: The Withy Pond at (11,15) → journal j193
+- point of interest `poi-10`: The withies at (15,20) → journal j194
+- point of interest `poi-11`: The deer path at (33,19) → journal j195
+- point of interest `poi-14`: The big patched tent, ransacked at (29,5) → journal j198
+- point of interest `poi-15`: The lean-to's embers at (21,6) → journal j199
+
+### The deer path, at first light (`deer-path`, wilderness 30×20, lighting dim)
+- point of interest `poi-2`: A mossy boulder at (8,9) → journal j201
+- point of interest `poi-3`: The way back to the pond at (3,4) → journal j202
+- point of interest `poi-4`: On to the turn-off at (28,13) → journal j203
 
 
 ## Recent events
 
-- ⚖ DM ruling: The night march's forced-march saves are void: no one gains Exhaustion — DM error: the player wasn't warned before pressing on that it was a forced march, with its odds and consequences; the player rules they don't tire this time
-- 📍 Noted on The Gallows track, the turn-off: The deer path (18,11) — click it on the map for its journal entry.
-- 📍 Noted on The Gallows track, the turn-off: The Gallows track (12,10) — click it on the map for its journal entry.
-- 📍 Noted on The Gallows track, the turn-off: A lichened boulder (21,2) — click it on the map for its journal entry.
-- 📍 Noted on The Gallows track, the turn-off: A fallen ash (25,14) — click it on the map for its journal entry.
-- Kit Corvell is at (17,10) on The Gallows track, the turn-off.
-- Brakka Holloway is at (18,10) on The Gallows track, the turn-off.
-- Corvin Asche is at (16,10) on The Gallows track, the turn-off.
-- Ottilie Marsh is at (16,11) on The Gallows track, the turn-off.
-- 🗺 Map: The Gallows track, the turn-off
-- 🎬 Near Gallows Oak — Day 2, before dawn — Black forest an hour before dawn; the cart's trail turns off the Gallows track down a deer path, and woodsmoke hangs on the air.
-- 🗺 Map: The Gallows track, the turn-off
-- Hours of black wood, Brakka in front with a hand back on Kit's bridle. At four in the morning he stops where the cart's ruts and the forked print turn off the Gallows track and push north-west down a deer path through broken bracken.
-- The air has changed: woodsmoke, faint and stale, from somewhere ahead along the path. Very far off a dog barks twice and is quiet. The thin crescent moon has risen behind the trees, and the east hasn't begun to grey.
-- “Cart went this way. Gallows Oak's a mile on up the track. Their fire's that way, a mile or two. And they've got dogs.”
+- Up the Barrow track through the yews, and the lane that goes nowhere for anyone else opens for them onto the hidden dell. Corlis comes running from the stalls to take the horses and the cart; Harl at the lodge door looks at the two women in the cart bed and says nothing at all.
+- Corlis takes the mule's head and clucks at her cracked shoe.
+- ⏳ 20m passes — through the lodge and down through the Rookery to the Pens with the prisoners. Now Day 2, 16:02.
+- Kit Corvell is at (6,7) on The Pens.
+- Brakka Holloway is at (7,8) on The Pens.
+- Ottilie Marsh is at (5,6) on The Pens.
+- Corvin Asche is at (4,8) on The Pens.
+- Jess, the bound woman is at (7,6) on The Pens.
+- Alys Brinn is at (6,9) on The Pens.
+- 🗺 Map: The Pens
+- 🎬 The Pens — Day 2, 16:02 — Torchlight and brazier-glow under the Barrow; iron doors along a black corridor, and the gaoler waiting with his keys.
+- 🗺 Map: The Pens
+- Bastian unhooks himself from the wall by the cell doors, a ring of keys swinging from one thick finger, and looks over the two women with professional interest.
+- “Two more, is it? And one of them's wearing the reeve's keys. You don't do things by halves, master. Where d'you want 'em? I've three empty on the north side, four on the south. The innkeeper's in the first north, if they're to be neighbours.”
+- In the first cell on the north side, behind the bars, Mercy Fulk lifts her head off the straw at the voices. Her gag is still in.

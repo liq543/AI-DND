@@ -1,4 +1,4 @@
-﻿# Standing orders from the player (injected at session start and after every compaction; travels with the repo)
+# Standing orders from the player (injected at session start and after every compaction; travels with the repo)
 
 Lessons from past corrections, on top of dm/turn-rules.md. Each one is a promise: the player should never have to
 give it again.
@@ -81,3 +81,4 @@ give it again.
   rooms beyond a stair) show as map tabs at all times: `map link` them, and mark any already known with `map set <id> --kv known=on`.
 - **Warn before any long march.** Before offering travel that runs past 8 hours in a day, say how long it takes, each
   character's chance of tiring (the engine's `travel` refusal gives the odds) and what Exhaustion does. Never roll it unwarned.
+- **Log the scene at the same detail as the reply.** Same turn, through `say` (`--as` for speech, `--at` when it is about one creature). Chat is not a fuller copy.

@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Wizard 6** (Evoker) · **Background:** Sage · **XP:** 14152
+**Player:** DM · **Human** · **Wizard 6** (Evoker) · **Background:** Sage · **XP:** 14484
 
 **HP** 38/38 · **AC** 14 (unarmored 10 + Dex 2 + bracers 2) · **Speed** 30 ft · **Initiative** +5 · **Proficiency** +3 · **Passive Perception** 11
 
@@ -27,7 +27,7 @@ Attacks per Attack action: 1
 ## Spellcasting
 
 - **Wizard:** save DC 15, attack +7, cantrips 4, prepared 10, up to level 3
-- **Slots:** L1 4/4, L2 3/3, L3 3/3
+- **Slots:** L1 3/4, L2 3/3, L3 1/3
 - **Cantrips:** fire-bolt, mage-hand, minor-illusion, light
 - **Prepared:** shield, magic-missile, sleep, misty-step, invisibility, suggestion, fireball, counterspell, animate-dead, dispel-magic
 - **Spellbook:** detect-magic, identify, shield, sleep, magic-missile, alarm, feather-fall, disguise-self, misty-step, knock, invisibility, suggestion, fireball, counterspell, animate-dead, dispel-magic
