@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 from . import art, assets, chargen, dice, itemart, maps, mechanics as M, render, srd, views
-from .core import (Game, RuleError, derive, fmt_time, level, parse_duration, replay, tier, TIER_MAX_GP_AWARD,
+from .core import (Game, RuleError, derive, fmt_time, level, parse_duration, parse_when, replay, tier, TIER_MAX_GP_AWARD,
                    SIZE_CELLS)
 from .store import ACTIVE_FILE, CAMPAIGNS, Store, TamperError, active_dir
 
@@ -1242,6 +1242,25 @@ def cmd_rest(g, a):
 
 
 def cmd_time(g, a):
+    if a.rewind_to:
+        # repair only: a command run by mistake (a journey nobody declared) moved the clock; put it back, publicly.
+        # Nothing that fired in the voided span is undone here: check the log and repair those separately.
+        when = parse_when(a.rewind_to)
+        if when is None:
+            raise RuleError('--rewind-to "Day N, HH:MM"')
+        if not a.override:
+            raise RuleError('time --rewind-to "Day N, HH:MM" --override "the DM error being corrected"')
+        if when >= g.state["time"]:
+            raise RuleError("--rewind-to must be earlier than now (time moves forward with `time <amount>`).")
+        g.override(a.override, f"the clock put back from {fmt_time(g.state['time'])} to {fmt_time(when)}")
+        g.emit("time.set", minutes=when)
+        td = g.state["view"].get("travel_day")
+        if td and td.get("start", 0) > when:
+            g.emit("view.set", travel_day=None)
+        g.say(f"⏪ The clock is put back to {fmt_time(when)} — {a.override}.", kind="time")
+        return
+    if not a.amount:
+        raise RuleError("time <amount> (e.g. 2h, 30m)")
     mins = parse_duration(a.amount)
     if mins <= 0:
         raise RuleError("Time only moves forward.")
@@ -3182,8 +3201,10 @@ def build_parser():
     c.add_argument("--note")
     c.add_argument("--reason")
     c = sp.add_parser("time", help="advance in-world time")
-    c.add_argument("amount")
+    c.add_argument("amount", nargs="?")
     c.add_argument("--reason")
+    c.add_argument("--rewind-to", help='repair: put the clock back to "Day N, HH:MM" after a voided DM error (public)')
+    c.add_argument("--override", help="the DM error being corrected (required with --rewind-to)")
     c = sp.add_parser("travel")
     c.add_argument("miles", nargs="?", type=float)
     c.add_argument("--pace", default="normal", choices=["fast", "normal", "slow"])

@@ -86,6 +86,17 @@ class MapHierarchyTest(unittest.TestCase):
         pv = views.player_view(g)["maps"]["brightwater"]
         self.assertEqual((pv["anchor"], pv["tab"], pv["parent"]), ("brightwater", False, "realm"))
 
+    def test_clock_rewind_is_a_public_repair(self):
+        from engine.core import fmt_time
+        start = _cli.game(self.env).state["time"]
+        self.ok("time", "3h", "--reason", "a journey run by mistake")
+        self.rule("time", "--rewind-to", fmt_time(start), contains="--override")
+        self.ok("time", "--rewind-to", fmt_time(start), "--override", "the journey was never declared")
+        g = _cli.game(self.env)
+        self.assertEqual(g.state["time"], start)
+        self.assertTrue(any("put back" in (f.get("text") or "") for f in g.state["feed"]))
+        self.rule("time", "--rewind-to", fmt_time(start), "--override", "x", contains="earlier")
+
 
 if __name__ == "__main__":
     unittest.main()
