@@ -355,6 +355,14 @@ class VisualsCliTest(unittest.TestCase):
         finally:
             self.ok("npc", "remove", "captain-rhosk")
 
+    def test_placing_a_hidden_creature_stays_secret(self):
+        self.ok("npc", "add", "bandit", "--name", "Captain Rhosk", "--hidden", "--at", "3,3")
+        try:
+            self.ok("place", "captain-rhosk", "3,3")
+            self.assertFalse(any("Rhosk" in (f.get("text") or "") for f in self.view()["feed"]))
+        finally:
+            self.ok("npc", "remove", "captain-rhosk")
+
     def test_server_serves_art(self):
         _cli.point_at(self.env)
         import engine.server as server

@@ -560,7 +560,10 @@ def cmd_place(g, a):
     if a.force and M.combat(g):
         g.override(a.force, f"placed {e['name']} at ({x},{y})")
     g.set(e, token={"map": mid, "x": x, "y": y}, cells=SIZE_CELLS.get(e.get("size", "Medium"), 1))
-    g.say(f"{e['name']} is at ({x},{y}) on {m['name']}.", kind="move", who=e["id"], map=mid, to=[x, y], placed=True)
+    if e.get("hidden"):
+        g.note(f"{e['name']} (hidden) is at ({x},{y}) on {m['name']}.")   # the players mustn't learn where an unseen creature is
+    else:
+        g.say(f"{e['name']} is at ({x},{y}) on {m['name']}.", kind="move", who=e["id"], map=mid, to=[x, y], placed=True)
     M.reveal_for(g, g.get(e["id"]))
 
 
