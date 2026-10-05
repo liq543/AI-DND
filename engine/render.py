@@ -860,6 +860,12 @@ def render_region(m, mode="player", cell=8, party_pos=None):
         marks.append((px - r, py - r * 1.5, px + r, py + r))
         rank = {"capital": 0, "city": 1, "town": 2, "castle": 3, "abbey": 4, "village": 5, "hamlet": 6}.get(s["kind"], 5)
         queue.append({"p": s, "px": px, "py": py, "r": r, "fs": fs, "rank": rank, "style": "normal", "weight": weight, "sw": 3})
+    for lb in m.get("labels", []):   # region names are fixed: place names steer round them
+        if player and lb.get("hidden"):
+            continue
+        fs = cell * 1.7
+        tw = len(lb["text"]) * (fs * .55 + 2)
+        marks.append((lb["x"] * cell - tw / 2, lb["y"] * cell - fs * .8, lb["x"] * cell + tw / 2, lb["y"] * cell + fs * .25))
     parts += _place_labels(queue, marks, cell, w * cell, h * cell, clickable)
     for lb in m.get("labels", []):
         if player and lb.get("hidden"):
