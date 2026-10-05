@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 RULES = ROOT / "rules"
 CACHE = Path(__file__).resolve().parent / ".cache" / "srd.json"
-CACHE_VERSION = 14
+CACHE_VERSION = 15
 
 ABILITIES = ["str", "dex", "con", "int", "wis", "cha"]
 ABILITY_NAMES = {"strength": "str", "dexterity": "dex", "constitution": "con",
@@ -413,11 +413,15 @@ def parse_equipment():
                     "stealth_dis": "Disadvantage" in r[3], "cost_cp": cost_cp(r[5]),
                 }
         elif headers and headers[0].lower() in ("item", "mount", "service", "animal", "focus", "type", "ship"):
+            amount_col = next((i for i, h in enumerate(headers) if h.strip().lower() == "amount"), None)
             for r in rows:
                 if len(r) >= 2:
                     price = next((cost_cp(c) for c in reversed(r) if cost_cp(c) is not None), None)
                     if price is not None:
                         gear[r[0].lower()] = {"name": r[0], "cost_cp": price}
+                        # ammunition is priced per bundle (Arrows: 20 for 1 GP); remember the bundle size
+                        if amount_col is not None and amount_col < len(r) and r[amount_col].strip().isdigit():
+                            gear[r[0].lower()]["bundle"] = int(r[amount_col].strip())
     for m in re.finditer(r"^#### \**([^\n(*]+?) \(([\d,]+ (?:CP|SP|GP|PP))\)\**[ \t]*\n(?=(.{0,400}))", text, re.M | re.S):
         entry = gear.setdefault(m.group(1).strip().lower(), {"name": m.group(1).strip(), "cost_cp": cost_cp(m.group(2))})
         ab = re.match(r"\s*\*\*Ability:\*\*\s*(\w+)", m.group(3))

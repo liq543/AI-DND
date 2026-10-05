@@ -1717,7 +1717,10 @@ def resolve_item(g, name):
         return out
     gear = srd.find("gear", raw)
     if gear:
-        return {"name": gear["name"], "kind": "gear", "value_cp": gear["cost_cp"]}
+        out = {"name": gear["name"], "kind": "gear", "value_cp": gear["cost_cp"]}
+        if gear.get("bundle"):
+            out["bundle"] = gear["bundle"]   # value_cp is the price of the whole bundle; qty counts single pieces
+        return out
     return None
 
 
@@ -1773,8 +1776,9 @@ def add_item(g, e, name, qty=1, source="found", price=None, purchase=False, over
         if price is not None and item.get("value_cp") and price < item["value_cp"] // 2 and not override:
             raise RuleError(f"{fmt_cp(price)} is less than half the listed price ({fmt_cp(item['value_cp'])}). "
                             f"A discount that large needs --override with the reason (haggling result, favour...).")
-        change_coins(g, e, -cost * qty, f"buy {item['name']}")
-        source = f"purchased for {fmt_cp(cost * qty)}"
+        total = -(-cost * qty // item["bundle"]) if item.get("bundle") and price is None else cost * qty
+        change_coins(g, e, -total, f"buy {item['name']}")
+        source = f"purchased for {fmt_cp(total)}"
     if item.get("magic"):
         # SRD: learning a magic item's properties isn't automatic (Identify, or a Short Rest focused on it). Bought and
         # starting items are known; anything found, looted, stolen or given starts unidentified unless the DM says otherwise.
@@ -1907,6 +1911,14 @@ def fall_inert(g, e):
         remove_item(g, g.get(e["id"]), it["id"], min(it.get("qty", 1), 2), "dropped")
 
 
+def bundle_size(it):
+    """Pieces per priced bundle for ammunition (SRD: Arrows 20 for 1 GP). Older saved items lack the field."""
+    if it.get("bundle"):
+        return it["bundle"]
+    gear = srd.find("gear", it.get("name", "")) if it.get("kind") == "gear" else None
+    return (gear or {}).get("bundle")
+
+
 def remove_item(g, e, ref, qty=1, reason="dropped", sell=False, to=None):
     it = find_item(e, ref)
     have = it.get("qty", 1)
@@ -1924,7 +1936,7 @@ def remove_item(g, e, ref, qty=1, reason="dropped", sell=False, to=None):
         value = it.get("value_cp", 0)
         if not value:
             raise RuleError(f"{it['name']} has no market value.")
-        price = value * qty // (1 if it.get("kind") == "treasure" else 2)
+        price = value * qty // ((1 if it.get("kind") == "treasure" else 2) * (bundle_size(it) or 1))
         change_coins(g, g.get(e["id"]), price, f"sold {it['name']}")
         g.say(f"💰 {e['name']} sells {qty}× {it['name']} for {fmt_cp(price)} (equipment sells for half its cost).", kind="item")
     elif to:
