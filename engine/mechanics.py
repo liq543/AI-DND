@@ -581,7 +581,7 @@ def attack_modes(g, att, tgt, ranged, dist, extra_adv=(), extra_dis=()):
         dis.append("Vicious Mockery")
     if any(fx.get("name") == "untrained armor" for fx in att.get("effects", [])):
         dis.append("armor without training")
-    if ranged and same_map(att, tgt):
+    if ranged and same_map(att, tgt) and "invisible" not in an:   # an unseen archer isn't seen by the foe beside them
         for other in g.entities.values():
             if other["id"] != att["id"] and alive(other) and hostile(att, other) and same_map(att, other) \
                     and not ({"incapacitated", "blinded"} & condition_names(other)) and dist_ft(att, other) <= 5:

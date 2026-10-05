@@ -175,6 +175,25 @@ class EngineTest(unittest.TestCase):
             self.ok("npc", "remove", "mark")
             self.ok("char", "remove", "nix")
 
+    def test_hidden_archer_not_hampered_by_foe_beside_them(self):
+        # a ranged attack gets Disadvantage from a hostile within 5 ft only if that foe can see the attacker
+        from engine import mechanics as M
+        self.ok("place", "kira", "8,8", "--map", "arena")
+        self.ok("npc", "add", "bandit", "--name", "Lurk", "--at", "9,8", "--map", "arena")
+        self.ok("npc", "add", "bandit", "--name", "Far", "--at", "14,8", "--map", "arena")
+        try:
+            g = self.state()
+            _, dis = M.attack_modes(g, g.get("kira"), g.get("far"), ranged=True, dist=30)
+            self.assertTrue(any("within 5 ft" in d for d in dis))
+            self.ok("condition", "add", "kira", "invisible", "--source", "Hide (Stealth 20)")
+            g = self.state()
+            _, dis = M.attack_modes(g, g.get("kira"), g.get("far"), ranged=True, dist=30)
+            self.assertFalse(any("within 5 ft" in d for d in dis))
+        finally:
+            _cli.run(self.env, "condition", "remove", "kira", "invisible")
+            self.ok("npc", "remove", "lurk")
+            self.ok("npc", "remove", "far")
+
     def test_hiding_ends_when_casting_aloud(self):
         # Hide ends when the hidden creature casts a spell with a Verbal component, not a silent one
         from engine import mechanics as M
