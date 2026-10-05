@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Orc** · **Fighter 6** (Champion) · **Background:** Soldier · **XP:** 14484
+**Player:** DM · **Orc** · **Fighter 6** (Champion) · **Background:** Soldier · **XP:** 17362
 
 **HP** 58/58 · **AC** 19 (Plate Armor 18 + items 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
 
@@ -38,7 +38,7 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 
 ## Inventory
 
-**Coins:** 205 GP 7 SP
+**Coins:** 100 GP 5 CP
 
 - `javelin-1` 8× Javelin · _starting equipment_
 - `spear-1` 1× Spear · _starting equipment_
@@ -56,23 +56,17 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 - `tinderbox-1` 1× Tinderbox · _starting equipment (unpacked from Dungeoneer's Pack)_
 - `torch-1` 10× Torch · _starting equipment (unpacked from Dungeoneer's Pack)_
 - `waterskin-1` 1× Waterskin · _starting equipment (unpacked from Dungeoneer's Pack)_
-- `heavy-crossbow-1` 1× Heavy Crossbow · _loot: Gorse_
-- `bolts-1` 13× Bolts · _loot: Gorse_
-- `rope-1` 1× Rope · _purchased for 1 GP_
 - `signal-whistle-1` 1× Signal Whistle · _purchased for 5 CP_
 - `sack-1` 1× Sack · _purchased for 1 CP_
 - `greatsword-1` 1× Greatsword · _starting equipment_
 - `smoked-glass-visor-1` 1× Smoked-glass visor · _gift: Kit, from the Eye's vault_
-- `mace-1` 1× Mace · _loot: Gorse_
 - `plate-armor-1` 1× Plate Armor (equipped) · _purchased for 1500 GP_
 - `flame-tongue-greatsword-1` 1× Flame Tongue (Greatsword) (equipped) (attuned) — Rare · _purchased for 4000 GP_
 - `cloak-of-protection-1` 1× Cloak of Protection (equipped) (attuned) — Uncommon · _purchased for 400 GP_
 - `potion-of-healing-1` 2× Potion of Healing — Common · _purchased for 400 GP_
 - `clothes-fine-1` 1× Clothes, Fine · _purchased for 45 GP_
 - `potion-of-greater-healin-1` 1× Potion of Greater Healing — Uncommon · _purchased for 200 GP_
-- `hand-crossbow-1` 1× Hand Crossbow · _loot: the woman in blue silk, dropped in the grass_
-- `scimitar-1` 1× Scimitar · _loot: the woman in blue silk, dropped in the grass_
-- `light-crossbow-1` 2× Light Crossbow · _loot: the least-scorched of the trackers' crossbows_
+- `rope-1` 1× Rope · _purchased for 1 GP_
 
 Hit Point Dice: Fighter d10 6/6
 Languages: Common, Orc, Giant · Tools: *Choose one kind of Gaming Set* (see "Equipment") · Armor training: light, medium, heavy, shield
