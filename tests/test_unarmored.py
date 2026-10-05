@@ -36,6 +36,10 @@ class UnarmoredTest(unittest.TestCase):
         self.ok("npc", "armored", "oswin-hale")
         self.assertEqual(self.ac(), armoured)
 
+    def test_leave_announces_a_visible_creature(self):
+        self.assertIn("leaves the scene", self.ok("npc", "leave", "oswin-hale"))
+        self.assertIn("is back", self.ok("npc", "return", "oswin-hale"))
+
 
 if __name__ == "__main__":
     unittest.main()

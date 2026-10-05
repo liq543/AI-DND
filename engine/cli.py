@@ -506,8 +506,9 @@ def cmd_npc(g, a):
         for i in ids(a.what):
             e = g.get(i)
             if a.action == "leave":
-                g.set(e, hidden=True, offstage=True, **({"known": True} if not e.get("hidden") or e.get("known") else {}))
-                g.say(f"👋 {e['name']} leaves the scene.", kind="creature") if not e.get("hidden") else None
+                was_hidden = e.get("hidden")   # read before g.set, which updates e in place
+                g.set(e, hidden=True, offstage=True, **({"known": True} if not was_hidden or e.get("known") else {}))
+                g.say(f"👋 {e['name']} leaves the scene.", kind="creature") if not was_hidden else None
             else:
                 g.set(e, hidden=False, offstage=False, known=True)
                 g.say(f"👁 {e['name']} is back.", kind="creature")
