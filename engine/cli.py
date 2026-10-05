@@ -961,7 +961,8 @@ def cmd_damage(g, a):
         g.say(f"   {a.source}: {r['text']}", kind="roll")
     if a.type.lower() not in srd.DAMAGE_TYPES:
         raise RuleError(f"Damage type must be one of {', '.join(srd.DAMAGE_TYPES)}")
-    M.apply_damage(g, e, [[int(amt), a.type.lower()]], source=a.source, crit=a.crit)
+    attacker = g.get(a.attacker) if getattr(a, "attacker", None) else None   # a hand-rolled attack that hit: reactions can answer it
+    M.apply_damage(g, e, [[int(amt), a.type.lower()]], source=a.source, crit=a.crit, attacker=attacker)
 
 
 def cmd_heal(g, a):
@@ -3136,6 +3137,7 @@ def build_parser():
     c.add_argument("type")
     c.add_argument("--source")
     c.add_argument("--crit", action="store_true")
+    c.add_argument("--attacker", help="the creature whose hand-rolled attack hit (lets Uncanny Dodge answer it)")
     c = sp.add_parser("heal", help="generic healing (party needs --override)")
     c.add_argument("who")
     c.add_argument("amount")

@@ -54,6 +54,13 @@ class UncannyDodgeTest(unittest.TestCase):
         code, out = _cli.run(self.env, "feature", "kira-vale", "uncanny dodge")
         self.assertNotEqual(code, 0)   # no second dodge of the same hit (and the Reaction is spent)
 
+    def test_answers_a_hand_rolled_attack(self):
+        # a spell attack the engine leaves to the DM (rolled by hand) is recorded with `damage --attacker`
+        before = self.hp()
+        self.ok("damage", "kira-vale", "8", "force", "--source", "Spiritual Weapon", "--attacker", "snag")
+        self.assertIn("halved to 4", self.ok("feature", "kira-vale", "uncanny dodge"))
+        self.assertEqual(self.hp(), before - 4)
+
     def test_needs_a_hit(self):
         code, out = _cli.run(self.env, "feature", "kira-vale", "uncanny dodge")
         self.assertNotEqual(code, 0)
