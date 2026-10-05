@@ -1041,7 +1041,7 @@ FEATURE_ACTIONS = {"Second Wind": "bonus", "Adrenaline Rush": "bonus", "Rage": "
                    "Channel Divinity": "action", "Wild Shape": "bonus", "Action Surge": None, "Innate Sorcery": "bonus",
                    "Indomitable": None, "Arcane Recovery": None, "Magical Cunning": None, "Favored Enemy": None,
                    "Focus Points": None, "Sorcery Points": None, "Divine Intervention": "action",
-                   "Steady Aim": "bonus", "Fast Hands": "bonus", "Cutting Words": "reaction"}
+                   "Steady Aim": "bonus", "Fast Hands": "bonus", "Cutting Words": "reaction", "Uncanny Dodge": "reaction"}
 
 
 def cmd_feature(g, a):
@@ -1071,11 +1071,23 @@ def cmd_feature(g, a):
     act = FEATURE_ACTIONS.get(key or name.title())
     if (key or name).lower() == "steady aim" and M.combat(g) and M.economy(g, e["id"]).get("move_used", 0):
         raise RuleError("Steady Aim works only if you haven't moved this turn.")
+    if (key or name).lower() == "uncanny dodge":
+        # rules/classes/rogue.md: when an attacker you can see hits you with an attack roll, your Reaction halves the damage
+        hit, c = e.get("last_hit"), M.combat(g)
+        if not c or not hit or hit.get("round") != c.get("round") or hit.get("time") != g.state["time"] or hit.get("dodged"):
+            raise RuleError("Uncanny Dodge answers an attack that just hit you (this round); there's no such hit to halve.")
     if M.combat(g) and act:
         M.use_action(g, e, act, key or name)
     if key:
         g.set(e, **{f"resources_used__{key}": info["used"] + amount})
     k = (key or name).lower()
+    if k == "uncanny dodge":
+        hit = e["last_hit"]
+        back = min(hit["hp_lost"], hit["amount"] - hit["amount"] // 2)
+        g.set(e, hp=min(M.hp_max(e), e["hp"] + back), last_hit=dict(hit, dodged=True))
+        g.say(f"🌀 {e['name']} uses Uncanny Dodge: the hit's {hit['amount']} damage is halved to {hit['amount'] // 2} "
+              f"({back} HP back; {g.get(e['id'])['hp']}/{M.hp_max(e)}).", kind="heal", who=e["id"])
+        return
     if k == "second wind":
         r = g.roll(f"1d10+{e['classes']['Fighter']}", "Second Wind", e["id"])
         M.heal(g, e, r["total"], "Second Wind")

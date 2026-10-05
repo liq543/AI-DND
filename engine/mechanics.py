@@ -311,6 +311,11 @@ def apply_damage(g, e, parts, source=None, crit=False, attacker=None, melee_with
     hp_before = e["hp"]
     new_hp = max(0, hp_before - remaining)
     patch = {"temp_hp": temp - absorbed, "hp": new_hp}
+    if attacker is not None:
+        # remembered for reactions that answer a hit (Uncanny Dodge halves the attack's damage)
+        c = combat(g)
+        patch["last_hit"] = {"amount": total, "hp_lost": remaining, "attacker": attacker.get("id") if isinstance(attacker, dict) else attacker,
+                             "round": (c or {}).get("round"), "time": g.state["time"]}
     msg = f"💥 {e['name']} takes {total} damage" + (f" ({', '.join(sorted(set(notes)))})" if notes else "") + \
           (f", {absorbed} absorbed by temporary HP" if absorbed else "") + (f" from {source}" if source else "")
     if e["kind"] == "pc":
