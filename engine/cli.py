@@ -1503,9 +1503,26 @@ def cmd_coins(g, a):
     # coins kept in a container (a vault, a strongbox): `coins <box-id> 500gp --from kit` deposits,
     # `coins kit 200gp --from <box-id>` withdraws. The character must be on the container's map.
     box_to, box_from = _find_box(g, a.who), _find_box(g, a.from_who) if getattr(a, "from_who", None) else None
+    if box_to and not getattr(a, "from_who", None):
+        # money arriving in (or spent straight out of) the vault: a tribute, a sale, wages paid from it
+        m, box = box_to
+        delta = M.parse_coins(a.amount)
+        if not a.source:
+            raise RuleError("Vault coins need --source (tribute: ..., sold: ..., spent: ...), or --from <who> to move a purse.")
+        if delta > 0:
+            cap = TIER_MAX_GP_AWARD[tier(g.party_level())] * 100
+            if delta > cap and not a.override:
+                raise RuleError(f"{M.fmt_cp(delta)} at once exceeds the tier {tier(g.party_level())} guideline ({M.fmt_cp(cap)}). "
+                                "Use --override \"reason\" (shown to the player) for a genuine hoard.")
+            if a.override:
+                g.override(a.override, f"{M.fmt_cp(delta)} into {box['name']}")
+        total = _box_coins(g, m, box, delta)
+        g.say(f"💰 {box['name']} {'receives' if delta > 0 else 'pays out'} {M.fmt_cp(abs(delta))} ({a.source}). "
+              f"{box['name']}: {M.fmt_cp(total)}.", kind="item")
+        return
     if box_to or box_from:
         delta = M.parse_coins(a.amount)
-        if delta <= 0 or not getattr(a, "from_who", None):
+        if delta <= 0:
             raise RuleError("Vault coins move with --from: `coins <box> 500gp --from kit` or `coins kit 200gp --from <box>`.")
         (m, box), who = (box_to, a.from_who) if box_to else (box_from, a.who)
         e = g.get(who)

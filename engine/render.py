@@ -451,7 +451,8 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
             continue
         here, box = tiles.get((fx, fy), []), boxes.get((fx, fy))
         n = sum(1 for _ in here)
-        label = (f"{box['name']}: {n} item{'s' if n != 1 else ''}" if box else
+        coins = box.get("coins_cp", 0) if box else 0
+        label = (f"{box['name']}: {n} item{'s' if n != 1 else ''}" + (f", {coins // 100:,} crowns" if coins >= 100 else "") if box else
                  ", ".join(f"{f['item'].get('qty', 1)}× {f['item']['name']}" for f in here) + " (on the floor)")
         px, py = fx * cell + cell - 9, fy * cell + cell - 9
         s0 = cell * .56
@@ -466,7 +467,10 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
                          f'<rect x="{x0:.1f}" y="{y0:.1f}" width="{s0:.1f}" height="{s0:.1f}" rx="4" fill="#1a130c" fill-opacity=".85" stroke="#d8b36a" stroke-width="1.5"/>'
                          f'<rect x="{x0 + s0 * .14:.1f}" y="{y0 + s0 * .38:.1f}" width="{s0 * .72:.1f}" height="{s0 * .44:.1f}" rx="2" fill="#8a5a32" stroke="#3e2410" stroke-width="1.2"/>'
                          f'<path d="M{x0 + s0 * .14:.1f},{y0 + s0 * .4:.1f} Q{x0 + s0 * .5:.1f},{y0 + s0 * .12:.1f} {x0 + s0 * .86:.1f},{y0 + s0 * .4:.1f} Z" fill="#a8703e" stroke="#3e2410" stroke-width="1.2"/>'
-                         f'<rect x="{x0 + s0 * .44:.1f}" y="{y0 + s0 * .4:.1f}" width="{s0 * .12:.1f}" height="{s0 * .16:.1f}" fill="#e0b448"/>{badge}</g>')
+                         f'<rect x="{x0 + s0 * .44:.1f}" y="{y0 + s0 * .4:.1f}" width="{s0 * .12:.1f}" height="{s0 * .16:.1f}" fill="#e0b448"/>{badge}'
+                         + (f'<circle cx="{x0 + 1:.1f}" cy="{y0 + 1:.1f}" r="6" fill="#f0c94a" stroke="#6b4a12" stroke-width="1.4"/>'
+                            f'<circle cx="{x0 + 1:.1f}" cy="{y0 + 1:.1f}" r="3" fill="none" stroke="#6b4a12" stroke-width="1"/>' if coins else "")
+                         + '</g>')
             continue
         f = here[0]
         if live:  # the viewer: a small framed picture of the top item

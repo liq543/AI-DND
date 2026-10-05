@@ -227,11 +227,14 @@
       const box = (M_.containers || []).find(c => c.id === t.dataset.box);
       const here = (M_.floor || []).filter(f => f.x === tx && f.y === ty);
       if (!here.length && !box) return;
+      const cp = box ? (box.coins_cp || 0) : 0;
+      const coinRow = cp ? `<li class="flrow"><div class="flart" style="display:flex;align-items:center;justify-content:center;font-size:22px">🪙</div>
+        <div><b>${Math.floor(cp / 100).toLocaleString()} crowns</b>${cp % 100 ? `<span class="muted"> ${Math.floor(cp % 100 / 10)} sp ${cp % 10} cp</span>` : ""}<div class="muted small">coin in the ${esc(box.name.replace(/^the /i, ""))}</div></div></li>` : "";
       const rows = here.map(f => `<li class="flrow" data-flitem="${esc(f.id)}" title="View this item"><img class="flart" src="/api/art/floor/${esc(viewMap)}/${esc(f.id)}.svg?v=${esc(f.art || "")}" alt="">
         <div><b>${f.qty > 1 ? f.qty + "× " : ""}${esc(f.name)}</b><div class="muted small">${esc(f.note || "")}${f.in && !box ? " · in a container" : ""}</div></div></li>`).join("");
       const title = box ? esc(box.name) : (here.length === 1 ? esc(here[0].name) : `${here.length} items on the floor`);
       openModal(`<div class="info floor"><h2>${title}</h2><div class="muted">${box ? "A container" : "On the floor"} at (${tx},${ty})${box && box.text ? " · " + esc(box.text) : ""}</div>
-        ${here.length ? `<ul class="fllist">${rows}</ul>` : `<p class="muted">Empty.</p>`}
+        ${here.length || cp ? `<ul class="fllist">${coinRow}${rows}</ul>` : `<p class="muted">Empty.</p>`}
         <p class="muted small">Anyone in or next to that square can ${box ? "take things out or put things in" : "pick these up"} (a free object interaction on their turn). Just tell the DM.</p></div>`);
       document.querySelectorAll("#modal [data-flitem]").forEach(li => li.onclick = () => openItem(`floor~${viewMap}`, li.dataset.flitem));
     });

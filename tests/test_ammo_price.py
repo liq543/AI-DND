@@ -45,6 +45,14 @@ class AmmoPriceTest(unittest.TestCase):
         self.assertIn("Iron strongbox: 10 GP", out)
         code, out = _cli.run(self.env, "coins", "kira-vale", "50gp", "--from", "vault")
         self.assertNotEqual(code, 0)
+        out = self.ok("coins", "vault", "+70gp", "--source", "tribute: a vassal's quarter")
+        self.assertIn("Iron strongbox: 80 GP", out)
+        out = self.ok("coins", "vault", "-30gp", "--source", "spent: wages")
+        self.assertIn("Iron strongbox: 50 GP", out)
+        from engine import render, core
+        camp = next(p for p in (self.tmp / "campaigns").iterdir() if p.is_dir() and not p.name.startswith("_"))
+        st = core.replay(core.Store(camp).load())
+        self.assertIn("50 crowns", render.render_map(st["maps"]["hall"], "player", live=True))
 
 
 if __name__ == "__main__":
