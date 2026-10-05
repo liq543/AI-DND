@@ -168,10 +168,18 @@
     const active = S.view.map;
     const world = (maps.find(m => m.world) || {}).id;     // the world map of record: always open, the default view
     if (followActive || !viewMap || !S.maps[viewMap]) viewMap = active || world;
-    const key = JSON.stringify([maps.map(m => [m.id, m.name]), viewMap, active]);
+    const key = JSON.stringify([maps.map(m => [m.id, m.name, m.level, m.parent]), viewMap, active]);
     if ($("#maptabs").dataset.key === key) return;
     $("#maptabs").dataset.key = key;
-    $("#maptabs").innerHTML = maps.map(m => `<button data-map="${esc(m.id)}" class="${m.id === viewMap ? "on" : ""}${m.world ? " world" : ""}" ${m.world ? 'title="The world map: open it any time"' : ""}>${m.id === active ? '<span class="cur" title="On the table"></span>' : ""}${m.world ? "🗺 " : ""}${esc(m.name)}</button>`).join("");
+    // the hierarchy (region > town or area > quarter > interior): each tab follows its parent, marked with its level
+    const LEVEL_ICON = { region: "🗺", area: "🏘", section: "▦", interior: "🚪" };
+    const LEVEL_TIP = { region: "The world map: open it any time", area: "The whole town or area", section: "A quarter or part of it", interior: "Inside a building" };
+    const depth = m => { let d = 0, p = m.parent, seen = {}; while (p && S.maps[p] && !seen[p]) { seen[p] = 1; d++; p = S.maps[p].parent; } return d; };
+    $("#maptabs").innerHTML = maps.map(m => {
+      const lv = m.world ? "region" : (m.level || "section");
+      const d = depth(m);
+      return `<button data-map="${esc(m.id)}" class="lv-${lv}${m.id === viewMap ? " on" : ""}${m.world ? " world" : ""}" title="${LEVEL_TIP[lv] || ""}">${d ? '<span class="lvsep">›</span>' : ""}${m.id === active ? '<span class="cur" title="On the table"></span>' : ""}${LEVEL_ICON[lv] || ""} ${esc(m.name)}</button>`;
+    }).join("");
     $("#maptabs").querySelectorAll("button").forEach(b => b.onclick = () => { viewMap = b.dataset.map; followActive = viewMap === S.view.map; renderMapTabs(); renderMap(true); });
   }
   let mapKey = "", prefetched = {};

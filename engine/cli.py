@@ -1710,8 +1710,27 @@ def _map_set_one(g, s, m, kv):
         g.emit("map.set", id=m["id"], set={"shown": on})
         g.say(f"🗺 {m['name']} is {'known to the party' if on else 'no longer on the table'}.", kind="map")
         return
+    if k == "parent":
+        # the hierarchy: region > area (a town and all its quarters) > section (one quarter) > interior (a building)
+        if v in ("", "none"):
+            g.emit("map.set", id=m["id"], set={"parent": None})
+            g.note(f"  {m['name']} no longer sits inside another map.")
+            return
+        if v not in s["maps"]:
+            raise RuleError(f"parent: no map '{v}' (`map list`)")
+        if v == m["id"] or m["id"] in views.map_ancestors(s, v):
+            raise RuleError("parent: a map can't sit inside itself or inside one of its own children")
+        g.emit("map.set", id=m["id"], set={"parent": v})
+        g.note(f"  {m['name']} sits inside {s['maps'][v]['name']}.")
+        return
+    if k == "level":
+        if v not in views.LEVELS:
+            raise RuleError("level: " + "|".join(views.LEVELS))
+        g.emit("map.set", id=m["id"], set={"level": v})
+        g.note(f"  {m['name']} is a{'n' if v[0] in 'aei' else ''} {v} map.")
+        return
     if k not in ("name", "lighting", "fog", "theme", "accent", *styles):
-        raise RuleError("map set name=...|lighting=bright|dim|dark|fog=true|false|theme=" + "|".join(render.THEMES) +
+        raise RuleError("map set name=...|parent=<map>|level=region|area|section|interior|lighting=bright|dim|dark|fog=true|false|theme=" + "|".join(render.THEMES) +
                         "|" + "|".join(f"{s}={'/'.join(o)}" for s, o in styles.items()) + "|accent=#rrggbb|world=on|off|known=on|off")
     if k in styles and v not in styles[k]:
         raise RuleError(f"{k}: " + "|".join(styles[k]))

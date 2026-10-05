@@ -177,6 +177,7 @@ map reveal <id> --room 3 | --rect 0,0,10,10 | --all      map hide <id> --rect ..
 map poi <id> x,y --name "Weathered Statue" --text "What they perceive"   # pin a perceived notable object to its tile
 map poi <id> x,y --name "..." --id j12   # ...or link an existing journal entry; players click the marker to open it
 map poi <id> x,y --name "..." --text "..." --clue   # a story clue: filed under Handouts & clues (default: Places & objects)
+map set temple --kv level=interior --kv parent=west-ward   # the hierarchy: region > area (town) > section (quarter) > interior
 map set cellar --kv known=on              # a place the party already knows: its tab stays up whenever they're anywhere linked to it
 journal file j36,j40 --as clue|place     # move journal entries between Handouts & clues and Places & objects
 map icons <words>                          # search 4,100+ game-icons for props: `map icons cauldron`, `map icons book pile`

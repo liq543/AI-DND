@@ -201,22 +201,69 @@ def creature_info(g, e):
     return info
 
 
+# The map hierarchy, top to bottom: the region (the world map), a town or area (all its quarters on one sheet), a section
+# (one quarter, a street, a village green) and an interior (a building's rooms). Each map names its `parent` one level up.
+LEVELS = ("region", "area", "section", "interior")
+
+
+def map_level(m):
+    """A map's place in the hierarchy: set with `map set <id> --kv level=...`, else guessed from the kind of map."""
+    if m.get("level") in LEVELS:
+        return m["level"]
+    return {"region": "region", "interior": "interior"}.get(m.get("kind"), "section")
+
+
+def map_ancestors(s, mid):
+    """The chain of parents above a map, nearest first (cycles are refused when set, but guarded here too)."""
+    out, seen = [], {mid}
+    p = s["maps"].get(mid, {}).get("parent")
+    while p and p in s["maps"] and p not in seen:
+        out.append(p)
+        seen.add(p)
+        p = s["maps"][p].get("parent")
+    return out
+
+
 def visible_maps(g):
-    """Maps the players can look at now: the one on the table, every map a PC stands on (split party), and every map
-    connected to those through `map link` (other floors, the stair down, the rooms beyond them) that the party has
-    already seen or knows."""
+    """Maps the players can look at now: the one on the table, every map a PC stands on (split party), every map above
+    those in the hierarchy (the quarter, the town, the region they are in), the known places one level down, and every
+    map connected through `map link` (other floors, the stair down, the rooms beyond them) that the party knows."""
     s = g.state
     here = {s["view"].get("map")} | {e["token"]["map"] for e in s["entities"].values()
                                       if e["kind"] == "pc" and e.get("token") and not e.get("dead") and not e.get("departed")}
     here.discard(None)
     vis = set(here) | {mid for mid, m in s["maps"].items() if m.get("world")}   # the world map is always open
+    for mid in list(here):
+        vis.update(map_ancestors(s, mid))                     # where you are sits inside these, so they're open too
     todo = list(here)
     while todo:   # the whole connected place, however many links away
         for other in s["maps"].get(todo.pop(), {}).get("links", []):
             if other not in vis and s["maps"].get(other, {}).get("shown"):
                 vis.add(other)
                 todo.append(other)
-    return {mid for mid in vis if s["maps"].get(mid, {}).get("shown")}
+    above = {a for h in here for a in map_ancestors(s, h)}
+    kids = {mid for mid, m in s["maps"].items() if m.get("parent") in here and m.get("shown")}
+    return {mid for mid in vis | kids if s["maps"].get(mid, {}).get("shown") or mid in above}
+
+
+def map_order(s, mids):
+    """Tab order: the hierarchy walked top-down (region, then each town, its quarters, their interiors), so every map
+    sits after its parent; maps outside the hierarchy follow in their own order."""
+    mids = list(mids)
+    kids = {}
+    for mid in mids:
+        p = s["maps"][mid].get("parent")
+        kids.setdefault(p if p in mids else None, []).append(mid)
+    rank = {lv: i for i, lv in enumerate(LEVELS)}
+    out = []
+
+    def walk(mid):
+        out.append(mid)
+        for k in kids.get(mid, []):
+            walk(k)
+    for root in sorted(kids.get(None, []), key=lambda m: (not s["maps"][m].get("world"), rank[map_level(s["maps"][m])])):
+        walk(root)
+    return out
 
 
 def seen_by_players(g, e):
@@ -351,6 +398,7 @@ def player_view(g):
     rolls = [{k: r.get(k) for k in ("id", "who", "purpose", "expr", "mode", "crit", "total", "nat", "terms", "text", "seq")}
              for r in s["rolls"] if not r.get("hidden")][-60:]
     maps_known = {mid: {"id": mid, "name": m["name"], "kind": m["kind"], "w": m["w"], "h": m["h"], "world": bool(m.get("world")),
+                        "level": map_level(m), "parent": m.get("parent"),
                         "floor": [{"id": f["id"], "x": f["x"], "y": f["y"], "name": f["item"]["name"], "qty": f["item"].get("qty", 1),
                                    "note": f.get("note", ""), "in": f.get("in"), "art": itemart.item_art_version(f["item"])}
                                   for f in m.get("floor", [])
@@ -361,7 +409,7 @@ def player_view(g):
                                  for p in m.get("pois", []) + (m.get("settlements", []) if m.get("kind") == "region" else [])
                                  if p.get("id") and not p.get("hidden")
                                  and (not m.get("fog") or (m.get("revealed") and m["revealed"][p["y"]][p["x"]] == "1"))]}
-                  for mid, m in s["maps"].items() if mid in visible_maps(g)}
+                  for mid, m in ((mid, s["maps"][mid]) for mid in map_order(s, visible_maps(g)))}
     return {
         "campaign": s["campaign"].get("title"), "session": s["session"], "time": fmt_time(s["time"]), "minutes": s["time"],
         "seq": s["seq"], "events": len(g.events), "head": g.events[-1]["hash"][:12] if g.events else "",

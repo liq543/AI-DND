@@ -113,6 +113,18 @@ Prefer one well-chosen update per beat over constant churn.
   6. **State kept live.** When the fiction changes something (opened, picked, bloodied, barricaded, emptied), replace
      its poi with the new state and `map show`. The map is always the truth of the room *now*.
   7. **locations.md mirrors it**: zones with coordinates, every poi, who owns what, the posts and the exits.
+- **The map hierarchy: four levels, built as needed.** Every map sits in one chain, set with
+  `map set <id> --kv level=... --kv parent=<map one level up>`:
+  1. **Region**: the world map of record (always open).
+  2. **Area**: a town, city, castle or wild area as one sheet, showing all its quarters or parts as labelled zones with
+     a poi each (what the party knows of that quarter), at true scale. A town of thousands has several quarters; a hamlet
+     can skip straight from region to section.
+  3. **Section**: one quarter, district or part of the area at street scale, packed with buildings on its lanes. Only the
+     real town wall gets a wall and gates; the other edges run on into the next quarter (label the streets that lead off).
+  4. **Interior**: one building's rooms, to the detail standard. Every building a scene enters or looks into gets one.
+  The table opens every map above where the party (or the table) is, plus the known maps one level down, in hierarchy
+  order. Nothing else tags along, so a far town's maps close again when the scene leaves it. Use `map link` only for
+  places physically joined at the same level (floors of one building, a stair down to a cellar), not for hierarchy.
 - **The world map of record.** A campaign that travels gets one hand-authored region map as its source of truth
   (`map import-grid` the terrain, then `map settlement`, `map site`, `map route`, and `map label` for regions), set with
   `map set <id> --kv world=on` so it is always one click away on the table. Every town and site gets `--text` for what

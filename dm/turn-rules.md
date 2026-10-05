@@ -37,7 +37,9 @@ correct me. A correction means the game wasn't played right.** Check every actio
      `xp award --amount N --reason "..."` the same turn (Low/Moderate/High budget for the party), before moving on.
 8. **NEW OR CHANGED AREA CHECKLIST. Every time, no exceptions, before describing the place:**
    1. A map made for this place: a distinct shape (not boxes of boxes, not a copy of the last map with new labels),
-      a fitting `theme`, and wall/floor styles that set it apart (dm/visuals.md).
+      a fitting `theme`, and wall/floor styles that set it apart (dm/visuals.md). Place it in the hierarchy
+      (`map set <id> --kv level=region|area|section|interior --kv parent=<one level up>`): towns get an area map of
+      their quarters, each quarter its own dense section map, each building entered its own interior.
    2. Show it (`map show` / `scene ... --map`). Set the `scene` banner, `lighting` and `fx ambient`. Reveal what they can see.
    3. **Every notable object the characters can see gets a `map poi` with a full, elegant description** on its own tile:
       fountains, statues, counters, altars, hearths, signs, doors worth naming, anything I name in narration or on the map.
