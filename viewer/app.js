@@ -164,10 +164,13 @@
 
   // ------------------------------------------------------------ maps
   function renderMapTabs() {
-    const maps = Object.values(S.maps);
     const active = S.view.map;
-    const world = (maps.find(m => m.world) || {}).id;     // the world map of record: always open, the default view
+    // maps opened by clicking a place ride along without a tab, unless one is the map being looked at
+    const world = (Object.values(S.maps).find(m => m.world) || {}).id;     // the world map of record: always open, the default view
     if (followActive || !viewMap || !S.maps[viewMap]) viewMap = active || world;
+    // the chain above the map being looked at gets tabs too, so the way back up is one click
+    const chain = {}; for (let p = viewMap; p && S.maps[p] && !chain[p]; p = S.maps[p].parent) chain[p] = 1;
+    const maps = Object.values(S.maps).filter(m => m.tab !== false || chain[m.id] || m.id === active);
     const key = JSON.stringify([maps.map(m => [m.id, m.name, m.level, m.parent]), viewMap, active]);
     if ($("#maptabs").dataset.key === key) return;
     $("#maptabs").dataset.key = key;
@@ -225,6 +228,9 @@
     $("#map").querySelectorAll(".poi").forEach(t => t.onclick = (ev) => {
       ev.stopPropagation();
       const p = ((S.maps[viewMap] || {}).pois || []).find(x => x.id === t.dataset.poi); if (!p) return;
+      // a known place with its own map (a town on the world map, a quarter on the town map): clicking goes in
+      const inner = Object.values(S.maps).find(m => m.parent === viewMap && m.anchor === p.id);
+      if (inner) { viewMap = inner.id; followActive = viewMap === S.view.map; renderMapTabs(); renderMap(true); return; }
       const j = (S.journal || []).find(x => x.id === p.journal);
       if (j) openJournalEntry(j); else openModal(`<div class="info"><h2>${esc(p.name)}</h2><p class="muted">Noted at (${p.x},${p.y}).</p></div>`);
     });

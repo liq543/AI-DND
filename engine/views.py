@@ -246,6 +246,26 @@ def visible_maps(g):
     return {mid for mid in vis | kids if s["maps"].get(mid, {}).get("shown") or mid in above}
 
 
+def browsable_maps(g):
+    """Maps the players can open by clicking a place on a map they can see: a known map anchored to a town, site or poi
+    (`map set <child> --kv anchor=<place-id>`) inside a visible map, and so on down. These ride along without a tab."""
+    s = g.state
+    vis = visible_maps(g)
+    out, todo = set(), list(vis)
+    while todo:
+        mid = todo.pop()
+        for cid, c in s["maps"].items():
+            if c.get("parent") == mid and c.get("anchor") and c.get("shown") and cid not in vis and cid not in out:
+                out.add(cid)
+                todo.append(cid)
+    return out
+
+
+def openable_maps(g):
+    """Every map the players may open: the tabs plus the known places reached by clicking through."""
+    return visible_maps(g) | browsable_maps(g)
+
+
 def map_order(s, mids):
     """Tab order: the hierarchy walked top-down (region, then each town, its quarters, their interiors), so every map
     sits after its parent; maps outside the hierarchy follow in their own order."""
@@ -397,8 +417,9 @@ def player_view(g):
     feed = [f for f in s["feed"] if f.get("kind") != "dm"][-1000:]
     rolls = [{k: r.get(k) for k in ("id", "who", "purpose", "expr", "mode", "crit", "total", "nat", "terms", "text", "seq")}
              for r in s["rolls"] if not r.get("hidden")][-60:]
+    tabs = visible_maps(g)
     maps_known = {mid: {"id": mid, "name": m["name"], "kind": m["kind"], "w": m["w"], "h": m["h"], "world": bool(m.get("world")),
-                        "level": map_level(m), "parent": m.get("parent"),
+                        "level": map_level(m), "parent": m.get("parent"), "anchor": m.get("anchor"), "tab": mid in tabs,
                         "floor": [{"id": f["id"], "x": f["x"], "y": f["y"], "name": f["item"]["name"], "qty": f["item"].get("qty", 1),
                                    "note": f.get("note", ""), "in": f.get("in"), "art": itemart.item_art_version(f["item"])}
                                   for f in m.get("floor", [])
@@ -409,7 +430,7 @@ def player_view(g):
                                  for p in m.get("pois", []) + (m.get("settlements", []) if m.get("kind") == "region" else [])
                                  if p.get("id") and not p.get("hidden")
                                  and (not m.get("fog") or (m.get("revealed") and m["revealed"][p["y"]][p["x"]] == "1"))]}
-                  for mid, m in ((mid, s["maps"][mid]) for mid in map_order(s, visible_maps(g)))}
+                  for mid, m in ((mid, s["maps"][mid]) for mid in map_order(s, tabs | browsable_maps(g)))}
     return {
         "campaign": s["campaign"].get("title"), "session": s["session"], "time": fmt_time(s["time"]), "minutes": s["time"],
         "seq": s["seq"], "events": len(g.events), "head": g.events[-1]["hash"][:12] if g.events else "",

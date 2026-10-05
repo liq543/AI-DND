@@ -122,6 +122,9 @@ Prefer one well-chosen update per beat over constant churn.
   3. **Section**: one quarter, district or part of the area at street scale, packed with buildings on its lanes. Only the
      real town wall gets a wall and gates; the other edges run on into the next quarter (label the streets that lead off).
   4. **Interior**: one building's rooms, to the detail standard. Every building a scene enters or looks into gets one.
+  **Anchor every child map to its place on the parent** (`map set <child> --kv anchor=<settlement, site or poi id>`): once
+  the party knows it (they've been there: `--kv known=on`), clicking that town on the world map, that quarter on the town
+  map or that building on the quarter opens it, all the way down.
   The table opens every map above where the party (or the table) is, plus the known maps one level down, in hierarchy
   order. Nothing else tags along, so a far town's maps close again when the scene leaves it. Use `map link` only for
   places physically joined at the same level (floors of one building, a stair down to a cellar), not for hierarchy.

@@ -1723,6 +1723,17 @@ def _map_set_one(g, s, m, kv):
         g.emit("map.set", id=m["id"], set={"parent": v})
         g.note(f"  {m['name']} sits inside {s['maps'][v]['name']}.")
         return
+    if k == "anchor":
+        # the place on the parent map (a town, a site, a poi) that opens this map when the players click it
+        par = s["maps"].get(m.get("parent") or "")
+        if not par:
+            raise RuleError("anchor: set the map's parent first (`--kv parent=<map>`)")
+        places = {p.get("id") for p in par.get("pois", []) + par.get("settlements", [])}
+        if v not in places:
+            raise RuleError(f"anchor: no town, site or poi '{v}' on {par['name']}")
+        g.emit("map.set", id=m["id"], set={"anchor": v})
+        g.note(f"  Clicking {v} on {par['name']} opens {m['name']} (once the party knows it).")
+        return
     if k == "level":
         if v not in views.LEVELS:
             raise RuleError("level: " + "|".join(views.LEVELS))
@@ -1730,7 +1741,7 @@ def _map_set_one(g, s, m, kv):
         g.note(f"  {m['name']} is a{'n' if v[0] in 'aei' else ''} {v} map.")
         return
     if k not in ("name", "lighting", "fog", "theme", "accent", *styles):
-        raise RuleError("map set name=...|parent=<map>|level=region|area|section|interior|lighting=bright|dim|dark|fog=true|false|theme=" + "|".join(render.THEMES) +
+        raise RuleError("map set name=...|parent=<map>|anchor=<place on the parent>|level=region|area|section|interior|lighting=bright|dim|dark|fog=true|false|theme=" + "|".join(render.THEMES) +
                         "|" + "|".join(f"{s}={'/'.join(o)}" for s, o in styles.items()) + "|accent=#rrggbb|world=on|off|known=on|off")
     if k in styles and v not in styles[k]:
         raise RuleError(f"{k}: " + "|".join(styles[k]))

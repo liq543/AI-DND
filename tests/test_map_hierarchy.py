@@ -68,6 +68,24 @@ class MapHierarchyTest(unittest.TestCase):
         self.ok("map", "show", "lair")
         self.assertEqual(views.visible_maps(_cli.game(self.env)), {"realm", "lair"})
 
+    def test_known_town_opens_from_its_place_on_the_world_map(self):
+        from engine import views
+        self.ok("map", "settlement", "realm", "6,6", "--name", "Brightwater", "--type", "town")
+        self.ok("map", "gen", "town", "--id", "brightwater", "--seed", "8")
+        self.ok("map", "set", "brightwater", "--kv", "level=area", "--kv", "parent=realm")
+        self.rule("map", "set", "brightwater", "--kv", "anchor=nowhere", contains="anchor")
+        self.ok("map", "set", "brightwater", "--kv", "anchor=brightwater")
+        self.ok("map", "show", "lair")
+        g = _cli.game(self.env)
+        self.assertNotIn("brightwater", views.openable_maps(g))     # never visited: the town stays a name on the map
+        self.ok("map", "set", "brightwater", "--kv", "known=on")
+        self.ok("map", "show", "lair")
+        g = _cli.game(self.env)
+        self.assertNotIn("brightwater", views.visible_maps(g))      # no tab of its own while the party is elsewhere
+        self.assertIn("brightwater", views.openable_maps(g))        # but clicking the town opens it
+        pv = views.player_view(g)["maps"]["brightwater"]
+        self.assertEqual((pv["anchor"], pv["tab"], pv["parent"]), ("brightwater", False, "realm"))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -109,7 +109,7 @@ class Handler(BaseHTTPRequestHandler):
         if path.startswith("/api/map/"):
             mid = path.rsplit("/", 1)[-1].removesuffix(".svg")
             m = s["maps"].get(mid)
-            if not m or not m.get("shown") or mid not in views.visible_maps(g):
+            if not m or not m.get("shown") or mid not in views.openable_maps(g):
                 return self.json({"error": "map not shown to players"}, 404)
             svg = views.map_svg(g, mid, "player", live=True)
             if m.get("background") and m["background"] in s["assets"]:
@@ -160,7 +160,7 @@ class Handler(BaseHTTPRequestHandler):
         if path.startswith("/api/art/floor/"):
             parts = path[len("/api/art/floor/"):].removesuffix(".svg").split("/")
             m = s["maps"].get(parts[0]) if parts else None
-            if not m or len(parts) < 2 or parts[0] not in views.visible_maps(g):
+            if not m or len(parts) < 2 or parts[0] not in views.openable_maps(g):
                 return self.json({"error": "unknown"}, 404)
             f = next((x for x in m.get("floor", []) if x["id"] == parts[1]), None)
             if not f or (m.get("fog") and m.get("revealed") and m["revealed"][f["y"]][f["x"]] != "1"):
@@ -184,7 +184,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self.json(views.item_info(g, {**it, "identified": True, "source": "SRD 5.2"}))
             if parts[0].startswith("floor~") and len(parts) > 1:  # an item on the floor or in a container: floor~<map>/<floor-id>
                 m = s["maps"].get(parts[0][len("floor~"):])
-                if not m or m["id"] not in views.visible_maps(g):
+                if not m or m["id"] not in views.openable_maps(g):
                     return self.json({"error": "unknown"}, 404)
                 f = next((x for x in m.get("floor", []) if x["id"] == parts[1]), None)
                 if not f or (m.get("fog") and m.get("revealed") and m["revealed"][f["y"]][f["x"]] != "1"):
