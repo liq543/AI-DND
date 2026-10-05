@@ -341,8 +341,11 @@ def apply_damage(g, e, parts, source=None, crit=False, attacker=None, melee_with
     else:
         if new_hp == 0:
             if knockout and melee_within_5:
-                patch["hp"] = 0
-                msg += " and is knocked out (Unconscious, not dead)."
+                # SRD Knocking Out a Creature: 1 HP and Unconscious; it starts a Short Rest, at the end of which the
+                # condition ends (sooner if it regains any HP).
+                patch["hp"] = 1
+                patch["knockout_wake_at"] = g.state["time"] + 60
+                msg += " and is knocked out (1 HP, Unconscious until the end of a Short Rest, not dead)."
                 add_condition(g, e, "unconscious", source="knocked out", quiet=True)
             else:
                 patch["dead"] = True
@@ -388,11 +391,15 @@ def heal(g, e, amount, source):
     mx = hp_max(e)
     new = min(mx, e["hp"] + max(0, int(amount)))
     gained = new - e["hp"]
+    was_zero = e["hp"] == 0
     patch = {"hp": new}
-    if e["hp"] == 0 and new > 0:
+    if was_zero and new > 0:
         patch["death"] = {"success": 0, "fail": 0, "stable": False}
     g.set(e, **patch)
-    if e["hp"] == 0 and new > 0 or (new > 0 and any(c["name"] == "unconscious" and c.get("source") == "0 HP" for c in e.get("conditions", []))):
+    e = g.get(e["id"])
+    # Regaining HP wakes a creature from 0 HP, and ends a knockout's Unconscious condition early (SRD).
+    if new > 0 and (was_zero or (gained > 0 and any(c["name"] == "unconscious" and c.get("source") in ("0 HP", "knocked out")
+                                                    for c in e.get("conditions", [])))):
         remove_condition(g, e, "unconscious", quiet=True)
     g.say(f"💚 {e['name']} regains {gained} HP from {source} ({new}/{mx}).", kind="heal", who=e["id"], amount=gained, hp=new, hp_max=mx)
     return gained
@@ -1476,6 +1483,11 @@ def after_time(g):
         mins = concentration_minutes(conc)
         if mins is not None and g.state["time"] >= conc["since"] + mins:
             end_concentration(g, e, "its duration ran out")
+    for e in list(g.entities.values()):
+        wake = e.get("knockout_wake_at")
+        if wake is not None and not e.get("dead") and g.state["time"] >= wake and                 any(c["name"] == "unconscious" and c.get("source") == "knocked out" for c in e.get("conditions", [])):
+            remove_condition(g, e, "unconscious", quiet=True)
+            g.say(f"{e['name']} comes round: the knockout's Short Rest is over.", kind="heal", who=e["id"])
     for e in g.pcs():
         wake = e.get("death", {}).get("wake_at")
         if e["hp"] == 0 and not e.get("dead") and wake is not None and g.state["time"] >= wake:
