@@ -227,7 +227,9 @@ class EngineTest(unittest.TestCase):
                 if "Lurking Oswin" in out or "hidden creature's turn" in out:
                     break
                 out = self.ok("combat", "next")
-            self.assertNotIn("Lurking Oswin's turn", out)
+            public = "
+".join(l for l in out.splitlines() if not l.startswith("[secret]"))   # DM-only notes may name it
+            self.assertNotIn("Lurking Oswin's turn", public)
         finally:
             self.ok("combat", "end")
             self.ok("npc", "remove", "lurking-oswin")
