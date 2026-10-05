@@ -268,7 +268,8 @@ def apply_save_effect(g, e, res, effect):
             apply_damage(g, e, parts, source=effect.get("source"))
     if effect.get("condition") and not res["success"]:
         add_condition(g, e, effect["condition"], source=effect.get("source"), caster=effect.get("caster"),
-                      spell=effect.get("spell"), save=effect.get("repeat_save"), escalate=effect.get("escalate"))
+                      spell=effect.get("spell"), save=effect.get("repeat_save"), escalate=effect.get("escalate"),
+                      until=effect.get("until"))
 
 
 # ====================================================================== damage & healing
@@ -425,7 +426,7 @@ def add_condition(g, e, name, source=None, until=None, caster=None, spell=None, 
                   escalate=None):
     name = name.lower().strip()
     valid = set(srd.data()["conditions"]) | {"raging", "dodging", "concentrating", "hidden", "surprised", "blessed",
-                                             "baned", "hasted", "slowed", "marked", "disengaged", "helped"}
+                                             "baned", "hasted", "slowed", "marked", "disengaged", "helped", "mocked"}
     if name not in valid:
         raise RuleError(f"'{name}' is not an SRD condition. Conditions: {', '.join(srd.data()['conditions'])}")
     if name == "exhaustion":
@@ -563,6 +564,8 @@ def attack_modes(g, att, tgt, ranged, dist, extra_adv=(), extra_dis=()):
         dis.append("target Dodging")
     if any(c["name"] == "helped" for c in att.get("conditions", [])):
         adv.append("Help")
+    if "mocked" in an:
+        dis.append("Vicious Mockery")
     if any(fx.get("name") == "untrained armor" for fx in att.get("effects", [])):
         dis.append("armor without training")
     if ranged and same_map(att, tgt):
@@ -688,6 +691,8 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
     exh = exhaustion_penalty(att)
     total_bonus = bonus - exh
     r = g.roll(f"1d20{fmt_mod(total_bonus)}", f"attack: {name} vs {tgt['name']}", att["id"], mode, request=request)
+    if "mocked" in condition_names(att):
+        remove_condition(g, att, "mocked", quiet=True)   # Vicious Mockery spoils one attack roll only
     ac, _ = armor_class(tgt)
     cover_bonus = {"half": 2, "three-quarters": 5}.get(cover, 0)
     eff_ac = ac + cover_bonus
@@ -1159,12 +1164,17 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
             parts = [[r["total"], fx["type"]]]
         # the condition the SRD text says a failed save inflicts (e.g. Sleep → Incapacitated), unless the DM names one
         condition = condition or fx.get("condition")
+        until = None
+        if spell["slug"] == "vicious-mockery":
+            # Disadvantage on the next attack roll it makes before the end of its next turn
+            condition, until = "mocked", "end of its next turn"
         for t in tgts:
             saving_throw(g, t, fx["save"], sc["dc"], source=spell["name"], spell=True, now=now,
                          effect={"damage": parts, "half": fx.get("half"), "condition": condition, "source": spell["name"],
                                  "caster": e["id"], "spell": spell["slug"],
                                  "repeat_save": f"{fx['save']}:{sc['dc']}" if fx.get("repeat") and condition else None,
-                                 "escalate": fx.get("escalate") if condition == fx.get("condition") else None})
+                                 "escalate": fx.get("escalate") if condition == fx.get("condition") else None,
+                                 "until": until})
     elif kind == "darts":
         if not tgts:
             raise RuleError("Magic Missile needs targets (--targets a,b; repeat a name to send more darts).")
@@ -1213,6 +1223,8 @@ def spell_attack(g, e, t, spell, sc, expr, fx, adv, dis, now):
     a_adv, a_dis = attack_modes(g, e, t, ranged, d, adv, dis)
     mode = _mode(a_adv, a_dis)
     r = g.roll(f"1d20{fmt_mod(sc['attack'] - exhaustion_penalty(e))}", f"spell attack: {spell['name']} vs {t['name']}", e["id"], mode)
+    if "mocked" in condition_names(e):
+        remove_condition(g, e, "mocked", quiet=True)
     ac = armor_class(t)[0] + {"half": 2, "three-quarters": 5}.get(cover, 0)
     crit = r["nat"] == 20
     hit = crit or (r["nat"] != 1 and r["total"] >= ac)

@@ -1,4 +1,5 @@
-"""Rogue Uncanny Dodge: after an attacker's hit, the Reaction halves that attack's damage (round down)."""
+"""Rogue Uncanny Dodge: after an attacker's hit, the Reaction halves that attack's damage (round down).
+Also: Vicious Mockery's failed save gives Disadvantage on the target's next attack roll, used up by that roll."""
 import _cli  # noqa: E402  (in-process CLI runner)
 import os
 import shutil
@@ -56,6 +57,21 @@ class UncannyDodgeTest(unittest.TestCase):
     def test_needs_a_hit(self):
         code, out = _cli.run(self.env, "feature", "kira-vale", "uncanny dodge")
         self.assertNotEqual(code, 0)
+
+    def test_mockery_disadvantage_spent_on_next_attack(self):
+        import engine.mechanics as M
+        g = _cli.game(self.env)
+        M.add_condition(g, g.get("snag"), "mocked", source="Vicious Mockery", until="end of its next turn", quiet=True)
+        g.commit()
+        g = _cli.game(self.env)
+        adv, dis = M.attack_modes(g, g.get("snag"), g.get("kira-vale"), False, 5)
+        self.assertIn("Vicious Mockery", dis)
+        while _cli.game(self.env).state["combat"]["order"][_cli.game(self.env).state["combat"]["turn"]]["id"] != "snag":
+            self.ok("combat", "next")
+        out = self.ok("attack", "snag", "kira-vale", "scimitar")
+        self.assertIn("Disadvantage", out)
+        g = _cli.game(self.env)
+        self.assertNotIn("mocked", M.condition_names(g.get("snag")))
 
 
 if __name__ == "__main__":
