@@ -1781,8 +1781,10 @@ def region_edit(g, a):
             entry["text"] = a.text   # kept for when it's discovered
         (settlements if a.action == "settlement" else sites).append(entry)
         g.emit("map.set", id=m["id"], set={"settlements": settlements, "pois": sites})
-        g.say(f"🗺 {a.name} ({a.ftype}) marked at ({x},{y}) on {m['name']}" + (" (hidden from the players)." if a.hidden else "."),
-              kind="map")
+        if a.hidden:   # a place the party hasn't heard of must not appear in the table's log either
+            g.note(f"🗺 {a.name} ({a.ftype}) marked at ({x},{y}) on {m['name']} (hidden from the players).")
+        else:
+            g.say(f"🗺 {a.name} ({a.ftype}) marked at ({x},{y}) on {m['name']}.", kind="map")
     elif a.action == "route":
         # map route <region> road|river --path "x,y x,y ..." : straight runs between the waypoints
         kind, way = a.at, getattr(a, "route_path", None) or a.rect

@@ -755,6 +755,42 @@ def tokens_svg(m, entities, current, cell, player):
     return f"<defs>{defs}</defs><g id='tokens'>{''.join(out)}</g>"
 
 
+def _place_labels(queue, marks, cell, W, H, clickable):
+    """Put each place name beside its marker where it overlaps no other name or marker: the most important places
+    choose first (capital, city, town...), trying above, below, right, left and the corners, then a smaller size.
+    A name that fits nowhere is left to its marker's tooltip rather than drawn over another."""
+    placed, out = list(marks), []
+
+    def hits(b):
+        return b[0] < 2 or b[1] < 2 or b[2] > W - 2 or b[3] > H - 2 or             any(b[0] < o[2] and o[0] < b[2] and b[1] < o[3] and o[1] < b[3] for o in placed)
+
+    for q in sorted(queue, key=lambda q: q["rank"]):
+        name, px, py, r = q["p"]["name"], q["px"], q["py"], q["r"]
+        own = (px - r, py - r * 1.5, px + r, py + r)
+        placed.remove(own) if own in placed else None   # a name may touch its own marker
+        done = False
+        for fs in (q["fs"], q["fs"] * .82):
+            tw, th, gap = len(name) * fs * .5, fs * .95, 2
+            spots = [("middle", px, py - r - gap - th * .2), ("middle", px, py + r + gap + th * .8),
+                     ("start", px + r + gap, py + th * .35), ("end", px - r - gap, py + th * .35),
+                     ("start", px + r * .7, py - r - gap), ("end", px - r * .7, py - r - gap),
+                     ("start", px + r * .7, py + r + gap + th * .8), ("end", px - r * .7, py + r + gap + th * .8)]
+            for anchor, tx, ty in spots:
+                x0 = tx - tw / 2 if anchor == "middle" else (tx if anchor == "start" else tx - tw)
+                box = (x0 - 1, ty - th * .8 - 1, x0 + tw + 1, ty + th * .25 + 1)
+                if not hits(box):
+                    placed.append(box)
+                    out.append(clickable(q["p"], f'<text x="{tx:.1f}" y="{ty:.1f}" text-anchor="{anchor}" font-size="{fs:.1f}" '
+                               f'font-weight="{q["weight"]}" font-style="{q["style"]}" fill="#2b1d0e" stroke="#f6e7c1" '
+                               f'stroke-width="{q["sw"]}" paint-order="stroke">{esc(name)}</text>'))
+                    done = True
+                    break
+            if done:
+                break
+        placed.append(own)
+    return out
+
+
 def render_region(m, mode="player", cell=8, party_pos=None):
     w, h = m["w"], m["h"]
     player = mode == "player"
@@ -790,6 +826,7 @@ def render_region(m, mode="player", cell=8, party_pos=None):
         if p.get("id"):
             return f'<g class="poi" data-poi="{esc(p["id"])}" style="cursor:pointer"><title>{esc(p["name"])}</title>{inner}</g>'
         return inner
+    marks, queue = [], []   # marker boxes, and labels to place once every marker is known (so none overlap)
     for p in m.get("pois", []):
         if player and p.get("hidden"):
             continue
@@ -797,8 +834,9 @@ def render_region(m, mode="player", cell=8, party_pos=None):
         glyph = {"ruins": "⌂", "dungeon": "☗", "tower": "♜", "cave": "◓", "shrine": "✚", "camp": "⛺", "lair": "☠",
                  "battlefield": "⚔", "grove": "♣", "barrow": "∩", "mine": "⚒", "bridge": "≍", "inn": "⌂", "mill": "✣",
                  "stones": "⁂"}.get(p["kind"], "★")
-        parts.append(clickable(p, f'<text x="{px}" y="{py + 4}" text-anchor="middle" font-size="{cell * 1.6}" fill="#3a1a0a" stroke="#f6e7c1" stroke-width="2" paint-order="stroke">{glyph}</text>'
-                     f'<text x="{px}" y="{py + cell * 2.4}" text-anchor="middle" font-size="{cell * 1.1}" font-style="italic" fill="#2b1d0e" stroke="#f6e7c1" stroke-width="2.5" paint-order="stroke">{esc(p["name"])}</text>'))
+        parts.append(clickable(p, f'<text x="{px}" y="{py + 4}" text-anchor="middle" font-size="{cell * 1.6}" fill="#3a1a0a" stroke="#f6e7c1" stroke-width="2" paint-order="stroke">{glyph}</text>'))
+        marks.append((px - cell * .8, py - cell * .8, px + cell * .8, py + cell * .8))
+        queue.append({"p": p, "px": px, "py": py, "r": cell * .8, "fs": cell * 1.1, "rank": 7, "style": "italic", "weight": "normal", "sw": 2.5})
     sizes = {"hamlet": (.4, 1.0, "normal"), "village": (.55, 1.2, "normal"), "town": (.85, 1.5, "bold"),
              "city": (1.2, 1.9, "bold"), "capital": (1.5, 2.2, "bold"), "castle": (.8, 1.4, "bold"), "abbey": (.7, 1.3, "normal")}
     for s in m.get("settlements", []):
@@ -818,7 +856,11 @@ def render_region(m, mode="player", cell=8, party_pos=None):
             mark = f'<circle cx="{px}" cy="{py}" r="{r}" fill="{fill}" stroke="#2b1d0e" stroke-width="1.5"/>'
             if s["kind"] == "capital":
                 mark += f'<circle cx="{px}" cy="{py}" r="{r * .45}" fill="#f6e7c1" stroke="#2b1d0e" stroke-width="1"/>'
-        parts.append(clickable(s, mark + f'<text x="{px}" y="{py - r - 3}" text-anchor="middle" font-size="{fs}" font-weight="{weight}" fill="#2b1d0e" stroke="#f6e7c1" stroke-width="3" paint-order="stroke">{esc(s["name"])}</text>'))
+        parts.append(clickable(s, mark))
+        marks.append((px - r, py - r * 1.5, px + r, py + r))
+        rank = {"capital": 0, "city": 1, "town": 2, "castle": 3, "abbey": 4, "village": 5, "hamlet": 6}.get(s["kind"], 5)
+        queue.append({"p": s, "px": px, "py": py, "r": r, "fs": fs, "rank": rank, "style": "normal", "weight": weight, "sw": 3})
+    parts += _place_labels(queue, marks, cell, w * cell, h * cell, clickable)
     for lb in m.get("labels", []):
         if player and lb.get("hidden"):
             continue

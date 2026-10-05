@@ -66,6 +66,7 @@ class RegionTest(unittest.TestCase):
         names = {p["name"] for p in pv["maps"]["realm"]["pois"]}
         self.assertIn("Oakhollow", names)
         self.assertNotIn("The Grey Barrow", names)          # hidden until discovered
+        self.assertFalse(any("Grey Barrow" in (f.get("text") or "") for f in pv.get("feed", [])))   # nor named in the log
         svg = views.map_svg(g, "realm", "player")
         self.assertIn('data-poi="oakhollow"', svg)
         self.assertNotIn("Grey Barrow", svg)
