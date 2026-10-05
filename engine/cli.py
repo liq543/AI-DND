@@ -1604,7 +1604,7 @@ def cmd_agenda(g, a):
         g.emit("agenda.add", item=item)
         (g.note if a.secret else lambda m: g.say(m, kind="info"))(
             f"📅 Scheduled for {fmt_time(due)}: {a.text}" + (f" ({'auto-paid' if a.auto else 'payment'} "
-            f"{item['pay'] if isinstance(item['pay'], str) else M.fmt_cp(abs(item['pay']))} to {a.to})" if a.pay else "") + f" [{item['id']}]")
+            f"{item['pay'] if isinstance(item['pay'], str) else ('-' if item['pay'] < 0 else '') + M.fmt_cp(abs(item['pay']))} {'out of' if not isinstance(item['pay'], str) and item['pay'] < 0 else 'to'} {a.to})" if a.pay else "") + f" [{item['id']}]")
     elif a.action in ("done", "cancel"):
         it = next((x for x in items if x["id"] == a.target), None)
         if not it:
