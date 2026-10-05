@@ -61,6 +61,21 @@ class UncannyDodgeTest(unittest.TestCase):
         self.assertIn("halved to 4", self.ok("feature", "kira-vale", "uncanny dodge"))
         self.assertEqual(self.hp(), before - 4)
 
+    def test_readied_spell_released_off_turn(self):
+        # a spell readied with the Ready action is released with the Reaction when the trigger comes
+        import engine.mechanics as M
+        from engine.core import RuleError
+        self.ok("npc", "add", "cultist-fanatic", "--at", "8,8", "--map", "field", "--name", "Brother Vell")
+        self.ok("combat", "add", "brother-vell")
+        while _cli.game(self.env).state["combat"]["order"][_cli.game(self.env).state["combat"]["turn"]]["id"] == "brother-vell":
+            self.ok("combat", "next")
+        g = _cli.game(self.env)
+        with self.assertRaises(RuleError):                             # nothing readied: off-turn casting is refused
+            M.cast(g, "brother-vell", "light", targets=(), readied=True)
+        M.set_economy(g, "brother-vell", action_used=True, action_used_for="ready")
+        M.cast(g, "brother-vell", "light", targets=(), readied=True)    # released as the Reaction
+        self.assertTrue(M.economy(g, "brother-vell").get("reaction_used"))
+
     def test_needs_a_hit(self):
         code, out = _cli.run(self.env, "feature", "kira-vale", "uncanny dodge")
         self.assertNotEqual(code, 0)

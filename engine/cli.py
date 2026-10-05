@@ -889,7 +889,7 @@ def cmd_attack(g, a):
 
 
 def cmd_cast(g, a):
-    M.cast(g, a.caster, a.spell, a.level, ids(a.targets), ritual=a.ritual, free=a.free, adv=ids(a.adv), dis=ids(a.dis),
+    M.cast(g, a.caster, a.spell, a.level, ids(a.targets), ritual=a.ritual, free=a.free, adv=ids(a.adv), dis=ids(a.dis), readied=getattr(a, 'readied', False),
            condition=a.condition, component=a.component, now=a.now, scroll=a.scroll)
 
 
@@ -3082,6 +3082,7 @@ def build_parser():
     c.add_argument("spell")
     c.add_argument("--level", type=int)
     c.add_argument("--targets")
+    c.add_argument("--readied", action="store_true", help="release a spell readied with the Ready action (uses the Reaction)")
     c.add_argument("--ritual", action="store_true")
     c.add_argument("--free", help="free casting source, e.g. 'Magic Initiate'")
     c.add_argument("--scroll", help="inventory id of a spell scroll")

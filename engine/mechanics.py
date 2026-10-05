@@ -972,7 +972,7 @@ def add_dice(expr, extra, n):
 
 
 def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, free=None, adv=(), dis=(),
-         condition=None, component=None, now=False, scroll=None, request=None):
+         condition=None, component=None, now=False, scroll=None, request=None, readied=False):
     e = g.get(caster_ref)
     spell = g.require("spells", spell_name, "Spell")
     base = spell["level"]
@@ -1083,6 +1083,11 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
     # --------------------------------------------------------------- action economy
     if combat(g) and not request:
         kind = "reaction" if spell["reaction"] else "bonus" if spell["bonus_action"] else "action"
+        if readied:
+            # rules glossary, Ready: a readied spell is released with the Reaction when its trigger happens
+            if not str(economy(g, e["id"]).get("action_used_for", "")).lower().startswith("ready"):
+                raise RuleError(f"{e['name']} hasn't readied a spell (take the Ready action on their turn first).")
+            kind = "reaction"
         if spell["casting_time"].lower().startswith(("1 minute", "10 minutes", "1 hour", "8 hours", "12 hours", "24 hours")):
             raise RuleError(f"{spell['name']} takes {spell['casting_time']} to cast — not in combat rounds.")
         use_action(g, e, kind, f"cast {spell['name']}")
