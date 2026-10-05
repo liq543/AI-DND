@@ -1481,7 +1481,47 @@ def cmd_item(g, a):
         raise RuleError("item add|remove|drop|sell|give|equip|unequip|attune|unattune|use|light|recover-ammo|card")
 
 
+def _find_box(g, ref):
+    """A container (chest, strongbox, vault) by id on any map, or None."""
+    for m in g.state["maps"].values():
+        for c in m.get("containers", []):
+            if c["id"] == ref:
+                return m, c
+    return None
+
+
+def _box_coins(g, m, box, delta):
+    have = box.get("coins_cp", 0)
+    if have + delta < 0:
+        raise RuleError(f"{box['name']} holds only {M.fmt_cp(have)}.")
+    boxes = [dict(c, coins_cp=have + delta) if c["id"] == box["id"] else c for c in m.get("containers", [])]
+    g.emit("map.set", id=m["id"], set={"containers": boxes})
+    return have + delta
+
+
 def cmd_coins(g, a):
+    # coins kept in a container (a vault, a strongbox): `coins <box-id> 500gp --from kit` deposits,
+    # `coins kit 200gp --from <box-id>` withdraws. The character must be on the container's map.
+    box_to, box_from = _find_box(g, a.who), _find_box(g, a.from_who) if getattr(a, "from_who", None) else None
+    if box_to or box_from:
+        delta = M.parse_coins(a.amount)
+        if delta <= 0 or not getattr(a, "from_who", None):
+            raise RuleError("Vault coins move with --from: `coins <box> 500gp --from kit` or `coins kit 200gp --from <box>`.")
+        (m, box), who = (box_to, a.from_who) if box_to else (box_from, a.who)
+        e = g.get(who)
+        if (e.get("token") or {}).get("map") != m["id"]:
+            raise RuleError(f"{e['name']} must be at {m['name']} to use {box['name']}.")
+        if box_to:
+            M.change_coins(g, e, -delta, a.source or f"put in {box['name']}")
+            total = _box_coins(g, m, box, delta)
+            g.say(f"💰 {e['name']} puts {M.fmt_cp(delta)} into {box['name']}. {box['name']}: {M.fmt_cp(total)}; purse "
+                  f"{M.fmt_cp(M.coins_total_cp(g.get(e['id'])))}.", kind="item")
+        else:
+            total = _box_coins(g, m, box, -delta)
+            M.change_coins(g, e, delta, a.source or f"taken from {box['name']}")
+            g.say(f"💰 {e['name']} takes {M.fmt_cp(delta)} from {box['name']}. {box['name']}: {M.fmt_cp(total)}; purse "
+                  f"{M.fmt_cp(M.coins_total_cp(g.get(e['id'])))}.", kind="item")
+        return
     e = g.get(a.who)
     delta = M.parse_coins(a.amount)
     if getattr(a, "from_who", None):

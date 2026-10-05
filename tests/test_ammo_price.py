@@ -1,4 +1,5 @@
-"""SRD ammunition is priced per bundle (Arrows: 20 for 1 GP), while inventories count single pieces."""
+"""SRD ammunition is priced per bundle (Arrows: 20 for 1 GP), while inventories count single pieces.
+Also: coins kept in a container (a vault) move in and out with `coins ... --from`."""
 import _cli  # noqa: E402  (in-process CLI runner)
 import os
 import shutil
@@ -32,6 +33,18 @@ class AmmoPriceTest(unittest.TestCase):
         self.assertIn("purchased for 1 GP", out)
         out = self.ok("item", "sell", "kira-vale", "bolts-1", "--qty", "14")
         self.assertIn("for 3 SP 5 CP", out)   # 14 bolts at half of 5 cp each
+
+    def test_vault_coins(self):
+        self.ok("map", "gen", "wilderness", "--biome", "plains", "--w", "20", "--h", "14", "--id", "hall", "--seed", "2", "--show")
+        self.ok("place", "kira-vale", "5,5", "--map", "hall")
+        self.ok("map", "container", "hall", "6,6", "--name", "Iron strongbox", "--id", "vault")
+        self.ok("coins", "kira-vale", "+20gp", "--source", "loot: test purse")
+        out = self.ok("coins", "vault", "15gp", "--from", "kira-vale")
+        self.assertIn("Iron strongbox: 15 GP", out)
+        out = self.ok("coins", "kira-vale", "5gp", "--from", "vault")
+        self.assertIn("Iron strongbox: 10 GP", out)
+        code, out = _cli.run(self.env, "coins", "kira-vale", "50gp", "--from", "vault")
+        self.assertNotEqual(code, 0)
 
 
 if __name__ == "__main__":

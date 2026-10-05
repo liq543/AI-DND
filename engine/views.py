@@ -355,7 +355,7 @@ def player_view(g):
                                    "note": f.get("note", ""), "in": f.get("in"), "art": itemart.item_art_version(f["item"])}
                                   for f in m.get("floor", [])
                                   if not m.get("fog") or (m.get("revealed") and m["revealed"][f["y"]][f["x"]] == "1")],
-                        "containers": [{k: c.get(k) for k in ("id", "x", "y", "name", "text")} for c in m.get("containers", [])
+                        "containers": [{k: c.get(k) for k in ("id", "x", "y", "name", "text", "coins_cp")} for c in m.get("containers", [])
                                        if not m.get("fog") or (m.get("revealed") and m["revealed"][c["y"]][c["x"]] == "1")],
                         "pois": [{k: p.get(k) for k in ("id", "x", "y", "name", "journal")}
                                  for p in m.get("pois", []) + (m.get("settlements", []) if m.get("kind") == "region" else [])
@@ -520,7 +520,8 @@ def map_state_md(g, mid):
                      + (f" · {conds}" if conds else "") + (" · hidden" if e.get("hidden") else ""))
     boxes = {c["id"]: c for c in m.get("containers", [])}
     for c in m.get("containers", []):
-        lines.append(f"- container `{c['id']}`: {c['name']} at ({c['x']},{c['y']})")
+        lines.append(f"- container `{c['id']}`: {c['name']} at ({c['x']},{c['y']})"
+                     + (f" — coins: {fmt_cp(c['coins_cp'])}" if c.get("coins_cp") else ""))
     for f in m.get("floor", []):
         where = f"in {boxes[f['in']]['name']} (`{f['in']}`)" if f.get("in") in boxes else "item on floor"
         lines.append(f"- {where} `{f['id']}`: {f['item'].get('qty', 1)}× {f['item']['name']} at ({f['x']},{f['y']}) — {f.get('note', '')}")
