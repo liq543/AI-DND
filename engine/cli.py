@@ -1578,6 +1578,48 @@ def cmd_coins(g, a):
     g.say(f"💰 {e['name']} {'gains' if delta > 0 else 'spends'} {M.fmt_cp(abs(delta))} ({a.source}). Purse: {M.fmt_cp(M.coins_total_cp(g.get(e['id'])))}.", kind="item")
 
 
+def cmd_agenda(g, a):
+    """Scheduled events the engine remembers: deliveries, debts, visits, deadlines. They're announced when their
+    time comes (`time`, `travel`, `rest`), and a payment marked --auto is made into or out of its target then."""
+    from .core import parse_when, parse_duration, fmt_time
+    items = g.state.get("agenda", [])
+    if a.action == "add":
+        if not a.text:
+            raise RuleError("agenda add needs --text \"what happens\".")
+        due = parse_when(a.at) if a.at else (g.state["time"] + parse_duration(a.inn) if a.inn else None)
+        if due is None:
+            raise RuleError("agenda add needs --at \"Day 7 08:00\" or --in 2d.")
+        item = {"id": f"a{len(items) + 1}", "due": due, "text": a.text, "status": "pending", "secret": bool(a.secret)}
+        if a.pay:
+            if not a.to:
+                raise RuleError("A payment needs --to <container or character> (e.g. --to treasury).")
+            pay = a.pay.strip()
+            if "d" in pay.lower().replace("gp", ""):
+                item["pay"] = pay.lower().replace("gp", "")   # dice, in crowns, rolled when it falls due
+            else:
+                item["pay"] = M.parse_coins(pay)
+            item.update(to=a.to, auto=bool(a.auto))
+        if due <= g.state["time"]:
+            raise RuleError(f"{fmt_time(due)} has already passed (it's {fmt_time(g.state['time'])}).")
+        g.emit("agenda.add", item=item)
+        (g.note if a.secret else lambda m: g.say(m, kind="info"))(
+            f"📅 Scheduled for {fmt_time(due)}: {a.text}" + (f" ({'auto-paid' if a.auto else 'payment'} "
+            f"{item['pay'] if isinstance(item['pay'], str) else M.fmt_cp(abs(item['pay']))} to {a.to})" if a.pay else "") + f" [{item['id']}]")
+    elif a.action in ("done", "cancel"):
+        it = next((x for x in items if x["id"] == a.target), None)
+        if not it:
+            raise RuleError(f"No agenda item '{a.target}'. `agenda list` shows them.")
+        g.emit("agenda.set", id=it["id"], set={"status": "done" if a.action == "done" else "cancelled", "note": a.note or a.reason})
+        g.note(f"📅 {it['id']} {a.action}: {it['text']}" + (f" — {a.note or a.reason}" if (a.note or a.reason) else ""))
+    else:
+        open_ = [x for x in items if x["status"] in ("pending", "due")]
+        if not open_:
+            g.note("Agenda: nothing scheduled.")
+        for x in sorted(open_, key=lambda x: x["due"]):
+            g.note(f"  {x['id']}  {fmt_time(x['due'])}  [{x['status']}{', secret' if x.get('secret') else ''}]  {x['text']}"
+                   + (f"  ({'auto ' if x.get('auto') else ''}{x['pay'] if isinstance(x['pay'], str) else M.fmt_cp(x['pay'])} → {x['to']})" if x.get('pay') else ""))
+
+
 def cmd_xp(g, a):
     members = [e for e in g.pcs() if not e.get("dead")]
     if a.action == "award":
@@ -3092,6 +3134,18 @@ def build_parser():
     c.add_argument("--focus", help="short rest: identify a magic item by focusing on it, kira:item-id (one per creature)")
     c.add_argument("--refund-hd", help="repair: refund Hit Point Dice spent by mistake, kira:1 (needs --reason; takes no rest)")
     c.add_argument("--reason")
+    c = sp.add_parser("agenda", help="add|list|done|cancel scheduled events (deliveries, debts, visits)")
+    c.add_argument("action", choices=["add", "list", "done", "cancel"])
+    c.add_argument("target", nargs="?")
+    c.add_argument("--at", help='"Day 7 08:00"')
+    c.add_argument("--in", dest="inn", help="from now: 2d, 6h")
+    c.add_argument("--text")
+    c.add_argument("--pay", help="coins (650gp, -430gp) or crowns as dice (600+2d40)")
+    c.add_argument("--to", help="who or which container is paid (treasury)")
+    c.add_argument("--auto", action="store_true", help="make the payment automatically when it falls due")
+    c.add_argument("--secret", action="store_true", help="DM only: not announced on the table")
+    c.add_argument("--note")
+    c.add_argument("--reason")
     c = sp.add_parser("time", help="advance in-world time")
     c.add_argument("amount")
     c.add_argument("--reason")
@@ -3270,7 +3324,7 @@ HANDLERS = {
     "damage": cmd_damage, "heal": cmd_heal, "temphp": cmd_temphp, "condition": cmd_condition, "exhaustion": cmd_exhaustion,
     "feature": cmd_feature, "bardic": cmd_bardic, "deathsave": cmd_deathsave, "stabilize": cmd_stabilize,
     "legendary-resist": cmd_legendary, "rest": cmd_rest, "time": cmd_time, "travel": cmd_travel, "item": cmd_item,
-    "coins": cmd_coins, "xp": cmd_xp, "encounter": cmd_encounter, "map": cmd_map, "asset": cmd_asset, "say": cmd_say, "fx": cmd_fx,
+    "coins": cmd_coins, "agenda": cmd_agenda, "xp": cmd_xp, "encounter": cmd_encounter, "map": cmd_map, "asset": cmd_asset, "say": cmd_say, "fx": cmd_fx,
     "scene": cmd_scene, "show": cmd_show, "homebrew": cmd_homebrew, "request": cmd_request, "roll": cmd_roll,
     "status": cmd_status, "audit": cmd_audit, "log": cmd_log,
 }

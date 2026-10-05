@@ -490,6 +490,13 @@ def state_md(g):
             pos = f"{e['token']['map']} ({e['token']['x']},{e['token']['y']})" if e.get("token") else "—"
             lines.append(f"| {e['name']} (`{e['id']}`, {e.get('srd', 'custom')}) | {e.get('side')} | {e['hp']}/{e['hp_max']} | {derive(e)['ac']} | "
                          f"{', '.join(c2['name'] for c2 in e.get('conditions', [])) or '—'}{' · DEAD' if e.get('dead') else ''} | {pos} | {'yes' if e.get('hidden') else ''} |")
+    agenda = [x for x in s.get("agenda", []) if x.get("status") in ("pending", "due")]
+    if agenda:
+        lines += ["", "## Agenda (scheduled by the engine; `agenda list`)", ""]
+        for x in sorted(agenda, key=lambda x: x["due"]):
+            pay = x.get("pay")
+            lines.append(f"- `{x['id']}` {fmt_time(x['due'])} [{x['status']}{', secret' if x.get('secret') else ''}] {x['text']}"
+                         + (f" ({'auto ' if x.get('auto') else ''}{pay if isinstance(pay, str) else fmt_cp(pay)} → {x['to']})" if pay else ""))
     if c:
         lines += ["", f"## Initiative — round {c['round']}", ""]
         for i, o in enumerate(c["order"]):

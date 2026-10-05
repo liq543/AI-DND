@@ -1490,9 +1490,46 @@ def concentration_minutes(conc):
     return parse_duration(text)
 
 
+def credit_coins(g, ref, cp, source):
+    """Pay coins (cp; negative pays out) to a character or into a container (a vault). Returns the new total there."""
+    for m in g.state["maps"].values():
+        for c in m.get("containers", []):
+            if c["id"] == ref:
+                total = c.get("coins_cp", 0) + cp
+                if total < 0:
+                    raise RuleError(f"{c['name']} holds only {fmt_cp(c.get('coins_cp', 0))}.")
+                g.emit("map.set", id=m["id"], set={"containers": [dict(x, coins_cp=total) if x["id"] == ref else x
+                                                                 for x in m.get("containers", [])]})
+                return total
+    e = g.get(ref)
+    change_coins(g, e, cp, source)
+    return coins_total_cp(g.get(e["id"]))
+
+
+def settle_agenda(g):
+    """Scheduled events (`agenda add`): when their time comes they're announced, and an automatic payment is made."""
+    from .core import fmt_time
+    for it in [dict(x) for x in g.state.get("agenda", []) if x.get("status") == "pending" and x["due"] <= g.state["time"]]:
+        patch = {"status": "due"}
+        msg = f"📅 Due ({fmt_time(it['due'])}): {it['text']}"
+        if it.get("pay") and it.get("to") and it.get("auto"):
+            amt = it["pay"]
+            if isinstance(amt, str):
+                amt = g.roll(amt, f"agenda: {it['text']}", None, hidden=bool(it.get("secret")))["total"] * 100
+            total = credit_coins(g, it["to"], amt, f"agenda: {it['text']}")
+            patch.update(status="done", paid_cp=amt)
+            msg += f" Paid {fmt_cp(abs(amt))} {'into' if amt > 0 else 'out of'} {it['to']} (now {fmt_cp(total)})."
+        g.emit("agenda.set", id=it["id"], set=patch)
+        if it.get("secret"):
+            g.note(msg)
+        else:
+            g.say(msg, kind="info")
+
+
 def after_time(g):
     """Things that happen as in-world time passes: concentration spells run out at the end of their duration,
-    and stable creatures regain 1 HP after 1d4 hours."""
+    stable creatures regain 1 HP after 1d4 hours, and scheduled agenda items fall due."""
+    settle_agenda(g)
     for e in list(g.entities.values()):
         conc = e.get("concentration")
         if not conc or conc.get("since") is None:

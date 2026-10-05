@@ -96,6 +96,12 @@ def apply(state, ev):
         state["assets"][d["asset"]["id"]] = d["asset"]
     elif t == "encounter.log":
         state["encounters"].append(d)
+    elif t == "agenda.add":
+        state.setdefault("agenda", []).append(d["item"])
+    elif t == "agenda.set":
+        for it in state.get("agenda", []):
+            if it["id"] == d["id"]:
+                it.update(d["set"])
     return state
 
 
@@ -140,6 +146,14 @@ def parse_duration(text):
         else:
             total += n
     return int(round(total))
+
+
+def parse_when(text):
+    """'Day 7 08:00', 'day 7', 'Day 7, 8:30' -> minutes since Day 1 00:00 (None if it isn't a date)."""
+    m = re.match(r"\s*day\s*(\d+)\s*,?\s*(?:(\d{1,2}):(\d{2}))?\s*$", str(text), re.I)
+    if not m:
+        return None
+    return (int(m.group(1)) - 1) * 1440 + int(m.group(2) or 0) * 60 + int(m.group(3) or 0)
 
 
 def fmt_time(minutes):

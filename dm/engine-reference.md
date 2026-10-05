@@ -104,6 +104,17 @@ request list | request roll <id> | request cancel <id>       # pending player ro
 `heal` / `temphp` for party members require `--override "reason"` — healing must come from a spell, potion,
 feature, rest, or a paid NPC service.
 
+## Agenda: scheduled events the engine remembers
+```
+agenda add --at "Day 7 09:00" --text "A gem buyer arrives with scales"          # announced on the table when it falls due
+agenda add --in 6d --text "The steward's cart sales" --pay 600+2d40 --to treasury --auto   # paid automatically then
+agenda add --at "Day 30" --text "Wages" --pay=-430gp --to treasury --auto      # money out (note the =)
+agenda add --at "Day 20" --text "The rival's spies reach town" --secret        # DM only
+agenda list | agenda done a3 --note "paid by hand" | agenda cancel a4 --reason "..."
+```
+Every promised delivery, debt, payday, visit and villain-clock step goes in the agenda the moment it's agreed, so it
+can't be forgotten: `time`, `travel` and `rest` announce each one as it falls due (state.md lists the open ones).
+
 ## Quicksave / quickload (player's choice only)
 ```
 quicksave [name] [--label "before the duel"]   # a restore point now (a timestamped name if none given)
