@@ -175,6 +175,19 @@ class EngineTest(unittest.TestCase):
             self.ok("npc", "remove", "mark")
             self.ok("char", "remove", "nix")
 
+    def test_hiding_ends_when_casting_aloud(self):
+        # Hide ends when the hidden creature casts a spell with a Verbal component, not a silent one
+        from engine import mechanics as M
+        self.ok("condition", "add", "kira", "invisible", "--source", "Hide (Stealth 20)")
+        try:
+            g = self.state()
+            M.break_invisibility_on_cast(g, g.get("kira"), {"components": "S, M (a feather)"})
+            self.assertIn("invisible", M.condition_names(g.get("kira")))
+            M.break_invisibility_on_cast(g, g.get("kira"), {"components": "V, S"})
+            self.assertNotIn("invisible", M.condition_names(g.get("kira")))
+        finally:
+            _cli.run(self.env, "condition", "remove", "kira", "invisible")
+
     def test_invisibility_ends_after_an_attack_roll(self):
         # Invisibility (the spell) ends right after the target makes an attack roll; Greater Invisibility doesn't
         self.ok("place", "kira", "8,8", "--map", "arena")

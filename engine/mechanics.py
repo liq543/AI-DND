@@ -455,6 +455,19 @@ def add_condition(g, e, name, source=None, until=None, caster=None, spell=None, 
     return True
 
 
+def break_invisibility_on_cast(g, e, spell):
+    """Casting gives a hidden creature away: Hide ends on casting a spell with a Verbal component (rules/core, Hide),
+    and the Invisibility spell ends when its target casts any spell (rules/spells/invisibility.md)."""
+    verbal = (spell.get("components") or "").lstrip().startswith("V")
+    for c in list(e.get("conditions", [])):
+        if c["name"] != "invisible":
+            continue
+        src, sp = (c.get("source") or "").lower(), (c.get("spell") or "").lower()
+        if (src.startswith("hide") and verbal) or sp == "invisibility" or ("invisibility" in src and "greater" not in src):
+            break_invisibility(g, e, "cast a spell" + (" aloud" if verbal else ""))
+            return
+
+
 def break_invisibility(g, e, why):
     """The Invisibility spell and the Hide action end right after the creature makes an attack roll (rules/spells/
     invisibility.md; Hide in rules/core). Greater Invisibility and innate invisibility don't."""
@@ -1102,6 +1115,7 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
         if not chk.get("success"):
             g.say(f"The magic of the scroll fizzles — {spell['name']} vanishes from it.")
             return {"failed": True}
+    break_invisibility_on_cast(g, e, spell)
     g.say(f"✨ {e['name']} casts {spell['name']}" + (f" at level {slot_level}" if base and slot_level > base else "") +
           (" as a ritual" if ritual else "") + (f" (from {how})" if how in ("scroll", "granted") else "") +
           (f" targeting {', '.join(t['name'] for t in tgts)}" if tgts else "") + ".", kind="spell", who=e["id"],
