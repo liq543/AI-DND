@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Wizard 6** (Evoker) · **Background:** Sage · **XP:** 17362
+**Player:** DM · **Human** · **Wizard 6** (Evoker) · **Background:** Sage · **XP:** 19685
 
 **HP** 38/38 · **AC** 14 (unarmored 10 + Dex 2 + bracers 2) · **Speed** 30 ft · **Initiative** +5 · **Proficiency** +3 · **Passive Perception** 11
 
@@ -56,7 +56,6 @@ Species traits: Resourceful, Skillful, Versatile
 - `calligraphers-supplies-1` 1× Calligrapher's Supplies · _starting equipment_
 - `book-1` 1× Book · _starting equipment_
 - `parchment-1` 1× Parchment · _starting equipment_
-- `forgery-kit-1` 1× Forgery Kit · _found: his own tools, from his back-room workshop_
 - `silver-pocket-watch-1` 1× Silver pocket watch · _loot: Mr Faircloth's waistcoat_
 - `tobiass-notes-on-the-bli-1` 1× Tobias's Notes on the Blink and the Heart · _gift: written by Tobias Fenwick in exchange for the Codex_
 - `clothes-travelers-1` 1× Nance's drab coat and cap (Clothes, Traveler's) · _purchased for 2 GP_

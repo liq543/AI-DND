@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Bard 6** (College of Lore) · **Background:** Sage · **XP:** 17362
+**Player:** DM · **Human** · **Bard 6** (College of Lore) · **Background:** Sage · **XP:** 19685
 
 **HP** 39/39 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
 
@@ -71,6 +71,8 @@ Species traits: Resourceful, Skillful, Versatile
 - `clothes-fine-1` 1× Clothes, Fine · _purchased for 45 GP_
 - `potion-of-greater-healin-1` 1× Potion of Greater Healing — Uncommon · _purchased for 200 GP_
 - `midnight-blue-silk-cloak-1` 1× Midnight-blue silk cloak · _loot: taken back off the bound woman at the Withy Pond_
+- `horse-riding-1` 1× Horse, Riding · _loot: two Greencloak horses caught loose in the beech holloway_
+- `forgery-kit-1` 1× Forgery Kit · _found: his own tools, from his back-room workshop_
 
 Hit Point Dice: Bard d8 6/6
 Languages: Common, Elvish, Halfling · Tools: Calligrapher's Supplies, Forgery Kit, Disguise Kit · Armor training: light

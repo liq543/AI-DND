@@ -1,0 +1,37 @@
+# Snapshot — party moved to Thornbury: the West Gate quarter at Day 12, 22:23 (event 12738)
+
+### The League house, Thornbury (`league-house`, interior 40×11, lighting dim)
+- Dunstan, the night porter (`dunstan-the-night-porter`, enemy) at (11,2) — DEAD · unconscious, prone
+- Factor Ambrose Leck (`factor-ambrose-leck`, enemy) at (21,3) — DEAD
+- Jory, the League clerk (`jory-the-league-clerk`, enemy) at (34,2) — DEAD · unconscious, prone
+- Margery Leck (`margery-leck`, enemy) at (26,1) — DEAD · unconscious, prone
+- container `league-strongbox`: The League strongbox at (4,7)
+- container `jorys-box`: Jory's box at (36,4)
+- container `lecks-chest`: The Lecks' clothes chest at (27,3)
+- container `cash-drawer`: The counter's cash drawer at (14,4)
+- point of interest `poi-1`: The study shutter at (22,0) → journal j403
+- point of interest `poi-3`: The study lamp at (22,1) → journal j405
+- point of interest `poi-4`: The dormer hatch at (35,0) → journal j406
+- point of interest `poi-6`: The attic ladder at (34,3) → journal j408
+- point of interest `poi-7`: Jory's mattress, soaked at (33,1) → journal j409
+- point of interest `poi-8`: The stair down at (21,7) → journal j410
+- point of interest `poi-9`: The bedroom door at (26,5) → journal j411
+- point of interest `poi-10`: The study door at (22,5) → journal j412
+- point of interest `poi-12`: The factor's desk, bloodied at (21,1) → journal j414
+- point of interest `poi-13`: The coat rack at (26,9) → journal j415
+- point of interest `poi-14`: The Lecks' bed at (25,1) → journal j416
+- point of interest `poi-16`: The washstand at (28,4) → journal j418
+- point of interest `poi-17`: The wardrobe, rifled at (28,1) → journal j419
+- point of interest `poi-19`: The front door, barred at (10,5) → journal j421
+- point of interest `poi-20`: The counter at (14,3) → journal j422
+- point of interest `poi-21`: The cellar stair at (11,1) → journal j423
+- point of interest `poi-22`: The porter's settle at (12,3) → journal j424
+- point of interest `poi-23`: The clerks' desks, rifled at (16,3) → journal j425
+- point of interest `poi-24`: The ledger shelves at (16,1) → journal j426
+- point of interest `poi-25`: The kitchen door at (17,7) → journal j427
+- point of interest `poi-27`: The wine barrels at (7,1) → journal j429
+- point of interest `poi-28`: The cellar shelves at (3,3) → journal j430
+- point of interest `poi-29`: The strongroom door, open at (4,5) → journal j431
+- point of interest `poi-30`: The strongroom, stripped at (1,6) → journal j434
+- doors: (22,0) closed, (26,0) closed, (35,0) open, (24,3) closed, (4,5) open, (10,5) closed, (22,5) open, (26,5) open, (17,7) closed
+- labels: Cellar (4,2), Ground (16,2), Upper (25,8), Attic (35,2)

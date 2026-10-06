@@ -1,0 +1,41 @@
+# Snapshot — party moved to The Rookery at Day 5, 16:10 (event 6243)
+
+### Fallowfield (`fallowfield`, wilderness 40×38, lighting dim)
+- Kit Corvell (`kit`, pc) at (15,24) — 35/51 HP
+- Guard A (`guard-a`, enemy) at (14,7) — DEAD
+- Guard A (`guard-a-2`, enemy) at (26,22) — DEAD · unconscious, prone
+- Guard B (`guard-b`, enemy) at (15,7) — DEAD
+- Guard B (`guard-b-2`, enemy) at (27,22) — DEAD · unconscious, prone
+- Guard C (`guard-c`, enemy) at (28,22) — DEAD · unconscious, prone
+- Guard D (`guard-d`, enemy) at (29,22) — DEAD · unconscious, prone
+- Guard E (`guard-e`, enemy) at (26,24) — DEAD · unconscious, prone
+- Guard F (`guard-f`, enemy) at (27,24) — DEAD · unconscious, prone
+- Guard G (`guard-g`, enemy) at (28,24) — DEAD · unconscious, prone
+- Guard H (`guard-h`, enemy) at (29,24) — DEAD · unconscious, prone
+- Guard I (`guard-i`, enemy) at (28,25) — DEAD · unconscious, prone
+- Orrin, the sergeant (`orrin-vasse`, enemy) at (18,25) — DEAD
+- Sir Lucan Mire (`sir-lucan-mire`, enemy) at (18,25) — DEAD
+- point of interest `poi-2`: The toll bar at (16,14) → journal j220
+- point of interest `poi-3`: The farmyard gate at (19,18) → journal j221
+- point of interest `poi-4`: The farmyard wall at (13,18) → journal j222
+- point of interest `poi-6`: The long table at (17,22) → journal j224
+- point of interest `poi-7`: The farmhouse range at (14,20) → journal j225
+- point of interest `poi-9`: The inner door at (20,23) → journal j227
+- point of interest `poi-10`: The captain's bed at (22,20) → journal j228
+- point of interest `poi-14`: The bedrolls at (27,22) → journal j232
+- point of interest `poi-16`: The farmyard well at (16,30) → journal j234
+- point of interest `poi-17`: The weapon racks at (25,31) → journal j235
+- point of interest `poi-18`: The toll crates at (28,29) → journal j236
+- point of interest `poi-19`: A tenant's cottage at (8,21) → journal j237
+- point of interest `poi-20`: A tenant's cottage at (8,29) → journal j238
+- point of interest `poi-21`: A tenant's cottage at (33,21) → journal j239
+- point of interest `poi-22`: The duck pond at (35,29) → journal j240
+- point of interest `poi-24`: The sentry brazier, unwatched at (22,14) → journal j242
+- point of interest `poi-27`: The back gate, open at (22,33) → journal j245
+- point of interest `poi-28`: The barn doors, rolled open at (27,27) → journal j246
+- point of interest `poi-29`: The barn, burning at (27,20) → journal j247
+- point of interest `poi-30`: The farmhouse threshold at (18,25) → journal j249
+- point of interest `poi-31`: The cellar, open and emptied at (14,24) → journal j251
+- point of interest `poi-32`: The captain's chest, emptied at (22,24) → journal j252
+- point of interest `poi-33`: The captain's writing desk at (21,20) → journal j253
+- doors: (19,18) closed, (20,18) closed, (8,21) closed, (33,21) closed, (20,23) open, (18,25) open, (27,27) open, (8,29) closed, (22,33) open
