@@ -231,6 +231,8 @@ def saving_throw(g, e, ability, dc, adv=(), dis=(), source=None, spell=False, no
         adv.append("Dodge")
     if spell and any(a["name"].lower() == "magic resistance" for a in e.get("actions", [])):
         adv.append("Magic Resistance")
+    if bloodied_frenzy(e):
+        adv.append("Bloodied Frenzy")
     if e["kind"] == "pc" and "Dwarf" == e.get("species") and source and "poison" in str(source).lower():
         adv.append("Dwarven Resilience")
     if any(fx.get("name") == "untrained armor" for fx in e.get("effects", [])) and ab in ("str", "dex"):
@@ -557,8 +559,17 @@ def monster_action(e, name, kinds=("attack",)):
     raise RuleError(f"{e['name']}'s stat block has no action '{name}'. Actions: {', '.join(a['name'] for a in e.get('actions', []))}")
 
 
+def bloodied_frenzy(e):
+    """SRD trait (e.g. Berserker): while Bloodied, Advantage on attack rolls and saving throws."""
+    if not any(a.get("name", "").lower() == "bloodied frenzy" for a in e.get("actions", [])):
+        return False
+    return 0 < e.get("hp", 0) <= hp_max(e) / 2
+
+
 def attack_modes(g, att, tgt, ranged, dist, extra_adv=(), extra_dis=()):
     adv, dis = list(extra_adv), list(extra_dis)
+    if bloodied_frenzy(att):
+        adv.append("Bloodied Frenzy")
     an, tn = condition_names(att), condition_names(tgt)
     for c in ATTACKER_DIS & an:
         dis.append(f"attacker {c}")

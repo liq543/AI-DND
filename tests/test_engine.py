@@ -481,6 +481,19 @@ class EngineTest(unittest.TestCase):
             self.ok("combat", "end")
             self.ok("condition", "remove", "kira", "invisible")
 
+    def test_bloodied_frenzy_gives_advantage(self):
+        from engine import mechanics as M
+        self.ok("npc", "add", "berserker", "--name", "Ulf", "--at", "8,8", "--map", "arena")
+        try:
+            ulf = self.state().get("ulf")
+            self.assertFalse(M.bloodied_frenzy(ulf))
+            self.assertNotIn("Bloodied Frenzy", self.ok("save", "ulf", "str", "--dc", "10", "--source", "test"))
+            self.ok("damage", "ulf", str(ulf["hp"] // 2 + 1), "slashing", "--source", "test")
+            self.assertTrue(M.bloodied_frenzy(self.state().get("ulf")))
+            self.assertIn("Bloodied Frenzy", self.ok("save", "ulf", "str", "--dc", "10", "--source", "test"))
+        finally:
+            self.ok("npc", "remove", "ulf")
+
     def test_sleep_is_two_stage(self):
         from engine import srd
         fx = srd.find("spells", "Sleep")["effect"]
