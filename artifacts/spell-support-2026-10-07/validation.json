@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-07",
+  "package": "B",
+  "rules": "SRD 5.2",
+  "explicit_profiles": 57,
+  "local_srd_spells": 339,
+  "targeted_tests": {"command": "python -m unittest discover -s tests -p test_spell_effects.py", "passed": 40},
+  "full_suite": {"command": "python -m unittest discover -s tests", "passed": 196, "seconds": 48.809},
+  "coverage": {"command": "python tools/spell_coverage.py", "mechanical": 34, "partial": 177, "narrative": 128},
+  "checks": ["all 57 profile casts exercised", "signed CLI persistence and requested roll", "event replay equivalence", "changed source git diff --check"],
+  "notes": ["Tests use synthetic entities and disposable campaigns.", "Deterministic dice faces are limited to tests.", "The existing full suite emits an unclosed HTTP test-socket ResourceWarning.", "Support classifications describe implemented mechanics, not complete SRD certification."]
+}

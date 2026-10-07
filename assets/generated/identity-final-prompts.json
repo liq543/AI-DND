@@ -1,0 +1,21 @@
+[
+  {
+    "name": "portraits-fantasy-colours-v4",
+    "prompt": "Repair this same precise 4 by 4 sixteen-portrait atlas. Preserve all sixteen identities, colours, presentations, armor, layout, style and backdrops exactly. Change ONLY the first nine Dragonborn heads: every blue, red and silver Dragonborn must have an unmistakable long DRACONIC reptilian muzzle, scaled snout, nostrils at the end of the snout and reptile mouth, with no human nose or lips. Retain feminine presentation in cells1,4,7 (zero-based), masculine cells0,3,6 and androgynous cells2,5,8; gender must not make a reptilian face human. Leave final seven Tiefling and Elf portraits unchanged. No text, borders or neighbor leakage.",
+    "referenced_image_paths": [
+      "C:\\Users\\ggore\\Documents\\Coding Projects\\dnd\\assets\\generated\\portraits-fantasy-colours-v3.png"
+    ],
+    "transparent_background": false,
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-712c5074-b09e-4a21-9751-881fff663233.png"
+  },
+  {
+    "name": "corpses-lion-deer-v1",
+    "prompt": "Premium painted realistic fantasy tactical RPG sprite atlas, exact equal2by2 square. Four whole non-graphic fallen animal bodies with eyes closed, side-lying lifeless poses, no wounds. Rowmajor: adult female tawny LIONESS no mane; neutral adult tawny LION with no mane; adult female brown DEER doe no antlers; neutral brown DEER no antlers. Generous transparent padding30% each cell, entire legs head ears tail inside owncell, no overlap neighbors. Muted natural tawny brown fur, anatomicalconvincing, topdown threequarter body, softupperleftlight, smallneutraltightshadow, actual transparentalpha, no background/text/borders/gore/humans.",
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-a16614c8-ab85-4209-87e9-3c569cc82fae.png"
+  },
+  {
+    "name": "portraits-lion-deer-v1",
+    "prompt": "Premium painted realistic fantasy RPG portrait atlas exact2by2 square, precise equalcells. Rowmajor: adult tawny female LIONESS face andneck, no mane; neutral adult tawny LION face andneck with no mane; adult brown female DEER doe face andneck no antlers; neutral brown DEER face andneck no antlers. Entire ears head andsnout comfortably inside owncell, darkforestgreen backdrops, softwarm upperleftlight, matchingpremiumfantasy animalillustrations. No text/borders/humans/gore/mane/antlers, no neighboringfragments.",
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-f211fb2b-ae22-4850-8935-fe5b9e46a9b0.png"
+  }
+]

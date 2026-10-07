@@ -293,6 +293,37 @@ class EngineTest(unittest.TestCase):
         finally:
             self.ok("set", "forced_march=srd")
 
+    def test_multi_day_journey_gives_the_nights_long_rests(self):
+        # 8 hours on the road a day leaves 16 off: a journey over several days rests every night without more time passing
+        self.ok("set", "forced_march=narrated")
+        try:
+            self.ok("damage", "kira", "3", "slashing", "--source", "test: a scrape before the road")
+            before = self.state().state["time"]
+            out = self.ok("travel", "60", "--pace", "normal")     # 20 h of travel: 2 days 4 h
+            g = self.state()
+            self.assertIn("Long Rest each night", out)
+            self.assertEqual(g.state["time"] - before, 2 * 1440 + 4 * 60)
+            kira = g.get("kira")
+            self.assertEqual(kira["hp"], kira["hp_max"])
+            self.assertEqual(kira["last_long_rest_end"], g.state["time"] - 4 * 60)
+            out = self.ok("travel", "12", "--pace", "normal")     # a single day's leg: no night on the road
+            self.assertNotIn("Long Rest", out)
+        finally:
+            self.ok("set", "forced_march=srd")
+            self.ok("time", "17h", "--reason", "test: leave room for the next Long Rest")
+
+    def test_long_rest_ended_at_repair_needs_a_reason_and_moves_no_time(self):
+        self.ok("time", "20h", "--reason", "test: a day passes")
+        before = self.state().state["time"]
+        self.rule("rest", "long", "--ended-at", "Day 1, 06:00")
+        when = before - 60
+        from engine.core import fmt_time
+        out = self.ok("rest", "long", "--who", "kira", "--ended-at", fmt_time(when), "--reason", "test: a night uncredited")
+        self.assertIn("DM override", out)
+        self.assertEqual(self.state().state["time"], before)
+        self.assertEqual(self.state().get("kira")["last_long_rest_end"], when)
+        self.ok("time", "17h", "--reason", "test: leave room for the next Long Rest")
+
     def test_elvenkind_boots_give_stealth_advantage(self):
         # rules/magic-items: Boots of Elvenkind give Advantage on Dexterity (Stealth) checks while worn
         self.ok("item", "add", "wren", "Boots of Elvenkind", "--source", "found: test boots", "--override", "test item")
@@ -703,7 +734,7 @@ class EngineTest(unittest.TestCase):
         m["grid"][2] = "#.CA...#"
         self.assertTrue(maps.blocks_sight(m, 1, 1))           # a bookshelf blocks sight
         self.assertNotIn('url(#felt)', svg)                   # plain tables aren't card tables
-        self.assertIn('#e0b448', svg)                         # the chest's brass lock
+        self.assertTrue('href="#painted-interior-storage-v2-3"' in svg or 'href="#painted-furniture-5"' in svg or '#e0b448' in svg)  # closed chest or fallback lock
         for c in "AKCWQO!&@":
             self.assertIn(c, maps.TERRAIN)
 
@@ -735,6 +766,7 @@ class EngineTest(unittest.TestCase):
         self.ok("npc", "describe", "captain-rhosk", "--text", "A stooped man with grey eyes and thin silver hair.")
         g = self.state()
         before = art.look_of(g.state["entities"]["captain-rhosk"])
+        before_asset=art.portrait_choice(g.state["entities"]["captain-rhosk"])
         self.ok("char", "create", "--name", "Rhosk", "--player", "DM", "--class", "Fighter", "--species", "Human",
                 "--background", "Soldier", "--method", "standard", "--scores", "str=15,con=14,dex=13,wis=12,cha=10,int=8",
                 "--bonus", "str+2,con+1", "--skills", "perception,survival", "--equipment", "A", "--bg-equipment", "A",
@@ -742,8 +774,23 @@ class EngineTest(unittest.TestCase):
                 "--fighting-style", "Defense", "--masteries", "longsword,javelin,greatsword")
         self.ok("asset", "look", "rhosk", "--like", "captain-rhosk")
         after = art.look_of(self.state().state["entities"]["rhosk"])
+        self.assertEqual(before_asset,art.portrait_choice(self.state().state["entities"]["rhosk"]))
         for k in ("skin", "hair_color", "hair_style", "eye_color", "outfit", "cloth", "bg", "seed"):
             self.assertEqual(before[k], after[k], k)
+
+    def test_visual_identity_pins_and_read_only_audit(self):
+        from engine import art
+        self.ok('npc','add','commoner','--name','Identity Artisan','--at','2,2','--map','arena','--side','neutral')
+        self.ok('asset','look','identity-artisan','--species','Elf','--presentation','female')
+        g=self.state();e=g.get('identity-artisan')
+        self.assertEqual(art.visual_identity(e)['species'],'Elf')
+        self.assertEqual(art.visual_identity(e)['presentation'],'feminine')
+        seq=g.state['seq'];before=g.dir.joinpath('engine/events.jsonl').read_bytes()
+        output=self.ok('asset','identity','identity-artisan')
+        self.assertIn('Elf / feminine',output)
+        g=self.state();self.assertEqual(g.state['seq'],seq)
+        self.assertEqual(g.dir.joinpath('engine/events.jsonl').read_bytes(),before)
+        self.rule('asset','look','identity-artisan','--presentation','ambiguous-value',contains='Presentation:')
 
     def test_new_party_members_join_at_the_partys_xp(self):
         from engine import mechanics as M
@@ -869,6 +916,8 @@ class EngineTest(unittest.TestCase):
 
     # ------------------------------------------------------------------ rests & time
     def test_long_rest_spacing(self):
+        # This class shares a campaign: another test may have just completed a rest.
+        self.ok("time", "16h")
         self.ok("rest", "long")
         self.rule("rest", "long", contains="16 hours")
         self.ok("time", "16h")

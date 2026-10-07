@@ -7,13 +7,17 @@ write_snapshots(): human-readable state.md + party/<id>.md regenerated after eve
 from pathlib import Path
 import re as _re
 
-from . import art, itemart, render, srd
-from .core import derive, fmt_time, item_display_name, item_known, journal_cat, level, pb, resources
+from . import art, itemart, render, srd, effects
+from .core import derive, fmt_time, item_display_name, item_known, journal_cat, level, pb, resources, condition_names
 from .mechanics import coins_total_cp, combat, current_id, economy, fmt_cp, xp_threshold
 
 
 def status_band(e):
-    if e.get("dead") or e.get("hp", 1) <= 0:
+    if e.get('dead'):
+        return 'Dead'
+    if any(c['name']=='unconscious' for c in e.get('conditions',[])):
+        return 'Unconscious'
+    if e.get("hp", 1) <= 0:
         return "Down"
     frac = e["hp"] / max(1, e.get("hp_max", 1))
     return "Unhurt" if frac >= 1 else "Hurt" if frac > .5 else "Bloodied" if frac > .25 else "Near death"
@@ -135,7 +139,9 @@ def pc_view(g, e):
         "speed": d["speed"], "init": d["init"], "pb": d["pb"], "abilities": d["abilities"], "mods": d["mods"],
         "saves": d["saves"], "skills": d["skills"], "passive_perception": d["passive_perception"],
         "save_profs": e.get("save_profs", []), "skill_profs": e.get("skills", []), "expertise": e.get("expertise", []),
-        "conditions": [c["name"] for c in e.get("conditions", [])], "exhaustion": e.get("exhaustion", 0),
+        "conditions": sorted(condition_names(e)), "exhaustion": e.get("exhaustion", 0),
+        "effects": [{k: f.get(k) for k in ("name", "spell", "since", "expires_at", "turn_boundary", "turn_owner")}
+                    for f in effects.active(e) if f.get("managed_spell")],
         "death": e.get("death"), "dead": e.get("dead", False), "concentration": (e.get("concentration") or {}).get("spell_name"),
         "slots": slots, "pact": ({**d["pact"], "left": d["pact"]["count"] - e.get("pact_used", 0)} if d["pact"] else None),
         "spellcasting": d["spellcasting"], "resources": d["resources"],
@@ -155,7 +161,7 @@ def npc_view(g, e):
     ally = e.get("side") == "ally"
     v = {"id": e["id"], "kind": e["kind"], "name": e["name"], "side": e.get("side", "enemy"), "type": e.get("type"),
          "size": e.get("size"), "status": status_band(e), "conditions": [c["name"] for c in e.get("conditions", [])],
-         "token": e.get("token"), "dead": e.get("dead") or e.get("hp", 1) <= 0, "portrait": e.get("portrait"),
+         "token": e.get("token"), "dead": bool(e.get("dead")), "portrait": e.get("portrait"),
          "art": art.art_version(e)}
     if ally:
         v.update({"hp": e["hp"], "hp_max": e["hp_max"], "ac": derive(e)["ac"]})
@@ -169,7 +175,7 @@ def creature_info(g, e):
     ally = e.get("side") == "ally"
     name = e["name"]
     info = {"id": e["id"], "name": name, "side": e.get("side", "enemy"), "size": e.get("size"), "type": e.get("type"), "art": art.art_version(e),
-            "status": status_band(e), "dead": e.get("dead") or e.get("hp", 1) <= 0,
+            "status": status_band(e), "dead": bool(e.get("dead")),
             "conditions": [{"name": c["name"], "source": c.get("source"), "until": c.get("until")} for c in e.get("conditions", [])],
             "lore": e.get("lore", []), "full": ally,
             "appearance": e.get("appearance") or (e.get("bio") or {}).get("appearance") or "", "alignment": e.get("alignment") or ""}
@@ -291,7 +297,7 @@ def seen_by_players(g, e):
     A creature that has left the table keeps its face in the log and the journal; one never seen stays a secret."""
     if not e:
         return False
-    if not e.get("hidden") or e.get("known"):
+    if _seen(g,e) or e.get("known"):
         return True
     # only lines the players witnessed: what it said, what was narrated about it, or its appearing on the table
     # (not moves or actions logged while it was hidden)
@@ -310,7 +316,7 @@ def _seen(g, e):
     if not m or not m.get("fog"):
         return True
     rv = m.get("revealed") or []
-    return 0 <= t["y"] < len(rv) and rv[t["y"]][t["x"]] == "1"
+    return 0 <= t["y"] < len(rv) and 0 <= t['x'] < len(rv[t['y']]) and rv[t["y"]][t["x"]] == "1"
 
 
 def _cell_seen(m, x, y):
@@ -386,6 +392,10 @@ def animation_cues(g, feed):
             pts = [f.get(p) for p in ("at", "from", "to") if isinstance(f.get(p), dict)]
             if any(not _seen(g, ent.get(p.get("id"))) for p in pts):
                 continue
+            coords=[f.get(p) for p in ('at','from','to') if isinstance(f.get(p),(list,tuple))]
+            m=s['maps'].get(f.get('map') or s['view'].get('map'))
+            if coords and (not m or any(len(p)!=2 or not _cell_seen(m,*p) for p in coords)):
+                continue
             c.update({x: f[x] for x in ("fx", "at", "from", "to", "color", "radius", "label", "map", "fit") if x in f})
         else:
             continue
@@ -396,12 +406,12 @@ def animation_cues(g, feed):
 def player_view(g):
     s = g.state
     c = combat(g)
-    visible = [e for e in s["entities"].values() if not e.get("hidden")]
+    visible = [e for e in s["entities"].values() if _seen(g,e)]
     order = []
     if c:
         for i, o in enumerate(c.get("order", [])):
             e = s["entities"].get(o["id"])
-            if not e or e.get("hidden"):
+            if not _seen(g,e):
                 continue
             order.append({"id": o["id"], "name": e["name"], "init": o["init"], "side": "pc" if e["kind"] == "pc" else e.get("side", "enemy"),
                           "current": i == c["turn"], "status": status_band(e) if e["kind"] != "pc" else f"{e['hp']}/{e['hp_max']}"})
@@ -441,7 +451,7 @@ def player_view(g):
         "offstage": [{"id": e["id"], "name": e["name"], "side": e.get("side", "neutral"), "art": art.art_version(e)}
                      for e in s["entities"].values() if (e["kind"] != "pc" or e.get("departed")) and e.get("hidden") and seen_by_players(g, e)]
                   + [npc_view(g, e) for e in visible if e["kind"] != "pc" and e.get("side") == "ally" and e.get("token", {}).get("map") != s["view"].get("map")],
-        "combat": {"round": c["round"], "order": order, "current": cur if cur and not s["entities"].get(cur, {}).get("hidden") else None,
+        "combat": {"round": c["round"], "order": order, "current": cur if cur and _seen(g,s['entities'].get(cur)) else None,
                    "economy": econ} if c else None,
         "requests": [{"id": r["id"], "who": r["who"], "name": s["entities"].get(r["who"], {}).get("name"), "label": r["label"]}
                      for r in s["requests"].values()],
@@ -465,10 +475,10 @@ def map_svg(g, map_id, mode="player", live=False):
     for e in g.state["entities"].values():
         if e.get("token", {}).get("map") != map_id:
             continue
-        if mode == "player" and e.get("hidden"):
+        if mode == "player" and not _seen(g,e):
             continue
         ee = dict(e)
-        if e.get("portrait") and e["portrait"] in g.state["assets"]:
+        if e.get("portrait") and e["portrait"] in g.state["assets"] and (mode!='player' or g.state['assets'][e['portrait']].get('public')):
             ee["portrait_href"] = f"/asset/{e['portrait']}"
         elif live and style == "art":
             ee["portrait_href"] = f"/api/art/face/{e['id']}.svg?v={art.art_version(e)}"
@@ -500,6 +510,10 @@ def sheet_md(g, e):
         lines.append(f"| {a['name']} | {a['bonus']:+d} | {a['damage']} {a['type']} | {'range ' + '/'.join(map(str, a['range'])) + ' ft' if a.get('range') else 'reach ' + str(a['reach']) + ' ft'}"
                      f"{', mastery ' + a['mastery'] if a.get('mastery') else ''} |")
     lines += ["", f"Attacks per Attack action: {d['attacks_per_action']}", ""]
+    if any(f.get("managed_spell") for f in effects.active(e)):
+        lines += ["**Active spell effects:** " + ", ".join(
+            f["name"] + (f" (expires at minute {f['expires_at']:g})" if f.get("expires_at") is not None else "")
+            for f in effects.active(e) if f.get("managed_spell")), ""]
     if d["spellcasting"]:
         lines += ["## Spellcasting", ""]
         for cls, sc in d["spellcasting"].items():
@@ -627,15 +641,39 @@ def snapshot_map(g, mid, why="left"):
     return d / f"{tag}.md"
 
 
+def write_view_file(path, text, tries=5):
+    """Write a regenerated view atomically (temp file, then replace). On Windows a reader such as the live table can
+    hold the file for a moment; retry briefly, and if it stays locked skip it: views are rebuilt after every command,
+    so a missed one must never fail the command that already went through."""
+    import os
+    import sys
+    import time
+    path = Path(path)
+    tmp = path.with_name(path.name + ".tmp")
+    for attempt in range(tries):
+        try:
+            tmp.write_text(text, encoding="utf-8")
+            os.replace(tmp, path)
+            return True
+        except OSError:
+            time.sleep(0.05 * (attempt + 1))
+    try:
+        tmp.unlink()
+    except OSError:
+        pass
+    print(f"(note: {path.name} was busy and wasn't refreshed this time; the next command rebuilds it)", file=sys.stderr)
+    return False
+
+
 def write_snapshots(g):
     d = Path(g.dir)
     (d / "party").mkdir(exist_ok=True)
-    (d / "state.md").write_text(state_md(g), encoding="utf-8")
+    write_view_file(d / "state.md", state_md(g))
     for e in g.state["entities"].values():
         if e["kind"] == "pc":
-            (d / "party" / f"{e['id']}.md").write_text(sheet_md(g, e), encoding="utf-8")
+            write_view_file(d / "party" / f"{e['id']}.md", sheet_md(g, e))
     views = d / "views"
     views.mkdir(exist_ok=True)
     mid = g.state["view"].get("map")
     if mid and mid in g.state["maps"]:
-        (views / "current-map.svg").write_text(map_svg(g, mid, "player"), encoding="utf-8")
+        write_view_file(views / "current-map.svg", map_svg(g, mid, "player"))

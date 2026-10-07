@@ -1,0 +1,649 @@
+{
+  "findings": [
+    {
+      "id": "F01",
+      "status": "reproduced",
+      "evidence": "Bless consumes a slot and starts concentration, but the target has no effect and its save has no bonus die."
+    },
+    {
+      "id": "F02",
+      "status": "reproduced",
+      "evidence": "Identify accepts a Dagger as its explicitly supplied costly component."
+    },
+    {
+      "id": "F03",
+      "status": "reproduced",
+      "evidence": "Identify ritual advances time by 10 minutes; its normal one-minute casting time is omitted."
+    },
+    {
+      "id": "F04",
+      "status": "reproduced",
+      "evidence": "Mage Armor remains attached and applied after nine hours pass."
+    },
+    {
+      "id": "F05",
+      "status": "reproduced",
+      "evidence": "Cure Wounds is accepted and consumes its slot but refuses healing solely because the target is Undead."
+    },
+    {
+      "id": "F06",
+      "status": "reproduced",
+      "evidence": "Player JSON includes the exact token coordinates of an enemy for which the engine visibility predicate returns false."
+    },
+    {
+      "id": "F07",
+      "status": "reproduced",
+      "evidence": "A PC spell attack rolls immediately in viewer mode without creating a Roll request."
+    },
+    {
+      "id": "F08",
+      "status": "reproduced",
+      "evidence": "Quickload leaves player notes and pins from after the save point."
+    },
+    {
+      "id": "F09",
+      "status": "reproduced",
+      "evidence": "A previously valid quicksave becomes unloadable after the supported rekey command."
+    },
+    {
+      "id": "F10",
+      "status": "reproduced",
+      "evidence": "A stale Game commits after quickload and divergent replay because the guard compares event count, not chain head."
+    },
+    {
+      "id": "F11",
+      "status": "reproduced",
+      "evidence": "An interrupted two-event commit leaves its first event on disk; ordinary verified replay accepts that partial command."
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "campaign",
+        "new",
+        "Review Fixture"
+      ],
+      "exit_code": 0,
+      "output": "Created and activated campaigns/review-fixture/ (signed engine log initialised).\n"
+    },
+    {
+      "argv": [
+        "char",
+        "create",
+        "--name",
+        "Lia Song",
+        "--class",
+        "Bard",
+        "--species",
+        "Human",
+        "--background",
+        "Acolyte",
+        "--method",
+        "standard",
+        "--scores",
+        "str=8,dex=14,con=13,int=10,wis=12,cha=15",
+        "--bonus",
+        "cha+2,wis+1",
+        "--skills",
+        "deception,persuasion,performance",
+        "--species-skill",
+        "stealth",
+        "--species-feat",
+        "Alert",
+        "--mi-cantrips",
+        "guidance,thaumaturgy",
+        "--mi-spell",
+        "bless",
+        "--languages",
+        "Elvish,Dwarvish",
+        "--instrument",
+        "viol"
+      ],
+      "exit_code": 0,
+      "output": "🧙 Lia Song joins the party: Human Bard (Acolyte), 9 HP.\n🎒 Lia Song gains 1× Leather Armor — starting equipment.\n🎒 Lia Song gains 2× Dagger — starting equipment.\n🎒 Lia Song gains 1× Viol — starting equipment.\n🎒 Lia Song gains 1× Entertainer's Pack — starting equipment.\n🎒 Lia Song gains 1× Calligrapher's Supplies — starting equipment.\n🎒 Lia Song gains 1× Book — starting equipment.\n🎒 Lia Song gains 1× Holy Symbol — starting equipment.\n🎒 Lia Song gains 1× Parchment — starting equipment.\n🎒 Lia Song gains 1× Robe — starting equipment.\nLia Song equips Leather Armor.\n   Lia Song starts with 27 GP.\n   Magic Initiate (Cleric): Guidance, Thaumaturgy, Bless (1 free casting per Long Rest).\n"
+    },
+    {
+      "argv": [
+        "spells",
+        "set",
+        "lia",
+        "--cantrips",
+        "light,mage hand",
+        "--prepared",
+        "cure wounds,healing word,identify,detect magic"
+      ],
+      "exit_code": 0,
+      "output": "📖 Lia Song prepares: Light, Mage Hand, Cure Wounds, Healing Word, Identify, Detect Magic.\n"
+    },
+    {
+      "argv": [
+        "cast",
+        "lia",
+        "bless",
+        "--targets",
+        "lia",
+        "--component",
+        "holy-symbol-1"
+      ],
+      "exit_code": 0,
+      "output": "✨ Lia Song casts Bless (from granted) targeting Lia Song.\n  Bless: effect is narrative — read rules/spells/bless.md and adjudicate. Duration: Concentration, up to 1 minute.\n"
+    },
+    {
+      "argv": [
+        "save",
+        "lia",
+        "wis",
+        "--dc",
+        "10",
+        "--source",
+        "review fixture"
+      ],
+      "exit_code": 0,
+      "output": "Lia Song — WIS save DC 10: 1d20(10) +1 = 11 → SUCCESS\n"
+    },
+    {
+      "argv": [
+        "campaign",
+        "new",
+        "Review Fixture"
+      ],
+      "exit_code": 0,
+      "output": "Created and activated campaigns/review-fixture/ (signed engine log initialised).\n"
+    },
+    {
+      "argv": [
+        "char",
+        "create",
+        "--name",
+        "Mira Vale",
+        "--class",
+        "Wizard",
+        "--species",
+        "Elf",
+        "--background",
+        "Sage",
+        "--method",
+        "pointbuy",
+        "--scores",
+        "str=8,dex=14,con=14,int=15,wis=12,cha=8",
+        "--bonus",
+        "int+2,con+1",
+        "--skills",
+        "investigation,medicine",
+        "--languages",
+        "Elvish,Draconic",
+        "--species-skill",
+        "perception",
+        "--mi-cantrips",
+        "light,mage hand",
+        "--mi-spell",
+        "shield"
+      ],
+      "exit_code": 0,
+      "output": "🧙 Mira Vale joins the party: Elf Wizard (Sage), 8 HP.\n🎒 Mira Vale gains 2× Dagger — starting equipment.\n🎒 Mira Vale gains 1× Quarterstaff — starting equipment (Arcane Focus).\n🎒 Mira Vale gains 1× Robe — starting equipment.\n🎒 Mira Vale gains 1× Spellbook — starting equipment.\n🎒 Mira Vale gains 1× Scholar's Pack — starting equipment.\n🎒 Mira Vale gains 1× Quarterstaff — starting equipment.\n🎒 Mira Vale gains 1× Calligrapher's Supplies — starting equipment.\n🎒 Mira Vale gains 1× Book — starting equipment.\n🎒 Mira Vale gains 1× Parchment — starting equipment.\n🎒 Mira Vale gains 1× Robe — starting equipment.\n   Mira Vale starts with 13 GP.\n   Magic Initiate (Wizard): Light, Mage Hand, Shield (1 free casting per Long Rest).\n"
+    },
+    {
+      "argv": [
+        "spells",
+        "set",
+        "mira",
+        "--cantrips",
+        "fire bolt,ray of frost,minor illusion",
+        "--prepared",
+        "magic missile,identify,mage armor,detect magic",
+        "--spellbook",
+        "magic missile,identify,mage armor,detect magic,shield,sleep"
+      ],
+      "exit_code": 0,
+      "output": "📖 Mira Vale prepares: Fire Bolt, Ray of Frost, Minor Illusion, Magic Missile, Identify, Mage Armor, Detect Magic.\n"
+    },
+    {
+      "argv": [
+        "item",
+        "add",
+        "mira",
+        "Dagger",
+        "--purchase"
+      ],
+      "exit_code": 0,
+      "output": "🎒 Mira Vale gains 1× Dagger — purchased for 2 GP.\n"
+    },
+    {
+      "argv": [
+        "cast",
+        "mira",
+        "identify",
+        "--ritual",
+        "--component",
+        "dagger-1"
+      ],
+      "exit_code": 0,
+      "output": "✨ Mira Vale casts Identify as a ritual.\n  Identify: effect is narrative — read rules/spells/identify.md and adjudicate. Duration: Instantaneous.\n"
+    },
+    {
+      "argv": [
+        "campaign",
+        "new",
+        "Review Fixture"
+      ],
+      "exit_code": 0,
+      "output": "Created and activated campaigns/review-fixture/ (signed engine log initialised).\n"
+    },
+    {
+      "argv": [
+        "char",
+        "create",
+        "--name",
+        "Mira Vale",
+        "--class",
+        "Wizard",
+        "--species",
+        "Elf",
+        "--background",
+        "Sage",
+        "--method",
+        "pointbuy",
+        "--scores",
+        "str=8,dex=14,con=14,int=15,wis=12,cha=8",
+        "--bonus",
+        "int+2,con+1",
+        "--skills",
+        "investigation,medicine",
+        "--languages",
+        "Elvish,Draconic",
+        "--species-skill",
+        "perception",
+        "--mi-cantrips",
+        "light,mage hand",
+        "--mi-spell",
+        "shield"
+      ],
+      "exit_code": 0,
+      "output": "🧙 Mira Vale joins the party: Elf Wizard (Sage), 8 HP.\n🎒 Mira Vale gains 2× Dagger — starting equipment.\n🎒 Mira Vale gains 1× Quarterstaff — starting equipment (Arcane Focus).\n🎒 Mira Vale gains 1× Robe — starting equipment.\n🎒 Mira Vale gains 1× Spellbook — starting equipment.\n🎒 Mira Vale gains 1× Scholar's Pack — starting equipment.\n🎒 Mira Vale gains 1× Quarterstaff — starting equipment.\n🎒 Mira Vale gains 1× Calligrapher's Supplies — starting equipment.\n🎒 Mira Vale gains 1× Book — starting equipment.\n🎒 Mira Vale gains 1× Parchment — starting equipment.\n🎒 Mira Vale gains 1× Robe — starting equipment.\n   Mira Vale starts with 13 GP.\n   Magic Initiate (Wizard): Light, Mage Hand, Shield (1 free casting per Long Rest).\n"
+    },
+    {
+      "argv": [
+        "spells",
+        "set",
+        "mira",
+        "--cantrips",
+        "fire bolt,ray of frost,minor illusion",
+        "--prepared",
+        "magic missile,identify,mage armor,detect magic",
+        "--spellbook",
+        "magic missile,identify,mage armor,detect magic,shield,sleep"
+      ],
+      "exit_code": 0,
+      "output": "📖 Mira Vale prepares: Fire Bolt, Ray of Frost, Minor Illusion, Magic Missile, Identify, Mage Armor, Detect Magic.\n"
+    },
+    {
+      "argv": [
+        "cast",
+        "mira",
+        "mage armor",
+        "--targets",
+        "mira"
+      ],
+      "exit_code": 0,
+      "output": "✨ Mira Vale casts Mage Armor targeting Mira Vale.\n  Mage Armor: effect is narrative — read rules/spells/mage-armor.md and adjudicate. Duration: 8 hours.\n"
+    },
+    {
+      "argv": [
+        "time",
+        "9h",
+        "--reason",
+        "review fixture"
+      ],
+      "exit_code": 0,
+      "output": "⏳ 9h passes — review fixture. Now Day 1, 09:00.\n"
+    },
+    {
+      "argv": [
+        "campaign",
+        "new",
+        "Review Fixture"
+      ],
+      "exit_code": 0,
+      "output": "Created and activated campaigns/review-fixture/ (signed engine log initialised).\n"
+    },
+    {
+      "argv": [
+        "char",
+        "create",
+        "--name",
+        "Lia Song",
+        "--class",
+        "Bard",
+        "--species",
+        "Human",
+        "--background",
+        "Acolyte",
+        "--method",
+        "standard",
+        "--scores",
+        "str=8,dex=14,con=13,int=10,wis=12,cha=15",
+        "--bonus",
+        "cha+2,wis+1",
+        "--skills",
+        "deception,persuasion,performance",
+        "--species-skill",
+        "stealth",
+        "--species-feat",
+        "Alert",
+        "--mi-cantrips",
+        "guidance,thaumaturgy",
+        "--mi-spell",
+        "bless",
+        "--languages",
+        "Elvish,Dwarvish",
+        "--instrument",
+        "viol"
+      ],
+      "exit_code": 0,
+      "output": "🧙 Lia Song joins the party: Human Bard (Acolyte), 9 HP.\n🎒 Lia Song gains 1× Leather Armor — starting equipment.\n🎒 Lia Song gains 2× Dagger — starting equipment.\n🎒 Lia Song gains 1× Viol — starting equipment.\n🎒 Lia Song gains 1× Entertainer's Pack — starting equipment.\n🎒 Lia Song gains 1× Calligrapher's Supplies — starting equipment.\n🎒 Lia Song gains 1× Book — starting equipment.\n🎒 Lia Song gains 1× Holy Symbol — starting equipment.\n🎒 Lia Song gains 1× Parchment — starting equipment.\n🎒 Lia Song gains 1× Robe — starting equipment.\nLia Song equips Leather Armor.\n   Lia Song starts with 27 GP.\n   Magic Initiate (Cleric): Guidance, Thaumaturgy, Bless (1 free casting per Long Rest).\n"
+    },
+    {
+      "argv": [
+        "spells",
+        "set",
+        "lia",
+        "--cantrips",
+        "light,mage hand",
+        "--prepared",
+        "cure wounds,healing word,identify,detect magic"
+      ],
+      "exit_code": 0,
+      "output": "📖 Lia Song prepares: Light, Mage Hand, Cure Wounds, Healing Word, Identify, Detect Magic.\n"
+    },
+    {
+      "argv": [
+        "npc",
+        "add",
+        "skeleton",
+        "--name",
+        "Fixture Skeleton",
+        "--side",
+        "ally"
+      ],
+      "exit_code": 0,
+      "output": "👁 Fixture Skeleton appears (ally).\n  added fixture-skeleton: Skeleton AC 14 HP 13 CR 1/4\n"
+    },
+    {
+      "argv": [
+        "damage",
+        "fixture",
+        "1",
+        "force",
+        "--source",
+        "review fixture"
+      ],
+      "exit_code": 0,
+      "output": "💥 Fixture Skeleton takes 1 damage from review fixture — still standing.\n"
+    },
+    {
+      "argv": [
+        "cast",
+        "lia",
+        "cure wounds",
+        "--targets",
+        "fixture"
+      ],
+      "exit_code": 0,
+      "output": "✨ Lia Song casts Cure Wounds targeting Fixture Skeleton.\nCure Wounds has no effect on Fixture Skeleton (Undead).\n"
+    },
+    {
+      "argv": [
+        "campaign",
+        "new",
+        "Review Fixture"
+      ],
+      "exit_code": 0,
+      "output": "Created and activated campaigns/review-fixture/ (signed engine log initialised).\n"
+    },
+    {
+      "argv": [
+        "map",
+        "gen",
+        "arena",
+        "--preset",
+        "crypt",
+        "--seed",
+        "3",
+        "--id",
+        "arena",
+        "--show"
+      ],
+      "exit_code": 0,
+      "output": "Generated arena map 'Crypt Chamber' id=arena (26×20, seed 3).\n🗺 Map: Crypt Chamber\n"
+    },
+    {
+      "argv": [
+        "map",
+        "set",
+        "arena",
+        "--kv",
+        "fog=true"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "argv": [
+        "map",
+        "hide",
+        "arena",
+        "--all"
+      ],
+      "exit_code": 0,
+      "output": "hide: 520 cells\n"
+    },
+    {
+      "argv": [
+        "npc",
+        "add",
+        "goblin-warrior",
+        "--name",
+        "Fixture Goblin",
+        "--at",
+        "2,2",
+        "--map",
+        "arena"
+      ],
+      "exit_code": 0,
+      "output": "👁 Fixture Goblin appears.\n  added fixture-goblin: Goblin Warrior AC 15 HP 10 CR 1/4\n"
+    },
+    {
+      "argv": [
+        "campaign",
+        "new",
+        "Review Fixture"
+      ],
+      "exit_code": 0,
+      "output": "Created and activated campaigns/review-fixture/ (signed engine log initialised).\n"
+    },
+    {
+      "argv": [
+        "char",
+        "create",
+        "--name",
+        "Mira Vale",
+        "--class",
+        "Wizard",
+        "--species",
+        "Elf",
+        "--background",
+        "Sage",
+        "--method",
+        "pointbuy",
+        "--scores",
+        "str=8,dex=14,con=14,int=15,wis=12,cha=8",
+        "--bonus",
+        "int+2,con+1",
+        "--skills",
+        "investigation,medicine",
+        "--languages",
+        "Elvish,Draconic",
+        "--species-skill",
+        "perception",
+        "--mi-cantrips",
+        "light,mage hand",
+        "--mi-spell",
+        "shield"
+      ],
+      "exit_code": 0,
+      "output": "🧙 Mira Vale joins the party: Elf Wizard (Sage), 8 HP.\n🎒 Mira Vale gains 2× Dagger — starting equipment.\n🎒 Mira Vale gains 1× Quarterstaff — starting equipment (Arcane Focus).\n🎒 Mira Vale gains 1× Robe — starting equipment.\n🎒 Mira Vale gains 1× Spellbook — starting equipment.\n🎒 Mira Vale gains 1× Scholar's Pack — starting equipment.\n🎒 Mira Vale gains 1× Quarterstaff — starting equipment.\n🎒 Mira Vale gains 1× Calligrapher's Supplies — starting equipment.\n🎒 Mira Vale gains 1× Book — starting equipment.\n🎒 Mira Vale gains 1× Parchment — starting equipment.\n🎒 Mira Vale gains 1× Robe — starting equipment.\n   Mira Vale starts with 13 GP.\n   Magic Initiate (Wizard): Light, Mage Hand, Shield (1 free casting per Long Rest).\n"
+    },
+    {
+      "argv": [
+        "spells",
+        "set",
+        "mira",
+        "--cantrips",
+        "fire bolt,ray of frost,minor illusion",
+        "--prepared",
+        "magic missile,identify,mage armor,detect magic",
+        "--spellbook",
+        "magic missile,identify,mage armor,detect magic,shield,sleep"
+      ],
+      "exit_code": 0,
+      "output": "📖 Mira Vale prepares: Fire Bolt, Ray of Frost, Minor Illusion, Magic Missile, Identify, Mage Armor, Detect Magic.\n"
+    },
+    {
+      "argv": [
+        "npc",
+        "add",
+        "goblin-warrior",
+        "--name",
+        "Fixture Goblin"
+      ],
+      "exit_code": 0,
+      "output": "👁 Fixture Goblin appears.\n  added fixture-goblin: Goblin Warrior AC 15 HP 10 CR 1/4\n"
+    },
+    {
+      "argv": [
+        "combat",
+        "start",
+        "mira,fixture"
+      ],
+      "exit_code": 0,
+      "output": "   Initiative — Mira Vale: 1d20(2) +2 = 4\n   Initiative — Fixture Goblin: 1d20(20) +2 = 22\n⚔ Roll for initiative! Combat begins.\nInitiative order: Fixture Goblin (22) → Mira Vale (4)\n▶ Fixture Goblin's turn (round 1).\n"
+    },
+    {
+      "argv": [
+        "combat",
+        "next"
+      ],
+      "exit_code": 0,
+      "output": "▶ Mira Vale's turn (round 1).\n"
+    },
+    {
+      "argv": [
+        "set",
+        "player_rolls=viewer"
+      ],
+      "exit_code": 0,
+      "output": "⚙ Setting: player_rolls = viewer\n"
+    },
+    {
+      "argv": [
+        "cast",
+        "mira",
+        "ray of frost",
+        "--targets",
+        "fixture"
+      ],
+      "exit_code": 0,
+      "output": "✨ Mira Vale casts Ray of Frost targeting Fixture Goblin.\n✨ Ray of Frost → Fixture Goblin: 1d20(1) +5 = 6 vs AC 15 → MISS\n"
+    },
+    {
+      "argv": [
+        "campaign",
+        "new",
+        "Review Fixture"
+      ],
+      "exit_code": 0,
+      "output": "Created and activated campaigns/review-fixture/ (signed engine log initialised).\n"
+    },
+    {
+      "argv": [
+        "quicksave",
+        "review-save"
+      ],
+      "exit_code": 0,
+      "output": "💾 Quicksaved 'review-save' at event 2.\n"
+    },
+    {
+      "argv": [
+        "quickload",
+        "review-save"
+      ],
+      "exit_code": 0,
+      "output": "⏪ Quickloaded 'review-save': the game is exactly as it was at event 2 (Day 1, 00:00).\n"
+    },
+    {
+      "argv": [
+        "rekey"
+      ],
+      "exit_code": 0,
+      "output": "✔ Re-signed 2 events (and backups) with a new key at campaigns\\review-fixture\\engine\\signing.key.\n"
+    },
+    {
+      "argv": [
+        "quickload",
+        "review-save"
+      ],
+      "exit_code": 2,
+      "output": "✖ RULE: Quicksave 'review-save' doesn't verify under this campaign's key; it can't be loaded.\n"
+    },
+    {
+      "argv": [
+        "campaign",
+        "new",
+        "Review Fixture"
+      ],
+      "exit_code": 0,
+      "output": "Created and activated campaigns/review-fixture/ (signed engine log initialised).\n"
+    },
+    {
+      "argv": [
+        "quicksave",
+        "origin"
+      ],
+      "exit_code": 0,
+      "output": "💾 Quicksaved 'origin' at event 2.\n"
+    },
+    {
+      "argv": [
+        "say",
+        "Fixture branch A"
+      ],
+      "exit_code": 0,
+      "output": "Fixture branch A\n"
+    },
+    {
+      "argv": [
+        "quickload",
+        "origin"
+      ],
+      "exit_code": 0,
+      "output": "⏪ Quickloaded 'origin': the game is exactly as it was at event 2 (Day 1, 00:00).\n"
+    },
+    {
+      "argv": [
+        "say",
+        "Fixture branch B"
+      ],
+      "exit_code": 0,
+      "output": "Fixture branch B\n"
+    },
+    {
+      "argv": [
+        "campaign",
+        "new",
+        "Review Fixture"
+      ],
+      "exit_code": 0,
+      "output": "Created and activated campaigns/review-fixture/ (signed engine log initialised).\n"
+    }
+  ]
+}

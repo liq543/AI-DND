@@ -3,7 +3,10 @@
     "allow": [
       "Bash(python -m engine:*)",
       "PowerShell(python -m engine:*)",
+      "PowerShell(py -m engine:*)",
+      "Bash(py -m engine:*)",
       "Bash(python -m unittest:*)",
+      "Bash(py -m unittest:*)",
       "Read(./rules/**)",
       "Read(./dm/**)",
       "Read(./campaigns/**)",

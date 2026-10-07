@@ -212,7 +212,7 @@
       fogClone.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 450, easing: "ease-out" }).finished.then(() => fogClone.remove());
     }
     wireMap();
-    if (firstTime || !zoom[viewMap].user) { fit(); requestAnimationFrame(() => { if (!zoom[viewMap].user) fit(); }); } else applyZoom();
+    if (firstTime || !zoom[viewMap].user) { fit(); requestAnimationFrame(() => { if (!zoom[viewMap].user) fit(); }); } else applyZoomNow();
     if (S.combat && S.combat.current && followActive && cameraFollow && FX.settings().camera !== "off") camera([tokenCenter(S.combat.current)], false, 400);
   }
   function wireMap() {
@@ -253,22 +253,69 @@
       document.querySelectorAll("#modal [data-flitem]").forEach(li => li.onclick = () => openItem(`floor~${viewMap}`, li.dataset.flitem));
     });
   }
-  function svgSize() { const s = $("#map svg"); return s ? [s.width.baseVal.value, s.height.baseVal.value] : [1, 1]; }
+  // the map's own size in map units (its viewBox), whatever size it is currently drawn at
+  function svgSize() {
+    const s = $("#map > svg"); if (!s) return [1, 1];
+    const vb = s.viewBox && s.viewBox.baseVal;
+    if (vb && vb.width) return [vb.width, vb.height];
+    return [s.width.baseVal.value, s.height.baseVal.value];
+  }
   function fit(animate) {
     // frame the explored part of a fogged map, or the whole map otherwise
     const vp = $("#viewport").getBoundingClientRect(), [W, H] = svgSize();
-    const f = ($("#map svg")?.dataset.focus || `0,0,${W},${H}`).split(",").map(Number);
+    const f = ($("#map > svg")?.dataset.focus || `0,0,${W},${H}`).split(",").map(Number);
     const [fx, fy, fw, fh] = f;
     const s = Math.min(3, Math.min(vp.width / fw, vp.height / fh) * 0.92);
     zoom[viewMap] = { s, x: (vp.width - fw * s) / 2 - fx * s, y: (vp.height - fh * s) / 2 - fy * s };
     if (animate) return glide(420);
-    applyZoom();
+    applyZoomNow();
   }
-  function applyZoom() { const z = zoom[viewMap]; if (z) $("#mapwrap").style.transform = `translate(${z.x}px,${z.y}px) scale(${z.s})`; }
+  // Zoom by drawing the SVG at its real on-screen size, so it is always sharp at rest. Redrawing a
+  // painted map is slow, so while the wheel turns (or a glide runs) the last sharp drawing is
+  // stretched for a moment, and redrawn crisp as soon as the motion stops. A pan only moves the layer.
+  let shown = null, drawn = null, glideRun = 0, settleTimer = 0;
+  function drawZoom(z, quick) {
+    const svg = $("#map > svg"); if (!svg) return;
+    if (!drawn || drawn.svg !== svg || (!quick && drawn.s !== z.s)) {
+      const [W, H] = svgSize();
+      svg.setAttribute("width", W * z.s); svg.setAttribute("height", H * z.s);
+      // Names stay modest at close range while the portraits can grow for inspection.
+      $("#map").querySelectorAll('.nametag').forEach(t => t.style.scale = Math.min(1, 1.5/z.s));
+      drawn = { svg, s: z.s };
+    }
+    const k = z.s / drawn.s;
+    $("#mapwrap").style.transform = `translate3d(${Math.round(z.x)}px,${Math.round(z.y)}px,0)` + (k !== 1 ? ` scale(${k})` : "");
+    shown = { map: viewMap, s: z.s, x: z.x, y: z.y };
+    clearTimeout(settleTimer);
+    if (k !== 1) settleTimer = setTimeout(() => { const zz = zoom[viewMap]; if (zz && !gliding) drawZoom(zz, false); }, 140);
+  }
+  // pointer and wheel events can fire many times a frame: draw at most once per frame
+  let zoomFrame = 0, gliding = false;
+  function applyZoom() {
+    glideRun++; gliding = false;
+    if (zoomFrame) return;
+    zoomFrame = requestAnimationFrame(() => { zoomFrame = 0; const z = zoom[viewMap]; if (z) drawZoom(z, true); });
+  }
+  function applyZoomNow() {
+    const z = zoom[viewMap]; if (!z) return;
+    glideRun++; gliding = false; if (zoomFrame) { cancelAnimationFrame(zoomFrame); zoomFrame = 0; } drawZoom(z, false);
+  }
   function glide(dur) {
-    const w = $("#mapwrap");
-    w.style.transition = `transform ${Math.max(0, dur)}ms cubic-bezier(.3,.7,.3,1)`; applyZoom();
-    return new Promise(r => setTimeout(() => { w.style.transition = ""; r(); }, Math.max(0, dur) + 20));
+    const z = zoom[viewMap]; if (!z) return Promise.resolve();
+    const from = shown && shown.map === viewMap ? { ...shown } : null, run = ++glideRun;
+    if (!from || dur <= 0 || document.body.dataset.motion === "off") { applyZoomNow(); return Promise.resolve(); }
+    gliding = true;
+    const to = { s: z.s, x: z.x, y: z.y }, t0 = performance.now();
+    const ease = (t) => 1 - Math.pow(1 - t, 3);
+    return new Promise(r => {
+      const step = (now) => {
+        if (run !== glideRun) return r();            // a newer zoom or pan took over
+        const k = Math.min(1, (now - t0) / dur), e = ease(k);
+        drawZoom({ s: from.s + (to.s - from.s) * e, x: from.x + (to.x - from.x) * e, y: from.y + (to.y - from.y) * e }, true);
+        if (k < 1) requestAnimationFrame(step); else { gliding = false; drawZoom(zoom[viewMap] || to, false); r(); }
+      };
+      requestAnimationFrame(step);
+    });
   }
   function tokenCenter(id) {
     const t = id && document.querySelector(`#map .token[data-id="${CSS.escape(id)}"]`);
@@ -300,9 +347,20 @@
     window.addEventListener("pointermove", (e) => { if (!drag) return; const z = zoom[viewMap]; if (!z) return; z.x += e.clientX - drag.x; z.y += e.clientY - drag.y; touched(z); drag = { x: e.clientX, y: e.clientY }; applyZoom(); });
     window.addEventListener("pointerup", () => { drag = null; vp.classList.remove("drag"); });
     document.querySelectorAll(".mapctl button").forEach(b => b.onclick = () => {
+      if (b.dataset.z === "grid") { const strong = $("#map").classList.toggle("grid-strong");
+        b.classList.toggle("on", strong); b.setAttribute("aria-pressed", String(strong)); return; }
       if (b.dataset.z === "follow") { cameraFollow = !cameraFollow; lsSet("cameraFollow", cameraFollow); b.classList.toggle("on", cameraFollow);
         toast(cameraFollow ? "Camera follows the action" : "Camera stays where you put it"); return; }
       const z = zoom[viewMap]; if (!z) return;
+      if (b.dataset.z === "party") {
+        const points = S.party.map(e => tokenCenter(e.id)).filter(Boolean); if (!points.length) return;
+        const vr = vp.getBoundingClientRect(), pad = 5 * (+$("#map > svg")?.dataset.cell || 32);
+        const left = Math.min(...points.map(p=>p.x))-pad, top = Math.min(...points.map(p=>p.y))-pad;
+        const width = Math.max(...points.map(p=>p.x))-left+pad, height = Math.max(...points.map(p=>p.y))-top+pad;
+        z.s = Math.min(2.4, vr.width/width*.9, vr.height/height*.9);
+        z.x = (vr.width-width*z.s)/2-left*z.s; z.y = (vr.height-height*z.s)/2-top*z.s;
+        touched(z); return glide(420);
+      }
       if (b.dataset.z === "fit") { z.user = false; return fit(true); }
       touched(z);
       const vr = vp.getBoundingClientRect(), f = b.dataset.z === "in" ? 1.25 : 0.8, ns = z.s * f;

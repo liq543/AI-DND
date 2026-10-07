@@ -152,11 +152,23 @@ needs storing: change the description or the look and the table redraws it.
 
 - **Pin exact features** with `asset look <id> --hair "..." --eyes "..." --skin "..." --beard "..." --marks "..."
   --headwear "..." --outfit "..." --cloak "..." --build "..." --age "..." --expression "..." --horns "..."
-  --background "..." --presentation feminine|masculine`. Each field overrides what the description implies;
+  --background "..." --species Elf --presentation feminine|masculine|androgynous`. Each field overrides what the description implies;
   `--clear eyes` (or `all`) removes pins. Every call prints what the generator will draw.
 - **Set it when the player describes their character** (session zero, character creation) so the portrait
   matches their idea. Ask them to look at it on the table and adjust with `asset look` until it does.
 - **See it yourself**: `asset art <id> [--crop face]` writes the SVG to `views/art/`.
+- **Keep identities consistent:** `asset identity <id>` reports the resolved species/presentation and the face/body assets.
+  With no IDs it checks the party and current map; `asset identity --all --issues-only` audits every creature for
+  missing identity, conflicting descriptions, absent compatible art and pinned portraits. It is read-only.
+  Use `asset look <id> --species Elf --presentation female` to pin known visual facts through signed engine events.
+  These pins are cosmetic: they do not change a stat block, character species, traits, size or mechanics.
+  Female/feminine, male/masculine and neutral/androgynous/nonbinary are accepted. Unknown presentation uses neutral
+  art and is flagged, rather than being inferred from clothing, hair or a personal name. Titles and explicit subject
+  pronouns in public appearance text can supply identity; pin it when the prose is ambiguous or mentions other people.
+  Portraits and corpses share these hard identity constraints. Outfit and skin/hair variation only rank compatible art.
+  Uncatalogued bodies use a covered or anatomical fallback instead of another species. A custom pinned image cannot
+  be verified automatically: inspect it and clear/re-pin it as needed. `asset look --like` preserves the chosen face
+  and identity when an NPC becomes a PC; `asset look <id> --clear-like` returns to the creature's own live appearance.
 - **A bespoke picture**: `asset portrait <id>` pins the current art as a fixed asset; `--style heraldic` gives the
   old heraldic card; `asset portrait <id> --clear` goes back to live art. You can also **draw** one (write an SVG,
   no scripts) and `asset draw file.svg --name "Sister Maren" --portrait maren`.

@@ -1,0 +1,78 @@
+[
+  {
+    "name": "corpses-human-masculine-v4",
+    "reference": "corpses-human-masculine-v3",
+    "prompt": "Use case: precise-object-edit. Repair this existing sixteen-sprite sheet for production extraction. Keep EXACTLY the same sixteen whole corpse subjects, species, adult presentations, clothing, colours, limb poses, art style and ROW-MAJOR order. Re-layout on a perfectly SQUARE exact equal4by4 atlas. Each sprite must be wholly inside its OWN cell, centered at normalized cell centers12.5%,37.5%,62.5%,87.5% on eachaxis. Scale every whole sprite down to at most60% of its cell's width AND height while retaining aspect ratio. Give at least20% EMPTY transparent padding on allfour sides of EACH cell. No visible grids, borders, text, extraobjects or clippedheads/feet/tails/wings. No sprite or shadow may cross itscellboundary. Clean actual transparent alpha: remove red/yellow/blue matte halos and strayfragments, retain tight soft neutralcontactshadow. Do not change or swap identity; no gore or wounds. Output only the cleanpaddedtransparent atlas.",
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-e5c5b3dc-1438-4170-a9b7-63623a06d6dd.png"
+  },
+  {
+    "name": "corpses-human-feminine-v4",
+    "reference": "corpses-human-feminine-v3",
+    "prompt": "Use case: precise-object-edit. Repair this existing sixteen-sprite sheet for production extraction. Keep EXACTLY the same sixteen whole corpse subjects, species, adult presentations, clothing, colours, limb poses, art style and ROW-MAJOR order. Re-layout on a perfectly SQUARE exact equal4by4 atlas. Each sprite must be wholly inside its OWN cell, centered at normalized cell centers12.5%,37.5%,62.5%,87.5% on eachaxis. Scale every whole sprite down to at most60% of its cell's width AND height while retaining aspect ratio. Give at least20% EMPTY transparent padding on allfour sides of EACH cell. No visible grids, borders, text, extraobjects or clippedheads/feet/tails/wings. No sprite or shadow may cross itscellboundary. Clean actual transparent alpha: remove red/yellow/blue matte halos and strayfragments, retain tight soft neutralcontactshadow. Do not change or swap identity; no gore or wounds. Output only the cleanpaddedtransparent atlas.",
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-206aa94d-ef59-4813-84f4-68dc95036ae0.png"
+  },
+  {
+    "name": "corpses-fantasy-a-v4",
+    "reference": "corpses-fantasy-a-v3",
+    "prompt": "Use case: precise-object-edit. Repair this existing sixteen-sprite sheet for production extraction. Keep EXACTLY the same sixteen whole corpse subjects, species, adult presentations, clothing, colours, limb poses, art style and ROW-MAJOR order. Re-layout on a perfectly SQUARE exact equal4by4 atlas. Each sprite must be wholly inside its OWN cell, centered at normalized cell centers12.5%,37.5%,62.5%,87.5% on eachaxis. Scale every whole sprite down to at most60% of its cell's width AND height while retaining aspect ratio. Give at least20% EMPTY transparent padding on allfour sides of EACH cell. No visible grids, borders, text, extraobjects or clippedheads/feet/tails/wings. No sprite or shadow may cross itscellboundary. Clean actual transparent alpha: remove red/yellow/blue matte halos and strayfragments, retain tight soft neutralcontactshadow. Do not change or swap identity; no gore or wounds. Output only the cleanpaddedtransparent atlas.",
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-853ea471-d18a-475f-bd0e-f6e7f73755f5.png"
+  },
+  {
+    "name": "corpses-fantasy-b-v4",
+    "reference": "corpses-fantasy-b-v3",
+    "prompt": "Use case: precise-object-edit. Repair this existing sixteen-sprite sheet for production extraction. Keep EXACTLY the same sixteen whole corpse subjects, species, adult presentations, clothing, colours, limb poses, art style and ROW-MAJOR order. Re-layout on a perfectly SQUARE exact equal4by4 atlas. Each sprite must be wholly inside its OWN cell, centered at normalized cell centers12.5%,37.5%,62.5%,87.5% on eachaxis. Scale every whole sprite down to at most60% of its cell's width AND height while retaining aspect ratio. Give at least20% EMPTY transparent padding on allfour sides of EACH cell. No visible grids, borders, text, extraobjects or clippedheads/feet/tails/wings. No sprite or shadow may cross itscellboundary. Clean actual transparent alpha: remove red/yellow/blue matte halos and strayfragments, retain tight soft neutralcontactshadow. Do not change or swap identity; no gore or wounds. Output only the cleanpaddedtransparent atlas.",
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-927ebe1e-a056-4d9b-9636-79e44120ca6b.png"
+  },
+  {
+    "name": "corpses-monsters-v4",
+    "reference": "corpses-monsters-v3",
+    "prompt": "Use case: precise-object-edit. Repair this existing sixteen-sprite sheet for production extraction. Keep EXACTLY the same sixteen whole corpse subjects, species, adult presentations, clothing, colours, limb poses, art style and ROW-MAJOR order. Re-layout on a perfectly SQUARE exact equal4by4 atlas. Each sprite must be wholly inside its OWN cell, centered at normalized cell centers12.5%,37.5%,62.5%,87.5% on eachaxis. Scale every whole sprite down to at most60% of its cell's width AND height while retaining aspect ratio. Give at least20% EMPTY transparent padding on allfour sides of EACH cell. No visible grids, borders, text, extraobjects or clippedheads/feet/tails/wings. No sprite or shadow may cross itscellboundary. Clean actual transparent alpha: remove red/yellow/blue matte halos and strayfragments, retain tight soft neutralcontactshadow. Do not change or swap identity; no gore or wounds. Output only the cleanpaddedtransparent atlas.",
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-076f1290-e000-459f-b55e-3e65a00dc0a6.png"
+  },
+  {
+    "name": "corpses-beasts-v4",
+    "reference": "corpses-beasts-v3",
+    "prompt": "Use case: precise-object-edit. Repair this existing sixteen-sprite sheet for production extraction. Keep EXACTLY the same sixteen whole corpse subjects, species, adult presentations, clothing, colours, limb poses, art style and ROW-MAJOR order. Re-layout on a perfectly SQUARE exact equal4by4 atlas. Each sprite must be wholly inside its OWN cell, centered at normalized cell centers12.5%,37.5%,62.5%,87.5% on eachaxis. Scale every whole sprite down to at most60% of its cell's width AND height while retaining aspect ratio. Give at least20% EMPTY transparent padding on allfour sides of EACH cell. No visible grids, borders, text, extraobjects or clippedheads/feet/tails/wings. No sprite or shadow may cross itscellboundary. Clean actual transparent alpha: remove red/yellow/blue matte halos and strayfragments, retain tight soft neutralcontactshadow. Do not change or swap identity; no gore or wounds. Output only the cleanpaddedtransparent atlas.",
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-12748ce5-83ac-4391-8acc-5635a3f41549.png"
+  },
+  {
+    "name": "corpses-creatures-v4",
+    "reference": "corpses-creatures-v3",
+    "prompt": "Use case: precise-object-edit. Repair this existing sixteen-sprite sheet for production extraction. Keep EXACTLY the same sixteen whole corpse subjects, species, adult presentations, clothing, colours, limb poses, art style and ROW-MAJOR order. Re-layout on a perfectly SQUARE exact equal4by4 atlas. Each sprite must be wholly inside its OWN cell, centered at normalized cell centers12.5%,37.5%,62.5%,87.5% on eachaxis. Scale every whole sprite down to at most60% of its cell's width AND height while retaining aspect ratio. Give at least20% EMPTY transparent padding on allfour sides of EACH cell. No visible grids, borders, text, extraobjects or clippedheads/feet/tails/wings. No sprite or shadow may cross itscellboundary. Clean actual transparent alpha: remove red/yellow/blue matte halos and strayfragments, retain tight soft neutralcontactshadow. Do not change or swap identity; no gore or wounds. Output only the cleanpaddedtransparent atlas.",
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-60cf6772-2220-4d7b-ac21-836c7d4f54a1.png"
+  },
+  {
+    "name": "corpses-human-neutral-v4",
+    "reference": "corpses-human-neutral-v3",
+    "prompt": "Use case: precise-object-edit. Repair this existing sixteen-sprite sheet for production extraction. Keep EXACTLY the same sixteen whole corpse subjects, species, adult presentations, clothing, colours, limb poses, art style and ROW-MAJOR order. Re-layout on a perfectly SQUARE exact equal4by4 atlas. Each sprite must be wholly inside its OWN cell, centered at normalized cell centers12.5%,37.5%,62.5%,87.5% on eachaxis. Scale every whole sprite down to at most60% of its cell's width AND height while retaining aspect ratio. Give at least20% EMPTY transparent padding on allfour sides of EACH cell. No visible grids, borders, text, extraobjects or clippedheads/feet/tails/wings. No sprite or shadow may cross itscellboundary. Clean actual transparent alpha: remove red/yellow/blue matte halos and strayfragments, retain tight soft neutralcontactshadow. Do not change or swap identity; no gore or wounds. Output only the cleanpaddedtransparent atlas.",
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-43c4f42e-a319-4240-8d12-b75b1302b843.png"
+  },
+  {
+    "name": "corpses-fantasy-neutral-v4",
+    "reference": "corpses-fantasy-neutral-v3",
+    "prompt": "Use case: precise-object-edit. Repair this existing sixteen-sprite sheet for production extraction. Keep EXACTLY the same sixteen whole corpse subjects, species, adult presentations, clothing, colours, limb poses, art style and ROW-MAJOR order. Re-layout on a perfectly SQUARE exact equal4by4 atlas. Each sprite must be wholly inside its OWN cell, centered at normalized cell centers12.5%,37.5%,62.5%,87.5% on eachaxis. Scale every whole sprite down to at most60% of its cell's width AND height while retaining aspect ratio. Give at least20% EMPTY transparent padding on allfour sides of EACH cell. No visible grids, borders, text, extraobjects or clippedheads/feet/tails/wings. No sprite or shadow may cross itscellboundary. Clean actual transparent alpha: remove red/yellow/blue matte halos and strayfragments, retain tight soft neutralcontactshadow. Do not change or swap identity; no gore or wounds. Output only the cleanpaddedtransparent atlas. Additionally remove beards ONLY from neutralDwarf bodies in cells3 and4 (row1columns3and4); keep shortstockyDwarf anatomy and neutralpresentation, matching clean-shaven neutralDwarf portraits.",
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-c0bc8ac2-65e9-4ce1-80ab-fb74e8dc6b92.png"
+  },
+  {
+    "name": "corpses-fantasy-colours-v4",
+    "reference": "corpses-fantasy-colours-v3",
+    "prompt": "Use case: precise-object-edit. Repair this existing sixteen-sprite sheet for production extraction. Keep EXACTLY the same sixteen whole corpse subjects, species, adult presentations, clothing, colours, limb poses, art style and ROW-MAJOR order. Re-layout on a perfectly SQUARE exact equal4by4 atlas. Each sprite must be wholly inside its OWN cell, centered at normalized cell centers12.5%,37.5%,62.5%,87.5% on eachaxis. Scale every whole sprite down to at most60% of its cell's width AND height while retaining aspect ratio. Give at least20% EMPTY transparent padding on allfour sides of EACH cell. No visible grids, borders, text, extraobjects or clippedheads/feet/tails/wings. No sprite or shadow may cross itscellboundary. Clean actual transparent alpha: remove red/yellow/blue matte halos and strayfragments, retain tight soft neutralcontactshadow. Do not change or swap identity; no gore or wounds. Output only the cleanpaddedtransparent atlas.",
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-31d16116-8ff9-498b-b19a-c1119c6e4c3d.png"
+  },
+  {
+    "name": "corpses-monsters-neutral-v4",
+    "reference": "corpses-monsters-neutral-v3",
+    "prompt": "Use case: precise-object-edit. Repair this existing sixteen-sprite sheet for production extraction. Keep EXACTLY the same sixteen whole corpse subjects, species, adult presentations, clothing, colours, limb poses, art style and ROW-MAJOR order. Re-layout on a perfectly SQUARE exact equal4by4 atlas. Each sprite must be wholly inside its OWN cell, centered at normalized cell centers12.5%,37.5%,62.5%,87.5% on eachaxis. Scale every whole sprite down to at most60% of its cell's width AND height while retaining aspect ratio. Give at least20% EMPTY transparent padding on allfour sides of EACH cell. No visible grids, borders, text, extraobjects or clippedheads/feet/tails/wings. No sprite or shadow may cross itscellboundary. Clean actual transparent alpha: remove red/yellow/blue matte halos and strayfragments, retain tight soft neutralcontactshadow. Do not change or swap identity; no gore or wounds. Output only the cleanpaddedtransparent atlas.",
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-f679b5db-ad90-48bf-b85b-577e53cfa03e.png"
+  },
+  {
+    "name": "portraits-beasts-v3",
+    "prompt": "Use case: stylized-concept. Premium realistic painted fantasy RPG ANIMAL PORTRAIT ATLAS. EXACT equal4by4 square sixteen distinct head-and-neck portraits, one centeredin eachcell, entirehead/ears insidecell with generousmargin, no gutters, borders, labels/text. Muted darkforestgreen backdrops, softwarm upperleftlight, rich anatomical detail and fur/feathers/scales, matching premiumfantasy paintedportraits. Exact species ROW-MAJOR:graywolf, tanmastiffdog, chestnuthorse, graypackmule; brownrat, brownspider(front anatomical8legcreature), blackraven, tawnyowl; tawnylion, orangestripedtiger, brownbear, darkwildboar; hornedgoat, creamsheep, olivecrocodile, brownfeatheredowlbear(owlhead bearbody). No humans, armor, clothes, mixedspecies, gore or multipleheads.",
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-45f90b86-e332-4062-b171-562b3f00a4f7.png"
+  },
+  {
+    "name": "portraits-creatures-v3",
+    "prompt": "Use case: stylized-concept. Premium realistic painted fantasy RPG CREATURE PORTRAIT ATLAS. EXACT equal4by4 square sixteen closeup head-and-shoulders or head/neck portraits, one wholeheadcomfortableinsideeachcell, no gutters/borders/labels/text, muted darkforestgreen backdrops softwarm upperleftlight anatomicallyconvincing detailedfantasy painting. EXACTROW-MAJOR:smallred dragon, largered dragon, BLUEdragon, GOLDdragon; human skeleton skull andribshoulders, feminine linenwrapped mummy, masculine linenwrapped mummy, empty animatedsteelarmor helmetandshoulders; graygiantbat, greenfrog, graygiantsnake, gianttanscorpion; palegianteagle, gryphonwithgray eagleheadand lionbody, blackgiantant, browndeerwithantlers. Species and dragonscale colours exact. Mummies non-graphic wholefaces with linen, no openwounds. No gore,children,humanfacesforcreatures,multipleheads or text.",
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-20aef8e7-4275-491e-b9ee-80e6304a252c.png"
+  }
+]

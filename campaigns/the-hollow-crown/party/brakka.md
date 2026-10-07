@@ -38,7 +38,7 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 
 ## Inventory
 
-**Coins:** 101 GP 1 SP 5 CP
+**Coins:** 176 GP 1 SP 5 CP
 
 - `javelin-1` 8× Javelin · _starting equipment_
 - `spear-1` 1× Spear · _starting equipment_

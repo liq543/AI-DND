@@ -1,0 +1,16 @@
+[
+  {
+    "col": "corpses-beasts-v4",
+    "index": 14,
+    "reference": "C:\\Users\\ggore\\Documents\\Coding Projects\\dnd\\assets\\generated\\corpses-beasts-v4\\14.webp",
+    "prompt": "Precision cleanup of this single production sprite. Preserve the ONE central entire fallen animal body exactly: same species, fur/scales, pose, head, feet and tail. Remove ALL detached neighboring brown fragments on either edge and remove red/yellow/blue matte fringes. Keep every part of the central body intact. Center the complete body on a square transparent canvas with20%empty transparent margin all sides, soft tight neutral contactshadow. Only ONE animal, no extra limbs, no other objects/text. Improve crisp painted detail while keeping matchingstyle and identity. No gore or wounds.",
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-0aede63c-f58b-4059-b3b5-ba4861ea44e1.png"
+  },
+  {
+    "col": "corpses-beasts-v4",
+    "index": 15,
+    "reference": "C:\\Users\\ggore\\Documents\\Coding Projects\\dnd\\assets\\generated\\corpses-beasts-v4\\15.webp",
+    "prompt": "Precision cleanup of this single production sprite. Preserve the ONE central entire fallen animal body exactly: same species, fur/scales, pose, head, feet and tail. Remove ALL detached neighboring brown fragments on either edge and remove red/yellow/blue matte fringes. Keep every part of the central body intact. Center the complete body on a square transparent canvas with20%empty transparent margin all sides, soft tight neutral contactshadow. Only ONE animal, no extra limbs, no other objects/text. Improve crisp painted detail while keeping matchingstyle and identity. No gore or wounds.",
+    "source": "C:\\Users\\ggore\\.codex\\generated_images\\01a1168c-1e05-78d3-8f9b-9f3b7e3b565b\\exec-c76285d7-a9b2-42b9-93e6-9f96ee24d547.png"
+  }
+]

@@ -1,0 +1,149 @@
+[
+  {
+    "fixture": "battle:Human identity \u00b7 plate",
+    "cold_ms": 57.79,
+    "median_ms": 33.26,
+    "p95_ms": 36.42,
+    "svg_bytes": 978008
+  },
+  {
+    "fixture": "battle:Human identity \u00b7 leather",
+    "cold_ms": 39.01,
+    "median_ms": 31.9,
+    "p95_ms": 33.75,
+    "svg_bytes": 954690
+  },
+  {
+    "fixture": "battle:Human identity \u00b7 robe",
+    "cold_ms": 41.55,
+    "median_ms": 34.78,
+    "p95_ms": 40.7,
+    "svg_bytes": 952197
+  },
+  {
+    "fixture": "battle:Human identity \u00b7 tunic",
+    "cold_ms": 41.23,
+    "median_ms": 34.11,
+    "p95_ms": 39.26,
+    "svg_bytes": 936881
+  },
+  {
+    "fixture": "battle:Fantasy identity \u00b7 plate",
+    "cold_ms": 59.2,
+    "median_ms": 49.54,
+    "p95_ms": 65.66,
+    "svg_bytes": 1639396
+  },
+  {
+    "fixture": "battle:Fantasy identity \u00b7 robe",
+    "cold_ms": 75.6,
+    "median_ms": 52.67,
+    "p95_ms": 75.52,
+    "svg_bytes": 1616235
+  },
+  {
+    "fixture": "battle:Monster identity",
+    "cold_ms": 39.15,
+    "median_ms": 25.95,
+    "p95_ms": 28.38,
+    "svg_bytes": 1516165
+  },
+  {
+    "fixture": "battle:Animal identity",
+    "cold_ms": 32.39,
+    "median_ms": 23.94,
+    "p95_ms": 29.68,
+    "svg_bytes": 1234165
+  },
+  {
+    "fixture": "battle:Creature identity",
+    "cold_ms": 89.92,
+    "median_ms": 19.13,
+    "p95_ms": 23.21,
+    "svg_bytes": 1348063
+  },
+  {
+    "fixture": "battle:Scale colours and dark elves",
+    "cold_ms": 34.14,
+    "median_ms": 22.72,
+    "p95_ms": 33.7,
+    "svg_bytes": 1222602
+  },
+  {
+    "fixture": "battle:Lion and deer identity",
+    "cold_ms": 11.74,
+    "median_ms": 7.48,
+    "p95_ms": 10.19,
+    "svg_bytes": 736240
+  },
+  {
+    "fixture": "portrait:ranger",
+    "cold_ms": 1.12,
+    "median_ms": 0.56,
+    "p95_ms": 0.86,
+    "svg_bytes": 22594
+  },
+  {
+    "fixture": "portrait:knight",
+    "cold_ms": 1.05,
+    "median_ms": 0.6,
+    "p95_ms": 0.81,
+    "svg_bytes": 21367
+  },
+  {
+    "fixture": "portrait:mage",
+    "cold_ms": 0.83,
+    "median_ms": 0.56,
+    "p95_ms": 1.24,
+    "svg_bytes": 22413
+  },
+  {
+    "fixture": "portrait:cleric",
+    "cold_ms": 1.06,
+    "median_ms": 0.63,
+    "p95_ms": 1.01,
+    "svg_bytes": 19238
+  },
+  {
+    "fixture": "portrait:wolf",
+    "cold_ms": 1.69,
+    "median_ms": 0.99,
+    "p95_ms": 1.04,
+    "svg_bytes": 19794
+  },
+  {
+    "fixture": "portrait:dragon",
+    "cold_ms": 1.47,
+    "median_ms": 0.74,
+    "p95_ms": 1.07,
+    "svg_bytes": 26117
+  },
+  {
+    "fixture": "item:Silver Longsword",
+    "cold_ms": 1.1,
+    "median_ms": 0.12,
+    "p95_ms": 0.17,
+    "svg_bytes": 19087
+  },
+  {
+    "fixture": "item:Potion of Healing",
+    "cold_ms": 2.59,
+    "median_ms": 0.27,
+    "p95_ms": 0.38,
+    "svg_bytes": 29897
+  },
+  {
+    "fixture": "item:Ruby Amulet",
+    "cold_ms": 0.64,
+    "median_ms": 0.24,
+    "p95_ms": 0.29,
+    "svg_bytes": 29422
+  },
+  {
+    "fixture": "item:Leather Spellbook",
+    "cold_ms": 0.87,
+    "median_ms": 0.26,
+    "p95_ms": 0.45,
+    "svg_bytes": 37775
+  }
+]

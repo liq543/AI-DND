@@ -4,7 +4,7 @@
 
 **Player:** DM · **Human** · **Bard 6** (College of Lore) · **Background:** Sage · **XP:** 21581
 
-**HP** 35/39 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
+**HP** 39/39 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
@@ -27,7 +27,7 @@ Attacks per Attack action: 1
 ## Spellcasting
 
 - **Bard:** save DC 14, attack +6, cantrips 3, prepared 10, up to level 3
-- **Slots:** L1 4/4, L2 2/3, L3 3/3
+- **Slots:** L1 4/4, L2 3/3, L3 3/3
 - **Cantrips:** vicious-mockery, message, mage-hand
 - **Prepared:** charm-person, disguise-self, dissonant-whispers, healing-word, silent-image, suggestion, invisibility, hypnotic-pattern, cure-wounds, clairvoyance
 
@@ -45,7 +45,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 100 GP 5 SP
+**Coins:** 93 GP 5 SP
 
 - `pan-flute-1` 1× Pan flute · _starting equipment_
 - `entertainers-pack-1` 1× Entertainer's Pack · _starting equipment_

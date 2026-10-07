@@ -7,7 +7,7 @@ import copy
 import json
 import re
 
-from . import dice, srd
+from . import dice, srd, effects
 from .store import Store, TamperError, active_dir
 
 
@@ -202,6 +202,28 @@ class Game:
         self.out = []
         self.cmdline = ""
 
+    def caught_up(self):
+        """A new Game that has caught up with events another process appended (the live table after a DM command),
+        verifying and applying only the new ones. This one is left untouched, so readers on other threads never see
+        it change. None when the log changed some other way (a quickload, a repair): build a fresh Game instead."""
+        if self.pending:
+            return None
+        store = Store(self.dir)
+        store._seen = dict(getattr(self.store, "_seen", None) or {})
+        if not store._seen:
+            return None
+        new = store.load_new()
+        if new is None:
+            return None
+        import pickle
+        g = copy.copy(self)
+        g.store, g.pending, g.out, g.cmdline = store, [], [], ""
+        g.state = pickle.loads(pickle.dumps(self.state, -1))
+        for ev in new:
+            apply(g.state, ev)
+        g.events = self.events + new
+        return g
+
     # ------------------------------------------------------------ event plumbing
     def emit(self, type_, **data):
         ev = {"type": type_, "data": copy.deepcopy(data)}
@@ -379,8 +401,9 @@ def equipped(e, kind):
 def armor_class(e):
     """Returns (ac, explanation)."""
     if e["kind"] != "pc":
-        bonus = sum(c.get("ac_bonus", 0) for c in e.get("effects", []))
-        return e["ac"] + bonus, f"stat block {e['ac']}" + (f" +{bonus} effects" if bonus else "")
+        bonus = sum(c.get("ac_bonus", 0) for c in effects.active(e))
+        base = max(e["ac"], 13 + amod(e, "dex") if effects.has(e, "mage_armor") else 0)
+        return max(base + bonus, max((f.get("ac_floor", 0) for f in effects.active(e)), default=0)), "stat block and spell effects"
     dex = amod(e, "dex")
     armors = [it for it in equipped(e, "armor") if it.get("category") != "shield"]
     shields = [it for it in equipped(e, "armor") if it.get("category") == "shield"]
@@ -399,7 +422,7 @@ def armor_class(e):
             options.append((10 + dex + amod(e, "con"), f"Unarmored Defense 10 + Dex {dex} + Con {amod(e, 'con')}"))
         if "Monk" in e["classes"] and not shields:
             options.append((10 + dex + amod(e, "wis"), f"Unarmored Defense 10 + Dex {dex} + Wis {amod(e, 'wis')}"))
-        if any(x.get("name") == "mage armor" for x in e.get("effects", [])):
+        if effects.has(e, "mage_armor") or any(x.get("name") == "mage armor" for x in e.get("effects", [])):
             options.append((13 + dex, f"Mage Armor 13 + Dex {dex}"))
     ac, why = max(options, key=lambda o: o[0])
     if shields:
@@ -418,11 +441,12 @@ def armor_class(e):
         if ub:
             ac += ub
             why += f" + bracers {ub}"
-    for fx in e.get("effects", []):
+    for fx in effects.active(e):
         if fx.get("ac_bonus"):
             ac += fx["ac_bonus"]
             why += f" + {fx['name']} {fx['ac_bonus']}"
-    return ac, why
+    floor = max((f.get("ac_floor", 0) for f in effects.active(e)), default=0)
+    return max(ac, floor), why + (f"; spell minimum {floor}" if floor > ac else "")
 
 
 def save_mod(e, ability):
@@ -474,12 +498,29 @@ def speed(e):
             if base and base.get("str_req") and abilities(e)["str"] < base["str_req"]:
                 sp["walk"] -= 10
     names = condition_names(e)
-    if names & {"grappled", "restrained", "paralyzed", "petrified", "stunned", "unconscious"} or _spellbound(e):
+    freedom = effects.has(e, "freedom")
+    zero = any(f.get("speed_zero") and not (freedom and f.get("spell")) for f in effects.active(e))
+    if names & {"grappled", "restrained", "paralyzed", "petrified", "stunned", "unconscious"} or _spellbound(e) or zero:
         return {k: 0 for k in sp}
     pen = 5 * e.get("exhaustion", 0)
-    for fx in e.get("effects", []):
-        pen += fx.get("speed_penalty", 0)
-    return {k: max(0, v - pen) for k, v in sp.items()}
+    multiplier, bonus = 1, 0
+    for fx in effects.active(e):
+        if not (freedom and fx.get("spell")):
+            pen += fx.get("speed_penalty", 0)
+        bonus += fx.get("speed_bonus", 0)
+        factor = fx.get("speed_multiplier", 1)
+        if not (freedom and fx.get("spell") and factor < 1):
+            multiplier *= factor
+        speeds = dict(fx.get("speeds", {}))
+        if fx.get("fly_speed"):
+            speeds["fly"] = fx["fly_speed"]
+        if fx.get("climb"):
+            speeds["climb"] = "walk"
+        if fx.get("swim"):
+            speeds["swim"] = "walk"
+        for mode, value in speeds.items():
+            sp[mode] = max(sp.get(mode, 0), sp["walk"] if value == "walk" else value)
+    return {k: max(0, int((v + bonus) * multiplier) - pen) for k, v in sp.items()}
 
 
 # Spells whose Charmed condition also brings Incapacitated and a Speed of 0 (SRD Hypnotic Pattern).
@@ -487,13 +528,18 @@ SPELLBOUND_CHARMS = {"hypnotic-pattern"}
 
 
 def _spellbound(e):
+    if any("charmed" in f.get("condition_immune", []) for f in effects.active(e)):
+        return False
     return any(c["name"] == "charmed" and srd.slug(str(c.get("spell") or c.get("source") or "")) in SPELLBOUND_CHARMS
                or (c["name"] == "charmed" and "hypnotic pattern" in str(c.get("source", "")).lower())
                for c in e.get("conditions", []))
 
 
 def condition_names(e):
-    names = {c["name"] for c in e.get("conditions", [])}
+    immune = {name for f in effects.active(e) for name in f.get("condition_immune", [])}
+    freedom = effects.has(e, "freedom")
+    names = {c["name"] for c in e.get("conditions", []) if c["name"] not in immune and not (
+        freedom and c.get("spell") and c["name"] in ("paralyzed", "restrained"))}
     for implied in ("paralyzed", "petrified", "stunned", "unconscious"):
         if implied in names:
             names.add("incapacitated")
@@ -503,7 +549,7 @@ def condition_names(e):
 
 
 def hp_max(e):
-    return e["hp_max"] + e.get("hp_max_bonus", 0)
+    return e["hp_max"] + e.get("hp_max_bonus", 0) + sum(f.get("hp_max_bonus", 0) for f in effects.active(e))
 
 
 def spell_slots(e):
@@ -607,6 +653,8 @@ def resources(e):
 
 
 def attacks_per_action(e):
+    if effects.has(e, "slow"):
+        return 1
     if e["kind"] != "pc":
         return e.get("multiattack", 1)
     n = 1

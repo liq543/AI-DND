@@ -4,6 +4,28 @@ Everything is `python -m engine <command>`. `-h` after any command shows its opt
 Output lines are what happened (also pushed to the live table). `✖ RULE:` = refused, nothing changed.
 Refer to creatures by id (`kira`, `goblin-warrior-a`) — ids are shown when they're created and in `state.md`.
 
+## Batch: a whole turn in one command (use this by default)
+One process, one load, one save, one table update: a 20-step turn takes well under a second instead of ~15 s.
+Every step obeys the same rules as on its own. A refused step stops the batch there: the steps before it stand,
+the rest are listed as "not run". Never chain past a refusal: fix it and send the rest.
+```
+py -m engine batch <<'EOF'
+# one engine command per line (the `py -m engine` prefix is optional); # comments; end a line with \ to continue it
+scene "The Wheel Inn" --desc "Dusk, rain on the shutters" --map wheel-inn --lighting dim --ambient rain
+npc add commoner --at 12,4 --side neutral --name "Oswin Hale" --desc "Bald innkeeper, leather apron" --align "lawful neutral"
+say --as "Oswin Hale" --at oswin-hale "Rooms are two silver, friend."
+move wren 10,6
+time 10m --reason "settling in"
+EOF
+```
+- `batch steps.txt` reads a file instead; `-q` hides the step echo; `--atomic` keeps nothing if any step is refused.
+- `--dry-run` checks moves, placements and costs and saves nothing. It stops before any dice (a roll is final, so it
+  can't be previewed): use it to test a path or a plan, never to peek at a roll.
+- Put a roll the player must see resolved *last* in a batch, or on its own, and read its result before narrating.
+- Not inside a batch (run alone): campaign, verify, quicksave/quickload, repair, rekey, serve, rules.
+- One-command shortcuts: `scene ... --lighting dim --ambient rain --map <id>` (banner, lighting, weather and map
+  together); `npc add ... --desc "..." --align "..."` (add, place, describe and align in one line).
+
 ## Campaign & session
 ```
 campaign new "The Sunken Crown" --set player_rolls=viewer --set xp_mode=xp --set difficulty=standard --set start_level=1
@@ -34,6 +56,7 @@ spells set wren --cantrips "fire bolt,light,mage hand" --prepared "magic missile
 spells scribe wren --spell "fireball" --source "spell scroll found in the vault" | spells list wren
 spells refund wren --level 1 --source "the spell was countered"   # public: a spent slot comes back (Counterspell, a DM error)
 spells refund wren --spell "shield" --source "..."                 # public: a spent free cast (Magic Initiate) comes back
+spells support ["spell name"]                                  # automated mechanics, choices and remaining DM rulings; no campaign needed
 char levelup kira [--class Rogue] [--hp avg|roll] [--subclass Champion] [--feat "Ability Score Improvement" --asi str+2]
          [--fighting-style Archery] [--expertise a,b]
 char masteries kira --masteries longsword,javelin,greatsword   # change Weapon Mastery weapons after a Long Rest
@@ -81,11 +104,19 @@ cast wren "magic missile" --targets goblin-a,goblin-a,goblin-b [--level 2]
 cast wren "burning hands" --targets goblin-a,goblin-b
 cast cleric "hold person" --targets bandit --condition paralyzed
 cast cleric "cure wounds" --targets kira
+cast cleric guidance --targets kira --choice stealth
+cast cleric resistance --targets kira --choice fire
+cast druid "enhance ability" --level 3 --targets kira,wren --choice strength,intelligence
+cast cleric "mass heal" --targets kira,wren --choice 120,80
 cast wren "detect magic" --ritual | cast wren shield --free "Magic Initiate" | cast wren fireball --scroll <item-id>
 feature kira "second wind" | feature bruna rage | feature pal "lay on hands" --amount 5 --target kira | feature kira "action surge"
 bardic <who>                  # spend a Bardic Inspiration die
 deathsave kira | stabilize wren kira | legendary-resist adult-red-dragon
 ```
+
+Spell choices, supported families and remaining narrative work: [spell support guide](../docs/spell-support.md).
+PC spell attacks and repeat saves create Roll requests in viewer mode. Self spells supply their caster target automatically.
+Haste's additional action is used after the ordinary action; its Attack action permits one attack. Expeditious Retreat enables `action <who> dash --bonus --via "Expeditious Retreat"`.
 
 ## Checks, saves, damage, conditions
 ```
@@ -127,6 +158,7 @@ After a quickload, everything past the save point never happened: don't mention 
 ## Rest, time, travel
 ```
 rest short --hd kira:2,wren:1 | rest long               # 16-hour spacing, 1 HP minimum, all rules applied
+travel over several days credits a Long Rest each night (no extra time); repair a missed one: rest long --ended-at "Day 9, 06:00" --reason "..."
 time 2h --reason "searching the library"
 travel 24 --pace normal | travel --to 55,30 --pace slow   # region map: terrain & roads, moves the party marker
 ```
@@ -192,6 +224,11 @@ map set <id> --kv lighting=dark                           map party 40,30   map 
 map from-image <asset-id> --w 30 --h 20
 asset look kira --hair "long auburn braid" --eyes green --marks "scar across left cheek" --outfit "crimson robes" [--headwear hood] [--clear eyes|all]
 asset look kira --like oswin-hale        # keep another creature's face: an NPC who joins the party as a character keeps the look the players know
+asset look kira --species Elf --presentation female  # visual identity only; never changes mechanical species or traits
+asset look kira --clear-like            # stop preserving another creature's appearance
+asset identity kira                    # read-only species, presentation, face/body selection and missing/conflicting facts
+asset identity                         # inspect party and current map
+asset identity --all --issues-only      # audit every creature, including corpses; does not pin guesses or write events
 asset art kira [--crop face] [--out file.svg] | asset art kira:<item-id> | asset art srd:flame-tongue     # write the generated picture to look at
 asset portrait kira [--style heraldic] [--clear] | asset icon "dragon" | asset fetch <url> --name "Cave art" --license CC0 --credit "..." [--portrait kira] [--item kira:<item-id>]
 asset import path/to/file.png --license "own work" | asset draw drawing.svg --name "Sister Maren" --portrait maren

@@ -1,0 +1,92 @@
+[
+  {
+    "fixture": "wilderness:The Old Forest",
+    "median_ms": 13.78,
+    "p95_ms": 46.59,
+    "svg_bytes": 646334
+  },
+  {
+    "fixture": "interior:The Lantern Inn",
+    "median_ms": 7.36,
+    "p95_ms": 13.41,
+    "svg_bytes": 616129
+  },
+  {
+    "fixture": "dungeon:The Forgotten Vault",
+    "median_ms": 7.71,
+    "p95_ms": 9.63,
+    "svg_bytes": 618975
+  },
+  {
+    "fixture": "interior:The Mosaic Court",
+    "median_ms": 7.23,
+    "p95_ms": 8.78,
+    "svg_bytes": 625976
+  },
+  {
+    "fixture": "region:The Borderlands",
+    "median_ms": 3.41,
+    "p95_ms": 4.85,
+    "svg_bytes": 141500
+  },
+  {
+    "fixture": "portrait:ranger",
+    "median_ms": 1.08,
+    "p95_ms": 1.44,
+    "svg_bytes": 25021
+  },
+  {
+    "fixture": "portrait:knight",
+    "median_ms": 0.84,
+    "p95_ms": 1.04,
+    "svg_bytes": 23916
+  },
+  {
+    "fixture": "portrait:mage",
+    "median_ms": 0.78,
+    "p95_ms": 1.03,
+    "svg_bytes": 25003
+  },
+  {
+    "fixture": "portrait:cleric",
+    "median_ms": 0.88,
+    "p95_ms": 1.34,
+    "svg_bytes": 28455
+  },
+  {
+    "fixture": "portrait:wolf",
+    "median_ms": 0.62,
+    "p95_ms": 0.88,
+    "svg_bytes": 23214
+  },
+  {
+    "fixture": "portrait:dragon",
+    "median_ms": 0.26,
+    "p95_ms": 0.47,
+    "svg_bytes": 19388
+  },
+  {
+    "fixture": "item:Silver Longsword",
+    "median_ms": 0.1,
+    "p95_ms": 0.62,
+    "svg_bytes": 3625
+  },
+  {
+    "fixture": "item:Potion of Healing",
+    "median_ms": 0.31,
+    "p95_ms": 1.39,
+    "svg_bytes": 4362
+  },
+  {
+    "fixture": "item:Ruby Amulet",
+    "median_ms": 0.22,
+    "p95_ms": 0.33,
+    "svg_bytes": 4996
+  },
+  {
+    "fixture": "item:Leather Spellbook",
+    "median_ms": 0.28,
+    "p95_ms": 0.51,
+    "svg_bytes": 4097
+  }
+]

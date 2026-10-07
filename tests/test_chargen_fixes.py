@@ -174,8 +174,8 @@ class ChargenFixesTest(unittest.TestCase):
         self.ok("map", "set", "barge", "--kv", "theme=ship")
         self.rule("map", "set", "barge", "--kv", "theme=disco", contains="theme")
         svg = Path(self.ok("map", "render", "barge").strip().splitlines()[-1]).read_text(encoding="utf-8")
-        self.assertIn("url(#carpet)", svg)
-        self.assertIn("url(#felt)", svg)
+        self.assertTrue("url(#painted-surface-3)" in svg or "url(#carpet)" in svg)
+        self.assertTrue('href="#painted-interior-tables-v2-11"' in svg or 'url(#felt)' in svg)
         bad = self.tmp / "bad.txt"
         bad.write_text("##9#\n", encoding="utf-8")
         self.rule("map", "import-grid", "barge", "--out", str(bad), "--small", "test", contains="Unknown terrain")
@@ -204,8 +204,8 @@ class ChargenFixesTest(unittest.TestCase):
         self.rule("map", "set", "baths", "--kv", "accent=pink", contains="accent")
         svg = Path(self.ok("map", "render", "baths").strip().splitlines()[-1]).read_text(encoding="utf-8")
         self.assertIn('id="wallface"', svg)      # brick wall faces
-        self.assertIn("url(#fine)", svg)         # the bathhouse's mosaic floor
-        self.assertIn("url(#tiles)", svg)        # the tiled 'z' squares
+        self.assertTrue("url(#painted-surface-2)" in svg or "url(#fine)" in svg)  # mosaic floor
+        self.assertTrue("url(#painted-surface-2)" in svg or "url(#tiles)" in svg)
         self.assertIn("#fbf6ee", svg)            # stone coping round the built pool
         self.assertIn("#aa3355", svg)            # the map's own accent colour
 

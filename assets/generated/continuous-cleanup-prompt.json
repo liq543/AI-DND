@@ -1,0 +1,4 @@
+{
+  "prompt": "Edit this production game sprite sheet. REMOVE EVERY PART OF THE BROWN GLOWING BACKGROUND completely to actual transparent alpha. No ground, no canvas, no haze, no diffuse glow between sprites, no opaque colored backdrop anywhere. Keep the four empty wooden furniture objects exactly in the same 2 by 2 cells and preserve their texture, scale, shape and palette. Only the furniture silhouettes and very tight minimal contact shadows may remain; outside those silhouettes must be alpha zero. This is a clean cutout sprite atlas for compositing over independently rendered floors.",
+  "operation": "Background removal; runtime uses cropped furnishing surfaces recorded in continuous-furniture-crops.json"
+}

@@ -42,6 +42,13 @@ def game():
     with _lock:
         if key != _cache["key"]:
             try:
+                old, old_key = _cache["game"], _cache["key"]
+                # the usual case, a DM command appended events: verify and apply just those (fast)
+                fresh = old.caught_up() if (old is not None and key and old_key and old_key[0] == key[0]
+                                            and key[1] >= old_key[1]) else None
+                if fresh is not None:
+                    _cache["game"], _cache["error"], _cache["key"] = fresh, None, key
+                    return _cache["game"], _cache["error"]
                 _cache["game"] = Game(Path(key[0])) if key else None
                 _cache["error"] = None if key else "No active campaign yet."
             except TamperError as e:
@@ -122,7 +129,7 @@ class Handler(BaseHTTPRequestHandler):
         if path.startswith(("/api/portrait/", "/api/art/portrait/", "/api/art/face/", "/api/art/bust/")):
             eid = path.rsplit("/", 1)[-1].removesuffix(".svg")
             e = s["entities"].get(eid)
-            if not e or (e.get("hidden") and not views.seen_by_players(g, e)):
+            if not e or (not views._seen(g,e) and not views.seen_by_players(g,e)):
                 return self.json({"error": "unknown"}, 404)
             if e.get("portrait") and e["portrait"] in s["assets"] and s["assets"][e["portrait"]].get("public"):
                 return self.redirect(f"/asset/{e['portrait']}")
@@ -131,7 +138,7 @@ class Handler(BaseHTTPRequestHandler):
         if path.startswith("/api/token/"):
             eid = path.rsplit("/", 1)[-1].removesuffix(".svg")
             e = s["entities"].get(eid)
-            if not e or e.get("hidden"):
+            if not views._seen(g,e):
                 return self.json({"error": "unknown"}, 404)
             own = e.get("portrait") in s["assets"] and s["assets"][e["portrait"]].get("public")
             if own:  # an <img> can't load images inside an SVG, so the picture is inlined
@@ -203,7 +210,7 @@ class Handler(BaseHTTPRequestHandler):
             return self.json(views.item_info(g, it, e["id"]))
         if path.startswith("/api/creature/"):
             e = s["entities"].get(path.rsplit("/", 1)[-1])
-            if not e or e.get("hidden") or e["kind"] == "pc":
+            if not e or not views._seen(g,e) or e["kind"] == "pc":
                 return self.json({"error": "unknown"}, 404)
             return self.json(views.creature_info(g, e))
         if path.startswith("/api/spell/"):
@@ -239,7 +246,7 @@ class Handler(BaseHTTPRequestHandler):
             return self.svg(assets.character_card(e, derive(e)))
         if kind == "creature":
             e = s["entities"].get(parts[1])
-            if not e or e.get("hidden"):
+            if not e or not views._seen(g,e):
                 return self.json({"error": "unknown"}, 404)
             return self.svg(assets.monster_card(e, reveal_stats=e.get("side") == "ally"))
         if kind == "item":
@@ -274,10 +281,10 @@ class Handler(BaseHTTPRequestHandler):
                     self.wfile.write(f"event: update\ndata: {json.dumps({'k': str(key)})}\n\n".encode())
                     self.wfile.flush()
                 beat += 1
-                if beat % 60 == 0:
+                if beat % 150 == 0:   # a keep-alive every ~15 s
                     self.wfile.write(b": ping\n\n")
                     self.wfile.flush()
-                time.sleep(0.25)
+                time.sleep(0.1)   # a change reaches the table within a tenth of a second
         except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError, OSError):
             return
 
@@ -322,8 +329,9 @@ class Handler(BaseHTTPRequestHandler):
                     fulfill(g, rid, "viewer")
                     g.commit()
                     views.write_snapshots(g)
-                    _cache["key"] = None
-                return self.json({"ok": True, "lines": g.out})
+                    lines, g.out = g.out, []
+                    _cache["game"], _cache["error"], _cache["key"] = g, None, events_key()   # already current
+                return self.json({"ok": True, "lines": lines})
             except RuleError as e:
                 return self.json({"error": str(e)}, 409)
             except TamperError as e:

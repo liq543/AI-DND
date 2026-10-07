@@ -9,7 +9,7 @@ WALLS = set("#B")
 
 
 def _shadow(x, y, w, h, rx=2):
-    return f'<rect x="{x + 1.5:.1f}" y="{y + 2:.1f}" width="{w:.1f}" height="{h:.1f}" rx="{rx}" fill="#000" fill-opacity=".22"/>'
+    return f'<rect x="{x + 2.5:.1f}" y="{y + 3.5:.1f}" width="{w:.1f}" height="{h:.1f}" rx="{rx}" fill="#111a14" fill-opacity=".35"/>'
 
 
 def _axis(nb, c):
@@ -44,6 +44,9 @@ def table(cx, cy, s, T, rng, nb):
     x, y, w, h = _span(nb, "A", cx, cy, s, .74, axis)
     out = [_shadow(x, y, w, h),
            f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" rx="2" fill="{T["plank"]}" stroke="{T["furniture_line"]}" stroke-width="1.2"/>']
+    out.append(f'<rect x="{x+1:.1f}" y="{y+1:.1f}" width="{w-2:.1f}" height="{h-2:.1f}" rx="1" fill="url(#art-wood)" opacity=".55"/>'
+               f'<path d="M{x+1:.1f} {y+h-1:.1f}H{x+w-1:.1f}" stroke="#241a10" stroke-width="2" opacity=".5"/>'
+               f'<path d="M{x+2:.1f} {y+1:.1f}H{x+w-2:.1f}" stroke="#e8cfa2" stroke-width="1" opacity=".5"/>')
     for i in (1, 2):
         if axis == "h":
             out.append(f'<path d="M{x:.1f} {y + h * i / 3:.1f}H{x + w:.1f}" stroke="{T["plank_line"]}" stroke-width=".8"/>')
@@ -321,10 +324,15 @@ def ladder(cx, cy, s, T, rng, nb):
 
 
 def hay(cx, cy, s, T, rng, nb):
-    out = [f'<rect x="{cx}" y="{cy}" width="{s}" height="{s}" fill="#d8b85a" fill-opacity=".85"/>']
-    for _ in range(14):
-        px, py, a = cx + rng.random() * s, cy + rng.random() * s, rng.random() * 6.28
-        out.append(f'<path d="M{px:.1f} {py:.1f}l{math.cos(a) * 5:.1f} {math.sin(a) * 5:.1f}" stroke="{rng.choice(["#b8963a", "#f0d888", "#a07a2a"])}" stroke-width="1"/>')
+    # Loose fibre piles follow the tile without exposing a rectangular swatch.
+    out = [f'<ellipse cx="{cx+s*.52:.1f}" cy="{cy+s*.59:.1f}" rx="{s*.48:.1f}" ry="{s*.36:.1f}" fill="#2c281b" opacity=".24"/>']
+    for _ in range(100):
+        a, radius = rng.random()*math.tau, math.sqrt(rng.random())
+        px, py = cx+s*.5+math.cos(a)*radius*s*.47, cy+s*.5+math.sin(a)*radius*s*.34
+        angle, length = rng.uniform(-.6,.6), rng.uniform(s*.10,s*.30)
+        dx,dy = math.cos(angle)*length,math.sin(angle)*length
+        out.append(f'<path d="M{px-dx/2:.1f} {py-dy/2:.1f}q{dx*.45:.1f} {dy*.5-1:.1f} {dx:.1f} {dy:.1f}" '
+                   f'stroke="{rng.choice(["#9a8852", "#c8b47a", "#a89560", "#ddd0a0"])}" stroke-width=".8" opacity=".7" fill="none"/>')
     return "".join(out)
 
 

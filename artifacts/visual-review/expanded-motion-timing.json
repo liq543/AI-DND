@@ -1,0 +1,7 @@
+{
+  "scene": "Generic forest with storm ambient",
+  "samples": 120,
+  "median_frame_interval_ms": 16.7,
+  "p95_frame_interval_ms": 16.8,
+  "measurement": "requestAnimationFrame intervals observed in local IAB review, not a guarantee for other devices"
+}

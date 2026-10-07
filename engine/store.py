@@ -149,31 +149,130 @@ class Store:
                 pass
 
     # -------------------------------------------------------------- read / verify
-    def load(self, verify=True):
-        """Return the list of events, verifying the chain. Raises TamperError on any break."""
+    # Speed: re-checking every signature on every command is most of a command's cost on a long campaign. After a
+    # full check the engine keeps a *verified prefix* record (engine/.verified.json): the log's byte length, the
+    # SHA-256 of those bytes and the head hash, the record itself signed with the campaign key. A later load whose
+    # file starts with exactly those bytes skips re-signing them and verifies only what was appended after. Any edit
+    # inside the prefix changes its SHA-256, so the full check runs and tampering is still caught, and the record
+    # can't be forged without the key. `engine verify` always checks every event.
+    VERIFIED_FILE = ".verified.json"
+
+    def _is_live_log(self):
+        return self.events_path == self.engine_dir / "events.jsonl"   # not a backup or quicksave being probed
+
+    def _record_mac(self, key, rec):
+        return hmac.new(key, canonical({k: rec[k] for k in ("size", "sha256", "head", "count")}).encode(),
+                        hashlib.sha256).hexdigest()
+
+    def _verified_record(self, key, raw):
+        if not self._is_live_log():
+            return None
+        try:
+            rec = json.loads((self.engine_dir / self.VERIFIED_FILE).read_text(encoding="utf-8"))
+            size = int(rec["size"])
+            if not hmac.compare_digest(self._record_mac(key, rec), str(rec.get("mac", ""))):
+                return None
+            if size > len(raw) or hashlib.sha256(raw[:size]).hexdigest() != rec["sha256"]:
+                return None
+            return rec
+        except (OSError, ValueError, KeyError, TypeError):
+            return None
+
+    def _save_verified(self, key, raw_or_none, head, count):
+        """Record the whole current log as verified (raw bytes given, or re-read from disk)."""
+        if not self._is_live_log():
+            return
+        try:
+            raw = raw_or_none if raw_or_none is not None else self.events_path.read_bytes()
+            rec = {"size": len(raw), "sha256": hashlib.sha256(raw).hexdigest(), "head": head, "count": count}
+            rec["mac"] = self._record_mac(key, rec)
+            path = self.engine_dir / self.VERIFIED_FILE
+            tmp = path.with_name(path.name + ".tmp")
+            tmp.write_text(json.dumps(rec), encoding="utf-8")
+            os.replace(tmp, path)
+        except OSError:
+            pass   # only a speed-up: if it can't be written, the next load just verifies more
+
+    def _remember(self, size, head, count, verified, sha=None):
+        """What this process last saw of the log, so appending (or catching up) doesn't have to re-read all of it."""
+        try:
+            mtime = self.events_path.stat().st_mtime_ns
+        except OSError:
+            mtime = None
+        self._seen = {"size": size, "mtime": mtime, "head": head, "count": count, "verified": verified, "sha": sha}
+
+    @staticmethod
+    def _check_link(key, ev, prev, n, lineno):
+        """Verify one event against the one before it (chain link, sequence number, signature)."""
+        body = {k: v for k, v in ev.items() if k != "hash"}
+        if ev.get("prev") != prev:
+            raise TamperError(f"event #{ev.get('seq')} (line {lineno}) does not follow the previous event — log was edited, reordered or truncated")
+        if ev.get("seq") != n + 1:
+            raise TamperError(f"line {lineno}: sequence number {ev.get('seq')} out of order")
+        expect = hmac.new(key, (prev + canonical(body)).encode(), hashlib.sha256).hexdigest()
+        if not hmac.compare_digest(expect, ev.get("hash", "")):
+            raise TamperError(f"event #{ev.get('seq')} (line {lineno}) signature mismatch — it was modified outside the engine")
+
+    def load_new(self):
+        """The events appended since this process last read or wrote the log, each verified, or None when the log
+        changed any other way (shortened, replaced by a quickload, edited): the caller then reloads it in full."""
+        seen = getattr(self, "_seen", None)
+        if not seen or not seen["verified"] or not seen.get("sha"):
+            return None
+        key = self._key()
+        raw = self.events_path.read_bytes()
+        size = seen["size"]
+        if len(raw) < size or hashlib.sha256(raw[:size]).hexdigest() != seen["sha"]:
+            return None
+        new, prev, n = [], seen["head"], seen["count"]
+        for bline in raw[size:].split(b"\n"):
+            line = bline.decode("utf-8")
+            if not line.strip():
+                continue
+            try:
+                ev = json.loads(line)
+            except ValueError:
+                raise TamperError(f"events.jsonl event #{n + 1} is not valid JSON")
+            self._check_link(key, ev, prev, n, f"after #{n}")
+            prev, n = ev.get("hash", ""), n + 1
+            new.append(ev)
+        sha = hashlib.sha256(raw).hexdigest()
+        if new:
+            self._save_verified(key, raw, prev, n)
+        self._remember(len(raw), prev, n, verified=True, sha=sha)
+        return new
+
+    def load(self, verify=True, full=False):
+        """Return the list of events, verifying the chain. Raises TamperError on any break.
+
+        full=True ignores the verified-prefix record and re-checks every signature (`engine verify`)."""
         if not self.events_path.exists():
             raise FileNotFoundError("this campaign has no engine log; run `python -m engine init`")
         key = self._key() if verify else None
+        raw = self.events_path.read_bytes()
+        rec = self._verified_record(key, raw) if verify and not full else None
+        trusted_n = int(rec["count"]) if rec else 0
         events, prev = [], GENESIS
-        with open(self.events_path, encoding="utf-8") as fh:
-            for lineno, line in enumerate(fh, 1):
-                if not line.strip():
-                    continue
-                try:
-                    ev = json.loads(line)
-                except ValueError:
-                    raise TamperError(f"events.jsonl line {lineno} is not valid JSON")
-                if verify:
-                    body = {k: v for k, v in ev.items() if k != "hash"}
-                    if ev.get("prev") != prev:
-                        raise TamperError(f"event #{ev.get('seq')} (line {lineno}) does not follow the previous event — log was edited, reordered or truncated")
-                    if ev.get("seq") != len(events) + 1:
-                        raise TamperError(f"line {lineno}: sequence number {ev.get('seq')} out of order")
-                    expect = hmac.new(key, (prev + canonical(body)).encode(), hashlib.sha256).hexdigest()
-                    if not hmac.compare_digest(expect, ev.get("hash", "")):
-                        raise TamperError(f"event #{ev.get('seq')} (line {lineno}) signature mismatch — it was modified outside the engine")
-                prev = ev.get("hash", "")
-                events.append(ev)
+        for lineno, bline in enumerate(raw.split(b"\n"), 1):
+            line = bline.decode("utf-8")
+            if not line.strip():
+                continue
+            try:
+                ev = json.loads(line)
+            except ValueError:
+                raise TamperError(f"events.jsonl line {lineno} is not valid JSON")
+            if verify and len(events) >= trusted_n:
+                self._check_link(key, ev, prev, len(events), lineno)
+            prev = ev.get("hash", "")
+            events.append(ev)
+            if rec and len(events) == trusted_n and prev != rec["head"]:
+                raise TamperError("the verified record doesn't match the log; run `python -m engine verify`")
+        if rec and len(events) < trusted_n:
+            raise TamperError("the log is shorter than its verified record; run `python -m engine verify`")
+        sha = hashlib.sha256(raw).hexdigest()
+        if verify and (not rec or len(events) > trusted_n):
+            self._save_verified(key, raw, prev, len(events))
+        self._remember(len(raw), prev, len(events), verified=verify, sha=sha)
         return events
 
     def valid_prefix(self):
@@ -196,6 +295,14 @@ class Store:
         return n
 
     def head(self):
+        seen = getattr(self, "_seen", None)
+        if seen and seen["verified"]:
+            try:
+                st = self.events_path.stat()
+                if st.st_size == seen["size"] and st.st_mtime_ns == seen["mtime"]:
+                    return seen["head"], seen["count"]   # nobody has touched the log since this process read or wrote it
+            except OSError:
+                pass
         events = self.load()
         return (events[-1]["hash"] if events else GENESIS), len(events)
 
@@ -222,6 +329,10 @@ class Store:
                     fh.write(line + "\n")
                 fh.flush()
                 os.fsync(fh.fileno())
+            # head() above verified everything before these lines, and these lines were just signed here
+            raw = self.events_path.read_bytes()
+            self._save_verified(key, raw, prev, seq)
+            self._remember(len(raw), prev, seq, verified=True, sha=hashlib.sha256(raw).hexdigest())
             self._backup(seq)
             return written
 

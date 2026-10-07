@@ -1,0 +1,63 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=block" rel="stylesheet">
+<style>
+  :root { --gold: #e8c27a; --gold2: #b8862f; --ink: #0b0d10; --ember: #ff8a3d; }
+  html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+  #cv, #post, #ov { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+  #ov { pointer-events: none; perspective: 1600px; }
+  #post { pointer-events: none; }
+  .el { position: absolute; will-change: transform, opacity; }
+  .callout { left: 96px; bottom: 120px; color: #fff; isolation: isolate; }
+  .callout::before { content: ''; position: absolute; left: -260px; right: -260px; top: -150px; bottom: -120px; z-index: -1;
+    background: radial-gradient(closest-side, rgba(0,0,0,.8), rgba(0,0,0,.55) 55%, transparent); }
+  .callout .rule { width: 72px; height: 3px; background: linear-gradient(90deg, var(--gold), transparent); margin-bottom: 18px; }
+  .callout .h { font: 700 58px/1.02 Cinzel, serif; letter-spacing: .06em; text-transform: uppercase;
+    background: linear-gradient(180deg, #fff6df 0%, #f3d48f 45%, #c99536 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 4px 14px rgba(0,0,0,.85)); white-space: nowrap; }
+  .callout .s { font: 500 25px/1.35 Inter, sans-serif; color: #e9e3d6; margin-top: 12px; text-shadow: 0 2px 10px rgba(0,0,0,.9); letter-spacing: .01em; max-width: 900px; }
+  .quote { font: italic 500 54px/1.25 'Cormorant Garamond', serif; color: #efe6d2; text-align: center; width: 1920px; left: 0; letter-spacing: .01em;
+    text-shadow: 0 2px 22px rgba(0,0,0,.9); }
+  .title { width: 1920px; left: 0; text-align: center; }
+  .gold { background: linear-gradient(180deg, #fff8e6 0%, #f6d78f 38%, #d39b3a 62%, #8a5a18 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .kicker { font: 600 20px Inter, sans-serif; letter-spacing: .55em; color: var(--gold); text-transform: uppercase; }
+  .chat { width: 860px; background: linear-gradient(180deg, rgba(20,22,27,.94), rgba(12,13,16,.95)); border: 1px solid rgba(232,194,122,.28);
+    border-radius: 18px; box-shadow: 0 30px 80px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.05); padding: 26px 30px 30px; color: #e8e4dc; font: 400 23px/1.45 Inter, sans-serif; }
+  .chat .hd { display: flex; align-items: center; gap: 12px; font: 600 17px Inter; color: #b9b2a3; letter-spacing: .04em; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,.07); margin-bottom: 18px; }
+  .chat .hd .dot { width: 12px; height: 12px; border-radius: 50%; background: #d97757; box-shadow: 0 0 12px #d97757; }
+  .msg { margin: 0 0 16px; }
+  .msg .who { font: 700 14px Inter; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 6px; }
+  .msg.you .who { color: #8fb8ff; } .msg.dm .who { color: #e8a57f; }
+  .msg.you .txt { background: rgba(80,120,200,.13); border: 1px solid rgba(120,160,255,.18); border-radius: 12px; padding: 12px 16px; display: inline-block; }
+  .msg.dm .txt { font: italic 500 27px/1.4 'Cormorant Garamond', serif; color: #f3ead6; }
+  .term { font: 400 17px/1.5 'JetBrains Mono', monospace; background: #07080a; border: 1px solid rgba(255,255,255,.07); border-radius: 10px; padding: 12px 16px; margin: 6px 0 16px; color: #9aa3ad; white-space: pre-wrap; }
+  .term .ok { color: #7fd99a; } .term .bad { color: #ff6b6b; font-weight: 600; } .term .cmd { color: #c8d0d8; } .term .dim { color: #6b737c; }
+  .cursor { display: inline-block; width: 10px; height: 1.1em; background: #e8e4dc; vertical-align: -3px; margin-left: 2px; }
+  .card { width: 1920px; height: 1080px; left: 0; top: 0; }
+  .crew-name { font: 900 96px/1 Cinzel, serif; letter-spacing: .03em; }
+  .crew-line { font: 600 22px Inter, sans-serif; letter-spacing: .32em; text-transform: uppercase; color: #e8c27a; }
+  .crew-quote { font: italic 500 44px/1.3 'Cormorant Garamond', serif; color: #f1e7d3; max-width: 860px; }
+  .chip { display: inline-flex; align-items: baseline; gap: 10px; padding: 10px 18px; margin-right: 12px; border-radius: 10px; border: 1px solid rgba(232,194,122,.35);
+    background: rgba(10,10,12,.55); color: #f6ecd8; font: 700 30px Inter; }
+  .chip small { font: 600 14px Inter; letter-spacing: .18em; color: #c9b58c; }
+  .portrait { width: 560px; height: 560px; border-radius: 6px; overflow: hidden; box-shadow: 0 40px 90px rgba(0,0,0,.75), 0 0 0 2px rgba(232,194,122,.55), 0 0 0 10px rgba(10,10,10,.6);
+    background-size: cover; background-position: center; }
+  .shot { box-shadow: 0 40px 120px rgba(0,0,0,.8), 0 0 0 1px rgba(232,194,122,.35); border-radius: 10px; overflow: hidden; background-repeat: no-repeat; }
+  .mtext { width: 1920px; left: 0; text-align: center; font: 900 92px/1 Cinzel, serif; letter-spacing: .05em; text-transform: uppercase; }
+  .chain { font: 600 17px 'JetBrains Mono', monospace; color: #d9c79f; display: flex; gap: 14px; }
+  .block { padding: 12px 16px; border: 1px solid rgba(232,194,122,.4); border-radius: 10px; background: rgba(15,14,12,.85); min-width: 230px; }
+  .block b { color: #fff; } .block .h { color: #8fd19e; }
+  .featrow { width: 1920px; left: 0; text-align: center; font: 600 21px Inter, sans-serif; letter-spacing: .3em; color: #d8c9a6; text-transform: uppercase; }
+  .cta { left: 50%; transform: translateX(-50%); padding: 18px 34px; border: 1px solid rgba(232,194,122,.6); border-radius: 14px; background: rgba(20,16,10,.6);
+    font: 500 30px Inter, sans-serif; color: #f5ead2; white-space: nowrap; }
+  .cta code { font: 600 30px 'JetBrains Mono', monospace; color: #ffb27a; }
+  .vhs { font: 600 34px 'JetBrains Mono', monospace; color: #fff; text-shadow: 2px 0 #f0f, -2px 0 #0ff; }
+</style></head>
+<body>
+<canvas id="cv" width="1920" height="1080"></canvas>
+<div id="ov"></div>
+<canvas id="post" width="1920" height="1080"></canvas>
+<script src="edl.js"></script>
+<script src="trailer.js"></script>
+</body></html>

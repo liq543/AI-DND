@@ -7,7 +7,7 @@ import json
 import math
 import re
 
-from . import dice, maps, srd
+from . import dice, maps, srd, effects as E, spells as S
 from .core import item_display_name
 from .core import (MAGIC_EFFECTS, RARITY_ORDER, TIER_MAX_GP_AWARD, TIER_MAX_RARITY, RuleError,
                    abilities, amod, armor_class, attacks_per_action, condition_names, derive, fmt_mod,
@@ -67,6 +67,10 @@ def use_action(g, e, kind="action", what=""):
         return
     ec = economy(g, e["id"])
     if kind == "reaction":
+        if E.has(e, "slow"):
+            raise RuleError("Slow prevents Reactions.")
+        if E.has(e, "no_oa") and "opportunity" in what.lower():
+            raise RuleError("Shocking Grasp prevents Opportunity Attacks until the target's next turn.")
         if ec.get("reaction_used"):
             raise RuleError(f"{e['name']} has already used their Reaction this round.")
         if "incapacitated" in condition_names(e):
@@ -78,13 +82,19 @@ def use_action(g, e, kind="action", what=""):
     if "incapacitated" in condition_names(e):
         raise RuleError(f"{e['name']} is Incapacitated and can't take actions or bonus actions.")
     key = "action_used" if kind == "action" else "bonus_used"
+    if E.has(e, "slow") and ec.get("bonus_used" if kind == "action" else "action_used"):
+        raise RuleError("Slow allows an Action or a Bonus Action on this turn, not both.")
     if ec.get(key):
         if kind == "action" and ec.get("action_surge"):
-            set_economy(g, e["id"], action_surge=False)
+            set_economy(g, e["id"], action_surge=False, last_action_haste=False)
+            return
+        if kind == "action" and E.has(e, "haste") and not ec.get("haste_used") and \
+                what.lower().split(" ")[0] in ("attack", "dash", "disengage", "hide", "utilize"):
+            set_economy(g, e["id"], haste_used=True, last_action_haste=True)
             return
         raise RuleError(f"{e['name']} has already used their {'Action' if kind == 'action' else 'Bonus Action'} this turn"
                         f"{' (' + ec.get(key + '_for', '') + ')' if ec.get(key + '_for') else ''}.")
-    set_economy(g, e["id"], **{key: True, key + "_for": what})
+    set_economy(g, e["id"], **{key: True, key + "_for": what}, **({"last_action_haste": False} if kind == "action" else {}))
 
 
 def token_pos(e):
@@ -153,6 +163,7 @@ def make_request(g, e, label, spec):
 def ability_check(g, e, what, dc=None, adv=(), dis=(), hidden=False, purpose=None, now=False, request=None):
     what = what.lower().strip()
     if what in srd.SKILLS:
+        ab = srd.SKILLS[what]
         m, label = skill_mod(g_ent(g, e), what), f"{srd.SKILLS[what].upper()} ({what.title()})"
     elif (srd.find("gear", what) or {}).get("tool_ability"):
         tool = srd.find("gear", what)
@@ -193,8 +204,12 @@ def ability_check(g, e, what, dc=None, adv=(), dis=(), hidden=False, purpose=Non
         return {"request": make_request(g, e, f"{label}" + (f" DC {dc}" if dc and not hidden else ""),
                                         {"op": "check", "who": e["id"], "what": what, "dc": dc, "adv": adv, "dis": dis,
                                          "hidden": hidden, "purpose": purpose})}
+    bonus, extra, a, d = E.roll_modifiers(g, e, "check", ab, what)
+    m += bonus
+    adv.extend(a)
+    dis.extend(d)
     mode = _mode(adv, dis)
-    r = g.roll(f"1d20{fmt_mod(m) if m else ''}", purpose or label, e["id"], mode, hidden=hidden, request=request)
+    r = g.roll(f"1d20{fmt_mod(m) if m else ''}{extra}", purpose or label, e["id"], mode, hidden=hidden, request=request)
     ok = None if dc is None else r["total"] >= dc
     txt = f"{e['name']} — {label}{_fmt_mode(mode, adv, dis)}: {r['text']}" + ("" if dc is None else f" vs DC {dc} → {'SUCCESS' if ok else 'FAILURE'}")
     if hidden:
@@ -243,8 +258,14 @@ def saving_throw(g, e, ability, dc, adv=(), dis=(), source=None, spell=False, no
     if wants_request(g, e, now) and not request:
         return {"request": make_request(g, e, label, {"op": "save", "who": e["id"], "ability": ab, "dc": dc, "adv": adv,
                                                       "dis": dis, "source": source, "spell": spell, "effect": effect})}
+    bonus, extra, a, d = E.roll_modifiers(g, e, "save", ab)
+    m += bonus
+    adv.extend(a)
+    dis.extend(d)
+    if source and "poison" in str(source).lower() and E.has(e, "poison_save_adv"):
+        adv.append("Protection from Poison")
     mode = _mode(adv, dis)
-    r = g.roll(f"1d20{fmt_mod(m) if m else ''}", purpose or f"{ab.upper()} save" + (f" vs {source}" if source else ""), e["id"], mode, request=request)
+    r = g.roll(f"1d20{fmt_mod(m) if m else ''}{extra}", purpose or f"{ab.upper()} save" + (f" vs {source}" if source else ""), e["id"], mode, request=request)
     ok = r["total"] >= dc
     g.say(f"{e['name']} — {label}{_fmt_mode(mode, adv, dis)}: {r['text']} → {'SUCCESS' if ok else 'FAILURE'}", kind="roll", roll=r["id"],
           who=e["id"], save=ab, success=ok)
@@ -259,6 +280,19 @@ def saving_throw(g, e, ability, dc, adv=(), dis=(), source=None, spell=False, no
 
 def apply_save_effect(g, e, res, effect):
     """effect = {'damage': [[amount, type]], 'half': bool, 'condition': name, 'source': str, 'caster': id, 'spell': slug}"""
+    if effect.get("remove_spell_effect") and res["success"]:
+        fx = next((f for f in e.get("effects", []) if f.get("id") == effect["remove_spell_effect"]), None)
+        if fx:
+            E.remove(g, e, fx, "ends after a successful save")
+            release_spell_if_unused(g, fx)
+    if effect.get("spell_effect") and not res["success"]:
+        fx = effect["spell_effect"]
+        caster = g.entities.get(fx["caster"], {})
+        conc = caster.get("concentration") or {}
+        current = not fx.get("concentration") or (conc.get("spell") == fx["spell"] and
+                   conc.get("instance") == fx.get("concentration_instance"))
+        if current and (fx.get("expires_at") is None or E.clock(g) < fx["expires_at"]):
+            E.add(g, e, fx)
     if effect.get("concentration_check"):
         after_concentration_save(g, g.get(e["id"]), res)
         return
@@ -277,14 +311,14 @@ def apply_save_effect(g, e, res, effect):
 # ====================================================================== damage & healing
 
 def defenses(e):
-    if e["kind"] == "pc":
-        res = set(e.get("resist", []))
-        if any(c["name"] == "raging" for c in e.get("conditions", [])):
-            res |= {"bludgeoning", "piercing", "slashing"}
-        for fx in e.get("effects", []):
-            res |= set(fx.get("resist", []))
-        return res, set(e.get("immune", [])), set(e.get("vulnerable", []))
-    return set(e.get("resist", [])), set(e.get("immune", [])), set(e.get("vulnerable", []))
+    res, imm, vul = (set(e.get(k, [])) for k in ("resist", "immune", "vulnerable"))
+    if any(c["name"] == "raging" for c in e.get("conditions", [])):
+        res |= {"bludgeoning", "piercing", "slashing"}
+    for fx in E.active(e):
+        res |= set(fx.get("resist", []))
+        imm |= set(fx.get("immune", []))
+        vul |= set(fx.get("vulnerable", []))
+    return res, imm, vul
 
 
 def apply_damage(g, e, parts, source=None, crit=False, attacker=None, melee_within_5=False, knockout=False):
@@ -292,6 +326,7 @@ def apply_damage(g, e, parts, source=None, crit=False, attacker=None, melee_with
     if e.get("dead"):
         g.note(f"{e['name']} is already dead.")
         return 0
+    parts = E.reduce_damage(g, e, parts)
     res, imm, vul = defenses(e)
     total, notes = 0, []
     for amount, dtype in parts:
@@ -313,6 +348,10 @@ def apply_damage(g, e, parts, source=None, crit=False, attacker=None, melee_with
     remaining = total - absorbed
     hp_before = e["hp"]
     new_hp = max(0, hp_before - remaining)
+    if hp_before > 0 and new_hp == 0 and E.has(e, "death_ward"):
+        ward = next(f for f in E.active(e) if f.get("death_ward"))
+        E.remove(g, e, ward, "prevents dropping to zero HP")
+        new_hp = 1
     patch = {"temp_hp": temp - absorbed, "hp": new_hp}
     if attacker is not None:
         # remembered for reactions that answer a hit (Uncanny Dodge halves the attack's damage)
@@ -394,7 +433,7 @@ def after_concentration_save(g, e, res):
 def heal(g, e, amount, source):
     if e.get("dead"):
         raise RuleError(f"{e['name']} is dead. Only magic that explicitly returns the dead to life (e.g. Revivify) can help.")
-    if any(c["name"] == "cursed-no-heal" for c in e.get("conditions", [])):
+    if E.has(e, "no_heal") or any(c["name"] == "cursed-no-heal" for c in e.get("conditions", [])):
         raise RuleError(f"{e['name']} can't regain hit points right now.")
     mx = hp_max(e)
     new = min(mx, e["hp"] + max(0, int(amount)))
@@ -425,7 +464,7 @@ def temp_hp(g, e, amount, source):
 # ====================================================================== conditions
 
 def add_condition(g, e, name, source=None, until=None, caster=None, spell=None, save=None, quiet=False, rounds=None,
-                  escalate=None):
+                  escalate=None, effect_id=None):
     name = name.lower().strip()
     valid = set(srd.data()["conditions"]) | {"raging", "dodging", "concentrating", "hidden", "surprised", "blessed",
                                              "baned", "hasted", "slowed", "marked", "disengaged", "helped", "mocked"}
@@ -433,13 +472,22 @@ def add_condition(g, e, name, source=None, until=None, caster=None, spell=None, 
         raise RuleError(f"'{name}' is not an SRD condition. Conditions: {', '.join(srd.data()['conditions'])}")
     if name == "exhaustion":
         raise RuleError("Use `exhaustion add` — Exhaustion has levels.")
-    if name in e.get("condition_immune", []):
+    immune = set(e.get("condition_immune", []))
+    for fx in E.active(e):
+        immune.update(fx.get("condition_immune", []))
+        if spell and fx.get("freedom"):
+            immune.update(("paralyzed", "restrained"))
+        creature = g.entities.get(caster, {})
+        if fx.get("protected_types") and any(t in str(creature.get("type", "")).lower() for t in fx["protected_types"]):
+            immune.update(("charmed", "frightened"))
+    if name in immune:
         g.say(f"{e['name']} is immune to the {name.title()} condition.", kind="info")
         return False
-    conds = [c for c in e.get("conditions", []) if c["name"] != name]
+    conds = [c for c in e.get("conditions", []) if c["name"] != name or
+             (effect_id and c.get("effect_id") != effect_id)]
     entry = {"name": name}
     for k, v in (("source", source), ("until", until), ("caster", caster), ("spell", spell), ("save", save), ("rounds", rounds),
-                 ("escalate", escalate)):
+                 ("escalate", escalate), ("effect_id", effect_id)):
         if v:
             entry[k] = v
     conds.append(entry)
@@ -478,12 +526,16 @@ def break_invisibility(g, e, why):
             continue
         src, sp = (c.get("source") or "").lower(), (c.get("spell") or "").lower()
         if sp == "invisibility" or src.startswith("hide") or ("invisibility" in src and "greater" not in src):
-            remove_condition(g, e, "invisible", quiet=True)
+            fx = next((f for f in e.get("effects", []) if f.get("id") == c.get("effect_id")), None)
+            if fx:
+                E.remove(g, e, fx, why)
+            else:
+                g.set(e, conditions=[x for x in e.get("conditions", []) if x != c])
             g.say(f"{e['name']} is no longer Invisible ({why}).", kind="condition", who=e["id"], cond="invisible", on=False)
             if sp == "invisibility" and c.get("caster"):
                 ce = g.entities.get(c["caster"])
                 if ce and (ce.get("concentration") or {}).get("spell") == "invisibility":
-                    end_concentration(g, ce, "the invisible creature attacked")
+                    release_spell_if_unused(g, c)
             return
 
 
@@ -508,7 +560,7 @@ def release_spell_if_unused(g, cond):
     if (ce.get("concentration") or {}).get("spell") != spell:
         return
     still = any(c.get("caster") == caster and c.get("spell") == spell
-                for o in g.entities.values() for c in o.get("conditions", []))
+                for o in g.entities.values() for c in o.get("conditions", []) + o.get("effects", []))
     if not still:
         end_concentration(g, ce, "no creature is still affected")
 
@@ -526,6 +578,9 @@ def end_concentration(g, e, why):
             g.say(f"  {other['name']}: {', '.join(c['name'] for c in linked)} from {conc['spell_name']} ends.", kind="condition")
         fx = [f for f in other.get("effects", []) if f.get("caster") == e["id"] and f.get("spell") == conc["spell"]]
         if fx:
+            for f in fx:
+                if f.get("managed_spell"):
+                    E.remove(g, other, f)
             g.set(other, effects=[f for f in other["effects"] if f not in fx])
 
 
@@ -573,9 +628,9 @@ def attack_modes(g, att, tgt, ranged, dist, extra_adv=(), extra_dis=()):
     an, tn = condition_names(att), condition_names(tgt)
     for c in ATTACKER_DIS & an:
         dis.append(f"attacker {c}")
-    if "invisible" in an:
+    if "invisible" in an and not E.has(att, "reveals_invisible") and not E.has(tgt, "see_invisible"):
         adv.append("attacker invisible")
-    if "invisible" in tn:
+    if "invisible" in tn and not E.has(tgt, "reveals_invisible") and not E.has(att, "see_invisible"):
         dis.append("target invisible")
     for c in TARGET_ADV & tn:
         adv.append(f"target {c}")
@@ -599,7 +654,8 @@ def attack_modes(g, att, tgt, ranged, dist, extra_adv=(), extra_dis=()):
                 # rules glossary, Ranged Attack: only an enemy "who can see you" and isn't Incapacitated imposes this
                 dis.append(f"hostile {other['name']} within 5 ft")
                 break
-    return adv, dis
+    a, d = E.attack_modes(att, tgt, dist)
+    return adv + a, dis + d
 
 
 def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, offhand=False, versatile=False,
@@ -670,6 +726,8 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
     c = combat(g)
     ec = economy(g, att["id"]) if c else {}
     if c and not request:
+        if E.has(att, "slow") and ec.get("attacks_made", 0):
+            raise RuleError("Slow permits only one attack on this turn.")
         if reaction:
             use_action(g, att, "reaction", f"opportunity attack with {name}")
         elif offhand or bonus_action:
@@ -696,9 +754,11 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
             left = ec.get("attacks_left")
             if left is None or left <= 0:
                 use_action(g, att, "action", f"Attack ({name})")
-                left = attacks_per_action(att)
+                left = 1 if E.has(att, "slow") or economy(g, att["id"]).get("last_action_haste") else attacks_per_action(att)
+            if E.has(att, "slow") and ec.get("attacks_made", 0):
+                raise RuleError("Slow permits only one attack on this turn.")
             light = "light" in prof.get("properties", [])
-            set_economy(g, att["id"], attacks_left=left - 1,
+            set_economy(g, att["id"], attacks_left=left - 1, attacks_made=ec.get("attacks_made", 0) + 1,
                         attacked_light=ec.get("attacked_light") or light,
                         light_item=(item or {}).get("id") if light else ec.get("light_item"))
     # ---------------------------------------------------------------- ammunition
@@ -711,10 +771,14 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
                                         {"op": "attack", "att": att["id"], "tgt": tgt["id"], "weapon": weapon,
                                          "adv": list(adv), "dis": list(dis), "offhand": offhand, "versatile": versatile,
                                          "sneak": sneak, "smite": smite, "reaction": reaction})}
-    mode = _mode(a_adv, a_dis)
     exh = exhaustion_penalty(att)
-    total_bonus = bonus - exh
-    r = g.roll(f"1d20{fmt_mod(total_bonus)}", f"attack: {name} vs {tgt['name']}", att["id"], mode, request=request)
+    fxbonus, extra, fxadv, fxdis = E.roll_modifiers(g, att, "attack")
+    a_adv.extend(fxadv)
+    a_dis.extend(fxdis)
+    mode = _mode(a_adv, a_dis)
+    total_bonus = bonus - exh + fxbonus
+    r = g.roll(f"1d20{fmt_mod(total_bonus)}{extra}", f"attack: {name} vs {tgt['name']}", att["id"], mode, request=request)
+    E.consume_attack_advantage(g, tgt)
     if "mocked" in condition_names(att):
         remove_condition(g, att, "mocked", quiet=True)   # Vicious Mockery spoils one attack roll only
     ac, _ = armor_class(tgt)
@@ -784,7 +848,8 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
             parts.append([sr["total"], "radiant"])
             notes.append(f"Divine Smite (level {smite_level}) {sr['text']}")
         conc = att.get("concentration") or {}
-        if conc.get("spell") == "hunters-mark" and tgt["id"] in conc.get("targets", []):
+        if conc.get("spell") == "hunters-mark" and tgt["id"] in conc.get("targets", []) and not any(
+                f.get("spell") == "hunters-mark" and f.get("caster") == att["id"] for f in E.active(tgt)):
             hm = g.roll("1d6", "Hunter's Mark", att["id"], crit=crit)
             parts.append([hm["total"], "force"])
             notes.append(f"Hunter's Mark {hm['text']}")
@@ -793,6 +858,12 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
             notes.append(f"possible extra {rd['dice']} {rd['type']} {rd['condition']} — DM applies with `damage` if it applies")
     if notes:
         g.say("   + " + "; ".join(notes), kind="attack")
+    for fx in E.active(att):
+        if fx.get("weapon_damage_dice") and parts:
+            expr = fx["weapon_damage_dice"]
+            rsize = g.roll(expr.lstrip("+-"), fx["name"], att["id"], crit=crit)
+            parts[0][0] = max(1, parts[0][0] + rsize["total"] * (-1 if expr.startswith("-") else 1))
+    parts.extend(E.hit_riders(g, att, tgt, crit))
     apply_damage(g, tgt, parts, source=name, crit=crit, attacker=att, knockout=knockout,
                  melee_within_5=(not ranged and (d is None or d <= 5)))
     if item and item.get("venom") and g.state["time"] <= item.get("venom_until", -1):
@@ -831,11 +902,13 @@ def grapple_or_shove(g, att, tgt, kind, prone=False, reaction=False):
         if current_id(g) != att["id"]:
             raise RuleError(f"It's not {att['name']}'s turn.")
         ec = economy(g, att["id"])
+        if E.has(att, "slow") and ec.get("attacks_made", 0):
+            raise RuleError("Slow permits only one attack on this turn.")
         left = ec.get("attacks_left")
         if left is None or left <= 0:
             use_action(g, att, "action", f"Attack ({kind})")
-            left = attacks_per_action(att)
-        set_economy(g, att["id"], attacks_left=left - 1)
+            left = 1 if E.has(att, "slow") or economy(g, att["id"]).get("last_action_haste") else attacks_per_action(att)
+        set_economy(g, att["id"], attacks_left=left - 1, attacks_made=ec.get("attacks_made", 0) + 1)
     dc = 8 + amod(att, "str") + pb(att)
     ab = "str" if save_mod(tgt, "str") >= save_mod(tgt, "dex") else "dex"
     g.say(f"🤼 {att['name']} tries to {kind} {tgt['name']} ({ab.upper()} save DC {dc}).", kind="attack", who=att["id"], target=tgt["id"])
@@ -983,12 +1056,17 @@ def add_dice(expr, extra, n):
 
 
 def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, free=None, adv=(), dis=(),
-         condition=None, component=None, now=False, scroll=None, request=None, readied=False):
+         condition=None, component=None, now=False, scroll=None, request=None, readied=False, choice=None):
     e = g.get(caster_ref)
     spell = g.require("spells", spell_name, "Spell")
     base = spell["level"]
     empty_area = any(str(t).lower() == "none" for t in targets)  # an area spell placed where no creature is (Web in a doorway)
     tgts = [g.get(t) for t in targets if str(t).lower() != "none"]
+    empty_profile = empty_area and S.PROFILES.get(spell["slug"], {}).get("handler") == "save"
+    if empty_profile:
+        choices = None
+    else:
+        tgts, choices = S.prepare(g, e, spell, tgts, base if ritual or free or scroll else (slot_level or base), choice)
     harmful = spell["effect"].get("kind") in ("attack", "darts", "damage") or \
         (spell["effect"].get("kind") == "save" and spell["effect"].get("dice"))
     if not combat(g) and harmful and any(t["id"] != e["id"] for t in tgts):
@@ -1104,11 +1182,19 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
         use_action(g, e, kind, f"cast {spell['name']}")
     if how == "scroll":
         g.set(e, inventory=[i for i in e["inventory"] if i["id"] != scroll])
+    if E.has(e, "slow") and "S" in spell["components"].split("(")[0]:
+        failure = g.roll("1d4", "Slow somatic spell failure", e["id"])
+        if failure["total"] == 1:
+            g.say(f"{spell['name']} fails because of Slow; the casting resources are spent.", kind="spell")
+            return {"failed": True}
     # --------------------------------------------------------------- range check
     if spell.get("range_ft") is not None:
         for t in tgts:
             dd = dist_ft(e, t)
             rng = spell["range_ft"] if spell["range_ft"] else 5
+            if spell["slug"] == "spare-the-dying":
+                lv = level(e) if e["kind"] == "pc" else 1
+                rng = 15 * 2 ** ((lv >= 5) + (lv >= 11) + (lv >= 17))
             if dd is not None and dd > rng and not spell["range"].lower().startswith("self"):
                 raise RuleError(f"{t['name']} is {dd} ft away — beyond {spell['name']}'s range ({spell['range']}).")
     # --------------------------------------------------------------- concentration
@@ -1116,7 +1202,7 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
         if e.get("concentration"):
             end_concentration(g, e, f"began concentrating on {spell['name']}")
         g.set(e, concentration={"spell": spell["slug"], "spell_name": spell["name"], "targets": [t["id"] for t in tgts],
-                                "since": g.state["time"], "duration": spell["duration"]})
+                                "since": E.clock(g), "duration": spell["duration"], "instance": f"cast{g.state['seq'] + 1}"})
     sc = spellcasting(e).get(next(iter(c for c in e.get("classes", {}) if c in spell["classes"]), None) or next(iter(spellcasting(e) or {"x": 0}), None), {}) if e["kind"] == "pc" else {}
     if e["kind"] == "pc" and not sc and spellcasting(e):
         sc = next(iter(spellcasting(e).values()))
@@ -1138,6 +1224,11 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
           spell=spell["slug"], targets=[t["id"] for t in tgts], dtype=(spell.get("effect") or {}).get("type"),
           fxkind=(spell.get("effect") or {}).get("kind"))
     # --------------------------------------------------------------- effects
+    entry = S.support(spell)
+    if entry["remaining"]:
+        g.note(f"  DM ruling: {entry['remaining']}")
+    if not empty_profile and S.resolve(g, e, spell, slot_level, tgts, sc, choices, now):
+        return {"ok": True, "support": entry["status"]}
     fx = spell["effect"]
     char_level = level(e) if e["kind"] == "pc" else max(1, int(srd.num(str(e.get("cr", "1")).split("/")[0], 1)))
     upcast_n = max(0, slot_level - base) if base else 0
@@ -1164,9 +1255,6 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
             expr = add_dice(expr, fx["upcast"], upcast_n)
         m = amod(e, sc["ability"]) if fx.get("add_mod") and sc else 0
         for t in tgts:
-            if (t.get("type") or "").lower().startswith(("undead", "construct")):
-                g.say(f"{spell['name']} has no effect on {t['name']} ({t['type']}).")
-                continue
             r = g.roll(f"{expr}{fmt_mod(m) if m else ''}", f"{spell['name']} healing", e["id"])
             heal(g, t, r["total"], spell["name"])
     elif kind in ("attack",):
@@ -1177,11 +1265,13 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
             count = 1 + (char_level >= 5) + (char_level >= 11) + (char_level >= 17)
         if fx.get("count"):
             count = fx["count"] + upcast_n * fx.get("count_per_level", 0)
+        if combat(g) and E.has(e, "slow"):
+            count = 1
         if len(tgts) > count:
             raise RuleError(f"{spell['name']} makes {count} attack(s); you listed {len(tgts)} targets.")
         seq = [tgts[i % len(tgts)] for i in range(count)] if len(tgts) < count and count > 1 else tgts
         for t in seq:
-            spell_attack(g, e, t, spell, sc, damage_expr(), fx, adv, dis, now)
+            spell_attack(g, e, t, spell, sc, damage_expr(), fx, adv, dis, now, slot=slot_level)
     elif kind == "save" and not tgts and empty_area:
         g.say(f"   {spell['name']} fills an area with no creatures in it — no saving throws yet.", kind="spell")
     elif kind == "save":
@@ -1230,18 +1320,15 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
                 add_condition(g, t, condition, source=spell["name"], caster=e["id"], spell=spell["slug"])
         g.note(f"  {spell['name']}: effect is narrative — read rules/spells/{spell['slug']}.md and adjudicate. "
                f"Duration: {spell['duration']}.")
-        if spell["slug"] == "mage-armor" and tgts:
-            for t in tgts:
-                g.set(t, effects=[f for f in t.get("effects", []) if f["name"] != "mage armor"] + [{"name": "mage armor", "caster": e["id"], "spell": "mage-armor"}])
-        if spell["slug"] == "shield-of-faith" and tgts:
-            for t in tgts:
-                g.set(t, effects=t.get("effects", []) + [{"name": "Shield of Faith", "ac_bonus": 2, "caster": e["id"], "spell": "shield-of-faith"}])
-        if spell["slug"] == "shield":
-            g.set(e, effects=e.get("effects", []) + [{"name": "Shield", "ac_bonus": 5, "until": "start of your next turn", "spell": "shield", "caster": e["id"]}])
     return {"ok": True}
 
 
-def spell_attack(g, e, t, spell, sc, expr, fx, adv, dis, now):
+def spell_attack(g, e, t, spell, sc, expr, fx, adv, dis, now, slot=0, request=None):
+    if combat(g) and not request:
+        ec = economy(g, e["id"])
+        if E.has(e, "slow") and ec.get("attacks_made", 0):
+            raise RuleError("Slow permits only one attack on this turn.")
+        set_economy(g, e["id"], attacks_made=ec.get("attacks_made", 0) + 1)
     ranged = fx.get("attack") == "ranged"
     d = dist_ft(e, t)
     cover = None
@@ -1251,8 +1338,16 @@ def spell_attack(g, e, t, spell, sc, expr, fx, adv, dis, now):
         if cover == "total":
             raise RuleError(f"{t['name']} has Total Cover.")
     a_adv, a_dis = attack_modes(g, e, t, ranged, d, adv, dis)
+    if wants_request(g, e, now) and not request:
+        return {"request": make_request(g, e, f"{spell['name']} vs {t['name']}",
+            {"op": "spell_attack", "who": e["id"], "target": t["id"], "spell": spell["slug"],
+             "sc": sc, "expr": expr, "fx": fx, "adv": list(adv), "dis": list(dis), "slot": slot})}
+    bonus, extra, fxadv, fxdis = E.roll_modifiers(g, e, "attack")
+    a_adv.extend(fxadv)
+    a_dis.extend(fxdis)
     mode = _mode(a_adv, a_dis)
-    r = g.roll(f"1d20{fmt_mod(sc['attack'] - exhaustion_penalty(e))}", f"spell attack: {spell['name']} vs {t['name']}", e["id"], mode)
+    r = g.roll(f"1d20{fmt_mod(sc['attack'] - exhaustion_penalty(e) + bonus)}{extra}", f"spell attack: {spell['name']} vs {t['name']}", e["id"], mode, request=request)
+    E.consume_attack_advantage(g, t)
     if "mocked" in condition_names(e):
         remove_condition(g, e, "mocked", quiet=True)
     ac = armor_class(t)[0] + {"half": 2, "three-quarters": 5}.get(cover, 0)
@@ -1264,7 +1359,10 @@ def spell_attack(g, e, t, spell, sc, expr, fx, adv, dis, now):
     break_invisibility(g, e, "made an attack roll")
     if hit and expr:
         dr = g.roll(expr, f"{spell['name']} damage", e["id"], crit=crit)
-        apply_damage(g, t, [[dr["total"], fx["type"]]], source=spell["name"], crit=crit)
+        apply_damage(g, t, [[dr["total"], fx["type"]]] + E.hit_riders(g, e, t, crit), source=spell["name"], crit=crit)
+        if not t.get("dead"):
+            S.on_hit(g, e, t, spell, slot)
+    return {"hit": hit, "crit": crit, "roll": r}
 
 
 # ====================================================================== death saves
@@ -1276,7 +1374,10 @@ def death_save(g, e, now=False, request=None):
         raise RuleError(f"{e['name']} is Stable and doesn't make death saves.")
     if wants_request(g, e, now) and not request:
         return {"request": make_request(g, e, "a Death Saving Throw", {"op": "death", "who": e["id"]})}
-    r = g.roll("1d20", "Death Saving Throw", e["id"], request=request)
+    bonus, extra, adv, dis = E.roll_modifiers(g, e, "save")
+    bonus -= exhaustion_penalty(e)
+    r = g.roll(f"1d20{fmt_mod(bonus) if bonus else ''}{extra}", "Death Saving Throw", e["id"],
+               _mode(adv, dis), request=request)
     ds = dict(e.get("death", {"success": 0, "fail": 0}))
     if r["nat"] == 20:
         g.say(f"☀ {e['name']} rolls a natural 20 on a death save and regains 1 HP!", kind="roll", roll=r["id"])
@@ -1315,12 +1416,20 @@ def roll_initiative(g, e, surprised=False, now=False, request=None):
     m = initiative_mod(e) - exhaustion_penalty(e)
     if wants_request(g, e, now) and not request:
         return {"request": make_request(g, e, "Initiative", {"op": "initiative", "who": e["id"], "surprised": surprised})}
-    r = g.roll(f"1d20{fmt_mod(m) if m else ''}", "Initiative", e["id"], _mode(adv, dis), request=request)
+    bonus, extra, a, d = E.roll_modifiers(g, e, "initiative", "dex")
+    m += bonus
+    r = g.roll(f"1d20{fmt_mod(m) if m else ''}{extra}", "Initiative", e["id"], _mode(adv + a, dis + d), request=request)
     return {"total": r["total"], "mod": m, "text": r["text"]}
 
 
 def start_of_turn(g, e):
     """Recharge rolls, effects ending at start of turn, death saves."""
+    g.set(e, turns_started=e.get("turns_started", 0) + 1)
+    E.expire(g)
+    E.turn_boundary(g, e, "start")
+    for fx in E.active(e):
+        if fx.get("turn_temp_hp"):
+            temp_hp(g, e, fx["turn_temp_hp"], fx["name"])
     for a in e.get("actions", []):
         if a.get("recharge") and not e.get("recharge_ready", {}).get(a["name"], True):
             r = g.roll("1d6", f"recharge {a['name']}", e["id"])
@@ -1344,6 +1453,12 @@ def start_of_turn(g, e):
 
 
 def end_of_turn(g, e):
+    E.turn_boundary(g, e, "end")
+    for fx in list(E.active(e)):
+        if fx.get("repeat_save"):
+            ab, dc = fx["repeat_save"].split(":")
+            saving_throw(g, e, ab, int(dc), source=fx["name"], spell=True,
+                         effect={"remove_spell_effect": fx["id"]})
     conds = [c for c in e.get("conditions", []) if c.get("until") in ("end of its next turn", "end of your next turn", "end of turn")]
     for c in conds:
         remove_condition(g, e, c["name"], quiet=True)
@@ -1485,7 +1600,7 @@ def stand(g, ref):
 
 def vision_ft(g, e, m):
     light = m.get("lighting", "bright")
-    dv = e.get("darkvision", 0)
+    dv = max(e.get("darkvision", 0), max((f.get("darkvision", 0) for f in E.active(e)), default=0))
     carried = 0
     for it in e.get("inventory", []):
         n = it["name"].lower()
@@ -1586,6 +1701,7 @@ def settle_agenda(g):
 def after_time(g):
     """Things that happen as in-world time passes: concentration spells run out at the end of their duration,
     stable creatures regain 1 HP after 1d4 hours, and scheduled agenda items fall due."""
+    E.expire(g)
     settle_agenda(g)
     for e in list(g.entities.values()):
         conc = e.get("concentration")
@@ -1669,25 +1785,31 @@ def short_rest(g, members, hit_dice=None, focus=None):
         identify_item(g, g.get(eid), ref, "focused on it through a Short Rest")
 
 
-def long_rest(g, members):
+def long_rest(g, members, ended_at=None, nights=1):
+    """A Long Rest now (8 hours pass), or, with ended_at, one already taken inside time that has passed
+    (the nights of a multi-day journey): nothing more passes, and `nights` rests each remove an Exhaustion level."""
     if combat(g):
         raise RuleError("You can't rest during combat.")
-    now = g.state["time"]
+    now = g.state["time"] if ended_at is None else ended_at - 8 * 60
     for e in members:
         last = e.get("last_long_rest_end")
-        if last is not None and now - last < 16 * 60:
+        if last is not None and now - last < 16 * 60 and ended_at is None:
             raise RuleError(f"{e['name']} finished a Long Rest {fmt_duration(now - last)} ago — you must wait at least 16 hours "
                             f"before starting another (rules/core/08-rules-glossary.md → Long Rest).")
         if e["hp"] < 1 and not e.get("dead"):
             raise RuleError(f"{e['name']} has 0 HP — a creature needs at least 1 HP to start a Long Rest.")
-    g.emit("time.set", minutes=now + 8 * 60)
-    g.say(f"🌙 The party takes a Long Rest (8 hours). Now {fmt_time(g.state['time'])}.", kind="rest")
-    after_time(g)
+    if ended_at is None:
+        g.emit("time.set", minutes=now + 8 * 60)
+        g.say(f"🌙 The party takes a Long Rest (8 hours). Now {fmt_time(g.state['time'])}.", kind="rest")
+        after_time(g)
+    else:
+        g.say(f"🌙 The party took a Long Rest each night on the road (the last ended {fmt_time(ended_at)}).", kind="rest")
+    end = g.state["time"] if ended_at is None else ended_at
     for e in members:
         if e.get("dead"):
             continue
         patch = {"hp": hp_max(e), "hd_spent": {}, "slots_used": {}, "pact_used": 0, "resources_used": {},
-                 "exhaustion": max(0, e.get("exhaustion", 0) - 1), "last_long_rest_end": g.state["time"],
+                 "exhaustion": max(0, e.get("exhaustion", 0) - nights), "last_long_rest_end": end,
                  "death": {"success": 0, "fail": 0, "stable": False}}
         if e.get("granted_spells"):
             patch["granted_spells"] = [dict(x, free_used=False) for x in e["granted_spells"]]
@@ -1697,7 +1819,7 @@ def long_rest(g, members):
         if patch.get("inspiration"):
             g.say(f"🌟 {e['name']} gains Heroic Inspiration — Resourceful (Human).", kind="xp")
         g.say(f"   {e['name']}: HP {hp_max(e)}/{hp_max(e)}, spell slots and features restored" +
-              (f", Exhaustion {e.get('exhaustion', 0)} → {max(0, e.get('exhaustion', 0) - 1)}" if e.get("exhaustion") else "") + ".")
+              (f", Exhaustion {e.get('exhaustion', 0)} → {max(0, e.get('exhaustion', 0) - nights)}" if e.get("exhaustion") else "") + ".")
 
 
 def fmt_duration(minutes):
@@ -1981,6 +2103,11 @@ def equip(g, e, ref, on=True):
         cat = it.get("category")
         if combat(g) and cat != "shield":
             raise RuleError("Donning armor takes minutes (1 / 5 / 10 for light / medium / heavy) — not during combat.")
+        if cat != "shield":
+            for fx in list(e.get("effects", [])):
+                if fx.get("spell") == "mage-armor" and fx.get("managed_spell"):
+                    E.remove(g, e, fx, "ends on donning armor")
+            effects = [f for f in e.get("effects", []) if f.get("spell") != "mage-armor" and f.get("name") != "mage armor"]
         for i in inv:
             if i.get("kind") == "armor" and i.get("equipped") and ((i.get("category") == "shield") == (cat == "shield")):
                 i["equipped"] = False

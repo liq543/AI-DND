@@ -27,7 +27,7 @@
 
 Attacks per Attack action: 1
 
-**Granted spells:** mage-hand (Magic Initiate (Wizard)), minor-illusion (Magic Initiate (Wizard)), disguise-self (Magic Initiate (Wizard))
+**Granted spells:** mage-hand (Magic Initiate (Wizard)), minor-illusion (Magic Initiate (Wizard)), disguise-self (Magic Initiate (Wizard), free cast used)
 
 ## Features & feats
 
@@ -78,7 +78,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `bag-of-holding-1` 1× Bag of Holding — Uncommon · _purchased for 400 GP_
 - `potion-of-greater-healin-1` 1× Potion of Greater Healing — Uncommon · _purchased for 200 GP_
 - `potion-of-healing-1` 2× Potion of Healing — Common · _purchased for 400 GP_
-- `horse-riding-1` 6× Horse, Riding · _purchased for 375 GP_
+- `horse-riding-1` 4× Horse, Riding · _purchased for 375 GP_
 - `saddle-riding-1` 5× Saddle - Riding · _purchased for 50 GP_
 - `mule-1` 1× The Rookery's grey mule (Mule) · _stolen: the Rookery's own mule, back from the Hanged Men's horse line_
   - The grey mule taken with the cart on the March Road. Its near-hind shoe is cracked, leaving a forked print: it wants a farrier.

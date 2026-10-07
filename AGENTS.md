@@ -117,7 +117,8 @@ Ambiguous opener ("hi", "let's play")? Check `campaigns/ACTIVE`: offer to contin
    (5/10/15/20/25/30) *before* the roll and don't change it after.
 3. Resolve with the engine: `check`, `save`, `attack`, `cast`, `move`, `feature`, `item`, … In player-roll mode
    PC rolls become **Roll** buttons; end your message asking them to roll, then read the result next turn
-   (`python -m engine log -n 10`).
+   (`python -m engine log -n 10`). Send the turn's commands together as one `python -m engine batch` (one save,
+   one table update; dm/engine-reference.md → Batch). Run a step that needs checking first (a move, a roll) on its own.
 4. Update visuals when the scene changes. **Entering a new area always means a new map, shown before you describe it**, and **re-entering or passing a known area means updating it first** for the time of day and for what has changed (crowds, closing hours, guards, doors). When the characters perceive a
    notable object, pin it to its tile with `map poi` (dm/visuals.md → Points of interest)
    (dm/visuals.md). Also reveal rooms, show handouts, and set a scene banner.

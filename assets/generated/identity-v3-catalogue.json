@@ -1,0 +1,3652 @@
+{
+  "corpses": [
+    {
+      "collection": "corpses-human-masculine-v4",
+      "index": 0,
+      "species": "Human",
+      "presentation": "masculine",
+      "outfit": "armor",
+      "skin": "pale",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#f3d2b8"
+    },
+    {
+      "collection": "corpses-human-masculine-v4",
+      "index": 1,
+      "species": "Human",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "pale",
+      "hair_color": "auburn",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#f3d2b8"
+    },
+    {
+      "collection": "corpses-human-masculine-v4",
+      "index": 2,
+      "species": "Human",
+      "presentation": "masculine",
+      "outfit": "robe",
+      "skin": "pale",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#f3d2b8"
+    },
+    {
+      "collection": "corpses-human-masculine-v4",
+      "index": 3,
+      "species": "Human",
+      "presentation": "masculine",
+      "outfit": "work",
+      "skin": "pale",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#f3d2b8"
+    },
+    {
+      "collection": "corpses-human-masculine-v4",
+      "index": 4,
+      "species": "Human",
+      "presentation": "masculine",
+      "outfit": "armor",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-human-masculine-v4",
+      "index": 5,
+      "species": "Human",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "tan",
+      "hair_color": "auburn",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-human-masculine-v4",
+      "index": 6,
+      "species": "Human",
+      "presentation": "masculine",
+      "outfit": "robe",
+      "skin": "tan",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-human-masculine-v4",
+      "index": 7,
+      "species": "Human",
+      "presentation": "masculine",
+      "outfit": "work",
+      "skin": "tan",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-human-masculine-v4",
+      "index": 8,
+      "species": "Human",
+      "presentation": "masculine",
+      "outfit": "armor",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#8d5634"
+    },
+    {
+      "collection": "corpses-human-masculine-v4",
+      "index": 9,
+      "species": "Human",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "brown",
+      "hair_color": "auburn",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#8d5634"
+    },
+    {
+      "collection": "corpses-human-masculine-v4",
+      "index": 10,
+      "species": "Human",
+      "presentation": "masculine",
+      "outfit": "robe",
+      "skin": "brown",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#8d5634"
+    },
+    {
+      "collection": "corpses-human-masculine-v4",
+      "index": 11,
+      "species": "Human",
+      "presentation": "masculine",
+      "outfit": "work",
+      "skin": "brown",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#8d5634"
+    },
+    {
+      "collection": "corpses-human-masculine-v4",
+      "index": 12,
+      "species": "Human",
+      "presentation": "masculine",
+      "outfit": "armor",
+      "skin": "dark",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#4f2d1a"
+    },
+    {
+      "collection": "corpses-human-masculine-v4",
+      "index": 13,
+      "species": "Human",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "dark",
+      "hair_color": "auburn",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#4f2d1a"
+    },
+    {
+      "collection": "corpses-human-masculine-v4",
+      "index": 14,
+      "species": "Human",
+      "presentation": "masculine",
+      "outfit": "robe",
+      "skin": "dark",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#4f2d1a"
+    },
+    {
+      "collection": "corpses-human-masculine-v4",
+      "index": 15,
+      "species": "Human",
+      "presentation": "masculine",
+      "outfit": "work",
+      "skin": "dark",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#4f2d1a"
+    },
+    {
+      "collection": "corpses-human-feminine-v4",
+      "index": 0,
+      "species": "Human",
+      "presentation": "feminine",
+      "outfit": "armor",
+      "skin": "pale",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#f3d2b8"
+    },
+    {
+      "collection": "corpses-human-feminine-v4",
+      "index": 1,
+      "species": "Human",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "pale",
+      "hair_color": "auburn",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#f3d2b8"
+    },
+    {
+      "collection": "corpses-human-feminine-v4",
+      "index": 2,
+      "species": "Human",
+      "presentation": "feminine",
+      "outfit": "robe",
+      "skin": "pale",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#f3d2b8"
+    },
+    {
+      "collection": "corpses-human-feminine-v4",
+      "index": 3,
+      "species": "Human",
+      "presentation": "feminine",
+      "outfit": "work",
+      "skin": "pale",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#f3d2b8"
+    },
+    {
+      "collection": "corpses-human-feminine-v4",
+      "index": 4,
+      "species": "Human",
+      "presentation": "feminine",
+      "outfit": "armor",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-human-feminine-v4",
+      "index": 5,
+      "species": "Human",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "tan",
+      "hair_color": "auburn",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-human-feminine-v4",
+      "index": 6,
+      "species": "Human",
+      "presentation": "feminine",
+      "outfit": "robe",
+      "skin": "tan",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-human-feminine-v4",
+      "index": 7,
+      "species": "Human",
+      "presentation": "feminine",
+      "outfit": "work",
+      "skin": "tan",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-human-feminine-v4",
+      "index": 8,
+      "species": "Human",
+      "presentation": "feminine",
+      "outfit": "armor",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#8d5634"
+    },
+    {
+      "collection": "corpses-human-feminine-v4",
+      "index": 9,
+      "species": "Human",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "brown",
+      "hair_color": "auburn",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#8d5634"
+    },
+    {
+      "collection": "corpses-human-feminine-v4",
+      "index": 10,
+      "species": "Human",
+      "presentation": "feminine",
+      "outfit": "robe",
+      "skin": "brown",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#8d5634"
+    },
+    {
+      "collection": "corpses-human-feminine-v4",
+      "index": 11,
+      "species": "Human",
+      "presentation": "feminine",
+      "outfit": "work",
+      "skin": "brown",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#8d5634"
+    },
+    {
+      "collection": "corpses-human-feminine-v4",
+      "index": 12,
+      "species": "Human",
+      "presentation": "feminine",
+      "outfit": "armor",
+      "skin": "dark",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#4f2d1a"
+    },
+    {
+      "collection": "corpses-human-feminine-v4",
+      "index": 13,
+      "species": "Human",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "dark",
+      "hair_color": "auburn",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#4f2d1a"
+    },
+    {
+      "collection": "corpses-human-feminine-v4",
+      "index": 14,
+      "species": "Human",
+      "presentation": "feminine",
+      "outfit": "robe",
+      "skin": "dark",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#4f2d1a"
+    },
+    {
+      "collection": "corpses-human-feminine-v4",
+      "index": 15,
+      "species": "Human",
+      "presentation": "feminine",
+      "outfit": "work",
+      "skin": "dark",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#4f2d1a"
+    },
+    {
+      "collection": "corpses-human-neutral-v4",
+      "index": 0,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "pale",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#f3d2b8"
+    },
+    {
+      "collection": "corpses-human-neutral-v4",
+      "index": 1,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "pale",
+      "hair_color": "auburn",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#f3d2b8"
+    },
+    {
+      "collection": "corpses-human-neutral-v4",
+      "index": 2,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "pale",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#f3d2b8"
+    },
+    {
+      "collection": "corpses-human-neutral-v4",
+      "index": 3,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "work",
+      "skin": "pale",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#f3d2b8"
+    },
+    {
+      "collection": "corpses-human-neutral-v4",
+      "index": 4,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-human-neutral-v4",
+      "index": 5,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "tan",
+      "hair_color": "auburn",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-human-neutral-v4",
+      "index": 6,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "tan",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-human-neutral-v4",
+      "index": 7,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "work",
+      "skin": "tan",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-human-neutral-v4",
+      "index": 8,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#8d5634"
+    },
+    {
+      "collection": "corpses-human-neutral-v4",
+      "index": 9,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "brown",
+      "hair_color": "auburn",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#8d5634"
+    },
+    {
+      "collection": "corpses-human-neutral-v4",
+      "index": 10,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "brown",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#8d5634"
+    },
+    {
+      "collection": "corpses-human-neutral-v4",
+      "index": 11,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "work",
+      "skin": "brown",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#8d5634"
+    },
+    {
+      "collection": "corpses-human-neutral-v4",
+      "index": 12,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "dark",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#4f2d1a"
+    },
+    {
+      "collection": "corpses-human-neutral-v4",
+      "index": 13,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "dark",
+      "hair_color": "auburn",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#4f2d1a"
+    },
+    {
+      "collection": "corpses-human-neutral-v4",
+      "index": 14,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "dark",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#4f2d1a"
+    },
+    {
+      "collection": "corpses-human-neutral-v4",
+      "index": 15,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "work",
+      "skin": "dark",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#4f2d1a"
+    },
+    {
+      "collection": "corpses-fantasy-a-v4",
+      "index": 0,
+      "species": "Elf",
+      "presentation": "masculine",
+      "outfit": "armor",
+      "skin": "olive",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#b88a64"
+    },
+    {
+      "collection": "corpses-fantasy-a-v4",
+      "index": 1,
+      "species": "Elf",
+      "presentation": "masculine",
+      "outfit": "robe",
+      "skin": "olive",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#b88a64"
+    },
+    {
+      "collection": "corpses-fantasy-a-v4",
+      "index": 2,
+      "species": "Elf",
+      "presentation": "feminine",
+      "outfit": "armor",
+      "skin": "olive",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#b88a64"
+    },
+    {
+      "collection": "corpses-fantasy-a-v4",
+      "index": 3,
+      "species": "Elf",
+      "presentation": "feminine",
+      "outfit": "robe",
+      "skin": "olive",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#b88a64"
+    },
+    {
+      "collection": "corpses-fantasy-neutral-v4",
+      "index": 0,
+      "species": "Elf",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "olive",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#b88a64"
+    },
+    {
+      "collection": "corpses-fantasy-neutral-v4",
+      "index": 1,
+      "species": "Elf",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "olive",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#b88a64"
+    },
+    {
+      "collection": "corpses-fantasy-a-v4",
+      "index": 4,
+      "species": "Dwarf",
+      "presentation": "masculine",
+      "outfit": "armor",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c58a5c"
+    },
+    {
+      "collection": "corpses-fantasy-a-v4",
+      "index": 5,
+      "species": "Dwarf",
+      "presentation": "masculine",
+      "outfit": "robe",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c58a5c"
+    },
+    {
+      "collection": "corpses-fantasy-a-v4",
+      "index": 6,
+      "species": "Dwarf",
+      "presentation": "feminine",
+      "outfit": "armor",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c58a5c"
+    },
+    {
+      "collection": "corpses-fantasy-a-v4",
+      "index": 7,
+      "species": "Dwarf",
+      "presentation": "feminine",
+      "outfit": "robe",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c58a5c"
+    },
+    {
+      "collection": "corpses-fantasy-neutral-v4",
+      "index": 2,
+      "species": "Dwarf",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c58a5c"
+    },
+    {
+      "collection": "corpses-fantasy-neutral-v4",
+      "index": 3,
+      "species": "Dwarf",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c58a5c"
+    },
+    {
+      "collection": "corpses-fantasy-a-v4",
+      "index": 8,
+      "species": "Orc",
+      "presentation": "masculine",
+      "outfit": "armor",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#7a8f5f"
+    },
+    {
+      "collection": "corpses-fantasy-a-v4",
+      "index": 9,
+      "species": "Orc",
+      "presentation": "masculine",
+      "outfit": "robe",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#7a8f5f"
+    },
+    {
+      "collection": "corpses-fantasy-a-v4",
+      "index": 10,
+      "species": "Orc",
+      "presentation": "feminine",
+      "outfit": "armor",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#7a8f5f"
+    },
+    {
+      "collection": "corpses-fantasy-a-v4",
+      "index": 11,
+      "species": "Orc",
+      "presentation": "feminine",
+      "outfit": "robe",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#7a8f5f"
+    },
+    {
+      "collection": "corpses-fantasy-neutral-v4",
+      "index": 4,
+      "species": "Orc",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#7a8f5f"
+    },
+    {
+      "collection": "corpses-fantasy-neutral-v4",
+      "index": 5,
+      "species": "Orc",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#7a8f5f"
+    },
+    {
+      "collection": "corpses-fantasy-a-v4",
+      "index": 12,
+      "species": "Tiefling",
+      "presentation": "masculine",
+      "outfit": "armor",
+      "skin": "violet",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#7a4a8e"
+    },
+    {
+      "collection": "corpses-fantasy-a-v4",
+      "index": 13,
+      "species": "Tiefling",
+      "presentation": "masculine",
+      "outfit": "robe",
+      "skin": "violet",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#7a4a8e"
+    },
+    {
+      "collection": "corpses-fantasy-a-v4",
+      "index": 14,
+      "species": "Tiefling",
+      "presentation": "feminine",
+      "outfit": "armor",
+      "skin": "violet",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#7a4a8e"
+    },
+    {
+      "collection": "corpses-fantasy-a-v4",
+      "index": 15,
+      "species": "Tiefling",
+      "presentation": "feminine",
+      "outfit": "robe",
+      "skin": "violet",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#7a4a8e"
+    },
+    {
+      "collection": "corpses-fantasy-neutral-v4",
+      "index": 6,
+      "species": "Tiefling",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "violet",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#7a4a8e"
+    },
+    {
+      "collection": "corpses-fantasy-neutral-v4",
+      "index": 7,
+      "species": "Tiefling",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "violet",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#7a4a8e"
+    },
+    {
+      "collection": "corpses-fantasy-b-v4",
+      "index": 0,
+      "species": "Halfling",
+      "presentation": "masculine",
+      "outfit": "armor",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-fantasy-b-v4",
+      "index": 1,
+      "species": "Halfling",
+      "presentation": "masculine",
+      "outfit": "robe",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-fantasy-b-v4",
+      "index": 2,
+      "species": "Halfling",
+      "presentation": "feminine",
+      "outfit": "armor",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-fantasy-b-v4",
+      "index": 3,
+      "species": "Halfling",
+      "presentation": "feminine",
+      "outfit": "robe",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-fantasy-neutral-v4",
+      "index": 8,
+      "species": "Halfling",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-fantasy-neutral-v4",
+      "index": 9,
+      "species": "Halfling",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c99268"
+    },
+    {
+      "collection": "corpses-fantasy-b-v4",
+      "index": 4,
+      "species": "Gnome",
+      "presentation": "masculine",
+      "outfit": "armor",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c58a5c"
+    },
+    {
+      "collection": "corpses-fantasy-b-v4",
+      "index": 5,
+      "species": "Gnome",
+      "presentation": "masculine",
+      "outfit": "robe",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c58a5c"
+    },
+    {
+      "collection": "corpses-fantasy-b-v4",
+      "index": 6,
+      "species": "Gnome",
+      "presentation": "feminine",
+      "outfit": "armor",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c58a5c"
+    },
+    {
+      "collection": "corpses-fantasy-b-v4",
+      "index": 7,
+      "species": "Gnome",
+      "presentation": "feminine",
+      "outfit": "robe",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c58a5c"
+    },
+    {
+      "collection": "corpses-fantasy-neutral-v4",
+      "index": 10,
+      "species": "Gnome",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c58a5c"
+    },
+    {
+      "collection": "corpses-fantasy-neutral-v4",
+      "index": 11,
+      "species": "Gnome",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c58a5c"
+    },
+    {
+      "collection": "corpses-fantasy-b-v4",
+      "index": 8,
+      "species": "Dragonborn",
+      "presentation": "masculine",
+      "outfit": "armor",
+      "skin": "gold",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c9a13a"
+    },
+    {
+      "collection": "corpses-fantasy-b-v4",
+      "index": 9,
+      "species": "Dragonborn",
+      "presentation": "masculine",
+      "outfit": "robe",
+      "skin": "gold",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c9a13a"
+    },
+    {
+      "collection": "corpses-fantasy-b-v4",
+      "index": 10,
+      "species": "Dragonborn",
+      "presentation": "feminine",
+      "outfit": "armor",
+      "skin": "gold",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c9a13a"
+    },
+    {
+      "collection": "corpses-fantasy-b-v4",
+      "index": 11,
+      "species": "Dragonborn",
+      "presentation": "feminine",
+      "outfit": "robe",
+      "skin": "gold",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c9a13a"
+    },
+    {
+      "collection": "corpses-fantasy-neutral-v4",
+      "index": 12,
+      "species": "Dragonborn",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "gold",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c9a13a"
+    },
+    {
+      "collection": "corpses-fantasy-neutral-v4",
+      "index": 13,
+      "species": "Dragonborn",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "gold",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#c9a13a"
+    },
+    {
+      "collection": "corpses-fantasy-b-v4",
+      "index": 12,
+      "species": "Goliath",
+      "presentation": "masculine",
+      "outfit": "armor",
+      "skin": "gray",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#9aa0a6"
+    },
+    {
+      "collection": "corpses-fantasy-b-v4",
+      "index": 13,
+      "species": "Goliath",
+      "presentation": "masculine",
+      "outfit": "robe",
+      "skin": "gray",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#9aa0a6"
+    },
+    {
+      "collection": "corpses-fantasy-b-v4",
+      "index": 14,
+      "species": "Goliath",
+      "presentation": "feminine",
+      "outfit": "armor",
+      "skin": "gray",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#9aa0a6"
+    },
+    {
+      "collection": "corpses-fantasy-b-v4",
+      "index": 15,
+      "species": "Goliath",
+      "presentation": "feminine",
+      "outfit": "robe",
+      "skin": "gray",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#9aa0a6"
+    },
+    {
+      "collection": "corpses-fantasy-neutral-v4",
+      "index": 14,
+      "species": "Goliath",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "gray",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#9aa0a6"
+    },
+    {
+      "collection": "corpses-fantasy-neutral-v4",
+      "index": 15,
+      "species": "Goliath",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "gray",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#9aa0a6"
+    },
+    {
+      "collection": "corpses-monsters-v4",
+      "index": 0,
+      "species": "Goblin",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-v4",
+      "index": 1,
+      "species": "Goblin",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-neutral-v4",
+      "index": 0,
+      "species": "Goblin",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-neutral-v4",
+      "index": 1,
+      "species": "Goblin",
+      "presentation": "androgynous",
+      "outfit": "work",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-v4",
+      "index": 2,
+      "species": "Hobgoblin",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "ruddy",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-v4",
+      "index": 3,
+      "species": "Hobgoblin",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "ruddy",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-neutral-v4",
+      "index": 2,
+      "species": "Hobgoblin",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "ruddy",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-neutral-v4",
+      "index": 3,
+      "species": "Hobgoblin",
+      "presentation": "androgynous",
+      "outfit": "work",
+      "skin": "ruddy",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-v4",
+      "index": 4,
+      "species": "Kobold",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "rust",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-v4",
+      "index": 5,
+      "species": "Kobold",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "rust",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-neutral-v4",
+      "index": 4,
+      "species": "Kobold",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "rust",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-neutral-v4",
+      "index": 5,
+      "species": "Kobold",
+      "presentation": "androgynous",
+      "outfit": "work",
+      "skin": "rust",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-v4",
+      "index": 6,
+      "species": "Lizardfolk",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-v4",
+      "index": 7,
+      "species": "Lizardfolk",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-neutral-v4",
+      "index": 6,
+      "species": "Lizardfolk",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-neutral-v4",
+      "index": 7,
+      "species": "Lizardfolk",
+      "presentation": "androgynous",
+      "outfit": "work",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-v4",
+      "index": 8,
+      "species": "Ogre",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-v4",
+      "index": 9,
+      "species": "Ogre",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-neutral-v4",
+      "index": 8,
+      "species": "Ogre",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-neutral-v4",
+      "index": 9,
+      "species": "Ogre",
+      "presentation": "androgynous",
+      "outfit": "work",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-v4",
+      "index": 10,
+      "species": "Troll",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-v4",
+      "index": 11,
+      "species": "Troll",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-neutral-v4",
+      "index": 10,
+      "species": "Troll",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-neutral-v4",
+      "index": 11,
+      "species": "Troll",
+      "presentation": "androgynous",
+      "outfit": "work",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-v4",
+      "index": 12,
+      "species": "Bugbear",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-v4",
+      "index": 13,
+      "species": "Bugbear",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-neutral-v4",
+      "index": 12,
+      "species": "Bugbear",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-neutral-v4",
+      "index": 13,
+      "species": "Bugbear",
+      "presentation": "androgynous",
+      "outfit": "work",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "corpses-monsters-v4",
+      "index": 14,
+      "species": "Zombie",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "pale",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "zombie"
+      ]
+    },
+    {
+      "collection": "corpses-monsters-v4",
+      "index": 15,
+      "species": "Zombie",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "pale",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "zombie"
+      ]
+    },
+    {
+      "collection": "corpses-monsters-neutral-v4",
+      "index": 14,
+      "species": "Zombie",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "pale",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "zombie"
+      ]
+    },
+    {
+      "collection": "corpses-monsters-neutral-v4",
+      "index": 15,
+      "species": "Zombie",
+      "presentation": "androgynous",
+      "outfit": "work",
+      "skin": "pale",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "zombie"
+      ]
+    },
+    {
+      "collection": "corpses-fantasy-colours-v4",
+      "index": 0,
+      "species": "Dragonborn",
+      "presentation": "masculine",
+      "outfit": "armor",
+      "skin": "blue",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#2f5fa8"
+    },
+    {
+      "collection": "corpses-fantasy-colours-v4",
+      "index": 1,
+      "species": "Dragonborn",
+      "presentation": "feminine",
+      "outfit": "armor",
+      "skin": "blue",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#2f5fa8"
+    },
+    {
+      "collection": "corpses-fantasy-colours-v4",
+      "index": 2,
+      "species": "Dragonborn",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "blue",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#2f5fa8"
+    },
+    {
+      "collection": "corpses-fantasy-colours-v4",
+      "index": 3,
+      "species": "Dragonborn",
+      "presentation": "masculine",
+      "outfit": "armor",
+      "skin": "red",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#b8453d"
+    },
+    {
+      "collection": "corpses-fantasy-colours-v4",
+      "index": 4,
+      "species": "Dragonborn",
+      "presentation": "feminine",
+      "outfit": "armor",
+      "skin": "red",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#b8453d"
+    },
+    {
+      "collection": "corpses-fantasy-colours-v4",
+      "index": 5,
+      "species": "Dragonborn",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "red",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#b8453d"
+    },
+    {
+      "collection": "corpses-fantasy-colours-v4",
+      "index": 6,
+      "species": "Dragonborn",
+      "presentation": "masculine",
+      "outfit": "armor",
+      "skin": "silver",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#9eaab6"
+    },
+    {
+      "collection": "corpses-fantasy-colours-v4",
+      "index": 7,
+      "species": "Dragonborn",
+      "presentation": "feminine",
+      "outfit": "armor",
+      "skin": "silver",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#9eaab6"
+    },
+    {
+      "collection": "corpses-fantasy-colours-v4",
+      "index": 8,
+      "species": "Dragonborn",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "silver",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#9eaab6"
+    },
+    {
+      "collection": "corpses-fantasy-colours-v4",
+      "index": 9,
+      "species": "Tiefling",
+      "presentation": "masculine",
+      "outfit": "armor",
+      "skin": "red",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#b8453d"
+    },
+    {
+      "collection": "corpses-fantasy-colours-v4",
+      "index": 10,
+      "species": "Tiefling",
+      "presentation": "feminine",
+      "outfit": "armor",
+      "skin": "red",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#b8453d"
+    },
+    {
+      "collection": "corpses-fantasy-colours-v4",
+      "index": 11,
+      "species": "Tiefling",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "red",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#b8453d"
+    },
+    {
+      "collection": "corpses-fantasy-colours-v4",
+      "index": 12,
+      "species": "Elf",
+      "presentation": "masculine",
+      "outfit": "armor",
+      "skin": "dark",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#4f2d1a"
+    },
+    {
+      "collection": "corpses-fantasy-colours-v4",
+      "index": 13,
+      "species": "Elf",
+      "presentation": "feminine",
+      "outfit": "armor",
+      "skin": "dark",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#4f2d1a"
+    },
+    {
+      "collection": "corpses-fantasy-colours-v4",
+      "index": 14,
+      "species": "Elf",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "dark",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#4f2d1a"
+    },
+    {
+      "collection": "corpses-fantasy-colours-v4",
+      "index": 15,
+      "species": "Elf",
+      "presentation": "androgynous",
+      "outfit": "armor",
+      "skin": "fair",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none",
+      "skin_hex": "#f3d2b8"
+    },
+    {
+      "collection": "corpses-beasts-v4",
+      "index": 0,
+      "species": "Wolf",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "wolf"
+      ]
+    },
+    {
+      "collection": "corpses-beasts-v4",
+      "index": 1,
+      "species": "Mastiff",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "mastiff",
+        "dog"
+      ]
+    },
+    {
+      "collection": "corpses-beasts-v4",
+      "index": 2,
+      "species": "Horse",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "horse",
+        "pony"
+      ]
+    },
+    {
+      "collection": "corpses-beasts-v4",
+      "index": 3,
+      "species": "Mule",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "mule"
+      ]
+    },
+    {
+      "collection": "corpses-beasts-v4",
+      "index": 4,
+      "species": "Rat",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "rat"
+      ]
+    },
+    {
+      "collection": "corpses-beasts-v4",
+      "index": 5,
+      "species": "Spider",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "spider"
+      ]
+    },
+    {
+      "collection": "corpses-beasts-v4",
+      "index": 6,
+      "species": "Raven",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "raven",
+        "crow"
+      ]
+    },
+    {
+      "collection": "corpses-beasts-v4",
+      "index": 7,
+      "species": "Owl",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "owl"
+      ]
+    },
+    {
+      "collection": "corpses-beasts-v4",
+      "index": 8,
+      "species": "Lion",
+      "presentation": "masculine",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "lion"
+      ]
+    },
+    {
+      "collection": "corpses-beasts-v4",
+      "index": 9,
+      "species": "Tiger",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "tiger"
+      ]
+    },
+    {
+      "collection": "corpses-beasts-v4",
+      "index": 10,
+      "species": "Bear",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "bear"
+      ]
+    },
+    {
+      "collection": "corpses-beasts-v4",
+      "index": 11,
+      "species": "Boar",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "boar"
+      ]
+    },
+    {
+      "collection": "corpses-beasts-v4",
+      "index": 12,
+      "species": "Goat",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "goat"
+      ]
+    },
+    {
+      "collection": "corpses-beasts-v4",
+      "index": 13,
+      "species": "Sheep",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "sheep"
+      ]
+    },
+    {
+      "collection": "corpses-beasts-v4",
+      "index": 14,
+      "species": "Crocodile",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "crocodile",
+        "alligator"
+      ]
+    },
+    {
+      "collection": "corpses-beasts-v4",
+      "index": 15,
+      "species": "Owlbear",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "owlbear"
+      ]
+    },
+    {
+      "collection": "corpses-creatures-v4",
+      "index": 0,
+      "species": "Red Dragon",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "red dragon"
+      ],
+      "size": "small"
+    },
+    {
+      "collection": "corpses-creatures-v4",
+      "index": 1,
+      "species": "Red Dragon",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "red dragon"
+      ],
+      "size": "huge"
+    },
+    {
+      "collection": "corpses-creatures-v4",
+      "index": 2,
+      "species": "Blue Dragon",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "blue dragon"
+      ],
+      "size": "huge"
+    },
+    {
+      "collection": "corpses-creatures-v4",
+      "index": 3,
+      "species": "Gold Dragon",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "gold dragon"
+      ],
+      "size": "huge"
+    },
+    {
+      "collection": "corpses-creatures-v4",
+      "index": 4,
+      "species": "Skeleton",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "skeleton"
+      ],
+      "size": "medium"
+    },
+    {
+      "collection": "corpses-creatures-v4",
+      "index": 5,
+      "species": "Mummy",
+      "presentation": "feminine",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "mummy"
+      ],
+      "size": "medium"
+    },
+    {
+      "collection": "corpses-creatures-v4",
+      "index": 6,
+      "species": "Mummy",
+      "presentation": "masculine",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "mummy"
+      ],
+      "size": "medium"
+    },
+    {
+      "collection": "corpses-creatures-v4",
+      "index": 7,
+      "species": "Animated Armor",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "animated armor",
+        "animated armour"
+      ],
+      "size": "medium"
+    },
+    {
+      "collection": "corpses-creatures-v4",
+      "index": 8,
+      "species": "Bat",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "bat"
+      ],
+      "size": "large"
+    },
+    {
+      "collection": "corpses-creatures-v4",
+      "index": 9,
+      "species": "Frog",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "frog",
+        "toad"
+      ],
+      "size": "large"
+    },
+    {
+      "collection": "corpses-creatures-v4",
+      "index": 10,
+      "species": "Snake",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "snake",
+        "serpent"
+      ],
+      "size": "large"
+    },
+    {
+      "collection": "corpses-creatures-v4",
+      "index": 11,
+      "species": "Scorpion",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "scorpion"
+      ],
+      "size": "large"
+    },
+    {
+      "collection": "corpses-creatures-v4",
+      "index": 12,
+      "species": "Eagle",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "eagle"
+      ],
+      "size": "large"
+    },
+    {
+      "collection": "corpses-creatures-v4",
+      "index": 13,
+      "species": "Griffon",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "griffon",
+        "griffin"
+      ],
+      "size": "large"
+    },
+    {
+      "collection": "corpses-creatures-v4",
+      "index": 14,
+      "species": "Ant",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "ant"
+      ],
+      "size": "large"
+    },
+    {
+      "collection": "corpses-creatures-v4",
+      "index": 15,
+      "species": "Deer",
+      "presentation": "masculine",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "deer",
+        "elk"
+      ],
+      "size": "medium"
+    },
+    {
+      "collection": "corpses-lion-deer-v1",
+      "index": 0,
+      "species": "Lion",
+      "presentation": "feminine",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "lion"
+      ]
+    },
+    {
+      "collection": "corpses-lion-deer-v1",
+      "index": 1,
+      "species": "Lion",
+      "presentation": "androgynous",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "lion"
+      ]
+    },
+    {
+      "collection": "corpses-lion-deer-v1",
+      "index": 2,
+      "species": "Deer",
+      "presentation": "feminine",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "deer"
+      ]
+    },
+    {
+      "collection": "corpses-lion-deer-v1",
+      "index": 3,
+      "species": "Deer",
+      "presentation": "androgynous",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "deer"
+      ]
+    }
+  ],
+  "portraits": [
+    {
+      "collection": "portraits-human-neutral-v3",
+      "index": 0,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "pale",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-human-neutral-v3",
+      "index": 1,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "pale",
+      "hair_color": "auburn",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-human-neutral-v3",
+      "index": 2,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "pale",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-human-neutral-v3",
+      "index": 3,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "tunic",
+      "skin": "pale",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-human-neutral-v3",
+      "index": 4,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-human-neutral-v3",
+      "index": 5,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "tan",
+      "hair_color": "auburn",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-human-neutral-v3",
+      "index": 6,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "tan",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-human-neutral-v3",
+      "index": 7,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "tunic",
+      "skin": "tan",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-human-neutral-v3",
+      "index": 8,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-human-neutral-v3",
+      "index": 9,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "brown",
+      "hair_color": "auburn",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-human-neutral-v3",
+      "index": 10,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "brown",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-human-neutral-v3",
+      "index": 11,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "tunic",
+      "skin": "brown",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-human-neutral-v3",
+      "index": 12,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "dark",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-human-neutral-v3",
+      "index": 13,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "dark",
+      "hair_color": "auburn",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-human-neutral-v3",
+      "index": 14,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "dark",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-human-neutral-v3",
+      "index": 15,
+      "species": "Human",
+      "presentation": "androgynous",
+      "outfit": "tunic",
+      "skin": "dark",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-neutral-v3",
+      "index": 0,
+      "species": "Elf",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "olive",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-neutral-v3",
+      "index": 1,
+      "species": "Elf",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "olive",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-neutral-v3",
+      "index": 2,
+      "species": "Dwarf",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "tan",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-neutral-v3",
+      "index": 3,
+      "species": "Dwarf",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "tan",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-neutral-v3",
+      "index": 4,
+      "species": "Orc",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "green",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-neutral-v3",
+      "index": 5,
+      "species": "Orc",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "green",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-neutral-v3",
+      "index": 6,
+      "species": "Tiefling",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "violet",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-neutral-v3",
+      "index": 7,
+      "species": "Tiefling",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "violet",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-neutral-v3",
+      "index": 8,
+      "species": "Halfling",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "tan",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-neutral-v3",
+      "index": 9,
+      "species": "Halfling",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "tan",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-neutral-v3",
+      "index": 10,
+      "species": "Gnome",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "brown",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-neutral-v3",
+      "index": 11,
+      "species": "Gnome",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "brown",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-neutral-v3",
+      "index": 12,
+      "species": "Dragonborn",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "gold",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-neutral-v3",
+      "index": 13,
+      "species": "Dragonborn",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "gold",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-neutral-v3",
+      "index": 14,
+      "species": "Goliath",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "gray",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-neutral-v3",
+      "index": 15,
+      "species": "Goliath",
+      "presentation": "androgynous",
+      "outfit": "robe",
+      "skin": "gray",
+      "hair_color": "brown",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-v3",
+      "index": 0,
+      "species": "Goblin",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-v3",
+      "index": 1,
+      "species": "Goblin",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-neutral-v3",
+      "index": 0,
+      "species": "Goblin",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-neutral-v3",
+      "index": 1,
+      "species": "Goblin",
+      "presentation": "androgynous",
+      "outfit": "tunic",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-v3",
+      "index": 2,
+      "species": "Hobgoblin",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "ruddy",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-v3",
+      "index": 3,
+      "species": "Hobgoblin",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "ruddy",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-neutral-v3",
+      "index": 2,
+      "species": "Hobgoblin",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "ruddy",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-neutral-v3",
+      "index": 3,
+      "species": "Hobgoblin",
+      "presentation": "androgynous",
+      "outfit": "tunic",
+      "skin": "ruddy",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-v3",
+      "index": 4,
+      "species": "Kobold",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "rust",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-v3",
+      "index": 5,
+      "species": "Kobold",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "rust",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-neutral-v3",
+      "index": 4,
+      "species": "Kobold",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "rust",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-neutral-v3",
+      "index": 5,
+      "species": "Kobold",
+      "presentation": "androgynous",
+      "outfit": "tunic",
+      "skin": "rust",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-v3",
+      "index": 6,
+      "species": "Lizardfolk",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-v3",
+      "index": 7,
+      "species": "Lizardfolk",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-neutral-v3",
+      "index": 6,
+      "species": "Lizardfolk",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-neutral-v3",
+      "index": 7,
+      "species": "Lizardfolk",
+      "presentation": "androgynous",
+      "outfit": "tunic",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-v3",
+      "index": 8,
+      "species": "Ogre",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-v3",
+      "index": 9,
+      "species": "Ogre",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-neutral-v3",
+      "index": 8,
+      "species": "Ogre",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-neutral-v3",
+      "index": 9,
+      "species": "Ogre",
+      "presentation": "androgynous",
+      "outfit": "tunic",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-v3",
+      "index": 10,
+      "species": "Troll",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-v3",
+      "index": 11,
+      "species": "Troll",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-neutral-v3",
+      "index": 10,
+      "species": "Troll",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-neutral-v3",
+      "index": 11,
+      "species": "Troll",
+      "presentation": "androgynous",
+      "outfit": "tunic",
+      "skin": "green",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-v3",
+      "index": 12,
+      "species": "Bugbear",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-v3",
+      "index": 13,
+      "species": "Bugbear",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-neutral-v3",
+      "index": 12,
+      "species": "Bugbear",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-neutral-v3",
+      "index": 13,
+      "species": "Bugbear",
+      "presentation": "androgynous",
+      "outfit": "tunic",
+      "skin": "brown",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-v3",
+      "index": 14,
+      "species": "Zombie",
+      "presentation": "masculine",
+      "outfit": "leather",
+      "skin": "pale",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-v3",
+      "index": 15,
+      "species": "Zombie",
+      "presentation": "feminine",
+      "outfit": "leather",
+      "skin": "pale",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-neutral-v3",
+      "index": 14,
+      "species": "Zombie",
+      "presentation": "androgynous",
+      "outfit": "leather",
+      "skin": "pale",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-monsters-neutral-v3",
+      "index": 15,
+      "species": "Zombie",
+      "presentation": "androgynous",
+      "outfit": "tunic",
+      "skin": "pale",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-colours-v4",
+      "index": 0,
+      "species": "Dragonborn",
+      "presentation": "masculine",
+      "outfit": "plate",
+      "skin": "blue",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-colours-v4",
+      "index": 1,
+      "species": "Dragonborn",
+      "presentation": "feminine",
+      "outfit": "plate",
+      "skin": "blue",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-colours-v4",
+      "index": 2,
+      "species": "Dragonborn",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "blue",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-colours-v4",
+      "index": 3,
+      "species": "Dragonborn",
+      "presentation": "masculine",
+      "outfit": "plate",
+      "skin": "red",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-colours-v4",
+      "index": 4,
+      "species": "Dragonborn",
+      "presentation": "feminine",
+      "outfit": "plate",
+      "skin": "red",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-colours-v4",
+      "index": 5,
+      "species": "Dragonborn",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "red",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-colours-v4",
+      "index": 6,
+      "species": "Dragonborn",
+      "presentation": "masculine",
+      "outfit": "plate",
+      "skin": "silver",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-colours-v4",
+      "index": 7,
+      "species": "Dragonborn",
+      "presentation": "feminine",
+      "outfit": "plate",
+      "skin": "silver",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-colours-v4",
+      "index": 8,
+      "species": "Dragonborn",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "silver",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-colours-v4",
+      "index": 9,
+      "species": "Tiefling",
+      "presentation": "masculine",
+      "outfit": "plate",
+      "skin": "red",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-colours-v4",
+      "index": 10,
+      "species": "Tiefling",
+      "presentation": "feminine",
+      "outfit": "plate",
+      "skin": "red",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-colours-v4",
+      "index": 11,
+      "species": "Tiefling",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "red",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-colours-v4",
+      "index": 12,
+      "species": "Elf",
+      "presentation": "masculine",
+      "outfit": "plate",
+      "skin": "dark",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-colours-v4",
+      "index": 13,
+      "species": "Elf",
+      "presentation": "feminine",
+      "outfit": "plate",
+      "skin": "dark",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-colours-v4",
+      "index": 14,
+      "species": "Elf",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "dark",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-fantasy-colours-v4",
+      "index": 15,
+      "species": "Elf",
+      "presentation": "androgynous",
+      "outfit": "plate",
+      "skin": "fair",
+      "hair_color": "silver",
+      "age": "adult",
+      "headwear": "none"
+    },
+    {
+      "collection": "portraits-beasts-v3",
+      "index": 0,
+      "species": "Wolf",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "wolf"
+      ]
+    },
+    {
+      "collection": "portraits-beasts-v3",
+      "index": 1,
+      "species": "Mastiff",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "mastiff",
+        "dog"
+      ]
+    },
+    {
+      "collection": "portraits-beasts-v3",
+      "index": 2,
+      "species": "Horse",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "horse",
+        "pony"
+      ]
+    },
+    {
+      "collection": "portraits-beasts-v3",
+      "index": 3,
+      "species": "Mule",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "mule"
+      ]
+    },
+    {
+      "collection": "portraits-beasts-v3",
+      "index": 4,
+      "species": "Rat",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "rat"
+      ]
+    },
+    {
+      "collection": "portraits-beasts-v3",
+      "index": 5,
+      "species": "Spider",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "spider"
+      ]
+    },
+    {
+      "collection": "portraits-beasts-v3",
+      "index": 6,
+      "species": "Raven",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "raven",
+        "crow"
+      ]
+    },
+    {
+      "collection": "portraits-beasts-v3",
+      "index": 7,
+      "species": "Owl",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "owl"
+      ]
+    },
+    {
+      "collection": "portraits-beasts-v3",
+      "index": 8,
+      "species": "Lion",
+      "presentation": "masculine",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "lion"
+      ]
+    },
+    {
+      "collection": "portraits-beasts-v3",
+      "index": 9,
+      "species": "Tiger",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "tiger"
+      ]
+    },
+    {
+      "collection": "portraits-beasts-v3",
+      "index": 10,
+      "species": "Bear",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "bear"
+      ]
+    },
+    {
+      "collection": "portraits-beasts-v3",
+      "index": 11,
+      "species": "Boar",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "boar"
+      ]
+    },
+    {
+      "collection": "portraits-beasts-v3",
+      "index": 12,
+      "species": "Goat",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "goat"
+      ]
+    },
+    {
+      "collection": "portraits-beasts-v3",
+      "index": 13,
+      "species": "Sheep",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "sheep"
+      ]
+    },
+    {
+      "collection": "portraits-beasts-v3",
+      "index": 14,
+      "species": "Crocodile",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "crocodile",
+        "alligator"
+      ]
+    },
+    {
+      "collection": "portraits-beasts-v3",
+      "index": 15,
+      "species": "Owlbear",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "owlbear"
+      ]
+    },
+    {
+      "collection": "portraits-creatures-v3",
+      "index": 0,
+      "species": "Red Dragon",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "red dragon"
+      ],
+      "size": "small"
+    },
+    {
+      "collection": "portraits-creatures-v3",
+      "index": 1,
+      "species": "Red Dragon",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "red dragon"
+      ],
+      "size": "huge"
+    },
+    {
+      "collection": "portraits-creatures-v3",
+      "index": 2,
+      "species": "Blue Dragon",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "blue dragon"
+      ],
+      "size": "huge"
+    },
+    {
+      "collection": "portraits-creatures-v3",
+      "index": 3,
+      "species": "Gold Dragon",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "gold dragon"
+      ],
+      "size": "huge"
+    },
+    {
+      "collection": "portraits-creatures-v3",
+      "index": 4,
+      "species": "Skeleton",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "skeleton"
+      ],
+      "size": "medium"
+    },
+    {
+      "collection": "portraits-creatures-v3",
+      "index": 5,
+      "species": "Mummy",
+      "presentation": "feminine",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "mummy"
+      ],
+      "size": "medium"
+    },
+    {
+      "collection": "portraits-creatures-v3",
+      "index": 6,
+      "species": "Mummy",
+      "presentation": "masculine",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "mummy"
+      ],
+      "size": "medium"
+    },
+    {
+      "collection": "portraits-creatures-v3",
+      "index": 7,
+      "species": "Animated Armor",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "animated armor",
+        "animated armour"
+      ],
+      "size": "medium"
+    },
+    {
+      "collection": "portraits-creatures-v3",
+      "index": 8,
+      "species": "Bat",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "bat"
+      ],
+      "size": "large"
+    },
+    {
+      "collection": "portraits-creatures-v3",
+      "index": 9,
+      "species": "Frog",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "frog",
+        "toad"
+      ],
+      "size": "large"
+    },
+    {
+      "collection": "portraits-creatures-v3",
+      "index": 10,
+      "species": "Snake",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "snake",
+        "serpent"
+      ],
+      "size": "large"
+    },
+    {
+      "collection": "portraits-creatures-v3",
+      "index": 11,
+      "species": "Scorpion",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "scorpion"
+      ],
+      "size": "large"
+    },
+    {
+      "collection": "portraits-creatures-v3",
+      "index": 12,
+      "species": "Eagle",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "eagle"
+      ],
+      "size": "large"
+    },
+    {
+      "collection": "portraits-creatures-v3",
+      "index": 13,
+      "species": "Griffon",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "griffon",
+        "griffin"
+      ],
+      "size": "large"
+    },
+    {
+      "collection": "portraits-creatures-v3",
+      "index": 14,
+      "species": "Ant",
+      "presentation": "any",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "ant"
+      ],
+      "size": "large"
+    },
+    {
+      "collection": "portraits-creatures-v3",
+      "index": 15,
+      "species": "Deer",
+      "presentation": "masculine",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "deer",
+        "elk"
+      ],
+      "size": "medium"
+    },
+    {
+      "collection": "portraits-lion-deer-v1",
+      "index": 0,
+      "species": "Lion",
+      "presentation": "feminine",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "lion"
+      ]
+    },
+    {
+      "collection": "portraits-lion-deer-v1",
+      "index": 1,
+      "species": "Lion",
+      "presentation": "androgynous",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "lion"
+      ]
+    },
+    {
+      "collection": "portraits-lion-deer-v1",
+      "index": 2,
+      "species": "Deer",
+      "presentation": "feminine",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "deer"
+      ]
+    },
+    {
+      "collection": "portraits-lion-deer-v1",
+      "index": 3,
+      "species": "Deer",
+      "presentation": "androgynous",
+      "outfit": "none",
+      "skin": "tan",
+      "hair_color": "black",
+      "age": "adult",
+      "headwear": "none",
+      "aliases": [
+        "deer"
+      ]
+    }
+  ]
+}

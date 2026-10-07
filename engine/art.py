@@ -18,6 +18,8 @@ import re
 
 from . import assets
 from .assets import esc
+from . import illustration
+from . import painted
 
 # ============================================================== colour helpers
 
@@ -103,8 +105,19 @@ SPECIES_SKIN = {
 SPECIES_WORDS = {"elf": "Elf", "elven": "Elf", "elvish": "Elf", "drow": "Elf", "half-elf": "Elf", "dwarf": "Dwarf",
                  "dwarven": "Dwarf", "duergar": "Dwarf", "halfling": "Halfling", "gnome": "Gnome", "gnomish": "Gnome",
                  "orc": "Orc", "orcish": "Orc", "half-orc": "Orc", "tiefling": "Tiefling", "dragonborn": "Dragonborn",
-                 "goliath": "Goliath", "human": "Human", "goblin": "Goblin", "hobgoblin": "Goblin", "bugbear": "Goblin",
-                 "kobold": "Kobold", "lizardfolk": "Lizardfolk"}
+                 "goliath": "Goliath", "human": "Human", "goblin": "Goblin", "hobgoblin": "Hobgoblin", "bugbear": "Bugbear",
+                 "kobold": "Kobold", "lizardfolk": "Lizardfolk", "ogre": "Ogre", "troll": "Troll", "zombie": "Zombie"}
+CREATURE_WORDS={word:species for species,words in (
+    ('Wolf',('wolf',)),('Mastiff',('mastiff','dog')),('Horse',('horse','pony')),('Mule',('mule',)),
+    ('Rat',('rat',)),('Spider',('spider',)),('Raven',('raven','crow')),('Owl',('owl',)),('Lion',('lion',)),
+    ('Tiger',('tiger',)),('Bear',('bear',)),('Boar',('boar',)),('Goat',('goat',)),('Sheep',('sheep',)),
+    ('Crocodile',('crocodile','alligator')),('Owlbear',('owlbear',)),('Skeleton',('skeleton',)),
+    ('Mummy',('mummy',)),('Animated Armor',('animated armor','animated armour')),('Bat',('bat',)),
+    ('Frog',('frog','toad')),('Snake',('snake','serpent')),('Scorpion',('scorpion',)),('Eagle',('eagle',)),
+    ('Griffon',('griffon','griffin')),('Ant',('ant',)),('Deer',('deer','elk'))
+    ) for word in words}
+CREATURE_WORDS.update({colour+' dragon':colour.title()+' Dragon' for colour in DRAGON_SCALES})
+CREATURE_WORDS['dragon']='Dragon'
 
 CLASS_STYLE = {
     "Barbarian": {"bg": ("#8a3a1c", "#1e0c06"), "outfit": "furs", "cloth": "#6b4a2e", "paint": .5},
@@ -157,7 +170,7 @@ TYPE_STYLE = {  # creature art palettes: (backdrop, backdrop dark, silhouette li
     "undead": ("#2f4a4a", "#060e10", "#c8e8e0", "#2f4040", "#7af0d0"),
 }
 HUMANLIKE_NAMES = ("vampire", "hag", "doppelganger", "drow", "duergar", "cultist", "goblin", "hobgoblin", "bugbear", "kobold",
-                   "lizardfolk", "orc")
+                   "lizardfolk", "orc", "ogre", "troll", "zombie")
 
 
 # ============================================================== reading a description
@@ -208,7 +221,7 @@ def read_description(text):
     c = _near(w, HAIR_NOUNS, HAIR_COLORS)
     if c:
         out["hair_color"] = HAIR_COLORS[c]
-    if re.search(r"\bbald|shaved head|shaven head|shaved scalp|hairless|clean[- ]shaven head", t):
+    if re.search(r"\bbald\b(?!\s+(?:at|on)\s+(?:the\s+)?(?:elbows|knees|seams))|shaved head|shaven head|shaved scalp|hairless|clean[- ]shaven head", t):
         out["hair_style"] = "bald"
     elif re.search(r"\bmohawk|crest of hair", t):
         out["hair_style"] = "mohawk"
@@ -285,7 +298,7 @@ def read_description(text):
         out["paint"] = True
     if re.search(r"tattoo|inked|tribal (marks|markings)|markings|runes? (on|across) (his|her|their) (face|cheek|brow)", t):
         out["tattoo"] = True
-    if re.search(r"\bold\b|elderly|aged\b|wrinkl|venerable|grizzled|ancient|weathered face|in (his|her|their) (sixties|seventies|eighties)"
+    if re.search(r"\bold\b(?!\s+(?:breaks|scars|wounds|injuries|clothes|coat|armor|armour|boots|sword|hat|book)\b)|elderly|\baged\b|wrinkl|venerable|grizzled|ancient|weathered face|in (his|her|their) (sixties|seventies|eighties)"
                  r"|\b(sixty|seventy|eighty|ninety)\b|\b[6-9]\d(-| )years?(-| )old", t):
         out["age"] = "old"
     elif re.search(r"\byoung\b|youth|boyish|girlish|teen|barely an adult|fresh-faced", t):
@@ -328,7 +341,7 @@ def read_description(text):
         out["outfit"] = "doublet"
     elif re.search(r"\bcoat\b|frock|greatcoat|longcoat", t):
         out["outfit"] = "coat"
-    elif re.search(r"\brags|tunic|homespun|apron|work clothes|smock|peasant", t):
+    elif re.search(r"\brags|tunic|homespun|apron|work clothes|smock|peasant|\bdress\b", t):
         out["outfit"] = "tunic"
     cc = _near(w, CLOTH_NOUNS, CLOTH_COLORS)
     if cc:
@@ -358,14 +371,14 @@ def read_description(text):
         out["ears"] = "pointed"
     if re.search(r"tusks?\b", t):
         out["tusks"] = True
-    if re.search(r"\b(she|her|hers|herself|woman|girl|lady|matron|maiden)\b", t) or "feminine" in t:
-        out["presentation"] = "feminine"
-    elif re.search(r"\b(he|him|his|himself|man|boy|lord|gentleman)\b", t) or "masculine" in t:
-        out["presentation"] = "masculine"
+    presentation=presentation_from(t)
+    if presentation:out['presentation']=presentation
     for word, sp in SPECIES_WORDS.items():
         if re.search(r"\b" + word + r"\b", t):
             out["species_hint"] = sp
             break
+    if re.search(r'hair (?:up )?(?:in|tied in|twisted (?:in|into)) (?:a )?knot|\bbun\b',t):
+        out['hair_style']='bun'
     return out
 
 
@@ -375,7 +388,7 @@ def _style_for(e):
     if e["kind"] == "pc":
         cls = max(e.get("classes", {"Fighter": 1}).items(), key=lambda kv: kv[1])[0]
         return dict(CLASS_STYLE.get(cls, CLASS_STYLE["Fighter"]))
-    name = f"{e.get('srd_name', '')} {e.get('name', '')}".lower()
+    name = (e.get('srd_name') or e.get('name') or '').lower()
     for key, st in ROLE_STYLE:
         if key in name:
             s = dict(st)
@@ -387,22 +400,72 @@ def _style_for(e):
 
 
 def species_of(e):
-    if e["kind"] == "pc":
-        return e.get("species", "Human")
-    hint = read_description(f"{e.get('srd_name', '')} {e.get('name', '')}").get("species_hint")
-    return read_description(e.get("appearance", "")).get("species_hint") or hint or "Human"
+    return visual_identity(e)['species']
 
 
 def is_humanlike(e):
     if e["kind"] == "pc":
         return True
     t = (e.get("type") or "").lower()
-    name = f"{e.get('srd_name', '')} {e.get('name', '')}".lower()
-    return t.startswith("humanoid") or any(re.search(r"\b" + k + r"\b", name) for k in HUMANLIKE_NAMES)
+    name = (e.get('srd_name') or e.get('name') or '').lower()
+    declared=e.get('species') or e.get('race') or (e.get('look') or {}).get('species') or (e.get('art_of') or {}).get('species')
+    return t.startswith('humanoid') or (species_of(e) in set(SPECIES_WORDS.values()) and bool(declared)) or any(re.search(r'\b'+k+r'\b',name) for k in HUMANLIKE_NAMES)
 
 
 LOOK_FIELDS = ("hair", "beard", "eyes", "skin", "marks", "headwear", "outfit", "cloak", "build", "age",
-               "expression", "horns", "accent", "background", "presentation")
+               "expression", "horns", "accent", "background", "presentation", "species")
+
+
+def canonical_species(value):
+    """Normalize visual species without changing the entity's mechanical species."""
+    text=str(value or '').strip()
+    return (SPECIES_WORDS.get(text.lower()) or CREATURE_WORDS.get(text.lower()) or text.title()) if text else None
+
+
+def presentation_from(value):
+    """Read the subject's first identity cue, not clothing or a later person's pronouns."""
+    words={'feminine':'feminine','female':'feminine','woman':'feminine','girl':'feminine','lady':'feminine',
+           'matron':'feminine','maiden':'feminine','she':'feminine','her':'feminine','hers':'feminine','herself':'feminine',
+           'masculine':'masculine','male':'masculine','man':'masculine','boy':'masculine','lord':'masculine',
+           'gentleman':'masculine','sir':'masculine','he':'masculine','him':'masculine','his':'masculine','himself':'masculine',
+           'androgynous':'androgynous','neutral':'androgynous','nonbinary':'androgynous','non-binary':'androgynous',
+           'they':'androgynous','them':'androgynous','their':'androgynous'}
+    for word in _words(value):
+        if word in words:return words[word]
+    return None
+
+
+def visual_identity(e):
+    """One identity for portraits, map faces and bodies; unknown presentation stays neutral.
+
+    Visual pins and preserved appearances precede structured identity, public description,
+    then stat block/name hints. A job, equipped armor or costume never defines identity.
+    """
+    look=e.get('look') or {};kept=e.get('art_of') or {};bio=e.get('bio') or {}
+    desc=e.get('appearance') or bio.get('appearance') or ''
+    species=None;species_source='unspecified'
+    for source,value in (('look',look.get('species')),('preserved',kept.get('species')),
+                         ('entity',e.get('species') or e.get('race')),('bio',bio.get('species') or bio.get('race'))):
+        if value:species=canonical_species(value);species_source=source;break
+    if not species:
+        humanoid=e.get('kind')=='pc' or str(e.get('type','')).lower().startswith('humanoid')
+        words=SPECIES_WORDS if humanoid else {**SPECIES_WORDS,**CREATURE_WORDS}
+        hints=(('description',desc),('stat block',e.get('srd_name','')),('name',e.get('name',''))) if humanoid else (
+            ('stat block',e.get('srd_name','')),('description',desc),('name',e.get('name','')))
+        for source,value in hints:
+            # Earliest subject species wins; related people mentioned later do not take precedence.
+            hits=[(match.start(),-len(word),sp) for word,sp in words.items()
+                  if (match:=re.search(r'\b'+re.escape(word)+r'\b',str(value).lower()))]
+            if hits:species=min(hits)[2];species_source=source;break
+    presentation=None;presentation_source='unspecified'
+    for source,value in (('look',look.get('presentation')),('preserved',kept.get('presentation') or (kept.get('traits') or kept.get('look') or {}).get('presentation')),
+                         ('entity',e.get('presentation') or e.get('gender') or e.get('sex') or e.get('pronouns')),
+                         ('bio',bio.get('presentation') or bio.get('gender') or bio.get('sex') or bio.get('pronouns')),
+                         ('description',desc),('name',e.get('name',''))):
+        found=presentation_from(value)
+        if found:presentation=found;presentation_source=source;break
+    return dict(species=species or 'Human',presentation=presentation or 'androgynous',
+                species_source=species_source,presentation_source=presentation_source)
 
 
 def _art_id(e):
@@ -413,7 +476,7 @@ def _art_id(e):
 def look_of(e):
     """The resolved visual traits used to draw a humanlike creature (defaults ← description ← DM's look fields)."""
     kept = e.get("art_of") or {}
-    sp = kept.get("species") or species_of(e)
+    identity=visual_identity(e);sp=identity['species']
     r = seeded("look", _art_id(e), kept.get("name") or e.get("name", ""))
     st = dict(kept["style"]) if kept.get("style") else _style_for(e)
     st.update({k: tuple(v) for k, v in st.items() if isinstance(v, list)})   # stored styles come back from JSON as lists
@@ -488,8 +551,7 @@ def look_of(e):
         L["reptile"] = True
         L["hair_style"] = "bald"
         L["eye_color"] = r.choice(["#d8b030", "#c02a20"])
-    if L["beard"] == "none" and sp in ("Human", "Tiefling", "Orc", "Goliath") and r.random() < .22 and \
-            read_description(e.get("appearance") or (e.get("bio") or {}).get("appearance") or "").get("presentation") != "feminine":
+    if L["beard"] == "none" and sp in ("Human", "Tiefling", "Orc", "Goliath") and r.random() < .22 and identity['presentation']=='masculine':
         L["beard"] = r.choice(["short", "stubble", "mustache", "goatee"])
     # armor actually worn by a PC decides the outfit
     if e["kind"] == "pc" and not kept:
@@ -503,12 +565,15 @@ def look_of(e):
     # what the description says
     desc = e.get("appearance") or (e.get("bio") or {}).get("appearance") or ""
     _apply(L, read_description(desc))
+    _apply(L,kept.get('traits') or {})
     # what the DM pinned with `asset look`
     for field, text in (e.get("look") or {}).items():
         _apply(L, _read_field(field, text))
+    L.update(species=sp,presentation=identity['presentation'])
     if L["age"] == "old" and not _mentions_hair_color(desc, e.get("look")):
         L["hair_color"] = mix(L["hair_color"], "#d8d8d4", .75)
     L.setdefault("beard_color", L["hair_color"])
+    if isinstance(L.get('bg'),list):L['bg']=tuple(L['bg'])
     return L
 
 
@@ -572,7 +637,8 @@ def _read_field(field, text):
             out["freckles"] = True
         return out
     if field == "presentation":
-        return {"presentation": "feminine" if re.search(r"fem|woman|female", low) else "masculine" if re.search(r"masc|man|male", low) else None}
+        return {'presentation':presentation_from(t)}
+    if field == 'species':return {'species':canonical_species(t)}
     if field in ("marks", "face"):
         f = read_description(t)
         return {k: v for k, v in f.items() if k in ("scars", "freckles", "paint", "tattoo", "eyepatch", "eyepatch_color",
@@ -623,7 +689,7 @@ def describe_look(e):
         return f"{e['name']}: creature art ({t} palette, emblem '{assets.icon_for_entity(e)}')"
     L = look_of(e)
     name_of = lambda table, v: next((k for k, x in table.items() if x == v), v)  # noqa: E731
-    bits = [f"species {L['species']}", f"skin {name_of(SKIN_TONES, L['skin'])}",
+    bits = [f"species {L['species']}", f"presentation {L['presentation']}", f"skin {name_of(SKIN_TONES, L['skin'])}",
             f"hair {L['hair_style']} {name_of(HAIR_COLORS, L['hair_color'])}", f"eyes {name_of(EYE_COLORS, L['eye_color'])}"
             + (" (glowing)" if L.get("eye_glow") else ""), f"beard {L['beard']}", f"outfit {L['outfit']} {name_of(CLOTH_COLORS, L['cloth'])}",
             f"headwear {L['headwear']}", f"build {L['build']}", f"age {L['age']}", f"expression {L['expression']}"]
@@ -639,6 +705,27 @@ def describe_look(e):
     return f"{e['name']}: " + "; ".join(bits) + (f"; also {', '.join(extras)}" if extras else "")
 
 
+def identity_report(e):
+    """Read-only DM audit: resolved identity, selected art and actionable missing data."""
+    identity=visual_identity(e);face=portrait_choice(e);body=painted.corpse_selection(e)
+    show=lambda pair:f'{pair[0]}/{pair[1]:02d}' if pair else 'neutral/anatomical fallback'
+    warnings=[]
+    if is_humanlike(e):
+        if identity['presentation_source']=='unspecified':warnings.append('Presentation unspecified: neutral art. Pin --presentation when known.')
+        if identity['species_source']=='unspecified':warnings.append('Species unspecified: Human fallback. Pin --species when known.')
+        if not face:warnings.append('No compatible painted face; using an anatomical fallback.')
+        if not body:warnings.append('No compatible body; using a covered fallback.')
+    if e.get('portrait'):warnings.append('Pinned portrait takes precedence; its identity cannot be verified automatically. Clear/re-pin it after correcting the look.')
+    structured=canonical_species(e.get('species') or e.get('race'))
+    if structured and structured!=identity['species']:warnings.append(f"Visual species {identity['species']} differs from stored species {structured}; stats are unchanged.")
+    description=read_description(e.get('appearance') or (e.get('bio') or {}).get('appearance') or '')
+    if description.get('species_hint') and description['species_hint']!=identity['species']:warnings.append('Public description and resolved species disagree; check the subject or pin.')
+    if description.get('presentation') and description['presentation']!=identity['presentation']:warnings.append('Public description and resolved presentation disagree; check the pin or description.')
+    summary=(f"{e['id']}: {identity['species']} / {identity['presentation']} "
+             f"(species: {identity['species_source']}; presentation: {identity['presentation_source']}); face {show(face)}; body {show(body)}")
+    return dict(identity=identity,face=face,body=body,warnings=warnings,summary=summary)
+
+
 # ============================================================== drawing a bust
 
 CX = 160
@@ -647,11 +734,11 @@ CX = 160
 def _head_path(w, top, chin, jaw):
     L, R, jw = CX - w, CX + w, w * jaw
     cheek = top + (chin - top) * .62
-    return (f"M{CX},{top} C{CX + w * .6:.1f},{top} {R},{top + 22} {R},{top + 58} "
-            f"C{R},{cheek - 4:.1f} {R - 4},{cheek + 12:.1f} {CX + jw:.1f},{chin - 18} "
+    return (f"M{CX},{top} C{CX + w * .6:.1f},{top} {R},{top + 22} {R-3},{top + 58} "
+            f"C{R+2},{cheek - 4:.1f} {R - 3},{cheek + 12:.1f} {CX + jw:.1f},{chin - 18} "
             f"C{CX + jw - 9:.1f},{chin - 5} {CX + 11},{chin} {CX},{chin} "
             f"C{CX - 11},{chin} {CX - jw + 9:.1f},{chin - 5} {CX - jw:.1f},{chin - 18} "
-            f"C{L + 4},{cheek + 12:.1f} {L},{cheek - 4:.1f} {L},{top + 58} "
+            f"C{L + 3},{cheek + 12:.1f} {L-2},{cheek - 4:.1f} {L+3},{top + 58} "
             f"C{L},{top + 22} {CX - w * .6:.1f},{top} {CX},{top} Z")
 
 
@@ -661,37 +748,40 @@ def bust_svg(e, mode="portrait", size=None):
     r = seeded("draw", L["seed"])
     P = f"b{hashlib.md5(e['id'].encode()).hexdigest()[:5]}"  # id prefix so inlined copies never collide
     skin = L["skin"]
-    skin_hi, skin_lo, skin_line = lighten(skin, .18), darken(skin, .22), darken(skin, .5)
+    skin_hi, skin_lo, skin_line = lighten(skin, .12), darken(skin, .38), darken(skin, .58)
     hair, hair_hi, hair_lo = L["hair_color"], lighten(L["hair_color"], .28), darken(L["hair_color"], .35)
     cloth = L["cloth"]
     sp = L["species"]
     small = sp in ("Halfling", "Gnome", "Goblin", "Kobold")
-    w = {"Dwarf": 55, "Orc": 55, "Goliath": 54, "Gnome": 53, "Halfling": 52, "Goblin": 52, "Dragonborn": 52}.get(sp, 50)
-    top, chin = (100, 230) if not small else (104, 226)
+    anatomy_rng = seeded('anatomy', L['seed'])
+    w = {"Dwarf": 63, "Orc": 62, "Goliath": 61, "Elf": 53, "Gnome": 56, "Halfling": 55, "Goblin": 54, "Dragonborn": 57}.get(sp, 57)
+    w += anatomy_rng.uniform(-4, 4)
+    top, chin = (94, 223) if not small else (98, 220)
     jaw = {"Orc": .78, "Dwarf": .75, "Goliath": .76, "Dragonborn": .8, "Elf": .5, "Goblin": .55}.get(sp, .62)
     if sp == "Dragonborn":
         chin = 238
     if L["build"] == "broad":
         jaw += .06
+    jaw += anatomy_rng.uniform(-.045,.045)
     pres = L.get("presentation")
     if pres == "feminine":
         jaw -= .07
     elif pres == "masculine":
         jaw += .05
-    ey = 166 if not small else 168
-    ex = 21 if sp not in ("Goblin", "Gnome") else 23
+    ey = 158 if not small else 160
+    ex = 23 if sp not in ("Goblin", "Gnome") else 25
     bg1, bg2 = L["bg"]
     out = []
     add = out.append
 
     # ---------------------------------------------------------------- defs
     add(f'<defs>'
-        f'<radialGradient id="{P}bg" cx="50%" cy="38%" r="75%"><stop offset="0" stop-color="{lighten(bg1, .12)}"/>'
-        f'<stop offset=".55" stop-color="{bg1}"/><stop offset="1" stop-color="{bg2}"/></radialGradient>'
+        f'<radialGradient id="{P}bg" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="{mix(bg1, "#ac9571", .3)}"/>'
+        f'<stop offset=".55" stop-color="{darken(bg1, .35)}"/><stop offset="1" stop-color="{bg2}"/></radialGradient>'
         f'<radialGradient id="{P}vig" cx="50%" cy="42%" r="70%"><stop offset=".55" stop-color="#000" stop-opacity="0"/>'
         f'<stop offset="1" stop-color="#000" stop-opacity=".55"/></radialGradient>'
-        f'<radialGradient id="{P}skin" cx="40%" cy="35%" r="75%"><stop offset="0" stop-color="{skin_hi}"/>'
-        f'<stop offset=".65" stop-color="{skin}"/><stop offset="1" stop-color="{skin_lo}"/></radialGradient>'
+        f'<radialGradient id="{P}skin" cx="24%" cy="25%" r="85%"><stop offset="0" stop-color="{skin_hi}"/>'
+        f'<stop offset=".4" stop-color="{skin}"/><stop offset="1" stop-color="{skin_lo}"/></radialGradient>'
         f'<linearGradient id="{P}hair" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="{hair_hi}"/>'
         f'<stop offset=".5" stop-color="{hair}"/><stop offset="1" stop-color="{hair_lo}"/></linearGradient>'
         f'<linearGradient id="{P}cloth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{lighten(cloth, .14)}"/>'
@@ -714,6 +804,10 @@ def bust_svg(e, mode="portrait", size=None):
 
     # ---------------------------------------------------------------- backdrop
     add(f'<rect width="320" height="400" fill="url(#{P}bg)"/>')
+    # Engraved architectural arch: a quiet, shared visual language across portraits.
+    add(f'<path d="M38 360 V142 A122 122 0 0 1 282 142 V360 M48 360 V142 A112 112 0 0 1 272 142 V360" '
+        f'fill="none" stroke="#d9bd82" stroke-width="1" opacity=".18"/>'
+        f'<circle cx="160" cy="142" r="92" fill="none" stroke="#d9bd82" stroke-width=".7" opacity=".13"/>')
     for i in range(5):  # soft light rays
         a = -40 + i * 20 + r.uniform(-6, 6)
         add(f'<path d="M160 -20 L{160 + 420 * math.sin(math.radians(a - 4)):.0f} 420 '
@@ -754,16 +848,26 @@ def bust_svg(e, mode="portrait", size=None):
     sw = {"broad": 128, "slender": 104}.get(L["build"], 116)
     if small:
         sw -= 8
-    sh_y = 262
+    sh_y = 236
     body = (f"M{CX - sw},402 C{CX - sw},{sh_y + 70} {CX - sw + 16},{sh_y + 22} {CX - 56},{sh_y + 6} "
             f"Q{CX},{sh_y - 4} {CX + 56},{sh_y + 6} C{CX + sw - 16},{sh_y + 22} {CX + sw},{sh_y + 70} {CX + sw},402 Z")
     # neck
-    nw = 21 if L["build"] != "broad" else 25
+    nw = 27 if L["build"] != "broad" else 32
     add(f'<path d="M{CX - nw},{chin - 26} L{CX - nw - 2},{sh_y + 8} Q{CX},{sh_y + 20} {CX + nw + 2},{sh_y + 8} L{CX + nw},{chin - 26} Z" fill="{skin_lo}"/>')
     add(f'<path d="M{CX - nw},{chin - 12} Q{CX},{chin + 12} {CX + nw},{chin - 12} L{CX + nw},{chin - 26} L{CX - nw},{chin - 26} Z" fill="{darken(skin, .38)}" fill-opacity=".55"/>')
     if L.get("reptile"):
         add(f'<path d="M{CX - nw},{chin - 26} L{CX - nw - 2},{sh_y + 8} Q{CX},{sh_y + 20} {CX + nw + 2},{sh_y + 8} L{CX + nw},{chin - 26} Z" fill="url(#{P}scales)"/>')
     add(_outfit(L, P, body, sw, sh_y, r))
+    add(f'<defs><clipPath id="{P}foldclip"><path d="{body}"/></clipPath></defs>'
+        f'<g clip-path="url(#{P}foldclip)" fill="none" stroke-linecap="round">')
+    for s in (-1, 1):
+        for k in range(5):
+            x, y = CX+s*(46+k*11), sh_y+18+k*12
+            add(f'<path d="M{x},{y} Q{x+s*7},{y+28} {x+s*3},{y+66}" '
+                f'stroke="{darken(cloth,.65)}" stroke-width="{2.8-k*.3}" opacity=".3"/>'
+                f'<path d="M{x-s*2},{y+2} Q{x+s*5},{y+28} {x+s},{y+64}" '
+                f'stroke="{lighten(cloth,.5)}" stroke-width=".8" opacity=".22"/>')
+    add('</g>')
     if L.get("pendant"):
         add(_pendant(L["pendant"], sh_y, L))
     if L.get("cloak") and hw != "hood" and L["outfit"] not in ("furs",):
@@ -802,6 +906,7 @@ def bust_svg(e, mode="portrait", size=None):
 
     # ---------------------------------------------------------------- head
     add(f'<path d="{_head_path(w, top, chin, jaw)}" fill="url(#{P}skin)" stroke="{darken(skin, .4)}" stroke-width="1.5"/>')
+    add(illustration.portrait_finish(P, skin, w, top, chin, ey))
     add(f'<g clip-path="url(#{P}head)">')
     if L.get("reptile"):
         add(f'<rect x="{CX - w}" y="{top}" width="{2 * w}" height="{chin - top}" fill="url(#{P}scales)"/>')
@@ -841,13 +946,13 @@ def bust_svg(e, mode="portrait", size=None):
         x = CX + s * ex
         patched = L.get("eyepatch") and ((L["eyepatch"] == "left") == (s == 1))
         rot = f' transform="rotate({-s * slant} {x} {ey})"' if slant else ""
-        almond = f"M{x - 11},{ey} C{x - 6},{ey - 7.5} {x + 6},{ey - 7.5} {x + 11},{ey} C{x + 6},{ey + 6} {x - 6},{ey + 6} {x - 11},{ey} Z"
+        almond = f"M{x - 11},{ey} C{x - 6},{ey - 5} {x + 6},{ey - 5} {x + 11},{ey} C{x + 6},{ey + 3.5} {x - 6},{ey + 3.5} {x - 11},{ey} Z"
         if patched:
             continue
         add(f'<g{rot}>')
         add(f'<clipPath id="{P}eye{s + 1}"><path d="{almond}"/></clipPath>')
         solid = L.get("solid_eyes")
-        add(f'<path d="{almond}" fill="{ec if solid else ("#fbf6ee" if not glow else lighten(ec, .6))}"/>')
+        add(f'<path d="{almond}" fill="{ec if solid else (mix(skin, "#e9dec9", .7) if not glow else lighten(ec, .6))}"/>')
         add(f'<g clip-path="url(#{P}eye{s + 1})">')
         if not solid:
             gf = f' filter="url(#{P}glow)"' if glow else ""
@@ -860,8 +965,9 @@ def bust_svg(e, mode="portrait", size=None):
             add(f'<ellipse cx="{x}" cy="{ey}" rx="11" ry="3" fill="{lighten(ec, .35)}" fill-opacity=".5"/>')
         add(f'<path d="M{x - 11},{ey} C{x - 6},{ey - 7.5} {x + 6},{ey - 7.5} {x + 11},{ey} L{x + 11},{ey - 8} L{x - 11},{ey - 8} Z" fill="{skin_lo}" fill-opacity=".35"/>')
         add('</g>')
-        add(f'<circle cx="{x - 1.8}" cy="{ey - 1.8}" r="1.4" fill="#fff" fill-opacity=".9"/>')
-        add(f'<path d="M{x - 12},{ey + .5} C{x - 6},{ey - 8} {x + 6},{ey - 8} {x + 12},{ey + .5}" fill="none" stroke="{skin_line}" stroke-width="2.2" stroke-linecap="round"/>')
+        add(f'<circle cx="{x - 1.8}" cy="{ey - 1.3}" r=".9" fill="#fff" fill-opacity=".85"/>')
+        add(f'<path d="M{x - 12},{ey + .5} C{x - 6},{ey - 5.5} {x + 6},{ey - 5.5} {x + 12},{ey + .5}" fill="none" stroke="{skin_line}" stroke-width="1.6" stroke-linecap="round"/>'
+            f'<path d="M{x-10},{ey+6} Q{x},{ey+10} {x+9},{ey+6}" fill="none" stroke="{skin_lo}" opacity=".45" stroke-width=".8"/>')
         if pres == "feminine" and not L.get("reptile"):
             add(f'<path d="M{x + s * 10},{ey - 2} l{s * 5},-4 M{x + s * 7},{ey - 5} l{s * 4},-5" stroke="{skin_line}" stroke-width="1.6" stroke-linecap="round"/>')
         if glow:
@@ -974,7 +1080,17 @@ def bust_svg(e, mode="portrait", size=None):
             f'C{CX + 20},{my - 12} {CX - 20},{my - 12} {CX - w + 6},{ey + 16} Z" fill="{bc}" fill-opacity=".28"/>')
 
     # ---------------------------------------------------------------- hair (front)
-    add(_hair_front(style, L, P, w, top, hair_lo, r))
+    hair_art = _hair_front(style, L, P, w, top, hair_lo, r)
+    add(hair_art)
+    if hair_art:
+        add(f'<defs><clipPath id="{P}hairclip">{hair_art}</clipPath></defs>'
+            f'<g clip-path="url(#{P}hairclip)" fill="none" stroke="{hair_hi}" stroke-width=".7" opacity=".26">')
+        hair_rng = seeded('strands', L['seed'])
+        for i in range(42):
+            x = CX - w - 12 + i * (2*w+24)/42
+            length = hair_rng.uniform(80, 210) if style in ('long','braid','dreads') else hair_rng.uniform(35,65)
+            add(f'<path d="M{x:.1f},{top-12} C{x-16:.1f},{top+18} {x+13:.1f},{top+50} {x+3:.1f},{top+length:.1f}"/>')
+        add('</g>')
     if L.get("undercut") and style not in ("bald", "hidden"):
         for s in (-1, 1):
             add(f'<path d="M{CX + s * (w - 2)},{top + 40} Q{CX + s * (w + 2)},{top + 60} {CX + s * (w - 1)},{ey + 4}" stroke="{hair}" stroke-width="7" stroke-opacity=".35" fill="none"/>')
@@ -985,6 +1101,19 @@ def bust_svg(e, mode="portrait", size=None):
     add(_headwear(hw, L, P, w, top, ey, cloak_col, r))
 
     # ---------------------------------------------------------------- finish
+    # Fine etched strokes over the face and cloth give the illustration a drawn finish.
+    finish_rng = seeded('finish', L['seed'])
+    add(f'<g clip-path="url(#{P}head)" stroke="{skin_line}" stroke-width=".5" opacity=".12">')
+    for i in range(80):
+        x, y = finish_rng.uniform(CX-w, CX+w), finish_rng.uniform(top+12, chin)
+        add(f'<path d="M{x:.1f},{y:.1f} l{finish_rng.uniform(1,3):.1f},-1.5"/>')
+    add('</g>')
+    add(f'<defs><clipPath id="{P}bodyclip"><path d="{body}"/></clipPath></defs>'
+        f'<g clip-path="url(#{P}bodyclip)" fill="none" stroke="#eddfb8" opacity=".09" stroke-width=".7">')
+    for i in range(65):
+        x, y = finish_rng.uniform(30,290), finish_rng.uniform(sh_y+16,400)
+        add(f'<path d="M{x:.1f},{y:.1f} l-3,5"/>')
+    add('</g>')
     add(f'<rect width="320" height="400" fill="url(#{P}vig)"/>')
     body_svg = "".join(out)
     if mode == "face":
@@ -992,7 +1121,7 @@ def bust_svg(e, mode="portrait", size=None):
         return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="72 70 176 176" width="{sz}" height="{sz}">'
                 f'{body_svg}</svg>')
     if mode == "bust":
-        return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" width="{size or 320}" height="{int((size or 320) * 1.25)}">{body_svg}</svg>'
+        return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 35 240 300" width="{size or 320}" height="{int((size or 320) * 1.25)}">{body_svg}</svg>'
     return _framed(e, body_svg, P, size)
 
 
@@ -1289,12 +1418,19 @@ def _headwear(hw, L, P, w, top, ey, cloak_col, r):  # noqa: C901
 
 # ============================================================== creature art (non-humanoids)
 
+def creature_icon(e):
+    """Fallback anatomy follows the same resolved species as painted faces and bodies."""
+    identity=visual_identity(e)
+    if identity['species_source']=='unspecified':return assets.icon_for_entity(e)
+    return assets.icon_for_entity(dict(e,srd_name=identity['species'],name=identity['species']))
+
+
 def creature_svg(e, mode="portrait", size=None):
     t = (e.get("type") or "monstrosity").split()[0].lower()
     bg, bg2, lite, dark, glow = TYPE_STYLE.get(t, TYPE_STYLE["monstrosity"])
     if e.get("side") == "ally":
         glow = "#6af0d0"
-    icon = assets.icon_for_entity(e)
+    icon = creature_icon(e)
     r = seeded("creature", _art_id(e))
     P = f"c{hashlib.md5(e['id'].encode()).hexdigest()[:5]}"
     body = assets.icon_body(icon)
@@ -1321,9 +1457,13 @@ def creature_svg(e, mode="portrait", size=None):
     for _ in range(18):
         parts.append(f'<circle cx="{r.uniform(10, 310):.0f}" cy="{r.uniform(10, 320):.0f}" r="{r.uniform(.8, 2.6):.1f}" fill="{glow}" fill-opacity="{r.uniform(.15, .5):.2f}"/>')
     parts.append(f'<ellipse cx="160" cy="{oy + 512 * sc + 2:.0f}" rx="96" ry="16" fill="#000" fill-opacity=".45" filter="url(#{P}soft)"/>')
-    parts.append(f'<g transform="translate({ox:.1f} {oy:.1f}) scale({sc})" filter="url(#{P}blur)" opacity=".7">{halo}</g>')
-    parts.append(f'<g transform="translate({ox + 4:.1f} {oy + 6:.1f}) scale({sc})" opacity=".45">{body.replace("currentColor", "#000")}</g>')
-    parts.append(f'<g transform="translate({ox:.1f} {oy:.1f}) scale({sc})">{sil}</g>')
+    study = illustration.creature_body(e, P, lite, dark, glow)
+    if study:
+        parts.append(study)
+    else:
+        parts.append(f'<g transform="translate({ox:.1f} {oy:.1f}) scale({sc})" filter="url(#{P}blur)" opacity=".7">{halo}</g>')
+        parts.append(f'<g transform="translate({ox + 4:.1f} {oy + 6:.1f}) scale({sc})" opacity=".45">{body.replace("currentColor", "#000")}</g>')
+        parts.append(f'<g transform="translate({ox:.1f} {oy:.1f}) scale({sc})">{sil}</g>')
     parts.append(f'<rect width="320" height="400" fill="url(#{P}vig)"/>')
     inner = "".join(parts)
     if mode == "face":
@@ -1337,24 +1477,56 @@ def creature_svg(e, mode="portrait", size=None):
 # ============================================================== public entry points
 
 def portrait_svg(e, size=None):
-    return bust_svg(e, "portrait", size) if is_humanlike(e) else creature_svg(e, "portrait", size)
+    return _painted_art(e,"portrait",size)
 
 
 def bust_svg_any(e, size=None):
     """Unframed head-and-shoulders (small portraits: party cards, sheet header)."""
-    return bust_svg(e, "bust", size) if is_humanlike(e) else creature_svg(e, "bust", size)
+    return _painted_art(e,"bust",size)
 
 
 def face_svg(e, size=None):
-    return bust_svg(e, "face", size) if is_humanlike(e) else creature_svg(e, "face", size)
+    return _painted_art(e,"face",size)
+
+
+def _painted_art(e,mode,size):
+    chosen=portrait_choice(e)
+    if chosen:return painted.portrait(e,chosen,mode,size)
+    # Uncatalogued creatures retain a deterministic immediate illustration.
+    return bust_svg(e,mode,size) if is_humanlike(e) else creature_svg(e,mode,size)
+
+
+def portrait_choice(e):
+    """The single asset decision used by portraits, map faces and body colour matching."""
+    chosen=None
+    kept=e.get('art_of') or {};saved=tuple(kept.get('portrait_asset') or ())
+    record=painted.portrait_records().get(saved)
+    identity=visual_identity(e)
+    if record and (e.get('look') or {})==kept.get('recipient_look',{}) and record['species']==identity['species'] and record['presentation'] in ('any',identity['presentation']) and painted.uri(*saved):return saved
+    if is_humanlike(e):
+        explicit=read_description(e.get('appearance') or (e.get('bio') or {}).get('appearance') or '')
+        for field,text in (e.get('look') or {}).items():explicit.update(_read_field(field,text))
+        L=look_of(e)
+        if L['species']=='Dragonborn' and e.get('ancestry'):explicit['skin']=L['skin']
+        if L['species']=='Elf' and re.search(r'\bdrow\b',str(e.get('srd_name',''))+' '+str(e.get('appearance',''))):
+            if 'skin' not in (e.get('look') or {}):L['skin']='#4f2d1a';explicit['skin']=L['skin']
+            if 'hair' not in (e.get('look') or {}):L['hair_color']='#e8e2cf';explicit['hair_color']=L['hair_color']
+        # Appearance preservation records have priority, as in the procedural renderer.
+        if e.get('art_of'):explicit.update(e['art_of'].get('traits') or e['art_of'].get('look') or {})
+        # Neutral painted bases now cover unspecified identities; never choose a gendered face for a neutral body.
+        explicit['presentation']=L['presentation']
+        chosen=painted.selection(e,L,explicit,HAIR_COLORS,SKIN_TONES)
+    else:chosen=painted.creature_selection(e)
+    return chosen
 
 
 def art_version(e):
     """Changes whenever anything the picture is drawn from changes (cache-busting for the viewer)."""
-    keys = ("name", "species", "classes", "ancestry", "appearance", "look", "side", "type", "size", "srd_name", "art_of")
+    keys = ("name", "species", "race", "presentation", "gender", "sex", "pronouns", "classes", "ancestry", "appearance", "look", "side", "type", "size", "srd_name", "art_of")
     worn = [(i.get("name"), i.get("category")) for i in e.get("inventory", []) if i.get("kind") == "armor" and i.get("equipped")]
-    blob = repr([e.get(k) for k in keys] + [(e.get("bio") or {}).get("appearance"), worn, ART_REV])
+    bio=e.get('bio') or {}
+    blob = repr([e.get(k) for k in keys] + [tuple(bio.get(k) for k in ('appearance','species','race','presentation','gender','sex','pronouns')), worn, ART_REV])
     return hashlib.sha1(blob.encode()).hexdigest()[:10]
 
 
-ART_REV = 2
+ART_REV = 11

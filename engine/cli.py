@@ -332,6 +332,8 @@ def cmd_char(g, a):
 
 
 def cmd_spells(g, a):
+    if not a.who:
+        raise RuleError("This spells command needs a creature id.")
     e = g.get(a.who)
     if a.action == "set":
         cls = a.cls or next(iter(derive(e)["spellcasting"]), None)
@@ -497,10 +499,21 @@ def cmd_npc(g, a):
             spots = maps.free_cells(m, len(made), __import__("random").Random(g.state["seq"]), near=(x, y), avoid=frozenset(occupied))
             for e, (sx, sy) in zip(made, spots):
                 g.set(e, token={"map": mid, "x": sx, "y": sy})
+        align = None
+        if getattr(a, "align", None):
+            align = " ".join(w.capitalize() for w in a.align.replace("-", " ").split())
+            if align not in ALIGNMENTS:
+                raise RuleError(f"--align \"{'|'.join(ALIGNMENTS)}\"")
         for e in made:
+            # one line can do the whole new-creature checklist: add, place, describe, align
+            if getattr(a, "desc", None):
+                g.set(e, appearance=a.desc)
+            if align:
+                g.set(e, alignment=align)
             if not e["hidden"]:
                 g.say(f"👁 {e['name']} appears{' (' + e['side'] + ')' if e['side'] != 'enemy' else ''}.", kind="creature", who=e["id"])
-            g.note(f"  added {e['id']}: {e['srd_name']} AC {e['ac']} HP {e['hp']} CR {e['cr']}")
+            g.note(f"  added {e['id']}: {e['srd_name']} AC {e['ac']} HP {e['hp']} CR {e['cr']}"
+                   + (" · described" if getattr(a, "desc", None) else "") + (f" · {align}" if align else ""))
     elif a.action in ("leave", "return"):
         # a creature walks out of the scene (not hiding in it): off the table, out of any fight here. `return` brings it back.
         for i in ids(a.what):
@@ -773,12 +786,13 @@ def cmd_combat(g, a):
         xp = sum(g.entities[i]["xp"] for i in defeated if i in g.entities)
         g.emit("encounter.log", defeated=defeated, xp=xp, awarded=False, time=g.state["time"],
                rounds=c["round"], ammo=c.get("ammo_total") or {k: v.get("ammo_spent", 0) for k, v in c.get("economy", {}).items() if v.get("ammo_spent")})
-        g.emit("time.set", minutes=g.state["time"] + max(1, c["round"] // 10))
+        g.emit("time.set", minutes=g.state["time"] + max(1, c["round"] / 10))
         for e in g.entities.values():
             conds = [x for x in e.get("conditions", []) if x["name"] in ("dodging", "helped", "raging", "disengaged")]
             if conds:
                 g.set(e, conditions=[x for x in e["conditions"] if x not in conds])
         g.emit("combat.set", combat=None)
+        M.after_time(g)
         g.say(f"🏁 Combat ends after {c['round']} round(s). Defeated: {', '.join(g.entities[i]['name'] for i in defeated if i in g.entities) or 'none'}"
               f" ({xp} XP available — `xp award --encounter`).", kind="combat", phase="end")
         return
@@ -820,7 +834,8 @@ def cmd_action(g, a):
         raise RuleError(f"'{name}' is not an SRD action. Actions: {', '.join(sorted(ACTIONS))}. Class features: `feature`.")
     if kind == "bonus" and not a.via:
         raise RuleError("Taking an action as a Bonus Action needs a feature that allows it (--via \"Cunning Action\").")
-    if a.via and not __import__("engine.core", fromlist=["has_feature"]).has_feature(e, a.via) and \
+    spell_dash = bool(a.via and a.via.lower() == "expeditious retreat" and M.E.has(e, "bonus_dash") and name == "dash")
+    if a.via and not spell_dash and not __import__("engine.core", fromlist=["has_feature"]).has_feature(e, a.via) and \
             not any(x["name"].lower() == a.via.lower() for x in e.get("actions", [])):
         raise RuleError(f"{e['name']} doesn't have '{a.via}'.")
     if name in ("grapple", "shove"):
@@ -892,7 +907,7 @@ def cmd_attack(g, a):
 
 def cmd_cast(g, a):
     M.cast(g, a.caster, a.spell, a.level, ids(a.targets), ritual=a.ritual, free=a.free, adv=ids(a.adv), dis=ids(a.dis), readied=getattr(a, 'readied', False),
-           condition=a.condition, component=a.component, now=a.now, scroll=a.scroll)
+           condition=a.condition, component=a.component, now=a.now, scroll=a.scroll, choice=a.choice)
 
 
 def cmd_check(g, a):
@@ -1240,6 +1255,20 @@ def cmd_rest(g, a):
             M.find_item(g.get(k), item)
             focus[g.get(k)["id"]] = item
         M.short_rest(g, members, hd, focus)
+    elif getattr(a, "ended_at", None):
+        # repair: the time already passed (a journey's nights) held a Long Rest the engine didn't credit; logged publicly
+        when = parse_when(a.ended_at)
+        if when is None or not a.reason:
+            raise RuleError('rest long --ended-at "Day N, HH:MM" --reason "..."')
+        if when > g.state["time"]:
+            raise RuleError("--ended-at must be in the past (use `rest long` for a rest taken now).")
+        for e in members:
+            last = e.get("last_long_rest_end")
+            if last is not None and when - 8 * 60 - last < 16 * 60:
+                raise RuleError(f"{e['name']} had finished a Long Rest {M.fmt_duration(when - 8 * 60 - last)} before that one began — "
+                                f"Long Rests need 16 hours between them (rules/core/08-rules-glossary.md → Long Rest).")
+        g.override(a.reason, f"a Long Rest ending {fmt_time(when)} credited to {', '.join(e['name'] for e in members)}")
+        M.long_rest(g, members, ended_at=when)
     else:
         M.long_rest(g, members)
 
@@ -1352,6 +1381,15 @@ def cmd_travel(g, a):
     if region:
         g.emit("view.set", party_pos=[tx, ty])
     M.after_time(g)
+    # A journey of more than one travel day spends its nights off the road: 8 hours on the move and 16 off each day,
+    # time enough for a Long Rest every night (rules/core/09-gameplay-toolbox.md, Travel Pace; 08-rules-glossary.md, Long Rest).
+    nights = int(total_min // 1440)
+    if nights >= 1 and not push:
+        rest_end = g.state["time"] - int(round(rem * 60))
+        able = [e for e in walkers if e["hp"] >= 1 and (e.get("last_long_rest_end") is None
+                                                         or rest_end - 8 * 60 - e["last_long_rest_end"] >= 16 * 60)]
+        if able:
+            M.long_rest(g, able, ended_at=rest_end, nights=nights)
     g.say(f"🧭 The party travels {miles} miles at a {a.pace} pace ({pace} mph, 8 hours a day"
           f"{', difficult terrain counted' if region else ''}) — "
           f"{f'{hours:.1f} h' if narrated and not push and hours <= 16 else f'{int(days)} day(s) {rem:.1f} h'}. Now {fmt_time(g.state['time'])}.", kind="time")
@@ -2360,20 +2398,44 @@ def cmd_asset(g, a):
         g.set(e, portrait=aid)
         g.note(f"Portrait {aid} pinned (it no longer follows `asset look` changes; `asset portrait {e['id']} --clear` to go back to live art).")
         return
+    if a.action == 'identity':
+        # Inspection only: no events, guesses, automatic pins or changes to mechanics.
+        current=s.get('view',{}).get('map')
+        es=[g.get(ref) for ref in a.args] if a.args else [e for e in s['entities'].values() if a.all or e.get('kind')=='pc' or (e.get('token') or {}).get('map')==current]
+        count=0
+        for e in es:
+            report=art.identity_report(e)
+            if a.issues_only and not report['warnings']:continue
+            g.note(report['summary'])
+            for warning in report['warnings']:g.note('  ⚠ '+warning)
+            count+=1
+        g.note(f'Checked {len(es)} creature(s); displayed {count}. No identity changed.')
+        return
     if a.action == "look":
         # What a creature looks like, feature by feature. The live table redraws its portrait and token from this.
         e = g.get(a.args[0])
+        fields = {f: getattr(a, f"look_{f}") for f in art.LOOK_FIELDS if getattr(a, f"look_{f}", None)}
+        if 'presentation' in fields:
+            value=art.presentation_from(fields['presentation'])
+            if not value:raise RuleError('Presentation: feminine/female, masculine/male, or androgynous/neutral/nonbinary.')
+            fields['presentation']=value
+        if 'species' in fields:fields['species']=art.canonical_species(fields['species'])
+        if a.clear_like:
+            g.set(e,art_of=None)
+            g.note('Appearance source cleared; live art follows this creature again.')
         if getattr(a, "like", None):
             # keep another creature's face: an NPC who joins the party as a character, a double, a twin
             other = g.get(a.like)
             kept = other.get("art_of") or {"seed": other["id"], "name": other.get("name", ""),
-                                             "style": art._style_for(other), "species": art.species_of(other)}
+                                             "style": art._style_for(other), "species": art.species_of(other),
+                                             "presentation": art.visual_identity(other)['presentation'],"traits":art.look_of(other),
+                                             "portrait_asset":art.portrait_choice(other),"recipient_look":dict(e.get('look') or {})}
+            kept=dict(kept,recipient_look=dict(e.get('look') or {}))
             g.set(e, art_of=kept)
             desc = other.get("appearance") or (other.get("bio") or {}).get("appearance")
             if desc and not (e.get("appearance") or (e.get("bio") or {}).get("appearance")):
                 g.set(e, appearance=desc)
             g.note(f"🎨 {e['name']} now looks like {other['name']} did.")
-        fields = {f: getattr(a, f"look_{f}") for f in art.LOOK_FIELDS if getattr(a, f"look_{f}", None)}
         if a.clear:
             drop = art.LOOK_FIELDS if a.clear == "all" else [x.strip() for x in a.clear.split(",")]
             bad = [x for x in drop if x not in art.LOOK_FIELDS]
@@ -2385,8 +2447,10 @@ def cmd_asset(g, a):
         if fields or a.clear:
             if e.get("portrait"):
                 g.note(f"  Note: {e['name']} has a pinned portrait ({e['portrait']}); `asset portrait {e['id']} --clear` to show the live art.")
-            g.note("🎨 Look updated.")
+            g.note("🎨 Look updated. Visual pins do not change species traits or other mechanics.")
         g.note(art.describe_look(g.get(e["id"])))
+        report=art.identity_report(g.get(e['id']))
+        for warning in report['warnings']:g.note('  ⚠ '+warning)
         return
     if a.action == "art":
         # Write the generated picture to a file so the DM can look at it (or hand-edit it and `asset draw` it back).
@@ -2414,7 +2478,7 @@ def cmd_asset(g, a):
         for k, v in s["assets"].items():
             print(f"{k}: {v['name']} [{v['kind']}] {v['license']} — {v.get('credit', '')} ({v['source'][:60]})")
         return
-    raise RuleError("asset icon|fetch|import|draw|portrait|look|art|list")
+    raise RuleError("asset icon|fetch|import|draw|portrait|look|identity|art|list")
 
 
 def set_item_art(g, ref, aid):
@@ -2603,8 +2667,22 @@ def cmd_scene(g, a):
         raise RuleError(f"No asset '{a.image}'.")
     g.emit("view.set", scene=scene)
     g.say(f"🎬 {a.title}" + (f" — {a.desc}" if a.desc else ""), kind="scene")
+    # the usual bookkeeping when time passes or the place changes, in the same command: lighting, weather, the map
+    mid = a.map or g.state["view"].get("map")
+    if getattr(a, "lighting", None):
+        if not mid or mid not in g.state["maps"]:
+            raise RuleError("scene --lighting needs a map (--map, or one already showing).")
+        sub_run(g, ["map", "set", mid, "--kv", f"lighting={a.lighting}"])
+    if getattr(a, "ambient", None):
+        sub_run(g, ["fx", "ambient", a.ambient])
     if a.map:
         show_map(g, a.map)
+
+
+def sub_run(g, argv):
+    """Run another engine command inside this one (same rules, same Game, same save)."""
+    sa = build_parser().parse_args(fix_negative_coins(argv))
+    HANDLERS[sa.cmd](g, sa)
 
 
 def cmd_show(g, a):
@@ -2813,6 +2891,10 @@ def fulfill(g, rid, via):
     elif op == "attack":
         M.attack(g, spec["att"], spec["tgt"], spec["weapon"], adv=spec["adv"], dis=spec["dis"], reaction=spec["reaction"],
                  offhand=spec["offhand"], versatile=spec["versatile"], sneak=spec["sneak"], smite=spec["smite"], now=True, request=rid)
+    elif op == "spell_attack":
+        M.spell_attack(g, e, g.get(spec["target"]), g.require("spells", spec["spell"], "Spell"),
+                       spec["sc"], spec["expr"], spec["fx"], spec["adv"], spec["dis"], True,
+                       slot=spec["slot"], request=rid)
     elif op == "death":
         M.death_save(g, e, now=True, request=rid)
     elif op == "initiative":
@@ -2890,7 +2972,7 @@ def cmd_verify(a):
     d = active_dir()
     st = Store(d)
     try:
-        ev = st.load()
+        ev = st.load(full=True)   # an explicit verify re-checks every signature
         print(f"✔ {len(ev)} events, signature chain intact. Head {ev[-1]['hash'][:16] if ev else '-'}")
         # snapshots vs replay
         g = Game(d)
@@ -2999,10 +3081,10 @@ def build_parser():
         c.add_argument(f"--{opt}", dest=opt.replace("-", "_"))
     c.add_argument("--class", dest="cls")
 
-    c = sp.add_parser("spells", help="set|scribe|list|refund")
-    c.add_argument("action", choices=["set", "scribe", "list", "refund"])
+    c = sp.add_parser("spells", help="set|scribe|list|refund|support")
+    c.add_argument("action", choices=["set", "scribe", "list", "refund", "support"])
     c.add_argument("--level", type=int, help="refund: the slot level to give back")
-    c.add_argument("who")
+    c.add_argument("who", nargs="?")
     c.add_argument("--class", dest="cls")
     c.add_argument("--cantrips")
     c.add_argument("--prepared", default="")
@@ -3031,6 +3113,8 @@ def build_parser():
     c.add_argument("--hp", choices=["avg", "roll"])
     c.add_argument("--at")
     c.add_argument("--map")
+    c.add_argument("--desc", help="npc add: what anyone can see (same as a following `npc describe`)")
+    c.add_argument("--align", help="npc add: the creature's alignment (same as a following `npc alignment`)")
 
     c = sp.add_parser("place", help="put a creature's token on a map")
     c.add_argument("who")
@@ -3092,6 +3176,7 @@ def build_parser():
     c.add_argument("--scroll", help="inventory id of a spell scroll")
     c.add_argument("--condition", help="condition applied on a failed save (e.g. paralyzed)")
     c.add_argument("--component", help="inventory id of the costly component")
+    c.add_argument("--choice", help="spell option: skill, ability, damage type, condition, or Mass Heal allocations")
     c.add_argument("--adv")
     c.add_argument("--dis")
     c.add_argument("--now", action="store_true")
@@ -3194,6 +3279,8 @@ def build_parser():
     c.add_argument("--hd", help="hit dice to spend: kira:2,bob:1")
     c.add_argument("--focus", help="short rest: identify a magic item by focusing on it, kira:item-id (one per creature)")
     c.add_argument("--refund-hd", help="repair: refund Hit Point Dice spent by mistake, kira:1 (needs --reason; takes no rest)")
+    c.add_argument("--ended-at", help='repair: a Long Rest already taken inside time that has passed, ending "Day N, HH:MM" '
+                                      '(needs --reason; no time passes)')
     c.add_argument("--reason")
     c = sp.add_parser("agenda", help="add|list|done|cancel scheduled events (deliveries, debts, visits)")
     c.add_argument("action", choices=["add", "list", "done", "cancel"])
@@ -3294,7 +3381,7 @@ def build_parser():
     c.add_argument("--path", dest="route_path", help='map route <region> road|river --path "x,y x,y ..." (waypoints)')
     c.add_argument("--small", help="map import-grid: why this place is genuinely smaller than a playable map (a skiff, a cell)")
 
-    c = sp.add_parser("asset", help="icon|fetch|import|draw|portrait|look|art|list")
+    c = sp.add_parser("asset", help="icon|fetch|import|draw|portrait|look|identity|art|list")
     c.add_argument("action")
     c.add_argument("args", nargs="*")
     c.add_argument("--name")
@@ -3309,8 +3396,11 @@ def build_parser():
     c.add_argument("--clear", nargs="?", const="all", help="portrait: unpin; look: clear fields (comma list or all)")
     c.add_argument("--out", help="art: write the SVG here")
     c.add_argument("--crop", choices=["portrait", "face"], help="art: framed portrait (default) or the token face")
+    c.add_argument('--all',action='store_true',help='identity: audit every creature; default is party and current map')
+    c.add_argument('--issues-only',action='store_true',help='identity: show only missing/conflicting identity or pinned art')
+    c.add_argument('--clear-like',action='store_true',help='look: stop preserving another creature\'s appearance')
     for f in ("hair", "beard", "eyes", "skin", "marks", "headwear", "outfit", "cloak", "build", "age", "expression", "horns",
-              "accent", "background", "presentation"):
+              "accent", "background", "presentation", "species"):
         c.add_argument(f"--{f}", dest=f"look_{f}", help=f"look: {f} (free text, e.g. --hair \"long silver braid\")")
     c = sp.add_parser("fx", help="table animation: status|preset|set|ambient|play <effect>|camera <target>")
     c.add_argument("action")
@@ -3333,6 +3423,8 @@ def build_parser():
     c.add_argument("--desc")
     c.add_argument("--image")
     c.add_argument("--map")
+    c.add_argument("--lighting", choices=["bright", "dim", "dark"], help="also set the map's lighting")
+    c.add_argument("--ambient", help="also set the table's weather (fx ambient: none|rain|snow|fog|embers|ash|motes|storm)")
     c = sp.add_parser("show", help="show a handout: item|creature|asset|text|srd-item|clear")
     c.add_argument("kind")
     c.add_argument("ref", nargs="?", default="")
@@ -3375,6 +3467,12 @@ def build_parser():
     c = sp.add_parser("serve", help="run the live viewer")
     c.add_argument("--port", type=int, default=8765)
     c.add_argument("--host", default="127.0.0.1")
+    c = sp.add_parser("batch", help="run many commands in one go: one load, one save, one table update")
+    c.add_argument("file", nargs="?", default="-", help="a file of commands, one per line (default: read stdin)")
+    c.add_argument("--atomic", action="store_true", help="all or nothing: if any step is refused, keep none of them")
+    c.add_argument("--dry-run", action="store_true",
+                   help="check every step against the rules and save nothing (stops at the first step that rolls dice)")
+    c.add_argument("-q", "--quiet", action="store_true", help="don't echo each step, only its output")
     sp.add_parser("help")
     return p
 
@@ -3392,20 +3490,152 @@ HANDLERS = {
     "status": cmd_status, "audit": cmd_audit, "log": cmd_log,
 }
 READ_ONLY = {"status", "audit", "log"}
+# commands that manage the campaign itself rather than play it: run them on their own, never inside a batch
+NOT_IN_BATCH = {"campaign", "verify", "quicksave", "quickload", "repair", "rekey", "serve", "batch", "help", "rules"}
+ENGINE_PREFIX = re.compile(r"^\s*(?:py|python3?|python)\s+-m\s+engine\s+")
+
+
+def fix_negative_coins(argv):
+    # `coins kira -5sp`: a negative amount looks like an option to argparse; pass it as a value instead
+    return [f"={x}" if i and argv[0] == "coins" and re.match(r"^-\d", x) else x for i, x in enumerate(argv)]
+
+
+def batch_steps(text):
+    """One command per line. Blank lines and lines starting with # are skipped; a line ending in a backslash
+    continues on the next. A leading `py -m engine` / `python -m engine` is optional."""
+    steps, buf, first = [], "", 0
+    for n, raw in enumerate(text.splitlines(), 1):
+        line = raw.rstrip()
+        if not buf:
+            first = n
+            if not line.strip() or line.lstrip().startswith("#"):
+                continue
+        if line.endswith("\\"):
+            buf += line[:-1] + " "
+            continue
+        buf += line
+        steps.append((first, ENGINE_PREFIX.sub("", buf).strip()))
+        buf = ""
+    if buf.strip():
+        steps.append((first, ENGINE_PREFIX.sub("", buf).strip()))
+    return steps
+
+
+def rollback_to(g, mark):
+    """Drop a refused step's pending events and rebuild the state from the log plus the steps that stood."""
+    from .core import apply
+    g.pending = g.pending[:mark]
+    g.state = replay(g.events)
+    for ev in g.pending:
+        apply(g.state, {**ev, "seq": g.state["seq"] + 1})
+
+
+def cmd_batch(a, parser):
+    """Run many engine commands as one: the log is loaded and verified once, each step is checked by the same
+    rules as on its own, the events are signed and saved together, and the live table updates once.
+
+    A refused step stops the batch there: the steps before it stand (or none, with --atomic) and the rest are
+    listed, not run. Nothing is ever chained past a refusal."""
+    import contextlib
+    import io
+    if a.file == "-":
+        if hasattr(sys.stdin, "reconfigure"):
+            try:
+                sys.stdin.reconfigure(encoding="utf-8", errors="replace")
+            except (ValueError, OSError):
+                pass
+        text = sys.stdin.read()
+    else:
+        text = Path(a.file).read_text(encoding="utf-8")
+    steps = batch_steps(text)
+    if not steps:
+        raise RuleError("the batch is empty: give one engine command per line")
+    parsed = []
+    for line_no, cmd in steps:
+        try:
+            argv = fix_negative_coins(shlex.split(cmd))
+        except ValueError as err:
+            raise RuleError(f"line {line_no}: can't read `{cmd}` ({err}); nothing was run")
+        err_buf = io.StringIO()
+        try:
+            with contextlib.redirect_stderr(err_buf):
+                sa = parser.parse_args(argv)
+        except SystemExit:
+            msg = (err_buf.getvalue().strip().splitlines() or ["not a valid engine command"])[-1]
+            raise RuleError(f"line {line_no}: `{cmd}` → {msg}; nothing was run")
+        if not sa.cmd or sa.cmd in NOT_IN_BATCH or sa.cmd not in HANDLERS or (sa.cmd == "spells" and sa.action == "support"):
+            raise RuleError(f"line {line_no}: `{sa.cmd or cmd}` can't run inside a batch (run it on its own); nothing was run")
+        parsed.append((line_no, cmd, argv, sa))
+
+    g = Game()
+    if a.dry_run:
+        def no_dice(*args, **kw):
+            raise RuleError("dry run stops before any dice are rolled (a roll is final, so it can't be previewed)")
+        g.roll = no_dice
+    done, failed = 0, None
+    for i, (line_no, cmd, argv, sa) in enumerate(parsed, 1):
+        mark, out_mark = len(g.pending), len(g.out)
+        g.cmdline = " ".join(shlex.quote(x) for x in argv)
+        if not a.quiet:
+            print(f"▸ {i}. {cmd}")
+        try:
+            HANDLERS[sa.cmd](g, sa)
+        except (RuleError, KeyError, IndexError) as err:
+            for line in g.out[out_mark:]:
+                print("  " + line)
+            rollback_to(g, mark)
+            g.out = g.out[:out_mark]
+            kind = "✖ RULE" if isinstance(err, RuleError) else f"✖ ERROR: {type(err).__name__}"
+            print(f"{kind}: {err}")
+            failed = (i, line_no, cmd)
+            break
+        for line in g.out[out_mark:]:
+            print(line)
+        done += 1
+    rest = parsed[failed[0]:] if failed else []
+    if a.dry_run:
+        print(f"── dry run: {done} of {len(parsed)} step(s) pass the rules; nothing was saved.")
+    elif failed and a.atomic:
+        print(f"── --atomic: step {failed[0]} was refused, so none of the {len(parsed)} steps were saved.")
+    else:
+        written = g.commit()
+        if written:
+            views.write_snapshots(g)
+        print(f"── batch: {done} of {len(parsed)} step(s) done, {len(written)} event(s) saved in one go.")
+    if failed:
+        print(f"   Stopped at step {failed[0]} (line {failed[1]}): {failed[2]}")
+        for j, (line_no, cmd, _, _) in enumerate(rest, failed[0] + 1):
+            print(f"   not run {j}: {cmd}")
+        return 2
+    return 0
 
 
 def main(argv=None):
     if hasattr(sys.stdout, "reconfigure"):  # (not when a test runs the CLI in-process with captured output)
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     argv = sys.argv[1:] if argv is None else argv
-    # `coins kira -5sp`: a negative amount looks like an option to argparse; pass it as a value instead
-    argv = [f"={x}" if i and argv[0] == "coins" and re.match(r"^-\d", x) else x for i, x in enumerate(argv)]
+    argv = fix_negative_coins(argv)
     p = build_parser()
     a = p.parse_args(argv)
     if not a.cmd or a.cmd == "help":
         p.print_help()
         return 0
     try:
+        if a.cmd == "spells" and a.action == "support":
+            from .spells import PROFILES, support
+            rows = [srd.find("spells", a.who)] if a.who else sorted(srd.data()["spells"].values(), key=lambda s: (s["level"], s["name"]))
+            if not rows or rows[0] is None:
+                raise RuleError(f"Unknown spell: {a.who}")
+            if not a.who:
+                print(f"{len(PROFILES)} explicit spell profiles; other spells use parsed resolution or DM narration.")
+            for spell in rows:
+                entry = support(spell)
+                print(f"{spell['name']} (level {spell['level']}) [{entry['status']}] — {entry['mechanics']}")
+                if entry["choice"]:
+                    print(f"  --choice: {entry['choice']}")
+                if entry["remaining"]:
+                    print(f"  DM: {entry['remaining']}")
+            return 0
         if a.cmd == "campaign":
             cmd_campaign(a)
             return 0
@@ -3426,6 +3656,8 @@ def main(argv=None):
         if a.cmd == "serve":
             cmd_serve(a)
             return 0
+        if a.cmd == "batch":
+            return cmd_batch(a, p)
         g = Game()
         g.cmdline = " ".join(shlex.quote(x) for x in argv)
         HANDLERS[a.cmd](g, a)

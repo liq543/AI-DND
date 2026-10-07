@@ -3,3 +3,10 @@ __pycache__/
 .venv/
 .DS_Store
 .claude/settings.local.json
+artifacts/test-temp/
+# machine-local speed cache for the signed log (rebuilt automatically; never needed in git)
+campaigns/*/engine/.verified.json
+campaigns/*/engine/.verified.json.tmp
+# over GitHub's 100 MB file limit (the -web.mp4 cut is committed instead)
+artifacts/trailer/hollow-crown-trailer.mp4
+artifacts/test-tmp/

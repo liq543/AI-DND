@@ -26,7 +26,8 @@ correct me. A correction means the game wasn't played right.** Check every actio
    are final. No fudging, no hand edits to engine data, ✖ RULE means no, and overrides are public and rare. Pick DCs
    before rolling. Social rolls follow the Influence rules (DC = 15 or the NPC's Intelligence; Friendly means
    Advantage, Hostile means Disadvantage).
-7. **Every turn's bookkeeping.**
+7. **Every turn's bookkeeping, in one `engine batch`** (dm/engine-reference.md → Batch): moves, lines, scene, time,
+   notes-worthy changes together, one save and one table update. A refused step stops it; fix it, send the rest.
    - Log dialogue (`say --as`) and events (`say`; anchor lines about one creature with `say --at <id>`).
    - Whenever time passes (dawn, dusk, hours), or the scene changes (someone leaves, a boat goes), update the `scene`
      banner, `map set lighting=` and `fx ambient` so the table matches the moment.

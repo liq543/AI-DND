@@ -26,6 +26,16 @@ ENGINE_CMD = re.compile(r"-m\s+engine\s+([a-z-]+)(?:\s+([a-z-]+))?")
 READ_ONLY = {"status", "verify", "log", "rules", "help", "audit", "serve", "request"}
 AREA = re.compile(r"-m\s+engine\s+(map\s+(gen|import-grid|show)\b|scene\b)")
 NEW_NPC = re.compile(r"-m\s+engine\s+(npc\s+add|encounter\s+spawn)\b")
+# inside `engine batch` the steps are bare lines ("map show crypt"); read each as if it had the engine prefix
+BATCH_LINE = re.compile(r"^\s*(?:(?:py|python3?)\s+-m\s+engine\s+)?([a-z][a-z-]*\b.*)$", re.M)
+
+
+def with_batch_lines(cmd):
+    """The command text, plus every step of an `engine batch` written out as a full engine command."""
+    cmd = cmd or ""
+    if not re.search(r"-m\s+engine\s+batch\b", cmd):
+        return cmd
+    return cmd + "\n" + "\n".join("-m engine " + m.group(1) for m in BATCH_LINE.finditer(cmd))
 
 STOP_CHECK = (
     "Rules check before ending this turn (dm/turn-rules.md). Did this turn: (1) log every spoken line (`say --as`) and "
@@ -99,7 +109,7 @@ def main():
         orders = ORDERS.read_text(encoding="utf-8") if ORDERS.exists() else ""
         print(json.dumps({"hookSpecificOutput": {"hookEventName": "SessionStart", "additionalContext": orders}}))
     elif event == "PreToolUse":
-        cmd = (payload.get("tool_input") or {}).get("command", "")
+        cmd = with_batch_lines((payload.get("tool_input") or {}).get("command", ""))
         notes = []
         if AREA.search(cmd):
             notes.append(area_checklist(rules))

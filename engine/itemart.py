@@ -155,7 +155,7 @@ def _grad(pid, stops, x2=1, y2=0):
 def _defs(P, pal):
     m, t, w, lth = pal["metal"], pal["trim"], pal["wood"], pal["leather"]
     g = pal["gem"]
-    return ("<defs>" + _grad(f"{P}m", [(0, m[0]), (.45, m[1]), (1, m[2])]) + _grad(f"{P}mv", [(0, m[0]), (.5, m[1]), (1, m[2])], 0, 1)
+    return ("<defs>" + _grad(f"{P}m", [(0, m[0]), (.18, m[1]), (.38, m[0]), (.55, m[1]), (1, m[2])]) + _grad(f"{P}mv", [(0, m[0]), (.5, m[1]), (1, m[2])], 0, 1)
             + _grad(f"{P}t", [(0, t[0]), (.5, t[1]), (1, t[2])]) + _grad(f"{P}w", [(0, w[0]), (.5, w[1]), (1, w[2])])
             + _grad(f"{P}l", [(0, lth[0]), (.5, lth[1]), (1, lth[2])])
             + _grad(f"{P}c", [(0, lighten(pal["cloth"], .25)), (1, darken(pal["cloth"], .45))], 0, 1)
@@ -521,12 +521,15 @@ def _book(P, pal):
     col = pal["cloth"]
     return (f'<path d="M60,40 L196,40 L204,48 L204,222 L68,222 L60,214 Z" fill="#f2e6c8" {O}/>'
             + "".join(f'<path d="M{196 - i * 3},{44 + i * 2} L{196 - i * 3},{218}" stroke="#c8b890" stroke-width="1"/>' for i in range(4))
-            + f'<rect x="52" y="34" width="140" height="182" rx="6" fill="{col}" {O}/>'
+            + f'<rect x="52" y="34" width="140" height="182" rx="6" fill="url(#{P}c)" {O}/>'
             f'<rect x="52" y="34" width="22" height="182" rx="5" fill="{darken(col, .3)}"/>'
             f'<path d="M74,34 L74,216" stroke="#15100c" stroke-width="1.5"/>'
             + "".join(f'<path d="M{x},{y} l14,0 l0,14" fill="none" stroke="url(#{P}t)" stroke-width="5" transform="rotate({a} {x} {y})"/>'
                       for x, y, a in ((178, 44, 0), (178, 206, 90)))
             + f'<rect x="96" y="80" width="72" height="90" rx="6" fill="none" stroke="url(#{P}t)" stroke-width="3"/>'
+            + f'<path d="M86 56 H178 V194 H86 Z M90 60 H174 V190 H90 Z" fill="none" stroke="{lighten(col,.35)}" stroke-width=".8" opacity=".6"/>'
+            + f'<path d="M102 104 Q132 76 162 104 M102 150 Q132 178 162 150 M115 93 L132 80 L149 93 M115 162 L132 175 L149 162" '
+              f'fill="none" stroke="url(#{P}t)" stroke-width="1" opacity=".65"/>'
             + _gem(P, 132, 125, 14)
             + "".join(f'<path d="M52,{70 + i * 40} L74,{70 + i * 40}" stroke="url(#{P}t)" stroke-width="3"/>' for i in range(4)))
 
@@ -824,6 +827,13 @@ def item_svg(item, size=None):
             back += (f'<text x="206" y="232" font-family="Georgia,serif" font-size="40" font-weight="bold" fill="{pal["glow"]}" fill-opacity=".85" '
                      f'stroke="#140c1e" stroke-width="3" paint-order="stroke">?</text>')
     sz = size or 256
+    from . import painted
+    if form in painted.EQUIPMENT and painted.uri('equipment',painted.EQUIPMENT[form]):
+        art=f'<image class="painted-equipment" href="{painted.uri("equipment",painted.EQUIPMENT[form])}" x="12" y="12" width="232" height="232"/>'
+        if pal['glow']:
+            art+=sparkles
+        if form in ('potion','vial') and pal['known']:
+            art+=f'<circle class="potion-hue" cx="205" cy="211" r="9" fill="{lighten(pal["liquid"],.45)}" stroke="#cfb984" stroke-width="1.5"/>'
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="{sz}" height="{sz}">{_defs(P, pal)}{back}'
             f'<g filter="url(#{P}sh)">{art}</g></svg>')
 
@@ -833,7 +843,7 @@ def item_art_version(item):
     return hashlib.sha1(repr([item.get(k) for k in keys] + [ITEM_ART_REV]).encode()).hexdigest()[:10]
 
 
-ITEM_ART_REV = 2
+ITEM_ART_REV = 5
 
 
 def _lint():  # every form keyword maps to something drawable

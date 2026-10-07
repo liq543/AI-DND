@@ -11,6 +11,7 @@ from . import assets
 from .assets import esc
 from .maps import BIOMES
 from .furniture import DRAW as FURNITURE_ART
+from . import illustration, painted
 
 CELL = 32
 
@@ -53,7 +54,7 @@ THEMES = {
                   "coping": "#fbf6ee", "tile": "#eadbd4", "tile2": "#86cbc6", "grout": "#cdb8b0",
                   "walls": "ashlar", "fine": "mosaic", "stone_floor": "hex"},
     # taverns, cottages, inns: limewash and dark beams, warm boards
-    "timber": {"wall": "#3b2a1c", "wall_edge": "#dccfb4", "wall_line": "#2a1d12", "trim": "#4a321f", "plank": "#a8784a",
+    "timber": {"wall": "#3b2a1c", "wall_edge": "#a79b80", "wall_line": "#2a1d12", "trim": "#4a321f", "plank": "#a8784a",
                "plank_line": "#7c5530", "flag": "#b9ab92", "flag_line": "#9a8c74", "water": "#8cc3e0", "deep": "#3f84bf",
                "carpet": "#6d3b22", "carpet_trim": "#d6a654", "marble": "#e2dccf", "marble_vein": "#c7bfae",
                "furniture": "#5e3d22", "furniture_line": "#2e1c0e", "counter": "#4a2e17", "backdrop": None,
@@ -238,25 +239,75 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
     theme = m.get("theme") or "stone"
     T = _palette(m, theme)
     ST = _styles(m, T)
+    natural=m['kind']=='wilderness' or m['kind'] in ('interior','town','battle') and any(c in ',Tt' for row in grid for c in row)
+    cold_hearths={(p['x'],p['y']) for p in m.get('props',[]) if painted.fire_state(p)=='cold'}
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w * cell} {h * cell}" width="{w * cell}" height="{h * cell}" '
-             f'font-family="Georgia,serif" data-cell="{cell}">', _defs(theme, m)]
+             f'font-family="Georgia,serif" data-cell="{cell}" data-lighting="{esc(m.get("lighting","bright"))}">', _defs(theme, m), illustration.terrain_defs()]
     fine = "url(#fine)" if ST["fine"] != "marble" else "url(#marble)"
     wood = "url(#wood)" if ST["wood"] != "planks" else "url(#planks)"
     stonef = "url(#stonef)" if ST["stone"] != "flag" else "url(#flag)"
+    if illustration._atlas('terrain-materials'):
+        if ST['wood'] == 'planks' and theme in ('stone', 'timber', 'cellar'):
+            wood = 'url(#art-wood)'
+        if ST['stone'] in ('flag', 'slate') and theme in ('stone', 'cellar', 'sewer'):
+            stonef = 'url(#art-stone)'
     wallface = "url(#wallface)" if ST["walls"] != "hatch" else None
+    if painted.uri('architecture',0):
+        parts.append('<defs>'+''.join(f'<pattern id="painted-surface-{i}" width="128" height="128" patternUnits="userSpaceOnUse"><use href="#painted-architecture-{i}" width="128" height="128"/></pattern>' for i in range(4))+'</defs>')
+        if ST['walls'] in ('ashlar','brick','hatch'):wallface='url(#painted-surface-0)'
+        fine='url(#painted-surface-1)' if ST['fine']=='marble' else 'url(#painted-surface-2)'
+    if painted.uri('floor-patterns',0):
+        parts.append('<defs>'+''.join(f'<pattern id="painted-floor-{i}" width="128" height="128" patternUnits="userSpaceOnUse"><use href="#painted-floor-patterns-{i}" width="128" height="128"/></pattern>' for i in range(4))+'</defs>')
+        if ST['wood'] in ('herringbone','parquet'):wood=f'url(#painted-floor-{0 if ST["wood"]=="herringbone" else 1})'
+        stonef='url(#painted-floor-3)' if m['kind'] in ('dungeon','cave') else 'url(#painted-floor-2)'
+    if painted.uri('wall-materials-v2',0):
+        wi=1 if (theme=='ship' and ST['walls']=='timber') or (theme=='timber' and ST['walls']=='hatch') else 0 if ST['walls'] in ('timber','plaster') else 3 if ST['walls']=='brick' else None
+        if wi is not None:
+            wallface='url(#painted-wall)'
+            parts.append(f'<defs><pattern id="painted-wall" width="96" height="96" patternUnits="userSpaceOnUse"><use href="#painted-wall-materials-v2-{wi}" width="96" height="96"/></pattern></defs>')
     if T.get("backdrop"):
         parts.append(f'<rect width="{w * cell}" height="{h * cell}" fill="{T["backdrop"]}"/>')
+    roof = '#6b5240'
+    paving='url(#cobble)'
+    if painted.uri('street-materials-v2',0):
+        parts.append('<defs><pattern id="painted-paving" width="128" height="128" patternUnits="userSpaceOnUse"><use href="#painted-street-materials-v2-0" width="128" height="128"/></pattern></defs>')
+        paving='url(#painted-paving)'
+    if painted.uri('town-roof-materials-v2',0):
+        parts.append('<defs>'+''.join(f'<pattern id="painted-roof-{i}" width="96" height="96" patternUnits="userSpaceOnUse"><use href="#painted-town-roof-materials-v2-{i}" width="96" height="96"/></pattern>' for i in range(4))+'</defs>')
+        roof='url(#painted-roof-0)'
     # base terrain as merged runs
     for y, row in enumerate(grid):
         base_row = [_under(grid, x, y, c) for x, c in enumerate(row)]
         if m["kind"] in ("dungeon", "cave", "battle", "interior") :
             base_row = [({"o": "."}.get(c, c) if row[i] == "o" else c) for i, c in enumerate(base_row)]
         for x0, n, c in _runs(base_row):
-            fill = {"#": "url(#hatch)", "S": "url(#hatch)", "=": wood, "_": "url(#cobble)", ".": stonef,
-                    "k": "url(#carpet)", "q": fine, "z": "url(#tiles)", "w": T["water"], "~": T["deep"]}.get(c, FILL.get(c, "#888"))
+            fill = {"#": wallface or "url(#hatch)", "S": wallface or "url(#hatch)", "=": wood, "_": paving, ".": stonef,
+                    "k": "url(#painted-surface-3)" if painted.uri('architecture',3) else "url(#carpet)", "q": fine,
+                    "z": "url(#painted-surface-2)" if painted.uri('architecture',2) else "url(#tiles)", "w": T["water"], "~": T["deep"],
+                    ",": "url(#art-meadow)", "t": "url(#art-brush)", ":": "url(#art-earth)",
+                    "s": "url(#art-sand)", "m": "url(#art-mud)", "^": "url(#art-earth)", "B":roof,"b":wood}.get(c, FILL.get(c, "#888"))
+            if c == "t":
+                fill = "url(#art-meadow)"
+            if natural and c in ":^ms":
+                fill = "url(#art-meadow)"
+            if illustration._atlas('water-materials') and c in "w~":
+                fill = "url(#art-water)" if c == "~" else "url(#art-shallows)"
+                if natural and m['kind']!='town':
+                    fill = "url(#art-meadow)"
             parts.append(f'<rect x="{x0 * cell}" y="{y * cell}" width="{n * cell}" height="{cell}" fill="{fill}"/>')
-            if c == "~":
+            if c == "~" and not illustration._atlas('water-materials') and m["kind"] not in ("wilderness", "cave", "battle"):
                 parts.append(f'<rect x="{x0 * cell}" y="{y * cell}" width="{n * cell}" height="{cell}" fill="url(#waves)"/>')
+    if natural:
+        parts.append(illustration.natural_materials(grid, cell,water=m['kind']!='town'))
+        # Roads and water use their rounded union outlines; walls retain their exact shape.
+        shadow_grid = [''.join(c if c not in ':w~ms' else ',' for c in row) for row in grid]
+        parts.append(illustration.terrain_edges(shadow_grid, cell))
+    else:
+        parts.append(illustration.terrain_edges(grid, cell))
+    bridge=illustration._material_path(grid,'b',cell)
+    if bridge:
+        parts.append(f'<path class="painted-bridge" d="{bridge}" transform="translate(1 3)" fill="#132820" opacity=".45"/>'
+                     f'<path d="{bridge}" fill="{wood}" stroke="#463624" stroke-width="2.2" fill-rule="evenodd"/>')
     # built pools and channels get a stone coping along their edges (natural water in the wild does not)
     if T.get("coping") and m["kind"] not in ("wilderness", "cave", "region"):
         edges = []
@@ -276,31 +327,62 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
             parts.append(f'<path d="{d}" stroke="#000" stroke-opacity=".22" stroke-width="7" stroke-linecap="round" transform="translate(1.5 2)"/>'
                          f'<path d="{d}" stroke="{T["coping"]}" stroke-width="5" stroke-linecap="round"/>'
                          f'<path d="{d}" stroke="{T["trim"] or T["wall_line"]}" stroke-opacity=".5" stroke-width="1"/>')
+    parts.append(painted.building_roofs(grid,m,cell))
+    hedge=illustration._material_path(grid,'%',cell,organic=True)
+    painted_hedge=bool(hedge and painted.uri('foliage-details-v2',0))
+    if painted_hedge:
+        parts.append('<defs><pattern id="hedge-leaves" width="96" height="96" patternUnits="userSpaceOnUse"><use href="#painted-foliage-details-v2-0" width="96" height="96"/></pattern></defs>'
+                     f'<path class="painted-hedge" d="{hedge}" fill="url(#hedge-leaves)" fill-rule="evenodd" stroke="#283c29" stroke-width="2"/>')
+        # Alpha foliage breaks the clipped outline into natural leaf edges, without new tactical cells.
+        edges=[]
+        for yy,row in enumerate(grid):
+            for xx,c in enumerate(row):
+                if c!='%':continue
+                for dx,dy in ((1,0),(-1,0),(0,1),(0,-1)):
+                    nx,ny=xx+dx,yy+dy
+                    if 0<=nx<w and 0<=ny<h and grid[ny][nx]=='%':continue
+                    for offset in (-.22,.22):
+                        size=cell*.6
+                        px=(xx+.5+dx*.39+(offset if not dx else 0))*cell-size/2
+                        py=(yy+.5+dy*.39+(offset if not dy else 0))*cell-size/2
+                        edges.append(f'<use href="#painted-tree-{(xx+yy)%2}" x="{px:.1f}" y="{py:.1f}" width="{size:.1f}" height="{size:.1f}"/>')
+        clip=' clip-path="url(#revealed-area)"' if player and m.get('fog') else ''
+        parts.append(f'<g class="hedge-leaf-edge"{clip}>{"".join(edges)}</g>')
+    joined, joined_cells = painted.joined_furnishings(grid,m,cell)
+    parts.append(joined)
     # walls edge shading
     for y in range(h):
         for x in range(w):
             c = grid[y][x]
+            if (x,y) in joined_cells:
+                continue
+            if c=='%' and painted_hedge:
+                continue
+            if c=='B' and roof!='#6b5240':
+                continue
             cx, cy = x * cell, y * cell
             s = cell
             if c in "#B" and any(0 <= y + dy < h and 0 <= x + dx < w and grid[y + dy][x + dx] not in "#B "
                                  for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1))):
-                face = (wallface or T["wall_edge"]) if c == "#" else "#6b5240"
+                face = (wallface or T["wall_edge"]) if c == "#" else roof
                 parts.append(f'<rect x="{cx}" y="{cy}" width="{s}" height="{s}" fill="{face}" stroke="{T["trim"] or "#211d19"}" stroke-width="{1.5 if T["trim"] else 1}"/>'
                              + (f'<rect x="{cx}" y="{cy}" width="{s}" height="{s}" fill="#000" fill-opacity=".12"/>' if wallface else ""))
+                if c=='#' and ST['walls']=='timber' and theme!='ship' and wallface:
+                    parts.append(f'<path d="M{cx+2} {cy+2}H{cx+s-2}V{cy+s-2}H{cx+2}Z M{cx+2} {cy+2}L{cx+s-2} {cy+s-2}" fill="none" stroke="#493d2c" stroke-width="2" opacity=".75"/>')
             elif c == "T":
-                r = s * (0.42 + rng.random() * 0.12)
-                parts.append(f'<circle cx="{cx + s / 2 + 2}" cy="{cy + s / 2 + 3}" r="{r}" fill="#000" fill-opacity=".18"/>'
-                             f'<circle cx="{cx + s / 2}" cy="{cy + s / 2}" r="{r}" fill="url(#canopy)" stroke="#23451a" stroke-width="1"/>')
+                if not (player and m.get("fog") and (m.get("revealed") or ["0" * w] * h)[y][x] != "1"):
+                    parts.append(illustration.tree(cx, cy, cell, f'{m.get("seed", 1)}:{x}:{y}'))
             elif c == "t":
-                for _ in range(3):
-                    px, py = cx + rng.random() * s, cy + rng.random() * s
-                    parts.append(f'<circle cx="{px:.1f}" cy="{py:.1f}" r="{s * 0.16:.1f}" fill="#4d7a30"/>')
+                parts.append(f'<use href="#art-tree-{(x * 3 + y) % 8}" opacity=".55" '
+                             f'transform="translate({cx + s / 2} {cy + s / 2}) scale({s / 64})"/>')
+            elif painted.furnishing(c,m,x,y) and painted.uri(*painted.furnishing(c,m,x,y)):
+                parts.append(painted.sprite(*painted.furnishing(c,m,x,y),cx+1,cy+1,s-2))
             elif c == "^":
                 for _ in range(4):
                     px, py = cx + 4 + rng.random() * (s - 8), cy + 4 + rng.random() * (s - 8)
                     parts.append(f'<circle cx="{px:.1f}" cy="{py:.1f}" r="{2 + rng.random() * 3:.1f}" fill="#8e8576"/>')
             elif c == "o":
-                parts.append(f'<ellipse cx="{cx + s / 2}" cy="{cy + s / 2}" rx="{s * .42}" ry="{s * .36}" fill="url(#rock)" stroke="#4a443c"/>')
+                parts.append(illustration.rock(cx, cy, cell, f'{m.get("seed", 1)}:{x}:{y}'))
             elif c == "P":
                 parts.append(f'<circle cx="{cx + s / 2}" cy="{cy + s / 2}" r="{s * .38}" fill="#8f877a" stroke="#4a443c" stroke-width="2"/>')
             elif c == "h":  # furniture: a mix of round tables with stools, square tables, and chairs
@@ -378,9 +460,16 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
             elif c == "n":  # mast / column
                 parts.append(f'<circle cx="{cx + s / 2}" cy="{cy + s / 2}" r="{s * .34}" fill="#5a3a22" stroke="{T["trim"] or "#2a1a0e"}" stroke-width="2"/>')
             elif c == "f":
-                parts.append(f'<rect x="{cx + 3}" y="{cy + 3}" width="{s - 6}" height="{s - 6}" fill="#555"/><circle cx="{cx + s / 2}" cy="{cy + s / 2}" r="{s * .25}" fill="#f08a24" filter="url(#glow)"/>')
+                if (x,y) in cold_hearths:
+                    parts.append(painted.sprite('interior-details-v2',14,cx,cy,s))
+                    continue
+                parts.append(painted.sprite('environment',5,cx,cy,s) or illustration.fire(cx+s/2,cy+s/2,s,x+y))
+                parts.append(illustration.fire(cx+s/2,cy+s/2,s*.62,x+y))
             elif c in "Dd":
                 horiz = door_horizontal(grid, x, y)
+                if painted.uri('fittings',0):
+                    parts.append(painted.sprite('fittings',0 if c=='D' else 1,cx,cy,s,rotation=0 if horiz else 90))
+                    continue
                 door = (f'<rect x="{cx + 1}" y="{cy + s * .3}" width="{s - 2}" height="{s * .4}"' if horiz else
                         f'<rect x="{cx + s * .3}" y="{cy + 1}" width="{s * .4}" height="{s - 2}"')
                 parts.append(door + (' fill="#7a4a1e" stroke="#3a2008" stroke-width="2"/>' if c == "D" else ' fill="none" stroke="#7a4a1e" stroke-width="2" stroke-dasharray="3 2"/>'))
@@ -395,16 +484,16 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
                 parts.append(f'<circle cx="{cx + s / 2}" cy="{cy + s / 2}" r="{s * .4}" fill="#6b6358"/><circle cx="{cx + s / 2}" cy="{cy + s / 2}" r="{s * .26}" fill="#3f84bf"/>')
             elif c == "b":
                 for i in range(4):
-                    parts.append(f'<line x1="{cx + i * 8 + 4}" y1="{cy}" x2="{cx + i * 8 + 4}" y2="{cy + s}" stroke="#5a3e22" stroke-width="1"/>')
+                    parts.append(f'<line x1="{cx + i * 8 + 4}" y1="{cy}" x2="{cx + i * 8 + 4}" y2="{cy + s}" stroke="#35291d" stroke-opacity=".24" stroke-width=".6"/>')
             elif c in FURNITURE_ART:
                 parts.append(FURNITURE_ART[c](cx, cy, s, T, rng, lambda dx, dy, x=x, y=y: grid[y + dy][x + dx]
                                               if 0 <= x + dx < w and 0 <= y + dy < h else " "))
     if show_grid:
         gl = [f'<path d="' + "".join(f"M{x * cell} 0V{h * cell}" for x in range(w + 1)) +
-              "".join(f"M0 {y * cell}H{w * cell}" for y in range(h + 1)) + '" stroke="#000" stroke-opacity=".13" stroke-width="1"/>']
+              "".join(f"M0 {y * cell}H{w * cell}" for y in range(h + 1)) + '" class="tactical-grid" stroke="#182c25" stroke-opacity=".10" stroke-width=".65"/>']
         parts += gl
     # rooms/building labels
-    revealed = m.get("revealed") or ["1" * w] * h
+    revealed = m.get("revealed") or [("0" if m.get('fog') else "1") * w] * h
     for r in m.get("rooms", []):
         cx, cy = r["x"] + r["w"] // 2, r["y"] + r["h"] // 2
         if player and m.get("fog") and revealed[cy][cx] != "1":
@@ -483,17 +572,53 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
         parts.append(f'<g {attrs}><title>{esc(label)}</title>'
                      f'<rect x="{px - 7}" y="{py - 7}" width="14" height="14" rx="2" transform="rotate(45 {px} {py})" fill="#d8b36a" stroke="#2b1d0e" stroke-width="2"/>'
                      f'<circle cx="{px}" cy="{py}" r="2.5" fill="#2b1d0e"/></g>')
-    # points of interest the characters have perceived: a small blue marker in the tile's top-left corner
+    # Perceived points use a quiet brass-and-sage marker above the art.
     for p in m.get("pois", []):
+        if player and p.get('hidden'):
+            continue
         pxx, pyy = p["x"], p["y"]
         if player and m.get("fog") and revealed and not (0 <= pyy < len(revealed) and revealed[pyy][pxx] == "1"):
             continue
         cx, cy = pxx * cell + 9, pyy * cell + 9
         parts.append(f'<g class="poi" data-poi="{esc(p["id"])}" style="cursor:pointer"><title>{esc(p["name"])}</title>'
-                     f'<circle cx="{cx}" cy="{cy}" r="7.5" fill="#6fb0ff" stroke="#10243d" stroke-width="2"/>'
-                     f'<text x="{cx}" y="{cy + 3.6}" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="10.5" fill="#10243d">i</text></g>')
+                     f'<circle cx="{cx}" cy="{cy}" r="6.5" fill="#405c50" stroke="#c8b588" stroke-width="1.4"/>'
+                     f'<text x="{cx}" y="{cy + 3.6}" text-anchor="middle" font-family="Georgia,serif" font-weight="bold" font-size="10.5" fill="#eee0bb">i</text></g>')
+    # A single light wash ties materials together, beneath every token and the opaque fog.
+    if m["kind"] in ("wilderness", "interior", "dungeon", "cave", "town", "battle"):
+        parts.append(f'<rect width="{w * cell}" height="{h * cell}" fill="url(#map-light)" pointer-events="none"/>')
+    lighting=m.get('lighting','bright')
+    if lighting in ('dim','dark'):
+        lights=[]
+        for y,row in enumerate(grid):
+            for x,c in enumerate(row):
+                if c in 'lf*&F' and (x,y) not in cold_hearths and (not m.get('fog') or revealed[y][x]=='1'):
+                    lights.append(((x+.5)*cell,(y+.5)*cell,cell*2.3))
+        for p in m.get('props',[]):
+            x,y=p['x'],p['y']
+            if painted.fire_state(p)!='burning' or player and p.get('hidden'):continue
+            if not (0<=x<w and 0<=y<h) or m.get('fog') and revealed[y][x]!='1':continue
+            if grid[y][x] not in 'lf*&F':lights.append(((x+.5)*cell,(y+.5)*cell,cell*2.3))
+        for e in entities:
+            t=e.get('token') or {}
+            if t.get('map')!=m['id'] or player and e.get('hidden'):continue
+            if m.get('fog') and (not (0<=t['y']<h and 0<=t['x']<w) or revealed[t['y']][t['x']]!='1'):continue
+            for it in e.get('inventory',[]):
+                if it.get('lit'):
+                    radius=cell*(8 if 'torch' in it.get('name','').lower() else 12 if 'lantern' in it.get('name','').lower() else 2)
+                    lights.append(((t['x']+.5)*cell,(t['y']+.5)*cell,radius))
+        holes=''.join(f'<circle cx="{x}" cy="{y}" r="{r}" fill="url(#light-cutout)"/>' for x,y,r in lights)
+        parts.append(f'<defs><radialGradient id="light-cutout"><stop stop-color="#000"/><stop offset=".45" stop-color="#333"/><stop offset="1" stop-color="#fff"/></radialGradient>'
+                     f'<mask id="room-shadow"><rect width="{w*cell}" height="{h*cell}" fill="#fff"/>{holes}</mask></defs>'
+                     f'<rect class="lighting-shade" width="{w*cell}" height="{h*cell}" fill="#06151c" opacity="{.48 if lighting=="dark" else .19}" mask="url(#room-shadow)" pointer-events="none"/>')
     # tokens
     parts.append(tokens_svg(m, entities, current, cell, player))
+    # Outdoor precipitation respects walls/roofs, including mixed indoor/outdoor maps.
+    exposed=weather_cells(grid,m['kind'])
+    exposure_rows=[''.join('1' if (x,y) in exposed
+                           and (not m.get('fog') or revealed[y][x]=='1') else '0' for x,c in enumerate(row)) for y,row in enumerate(grid)]
+    exposure=''.join(f'<rect x="{x0*cell}" y="{y*cell}" width="{n*cell}" height="{cell}"/>'
+                     for y,row in enumerate(exposure_rows) for x0,n,c in _runs(row) if c=='1')
+    parts.append(f'<defs><clipPath id="weather-exposure">{exposure}</clipPath></defs>')
     # fog
     focus = None
     if player and m.get("fog"):
@@ -505,7 +630,9 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
                 else:
                     xs += [x0, x0 + n]
                     ys.append(y)
-        parts.append(f'<g id="fog" fill="#0b0a0f" shape-rendering="crispEdges">{"".join(fog)}</g>')
+        visible_cells=''.join(f'<rect x="{x0*cell}" y="{y*cell}" width="{n*cell}" height="{cell}"/>' for y,row in enumerate(revealed) for x0,n,c in _runs(row) if c=='1')
+        parts.append(f'<defs><clipPath id="revealed-area">{visible_cells}</clipPath></defs>'
+                     f'<g id="fog" fill="#0e1918" shape-rendering="crispEdges">{"".join(fog)}</g>')
         if xs:
             pad = 3
             fx0, fy0 = max(0, min(xs) - pad), max(0, min(ys) - pad)
@@ -514,7 +641,31 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
     parts.append("</svg>")
     if focus:
         parts[0] = parts[0].replace("<svg ", f'<svg data-focus="{focus}" ', 1)
-    return "".join(parts)
+    svg="".join(parts)
+    svg=painted.prune_patterns(svg)
+    return svg.replace('>', '>'+painted.definitions(svg),1)
+
+
+def weather_cells(grid,kind):
+    """Expose outdoor surfaces and their connected water, keeping indoor pools covered."""
+    h,w=len(grid),len(grid[0]);out=set();water=set()
+    for y,row in enumerate(grid):
+        for x,c in enumerate(row):
+            if c in ',:tTsm_%^':out.add((x,y))
+            if c in 'w~b':water.add((x,y))
+    for y,row in enumerate(grid):
+        for x,c in enumerate(row):
+            if c=='o' and (kind=='wilderness' or any((x+dx,y+dy) in out for dx,dy in ((1,0),(-1,0),(0,1),(0,-1)))):out.add((x,y))
+    while water:
+        start=water.pop();group={start};todo=[start];outside=False
+        while todo:
+            x,y=todo.pop()
+            if kind in ('wilderness','town','battle') and (x in (0,w-1) or y in (0,h-1)):outside=True
+            for p in ((x+1,y),(x-1,y),(x,y+1),(x,y-1)):
+                if p in out:outside=True
+                if p in water:water.remove(p);group.add(p);todo.append(p)
+        if outside:out.update(group)
+    return out
 
 
 def prop_svg(pr, cell, T):
@@ -526,6 +677,11 @@ def prop_svg(pr, cell, T):
     body = assets.icon_body(pr["icon"]).replace('fill="currentColor"', "")
     rot = f' transform="rotate({pr["rotate"]} {x0 + size / 2:.1f} {y0 + size / 2:.1f})"' if pr.get("rotate") else ""
     name = esc(pr.get("name") or pr["icon"].replace("-", " "))
+    study=painted.prop(pr,cell)
+    if study:
+        return f'<g class="prop"><title>{name}</title>{study}</g>'
+    if any(word in pr['icon'] for word in ('fire', 'flame', 'burning')):
+        return f'<g class="prop"><title>{name}</title>' + illustration.fire(x0+size/2,y0+size/2,size,pr.get('id',name)) + '</g>'
     return (f'<g class="prop"{rot}><title>{name}</title>'
             f'<svg x="{x0 + 1.5:.1f}" y="{y0 + 2:.1f}" width="{size:.1f}" height="{size:.1f}" viewBox="0 0 512 512" fill="#000" fill-opacity=".25">{body}</svg>'
             f'<svg x="{x0:.1f}" y="{y0:.1f}" width="{size:.1f}" height="{size:.1f}" viewBox="0 0 512 512" fill="{col}">{body}</svg></g>')
@@ -591,8 +747,10 @@ def short_label(e):
     return f"{core} {tag}".strip()
 
 
-LABEL_FONT = 9
+LABEL_FONT = 10
 LABEL_MAX = 12   # characters before a name is trimmed with …
+LABEL_TOP = 11
+LABEL_BOTTOM = 3.5
 
 
 def _label_width(text):
@@ -618,21 +776,21 @@ def _layout_labels(tokens, cell):
         w = _label_width(text)
         own = (cx - r, cy - r, cx + r, cy + r)
         others = [f for f in faces if f != own]
-        spots = [cy + r + 9, cy - r - 4, cy + r + 20, cy - r - 15, cy + r + 31, cy - r - 26]
+        spots = [cy + r + 12, cy - r - 5, cy + r + 29, cy - r - 22, cy + r + 46, cy - r - 39]
         best = None
         for ly in spots:
-            box = (cx - w / 2 - 2, ly - 8.5, cx + w / 2 + 2, ly + 2.5)
+            box = (cx - w / 2 - 2, ly - LABEL_TOP, cx + w / 2 + 2, ly + LABEL_BOTTOM)
             if not hits(box, placed) and not hits(box, others):
                 best = (ly, box)
                 break
         if best is None:  # everything is taken: fall back to the first spot that at least clears other tags
             for ly in spots:
-                box = (cx - w / 2 - 2, ly - 8.5, cx + w / 2 + 2, ly + 2.5)
+                box = (cx - w / 2 - 2, ly - LABEL_TOP, cx + w / 2 + 2, ly + LABEL_BOTTOM)
                 if not hits(box, placed):
                     best = (ly, box)
                     break
             else:
-                best = (spots[0], (cx - w / 2 - 2, spots[0] - 8.5, cx + w / 2 + 2, spots[0] + 2.5))
+                best = (spots[0], (cx - w / 2 - 2, spots[0] - LABEL_TOP, cx + w / 2 + 2, spots[0] + LABEL_BOTTOM))
         placed.append(best[1])
         out[e["id"]] = (text, cx, best[0], w)
     return out
@@ -640,7 +798,7 @@ def _layout_labels(tokens, cell):
 
 def tokens_svg(m, entities, current, cell, player):
     out, symbols = [], {}
-    revealed = m.get("revealed") or []
+    revealed = m.get("revealed") or (["0"*m.get('w',0)]*m.get('h',0) if m.get('fog') else [])
     def is_dead(e):  # destroyed/killed; a knocked-out creature (Unconscious at 0 HP) keeps its full token
         down = e.get("dead") or (e["kind"] != "pc" and e.get("hp", 1) <= 0)
         return bool(down) and not (not e.get("dead") and any(c["name"] == "unconscious" for c in e.get("conditions", [])))
@@ -687,12 +845,17 @@ def tokens_svg(m, entities, current, cell, player):
         here = square.get((x, y), [e])
         stack = ",".join(o["id"] for o in here) if len(here) > 1 else ""
         if is_dead(e):
-            # corpse / wreck marker: small, faded, no label, still clickable (search it, loot it)
-            rr = r * .45
-            ox, oy = cx - r * .45, cy + r * .45
-            out.append(f'<g class="token dead" data-id="{esc(e["id"])}" data-stack="{esc(stack)}" opacity=".6"><title>{esc(e["name"])} (defeated)</title>'
-                       f'<circle cx="{ox}" cy="{oy}" r="{rr}" fill="#3a3030" stroke="#111" stroke-width="1.5"/>'
-                       f'<path d="M{ox - rr * .6} {oy - rr * .6} L{ox + rr * .6} {oy + rr * .6} M{ox + rr * .6} {oy - rr * .6} L{ox - rr * .6} {oy + rr * .6}" stroke="#d9443b" stroke-width="2"/></g>')
+            # Full body remains searchable. Living occupants paint above it; never an anonymous cross.
+            short=short_label(e)
+            if len(short)>5:
+                short=short[:3]+'…'+(short[-1] if len(short.split()[-1])==1 else '')
+            label=esc(short)
+            tagwidth=min(cell*.94,32)
+            out.append(f'<g class="token dead corpse" data-id="{esc(e["id"])}" data-stack="{esc(stack)}" data-cx="{cx}" data-cy="{cy}" data-r="{r}" data-state="dead"><title>{esc(e["name"])} (dead)</title>'
+                       f'<ellipse cx="{cx}" cy="{cy+3}" rx="{r*.78}" ry="{r*.48}" fill="#07100b" opacity=".5"/>'
+                       +painted.corpse(e,cx,cy,2*r*1.12)+
+                       f'<g class="nametag"><rect x="{cx-tagwidth/2:.1f}" y="{cy+r-1}" width="{tagwidth:.1f}" height="11" rx="3" fill="#211e19" stroke="#a89772" stroke-width=".5"/>'
+                       f'<text x="{cx}" y="{cy+r+7}" font-size="7.5" text-anchor="middle" fill="#dfd2b8">†{label}</text></g></g>')
             continue
         alive_here = living_at.get((x, y), [])
         if len(alive_here) > 1:  # two living creatures in one square (moving through, grappled, mounted): shrink and offset
@@ -714,16 +877,20 @@ def tokens_svg(m, entities, current, cell, player):
              f'data-side="{side}" opacity="{0.45 if dead else 1}">',
              f'<title>{esc(e["name"])}</title>']
         if current == e["id"]:
-            g.append(f'<circle cx="{cx}" cy="{cy}" r="{r + 3}" fill="none" stroke="#ffd34d" stroke-width="4" filter="url(#glow)"><animate attributeName="stroke-opacity" values="1;.35;1" dur="1.6s" repeatCount="indefinite"/></circle>')
+            g.append(f'<circle class="turn-ring" cx="{cx}" cy="{cy}" r="{r + 3}" fill="none" stroke="#e6c47c" stroke-width="2.5" filter="url(#glow)"/>')
         g.append(f'<circle cx="{cx + 2}" cy="{cy + 3}" r="{r - 1}" fill="#000" fill-opacity=".3"/>')
-        g.append(f'<circle cx="{cx}" cy="{cy}" r="{r - 1}" fill="{color}"/>')
-        g.append(f'<circle cx="{cx}" cy="{cy}" r="{r - 4}" fill="hsl({hue},38%,26%)"/>')
+        g.append(f'<circle cx="{cx}" cy="{cy}" r="{r - 1}" fill="#1a251f" stroke="{color}" stroke-width="1.8"/>')
+        g.append(f'<circle cx="{cx}" cy="{cy}" r="{max(1,r - 2.5)}" fill="hsl({hue},38%,26%)"/>')
+        conditions={c['name'] for c in e.get('conditions',[])}
         if e.get("portrait_href"):
-            g.append(f'<clipPath id="cp-{esc(e["id"])}"><circle cx="{cx}" cy="{cy}" r="{r - 4}"/></clipPath>'
-                     f'<image href="{esc(e["portrait_href"])}" x="{cx - r + 4}" y="{cy - r + 4}" width="{2 * r - 8}" height="{2 * r - 8}" clip-path="url(#cp-{esc(e["id"])})" preserveAspectRatio="xMidYMid slice"/>')
+            treatment=' filter="url(#petrified-face)"' if 'petrified' in conditions else ''
+            if 'invisible' in conditions:treatment+=' opacity=".3"'
+            if 'prone' in conditions:treatment+=f' transform="rotate(-25 {cx} {cy})"'
+            g.append(f'<clipPath id="cp-{esc(e["id"])}"><circle cx="{cx}" cy="{cy}" r="{max(1,r - 2.5)}"/></clipPath>'
+                     f'<image class="token-face" href="{esc(e["portrait_href"])}" x="{cx - r + 2.5}" y="{cy - r + 2.5}" width="{max(2,2 * r - 5)}" height="{max(2,2 * r - 5)}" clip-path="url(#cp-{esc(e["id"])})" preserveAspectRatio="xMidYMid slice"{treatment}/>')
         else:
             s = (2 * r - 12)
-            g.append(f'<use href="#{sym}" x="{cx - s / 2}" y="{cy - s / 2}" width="{s}" height="{s}" fill="#f4efe6"/>')
+            g.append(f'<use href="#{sym}" x="{cx - s / 2}" y="{cy - s / 2}" width="{s}" height="{s}" fill="#f4efe6" color="#f4efe6"/>')
         # health indicator: exact bar for PCs/allies, coarse status ring for others
         if e.get("hp_max"):
             frac = max(0, min(1, e.get("hp", 0) / max(1, e["hp_max"])))
@@ -735,24 +902,34 @@ def tokens_svg(m, entities, current, cell, player):
             elif frac <= .5 and not dead:
                 g.append(f'<path d="M{cx - r * .7} {cy - r * .7} L{cx + r * .7} {cy + r * .7}" stroke="#d9443b" stroke-width="3" stroke-opacity=".85"/>')
         conds = [c["name"] for c in e.get("conditions", [])][:4]
+        if e.get('hp',1)<=0 or 'unconscious' in conds:
+            g.append(f'<g class="down-state"><circle cx="{cx}" cy="{cy}" r="{r-1}" fill="#071315" opacity=".33"/>'
+                     f'<rect x="{cx-13}" y="{cy-5}" width="26" height="11" rx="3" fill="#3e3422" stroke="#d9c18a" stroke-width=".7"/>'
+                     f'<text x="{cx}" y="{cy+3}" text-anchor="middle" font-size="8" fill="#f5e5bb">Down</text></g>')
         for i, cname in enumerate(conds):
             ci = assets.CONDITION_ICONS.get(cname)
             if ci:
                 symbols[f"i-{ci}"] = ci
-                g.append(f'<circle cx="{cx + r - 6 - i * 13}" cy="{cy - r + 6}" r="7" fill="#fff" stroke="#222"/>'
-                         f'<use href="#i-{ci}" x="{cx + r - 12 - i * 13}" y="{cy - r}" width="12" height="12" fill="#222"/>')
+                g.append(f'<g class="condition-badge" data-condition="{esc(cname)}"><title>{esc(cname.title())}</title>'
+                         f'<circle cx="{cx + r - 6 - i * 13}" cy="{cy - r + 6}" r="7" fill="#172921" stroke="#dbc48c" stroke-width=".8"/>'
+                         f'<use href="#i-{ci}" x="{cx + r - 12 - i * 13}" y="{cy - r}" width="12" height="12" fill="#e8d7a8" color="#e8d7a8"/></g>')
         if dead:
             g.append(f'<path d="M{cx - r * .6} {cy - r * .6} L{cx + r * .6} {cy + r * .6} M{cx + r * .6} {cy - r * .6} L{cx - r * .6} {cy + r * .6}" stroke="#111" stroke-width="4"/>')
         # name tag: placed by _layout_labels (below the token unless that collides with another tag)
         if e["id"] in labels:
             label, lx, ly, lw = labels[e["id"]]
-            g.append(f'<g class="nametag"><rect x="{lx - lw / 2 - 2:.1f}" y="{ly - 8.5:.1f}" width="{lw + 4:.1f}" height="11" rx="3" '
-                     f'fill="#0c0a10" fill-opacity=".72"/>'
-                     f'<text x="{lx:.1f}" y="{ly:.1f}" text-anchor="middle" font-size="{LABEL_FONT}" font-weight="600" fill="#fff">{esc(label)}</text></g>')
+            if abs(ly-cy) > r+22:
+                above = ly < cy
+                g.append(f'<path d="M{cx:.1f} {cy-r if above else cy+r:.1f}L{lx:.1f} '
+                         f'{ly+LABEL_BOTTOM if above else ly-LABEL_TOP:.1f}" stroke="#d4c394" stroke-width=".6" opacity=".55"/>')
+            g.append(f'<g class="nametag"><rect x="{lx - lw / 2 - 2:.1f}" y="{ly - LABEL_TOP:.1f}" width="{lw + 4:.1f}" height="{LABEL_TOP + LABEL_BOTTOM}" rx="3" '
+                     f'fill="#1b2821" fill-opacity=".82" stroke="#cab780" stroke-opacity=".3" stroke-width=".5"/>'
+                     f'<text x="{lx:.1f}" y="{ly:.1f}" text-anchor="middle" font-size="{LABEL_FONT}" font-weight="400" fill="#eee5d0">{esc(label)}</text></g>')
         g.append("</g>")
         out.append("".join(g))
-    defs = "".join(assets.icon_symbol(icon, sym) for sym, icon in symbols.items())
-    return f"<defs>{defs}</defs><g id='tokens'>{''.join(out)}</g>"
+    defs = '<filter id="petrified-face"><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncR type="linear" slope=".7" intercept=".16"/><feFuncG type="linear" slope=".7" intercept=".17"/><feFuncB type="linear" slope=".65" intercept=".16"/></feComponentTransfer></filter>'+"".join(assets.icon_symbol(icon, sym) for sym, icon in symbols.items())
+    svg=f"<defs>{defs}</defs><g id='tokens'>{''.join(out)}</g>"
+    return svg
 
 
 def _place_labels(queue, marks, cell, W, H, clickable):
@@ -791,36 +968,81 @@ def _place_labels(queue, marks, cell, W, H, clickable):
     return out
 
 
+def _simplify_route(points,tolerance):
+    """Remove tiny decorative river elbows without moving its endpoints."""
+    if len(points)<3:return points
+    a,b=points[0],points[-1];dx,dy=b[0]-a[0],b[1]-a[1];length=dx*dx+dy*dy
+    farthest,distance=0,0
+    for i,p in enumerate(points[1:-1],1):
+        t=max(0,min(1,((p[0]-a[0])*dx+(p[1]-a[1])*dy)/length)) if length else 0
+        d=((p[0]-a[0]-t*dx)**2+(p[1]-a[1]-t*dy)**2)**.5
+        if d>distance:farthest,distance=i,d
+    if distance<=tolerance:return [a,b]
+    return _simplify_route(points[:farthest+1],tolerance)[:-1]+_simplify_route(points[farthest:],tolerance)
+
+def _smooth_route(points,cell):
+    """Decorative route interpolation; positions and travel mechanics retain their exact cells."""
+    pts=[((x+.5)*cell,(y+.5)*cell) for x,y in points]
+    if not pts:return ''
+    path=f'M{pts[0][0]:.1f} {pts[0][1]:.1f}'
+    for i in range(len(pts)-1):
+        a,b=pts[i],pts[i+1];before=pts[max(0,i-1)];after=pts[min(len(pts)-1,i+2)]
+        controls=[]
+        for k in (0,1):
+            lo,hi=sorted((a[k],b[k]))
+            controls.append((max(lo,min(hi,a[k]+(b[k]-before[k])/6)),max(lo,min(hi,b[k]-(after[k]-a[k])/6))))
+        path+=f'C{controls[0][0]:.1f} {controls[1][0]:.1f} {controls[0][1]:.1f} {controls[1][1]:.1f} {b[0]:.1f} {b[1]:.1f}'
+    return path
+
 def render_region(m, mode="player", cell=8, party_pos=None):
     w, h = m["w"], m["h"]
     player = mode == "player"
+    ink_palette = {"O": "#24474f", "C": "#4e7c80", "s": "#d4c6a1", "p": "#b5b88c", "g": "#99a275",
+                   "f": "#75855f", "F": "#4e6a52", "h": "#b2a27a", "M": "#9a9684", "K": "#dedec8",
+                   "w": "#7b896b", "d": "#ccb88b", "L": "#578b8b"}
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w * cell} {h * cell}" width="{w * cell}" height="{h * cell}" font-family="Georgia,serif">',
              '<defs><filter id="paper"><feTurbulence baseFrequency=".04" numOctaves="3" seed="3"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .45  0 0 0 0 .35  0 0 0 .18 0"/><feBlend in="SourceGraphic" mode="multiply"/></filter></defs>',
              '<g filter="url(#paper)">']
-    for y, row in enumerate(m["grid"]):
-        for x0, n, c in _runs(row):
-            parts.append(f'<rect x="{x0 * cell}" y="{y * cell}" width="{n * cell}" height="{cell + .5}" fill="{BIOMES.get(c, ("", "#999"))[1]}"/>')
+    parts.append(f'<rect width="{w*cell}" height="{h*cell}" fill="{ink_palette["p"]}"/>')
+    for c in sorted(set(''.join(m['grid']))-{'p'}):
+        d=illustration._material_path(m['grid'],c,cell,organic=True)
+        if d:parts.append(f'<path class="regional-biome" d="{d}" fill="{ink_palette.get(c,BIOMES.get(c,("","#999"))[1])}" fill-rule="evenodd"/>')
     parts.append("</g>")
     rng = random.Random(m.get("seed") or 1)
     for y, row in enumerate(m["grid"]):  # glyphs for mountains and forests
         for x, c in enumerate(row):
+            selected={'M':3,'K':3,'f':1,'F':0,'h':2,'w':13}.get(c)
+            if selected is not None and painted.uri('regional-landmarks-v2',selected):
+                if x%3==1 and y%3==1:
+                    if rng.random()>.82:continue
+                    size=cell*((4 if c in 'MK' else 3.6)+rng.uniform(-.6,.6))
+                    px=(x+.5+rng.uniform(-.85,.85))*cell;py=(y+.5+rng.uniform(-.85,.85))*cell
+                    parts.append(painted.sprite('regional-landmarks-v2',selected,px-size/2,py-size/2,size))
+                continue
             if (x + y) % 2:
                 continue
             px, py = x * cell + cell / 2, y * cell + cell / 2
             if c in "MK" and rng.random() < .55:
-                parts.append(f'<path d="M{px - cell * .9} {py + cell * .5} L{px} {py - cell * .8} L{px + cell * .9} {py + cell * .5}" fill="{"#f4f6f8" if c == "K" else "#6f665d"}" stroke="#3f3a34" stroke-width=".8"/>')
+                parts.append(f'<path d="M{px - cell * .9} {py + cell * .5} L{px} {py - cell * .8} L{px + cell * .9} {py + cell * .5}" fill="{"#ecead7" if c == "K" else "#c0baa0"}" stroke="#605e4b" stroke-width=".65"/>'
+                             f'<path d="M{px} {py - cell * .8} L{px + cell * .9} {py + cell * .5} L{px + cell * .12} {py + cell * .3} Z" fill="#5f6757" opacity=".65"/>'
+                             f'<path d="M{px} {py-cell*.5} l{-cell*.32} {cell*.5} m{cell*.18} {-cell*.22} l{-cell*.2} {cell*.36}" fill="none" stroke="#6d6c55" stroke-width=".5"/>')
             elif c in "fF" and rng.random() < .5:
-                parts.append(f'<circle cx="{px}" cy="{py}" r="{cell * .55}" fill="{"#26491f" if c == "F" else "#3c6a2e"}"/>')
+                parts.append(f'<path d="M{px-cell*.55} {py+cell*.45} l{cell*.38} {-cell*.8} l{cell*.27} {cell*.56} '
+                             f'l{cell*.3} {-cell*1.05} l{cell*.55} {cell*1.29} Z" fill="{"#395543" if c == "F" else "#536d4d"}" stroke="#405440" stroke-width=".4"/>'
+                             f'<path d="M{px+cell*.4} {py-cell*.46} v{cell*.72}" stroke="#a7b18a" stroke-width=".5" opacity=".6"/>')
             elif c == "h" and rng.random() < .35:
                 parts.append(f'<path d="M{px - cell * .8} {py + cell * .3} Q{px} {py - cell * .6} {px + cell * .8} {py + cell * .3}" fill="none" stroke="#7a6d45" stroke-width="1.2"/>')
             elif c == "w" and rng.random() < .35:
                 parts.append(f'<path d="M{px - 3} {py} h6 M{px - 2} {py - 2} v4" stroke="#3f5a38" stroke-width="1"/>')
+            elif c in "OCL" and rng.random() < .16:
+                parts.append(f'<path d="M{px-cell*.8} {py} q{cell*.8} {-cell*.32} {cell*1.6} 0" '
+                             'fill="none" stroke="#c0d1bd" stroke-width=".5" opacity=".22"/>')
     for r in m.get("rivers", []):
-        pts = " ".join(f"{(x + .5) * cell},{(y + .5) * cell}" for x, y in r)
-        parts.append(f'<polyline points="{pts}" fill="none" stroke="#3b7cb0" stroke-width="{cell * .45}" stroke-linejoin="round" stroke-linecap="round"/>')
+        route = _smooth_route(_simplify_route(r,1.3),cell)
+        parts.append(f'<path d="{route}" fill="none" stroke="#397a94" stroke-width="{cell * .45}" stroke-linejoin="round" stroke-linecap="round"/>')
     for r in m.get("roads", []):
-        pts = " ".join(f"{(x + .5) * cell},{(y + .5) * cell}" for x, y in r)
-        parts.append(f'<polyline points="{pts}" fill="none" stroke="#6b4a2a" stroke-width="{cell * .3}" stroke-dasharray="{cell * .8} {cell * .4}" stroke-linejoin="round"/>')
+        route = _smooth_route(r,cell)
+        parts.append(f'<path d="{route}" fill="none" stroke="#6b4a2a" stroke-width="{cell * .3}" stroke-dasharray="{cell * .8} {cell * .4}" stroke-linejoin="round"/>')
     def clickable(p, inner):
         # a town or site with an id opens its journal entry on the table (what the party knows of it)
         if p.get("id"):
@@ -834,7 +1056,9 @@ def render_region(m, mode="player", cell=8, party_pos=None):
         glyph = {"ruins": "⌂", "dungeon": "☗", "tower": "♜", "cave": "◓", "shrine": "✚", "camp": "⛺", "lair": "☠",
                  "battlefield": "⚔", "grove": "♣", "barrow": "∩", "mine": "⚒", "bridge": "≍", "inn": "⌂", "mill": "✣",
                  "stones": "⁂"}.get(p["kind"], "★")
-        parts.append(clickable(p, f'<text x="{px}" y="{py + 4}" text-anchor="middle" font-size="{cell * 1.6}" fill="#3a1a0a" stroke="#f6e7c1" stroke-width="2" paint-order="stroke">{glyph}</text>'))
+        icon={'ruins':7,'dungeon':14,'tower':8,'cave':14,'shrine':10,'grove':1,'barrow':15,'mine':14,'bridge':11,'inn':5,'mill':9,'stones':15,'farm':12,'camp':12}.get(p['kind'])
+        marker=painted.sprite('regional-landmarks-v2',icon,px-cell*1.3,py-cell*1.3,cell*2.6) if icon is not None else ''
+        parts.append(clickable(p, marker or f'<text x="{px}" y="{py + 4}" text-anchor="middle" font-size="{cell * 1.6}" fill="#3a1a0a" stroke="#f6e7c1" stroke-width="2" paint-order="stroke">{glyph}</text>'))
         marks.append((px - cell * .8, py - cell * .8, px + cell * .8, py + cell * .8))
         queue.append({"p": p, "px": px, "py": py, "r": cell * .8, "fs": cell * 1.1, "rank": 7, "style": "italic", "weight": "normal", "sw": 2.5})
     sizes = {"hamlet": (.4, 1.0, "normal"), "village": (.55, 1.2, "normal"), "town": (.85, 1.5, "bold"),
@@ -856,6 +1080,10 @@ def render_region(m, mode="player", cell=8, party_pos=None):
             mark = f'<circle cx="{px}" cy="{py}" r="{r}" fill="{fill}" stroke="#2b1d0e" stroke-width="1.5"/>'
             if s["kind"] == "capital":
                 mark += f'<circle cx="{px}" cy="{py}" r="{r * .45}" fill="#f6e7c1" stroke="#2b1d0e" stroke-width="1"/>'
+        icon=6 if s['kind']=='castle' else 10 if s['kind']=='abbey' else 4 if s['kind'] in ('town','city','capital') else 5
+        if painted.uri('regional-landmarks-v2',icon):
+            r=max(r,cell*1.6)
+            mark=painted.sprite('regional-landmarks-v2',icon,px-r,py-r,2*r)
         parts.append(clickable(s, mark))
         marks.append((px - r, py - r * 1.5, px + r, py + r))
         rank = {"capital": 0, "city": 1, "town": 2, "castle": 3, "abbey": 4, "village": 5, "hamlet": 6}.get(s["kind"], 5)
@@ -873,7 +1101,7 @@ def render_region(m, mode="player", cell=8, party_pos=None):
         parts.append(f'<text x="{lb["x"] * cell}" y="{lb["y"] * cell}" text-anchor="middle" font-size="{cell * 1.7}" font-style="italic" letter-spacing="2" fill="#1f1a14" fill-opacity=".75" stroke="#f6e7c1" stroke-width="2" stroke-opacity=".6" paint-order="stroke">{esc(lb["text"])}</text>')
     if party_pos:
         px, py = (party_pos[0] + .5) * cell, (party_pos[1] + .5) * cell
-        parts.append(f'<g><circle cx="{px}" cy="{py}" r="{cell * 1.3}" fill="#2f8fdd" stroke="#fff" stroke-width="2"><animate attributeName="r" values="{cell};{cell * 1.6};{cell}" dur="2s" repeatCount="indefinite"/></circle><title>The party</title></g>')
+        parts.append(f'<g><circle class="region-party" cx="{px}" cy="{py}" r="{cell * 1.3}" fill="#2f8fdd" stroke="#fff" stroke-width="2"/><title>The party</title></g>')
     # compass & scale bar
     W, H = w * cell, h * cell
     mpc = m.get("miles_per_cell", 2)
@@ -883,7 +1111,8 @@ def render_region(m, mode="player", cell=8, party_pos=None):
                  f'<text y="-4" font-size="11" fill="#2b1d0e">0</text><text x="{bar}" y="-4" font-size="11" text-anchor="end" fill="#2b1d0e">{10 * mpc} miles</text></g>')
     parts.append(f'<text x="{W / 2}" y="34" text-anchor="middle" font-size="26" font-weight="bold" fill="#2b1d0e" stroke="#f6e7c1" stroke-width="4" paint-order="stroke">{esc(m["name"])}</text>')
     parts.append("</svg>")
-    return "".join(parts)
+    svg="".join(parts)
+    return svg.replace('>', '>'+painted.definitions(svg),1)
 
 
 def render_map(m, mode="player", entities=(), current=None, **kw):

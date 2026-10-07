@@ -15,6 +15,7 @@
 
   let S = null, app = null, lastSeq = null, queue = [], playing = false, waiters = [], skipping = false, gradCache = {};
   const offsets = {};                       // token id -> {dx, dy}: where an animation left a token (until the next commit)
+  let visualPaused = false;
 
   // ------------------------------------------------------------ settings: the DM's, softened by the viewer's own choice
   const pref = () => { try { return localStorage.getItem("fxpref") || (reduceQuery.matches ? "reduced" : "dm"); } catch { return "dm"; } };
@@ -24,10 +25,11 @@
     if (p === "off") Object.assign(a, { moves: "off", attacks: "off", numbers: "off", turns: "off", dice: "off", shake: "off", ambient: "none" });
     if (p === "reduced") Object.assign(a, { shake: "off", ambient: "none", speed: Math.max(1.6, +a.speed || 1) });
     a.speed = Math.max(0.25, Math.min(4, +a.speed || 1));
+    a.intensity = Math.max(0, Math.min(1, Number.isFinite(+a.intensity) ? +a.intensity : .6));
     return a;
   }
   const on = (k) => settings()[k] !== "off" && settings()[k] !== "none";
-  const ms = (t) => skipping ? 0 : t / settings().speed;
+  const ms = (t) => skipping || pref() === "off" ? 0 : t / settings().speed;
   const wait = (t) => new Promise(r => setTimeout(r, ms(t)));
 
   // ------------------------------------------------------------ geometry on the map
@@ -37,15 +39,17 @@
     let l = $("#fxlayer");
     const s = svgEl();
     if (!l) {
-      l = document.createElementNS(NS, "svg");
+      // Keep effects in the map's coordinate system and paint stack. This also
+      // preserves transient effects when the map is exported or screenshotted.
+      l = document.createElementNS(NS, "g");
       l.id = "fxlayer";
+      l.setAttribute('xmlns', NS);
+      if (s?.querySelector('#revealed-area')) l.setAttribute('clip-path','url(#revealed-area)');
       l.innerHTML = `<defs><filter id="fxglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.5" result="b"/>
         <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
         <filter id="fxsoft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter></defs>`;
-      $("#mapwrap").appendChild(l);
+      s?.appendChild(l);
     }
-    if (s) { l.setAttribute("width", s.width.baseVal.value); l.setAttribute("height", s.height.baseVal.value);
-      l.setAttribute("viewBox", s.getAttribute("viewBox")); }
     return l;
   }
   function mk(tag, attrs = {}, parent) {
@@ -107,10 +111,30 @@
     g.remove();
   }
   async function ringFx(p, color, radius, dur = 900) {
-    const r = mk("circle", { cx: p.x, cy: p.y, r: radius, fill: "none", stroke: color, "stroke-width": 4, filter: "url(#fxglow)" });
-    r.style.transformOrigin = `${p.x}px ${p.y}px`; r.style.transformBox = "view-box";
-    await anim(r, [{ transform: "scale(.1)", opacity: 1 }, { transform: "scale(1)", opacity: 0 }], { duration: dur, easing: "cubic-bezier(.2,.7,.3,1)" });
-    r.remove();
+    if (!p) return;
+    const g = mk('g', {'pointer-events':'none'});
+    const glow = mk('circle', {cx:p.x,cy:p.y,r:0,fill:`url(#${grad(color)})`,opacity:0},g);
+    const halo = mk('circle', {cx:p.x,cy:p.y,r:0,fill:'none',stroke:color,
+      'stroke-width':1.3,'stroke-dasharray':'2 7',opacity:0},g);
+    const ring = mk('circle', {cx:p.x,cy:p.y,r:0,fill:'none',stroke:color,
+      'stroke-width':2.5,filter:'url(#fxglow)',opacity:0},g);
+    // Attribute animation keeps SVG effects portable and screenshot/export friendly.
+    await new Promise(resolve => {
+      const duration = ms(dur); let elapsed=0, previous=null;
+      const frame = ts => {
+        if (previous !== null && !visualPaused) elapsed += Math.min(50,ts-previous);
+        previous=ts;
+        const t = !duration || skipping || pref()==='off' ? 1 : Math.min(1,elapsed/duration);
+        const ease = 1-Math.pow(1-t,3), light = Math.sin(Math.PI*t);
+        ring.setAttribute('r',radius*(.1+.95*ease)); ring.setAttribute('opacity',String((1-t)*.95));
+        halo.setAttribute('r',radius*(.2+.64*ease)); halo.setAttribute('opacity',String(light*.85));
+        halo.setAttribute('stroke-dashoffset',String(-t*radius*.7));
+        glow.setAttribute('r',radius*(.15+.6*ease)); glow.setAttribute('opacity',String(light*.3));
+        if (t>=1) resolve(); else requestAnimationFrame(frame);
+      };
+      requestAnimationFrame(frame);
+    });
+    g.remove();
   }
   // numbers and call-outs stay readable however far the map is zoomed out
   const ui = () => Math.max(1, Math.min(2.4, 1.15 / ((app && app.scale && app.scale()) || 1)));
@@ -486,7 +510,7 @@
     if (c.k === "combat") return s.turns !== "off";
     if (c.k === "die") return s.dice !== "off";
     if (c.k === "speech" || c.k === "narration") return !!window.TableStory;   // the story plays in order with the action
-    return c.k === "fx";
+    return c.k === "fx" && pref() !== "off";
   }
   async function handle(c, i, list) {
     const s = settings();
@@ -534,28 +558,51 @@
   }
 
   // ------------------------------------------------------------ ambient weather (screen space, canvas)
-  let amb = { kind: "none", raf: 0, parts: [], canvas: null, t: 0, flash: 0 };
+  let amb = { kind: "none", raf: 0, parts: [], canvas: null, t: 0, flash: 0, generation: 0 };
+  let weatherNode = null, weatherPath = null;
+  function weatherClip(ctx, cv, dpr) {
+    const node = svgEl()?.querySelector('#weather-exposure');
+    if (!node) return;
+    if (weatherNode !== node) {
+      weatherNode = node; weatherPath = new Path2D();
+      node.querySelectorAll('rect').forEach(r => weatherPath.rect(+r.getAttribute('x'),+r.getAttribute('y'),+r.getAttribute('width'),+r.getAttribute('height')));
+    }
+    const m = svgEl().getScreenCTM(), b = cv.getBoundingClientRect();
+    if (!m) return;
+    ctx.setTransform(dpr*m.a,dpr*m.b,dpr*m.c,dpr*m.d,dpr*(m.e-b.left),dpr*(m.f-b.top));
+    ctx.clip(weatherPath); ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
   function ambient(kind, intensity) {
     const cv = $("#ambient"); if (!cv) return;
     amb.canvas = cv;
     if (kind === amb.kind && intensity === amb.intensity) return;
-    amb.kind = kind; amb.intensity = intensity; amb.parts = [];
+    amb.kind = kind; amb.intensity = intensity; amb.parts = []; amb.t = 0; amb.flash = 0;
+    const generation = ++amb.generation;
     cv.className = "amb-" + kind;
     cancelAnimationFrame(amb.raf);
     if (kind === "none") { cv.getContext("2d").clearRect(0, 0, cv.width, cv.height); return; }
     const step = (ts) => {
-      const dpr = window.devicePixelRatio || 1, w = cv.clientWidth, h = cv.clientHeight;
-      if (cv.width !== Math.round(w * dpr)) { cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); }
+      if (generation !== amb.generation || amb.kind === "none") return;
+      if (document.hidden) { amb.t = 0; amb.raf = 0; return; }
+      const dt = amb.t ? Math.min(2, (ts - amb.t) / (1000 / 60)) : 1;
+      amb.t = ts;
+      const dpr = Math.min(2, window.devicePixelRatio || 1), w = cv.clientWidth, h = cv.clientHeight;
+      if (cv.width !== Math.round(w * dpr) || cv.height !== Math.round(h * dpr)) {
+        cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+      }
       const ctx = cv.getContext("2d"); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
-      const want = Math.round({ rain: 180, storm: 260, snow: 110, fog: 9, embers: 60, ash: 70, motes: 45 }[kind] * (amb.intensity || .6) * Math.min(1.5, w * h / 900000));
+      ctx.save();
+      if (['rain','storm','snow','ash'].includes(kind)) weatherClip(ctx,cv,dpr);
+      const want = Math.round(({ rain: 180, storm: 260, snow: 110, fog: 9, embers: 60, ash: 70, motes: 45 }[kind] || 0) * (amb.intensity ?? .6) * Math.min(1.5, w * h / 900000));
       while (amb.parts.length < want) amb.parts.push(spawn(kind, w, h, true));
       if (amb.parts.length > want) amb.parts.length = want;
-      for (const p of amb.parts) { move(kind, p, w, h); drawPart(ctx, kind, p); }
+      for (const p of amb.parts) { move(kind, p, w, h, dt); drawPart(ctx, kind, p); }
       if (kind === "storm") {
-        if (Math.random() < .0025) amb.flash = 1;
-        if (amb.flash > 0) { ctx.fillStyle = `rgba(220,230,255,${amb.flash * .35})`; ctx.fillRect(0, 0, w, h); amb.flash -= .06; }
+        if (Math.random() < .0025 * dt) amb.flash = 1;
+        if (amb.flash > 0) { ctx.fillStyle = `rgba(220,230,255,${amb.flash * .35})`; ctx.fillRect(0, 0, w, h); amb.flash -= .06 * dt; }
       }
-      amb.raf = document.hidden ? setTimeout(() => requestAnimationFrame(step), 500) : requestAnimationFrame(step);
+      ctx.restore();
+      amb.raf = requestAnimationFrame(step);
     };
     amb.raf = requestAnimationFrame(step);
   }
@@ -569,14 +616,24 @@
     if (kind === "ash") return { x: r() * w, y: y0, v: .3 + r() * .7, s: 1 + r() * 2.2, ph: r() * 6, a: .3 + r() * .4 };
     return { x: r() * w, y: r() * h, v: .1 + r() * .3, s: 1 + r() * 2, ph: r() * 6, a: .2 + r() * .5 };
   }
-  function move(kind, p, w, h) {
-    const sp = Math.min(2, settings().speed);
+  function move(kind, p, w, h, dt = 1) {
+    const sp = Math.min(2, settings().speed) * dt;
     if (kind === "rain" || kind === "storm") { p.y += p.v * sp; p.x += p.v * .25 * sp; if (p.y > h + 20) Object.assign(p, spawn(kind, w, h)); }
-    else if (kind === "snow" || kind === "ash") { p.y += p.v; p.ph += .02; p.x += Math.sin(p.ph) * .5; if (p.y > h + 10) Object.assign(p, spawn(kind, w, h)); }
-    else if (kind === "fog") { p.x += p.v; if (p.x - p.s > w) { p.x = -p.s; p.y = Math.random() * h; } }
-    else if (kind === "embers") { p.y -= p.v; p.ph += .05; p.x += Math.sin(p.ph) * .6; p.a -= .002; if (p.y < -10 || p.a <= 0) Object.assign(p, spawn(kind, w, h)); }
-    else { p.ph += .01; p.x += Math.cos(p.ph) * p.v; p.y += Math.sin(p.ph * 1.3) * p.v; if (p.x < -5 || p.x > w + 5 || p.y < -5 || p.y > h + 5) Object.assign(p, spawn(kind, w, h, true)); }
+    else if (kind === "snow" || kind === "ash") { p.y += p.v * dt; p.ph += .02 * dt; p.x += Math.sin(p.ph) * .5 * dt; if (p.y > h + 10) Object.assign(p, spawn(kind, w, h)); }
+    else if (kind === "fog") { p.x += p.v * dt; if (p.x - p.s > w) { p.x = -p.s; p.y = Math.random() * h; } }
+    else if (kind === "embers") { p.y -= p.v * dt; p.ph += .05 * dt; p.x += Math.sin(p.ph) * .6 * dt; p.a -= .002 * dt; if (p.y < -10 || p.a <= 0) Object.assign(p, spawn(kind, w, h)); }
+    else { p.ph += .01 * dt; p.x += Math.cos(p.ph) * p.v * dt; p.y += Math.sin(p.ph * 1.3) * p.v * dt; if (p.x < -5 || p.x > w + 5 || p.y < -5 || p.y > h + 5) Object.assign(p, spawn(kind, w, h, true)); }
   }
+
+  document.addEventListener("visibilitychange", () => {
+    cancelAnimationFrame(amb.raf); amb.raf = 0;
+    if (!document.hidden && amb.kind !== "none") {
+      const kind = amb.kind, intensity = amb.intensity; amb.kind = null; ambient(kind, intensity);
+    }
+  });
+  reduceQuery.addEventListener?.("change", () => {
+    const a = settings(); ambient(a.ambient || "none", a.intensity);
+  });
   function drawPart(ctx, kind, p) {
     if (kind === "rain" || kind === "storm") { ctx.strokeStyle = `rgba(190,210,240,${p.a})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x - p.l * .25, p.y - p.l); ctx.stroke(); }
     else if (kind === "fog") { const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.s); g.addColorStop(0, `rgba(210,215,220,${p.a})`); g.addColorStop(1, "rgba(210,215,220,0)"); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, 7); ctx.fill(); }
@@ -591,9 +648,10 @@
   // ------------------------------------------------------------ public API
   window.TableFX = {
     init(api) { app = api; },
-    setState(st) { S = st; const a = settings(); ambient(a.ambient || "none", +a.intensity || .6); },
+    setState(st) { S = st; document.body.dataset.motion = pref(); const a = settings(); ambient(a.ambient || "none", a.intensity); },
     settings, pref,
-    setPref(p) { try { localStorage.setItem("fxpref", p); } catch {} const a = settings(); ambient(a.ambient || "none", +a.intensity || .6); },
+    setPref(p) { try { localStorage.setItem("fxpref", p); } catch {} document.body.dataset.motion = p;
+      const a = settings(); ambient(a.ambient || "none", a.intensity); },
     collect,
     // play new cues; resolves once everything queued so far has played
     play(cues) {
@@ -605,6 +663,7 @@
       return p;
     },
     get playing() { return playing; },
+    pauseVisuals(p) { visualPaused = !!p; },
     skip() { skipping = true; },
     // the app swapped in a new map: every token is where the state says, so animation offsets are spent
     committed() { for (const k in offsets) delete offsets[k]; layer(); },

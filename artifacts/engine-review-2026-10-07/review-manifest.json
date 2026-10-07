@@ -1,0 +1,70 @@
+{
+  "review_date": "2026-10-07",
+  "rules_target": "SRD 5.2 (2024)",
+  "review_mode": "proposals only; production implementation awaiting user selection",
+  "baseline_tests": {
+    "command": "python -m unittest discover -s tests",
+    "tests": 148,
+    "result": "PASS",
+    "duration_seconds": 45.65,
+    "note": "Normal temp-directory permissions required; sandbox attempt failed on temp fixture access. ResourceWarning: unclosed test HTTP socket."
+  },
+  "files": {
+    "engine/core.py": {
+      "sha256": "4916e929011bb973a35e4ac1f7302ea066713a066bd4f544380e93ff0048c5e1",
+      "lines": 719
+    },
+    "engine/store.py": {
+      "sha256": "29cdd0d550bd31b6169b62c0d5e3ef49ae012432949c31a6d6ec5d9cb1bbacf5",
+      "lines": 273
+    },
+    "engine/quicksave.py": {
+      "sha256": "9edec3c71277532e84a31395b27d11d702d412a7e360adec7dc8cefea6ad85fc",
+      "lines": 119
+    },
+    "engine/mechanics.py": {
+      "sha256": "128f8d1a0d42d019e26bb4e6d6fbd4440ab33d00f3d0778c26a5950cb3096cc2",
+      "lines": 2263
+    },
+    "engine/cli.py": {
+      "sha256": "a9f619e3e02b7e16d5e905894e1eeca54eabf08e20b0103232beab7aa851e03c",
+      "lines": 3448
+    },
+    "engine/srd.py": {
+      "sha256": "05996e80a3f9b6d51a0c3df242c5a79418976be6507c415787ef73ed888ae354",
+      "lines": 620
+    },
+    "engine/views.py": {
+      "sha256": "f383df61e57fe7287c288199e1603cbe9c381868c3732f94fa4249ffaab2c13f",
+      "lines": 641
+    },
+    "engine/server.py": {
+      "sha256": "9b18abe7ee3fd451ff45f61434b942f21d56bff3bce9d847f1b646c8e26063a0",
+      "lines": 341
+    },
+    "engine/chargen.py": {
+      "sha256": "96f9a64ce5e415f86b7d5bcc195c2fe5e4f8cb5b638085a6726174c74f7a3984",
+      "lines": 631
+    },
+    "engine/dice.py": {
+      "sha256": "05dfde2f187f8657910ead12aa05554c81f71219f18fbc85db4376fbbd7db75f",
+      "lines": 92
+    },
+    "engine/maps.py": {
+      "sha256": "9ab51e763d23a7005ad524f1d9882347b99cad3d57a9eec2aa90d74942822c0a",
+      "lines": 1166
+    },
+    "tests/_cli.py": {
+      "sha256": "d4acb070306f8aafdda4e98e41e9dfa53cc4ab1b31f5a60c3c59010d8a82bfe4",
+      "lines": 65
+    },
+    "tests/test_engine.py": {
+      "sha256": "adce4fab541df98e841e1a9b1f4fa73e8df0ae0ac2428501747a839f99db44eb",
+      "lines": 1020
+    },
+    "tests/test_quicksave.py": {
+      "sha256": "8c92e3d840b2026c9ab1df2ddb2e0e708c4196f83ea5d7eb93e9abc5544ce057",
+      "lines": 76
+    }
+  }
+}
