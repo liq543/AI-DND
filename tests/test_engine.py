@@ -470,6 +470,17 @@ class EngineTest(unittest.TestCase):
         finally:
             self.ok("combat", "end")
 
+    def test_invisible_rolls_initiative_with_advantage(self):
+        self.ok("place", "kira", "5,5", "--map", "arena")
+        self.ok("condition", "add", "kira", "invisible", "--source", "hidden in the dark")
+        try:
+            out = self.ok("combat", "start")
+            line = next(l for l in out.splitlines() if "Initiative" in l and "Kira" in l)
+            self.assertIn("adv", line)
+        finally:
+            self.ok("combat", "end")
+            self.ok("condition", "remove", "kira", "invisible")
+
     def test_sleep_is_two_stage(self):
         from engine import srd
         fx = srd.find("spells", "Sleep")["effect"]

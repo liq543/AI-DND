@@ -1296,6 +1296,11 @@ def death_save(g, e, now=False, request=None):
 def roll_initiative(g, e, surprised=False, now=False, request=None):
     dis = ["surprised"] if surprised else []
     adv = ["Remarkable Athlete"] if e["kind"] == "pc" and _has_feature(e, "Remarkable Athlete") else []
+    names = condition_names(e)
+    if "invisible" in names:                      # SRD Invisible: Surprise. Advantage on Initiative.
+        adv.append("Invisible")
+    if "incapacitated" in names:                  # SRD Incapacitated: Disadvantage on Initiative.
+        dis.append("Incapacitated")
     m = initiative_mod(e) - exhaustion_penalty(e)
     if wants_request(g, e, now) and not request:
         return {"request": make_request(g, e, "Initiative", {"op": "initiative", "who": e["id"], "surprised": surprised})}
