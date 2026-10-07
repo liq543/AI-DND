@@ -481,6 +481,17 @@ class EngineTest(unittest.TestCase):
             self.ok("combat", "end")
             self.ok("condition", "remove", "kira", "invisible")
 
+    def test_hide_needs_cover_or_obscurement(self):
+        self.ok("place", "kira", "5,5", "--map", "arena")
+        self.ok("npc", "add", "bandit", "--name", "Watcher", "--at", "6,5", "--map", "arena")
+        self.ok("combat", "start")
+        try:
+            out = self.rule("action", "kira", "hide", contains="can't Hide")
+            self.assertIn("clear view", out)
+        finally:
+            self.ok("combat", "end")
+            self.ok("npc", "remove", "watcher")
+
     def test_bloodied_frenzy_gives_advantage(self):
         from engine import mechanics as M
         self.ok("npc", "add", "berserker", "--name", "Ulf", "--at", "8,8", "--map", "arena")

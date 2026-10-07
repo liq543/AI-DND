@@ -838,6 +838,8 @@ def cmd_action(g, a):
         if r.get("success"):
             M.remove_condition(g, g.get(e["id"]), "grappled")
         return
+    if name == "hide":
+        M.check_can_hide(g, e)
     M.use_action(g, e, kind, name)
     if name == "dash":
         ec = M.economy(g, e["id"])

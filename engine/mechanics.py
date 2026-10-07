@@ -1498,6 +1498,28 @@ def vision_ft(g, e, m):
     return max(dv, carried)
 
 
+def check_can_hide(g, e):
+    """SRD Hide: the Stealth check is only allowed while Heavily Obscured or behind Three-Quarters or Total Cover,
+    out of any enemy's line of sight. Refuses when a conscious, seeing enemy on the same map has a clear view."""
+    t = e.get("token")
+    if not t or t.get("map") not in g.state.get("maps", {}):
+        return
+    m = g.state["maps"][t["map"]]
+    me = (t["x"], t["y"])
+    for o in g.entities.values():
+        if o["id"] == e["id"] or not alive(o) or not hostile(e, o) or not same_map(e, o) or o.get("hidden"):
+            continue
+        if {"incapacitated", "blinded", "unconscious"} & condition_names(o):
+            continue
+        ot = o["token"]
+        if maps.cover_between(m, (ot["x"], ot["y"]), me) in ("three-quarters", "total"):
+            continue
+        if dist_ft(e, o) > vision_ft(g, o, m):          # in darkness beyond what it can see: Heavily Obscured to it
+            continue
+        raise RuleError(f"{e['name']} can't Hide: {o['name']} has a clear view of them. Hiding needs Heavy Obscurement "
+                        f"(darkness, thick fog, foliage) or Three-Quarters Cover from every enemy, out of their sight.")
+
+
 def reveal_for(g, e):
     t = e.get("token")
     if not t:
