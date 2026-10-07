@@ -481,6 +481,15 @@ class EngineTest(unittest.TestCase):
             self.ok("combat", "end")
             self.ok("condition", "remove", "kira", "invisible")
 
+    def test_hypnotic_pattern_charm_incapacitates_and_stops(self):
+        from engine.core import condition_names, speed
+        e = {"kind": "monster", "speed": {"walk": 30}, "conditions": [{"name": "charmed", "source": "Hypnotic Pattern"}]}
+        self.assertIn("incapacitated", condition_names(e))
+        self.assertEqual(speed(e)["walk"], 0)
+        e["conditions"] = [{"name": "charmed", "source": "Charm Person"}]
+        self.assertNotIn("incapacitated", condition_names(e))
+        self.assertEqual(speed(e)["walk"], 30)
+
     def test_hide_needs_cover_or_obscurement(self):
         self.ok("place", "kira", "5,5", "--map", "arena")
         self.ok("npc", "add", "bandit", "--name", "Watcher", "--at", "6,5", "--map", "arena")

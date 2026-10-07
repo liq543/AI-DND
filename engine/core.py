@@ -474,7 +474,7 @@ def speed(e):
             if base and base.get("str_req") and abilities(e)["str"] < base["str_req"]:
                 sp["walk"] -= 10
     names = condition_names(e)
-    if names & {"grappled", "restrained", "paralyzed", "petrified", "stunned", "unconscious"}:
+    if names & {"grappled", "restrained", "paralyzed", "petrified", "stunned", "unconscious"} or _spellbound(e):
         return {k: 0 for k in sp}
     pen = 5 * e.get("exhaustion", 0)
     for fx in e.get("effects", []):
@@ -482,11 +482,23 @@ def speed(e):
     return {k: max(0, v - pen) for k, v in sp.items()}
 
 
+# Spells whose Charmed condition also brings Incapacitated and a Speed of 0 (SRD Hypnotic Pattern).
+SPELLBOUND_CHARMS = {"hypnotic-pattern"}
+
+
+def _spellbound(e):
+    return any(c["name"] == "charmed" and srd.slug(str(c.get("spell") or c.get("source") or "")) in SPELLBOUND_CHARMS
+               or (c["name"] == "charmed" and "hypnotic pattern" in str(c.get("source", "")).lower())
+               for c in e.get("conditions", []))
+
+
 def condition_names(e):
     names = {c["name"] for c in e.get("conditions", [])}
     for implied in ("paralyzed", "petrified", "stunned", "unconscious"):
         if implied in names:
             names.add("incapacitated")
+    if _spellbound(e):
+        names.add("incapacitated")
     return names
 
 
