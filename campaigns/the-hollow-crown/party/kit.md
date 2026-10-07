@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** Player · **Human** · **Rogue 6** (Thief) · **Background:** Criminal · **XP:** 19685
+**Player:** Player · **Human** · **Rogue 6** (Thief) · **Background:** Criminal · **XP:** 21581
 
 **HP** 51/51 · **AC** 16 (Studded Leather Armor 12 + Dex 4) · **Speed** 30 ft · **Initiative** +7 · **Proficiency** +3 · **Passive Perception** 17
 
@@ -37,7 +37,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 1735 GP 1 SP 5 CP
+**Coins:** 100 GP 3 SP 5 CP
 
 - `the-magpies-key-1` 1× The Magpie's Key · _stolen: Lot 9, lifted from Dorothea Quill mid-raid_
 - `quiver-1` 1× Quiver · _starting equipment_
@@ -56,11 +56,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `cart-1` 2× Cart · _purchased for 15 GP_
 - `horse-draft-1` 1× Horse, Draft · _purchased for 50 GP_
 - `studded-leather-armor-1` 1× Studded Leather Armor (equipped) · _purchased for 90 GP_
-- `paper-1` 30× Blank harbour customs forms (Paper) · _found: oilcloth bundle in the clerks' pigeonholes, Old Customs House_
-  - About thirty blank customs clearance forms from before the Council's new quay, kept dry in an oilcloth wrap. Each is headed with the old harbour customs crest and has spaces for vessel, master, cargo, duty paid and the Collector's seal. Good stock for a forger.
-- `rapier-1` 1× Heron-head Sword-cane (Rapier) · _loot: the blade hidden inside Crane's heron's-head cane (a sword-cane)_
-  - Valentin Crane's walking cane: black lacquered wood with a silver heron's-head handle. A twist of the handle draws a slim, needle-pointed blade. It passes for a gentleman's cane anywhere a sword would draw looks. The engine treats it as a Rapier.
-- `arrows-2` 49× Arrows · _starting equipment_
+- `arrows-2` 60× Arrows · _starting equipment_
 - `arrows-3` 1× Arrows · _starting equipment_
 - `lantern-hooded-1` 1× Lantern, Hooded · _purchased for 5 GP_
 - `lantern-bullseye-1` 1× Lantern, Bullseye · _purchased for 10 GP_
@@ -73,9 +69,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `smoked-glass-visor-1` 1× Smoked-glass visor · _stolen: the Eye's vault_
 - `dagger-of-venom-1` 1× Dagger of Venom (Dagger of Venom) (equipped) — Rare · _stolen: Acquisitions case A-148, Cage Three, Undercroft Stores (swapped for a plain dagger)_
   - Acquisitions exhibit A-148, lifted from its glass case in the Undercroft Stores. A slim blade of blued black steel with a green-enamelled hilt, faintly oily to the touch. A plain dagger lies on the black felt in its place, under an unbroken Acquisitions seal.
-- `black-gold-closed-eye-pi-1` 1× Black-gold closed-eye pin · _loot: the Emissary's throat_
 - `letter-of-passage-lidles-1` 1× Letter of passage (Lidless Court) · _loot: the Emissary's wallet_
-- `foreign-gold-sun-coins-1` 3× Foreign gold 'sun' coins · _loot: the Emissary's wallet_
 - `casket-key-on-a-cord-1` 1× Casket key on a cord · _loot: the Emissary's neck_
 - `dagger-1` 1× Dagger · _starting equipment_
 - `cloak-of-elvenkind-1` 1× Cloak of Elvenkind (equipped) (attuned) — Uncommon · _purchased for 400 GP_
@@ -84,7 +78,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `bag-of-holding-1` 1× Bag of Holding — Uncommon · _purchased for 400 GP_
 - `potion-of-greater-healin-1` 1× Potion of Greater Healing — Uncommon · _purchased for 200 GP_
 - `potion-of-healing-1` 2× Potion of Healing — Common · _purchased for 400 GP_
-- `horse-riding-1` 4× Horse, Riding · _purchased for 375 GP_
+- `horse-riding-1` 6× Horse, Riding · _purchased for 375 GP_
 - `saddle-riding-1` 5× Saddle - Riding · _purchased for 50 GP_
 - `mule-1` 1× The Rookery's grey mule (Mule) · _stolen: the Rookery's own mule, back from the Hanged Men's horse line_
   - The grey mule taken with the cart on the March Road. Its near-hind shoe is cracked, leaving a forked print: it wants a farrier.
@@ -92,18 +86,14 @@ Species traits: Resourceful, Skillful, Versatile
   - A thumb-sized book bound in greasy calfskin, its pages ruled in columns in a small neat hand, with a stub of pencil tied to the spine. It was under the pillow in the big tent, wrapped in a stocking.
 - `shortbow-1` 1× Shortbow (equipped) · _starting equipment_
 - `lucans-unfinished-letter-1` 1× Lucan's unfinished letter · _loot: Sir Lucan's writing desk_
-- `silver-eye-pendant-1` 1× Silver eye pendant · _loot: Tam Orrin_
-- `iron-eye-holy-symbol-1` 2× Iron eye holy symbol · _loot: the two Eyeless Brothers_
 - `bundle-of-sealed-letters-1` 1× Bundle of sealed letters · _loot: Brother Ennis's satchel_
 - `sealed-orders-of-sir-ger-1` 1× Sealed orders of Sir Gerold · _loot: Sergeant Wace Thorley_
 - `the-marchwood-tally-roll-1` 1× The Marchwood tally-roll · _loot: the oiled-leather tube strapped inside the tax wagon's tailboard_
 - `quists-papers-1` 1× Quist's papers · _gift: drawn by Quist that evening_
 - `the-factors-key-1` 1× The factor's key · _loot: Factor Ambrose Leck's neck_
-- `the-league-house-key-rin-1` 1× The League house key ring · _loot: the coat pegs on the League house landing_
 - `dagger-1-1` 1× Dagger +1 (equipped) — Uncommon · _purchased for 402 GP_
 - `the-leagues-seal-1` 1× The League's seal · _stolen: the factor's desk in the League counting room_
 - `blank-league-letters-of--1` 1× Blank League letters of credit · _stolen: a locked drawer in the League counting room_
-- `sir-gerolds-bond-1` 1× Sir Gerold's bond · _stolen: the League strongroom, Thornbury_
 - `the-leagues-register-of--1` 1× The League's register of letters · _stolen: the League strongroom, Thornbury_
 - `bundle-of-league-bonds-a-1` 1× Bundle of League bonds and deeds (Bundle of League bonds and deeds) · _stolen: the League strongroom, Thornbury_
   - The last of the League's Marchwood bonds: the three Thornbury wool merchants (300 each) and the Plough and Pennant's landlord (250), all to be paid by Thornbury's council as the town's fine on Day 16. Settled already: the Aldersons and Oxbow Mill. With Hesketh's men: the twelve freeholders' bonds.
@@ -114,11 +104,12 @@ Species traits: Resourceful, Skillful, Versatile
 - `pells-letter-on-kingshol-1` 1× Pell's letter on Kingsholt (1,500) · _reward: Master Pell, for the Thornbury letter_
 - `pells-second-letter-on-g-1` 1× Pell's second letter on Gildford (1,000) · _reward: Master Pell, for the Thornbury letter_
 - `the-deed-to-coldharbour-1` 1× The deed to Coldharbour · _reward: bought from Gaffer Moss_
-- `agnes-aldersons-silver-1` 1× Agnes Alderson's silver · _reward: Hamon Alderson's bond, settled in kind_
-- `the-alderson-signet-1` 1× The Alderson signet · _reward: Hamon Alderson's bond, settled in kind_
-- `league-mans-badge-1` 1× League man's badge · _loot: the League's hired man_
 - `watch-captain-ormes-keys-1` 1× Watch-captain Orme's keys · _loot: Watch-captain Orme_
 - `keys-of-the-lidless-chap-1` 1× Keys of the Lidless chapel · _gift: Reeve Ashby's surrender of Thornbury_
+- `mattocks-keys-1` 1× Mattock's keys · _loot: Old Mattock's wrist, the well-house at Harrowgate_
+- `antler-token-of-the-thor-1` 1× Sedge's antler token (Antler token of the Thornpact) · _loot: Sedge's body at the Hartstone_
+  - A disc of polished antler the size of a palm, carved with a stag's head crowned by an oak over an open hand, strung on red cord. Old, worn smooth by many thumbs. Found in Sedge's furs.
+- `lerners-written-confessi-1` 1× Lerner's written confession · _gift: written by Sergeant Lerner under Ottilie's charm, Day 18_
 
 Hit Point Dice: Rogue d8 6/6
 Languages: Common, Elvish, Halfling, Thieves' Cant · Tools: Thieves' Tools · Armor training: light

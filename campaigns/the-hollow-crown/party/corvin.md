@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Wizard 6** (Evoker) · **Background:** Sage · **XP:** 19685
+**Player:** DM · **Human** · **Wizard 6** (Evoker) · **Background:** Sage · **XP:** 21581
 
 **HP** 38/38 · **AC** 14 (unarmored 10 + Dex 2 + bracers 2) · **Speed** 30 ft · **Initiative** +5 · **Proficiency** +3 · **Passive Perception** 11
 
@@ -27,7 +27,7 @@ Attacks per Attack action: 1
 ## Spellcasting
 
 - **Wizard:** save DC 15, attack +7, cantrips 4, prepared 10, up to level 3
-- **Slots:** L1 4/4, L2 3/3, L3 3/3
+- **Slots:** L1 4/4, L2 3/3, L3 2/3
 - **Cantrips:** fire-bolt, mage-hand, minor-illusion, light
 - **Prepared:** shield, magic-missile, sleep, misty-step, invisibility, suggestion, fireball, counterspell, animate-dead, dispel-magic
 - **Spellbook:** detect-magic, identify, shield, sleep, magic-missile, alarm, feather-fall, disguise-self, misty-step, knock, invisibility, suggestion, fireball, counterspell, animate-dead, dispel-magic
@@ -46,7 +46,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 100 GP 8 SP
+**Coins:** 101 GP 1 SP 5 CP
 
 - `dagger-1` 2× Dagger · _starting equipment_
 - `quarterstaff-1` 2× Quarterstaff · _starting equipment (Arcane Focus)_
@@ -56,7 +56,6 @@ Species traits: Resourceful, Skillful, Versatile
 - `calligraphers-supplies-1` 1× Calligrapher's Supplies · _starting equipment_
 - `book-1` 1× Book · _starting equipment_
 - `parchment-1` 1× Parchment · _starting equipment_
-- `silver-pocket-watch-1` 1× Silver pocket watch · _loot: Mr Faircloth's waistcoat_
 - `tobiass-notes-on-the-bli-1` 1× Tobias's Notes on the Blink and the Heart · _gift: written by Tobias Fenwick in exchange for the Codex_
 - `clothes-travelers-1` 1× Nance's drab coat and cap (Clothes, Traveler's) · _purchased for 2 GP_
   - Second-hand from Nance Pettle's rag stall: a long brown wool coat gone shiny at the elbows, a grey waistcoat, a flat cloth cap. A clerk's clothes, not a magister's.
@@ -73,6 +72,8 @@ Species traits: Resourceful, Skillful, Versatile
 - `potion-of-healing-1` 2× Potion of Healing — Common · _purchased for 400 GP_
 - `clothes-fine-1` 1× Clothes, Fine · _purchased for 45 GP_
 - `potion-of-greater-healin-1` 1× Potion of Greater Healing — Uncommon · _purchased for 200 GP_
+- `the-marchwood-tax-rolls-1` 1× The Marchwood tax rolls · _loot: Harrowgate's strongroom, the tax-roll chest_
+- `the-lord-protectors-lett-1` 1× The Lord Protector's letters to Harrowgate · _loot: Harrowgate's strongroom, the tally shelves_
 
 Hit Point Dice: Wizard d6 6/6
 Languages: Common, Elvish, Draconic · Tools: Calligrapher's Supplies · Armor training: none

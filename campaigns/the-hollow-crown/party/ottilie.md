@@ -2,9 +2,9 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Bard 6** (College of Lore) · **Background:** Sage · **XP:** 19685
+**Player:** DM · **Human** · **Bard 6** (College of Lore) · **Background:** Sage · **XP:** 21581
 
-**HP** 39/39 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
+**HP** 35/39 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
@@ -27,7 +27,7 @@ Attacks per Attack action: 1
 ## Spellcasting
 
 - **Bard:** save DC 14, attack +6, cantrips 3, prepared 10, up to level 3
-- **Slots:** L1 4/4, L2 3/3, L3 3/3
+- **Slots:** L1 4/4, L2 2/3, L3 3/3
 - **Cantrips:** vicious-mockery, message, mage-hand
 - **Prepared:** charm-person, disguise-self, dissonant-whispers, healing-word, silent-image, suggestion, invisibility, hypnotic-pattern, cure-wounds, clairvoyance
 
@@ -45,7 +45,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 100 GP
+**Coins:** 100 GP 5 SP
 
 - `pan-flute-1` 1× Pan flute · _starting equipment_
 - `entertainers-pack-1` 1× Entertainer's Pack · _starting equipment_
@@ -65,13 +65,13 @@ Species traits: Resourceful, Skillful, Versatile
 - `smoked-glass-visor-1` 1× Smoked-glass visor · _gift: Kit, from the Eye's vault_
 - `hat-of-disguise-1` 1× Hat of Disguise (equipped) (attuned) — Uncommon · _purchased for 400 GP_
 - `eyes-of-charming-1` 1× Eyes of Charming (equipped) (attuned) — Uncommon · _purchased for 400 GP_
+  - Crystal lenses over the eyes: 3 charges of Charm Person (save DC 13), all regained at dawn. Charges: 0/3 (all spent Day 18 on Lerner; the third took); full again at dawn on Day 19. Lerner is Charmed by Ottilie for an hour (until ~14:46) and will know it afterwards.
 - `stone-of-good-luck-lucks-1` 1× Stone of Good Luck (Luckstone) (equipped) (attuned) — Uncommon · _purchased for 400 GP_
 - `lute-1` 1× Lute · _purchased for 35 GP_
 - `potion-of-healing-1` 2× Potion of Healing — Common · _purchased for 400 GP_
 - `clothes-fine-1` 1× Clothes, Fine · _purchased for 45 GP_
 - `potion-of-greater-healin-1` 1× Potion of Greater Healing — Uncommon · _purchased for 200 GP_
 - `midnight-blue-silk-cloak-1` 1× Midnight-blue silk cloak · _loot: taken back off the bound woman at the Withy Pond_
-- `horse-riding-1` 1× Horse, Riding · _loot: two Greencloak horses caught loose in the beech holloway_
 - `forgery-kit-1` 1× Forgery Kit · _found: his own tools, from his back-room workshop_
 
 Hit Point Dice: Bard d8 6/6

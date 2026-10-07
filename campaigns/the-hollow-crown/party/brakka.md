@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Orc** · **Fighter 6** (Champion) · **Background:** Soldier · **XP:** 19685
+**Player:** DM · **Orc** · **Fighter 6** (Champion) · **Background:** Soldier · **XP:** 21581
 
 **HP** 58/58 · **AC** 19 (Plate Armor 18 + items 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
 
@@ -38,7 +38,7 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 
 ## Inventory
 
-**Coins:** 100 GP 5 CP
+**Coins:** 101 GP 1 SP 5 CP
 
 - `javelin-1` 8× Javelin · _starting equipment_
 - `spear-1` 1× Spear · _starting equipment_
@@ -67,6 +67,12 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 - `clothes-fine-1` 1× Clothes, Fine · _purchased for 45 GP_
 - `potion-of-greater-healin-1` 1× Potion of Greater Healing — Uncommon · _purchased for 200 GP_
 - `rope-1` 1× Rope · _purchased for 1 GP_
+- `pistol-1` 1× Pistol · _loot: Mother Gallows at the Gallows Oak_
+- `scimitar-1` 1× Scimitar · _loot: Mother Gallows at the Gallows Oak_
+- `studded-leather-armor-1` 1× Studded Leather Armor · _loot: Mother Gallows at the Gallows Oak_
+- `heavy-crossbow-1` 1× Heavy Crossbow · _loot: Coll_
+- `mace-1` 1× Mace · _loot: Coll_
+- `leather-armor-1` 1× Leather Armor · _loot: Coll_
 
 Hit Point Dice: Fighter d10 6/6
 Languages: Common, Orc, Giant · Tools: *Choose one kind of Gaming Set* (see "Equipment") · Armor training: light, medium, heavy, shield
