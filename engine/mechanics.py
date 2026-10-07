@@ -2030,7 +2030,7 @@ def bundle_size(it):
     return (gear or {}).get("bundle")
 
 
-def remove_item(g, e, ref, qty=1, reason="dropped", sell=False, to=None):
+def remove_item(g, e, ref, qty=1, reason="dropped", sell=False, to=None, appraised_cp=None):
     it = find_item(e, ref)
     have = it.get("qty", 1)
     if qty > have:
@@ -2043,10 +2043,16 @@ def remove_item(g, e, ref, qty=1, reason="dropped", sell=False, to=None):
         else:
             inv.append(i)
     g.set(e, inventory=inv)
-    if sell:
+    if sell and appraised_cp is not None:
+        # Loot with no SRD price (plate, jewellery, trinkets): sold whole at the DM's public appraisal, like treasure.
+        if it.get("value_cp"):
+            raise RuleError(f"{it['name']} has an SRD price; sell it without --price.")
+        change_coins(g, g.get(e["id"]), appraised_cp, f"sold {it['name']} (appraised)")
+        g.say(f"💰 {e['name']} sells {qty}× {it['name']} for {fmt_cp(appraised_cp)} (appraised value, publicly set).", kind="item")
+    elif sell:
         value = it.get("value_cp", 0)
         if not value:
-            raise RuleError(f"{it['name']} has no market value.")
+            raise RuleError(f"{it['name']} has no market value. Treasure with no SRD price sells at a public appraisal: --price.")
         price = value * qty // ((1 if it.get("kind") == "treasure" else 2) * (bundle_size(it) or 1))
         change_coins(g, g.get(e["id"]), price, f"sold {it['name']}")
         g.say(f"💰 {e['name']} sells {qty}× {it['name']} for {fmt_cp(price)} (equipment sells for half its cost).", kind="item")

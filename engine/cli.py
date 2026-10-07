@@ -1411,7 +1411,9 @@ def cmd_item(g, a):
         to = g.get(a.to) if a.to else None
         if a.action == "give" and not to:
             raise RuleError("give needs --to")
-        M.remove_item(g, e, a.item, a.qty, "dropped" if a.action == "drop" else a.source or "removed", sell=a.action == "sell", to=to)
+        appraised = M.parse_coins(a.price) if (a.action == "sell" and a.price) else None
+        M.remove_item(g, e, a.item, a.qty, "dropped" if a.action == "drop" else a.source or "removed", sell=a.action == "sell", to=to,
+                      appraised_cp=appraised)
     elif a.action == "pickup":
         M.pick_up(g, e, a.item, with_attack=getattr(a, 'with_attack', False))
     elif a.action == "stash":

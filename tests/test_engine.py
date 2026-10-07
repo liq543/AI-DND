@@ -481,6 +481,18 @@ class EngineTest(unittest.TestCase):
             self.ok("combat", "end")
             self.ok("condition", "remove", "kira", "invisible")
 
+    def test_sell_unpriced_loot_at_appraisal(self):
+        self.ok("item", "add", "kira", "Silver candlesticks", "--custom", "treasure", "--source", "loot: a manor sideboard")
+        iid = next(i["id"] for i in self.state().get("kira")["inventory"] if i["name"] == "Silver candlesticks")
+        self.rule("item", "sell", "kira", iid, contains="appraisal")
+        before = self.state().get("kira")["coins"]
+        out = self.ok("item", "sell", "kira", iid, "--price", "40gp")
+        self.assertIn("appraised", out)
+        self.assertNotEqual(before, self.state().get("kira")["coins"])
+        self.ok("item", "add", "kira", "Dagger", "--source", "loot: test")
+        did = [i["id"] for i in self.state().get("kira")["inventory"] if i["name"] == "Dagger"][-1]
+        self.rule("item", "sell", "kira", did, "--price", "99gp", contains="SRD price")
+
     def test_hypnotic_pattern_charm_incapacitates_and_stops(self):
         from engine.core import condition_names, speed
         e = {"kind": "monster", "speed": {"walk": 30}, "conditions": [{"name": "charmed", "source": "Hypnotic Pattern"}]}
