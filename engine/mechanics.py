@@ -1064,7 +1064,7 @@ def add_dice(expr, extra, n):
 
 
 def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, free=None, adv=(), dis=(),
-         condition=None, component=None, now=False, scroll=None, request=None, readied=False, choice=None):
+         condition=None, component=None, now=False, scroll=None, request=None, readied=False, choice=None, item=None):
     e = g.get(caster_ref)
     spell = g.require("spells", spell_name, "Spell")
     base = spell["level"]
@@ -1086,7 +1086,26 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
     if any(fx.get("name") == "untrained armor" for fx in e.get("effects", [])):
         raise RuleError(f"{e['name']} is wearing armor without training and can't cast spells.")
     how = None
-    if e["kind"] == "pc":
+    wand = None
+    if item:
+        it = next((i for i in e.get("inventory", []) if i["id"] == item), None)
+        spec = charged_spec(it) if it else None
+        if not it or not spec or spec["spell"] != spell["slug"]:
+            raise RuleError(f"{e['name']} has no item {item} that casts {spell['name']}.")
+        if spec["attunement"] and not it.get("attuned"):
+            raise RuleError(f"{it['name']} requires attunement before it can be used.")
+        lvl0 = spec["base_level"] or base
+        want = slot_level or lvl0
+        need = want - lvl0 + 1
+        if need < 1 or need > spec["max_charges"]:
+            raise RuleError(f"{it['name']} casts {spell['name']} at level {lvl0} to {lvl0 + spec['max_charges'] - 1} "
+                            f"(1 to {spec['max_charges']} charges).")
+        have = charged_item_refresh(g, e, it, spec)
+        if have < need:
+            raise RuleError(f"{it['name']} has {have} charge(s) left; level {want} needs {need}.")
+        wand = {"it": it, "spec": spec, "need": need, "have": have}
+        slot_level, how = want, "item"
+    elif e["kind"] == "pc":
         if scroll:
             it = next((i for i in e.get("inventory", []) if i["id"] == scroll), None)
             if not it or "scroll" not in it["name"].lower() or srd.slug(it.get("spell", "")) != spell["slug"]:
@@ -1141,6 +1160,8 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
         g.emit("time.set", minutes=g.state["time"] + 10)
     elif how == "scroll":
         slot_level = base
+    elif how == "item":
+        pass   # the charges pay for it (spent below, once the casting goes ahead)
     elif free:
         gr = next((x for x in e.get("granted_spells", []) if x["slug"] == spell["slug"] and x["source"].lower().startswith(free.lower())), None)
         if not gr:
@@ -1190,6 +1211,17 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
         use_action(g, e, kind, f"cast {spell['name']}")
     if how == "scroll":
         g.set(e, inventory=[i for i in e["inventory"] if i["id"] != scroll])
+    if wand:
+        left = wand["have"] - wand["need"]
+        e = g.get(e["id"])
+        g.set(e, inventory=[dict(i, charges=left) if i["id"] == wand["it"]["id"] else i for i in e["inventory"]])
+        g.say(f"  🪄 {wand['it']['name']}: {wand['need']} charge(s) spent, {left} left.", kind="spell")
+        if left == 0 and wand["spec"]["crumble"]:
+            r = g.roll("1d20", f"{wand['it']['name']}: last charge spent", e["id"])
+            if r["total"] == 1:
+                e = g.get(e["id"])
+                g.set(e, inventory=[i for i in e["inventory"] if i["id"] != wand["it"]["id"]])
+                g.say(f"  {wand['it']['name']} crumbles into ashes.", kind="spell")
     if E.has(e, "slow") and "S" in spell["components"].split("(")[0]:
         failure = g.roll("1d4", "Slow somatic spell failure", e["id"])
         if failure["total"] == 1:
@@ -1220,6 +1252,8 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
         mat = re.search(r"([+-]\d+) to hit with spell attacks", text)
         sc = {"dc": int(mdc.group(1)) if mdc else 10 + e.get("pb", 2), "attack": int(mat.group(1)) if mat else e.get("pb", 2),
               "ability": "int"}
+    if wand and wand["spec"]["dc"]:
+        sc = dict(sc or {}, dc=wand["spec"]["dc"])
     if how == "scroll" and base > max((spellcasting(e).get(c, {}).get("max_level", 0) for c in e["classes"]), default=0):
         chk = ability_check(g, e, sc["ability"], dc=10 + base, now=True, purpose=f"read scroll of {spell['name']}")
         if not chk.get("success"):
@@ -1227,7 +1261,7 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
             return {"failed": True}
     break_invisibility_on_cast(g, e, spell)
     g.say(f"✨ {e['name']} casts {spell['name']}" + (f" at level {slot_level}" if base and slot_level > base else "") +
-          (" as a ritual" if ritual else "") + (f" (from {how})" if how in ("scroll", "granted") else "") +
+          (" as a ritual" if ritual else "") + (f" (from {how})" if how in ("scroll", "granted") else "") + (f" from {wand['it']['name']}" if wand else "") +
           (f" targeting {', '.join(t['name'] for t in tgts)}" if tgts else "") + ".", kind="spell", who=e["id"],
           spell=spell["slug"], targets=[t["id"] for t in tgts], dtype=(spell.get("effect") or {}).get("type"),
           fxkind=(spell.get("effect") or {}).get("kind"))
@@ -2402,3 +2436,46 @@ def award_xp(g, members, total, reason):
         ready = lv < 20 and new >= xp_threshold(lv + 1)
         g.say(f"⭐ {m['name']} gains {each} XP ({reason}) — total {new}" + (f". LEVEL UP available (level {lv + 1})!" if ready else "."), kind="xp")
     return each
+
+
+# ====================================================================== charged items (wands)
+
+def charged_spec(it):
+    """A charged item that casts a spell, read from its SRD text (rules/magic-items): e.g. Wand of Magic Missiles
+    "has 7 charges ... expend no more than 3 charges to cast *Magic Missile* ... For 1 charge, you cast the level 1
+    version ... regains 1d6 + 1 expended charges daily at dawn ... crumbles"."""
+    entry = srd.find("magic_items", it.get("base_name") or it.get("name", "")) or srd.find("magic_items", it.get("name", ""))
+    if not entry:
+        return None
+    text = (srd.RULES / "magic-items" / f"{entry['slug']}.md").read_text(encoding="utf-8")
+    m_max = re.search(r"has (\d+) charges", text)
+    m_cast = re.search(r"expend (?:no more than (\d+) charges|(\d+) charge) to cast \*([^*]+)\*(?: \(save DC (\d+)\))?", text)
+    if not (m_max and m_cast):
+        return None
+    m_lvl = re.search(r"For 1 charge, you cast the level (\d) version", text)
+    m_regain = re.search(r"regains ([\dd +]+?) expended charges daily at dawn", text)
+    return {"name": entry["name"], "max": int(m_max.group(1)), "spell": srd.slug(m_cast.group(3)),
+            "max_charges": int(m_cast.group(1) or m_cast.group(2)), "base_level": int(m_lvl.group(1)) if m_lvl else None,
+            "dc": int(m_cast.group(4)) if m_cast.group(4) else None,
+            "regain": m_regain.group(1).replace(" ", "") if m_regain else None, "crumble": "crumbles" in text,
+            "attunement": entry.get("attunement", False)}
+
+
+def charged_item_refresh(g, e, it, spec):
+    """Charges are tracked on the item; each dawn since it was last counted restores its regain dice (rolled now)."""
+    now = g.state["time"]
+    charges = it.get("charges")
+    if charges is None:
+        charges, last = spec["max"], now
+    else:
+        last = it.get("charges_at", now)
+        d = next_dawn(last)
+        while d <= now and charges < spec["max"] and spec["regain"]:
+            r = g.roll(spec["regain"], f"{spec['name']} regains charges at dawn", e["id"])
+            before, charges = charges, min(spec["max"], charges + r["total"])
+            g.say(f"  🪄 {it['name']} regains charges at dawn: {r['text']} → {charges}/{spec['max']}"
+                  + (" (full)" if charges == spec["max"] and before + r["total"] > spec["max"] else "") + ".", kind="spell")
+            d += 1440
+    inv = [dict(i, charges=charges, charges_at=now) if i["id"] == it["id"] else i for i in e["inventory"]]
+    g.set(e, inventory=inv)
+    return charges

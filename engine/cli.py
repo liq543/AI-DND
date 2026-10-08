@@ -909,7 +909,8 @@ def cmd_attack(g, a):
 
 def cmd_cast(g, a):
     M.cast(g, a.caster, a.spell, a.level, ids(a.targets), ritual=a.ritual, free=a.free, adv=ids(a.adv), dis=ids(a.dis), readied=getattr(a, 'readied', False),
-           condition=a.condition, component=a.component, now=a.now, scroll=a.scroll, choice=a.choice)
+           condition=a.condition, component=a.component, now=a.now, scroll=a.scroll, choice=a.choice,
+           item=getattr(a, "item", None))
 
 
 def cmd_check(g, a):
@@ -3189,6 +3190,7 @@ def build_parser():
     c.add_argument("--ritual", action="store_true")
     c.add_argument("--free", help="free casting source, e.g. 'Magic Initiate'")
     c.add_argument("--scroll", help="inventory id of a spell scroll")
+    c.add_argument("--item", help="inventory id of a charged item that casts the spell (e.g. a Wand of Magic Missiles); --level sets charges")
     c.add_argument("--condition", help="condition applied on a failed save (e.g. paralyzed)")
     c.add_argument("--component", help="inventory id of the costly component")
     c.add_argument("--choice", help="spell option: skill, ability, damage type, condition, or Mass Heal allocations")
