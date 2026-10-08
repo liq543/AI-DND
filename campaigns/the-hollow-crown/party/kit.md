@@ -21,7 +21,6 @@
 | Attack | To hit | Damage | Notes |
 |---|---|---|---|
 | Dagger of Venom | +8 | 1d4+5 piercing | range 20/60 ft, mastery nick |
-| Shortbow | +7 | 1d6+4 piercing | range 80/320 ft, mastery vex |
 | Dagger +1 | +8 | 1d4+5 piercing | range 20/60 ft, mastery nick |
 | Unarmed Strike | +2 | 0 bludgeoning | reach 5 ft |
 
@@ -84,7 +83,7 @@ Species traits: Resourceful, Skillful, Versatile
   - The grey mule taken with the cart on the March Road. Its near-hind shoe is cracked, leaving a forked print: it wants a farrier.
 - `book-1` 1× A little tally-book (Book) · _found: under the woman's pillow in the big tent_
   - A thumb-sized book bound in greasy calfskin, its pages ruled in columns in a small neat hand, with a stub of pencil tied to the spine. It was under the pillow in the big tent, wrapped in a stocking.
-- `shortbow-1` 1× Shortbow (equipped) · _starting equipment_
+- `shortbow-1` 1× Shortbow · _starting equipment_
 - `lucans-unfinished-letter-1` 1× Lucan's unfinished letter · _loot: Sir Lucan's writing desk_
 - `bundle-of-sealed-letters-1` 1× Bundle of sealed letters · _loot: Brother Ennis's satchel_
 - `sealed-orders-of-sir-ger-1` 1× Sealed orders of Sir Gerold · _loot: Sergeant Wace Thorley_
@@ -110,6 +109,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `antler-token-of-the-thor-1` 1× Sedge's antler token (Antler token of the Thornpact) · _loot: Sedge's body at the Hartstone_
   - A disc of polished antler the size of a palm, carved with a stag's head crowned by an oak over an open hand, strung on red cord. Old, worn smooth by many thumbs. Found in Sedge's furs.
 - `lerners-written-confessi-1` 1× Lerner's written confession · _gift: written by Sergeant Lerner under Ottilie's charm, Day 18_
+- `shortbow-2-1` 1× Shortbow +2 — Rare · _gift: the Rookery armoury (retcon by ruling: the bow owed since Day 1)_
 
 Hit Point Dice: Rogue d8 7/7
 Languages: Common, Elvish, Halfling, Thieves' Cant · Tools: Thieves' Tools · Armor training: light

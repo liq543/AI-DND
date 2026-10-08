@@ -178,6 +178,15 @@ item drop kira dagger-1 --qty 1      # lands on the map at the token's square (g
 item pickup kira floor-1             # must be in/next to that square; in combat uses the free object interaction
 map container crypt 12,7 --name "Iron-bound chest" [--text "..."] [--id chest-1]   # a tile that holds items (clickable)
 item stash kira rope-1 --to chest-1 [--qty 2]   # put an item into a container (in/next to it)
+# Loot is decided before anyone searches, and the engine holds you to it:
+loot list                                   # loot owed by defeated notable foes + every sealed cache and its contents (DM)
+loot suggest [--rarity Rare] [--kind weapon]   # SRD magic items within the party's tier cap
+loot body captain-rhosk --items "Longsword +1; 2x Potion of Healing" --coins 30gp   # seal a foe's gear at its body (clears "owed")
+loot none captain-rhosk --reason "lost it all in the river"    # or record why there's nothing
+loot cache crypt 12,7 --name "Iron strongbox" --items "Ledger=a merchant ledger; Potion of Healing" --coins 140gp [--lock 15] [--id box]
+loot open kira box [--unlocked "Thieves' Tools 18 vs DC 15"]   # reveals the contents on the table; then item pickup / coins --from
+# `combat end` lists loot owed for notable foes (CR 1+, named, custom); `status` and every passage of time nag until decided.
+# A DM-run companion's turn start prints its whole kit (slots, features, potions, wand charges, unlit Flame Tongue).
 item identify kira <item-id> --how "Identify spell (cast by wren)"   # magic items start UNIDENTIFIED unless bought, starting or --identified
 rest short --focus kira:<item-id>     # SRD: focus on one magic item through a Short Rest to learn its properties
 item obscure kira <item-id> --how "..." | item refresh kira <item-id>   # DM repair: mark unidentified / re-read an item from the SRD

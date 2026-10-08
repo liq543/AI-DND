@@ -3,7 +3,7 @@
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
 **Session:** 2 · **In-world time:** Day 23, 12:15 · **Mode:** exploration
-**Current map:** The Chapel of the Unblinking (`unblinking-chapel`) · **Events:** 21822 · **Log head:** `f583e51493ba09b1`
+**Current map:** The Chapel of the Unblinking (`unblinking-chapel`) · **Events:** 21836 · **Log head:** `5d5bc0511f630738`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
@@ -234,6 +234,7 @@
 
 - `a50` Day 23, 09:00 [due] Corvin's research on paired speaking stones resumes only once he is back in his library at the Rookery (Arcana check then)
 - `a36` Day 23, 16:00 [pending] The Gilded Hand (Captain Vaux, 100 men) reach Thornbury: a month's pay is due on arrival, 2.25 crowns a head a day (6,750) (-6750 GP → treasury)
+- `a54` Day 24, 06:00 [pending, secret] Corvin: at his next Long Rest, prepare Sending in place of Magic Missile (the player's choice, Day 23)
 - `a28` Day 24, 07:00 [pending] Quist's word from the Coldharbour carriers on the League's silver cart (route, guard, halts) for Day 34
 - `a51` Day 24, 10:00 [pending] The Pilgrim Road carrier calls at Thornbury on his eastward run (the Wheatsheaf is gone; he'll ask at the barracks or the Drover's Rest): the Mission's post to Ambersell goes with him
 - `a43` Day 24, 15:00 [pending] The hanging of the two Thornbound raiders (the Stag and the young spearman) at the gallows by Thornbury's market cross, by Lord Corvell's order
@@ -646,6 +647,11 @@
 - Eyeless Brother B (`eyeless-brother-b`, enemy) at (11,8) — DEAD
 - Eyeless Brother C (`eyeless-brother-c`, enemy) at (18,13) — DEAD
 - Eyeless Brother D (`eyeless-brother-d`, enemy) at (18,10) — DEAD
+- container `sabines-chest`: Sabine's iron-bound travelling chest at (2,7) · SEALED (contents hidden from players) · lock DC 15 — coins: 60 GP
+- in Sabine's iron-bound travelling chest (`sabines-chest`) `floor-1`: 1× Robe of Eyes at (2,7) — in Sabine's iron-bound travelling chest
+- in Sabine's iron-bound travelling chest (`sabines-chest`) `floor-2`: 2× Potion of Healing at (2,7) — in Sabine's iron-bound travelling chest
+- in Sabine's iron-bound travelling chest (`sabines-chest`) `floor-3`: 1× Dove-grey travelling clothes at (2,7) — in Sabine's iron-bound travelling chest
+- in Sabine's iron-bound travelling chest (`sabines-chest`) `floor-4`: 1× Blank writing case at (2,7) — in Sabine's iron-bound travelling chest
 - point of interest `poi-1`: The long bar at (26,8) → journal j325
 - point of interest `poi-2`: The great hearth at (10,11) → journal j326
 - point of interest `poi-3`: The carters' table at (15,10) → journal j327
@@ -1002,6 +1008,13 @@
 
 ### The Wheatsheaf, upper floor (`wheatsheaf-upper`, interior 30×22, lighting dim)
 - Landlord Abel Fenn (`landlord-abel-fenn`, neutral) at (1,7) — DEAD
+- container `fenns-strongbox`: Fenn's strongbox at (7,10) · SEALED (contents hidden from players) · lock DC 15 — coins: 140 GP
+- container `brothers-packs`: The brothers' packs at (18,14) · SEALED (contents hidden from players) — coins: 6 GP
+- in Fenn's strongbox (`fenns-strongbox`) `floor-1`: 1× Potion of Greater Healing at (7,10) — in Fenn's strongbox
+- in Fenn's strongbox (`fenns-strongbox`) `floor-2`: 1× Fenn's ledger of watchings at (7,10) — in Fenn's strongbox
+- in The brothers' packs (`brothers-packs`) `floor-3`: 1× Spell Scroll (Lesser Restoration) at (18,14) — in The brothers' packs
+- in The brothers' packs (`brothers-packs`) `floor-4`: 1× Spell Scroll (Hold Person) at (18,14) — in The brothers' packs
+- in The brothers' packs (`brothers-packs`) `floor-5`: 4× Dagger at (18,14) — in The brothers' packs
 - point of interest `poi-1`: The corridor's end window at (0,7) → journal j567
 - point of interest `poi-2`: The back stair head at (28,20) → journal j568
 - point of interest `poi-3`: The pilgrims' room doors (open) at (25,6) → journal j569
@@ -1034,13 +1047,6 @@
 
 ## Recent events
 
-- ⭐ Ottilie Marsh gains 37 XP (Ottilie's flawless forgery of Sabine's letter) — total 23007. LEVEL UP available (level 7)!
-- 🎬 The barracks: Ennis's old study — Day 23, 12:15. Noon light through the study shutters; the flawless forged letter sealed on Ennis's desk; the crew up and fed; the Gilded Hand due at the West Gate at four.
-- By noon the barracks is awake: Brakka shaving with his dagger at the yard trough, Corvin reading Sabine's journal over porridge, Nib out on the step watching the street; the Hanged Men water their horses in the yard and change the gate guard.
-- The Hanged Man on the vestry door reports the two inside quiet all morning: the woman hasn't eaten, the boy ate both bowls.
-- 🎉 Kit Corvell reaches level 7 (Rogue 7) — 23007 XP. +6 HP (rolled 1d8(3) = 3). New: Evasion, Reliable Talent
-- 🎉 Brakka Holloway reaches level 7 (Fighter 7) — 23007 XP. +13 HP (rolled 1d10(10) = 10). New: Subclass feature
-- 🔧 Engine fix applied to Brakka Holloway: Additional Fighting Style: Defense.
 - ⚙ Setting: xp_rate = 2
 - 🎉 Corvin Asche reaches level 7 (Wizard 7) — 23007 XP. +3 HP (rolled 1d6(1) = 1). New: 
 - 🎉 Ottilie Marsh reaches level 7 (Bard 7) — 23007 XP. +9 HP (rolled 1d8(8) = 8). New: Countercharm
@@ -1049,3 +1055,10 @@
 - 📖 Corvin Asche scribes Sending into their spellbook (level up (Wizard 7)).
 - 📖 Corvin Asche prepares: Fire Bolt, Mage Hand, Minor Illusion, Light, Shield, Magic Missile, Sleep, Misty Step, Invisibility, Suggestion, Fireball, Counterspell, Animate Dead, Dispel Magic, Wall of Fire.
 - 📖 Ottilie Marsh prepares: Vicious Mockery, Message, Mage Hand, Charm Person, Disguise Self, Dissonant Whispers, Healing Word, Silent Image, Suggestion, Invisibility, Hypnotic Pattern, Cure Wounds, Clairvoyance, Dimension Door.
+- ⚠ DM override — Kit has owned a Shortbow +2 since the Rookery's armoury was stocked. Reason: DM error: the player asked on Day 1 for a better shortbow (a shopping or loot goal within the tier cap) and it was never acted on; retconned in, no charge
+- ⚖ DM ruling: Kit has owned a Shortbow +2 since the Rookery's armoury was stocked — DM error: the player asked on Day 1 for a better shortbow (a shopping or loot goal within the tier cap) and it was never acted on; retconned in, no charge
+- 🎒 Kit Corvell gains 1× Shortbow +2 (Rare) — gift: the Rookery armoury (retcon by ruling: the bow owed since Day 1).
+- Kit Corvell unequips Shortbow.
+- 🧰 Sabine's iron-bound travelling chest at (2,7) on The Wheatsheaf (locked).
+- 🧰 Fenn's strongbox at (7,10) on The Wheatsheaf, upper floor (locked).
+- 🧰 The brothers' packs at (18,14) on The Wheatsheaf, upper floor.

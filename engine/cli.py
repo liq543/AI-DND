@@ -12,7 +12,7 @@ import shutil
 import sys
 from pathlib import Path
 
-from . import art, assets, chargen, dice, itemart, maps, mechanics as M, render, srd, views
+from . import art, assets, chargen, dice, itemart, loot as L, maps, mechanics as M, render, srd, views
 from .core import (Game, RuleError, derive, fmt_time, level, parse_duration, parse_when, replay, tier, TIER_MAX_GP_AWARD,
                    SIZE_CELLS)
 from .store import ACTIVE_FILE, CAMPAIGNS, Store, TamperError, active_dir
@@ -797,6 +797,7 @@ def cmd_combat(g, a):
         M.after_time(g)
         g.say(f"🏁 Combat ends after {c['round']} round(s). Defeated: {', '.join(g.entities[i]['name'] for i in defeated if i in g.entities) or 'none'}"
               f" ({xp} XP available — `xp award --encounter`).", kind="combat", phase="end")
+        L.owe(g, defeated)
         return
     if a.action == "status":
         for i, o in enumerate(c["order"]):
@@ -917,6 +918,85 @@ def cmd_check(g, a):
     for who in ids(a.who):
         M.ability_check(g, g.get(who), a.what, dc=a.dc, adv=ids(a.adv), dis=ids(a.dis), hidden=a.hidden, now=a.now,
                         purpose=a.purpose)
+
+
+def cmd_loot(g, a):
+    """Treasure decided before anyone searches: loot owed by notable foes, sealed caches, tier-fit suggestions."""
+    s = g.state
+    if a.action == "list":
+        left = L.owed(g)
+        print("Loot owed (decide before the party searches):" if left else "No loot owed.")
+        for x in left:
+            print(f"  {x['foe']}: {x['name']} (CR {x.get('cr')}) at {x.get('map')} ({x.get('x')},{x.get('y')}), {fmt_time(x['time'])}")
+        sealed = [(mid, c) for mid, m in s["maps"].items() for c in m.get("containers", []) if c.get("sealed")]
+        print("Sealed caches:" if sealed else "No sealed caches.")
+        for mid, c in sealed:
+            inside = [f"{f['item'].get('qty', 1)}× {f['item']['name']}" for f in s["maps"][mid].get("floor", []) if f.get("in") == c["id"]]
+            print(f"  {mid}:{c['id']} {c['name']} at ({c['x']},{c['y']})" + (f" lock DC {c['lock_dc']}" if c.get("lock_dc") else "")
+                  + ": " + (", ".join(inside) or "no items") + (f", {M.fmt_cp(c['coins_cp'])}" if c.get("coins_cp") else ""))
+        return
+    if a.action == "suggest":
+        cap, rows, total = L.suggest(g, rarity=a.rarity, kind=a.kind)
+        print(f"Party level {g.party_level()} (tier {tier(g.party_level())}): magic up to {cap}. {total} SRD items fit"
+              + (f"; first {len(rows)}" if total > len(rows) else "") + ":")
+        for r in rows:
+            print("  " + r)
+        return
+    if a.action in ("body", "none"):
+        x = next((x for x in s.get("loot", []) if x["foe"] == a.target), None)
+        e = g.entities.get(a.target)
+        if not x and not e:
+            raise RuleError(f"No creature '{a.target}'.")
+        if x and x["status"] != "owed":
+            raise RuleError(f"{x['name']}'s loot is already decided ({x['status']}).")
+        if not x:
+            t = e.get("token") or {}
+            x = {"foe": e["id"], "name": e["name"], "cr": e.get("cr"), "map": t.get("map"), "x": t.get("x"), "y": t.get("y"),
+                 "time": s["time"], "status": "owed"}
+            g.emit("loot.add", item=x)
+        if a.action == "none":
+            if not a.reason or len(a.reason.strip()) < 8:
+                raise RuleError(f"loot none {a.target} --reason \"why nothing of value (8+ characters)\"")
+            g.emit("loot.set", foe=x["foe"], set={"status": "none", "reason": a.reason.strip()})
+            g.note(f"💰 {x['name']}: nothing of value ({a.reason.strip()}).")
+            return
+        if not (a.items or a.coins):
+            raise RuleError(f'loot body {a.target} --items "Longsword +1; 2x Potion of Healing" [--coins 30gp] [--at map:x,y] [--name ...]')
+        items = L.build_items(g, a.items, a.override)
+        coins = M.parse_coins(a.coins) if a.coins else 0
+        if coins > TIER_MAX_GP_AWARD[tier(g.party_level())] * 100 and not a.override:
+            raise RuleError(f"{M.fmt_cp(coins)} on one body is more than the tier guideline; use --override \"reason\" (public).")
+        if a.at:
+            mid, _, pos = a.at.rpartition(":")
+            px, py = xy(pos)
+        else:
+            mid, px, py = x.get("map"), x.get("x"), x.get("y")
+            if not mid or px is None:
+                raise RuleError(f"{x['name']} isn't on a map; give --at <map>:x,y for where the gear lies.")
+        box = L.make_cache(g, mid, px, py, a.name or f"{x['name']}'s gear", items, coins, text=a.text, source="loot")
+        g.emit("loot.set", foe=x["foe"], set={"status": "decided", "box": box["id"], "box_map": mid})
+        g.note(f"💰 {x['name']}'s gear sealed in `{mid}:{box['id']}` at ({px},{py}): {len(items)} item line(s)"
+               + (f", {M.fmt_cp(coins)}" if coins else "") + f". Players see it when someone runs `loot open <who> {box['id']}`.")
+        return
+    if a.action == "cache":
+        if not a.target or not a.pos or not a.name:
+            raise RuleError('loot cache <map> x,y --name "Iron strongbox" --items "..." [--coins 140gp] [--lock 15] [--text ...]')
+        x0, y0 = xy(a.pos)
+        items = L.build_items(g, a.items, a.override)
+        coins = M.parse_coins(a.coins) if a.coins else 0
+        if coins > TIER_MAX_GP_AWARD[tier(g.party_level())] * 100 and not a.override:
+            raise RuleError(f"{M.fmt_cp(coins)} in one cache is more than the tier guideline; use --override \"reason\" (public).")
+        if a.override and coins > TIER_MAX_GP_AWARD[tier(g.party_level())] * 100:
+            g.override(a.override, f"{M.fmt_cp(coins)} in {a.name}")
+        box = L.make_cache(g, a.target, x0, y0, a.name, items, coins, lock_dc=a.lock, text=a.text, box_id=a.id, source="loot")
+        g.say(f"🧰 {box['name']} at ({x0},{y0}) on {s['maps'][a.target]['name']}" + (" (locked)" if box.get("lock_dc") else "") + ".",
+              kind="map")
+        g.note(f"  sealed `{box['id']}`: {len(items)} item line(s)" + (f", {M.fmt_cp(coins)}" if coins else "") + " — hidden until opened.")
+        return
+    if a.action == "open":
+        L.open_cache(g, g.get(a.target), a.pos, a.unlocked)
+        return
+    raise RuleError("loot list|suggest|body|none|cache|open")
 
 
 def cmd_ruling(g, a):
@@ -1584,6 +1664,8 @@ def _find_box(g, ref):
 
 
 def _box_coins(g, m, box, delta):
+    if delta < 0 and box.get("sealed"):
+        raise RuleError(f"Nobody has opened the {box['name']} yet: `loot open <who> {box['id']}` first.")
     have = box.get("coins_cp", 0)
     if have + delta < 0:
         raise RuleError(f"{box['name']} holds only {M.fmt_cp(have)}.")
@@ -3299,6 +3381,22 @@ def build_parser():
     c.add_argument("--ended-at", help='repair: a Long Rest already taken inside time that has passed, ending "Day N, HH:MM" '
                                       '(needs --reason; no time passes)')
     c.add_argument("--reason")
+    c = sp.add_parser("loot", help="list|suggest|body|none|cache|open: treasure decided before anyone searches")
+    c.add_argument("action", choices=["list", "suggest", "body", "none", "cache", "open"])
+    c.add_argument("target", nargs="?", help="body/none: the foe · cache: the map · open: who opens it")
+    c.add_argument("pos", nargs="?", help="cache: x,y · open: the container id")
+    c.add_argument("--items", help='"Longsword +1; 2x Potion of Healing; Ledger=a merchant ledger"')
+    c.add_argument("--coins", help="30gp 5sp")
+    c.add_argument("--name")
+    c.add_argument("--text")
+    c.add_argument("--id")
+    c.add_argument("--at", help="body: map:x,y where the gear lies (default: the body's tile)")
+    c.add_argument("--lock", type=int, help="cache: lock DC")
+    c.add_argument("--unlocked", help="open: how the lock was beaten (a check passed, the key)")
+    c.add_argument("--rarity", choices=["Common", "Uncommon", "Rare", "Very Rare", "Legendary"])
+    c.add_argument("--kind", help="suggest: weapon, armor, wondrous, ring, potion...")
+    c.add_argument("--reason")
+    c.add_argument("--override")
     c = sp.add_parser("agenda", help="add|list|done|cancel scheduled events (deliveries, debts, visits)")
     c.add_argument("action", choices=["add", "list", "done", "cancel"])
     c.add_argument("target", nargs="?")
@@ -3502,7 +3600,7 @@ HANDLERS = {
     "damage": cmd_damage, "heal": cmd_heal, "temphp": cmd_temphp, "condition": cmd_condition, "exhaustion": cmd_exhaustion,
     "feature": cmd_feature, "bardic": cmd_bardic, "deathsave": cmd_deathsave, "stabilize": cmd_stabilize,
     "legendary-resist": cmd_legendary, "rest": cmd_rest, "time": cmd_time, "travel": cmd_travel, "item": cmd_item,
-    "coins": cmd_coins, "agenda": cmd_agenda, "xp": cmd_xp, "encounter": cmd_encounter, "map": cmd_map, "asset": cmd_asset, "say": cmd_say, "fx": cmd_fx,
+    "coins": cmd_coins, "agenda": cmd_agenda, "loot": cmd_loot, "xp": cmd_xp, "encounter": cmd_encounter, "map": cmd_map, "asset": cmd_asset, "say": cmd_say, "fx": cmd_fx,
     "scene": cmd_scene, "show": cmd_show, "homebrew": cmd_homebrew, "request": cmd_request, "roll": cmd_roll,
     "status": cmd_status, "audit": cmd_audit, "log": cmd_log,
 }

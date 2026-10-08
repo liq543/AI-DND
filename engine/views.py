@@ -432,9 +432,11 @@ def player_view(g):
                         "level": map_level(m), "parent": m.get("parent"), "anchor": m.get("anchor"), "tab": mid in tabs,
                         "floor": [{"id": f["id"], "x": f["x"], "y": f["y"], "name": f["item"]["name"], "qty": f["item"].get("qty", 1),
                                    "note": f.get("note", ""), "in": f.get("in"), "art": itemart.item_art_version(f["item"])}
-                                  for f in m.get("floor", [])
+                                  for f in m.get("floor", []) if not in_sealed(m, f)
                                   if not m.get("fog") or (m.get("revealed") and m["revealed"][f["y"]][f["x"]] == "1")],
-                        "containers": [{k: c.get(k) for k in ("id", "x", "y", "name", "text", "coins_cp")} for c in m.get("containers", [])
+                        # a sealed cache shows as a closed box: what's inside stays off the table until someone opens it
+                        "containers": [{k: c.get(k) for k in ("id", "x", "y", "name", "text", "coins_cp", "sealed")
+                                        if not (c.get("sealed") and k == "coins_cp")} for c in m.get("containers", [])
                                        if not m.get("fog") or (m.get("revealed") and m["revealed"][c["y"]][c["x"]] == "1")],
                         "pois": [{k: p.get(k) for k in ("id", "x", "y", "name", "journal")}
                                  for p in m.get("pois", []) + (m.get("settlements", []) if m.get("kind") == "region" else [])
@@ -547,6 +549,11 @@ def sheet_md(g, e):
     return "\n".join(lines) + "\n"
 
 
+def in_sealed(m, f):
+    """True for an item inside a container nobody has opened yet (`loot cache` / `loot body`)."""
+    return bool(f.get("in")) and any(c["id"] == f["in"] and c.get("sealed") for c in m.get("containers", []))
+
+
 def state_md(g):
     s = g.state
     c = combat(g)
@@ -580,6 +587,10 @@ def state_md(g):
             pay = x.get("pay")
             lines.append(f"- `{x['id']}` {fmt_time(x['due'])} [{x['status']}{', secret' if x.get('secret') else ''}] {x['text']}"
                          + (f" ({'auto ' if x.get('auto') else ''}{pay if isinstance(pay, str) else fmt_cp(pay)} → {x['to']})" if pay else ""))
+    owed = [x for x in s.get("loot", []) if x.get("status") == "owed"]
+    if owed:
+        lines += ["", "## ⚠ Loot owed (decide before the party searches: `loot body` / `loot none`)", ""]
+        lines += [f"- `{x['foe']}` {x['name']} (CR {x.get('cr')}) at {x.get('map')} ({x.get('x')},{x.get('y')})" for x in owed]
     if c:
         lines += ["", f"## Initiative — round {c['round']}", ""]
         for i, o in enumerate(c["order"]):
@@ -611,6 +622,8 @@ def map_state_md(g, mid):
     boxes = {c["id"]: c for c in m.get("containers", [])}
     for c in m.get("containers", []):
         lines.append(f"- container `{c['id']}`: {c['name']} at ({c['x']},{c['y']})"
+                     + (" · SEALED (contents hidden from players)" if c.get("sealed") else "")
+                     + (f" · lock DC {c['lock_dc']}" if c.get("lock_dc") else "")
                      + (f" — coins: {fmt_cp(c['coins_cp'])}" if c.get("coins_cp") else ""))
     for f in m.get("floor", []):
         where = f"in {boxes[f['in']]['name']} (`{f['in']}`)" if f.get("in") in boxes else "item on floor"

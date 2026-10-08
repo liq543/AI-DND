@@ -1492,6 +1492,9 @@ def start_of_turn(g, e):
     if e["kind"] == "pc" and e["hp"] == 0 and not e.get("dead") and not e.get("death", {}).get("stable"):
         g.say(f"{e['name']} is dying and must make a Death Saving Throw.", kind="info")
         death_save(g, e)
+    if e["kind"] == "pc" and e.get("player") == "DM" and e["hp"] > 0 and not e.get("dead"):
+        from . import loot
+        loot.companion_kit(g, g.get(e["id"]))
 
 
 def end_of_turn(g, e):
@@ -1745,6 +1748,8 @@ def after_time(g):
     stable creatures regain 1 HP after 1d4 hours, and scheduled agenda items fall due."""
     E.expire(g)
     settle_agenda(g)
+    from . import loot
+    loot.reminder(g)
     for e in list(g.entities.values()):
         conc = e.get("concentration")
         if not conc or conc.get("since") is None:
@@ -2290,6 +2295,9 @@ def pick_up(g, e, floor_id, with_attack=False):
                         (", ".join(f"{x['id']} {x['item']['name']} at ({x['x']},{x['y']})" for x in m.get("floor", [])) or "nothing"))
     if max(abs(f["x"] - t["x"]), abs(f["y"] - t["y"])) > 1:
         raise RuleError(f"{e['name']} must be in or next to square ({f['x']},{f['y']}) to pick up the {f['item']['name']}.")
+    sealed = next((c for c in m.get("containers", []) if c["id"] == f.get("in") and c.get("sealed")), None)
+    if sealed:
+        raise RuleError(f"That's inside the {sealed['name']}, which nobody has opened yet: `loot open {e['id']} {sealed['id']}` first.")
     if combat(g) and with_attack:
         # rules glossary, Attack action: equip (draw or pick up) one weapon with each attack you make, before or after it
         ec = economy(g, e["id"])

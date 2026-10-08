@@ -170,7 +170,7 @@ class Handler(BaseHTTPRequestHandler):
             if not m or len(parts) < 2 or parts[0] not in views.openable_maps(g):
                 return self.json({"error": "unknown"}, 404)
             f = next((x for x in m.get("floor", []) if x["id"] == parts[1]), None)
-            if not f or (m.get("fog") and m.get("revealed") and m["revealed"][f["y"]][f["x"]] != "1"):
+            if not f or (m.get("fog") and m.get("revealed") and m["revealed"][f["y"]][f["x"]] != "1") or views.in_sealed(m, f):
                 return self.json({"error": "unknown"}, 404)
             return self.send(200, itemart.item_svg(f["item"]), "image/svg+xml; charset=utf-8", cache=True)
         if path.startswith("/api/card/"):
@@ -194,7 +194,7 @@ class Handler(BaseHTTPRequestHandler):
                 if not m or m["id"] not in views.openable_maps(g):
                     return self.json({"error": "unknown"}, 404)
                 f = next((x for x in m.get("floor", []) if x["id"] == parts[1]), None)
-                if not f or (m.get("fog") and m.get("revealed") and m["revealed"][f["y"]][f["x"]] != "1"):
+                if not f or (m.get("fog") and m.get("revealed") and m["revealed"][f["y"]][f["x"]] != "1") or views.in_sealed(m, f):
                     return self.json({"error": "unknown"}, 404)
                 return self.json(views.item_info(g, f["item"]))
             e = s["entities"].get(parts[0])
