@@ -110,7 +110,7 @@ Species traits: Resourceful, Skillful, Versatile
   - A disc of polished antler the size of a palm, carved with a stag's head crowned by an oak over an open hand, strung on red cord. Old, worn smooth by many thumbs. Found in Sedge's furs.
 - `lerners-written-confessi-1` 1× Lerner's written confession · _gift: written by Sergeant Lerner under Ottilie's charm, Day 18_
 - `shortbow-2-1` 1× Shortbow +2 — Rare · _gift: the Rookery armoury (retcon by ruling: the bow owed since Day 1)_
-- `robe-of-eyes-1` 1× Robe of Eyes — Rare · _loot: Sabine's iron-bound travelling chest_
+- `robe-of-eyes-1` 1× Robe of Eyes (equipped) (attuned) — Rare · _loot: Sabine's iron-bound travelling chest_
 - `potion-of-healing-2` 2× Potion of Healing — Common · _loot: Sabine's iron-bound travelling chest_
 - `fenns-keys-1` 1× Fenn's keys · _loot: Fenn's pockets_
 - `clay-pipe-1` 1× Clay pipe · _loot: Fenn's pockets_

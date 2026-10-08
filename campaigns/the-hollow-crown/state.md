@@ -2,8 +2,8 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 2 · **In-world time:** Day 23, 14:15 · **Mode:** exploration
-**Current map:** The March Road before the West Gate (`thornbury-west-road`) · **Events:** 22168 · **Log head:** `9cb414d508834aec`
+**Session:** 2 · **In-world time:** Day 23, 15:15 · **Mode:** exploration
+**Current map:** The March Road before the West Gate (`thornbury-west-road`) · **Events:** 22187 · **Log head:** `a0bf5a99dbb217a8`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
@@ -1049,18 +1049,18 @@
 
 ## Recent events
 
-- 🚶 Hanged Man off duty B moves 35 ft to (33,10).
-- 🚶 Hanged Man off duty C moves 40 ft to (33,12).
-- 🎬 The West Gate — Day 23, 14:15. Bright afternoon on the March Road; crows on the gallows, a slow trickle of carts at the toll.
-- 🗺 Map: The March Road before the West Gate
-- Kit Corvell is at (31,11) on The March Road before the West Gate.
-- Brakka Holloway is at (30,11) on The March Road before the West Gate.
-- Corvin Asche is at (30,12) on The March Road before the West Gate.
-- Ottilie Marsh is at (31,12) on The March Road before the West Gate.
-- Nib is at (31,10) on The March Road before the West Gate.
 - The crew came out under the West Gate onto the March Road, Nib trotting behind. The toll men straightened; two off-duty Hanged Men left their dice to stand by the gate. Out on the road, Peg and Ord turned slowly on the gallows with the crows at them, and the few carts coming in gave the posts a wide berth.
 - “Road's quiet, my lord. Turnips and a tinker since noon. No company of a hundred, nor anything like it.”
 - “Can I wear it over the leathers? Then it's mine.”
 - “Over the leathers and under the cloak, yes. A robe's neither armour nor a cloak. Truesight and darkvision to a hundred and twenty feet, and nothing in sight gets past you. Its weakness is light: a Light spell cast on it, or Daylight close by, blinds you for a while.”
 - “Do keep it in the pack in town, darling. We did just tell everyone the people in eye-robes were spies.”
 - Kit kept the Robe of Eyes, folded in his pack.
+- “We rest here an hour. I'll get to know my new robe.”
+- Kit sat down by the gate with his back to the wall, the Robe of Eyes on under the Cloak of Elvenkind, hood up, and spent the hour on it alone.
+- ⏳ The party takes a Short Rest (1 hour). Now Day 23, 15:15.
+- Kit Corvell attunes to Robe of Eyes through the Short Rest.
+- Through the hour: two carts of turnips and a tinker's mule paid the toll; the off-duty Hanged Men went back to their dice on an upturned crate; Brakka sat on the verge, the Hand's money in his purse and his eyes on the western road; Corvin read in the shade, Ottilie dozed against the wall with her hat over her face, and Nib threw stones at the crows on the gallows until a toll man cuffed him.
+- “Mm. Wake me when someone important arrives, darling. Or someone rich.”
+- When the hour was done, the world opened round Kit: he could see behind him without turning his head, and every shadow in the gate arch was plain as noon.
+- 🎬 The West Gate — Day 23, 15:15. Afternoon sun on the March Road; the toll men dozing, the road west empty so far.
+- 🗺 Map: The March Road before the West Gate
