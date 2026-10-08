@@ -430,7 +430,7 @@ def player_view(g):
     tabs = visible_maps(g)
     maps_known = {mid: {"id": mid, "name": m["name"], "kind": m["kind"], "w": m["w"], "h": m["h"], "world": bool(m.get("world")),
                         "level": map_level(m), "parent": m.get("parent"), "anchor": m.get("anchor"), "tab": mid in tabs,
-                        "floor": [{"id": f["id"], "x": f["x"], "y": f["y"], "name": f["item"]["name"], "qty": f["item"].get("qty", 1),
+                        "floor": [{"id": f["id"], "x": f["x"], "y": f["y"], "name": item_display_name(f["item"]), "qty": f["item"].get("qty", 1),
                                    "note": f.get("note", ""), "in": f.get("in"), "art": itemart.item_art_version(f["item"])}
                                   for f in m.get("floor", []) if not in_sealed(m, f)
                                   if not m.get("fog") or (m.get("revealed") and m["revealed"][f["y"]][f["x"]] == "1")],

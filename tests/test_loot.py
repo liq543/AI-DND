@@ -64,7 +64,9 @@ class LootTest(unittest.TestCase):
         self.assertIn("Potion of Healing", out)
         self.assertIn("30", out)
         floor_id = next(f["id"] for f in _cli.game(self.env).state["maps"]["field"]["floor"] if f.get("in") == box["id"])
-        self.ok("item", "pickup", "kira-vale", floor_id)
+        out = self.ok("item", "pickup", "kira-vale", floor_id)
+        self.assertNotIn("+1", out)  # an unidentified magic item keeps its real name hidden when picked up
+        self.assertNotIn("the the", out.lower())
 
     def test_loot_none_needs_a_reason(self):
         self.ok("npc", "add", "bandit-captain", "--at", "6,5", "--map", "field", "--name", "Captain Rhosk", "--side", "enemy")
@@ -88,6 +90,16 @@ class LootTest(unittest.TestCase):
         self.assertIn("Ledger", out)
         self.ok("coins", "kira-vale", "140gp", "--from", "strongbox", "--source", "take")
 
+    def test_same_box_id_on_two_maps_uses_the_characters_map(self):
+        self.ok("map", "gen", "wilderness", "--biome", "plains", "--w", "20", "--h", "14", "--id", "meadow", "--seed", "3")
+        self.ok("loot", "cache", "meadow", "4,4", "--name", "Far chest", "--id", "chest", "--coins", "5gp")
+        self.ok("loot", "cache", "field", "5,6", "--name", "Near chest", "--id", "chest", "--coins", "9gp")
+        self.ok("loot", "open", "kira-vale", "chest")
+        self.ok("coins", "kira-vale", "9gp", "--from", "chest", "--source", "take")
+        out = self.ok("loot", "cache", "meadow", "6,6", "--name", "Another")
+        self.assertNotIn("box-1", self.ok("loot", "cache", "field", "7,7", "--name", "Yet another"))
+        self.assertIn("box-1", out)
+
     def test_companion_turn_lists_its_kit(self):
         self.ok("item", "add", "kira-vale", "Potion of Healing", "--source", "loot: test")
         g = _cli.game(self.env)
@@ -103,3 +115,4 @@ class LootTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

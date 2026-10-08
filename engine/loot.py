@@ -106,8 +106,9 @@ def make_cache(g, map_id, x, y, name, items, coins_cp=0, lock_dc=None, text="", 
         raise RuleError(f"There's already an open container at ({x},{y}): {box['name']} (`{box['id']}`). Use `item stash`, "
                         "or put the cache on another tile.")
     if not box:
+        taken = {c["id"] for mm in g.state["maps"].values() for c in mm.get("containers", [])}
         n = 1
-        while any(c["id"] == f"box-{n}" for c in boxes):
+        while f"box-{n}" in taken:  # unique across every map, so `coins --from box-N` can't pick the wrong one
             n += 1
         box = {"id": box_id or f"box-{n}", "x": x, "y": y, "name": name, "text": text or "", "sealed": True}
         if any(c["id"] == box["id"] for c in boxes):
@@ -162,7 +163,7 @@ def open_cache(g, e, box_id, unlocked=None):
     what = [f"{f['item'].get('qty', 1)}× {item_display_name(f['item'])}" for f in inside]
     if box.get("coins_cp"):
         what.append(M.fmt_cp(box["coins_cp"]))
-    g.say(f"🧰 {e['name']} opens the {box['name']}" + (f" ({unlocked})" if unlocked else "") + ": " +
+    g.say(f"🧰 {e['name']} opens {M.the(box['name'])}" + (f" ({unlocked})" if unlocked else "") + ": " +
           (", ".join(what) if what else "it's empty") + ".", kind="item", who=e["id"])
     if inside or box.get("coins_cp"):
         g.note(f"  take with `item pickup {e['id']} <floor-id>` ({', '.join(f['id'] for f in inside)})"

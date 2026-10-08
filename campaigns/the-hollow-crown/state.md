@@ -2,18 +2,18 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 2 · **In-world time:** Day 23, 12:15 · **Mode:** exploration
-**Current map:** The Chapel of the Unblinking (`unblinking-chapel`) · **Events:** 21836 · **Log head:** `5d5bc0511f630738`
+**Session:** 2 · **In-world time:** Day 23, 13:10 · **Mode:** exploration
+**Current map:** The Wheatsheaf, upper floor (`wheatsheaf-upper`) · **Events:** 22058 · **Log head:** `2571a8d76cd3ef0c`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | unblinking-chapel (9,18) |
-| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | unblinking-chapel (10,18) |
-| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | unblinking-chapel (11,18) |
-| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | unblinking-chapel (9,3) |
+| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | wheatsheaf-upper (7,11) |
+| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | wheatsheaf-upper (19,14) |
+| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | wheatsheaf-upper (18,13) |
+| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | wheatsheaf-upper (17,13) |
 
 ## Other creatures (DM view)
 
@@ -229,6 +229,8 @@
 | Townsfolk at the gallows E (`townsfolk-at-the-gallows-e`, commoner) | neutral | 4/4 | 10 | — | thornbury-west-road (23,15) | yes |
 | Ord, the League house under-clerk (`ord-the-league-house-under-clerk`, commoner) | neutral | 0/4 | 10 | — · DEAD | thornbury-west-road (29,20) |  |
 | Davy, the landlord's boy (`a-boy-hiding-in-the-loft`, commoner) | neutral | 4/4 | 10 | restrained | unblinking-chapel (8,21) |  |
+| Hanged Man with the ladder A (`hanged-man-with-the-ladder-a`, bandit) | ally | 11/11 | 12 | — | wheatsheaf (27,20) |  |
+| Hanged Man with the ladder B (`hanged-man-with-the-ladder-b`, bandit) | ally | 11/11 | 12 | — | wheatsheaf-yard (7,9) |  |
 
 ## Agenda (scheduled by the engine; `agenda list`)
 
@@ -638,7 +640,7 @@
 - doors: (14,1) closed, (29,1) closed, (31,1) closed, (45,1) closed, (52,1) closed, (58,1) closed, (40,2) closed, (48,2) closed, (4,3) closed, (9,3) closed, (22,3) closed, (3,6) closed, (22,6) closed, (35,6) closed, (48,7) closed, (53,7) closed, (15,8) closed, (29,9) closed, (44,9) closed, (22,11) closed, (5,13) closed, (9,13) closed, (44,13) closed, (48,13) closed, (53,13) closed, (54,16) closed, (11,17) closed, (57,17) closed, (50,18) closed, (32,19) closed, (39,19) closed, (3,20) closed, (22,20) closed, (48,21) closed, (52,21) closed, (11,22) closed, (56,22) closed, (42,23) closed, (16,24) closed, (26,24) closed, (31,24) closed, (35,24) closed, (6,25) closed, (1,27) open, (9,29) closed, (31,29) closed, (58,29) closed, (3,30) open, (17,30) closed, (25,30) closed, (37,30) closed, (44,31) closed, (12,34) closed, (48,34) closed, (53,34) closed, (23,36) closed, (28,36) closed, (35,36) closed, (12,37) closed, (57,37) closed, (48,38) closed
 - labels: Market Square (26,15), West Gate (4,26), March Road: on to the town's heart (56,27), Tanners' Row: to the north ward (13,1), Brewers' Street (47,1), To the fair ground and the south ward (47,38), Wheat Lane (30,5), Cooper's Lane (30,37)
 
-### The Wheatsheaf (`wheatsheaf`, interior 30×22, lighting dim)
+### The Wheatsheaf (`wheatsheaf`, interior 30×22, lighting bright)
 - A League carter (`commoner-a-2`, neutral) at (16,9) — 4/4 HP · hidden
 - A hooded penitent with bound eyes (`a-hooded-penitent-with-bound-eyes`, enemy) at (11,11) — DEAD · unconscious, prone
 - A second penitent (`a-second-penitent`, enemy) at (3,6) — DEAD
@@ -647,20 +649,15 @@
 - Eyeless Brother B (`eyeless-brother-b`, enemy) at (11,8) — DEAD
 - Eyeless Brother C (`eyeless-brother-c`, enemy) at (18,13) — DEAD
 - Eyeless Brother D (`eyeless-brother-d`, enemy) at (18,10) — DEAD
-- container `sabines-chest`: Sabine's iron-bound travelling chest at (2,7) · SEALED (contents hidden from players) · lock DC 15 — coins: 60 GP
-- in Sabine's iron-bound travelling chest (`sabines-chest`) `floor-1`: 1× Robe of Eyes at (2,7) — in Sabine's iron-bound travelling chest
-- in Sabine's iron-bound travelling chest (`sabines-chest`) `floor-2`: 2× Potion of Healing at (2,7) — in Sabine's iron-bound travelling chest
-- in Sabine's iron-bound travelling chest (`sabines-chest`) `floor-3`: 1× Dove-grey travelling clothes at (2,7) — in Sabine's iron-bound travelling chest
-- in Sabine's iron-bound travelling chest (`sabines-chest`) `floor-4`: 1× Blank writing case at (2,7) — in Sabine's iron-bound travelling chest
-- point of interest `poi-1`: The long bar at (26,8) → journal j325
+- Hanged Man with the ladder A (`hanged-man-with-the-ladder-a`, ally) at (27,20) — 11/11 HP
+- container `sabines-chest`: Sabine's iron-bound travelling chest at (2,7)
+- container `box-1`: The second penitent's belt at (3,6)
 - point of interest `poi-2`: The great hearth at (10,11) → journal j326
 - point of interest `poi-3`: The carters' table at (15,10) → journal j327
 - point of interest `poi-4`: A table by the hearth at (13,13) → journal j328
 - point of interest `poi-5`: The corner table at (24,16) → journal j329
 - point of interest `poi-6`: The back room door at (9,9) → journal j330
 - point of interest `poi-7`: The back-room table at (4,4) → journal j331
-- point of interest `poi-8`: The front door at (12,0) → journal j332
-- point of interest `poi-9`: The stair up at (28,20) → journal j333
 - point of interest `poi-10`: The room slate at (26,11) → journal j560
 - point of interest `poi-11`: The kitchen room door at (9,13) → journal j561
 - point of interest `poi-12`: The kitchen room's bed at (3,12) → journal j562
@@ -668,6 +665,11 @@
 - point of interest `poi-14`: The linen cupboard at (2,13) → journal j564
 - point of interest `poi-15`: The back room's shutter at (0,4) → journal j565
 - point of interest `poi-16`: The kitchen's yard door at (0,18) → journal j566
+- point of interest `poi-17`: The long bar, burned at (26,8) → journal j599
+- point of interest `poi-18`: The back stair, collapsed at (28,20) → journal j600
+- point of interest `poi-19`: The fallen roof at (19,5) → journal j601
+- point of interest `poi-20`: The front doors, scorched at (12,0) → journal j602
+- point of interest `poi-21`: The back room's bed at (1,8) → journal j604
 - doors: (12,0) open, (13,0) closed, (0,4) closed, (9,9) open, (9,13) open, (0,18) open, (9,18) open
 - labels: Bar (26,2)
 
@@ -689,10 +691,6 @@
 - labels: Bar (3,2)
 
 ### The Chapel of the Unblinking (`unblinking-chapel`, interior 32×24, lighting bright)
-- Brakka Holloway (`brakka`, pc) at (10,18) — 71/71 HP
-- Corvin Asche (`corvin`, pc) at (11,18) — 41/41 HP
-- Kit Corvell (`kit`, pc) at (9,18) — 57/57 HP
-- Ottilie Marsh (`ottilie`, pc) at (9,3) — 48/48 HP
 - Davy, the landlord's boy (`a-boy-hiding-in-the-loft`, neutral) at (8,21) — 4/4 HP · restrained
 - Hanged Man off duty A (`hanged-man-off-duty-a`, ally) at (9,20) — 11/11 HP
 - Ivo Tarrant (`bandit-g`, ally) at (10,5) — 11/11 HP
@@ -1007,21 +1005,23 @@
 - doors: (22,12) open
 
 ### The Wheatsheaf, upper floor (`wheatsheaf-upper`, interior 30×22, lighting dim)
+- Brakka Holloway (`brakka`, pc) at (19,14) — 71/71 HP
+- Corvin Asche (`corvin`, pc) at (18,13) — 41/41 HP
+- Kit Corvell (`kit`, pc) at (7,11) — 57/57 HP
+- Ottilie Marsh (`ottilie`, pc) at (17,13) — 48/48 HP
 - Landlord Abel Fenn (`landlord-abel-fenn`, neutral) at (1,7) — DEAD
-- container `fenns-strongbox`: Fenn's strongbox at (7,10) · SEALED (contents hidden from players) · lock DC 15 — coins: 140 GP
-- container `brothers-packs`: The brothers' packs at (18,14) · SEALED (contents hidden from players) — coins: 6 GP
-- in Fenn's strongbox (`fenns-strongbox`) `floor-1`: 1× Potion of Greater Healing at (7,10) — in Fenn's strongbox
-- in Fenn's strongbox (`fenns-strongbox`) `floor-2`: 1× Fenn's ledger of watchings at (7,10) — in Fenn's strongbox
-- in The brothers' packs (`brothers-packs`) `floor-3`: 1× Spell Scroll (Lesser Restoration) at (18,14) — in The brothers' packs
-- in The brothers' packs (`brothers-packs`) `floor-4`: 1× Spell Scroll (Hold Person) at (18,14) — in The brothers' packs
-- in The brothers' packs (`brothers-packs`) `floor-5`: 4× Dagger at (18,14) — in The brothers' packs
+- container `fenns-strongbox`: Fenn's strongbox at (7,10)
+- container `brothers-packs`: The brothers' packs at (18,14)
+- container `box-1`: Fenn's pockets at (1,7)
 - point of interest `poi-1`: The corridor's end window at (0,7) → journal j567
-- point of interest `poi-2`: The back stair head at (28,20) → journal j568
 - point of interest `poi-3`: The pilgrims' room doors (open) at (25,6) → journal j569
 - point of interest `poi-4`: The landlord's door at (4,9) → journal j570
-- doors: (3,6) closed, (10,6) closed, (17,6) closed, (25,6) closed, (0,7) closed, (4,9) closed, (12,9) closed, (20,9) closed
+- point of interest `poi-5`: The back stair head, burned through at (28,20) → journal j603
+- point of interest `poi-6`: The prayer table at (20,13) → journal j605
+- doors: (3,6) closed, (10,6) closed, (17,6) closed, (25,6) closed, (0,7) closed, (4,9) open, (12,9) closed, (20,9) open
 
 ### The Wheatsheaf's stable yard (`wheatsheaf-yard`, interior 24×22, lighting bright)
+- Hanged Man with the ladder B (`hanged-man-with-the-ladder-b`, ally) at (7,9) — 11/11 HP
 - point of interest `poi-1`: The yard gate at (9,0) → journal j572
 - point of interest `poi-2`: The horse trough at (11,6) → journal j573
 - point of interest `poi-3`: The lean-to cart shed at (21,8) → journal j574
@@ -1047,18 +1047,18 @@
 
 ## Recent events
 
-- ⚙ Setting: xp_rate = 2
-- 🎉 Corvin Asche reaches level 7 (Wizard 7) — 23007 XP. +3 HP (rolled 1d6(1) = 1). New: 
-- 🎉 Ottilie Marsh reaches level 7 (Bard 7) — 23007 XP. +9 HP (rolled 1d8(8) = 8). New: Countercharm
-- 📖 Corvin Asche prepares: Fire Bolt, Mage Hand, Minor Illusion, Light, Shield, Magic Missile, Sleep, Misty Step, Invisibility, Suggestion, Fireball, Counterspell, Animate Dead, Dispel Magic.
-- 📖 Corvin Asche scribes Wall of Fire into their spellbook (level up (Wizard 7)).
-- 📖 Corvin Asche scribes Sending into their spellbook (level up (Wizard 7)).
-- 📖 Corvin Asche prepares: Fire Bolt, Mage Hand, Minor Illusion, Light, Shield, Magic Missile, Sleep, Misty Step, Invisibility, Suggestion, Fireball, Counterspell, Animate Dead, Dispel Magic, Wall of Fire.
-- 📖 Ottilie Marsh prepares: Vicious Mockery, Message, Mage Hand, Charm Person, Disguise Self, Dissonant Whispers, Healing Word, Silent Image, Suggestion, Invisibility, Hypnotic Pattern, Cure Wounds, Clairvoyance, Dimension Door.
-- ⚠ DM override — Kit has owned a Shortbow +2 since the Rookery's armoury was stocked. Reason: DM error: the player asked on Day 1 for a better shortbow (a shopping or loot goal within the tier cap) and it was never acted on; retconned in, no charge
-- ⚖ DM ruling: Kit has owned a Shortbow +2 since the Rookery's armoury was stocked — DM error: the player asked on Day 1 for a better shortbow (a shopping or loot goal within the tier cap) and it was never acted on; retconned in, no charge
-- 🎒 Kit Corvell gains 1× Shortbow +2 (Rare) — gift: the Rookery armoury (retcon by ruling: the bow owed since Day 1).
-- Kit Corvell unequips Shortbow.
-- 🧰 Sabine's iron-bound travelling chest at (2,7) on The Wheatsheaf (locked).
-- 🧰 Fenn's strongbox at (7,10) on The Wheatsheaf, upper floor (locked).
-- 🧰 The brothers' packs at (18,14) on The Wheatsheaf, upper floor.
+- 🚪 The door at (20,9) is opened.
+- 🚶 Corvin Asche moves 110 ft to (18,13).
+- 🚶 Ottilie Marsh moves 105 ft to (17,13).
+- 🚶 Brakka Holloway moves 115 ft to (19,14).
+- The four pilgrims' rooms across the corridor are bare: stripped beds, a silver lidless eye nailed over each. The brothers kept their packs together in the long room, by the pallets.
+- 🧰 Corvin Asche opens the brothers' packs: 1× Unidentified magic consumable, 1× Unidentified magic consumable, 4× Dagger, 6 GP.
+- ⬆ Corvin Asche picks up 1× Unidentified magic consumable.
+- ⬆ Ottilie Marsh picks up 1× Unidentified magic consumable.
+- ⬆ Brakka Holloway picks up 4× Dagger.
+- 💰 Brakka Holloway takes 6 GP from The brothers' packs. The brothers' packs: 0 GP; purse 6856 GP 4 SP 5 CP.
+- “Two scrolls, Mission work, sealed with the eye. I'll want a quiet hour with these.”
+- 📍 Noted on The Wheatsheaf, upper floor: The prayer table (20,13) — click it on the map for its journal entry.
+- On the prayer table at the head of the long room sits a little lidless stone face, no bigger than a fist, staring at the door.
+- “Boss. Another one of them faces. Want it smashed like the chapel's?”
+- ⏳ 20m passes — searching the upper floor. Now Day 23, 13:10.

@@ -1654,13 +1654,12 @@ def cmd_item(g, a):
         raise RuleError("item add|remove|drop|sell|give|equip|unequip|attune|unattune|use|light|recover-ammo|card")
 
 
-def _find_box(g, ref):
-    """A container (chest, strongbox, vault) by id on any map, or None."""
-    for m in g.state["maps"].values():
-        for c in m.get("containers", []):
-            if c["id"] == ref:
-                return m, c
-    return None
+def _find_box(g, ref, near=None):
+    """A container (chest, strongbox, vault) by id on any map, or None. Ids are unique per map, so when two maps share
+    one, the box on the map where `near` (a creature id) stands wins."""
+    found = [(m, c) for m in g.state["maps"].values() for c in m.get("containers", []) if c["id"] == ref]
+    here = ((g.entities.get(near) or {}).get("token") or {}).get("map") if near else None
+    return next(((m, c) for m, c in found if m["id"] == here), found[0] if found else None)
 
 
 def _box_coins(g, m, box, delta):
@@ -1677,7 +1676,8 @@ def _box_coins(g, m, box, delta):
 def cmd_coins(g, a):
     # coins kept in a container (a vault, a strongbox): `coins <box-id> 500gp --from kit` deposits,
     # `coins kit 200gp --from <box-id>` withdraws. The character must be on the container's map.
-    box_to, box_from = _find_box(g, a.who), _find_box(g, a.from_who) if getattr(a, "from_who", None) else None
+    box_to = _find_box(g, a.who, near=getattr(a, "from_who", None))
+    box_from = _find_box(g, a.from_who, near=a.who) if getattr(a, "from_who", None) else None
     if box_to and not getattr(a, "from_who", None):
         # money arriving in (or spent straight out of) the vault: a tribute, a sale, wages paid from it
         m, box = box_to
@@ -3661,8 +3661,8 @@ def cmd_batch(a, parser):
                 pass
         text = sys.stdin.read()
     else:
-        text = Path(a.file).read_text(encoding="utf-8")
-    steps = batch_steps(text)
+        text = Path(a.file).read_text(encoding="utf-8-sig")  # files saved by Windows tools often start with a BOM
+    steps = batch_steps(text.lstrip("﻿"))
     if not steps:
         raise RuleError("the batch is empty: give one engine command per line")
     parsed = []

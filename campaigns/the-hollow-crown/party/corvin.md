@@ -74,6 +74,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `potion-of-greater-healin-1` 1× Potion of Greater Healing — Uncommon · _purchased for 200 GP_
 - `the-marchwood-tax-rolls-1` 1× The Marchwood tax rolls · _loot: Harrowgate's strongroom, the tax-roll chest_
 - `the-lord-protectors-lett-1` 1× The Lord Protector's letters to Harrowgate · _loot: Harrowgate's strongroom, the tally shelves_
+- `spell-scroll-hold-person-1` 1× Spell Scroll (Hold Person) (UNIDENTIFIED — players see "Unidentified magic consumable") — Uncommon · _loot: The brothers' packs_
 
 Hit Point Dice: Wizard d6 7/7
 Languages: Common, Elvish, Draconic · Tools: Calligrapher's Supplies · Armor training: none

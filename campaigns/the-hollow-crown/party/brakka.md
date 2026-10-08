@@ -21,6 +21,7 @@
 | Attack | To hit | Damage | Notes |
 |---|---|---|---|
 | Flame Tongue (Greatsword) | +8 | 2d6+5 slashing | reach 5 ft, mastery graze |
+| Dagger | +8 | 1d4+5 piercing | range 20/60 ft |
 | Unarmed Strike | +8 | 6 bludgeoning | reach 5 ft |
 
 Attacks per Attack action: 2
@@ -38,7 +39,7 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 
 ## Inventory
 
-**Coins:** 6850 GP 1 SP 5 CP
+**Coins:** 6856 GP 4 SP 5 CP
 
 - `javelin-1` 8× Javelin · _starting equipment_
 - `spear-1` 1× Spear · _starting equipment_
@@ -73,6 +74,7 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 - `heavy-crossbow-1` 1× Heavy Crossbow · _loot: Coll_
 - `mace-1` 1× Mace · _loot: Coll_
 - `leather-armor-1` 1× Leather Armor · _loot: Coll_
+- `dagger-1` 5× Dagger (equipped) · _loot: The second penitent's belt_
 
 Hit Point Dice: Fighter d10 7/7
 Languages: Common, Orc, Giant · Tools: *Choose one kind of Gaming Set* (see "Equipment") · Armor training: light, medium, heavy, shield

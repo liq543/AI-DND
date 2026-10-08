@@ -36,7 +36,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 98 GP 3 SP 5 CP
+**Coins:** 298 GP 7 SP 5 CP
 
 - `the-magpies-key-1` 1× The Magpie's Key · _stolen: Lot 9, lifted from Dorothea Quill mid-raid_
 - `quiver-1` 1× Quiver · _starting equipment_
@@ -110,6 +110,12 @@ Species traits: Resourceful, Skillful, Versatile
   - A disc of polished antler the size of a palm, carved with a stag's head crowned by an oak over an open hand, strung on red cord. Old, worn smooth by many thumbs. Found in Sedge's furs.
 - `lerners-written-confessi-1` 1× Lerner's written confession · _gift: written by Sergeant Lerner under Ottilie's charm, Day 18_
 - `shortbow-2-1` 1× Shortbow +2 — Rare · _gift: the Rookery armoury (retcon by ruling: the bow owed since Day 1)_
+- `robe-of-eyes-1` 1× Robe of Eyes (UNIDENTIFIED — players see "Unidentified magic item") — Rare · _loot: Sabine's iron-bound travelling chest_
+- `potion-of-healing-2` 2× Potion of Healing (UNIDENTIFIED — players see "Unidentified potion") — Common · _loot: Sabine's iron-bound travelling chest_
+- `fenns-keys-1` 1× Fenn's keys · _loot: Fenn's pockets_
+- `clay-pipe-1` 1× Clay pipe · _loot: Fenn's pockets_
+- `potion-of-greater-healin-2` 1× Potion of Greater Healing (UNIDENTIFIED — players see "Unidentified potion") — Uncommon · _loot: Fenn's strongbox_
+- `fenns-ledger-of-watching-1` 1× Fenn's ledger of watchings · _loot: Fenn's strongbox_
 
 Hit Point Dice: Rogue d8 7/7
 Languages: Common, Elvish, Halfling, Thieves' Cant · Tools: Thieves' Tools · Armor training: light

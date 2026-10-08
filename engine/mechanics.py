@@ -2246,6 +2246,16 @@ def remove_item(g, e, ref, qty=1, reason="dropped", sell=False, to=None, apprais
                          f"dropped by {e['name']}")
 
 
+def the(name):
+    """A container's name after a verb: 'Iron chest' -> 'the Iron chest', 'The miller's chest' -> 'the miller's chest',
+    "Kira's pack" stays "Kira's pack" (no doubled or wrong article)."""
+    if re.match(r"(?i)the\s", name):
+        return re.sub(r"^the\s+", "the ", name, flags=re.I)
+    if re.match(r"^[\w-]+'s\b", name):
+        return name
+    return f"the {name}"
+
+
 def put_on_floor(g, map_id, x, y, item, note, into=None):
     m = g.state["maps"][map_id]
     floor = [dict(f) for f in m.get("floor", [])]
@@ -2257,7 +2267,7 @@ def put_on_floor(g, map_id, x, y, item, note, into=None):
         entry["in"] = into["id"]
     floor.append(entry)
     g.emit("map.set", id=map_id, set={"floor": floor})
-    g.say(f"⬇ {item.get('qty', 1)}× {item['name']} " + (f"goes into the {into['name']}" if into else f"lies on the floor at ({x},{y})")
+    g.say(f"⬇ {item.get('qty', 1)}× {item_display_name(item)} " + (f"goes into {the(into['name'])}" if into else f"lies on the floor at ({x},{y})")
           + f" — {note}.", kind="item")
     return f"floor-{n}"
 
@@ -2330,7 +2340,7 @@ def pick_up(g, e, floor_id, with_attack=False):
         inv.append(item)
     g.set(e, inventory=inv)
     g.emit("map.set", id=t["map"], set={"floor": [x for x in m.get("floor", []) if x["id"] != floor_id]})
-    g.say(f"⬆ {e['name']} picks up {item.get('qty', 1)}× {item['name']}.", kind="item", who=e["id"])
+    g.say(f"⬆ {e['name']} picks up {item.get('qty', 1)}× {item_display_name(item)}.", kind="item", who=e["id"])
 
 
 def recover_thrown(g, e, floor_id, how):

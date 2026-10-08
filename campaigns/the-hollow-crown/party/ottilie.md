@@ -81,6 +81,9 @@ Species traits: Resourceful, Skillful, Versatile
 - `watchers-penny-1` 1× Watcher's penny · _found: on a string round Goody Prail's neck_
 - `forged-letter-in-sabines-1` 1× Forged letter in Sabine's hand · _crafted: Ottilie's forgery in Sabine's hand, cipher and seal_
   - A letter on Sabine's cream paper in her cipher and a flawless copy of her hand, sealed in grey wax with the Lidless signet: 'The place is found. Send the Glass at once, quietly, with six brothers in pilgrim grey and its keeper, no banners, by the Pilgrim Road through Tanner's Cross. I will meet it myself at the burnt chapel on the Pilgrim Road, a day east of Thornbury.' For Brother Prior Anselm at Ambersell. (Ottilie's third attempt, Day 23.)
+- `dove-grey-travelling-clo-1` 1× Dove-grey travelling clothes · _loot: Sabine's iron-bound travelling chest_
+- `blank-writing-case-1` 1× Blank writing case · _loot: Sabine's iron-bound travelling chest_
+- `spell-scroll-lesser-rest-1` 1× Spell Scroll (Lesser Restoration) (UNIDENTIFIED — players see "Unidentified magic consumable") — Uncommon · _loot: The brothers' packs_
 
 Hit Point Dice: Bard d8 7/7
 Languages: Common, Elvish, Halfling · Tools: Calligrapher's Supplies, Forgery Kit, Disguise Kit · Armor training: light
