@@ -1,0 +1,170 @@
+[
+  {
+    "fixture": "wilderness:The Old Forest",
+    "cold_ms": 52.69,
+    "median_ms": 12.64,
+    "p95_ms": 24.65,
+    "svg_bytes": 643530
+  },
+  {
+    "fixture": "interior:The Lantern Inn",
+    "cold_ms": 20.4,
+    "median_ms": 15.02,
+    "p95_ms": 18.25,
+    "svg_bytes": 695688
+  },
+  {
+    "fixture": "dungeon:The Forgotten Vault",
+    "cold_ms": 28.75,
+    "median_ms": 17.52,
+    "p95_ms": 25.11,
+    "svg_bytes": 684227
+  },
+  {
+    "fixture": "interior:The Mosaic Court",
+    "cold_ms": 15.86,
+    "median_ms": 9.85,
+    "p95_ms": 12.13,
+    "svg_bytes": 734211
+  },
+  {
+    "fixture": "region:The Borderlands",
+    "cold_ms": 4.1,
+    "median_ms": 4.0,
+    "p95_ms": 5.74,
+    "svg_bytes": 141500
+  },
+  {
+    "fixture": "interior:The Scriptorium",
+    "cold_ms": 15.85,
+    "median_ms": 9.67,
+    "p95_ms": 15.72,
+    "svg_bytes": 755825
+  },
+  {
+    "fixture": "interior:The Smithy",
+    "cold_ms": 14.78,
+    "median_ms": 7.82,
+    "p95_ms": 8.99,
+    "svg_bytes": 822382
+  },
+  {
+    "fixture": "interior:The Chapel",
+    "cold_ms": 13.34,
+    "median_ms": 18.04,
+    "p95_ms": 46.11,
+    "svg_bytes": 801417
+  },
+  {
+    "fixture": "interior:The Manor",
+    "cold_ms": 25.83,
+    "median_ms": 12.39,
+    "p95_ms": 16.2,
+    "svg_bytes": 767752
+  },
+  {
+    "fixture": "battle:Fog and fallen bodies",
+    "cold_ms": 27.75,
+    "median_ms": 17.38,
+    "p95_ms": 19.96,
+    "svg_bytes": 667916
+  },
+  {
+    "fixture": "interior:The Grey Barrow",
+    "cold_ms": 47.41,
+    "median_ms": 22.84,
+    "p95_ms": 25.03,
+    "svg_bytes": 874250
+  },
+  {
+    "fixture": "interior:The Rookery",
+    "cold_ms": 20.45,
+    "median_ms": 13.81,
+    "p95_ms": 21.54,
+    "svg_bytes": 1288487
+  },
+  {
+    "fixture": "interior:The Socket",
+    "cold_ms": 15.57,
+    "median_ms": 8.47,
+    "p95_ms": 13.79,
+    "svg_bytes": 697389
+  },
+  {
+    "fixture": "interior:The Pens",
+    "cold_ms": 38.08,
+    "median_ms": 28.04,
+    "p95_ms": 46.11,
+    "svg_bytes": 783376
+  },
+  {
+    "fixture": "portrait:ranger",
+    "cold_ms": 2.51,
+    "median_ms": 1.27,
+    "p95_ms": 1.79,
+    "svg_bytes": 22514
+  },
+  {
+    "fixture": "portrait:knight",
+    "cold_ms": 3.15,
+    "median_ms": 1.79,
+    "p95_ms": 13.6,
+    "svg_bytes": 21286
+  },
+  {
+    "fixture": "portrait:mage",
+    "cold_ms": 2.22,
+    "median_ms": 1.19,
+    "p95_ms": 28.76,
+    "svg_bytes": 24170
+  },
+  {
+    "fixture": "portrait:cleric",
+    "cold_ms": 1.65,
+    "median_ms": 1.1,
+    "p95_ms": 1.15,
+    "svg_bytes": 25838
+  },
+  {
+    "fixture": "portrait:wolf",
+    "cold_ms": 0.94,
+    "median_ms": 0.04,
+    "p95_ms": 0.17,
+    "svg_bytes": 20396
+  },
+  {
+    "fixture": "portrait:dragon",
+    "cold_ms": 0.78,
+    "median_ms": 0.05,
+    "p95_ms": 2.34,
+    "svg_bytes": 24522
+  },
+  {
+    "fixture": "item:Silver Longsword",
+    "cold_ms": 3.92,
+    "median_ms": 0.37,
+    "p95_ms": 8.42,
+    "svg_bytes": 19087
+  },
+  {
+    "fixture": "item:Potion of Healing",
+    "cold_ms": 5.69,
+    "median_ms": 0.96,
+    "p95_ms": 1.98,
+    "svg_bytes": 29897
+  },
+  {
+    "fixture": "item:Ruby Amulet",
+    "cold_ms": 2.11,
+    "median_ms": 0.81,
+    "p95_ms": 2.05,
+    "svg_bytes": 29422
+  },
+  {
+    "fixture": "item:Leather Spellbook",
+    "cold_ms": 2.3,
+    "median_ms": 0.89,
+    "p95_ms": 1.19,
+    "svg_bytes": 37775
+  }
+]

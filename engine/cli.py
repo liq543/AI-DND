@@ -12,7 +12,7 @@ import shutil
 import sys
 from pathlib import Path
 
-from . import art, assets, chargen, dice, itemart, loot as L, maps, mechanics as M, render, srd, views
+from . import art, assets, chargen, dice, forces as F, itemart, loot as L, maps, mechanics as M, render, srd, views
 from .core import (Game, RuleError, derive, fmt_time, level, parse_duration, parse_when, replay, tier, TIER_MAX_GP_AWARD,
                    SIZE_CELLS)
 from .store import ACTIVE_FILE, CAMPAIGNS, Store, TamperError, active_dir
@@ -918,6 +918,66 @@ def cmd_check(g, a):
     for who in ids(a.who):
         M.ability_check(g, g.get(who), a.what, dc=a.dc, adv=ids(a.adv), dis=ids(a.dis), hidden=a.hidden, now=a.now,
                         purpose=a.purpose)
+
+
+def cmd_forces(g, a):
+    """Standing forces: units with a count, a stat block, a captain, kit, pay and an attitude (engine/forces.py)."""
+    if a.action == "list":
+        fs = F.units(g)
+        print("Forces:" if fs else "No units yet (`forces add`).")
+        for uid, u in fs.items():
+            print("  " + F.describe(g, uid, u))
+        return
+    if a.action == "add":
+        if not (a.target and a.name and a.stat and a.count):
+            raise RuleError('forces add <id> --name "Hanged Men of Thornbury" --stat bandit --count 10 [--where ...] [--captain ...] [--pay "2sp/day"] [--attitude indifferent]')
+        F.add(g, a.target, a.name, a.stat, a.count, a.where, a.captain, a.attitude or "indifferent", a.pay)
+        return
+    u = F.get(g, a.target)
+    if a.action == "set":
+        if not a.reason:
+            raise RuleError("forces set <id> [--count N] [--where ...] [--captain ...] [--attitude ...] [--pay ...] --reason \"...\"")
+        before = dict(u)
+        for k in ("count", "where", "captain", "pay", "name"):
+            v = getattr(a, k, None)
+            if v is not None:
+                u[k] = v
+        if a.attitude:
+            if a.attitude not in F.ATTITUDES:
+                raise RuleError(f"--attitude {'|'.join(F.ATTITUDES)}")
+            u["attitude"] = a.attitude
+        if u["count"] < 1:
+            F.save(g, a.target, None)
+            g.say(f"⚔ {before['name']} is gone — {a.reason}.", kind="info")
+            return
+        F.save(g, a.target, u)
+        g.say(f"⚔ {F.describe(g, a.target, u)} — {a.reason}.", kind="info")
+    elif a.action == "equip":
+        if not a.source:
+            raise RuleError("forces equip <id> --from <container> [--armor ...] [--shield] [--weapon ...]")
+        F.equip(g, a.target, a.source, a.armor, a.shield, a.weapon)
+    elif a.action == "share":
+        if not (a.coins and a.source and a.reason):
+            raise RuleError('forces share <id> --coins 20gp --from <who|container> --reason "spoils of the ..."')
+        F.share(g, a.target, M.parse_coins(a.coins), a.source, a.reason)
+    elif a.action == "split":
+        if not (a.count and a.into and a.name):
+            raise RuleError('forces split <id> --count N --into <new-id> --name "..."')
+        if a.count >= u["count"]:
+            raise RuleError(f"{u['name']} has only {u['count']} men; split off fewer.")
+        F.save(g, a.target, dict(u, count=u["count"] - a.count))
+        F.add(g, a.into, a.name, u["stat"], a.count, a.where or u.get("where"), a.captain, u.get("attitude", "indifferent"), u.get("pay"))
+        F.save(g, a.into, dict(F.get(g, a.into), gear=dict(u.get("gear", {}))))
+    elif a.action == "enlist":
+        if not a.ids:
+            raise RuleError("forces enlist <unit> --ids a,b,c")
+        F.enlist(g, a.target, ids(a.ids))
+    elif a.action == "muster":
+        if not (a.count and a.at and a.map):
+            raise RuleError("forces muster <id> --count N --at x,y --map <map>")
+        F.muster(g, a.target, a.count, a.map, xy(a.at), lambda g2, mon, nm, side, hidden: instantiate_monster(g2, mon, nm, side, hidden))
+    else:
+        raise RuleError("forces list|add|set|equip|share|split|muster|enlist")
 
 
 def cmd_loot(g, a):
@@ -3391,6 +3451,26 @@ def build_parser():
     c.add_argument("--ended-at", help='repair: a Long Rest already taken inside time that has passed, ending "Day N, HH:MM" '
                                       '(needs --reason; no time passes)')
     c.add_argument("--reason")
+    c = sp.add_parser("forces", help="list|add|set|equip|share|split|muster: the units you command (numbers, kit, pay, attitude)")
+    c.add_argument("action", choices=["list", "add", "set", "equip", "share", "split", "muster", "enlist"])
+    c.add_argument("--ids", help="enlist: creatures already on the map who join the unit")
+    c.add_argument("target", nargs="?", help="the unit id")
+    c.add_argument("--name")
+    c.add_argument("--stat", help="SRD stat block of one man (bandit, guard, commoner, warrior-infantry...)")
+    c.add_argument("--count", type=int)
+    c.add_argument("--where")
+    c.add_argument("--captain")
+    c.add_argument("--pay", help='e.g. "2sp/day"')
+    c.add_argument("--attitude", choices=["hostile", "indifferent", "friendly", "helpful"])
+    c.add_argument("--from", dest="source", help="equip: the container the kit comes out of · share: who or which container pays")
+    c.add_argument("--armor")
+    c.add_argument("--shield", action="store_true")
+    c.add_argument("--weapon")
+    c.add_argument("--coins")
+    c.add_argument("--into")
+    c.add_argument("--at")
+    c.add_argument("--map")
+    c.add_argument("--reason")
     c = sp.add_parser("loot", help="list|suggest|body|none|cache|open: treasure decided before anyone searches")
     c.add_argument("action", choices=["list", "suggest", "body", "none", "cache", "open"])
     c.add_argument("target", nargs="?", help="body/none: the foe · cache: the map · open: who opens it")
@@ -3610,7 +3690,7 @@ HANDLERS = {
     "damage": cmd_damage, "heal": cmd_heal, "temphp": cmd_temphp, "condition": cmd_condition, "exhaustion": cmd_exhaustion,
     "feature": cmd_feature, "bardic": cmd_bardic, "deathsave": cmd_deathsave, "stabilize": cmd_stabilize,
     "legendary-resist": cmd_legendary, "rest": cmd_rest, "time": cmd_time, "travel": cmd_travel, "item": cmd_item,
-    "coins": cmd_coins, "agenda": cmd_agenda, "loot": cmd_loot, "xp": cmd_xp, "encounter": cmd_encounter, "map": cmd_map, "asset": cmd_asset, "say": cmd_say, "fx": cmd_fx,
+    "coins": cmd_coins, "agenda": cmd_agenda, "loot": cmd_loot, "forces": cmd_forces, "xp": cmd_xp, "encounter": cmd_encounter, "map": cmd_map, "asset": cmd_asset, "say": cmd_say, "fx": cmd_fx,
     "scene": cmd_scene, "show": cmd_show, "homebrew": cmd_homebrew, "request": cmd_request, "roll": cmd_roll,
     "status": cmd_status, "audit": cmd_audit, "log": cmd_log,
 }

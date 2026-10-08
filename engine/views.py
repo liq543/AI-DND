@@ -587,6 +587,9 @@ def state_md(g):
             pay = x.get("pay")
             lines.append(f"- `{x['id']}` {fmt_time(x['due'])} [{x['status']}{', secret' if x.get('secret') else ''}] {x['text']}"
                          + (f" ({'auto ' if x.get('auto') else ''}{pay if isinstance(pay, str) else fmt_cp(pay)} → {x['to']})" if pay else ""))
+    if s.get("forces"):
+        from . import forces as F
+        lines += ["", "## Forces (`forces list`)", ""] + [f"- {F.describe(g, uid, u)}" for uid, u in s["forces"].items()]
     owed = [x for x in s.get("loot", []) if x.get("status") == "owed"]
     if owed:
         lines += ["", "## ⚠ Loot owed (decide before the party searches: `loot body` / `loot none`)", ""]

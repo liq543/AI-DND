@@ -185,6 +185,11 @@ loot body captain-rhosk --items "Longsword +1; 2x Potion of Healing" --coins 30g
 loot none captain-rhosk --reason "lost it all in the river"    # or record why there's nothing
 loot cache crypt 12,7 --name "Iron strongbox" --items "Ledger=a merchant ledger; Potion of Healing" --coins 140gp [--lock 15] [--id box]
 loot open kira box [--unlocked "Thieves' Tools 18 vs DC 15"]   # reveals the contents on the table; then item pickup / coins --from
+# Forces: the units a character commands (numbers, kit, pay, attitude) live in the engine, not the notes:
+forces add militia --name "Oakhollow militia" --stat commoner --count 12 --where "Oakhollow" --captain "Oswin Hale" --pay "2sp/day"
+forces equip militia --from armoury --armor "Chain Shirt" --shield --weapon Spear   # one piece per man out of a container; AC follows the SRD armor table
+forces share militia --coins 20gp --from kira --reason "spoils"   # a crown a man or more: attitude one step up (Friendly+ = Advantage on Influence with them)
+forces split|enlist|muster|set|list   # split off a detachment; enlist creatures already on the map; muster men onto a map; recount (--reason)
 # `combat end` lists loot owed for notable foes (CR 1+, named, custom); `status` and every passage of time nag until decided.
 # A DM-run companion's turn start prints its whole kit (slots, features, potions, wand charges, unlit Flame Tongue).
 item identify kira <item-id> --how "Identify spell (cast by wren)"   # magic items start UNIDENTIFIED unless bought, starting or --identified

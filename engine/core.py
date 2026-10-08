@@ -102,6 +102,11 @@ def apply(state, ev):
         for it in state.get("agenda", []):
             if it["id"] == d["id"]:
                 it.update(d["set"])
+    elif t == "forces.set":
+        if d.get("unit") is None:
+            state.setdefault("forces", {}).pop(d["id"], None)
+        else:
+            state.setdefault("forces", {})[d["id"]] = d["unit"]
     elif t == "loot.add":
         state.setdefault("loot", []).append(d["item"])
     elif t == "loot.set":

@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Orc** · **Fighter 7** (Champion) · **Background:** Soldier · **XP:** 25207
+**Player:** DM · **Orc** · **Fighter 7** (Champion) · **Background:** Soldier · **XP:** 25357
 
 **HP** 71/71 · **AC** 20 (Plate Armor 18 + Defense style 1 + items 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
 
@@ -42,7 +42,7 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 
 ## Inventory
 
-**Coins:** 3586 GP 4 SP 5 CP
+**Coins:** 3411 GP 4 SP 5 CP
 
 - `javelin-1` 8× Javelin · _starting equipment_
 - `spear-1` 1× Spear · _starting equipment_
@@ -78,7 +78,7 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 - `mace-1` 1× Mace · _loot: Coll_
 - `leather-armor-1` 1× Leather Armor · _loot: Coll_
 - `dagger-1` 5× Dagger (equipped) · _loot: The second penitent's belt_
-- `longsword-1-1` 1× Longsword +1 (UNIDENTIFIED — players see "Unidentified magic longsword") (equipped) — Uncommon · _loot: Sir Hugh Darrow's arms and saddlebags_
+- `longsword-1-1` 1× Longsword +1 (equipped) — Uncommon · _loot: Sir Hugh Darrow's arms and saddlebags_
 - `plate-armor-2` 1× Plate Armor · _loot: Sir Hugh Darrow's arms and saddlebags_
 - `shield-1` 1× Shield · _loot: Sir Hugh Darrow's arms and saddlebags_
 - `darrows-saddlebags-1` 1× Darrow's saddlebags · _loot: Sir Hugh Darrow's arms and saddlebags_
