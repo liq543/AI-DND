@@ -2,24 +2,24 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 2 · **In-world time:** Day 23, 16:10 · **Mode:** exploration
-**Current map:** The Pilgrim Road before the East Gate (`thornbury-east-road`) · **Events:** 22341 · **Log head:** `3e6d5a76d0e7727f`
+**Session:** 2 · **In-world time:** Day 23, 16:35 · **Mode:** exploration
+**Current map:** Thornbury: the West Gate quarter (`thornbury`) · **Events:** 22386 · **Log head:** `61abb9dbd70881d4`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | thornbury-east-road (9,12) |
-| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | thornbury-east-road (6,13) |
-| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-east-road (7,13) |
-| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-east-road (10,13) |
+| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | thornbury (4,27) |
+| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | thornbury (5,27) |
+| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury (5,28) |
+| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury (4,28) |
 
 ## Other creatures (DM view)
 
 | Creature | Side | HP | AC | Conditions | Position | Hidden |
 |---|---|---|---|---|---|---|
-| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | thornbury-east-road (5,13) |  |
+| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | thornbury (6,27) |  |
 | Mr Fennimore Quist (`mr-fennimore-quist`, spy) | neutral | 23/27 | 12 | — | rookery (47,31) |  |
 | Mother Hobday (`mother-hobday`, commoner) | neutral | 4/4 | 10 | — | rookery (4,2) |  |
 | Ada Crisp (`ada-crisp`, commoner) | neutral | 4/4 | 10 | — | rookery (44,6) |  |
@@ -135,9 +135,9 @@
 | Watch-captain Orme (`watch-captain-orme`, warrior-veteran) | enemy | 0/65 | 17 | mocked · DEAD | thornbury (17,27) | yes |
 | Reeve Odo Ashby (`reeve-odo-ashby`, noble) | neutral | 9/9 | 15 | — | thornbury-heart (23,10) |  |
 | Edwin Ashby (`edwin-ashby`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (22,30) |  |
-| Captain Brannoc Vaux (`captain-brannoc-vaux`, gladiator) | neutral | 112/112 | 16 | — | thornbury-east-road (16,12) |  |
-| Vaux's paymaster (`vauxs-paymaster`, commoner) | neutral | 4/4 | 10 | — | thornbury-east-road (22,12) |  |
-| Sergeant Mags Orrel (`sergeant-mags-orrel`, warrior-veteran) | neutral | 65/65 | 17 | — | thornbury-east-road (16,13) |  |
+| Captain Brannoc Vaux (`captain-brannoc-vaux`, gladiator) | neutral | 112/112 | 16 | — | thornbury (13,25) |  |
+| Vaux's paymaster (`vauxs-paymaster`, commoner) | neutral | 4/4 | 10 | — | thornbury-east-road (22,12) | yes |
+| Sergeant Mags Orrel (`sergeant-mags-orrel`, warrior-veteran) | neutral | 65/65 | 17 | — | thornbury (13,29) |  |
 | Sleeping Greencloak 1 (`sleeping-greencloak-1`, guard) | enemy | 0/11 | 16 | unconscious, prone · DEAD | harrowgate (31,13) |  |
 | Greencloak waking (`sleeping-greencloak-2`, guard) | enemy | 0/11 | 16 | prone · DEAD | harrowgate (31,14) |  |
 | Sleeping Greencloak 3 (`sleeping-greencloak-3`, guard) | enemy | 0/11 | 16 | unconscious, prone · DEAD | harrowgate (31,15) |  |
@@ -234,12 +234,12 @@
 | Quist's rider (`quists-rider`, bandit) | ally | 11/11 | 12 | — | wheatsheaf-yard (8,9) |  |
 | Reeve's man at the East Gate A (`reeves-man-at-the-east-gate-a`, guard) | neutral | 11/11 | 16 | — | thornbury-east-road (3,11) |  |
 | Reeve's man at the East Gate B (`reeves-man-at-the-east-gate-b`, guard) | neutral | 11/11 | 16 | — | thornbury-east-road (3,12) |  |
-| Gilded Hand outrider A (`gilded-hand-outrider-a`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury-east-road (12,12) |  |
-| Gilded Hand outrider B (`gilded-hand-outrider-b`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury-east-road (12,11) |  |
-| Gilded Hand foot A (`gilded-hand-foot-a`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury-east-road (26,12) |  |
-| Gilded Hand foot B (`gilded-hand-foot-b`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury-east-road (25,12) |  |
-| Gilded Hand foot C (`gilded-hand-foot-c`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury-east-road (27,12) |  |
-| Gilded Hand foot D (`gilded-hand-foot-d`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury-east-road (26,13) |  |
+| Gilded Hand outrider A (`gilded-hand-outrider-a`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury (4,31) |  |
+| Gilded Hand outrider B (`gilded-hand-outrider-b`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury (5,31) |  |
+| Gilded Hand foot A (`gilded-hand-foot-a`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury (13,23) |  |
+| Gilded Hand foot B (`gilded-hand-foot-b`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury (13,31) |  |
+| Gilded Hand foot C (`gilded-hand-foot-c`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury (21,24) |  |
+| Gilded Hand foot D (`gilded-hand-foot-d`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury (21,30) |  |
 
 ## Agenda (scheduled by the engine; `agenda list`)
 
@@ -616,19 +616,32 @@
 - point of interest `poi-7`: The burning tollhouse at (23,7) → journal j386
 - doors: (23,8) closed
 
-### Thornbury: the West Gate quarter (`thornbury`, town 60×40, lighting dim)
+### Thornbury: the West Gate quarter (`thornbury`, town 60×40, lighting bright)
+- Brakka Holloway (`brakka`, pc) at (5,27) — 71/71 HP
+- Corvin Asche (`corvin`, pc) at (5,28) — 41/41 HP
+- Kit Corvell (`kit`, pc) at (4,27) — 57/57 HP
+- Ottilie Marsh (`ottilie`, pc) at (4,28) — 48/48 HP
 - A horse-coper at the fair yard (`a-horse-coper-at-the-fair-yard`, neutral) at (4,32) — 4/4 HP
 - Aldous Crane (`aldous-crane`, ally) at (16,26) — 52/52 HP
+- Captain Brannoc Vaux (`captain-brannoc-vaux`, neutral) at (13,25) — 112/112 HP
 - Cornmarket watchman (`guard-a-6`, enemy) at (6,27) — DEAD · hidden
 - Cornmarket watchman (`guard-b-6`, enemy) at (4,27) — DEAD · hidden
 - Cornmarket watchman (`guard-c-4`, enemy) at (4,28) — DEAD · hidden
 - Cornmarket watchman (`guard-d-2`, enemy) at (5,26) — DEAD · hidden
 - Cornmarket watchman (`guard-e-2`, enemy) at (5,28) — DEAD · hidden
 - Cornmarket watchman (`guard-f-2`, enemy) at (6,26) — DEAD · hidden
+- Gilded Hand foot A (`gilded-hand-foot-a`, neutral) at (13,23) — 9/9 HP
+- Gilded Hand foot B (`gilded-hand-foot-b`, neutral) at (13,31) — 9/9 HP
+- Gilded Hand foot C (`gilded-hand-foot-c`, neutral) at (21,24) — 9/9 HP
+- Gilded Hand foot D (`gilded-hand-foot-d`, neutral) at (21,30) — 9/9 HP
+- Gilded Hand outrider A (`gilded-hand-outrider-a`, neutral) at (4,31) — 9/9 HP
+- Gilded Hand outrider B (`gilded-hand-outrider-b`, neutral) at (5,31) — 9/9 HP
 - Goodwife Haddow (`goodwife-haddow`, neutral) at (4,23) — 4/4 HP · hidden
 - Hal Bramble (`hal-bramble`, neutral) at (26,31) — 4/4 HP · hidden
 - Market folk A (`market-folk-a`, neutral) at (47,10) — 4/4 HP · hidden
 - Market folk B (`market-folk-b`, neutral) at (47,11) — 4/4 HP · hidden
+- Nib (`nib`, neutral) at (6,27) — 4/4 HP
+- Sergeant Mags Orrel (`sergeant-mags-orrel`, neutral) at (13,29) — 65/65 HP
 - Watch-captain Orme (`watch-captain-orme`, enemy) at (17,27) — DEAD · mocked · hidden
 - Watchman at the brazier (`guard-c-2`, enemy) at (4,26) — DEAD · hidden
 - Widow Tessaly (`widow-tessaly`, neutral) at (55,5) — 4/4 HP · hidden
@@ -1048,22 +1061,9 @@
 - doors: (14,9) open, (14,15) closed
 
 ### The Pilgrim Road before the East Gate (`thornbury-east-road`, wilderness 40×24, lighting bright)
-- Brakka Holloway (`brakka`, pc) at (6,13) — 71/71 HP
-- Corvin Asche (`corvin`, pc) at (7,13) — 41/41 HP
-- Kit Corvell (`kit`, pc) at (9,12) — 57/57 HP
-- Ottilie Marsh (`ottilie`, pc) at (10,13) — 48/48 HP
-- Captain Brannoc Vaux (`captain-brannoc-vaux`, neutral) at (16,12) — 112/112 HP
-- Gilded Hand foot A (`gilded-hand-foot-a`, neutral) at (26,12) — 9/9 HP
-- Gilded Hand foot B (`gilded-hand-foot-b`, neutral) at (25,12) — 9/9 HP
-- Gilded Hand foot C (`gilded-hand-foot-c`, neutral) at (27,12) — 9/9 HP
-- Gilded Hand foot D (`gilded-hand-foot-d`, neutral) at (26,13) — 9/9 HP
-- Gilded Hand outrider A (`gilded-hand-outrider-a`, neutral) at (12,12) — 9/9 HP
-- Gilded Hand outrider B (`gilded-hand-outrider-b`, neutral) at (12,11) — 9/9 HP
-- Nib (`nib`, neutral) at (5,13) — 4/4 HP
 - Reeve's man at the East Gate A (`reeves-man-at-the-east-gate-a`, neutral) at (3,11) — 11/11 HP
 - Reeve's man at the East Gate B (`reeves-man-at-the-east-gate-b`, neutral) at (3,12) — 11/11 HP
-- Sergeant Mags Orrel (`sergeant-mags-orrel`, neutral) at (16,13) — 65/65 HP
-- Vaux's paymaster (`vauxs-paymaster`, neutral) at (22,12) — 4/4 HP
+- Vaux's paymaster (`vauxs-paymaster`, neutral) at (22,12) — 4/4 HP · hidden
 - point of interest `poi-1`: The East Gate at (2,12) → journal j609
 - point of interest `poi-2`: The town ditch at (4,8) → journal j610
 - point of interest `poi-3`: The Wend bridge at (30,12) → journal j611
@@ -1075,18 +1075,18 @@
 
 ## Recent events
 
-- Vaux was quiet a long moment, the gauntlet drumming on his saddlebow. Then he laughed, short and genuine, and looked at Kit rather than Ottilie.
-- “A fifth of a kingdom against half a month. That's a wager, not a contract. In. But it goes in the book, lady, in ink, witnessed by my sergeant. And the half is paid today, on this road.”
-- “Witnessed. Gods help us.”
-- 💰 Brakka Holloway spends 3375 GP (paid: the Gilded Hand's first month on the new terms (half the fee, a fifth of spoils)). Purse: 3481 GP 4 SP 5 CP.
-- 📅 Scheduled for Day 53, 16:00: The Gilded Hand's second month on the new terms: 3,375 due to Captain Vaux (and a fifth of the month's spoils) (payment -3375 GP out of treasury) [a55]
-- The paymaster counted Brakka's coin into the brass-bound coffer bag by bag and wrote the new terms into the company book in a cramped clerk's hand; Vaux signed, Mags made her mark, and a fair copy went to Ottilie.
-- 🎒 Ottilie Marsh gains 1× The Gilded Hand's contract (new terms) — gift: Vaux's paymaster.
-- ⭐ Kit Corvell gains 250 XP (Ottilie's new contract with the Gilded Hand at the gate: half the fee and a fifth of the spoils; ×2 house XP rate) — total 23257.
-- ⭐ Brakka Holloway gains 250 XP (Ottilie's new contract with the Gilded Hand at the gate: half the fee and a fifth of the spoils; ×2 house XP rate) — total 23257.
-- ⭐ Corvin Asche gains 250 XP (Ottilie's new contract with the Gilded Hand at the gate: half the fee and a fifth of the spoils; ×2 house XP rate) — total 23257.
-- ⭐ Ottilie Marsh gains 250 XP (Ottilie's new contract with the Gilded Hand at the gate: half the fee and a fifth of the spoils; ×2 house XP rate) — total 23257.
-- “Now, my lord. These knights of yours. Where are they, when do they come, and where do my hundred sleep tonight?”
-- ⏳ 10m passes — terms at the gate, the counting and the signing. Now Day 23, 16:10.
-- 🎬 The East Gate — Day 23, 16:10. The Gilded Hand halted on the Pilgrim Road, a new contract in ink; Vaux waiting on his orders.
-- 🗺 Map: The Pilgrim Road before the East Gate
+- 🗺 Map: Thornbury: the West Gate quarter
+- Captain Brannoc Vaux is at (13,25) on Thornbury: the West Gate quarter.
+- Sergeant Mags Orrel is at (13,29) on Thornbury: the West Gate quarter.
+- Gilded Hand foot A is at (13,23) on Thornbury: the West Gate quarter.
+- Gilded Hand foot B is at (13,31) on Thornbury: the West Gate quarter.
+- Gilded Hand foot C is at (21,24) on Thornbury: the West Gate quarter.
+- Gilded Hand foot D is at (21,30) on Thornbury: the West Gate quarter.
+- Gilded Hand outrider A is at (4,31) on Thornbury: the West Gate quarter.
+- Gilded Hand outrider B is at (5,31) on Thornbury: the West Gate quarter.
+- Kit Corvell is at (4,27) on Thornbury: the West Gate quarter.
+- Ottilie Marsh is at (4,28) on Thornbury: the West Gate quarter.
+- Brakka Holloway is at (5,27) on Thornbury: the West Gate quarter.
+- Corvin Asche is at (5,28) on Thornbury: the West Gate quarter.
+- Nib is at (6,27) on Thornbury: the West Gate quarter.
+- Behind the West Gate the street emptied of townsfolk and filled with quiet men: spears down the lanes either side, crossbowmen crouched along the wall-walk below the parapet, ten horse in the horse-fair yard with their girths tight. From the road outside, through the open arch, there is nothing to see but an empty street.

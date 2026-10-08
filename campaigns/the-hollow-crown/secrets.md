@@ -882,3 +882,4 @@ Gallery.
   - **The long room's prayer table:** a little lidless stone Face (statue-sight window: it looks toward its twin in the Mission house at Ambersell).
   Ivo's men have the yard and the stable end; they have not gone upstairs (the stair burned) and nobody has looked in the back room.
 - **Day 23, 14:05:** Quist's rider delivered Lerner's letter and Quist's note at the Wheatsheaf. The crew now knows the Castle Gaunt column is coming and has been on the March Road since dawn. It is still due at Thornbury about 18:00 (the West Gate, by the March Road).
+- **Day 23, 16:35:** the Gilded Hand lies hidden in the West Gate quarter (Fourth Banner in the lanes, Second Banner's crossbows on the wall-walk, the horse in the horse-fair yard). The Castle Gaunt column is still due about 18:00 on the March Road.
