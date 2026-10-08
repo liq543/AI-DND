@@ -3,7 +3,7 @@
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
 **Session:** 2 · **In-world time:** Day 24, 07:00 · **Mode:** exploration
-**Current map:** The Chapel of the Unblinking (`unblinking-chapel`) · **Events:** 23280 · **Log head:** `c280079219d3d466`
+**Current map:** The Chapel of the Unblinking (`unblinking-chapel`) · **Events:** 23281 · **Log head:** `4c747702efd37122`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
@@ -1150,7 +1150,6 @@
 
 ## Recent events
 
-- “Corvin, send word to Quist, and see if he has anything to report. And cancel the fort. We've taken a castle and a walled town; that's two sets of walls already. Why build a fort? And give me Fenn's ledger. I'll read it now.”
 - “Quist's inside the Stillness, boss. It turns divination to grey fog, and Sending is divination. But Hesketh's at Crowsfoot, three miles outside it. I'll send through him, and have Quist step out to the Hollins Stones at noon so I can speak to him direct.”
 - ✨ Corvin Asche casts Sending targeting Hesketh Rowe.
 - “(Sending) Hesketh, Corvin. Ride to Quist now: cancel the fort works. Have Quist stand outside the Stillness at the Hollins Stones at noon; I'll Send.”
@@ -1165,3 +1164,4 @@
 - ⏳ 30m passes — Corvin's Sending and reading Fenn's ledger. Now Day 24, 07:00.
 - 🎬 The Hanged Men's barracks — Day 24, 07:00. The war council at the altar, Fenn's ledger open; Hesketh riding for the Rookery.
 - 🗺 Map: The Chapel of the Unblinking
+- — Session 2 ends —
