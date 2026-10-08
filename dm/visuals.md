@@ -143,16 +143,23 @@ monster looks like, run `npc describe <id> --text "what anyone can see"` (looks,
 voice, what they're doing). The players click the token and read it on the info panel. Update it when their
 look changes (wounded, disguised, chained). Hidden facts go in `npc lore` only once the party learns them.
 
-**Pictures are drawn live from that description.** Every character and humanlike NPC gets a generated portrait
-(party panel, sheet, info card) and face (map token, initiative bar, log, journal), drawn from: species; class or
-NPC role (guard, cultist, noble, pirate...); the armor a PC actually wears; and whatever the description says about
-hair, eyes, skin, beard, scars, freckles, tattoos, war paint, eyepatch, horns, headwear, clothing, cloak, build,
-age and expression. Beasts, monsters and other non-humanoids get creature art in their type's palette. Nothing
-needs storing: change the description or the look and the table redraws it.
+**A chosen face stays with its character.** The engine stores the initial visual identity, appearance traits
+and selected local portrait in a cosmetic profile through signed entity events. The first descriptive appearance
+can establish a new creature's identity; later scene descriptions and biography updates leave that face intact.
+An Orc mentioned grabbing a Human does not turn the Human's portrait into an Orc. Portraits in the party panel,
+sheet, info card, map, initiative and journal use this same retained choice. Corpses use the same resolved identity.
+Beasts and other non-humanoids use compatible creature art. Known gendered titles such as man-at-arms and
+townswoman provide presentation; generic jobs such as Guard do not.
+
+- **Retain existing faces:** `asset stabilize --all` uses each creature's first authored descriptive appearance
+  in the active campaign. It is idempotent and preserves already retained faces. `asset stabilize <id> --refresh`
+  intentionally chooses again from saved appearance and current pins.
+- **Choose a face explicitly:** `asset faces <id>` lists compatible local bases; `asset faces <id> --choose
+  collection/number` retains that exact choice. Species and presentation must match. Inspect the result on the table.
 
 - **Pin exact features** with `asset look <id> --hair "..." --eyes "..." --skin "..." --beard "..." --marks "..."
   --headwear "..." --outfit "..." --cloak "..." --build "..." --age "..." --expression "..." --horns "..."
-  --background "..." --species Elf --presentation feminine|masculine|androgynous`. Each field overrides what the description implies;
+  --background "..." --species Elf --presentation feminine|masculine|androgynous`. These are intentional visual changes and refresh the retained choice. Each field overrides the saved description;
   `--clear eyes` (or `all`) removes pins. Every call prints what the generator will draw.
 - **Set it when the player describes their character** (session zero, character creation) so the portrait
   matches their idea. Ask them to look at it on the table and adjust with `asset look` until it does.

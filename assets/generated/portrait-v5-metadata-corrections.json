@@ -1,0 +1,348 @@
+{
+  "review": "Independent visual inspection of rendered production portraits, 2026-10-08",
+  "changes": [
+    {
+      "collection": "portraits-human-masculine-pale-v5",
+      "index": 11,
+      "field": "beard",
+      "before": "stubble",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-human-masculine-pale-v5",
+      "index": 15,
+      "field": "beard",
+      "before": "stubble",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-human-masculine-tan-v5",
+      "index": 11,
+      "field": "beard",
+      "before": "stubble",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-human-masculine-tan-v5",
+      "index": 15,
+      "field": "beard",
+      "before": "stubble",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-human-masculine-brown-v5",
+      "index": 2,
+      "field": "beard",
+      "before": "mustache",
+      "after": "goatee"
+    },
+    {
+      "collection": "portraits-human-masculine-brown-v5",
+      "index": 6,
+      "field": "beard",
+      "before": "mustache",
+      "after": "goatee"
+    },
+    {
+      "collection": "portraits-human-masculine-brown-v5",
+      "index": 10,
+      "field": "beard",
+      "before": "mustache",
+      "after": "goatee"
+    },
+    {
+      "collection": "portraits-human-masculine-brown-v5",
+      "index": 11,
+      "field": "beard",
+      "before": "stubble",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-human-masculine-brown-v5",
+      "index": 14,
+      "field": "beard",
+      "before": "mustache",
+      "after": "goatee"
+    },
+    {
+      "collection": "portraits-human-masculine-brown-v5",
+      "index": 15,
+      "field": "beard",
+      "before": "stubble",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-human-masculine-dark-v5",
+      "index": 2,
+      "field": "beard",
+      "before": "mustache",
+      "after": "goatee"
+    },
+    {
+      "collection": "portraits-human-masculine-dark-v5",
+      "index": 6,
+      "field": "beard",
+      "before": "mustache",
+      "after": "goatee"
+    },
+    {
+      "collection": "portraits-human-masculine-dark-v5",
+      "index": 10,
+      "field": "beard",
+      "before": "mustache",
+      "after": "goatee"
+    },
+    {
+      "collection": "portraits-human-masculine-dark-v5",
+      "index": 11,
+      "field": "beard",
+      "before": "stubble",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-human-masculine-dark-v5",
+      "index": 14,
+      "field": "beard",
+      "before": "mustache",
+      "after": "goatee"
+    },
+    {
+      "collection": "portraits-human-masculine-dark-v5",
+      "index": 15,
+      "field": "beard",
+      "before": "stubble",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-elf-variety-v5",
+      "index": 5,
+      "field": "beard",
+      "before": "none",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-elf-variety-v5",
+      "index": 6,
+      "field": "beard",
+      "before": "none",
+      "after": "goatee"
+    },
+    {
+      "collection": "portraits-elf-variety-v5",
+      "index": 7,
+      "field": "beard",
+      "before": "none",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-dwarf-variety-v5",
+      "index": 0,
+      "field": "beard",
+      "before": "long",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-dwarf-variety-v5",
+      "index": 3,
+      "field": "hair_style",
+      "before": "ponytail",
+      "after": "bun"
+    },
+    {
+      "collection": "portraits-dwarf-variety-v5",
+      "index": 4,
+      "field": "beard",
+      "before": "long",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-dwarf-variety-v5",
+      "index": 7,
+      "field": "hair_style",
+      "before": "ponytail",
+      "after": "bun"
+    },
+    {
+      "collection": "portraits-dwarf-variety-v5",
+      "index": 11,
+      "field": "hair_style",
+      "before": "ponytail",
+      "after": "bun"
+    },
+    {
+      "collection": "portraits-dwarf-variety-v5",
+      "index": 15,
+      "field": "hair_style",
+      "before": "ponytail",
+      "after": "bun"
+    },
+    {
+      "collection": "portraits-orc-variety-v5",
+      "index": 1,
+      "field": "beard",
+      "before": "none",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-orc-variety-v5",
+      "index": 2,
+      "field": "beard",
+      "before": "none",
+      "after": "goatee"
+    },
+    {
+      "collection": "portraits-orc-variety-v5",
+      "index": 5,
+      "field": "beard",
+      "before": "none",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-orc-variety-v5",
+      "index": 6,
+      "field": "beard",
+      "before": "none",
+      "after": "goatee"
+    },
+    {
+      "collection": "portraits-orc-variety-v5",
+      "index": 7,
+      "field": "beard",
+      "before": "none",
+      "after": "long"
+    },
+    {
+      "collection": "portraits-tiefling-variety-v5",
+      "index": 0,
+      "field": "beard",
+      "before": "none",
+      "after": "stubble"
+    },
+    {
+      "collection": "portraits-tiefling-variety-v5",
+      "index": 1,
+      "field": "beard",
+      "before": "none",
+      "after": "stubble"
+    },
+    {
+      "collection": "portraits-tiefling-variety-v5",
+      "index": 2,
+      "field": "beard",
+      "before": "none",
+      "after": "goatee"
+    },
+    {
+      "collection": "portraits-tiefling-variety-v5",
+      "index": 4,
+      "field": "beard",
+      "before": "none",
+      "after": "goatee"
+    },
+    {
+      "collection": "portraits-tiefling-variety-v5",
+      "index": 5,
+      "field": "beard",
+      "before": "none",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-tiefling-variety-v5",
+      "index": 6,
+      "field": "beard",
+      "before": "none",
+      "after": "goatee"
+    },
+    {
+      "collection": "portraits-tiefling-variety-v5",
+      "index": 7,
+      "field": "beard",
+      "before": "none",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-halfling-variety-v5",
+      "index": 2,
+      "field": "beard",
+      "before": "none",
+      "after": "goatee"
+    },
+    {
+      "collection": "portraits-halfling-variety-v5",
+      "index": 5,
+      "field": "beard",
+      "before": "none",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-halfling-variety-v5",
+      "index": 6,
+      "field": "beard",
+      "before": "none",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-gnome-variety-v5",
+      "index": 1,
+      "field": "beard",
+      "before": "none",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-gnome-variety-v5",
+      "index": 2,
+      "field": "beard",
+      "before": "none",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-gnome-variety-v5",
+      "index": 3,
+      "field": "beard",
+      "before": "none",
+      "after": "stubble"
+    },
+    {
+      "collection": "portraits-gnome-variety-v5",
+      "index": 5,
+      "field": "beard",
+      "before": "none",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-gnome-variety-v5",
+      "index": 6,
+      "field": "beard",
+      "before": "none",
+      "after": "long"
+    },
+    {
+      "collection": "portraits-gnome-variety-v5",
+      "index": 7,
+      "field": "beard",
+      "before": "none",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-goliath-variety-v5",
+      "index": 5,
+      "field": "beard",
+      "before": "none",
+      "after": "short"
+    },
+    {
+      "collection": "portraits-goliath-variety-v5",
+      "index": 6,
+      "field": "beard",
+      "before": "none",
+      "after": "long"
+    },
+    {
+      "collection": "portraits-goliath-variety-v5",
+      "index": 7,
+      "field": "beard",
+      "before": "none",
+      "after": "short"
+    }
+  ]
+}

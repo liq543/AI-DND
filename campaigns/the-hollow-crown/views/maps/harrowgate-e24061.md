@@ -1,0 +1,65 @@
+# Snapshot — party moved to Crowsfoot at Day 25, 01:26 (event 24061)
+
+### Harrowgate (`harrowgate`, wilderness 46×34, lighting dim)
+- Brakka Holloway (`brakka`, pc) at (24,19) — 71/71 HP
+- Corvin Asche (`corvin`, pc) at (22,18) — 41/41 HP
+- Kit Corvell (`kit`, pc) at (23,19) — 57/57 HP
+- Ottilie Marsh (`ottilie`, pc) at (22,19) — 48/48 HP
+- A groom at the stables (`a-groom-at-the-stables`, neutral) at (16,20) — 4/4 HP
+- Crabbe's four (late of Castle Gaunt) 1 (`crabbes-four-late-of-castle-gaunt-1`, ally) at (25,21) — 11/11 HP
+- Crabbe's four (late of Castle Gaunt) 2 (`crabbes-four-late-of-castle-gaunt-2`, ally) at (24,21) — 11/11 HP
+- Crabbe's four (late of Castle Gaunt) 3 (`crabbes-four-late-of-castle-gaunt-3`, ally) at (24,20) — 11/11 HP
+- Crabbe's four (late of Castle Gaunt) 4 (`crabbes-four-late-of-castle-gaunt-4`, ally) at (22,20) — 11/11 HP
+- Ditchley man 10 (`commoner-j`, neutral) at (31,30) — 4/4 HP · hidden
+- Ditchley man 4 (`commoner-d`, ally) at (21,17) — 4/4 HP
+- Ditchley man 5 (`commoner-e`, ally) at (19,16) — 4/4 HP
+- Ditchley man 6 (`commoner-f`, ally) at (20,16) — 4/4 HP
+- Ditchley man 7 (`commoner-g`, neutral) at (26,31) — 4/4 HP · hidden
+- Ditchley man 8 (`commoner-h`, neutral) at (29,30) — 4/4 HP · hidden
+- Ditchley man 9 (`commoner-i`, neutral) at (30,30) — 4/4 HP · hidden
+- Ditchley's reeve (`commoner-a-4`, neutral) at (24,28) — 4/4 HP · hidden
+- Nib (`nib`, neutral) at (25,19) — 4/4 HP
+- Osgar (`commoner-c`, ally) at (20,17) — 4/4 HP
+- Sergeant Dorran Lerner (`sergeant-dorran-lerner`, ally) at (18,16) — 57/75 HP · hidden
+- Sergeant Wystan Crabbe (`gaunt-sergeant-a`, ally) at (23,21) — 65/65 HP
+- Sir Gerold Ambry (`sir-gerold-ambry`, neutral) at (20,9) — 52/52 HP
+- Surrendered conscript A (`sleeping-conscript-8`, neutral) at (26,17) — 4/4 HP · hidden
+- Surrendered conscript B (`sleeping-conscript-9`, neutral) at (27,17) — 4/4 HP · hidden
+- Surrendered conscript D (`sleeping-conscript-11`, neutral) at (26,18) — 4/4 HP · hidden
+- Surrendered conscript E (`sleeping-conscript-12`, neutral) at (27,18) — 4/4 HP · hidden
+- Tam, a conscript (`sleeping-conscript-10`, enemy) at (20,10) — 4/4 HP · hidden
+- The Stag (`the-stag`, enemy) at (22,21) — 1/67 HP · restrained
+- Wilf Underhay (`commoner-b-4`, ally) at (19,17) — 4/4 HP
+- point of interest `poi-1`: The Harrowgate milestone at (9,30) → journal j480
+- point of interest `poi-2`: The crag at (20,28) → journal j481
+- point of interest `poi-3`: The castle ramp at (27,29) → journal j482
+- point of interest `poi-4`: The portcullis at (23,27) → journal j483
+- point of interest `poi-5`: Firelight in the gatehouse at (21,27) → journal j484
+- point of interest `poi-6`: The south-west tower at (10,25) → journal j485
+- point of interest `poi-7`: The keep at (17,8) → journal j486
+- point of interest `poi-8`: The north postern (Lerner's account) at (29,5) → journal j487
+- point of interest `poi-10`: The kitchen door at (24,16) → journal j489
+- point of interest `poi-11`: The barracks door at (29,15) → journal j490
+- point of interest `poi-12`: The stables at (16,20) → journal j491
+- point of interest `poi-13`: The grain cart at (21,20) → journal j492
+- point of interest `poi-14`: The smithy lean-to at (27,20) → journal j493
+- point of interest `poi-15`: The mounting block at (23,18) → journal j494
+- point of interest `poi-16`: The inner gate at (23,23) → journal j495
+- point of interest `poi-17`: The well-house door at (27,10) → journal j496
+- point of interest `poi-18`: The castle well at (27,7) → journal j497
+- point of interest `poi-19`: Mattock's pallet at (30,7) → journal j498
+- point of interest `poi-20`: The cider barrel at (26,9) → journal j499
+- point of interest `poi-21`: The guardroom brazier at (20,25) → journal j500
+- point of interest `poi-22`: Tolly's cot at (27,24) → journal j501
+- point of interest `poi-23`: The barracks spear-rack at (31,18) → journal j502
+- point of interest `poi-24`: The burning barracks at (31,15) → journal j503
+- point of interest `poi-25`: The bread ovens at (23,13) → journal j504
+- point of interest `poi-26`: The kitchen worktable at (25,14) → journal j505
+- point of interest `poi-27`: The keep door at (18,15) → journal j506
+- point of interest `poi-28`: The keep hall table at (17,11) → journal j507
+- point of interest `poi-29`: The keep hall hearth at (15,9) → journal j508
+- point of interest `poi-30`: The stair up at (20,9) → journal j509
+- point of interest `poi-31`: The stair down at (15,14) → journal j510
+- point of interest `poi-32`: The hall shelves at (20,14) → journal j511
+- point of interest `poi-33`: The new graves below the crag at (8,31) → journal j622
+- doors: (29,5) closed, (27,10) open, (18,15) closed, (29,15) open, (24,16) open, (23,23) open, (24,23) open, (22,25) open, (25,25) open, (23,27) open, (24,27) open

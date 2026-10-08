@@ -1,0 +1,57 @@
+# Snapshot — party moved to Thornbury: the West Gate quarter at Day 24, 09:55 (event 23439)
+
+### The Chapel of the Unblinking (`unblinking-chapel`, interior 32×24, lighting bright)
+- Captain Brannoc Vaux (`captain-brannoc-vaux`, neutral) at (20,12) — 112/112 HP · hidden
+- Gaunt man-at-arms A (`gaunt-man-at-arms-a`, ally) at (12,10) — 11/11 HP
+- Gaunt man-at-arms B (`gaunt-man-at-arms-b`, ally) at (13,10) — 11/11 HP
+- Gaunt man-at-arms C (`gaunt-man-at-arms-c`, ally) at (14,10) — 11/11 HP
+- Gaunt man-at-arms D (`gaunt-man-at-arms-d`, ally) at (15,10) — 11/11 HP
+- Gaunt man-at-arms E (`gaunt-man-at-arms-e`, ally) at (16,10) — 11/11 HP
+- Gaunt man-at-arms F (`gaunt-man-at-arms-f`, ally) at (17,10) — 11/11 HP
+- Gaunt man-at-arms G (`gaunt-man-at-arms-g`, ally) at (18,10) — 11/11 HP
+- Gaunt man-at-arms H (`gaunt-man-at-arms-h`, ally) at (19,10) — 11/11 HP
+- Gaunt man-at-arms I (`gaunt-man-at-arms-i`, ally) at (20,10) — 11/11 HP
+- Gaunt man-at-arms J (`gaunt-man-at-arms-j`, ally) at (21,10) — 11/11 HP
+- Gaunt man-at-arms K (`gaunt-man-at-arms-k`, ally) at (22,10) — 11/11 HP
+- Gaunt man-at-arms L (`gaunt-man-at-arms-l`, ally) at (23,10) — 11/11 HP
+- Gaunt sergeant A (`gaunt-sergeant-a`, ally) at (10,10) — 65/65 HP
+- Gaunt sergeant B (`gaunt-sergeant-b`, ally) at (11,10) — 65/65 HP
+- Gilded Hand foot A (`gilded-hand-foot-a`, neutral) at (24,11) — 9/9 HP
+- Gilded Hand foot B (`gilded-hand-foot-b`, neutral) at (24,12) — 9/9 HP
+- Gilded Hand foot C (`gilded-hand-foot-c`, neutral) at (22,13) — 9/9 HP
+- Gilded Hand foot D (`gilded-hand-foot-d`, neutral) at (23,13) — 9/9 HP
+- Gilded Hand outrider A (`gilded-hand-outrider-a`, neutral) at (26,11) — 9/9 HP
+- Gilded Hand outrider B (`gilded-hand-outrider-b`, neutral) at (26,12) — 9/9 HP
+- Hanged Man off duty A (`hanged-man-off-duty-a`, ally) at (9,20) — 11/11 HP
+- Hanged Man off duty B (`hanged-man-off-duty-b`, ally) at (25,10) — 11/11 HP
+- Hanged Man off duty C (`hanged-man-off-duty-c`, ally) at (25,13) — 11/11 HP
+- Ivo Tarrant (`bandit-g`, ally) at (7,12) — 11/11 HP · hidden
+- Peg's mother (`pegs-mother`, neutral) at (10,21) — 4/4 HP · restrained
+- Quist's rider (`quists-rider`, ally) at (6,14) — 11/11 HP · hidden
+- Sergeant Mags Orrel (`sergeant-mags-orrel`, neutral) at (21,11) — 65/65 HP · hidden
+- Sir Hugh Darrow, banneret of Castle Gaunt (`sir-hugh-darrow-banneret-of-castle-gaunt`, enemy) at (7,10) — 52/52 HP · hidden
+- Thornbury recruits 1 (`thornbury-recruits-1`, ally) at (10,16) — 4/4 HP
+- Thornbury recruits 2 (`thornbury-recruits-2`, ally) at (10,17) — 4/4 HP
+- Thornbury recruits 3 (`thornbury-recruits-3`, ally) at (10,15) — 4/4 HP
+- Thornbury recruits 4 (`thornbury-recruits-4`, ally) at (8,16) — 4/4 HP
+- Thornbury recruits 5 (`thornbury-recruits-5`, ally) at (10,18) — 4/4 HP
+- container `ennis-strongbox`: Ennis's strongbox at (13,1)
+- container `ennis-chest`: Ennis's clothes chest at (6,3)
+- container `brothers-chest`: The brothers' chest at (17,3)
+- container `alms-box`: The alms box at (29,9)
+- container `vestment-chest`: The vestment chest at (12,22)
+- container `barracks-armoury`: The barracks armoury at (6,21)
+- point of interest `poi-2`: The altar at (3,11) → journal j349
+- point of interest `poi-3`: The silver-eye doors at (31,11) → journal j350
+- point of interest `poi-4`: The notice board at (25,9) → journal j351
+- point of interest `poi-5`: The aisle runner at (14,11) → journal j352
+- point of interest `poi-6`: The lamp that never goes out at (6,8) → journal j353
+- point of interest `poi-7`: Ennis's writing desk at (6,6) → journal j354
+- point of interest `poi-8`: The listening grille at (16,21) → journal j355
+- point of interest `poi-9`: The study desk at (9,2) → journal j356
+- point of interest `poi-10`: The toppled brazier at (4,13) → journal j381
+- point of interest `poi-11`: The recruiting table at (30,13) → journal j518
+- point of interest `poi-12`: The Charter Chair at (5,12) → journal j519
+- point of interest `poi-13`: The Unblinking Face (smashed) at (1,11) → journal j587
+- doors: (24,2) closed, (10,4) closed, (19,4) closed, (31,11) open, (31,12) open, (9,19) closed, (15,19) closed, (18,19) closed, (21,19) closed
+- labels: The nave (14,6), Ennis's study (9,2), The brothers' dormitory (19,2), Vestry (8,21), The listening room (16,21), Store (21,21), Porch (27,11)

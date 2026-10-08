@@ -114,6 +114,9 @@ def move_cost(m, x, y):
 
 
 def blocks_sight(m, x, y):
+    # an opaque spell wall standing on the square (Wall of Fire) blocks sight like stone
+    if any(w.get("opaque") and [x, y] in w["cells"] for w in m.get("spell_walls", [])):
+        return True
     return TERRAIN.get(cell(m, x, y), TERRAIN["."])[2]
 
 

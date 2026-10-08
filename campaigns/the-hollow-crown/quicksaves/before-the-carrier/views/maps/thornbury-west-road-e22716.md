@@ -1,0 +1,56 @@
+# Snapshot — party moved to The Chapel of the Unblinking at Day 23, 18:40 (event 22716)
+
+### The March Road before the West Gate (`thornbury-west-road`, wilderness 38×24, lighting dim)
+- Brakka Holloway (`brakka`, pc) at (12,10) — 71/71 HP
+- Corvin Asche (`corvin`, pc) at (28,12) — 41/41 HP
+- Kit Corvell (`kit`, pc) at (29,11) — 57/57 HP
+- Ottilie Marsh (`ottilie`, pc) at (12,13) — 48/48 HP
+- A carter with a load of turnips (`a-carter-with-a-load-of-turnips`, neutral) at (30,13) — 4/4 HP · hidden
+- Captain Brannoc Vaux (`captain-brannoc-vaux`, neutral) at (32,11) — 112/112 HP
+- Causeway watchman with a torch (`guard-a-5`, enemy) at (32,10) — DEAD · hidden
+- Causeway watchman with a torch (`guard-b-5`, enemy) at (32,12) — DEAD · hidden
+- Gaunt man-at-arms A (`gaunt-man-at-arms-a`, enemy) at (6,11) — 11/11 HP
+- Gaunt man-at-arms B (`gaunt-man-at-arms-b`, enemy) at (6,10) — 11/11 HP
+- Gaunt man-at-arms C (`gaunt-man-at-arms-c`, enemy) at (6,12) — 11/11 HP
+- Gaunt man-at-arms D (`gaunt-man-at-arms-d`, enemy) at (7,11) — 11/11 HP
+- Gaunt man-at-arms E (`gaunt-man-at-arms-e`, enemy) at (5,11) — 11/11 HP
+- Gaunt man-at-arms F (`gaunt-man-at-arms-f`, enemy) at (7,12) — 11/11 HP
+- Gaunt man-at-arms G (`gaunt-man-at-arms-g`, enemy) at (7,10) — 11/11 HP
+- Gaunt man-at-arms H (`gaunt-man-at-arms-h`, enemy) at (5,12) — 11/11 HP
+- Gaunt man-at-arms I (`gaunt-man-at-arms-i`, enemy) at (5,10) — 11/11 HP
+- Gaunt man-at-arms J (`gaunt-man-at-arms-j`, enemy) at (4,11) — 11/11 HP
+- Gaunt man-at-arms K (`gaunt-man-at-arms-k`, enemy) at (6,9) — 11/11 HP
+- Gaunt man-at-arms L (`gaunt-man-at-arms-l`, enemy) at (6,13) — 11/11 HP
+- Gaunt man-at-arms M (`gaunt-man-at-arms-m`, enemy) at (7,13) — 11/11 HP
+- Gaunt man-at-arms N (`gaunt-man-at-arms-n`, enemy) at (8,10) — 11/11 HP
+- Gaunt man-at-arms O (`gaunt-man-at-arms-o`, enemy) at (7,9) — 11/11 HP
+- Gaunt man-at-arms P (`gaunt-man-at-arms-p`, enemy) at (4,10) — 11/11 HP
+- Gaunt sergeant A (`gaunt-sergeant-a`, enemy) at (9,11) — 65/65 HP
+- Gaunt sergeant B (`gaunt-sergeant-b`, enemy) at (8,11) — 65/65 HP
+- Hanged Man at the toll table (`hanged-man-at-the-toll-table`, ally) at (16,11) — 11/11 HP
+- Hanged Man off duty B (`hanged-man-off-duty-b`, ally) at (17,11) — 11/11 HP
+- Hanged Man off duty C (`hanged-man-off-duty-c`, ally) at (17,12) — 11/11 HP
+- Hanged Man on the West Gate toll (`hanged-man-on-the-west-gate-toll`, ally) at (16,12) — 11/11 HP
+- League man in grey (`guard-c-3`, enemy) at (37,10) — DEAD · hidden
+- Night watchman with a crossbow (`guard-b-4`, enemy) at (35,12) — DEAD · hidden
+- Night watchman with a lantern (`guard-a-4`, enemy) at (35,10) — DEAD · hidden
+- Ord, the League house under-clerk (`ord-the-league-house-under-clerk`, neutral) at (29,20) — DEAD
+- Peg, the Wheatsheaf's serving girl (`the-serving-girl`, neutral) at (28,18) — DEAD · restrained
+- Sir Anselm Brey (`sir-anselm-brey`, enemy) at (11,10) — 52/52 HP
+- Sir Hugh Darrow, banneret of Castle Gaunt (`sir-hugh-darrow-banneret-of-castle-gaunt`, enemy) at (12,11) — 52/52 HP
+- Sir Piers Whitlock (`sir-piers-whitlock`, enemy) at (11,12) — 52/52 HP
+- Townsfolk at the gallows A (`townsfolk-at-the-gallows-a`, neutral) at (23,16) — 4/4 HP · hidden
+- Townsfolk at the gallows B (`townsfolk-at-the-gallows-b`, neutral) at (22,16) — 4/4 HP · hidden
+- Townsfolk at the gallows C (`townsfolk-at-the-gallows-c`, neutral) at (24,16) — 4/4 HP · hidden
+- Townsfolk at the gallows D (`townsfolk-at-the-gallows-d`, neutral) at (23,17) — 4/4 HP · hidden
+- Townsfolk at the gallows E (`townsfolk-at-the-gallows-e`, neutral) at (23,15) — 4/4 HP · hidden
+- point of interest `poi-2`: The town ditch at (31,5) → journal j373
+- point of interest `poi-3`: The roadside copse at (7,4) → journal j374
+- point of interest `poi-4`: The ruined tithe barn at (10,17) → journal j375
+- point of interest `poi-5`: The roadside shrine at (20,8) → journal j376
+- point of interest `poi-6`: The milestone at (25,14) → journal j377
+- point of interest `poi-8`: The West Gate at (34,11) → journal j555
+- point of interest `poi-9`: The alarm bell at (36,10) → journal j556
+- point of interest `poi-10`: The proclamation board at (30,12) → journal j557
+- point of interest `poi-11`: The town gallows (Peg and Ord hanging) at (28,19) → journal j586
+- doors: (10,15) open

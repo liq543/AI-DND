@@ -239,6 +239,9 @@ class Game:
 
     # ------------------------------------------------------------ event plumbing
     def emit(self, type_, **data):
+        if type_ in ('entity.add','entity.set'):
+            from . import portrait_profiles
+            data=portrait_profiles.prepare(self.state,type_,data)
         ev = {"type": type_, "data": copy.deepcopy(data)}
         if self.cmdline:
             ev["cmd"] = self.cmdline

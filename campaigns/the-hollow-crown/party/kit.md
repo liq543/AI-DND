@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** Player · **Human** · **Rogue 7** (Thief) · **Background:** Criminal · **XP:** 25357
+**Player:** Player · **Human** · **Rogue 7** (Thief) · **Background:** Criminal · **XP:** 29849
 
 **HP** 57/57 · **AC** 16 (Studded Leather Armor 12 + Dex 4) · **Speed** 30 ft · **Initiative** +7 · **Proficiency** +3 · **Passive Perception** 17
 
@@ -20,7 +20,7 @@
 
 | Attack | To hit | Damage | Notes |
 |---|---|---|---|
-| Dagger of Venom | +8 | 1d4+5 piercing | range 20/60 ft, mastery nick |
+| Shortbow +2 | +9 | 1d6+6 piercing | range 80/320 ft, mastery vex |
 | Dagger +1 | +8 | 1d4+5 piercing | range 20/60 ft, mastery nick |
 | Unarmed Strike | +2 | 0 bludgeoning | reach 5 ft |
 
@@ -36,7 +36,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 293 GP 7 SP 5 CP
+**Coins:** 1988 GP 7 SP 1 CP
 
 - `the-magpies-key-1` 1× The Magpie's Key · _stolen: Lot 9, lifted from Dorothea Quill mid-raid_
 - `quiver-1` 1× Quiver · _starting equipment_
@@ -45,7 +45,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `bell-1` 1× Bell · _starting equipment (unpacked from Burglar's Pack)_
 - `candle-1` 50× Candle · _starting equipment (unpacked from Burglar's Pack)_
 - `crowbar-1` 1× Crowbar · _starting equipment (unpacked from Burglar's Pack)_
-- `oil-1` 21× Oil · _starting equipment (unpacked from Burglar's Pack)_
+- `oil-1` 20× Oil · _starting equipment (unpacked from Burglar's Pack)_
 - `rations-1` 5× Rations · _starting equipment (unpacked from Burglar's Pack)_
 - `tinderbox-1` 1× Tinderbox · _starting equipment (unpacked from Burglar's Pack)_
 - `waterskin-1` 1× Waterskin · _starting equipment (unpacked from Burglar's Pack)_
@@ -55,7 +55,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `cart-1` 2× Cart · _purchased for 15 GP_
 - `horse-draft-1` 1× Horse, Draft · _purchased for 50 GP_
 - `studded-leather-armor-1` 1× Studded Leather Armor (equipped) · _purchased for 90 GP_
-- `arrows-2` 99× Arrows · _starting equipment_
+- `arrows-2` 97× Arrows · _starting equipment_
 - `arrows-3` 1× Arrows · _starting equipment_
 - `lantern-hooded-1` 1× Lantern, Hooded · _purchased for 5 GP_
 - `lantern-bullseye-1` 1× Lantern, Bullseye · _purchased for 10 GP_
@@ -66,7 +66,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `oilcloth-wrap-1` 4× Oilcloth wrap · _purchased for 5 GP_
 - `rope-1` 1× Rope · _purchased for 1 GP_
 - `smoked-glass-visor-1` 1× Smoked-glass visor · _stolen: the Eye's vault_
-- `dagger-of-venom-1` 1× Dagger of Venom (Dagger of Venom) (equipped) — Rare · _stolen: Acquisitions case A-148, Cage Three, Undercroft Stores (swapped for a plain dagger)_
+- `dagger-of-venom-1` 1× Dagger of Venom (Dagger of Venom) — Rare · _stolen: Acquisitions case A-148, Cage Three, Undercroft Stores (swapped for a plain dagger)_
   - Acquisitions exhibit A-148, lifted from its glass case in the Undercroft Stores. A slim blade of blued black steel with a green-enamelled hilt, faintly oily to the touch. A plain dagger lies on the black felt in its place, under an unbroken Acquisitions seal.
 - `letter-of-passage-lidles-1` 1× Letter of passage (Lidless Court) · _loot: the Emissary's wallet_
 - `casket-key-on-a-cord-1` 1× Casket key on a cord · _loot: the Emissary's neck_
@@ -90,7 +90,6 @@ Species traits: Resourceful, Skillful, Versatile
 - `the-marchwood-tally-roll-1` 1× The Marchwood tally-roll · _loot: the oiled-leather tube strapped inside the tax wagon's tailboard_
 - `quists-papers-1` 1× Quist's papers · _gift: drawn by Quist that evening_
 - `the-factors-key-1` 1× The factor's key · _loot: Factor Ambrose Leck's neck_
-- `dagger-1-1` 1× Dagger +1 (equipped) — Uncommon · _purchased for 402 GP_
 - `the-leagues-seal-1` 1× The League's seal · _stolen: the factor's desk in the League counting room_
 - `blank-league-letters-of--1` 1× Blank League letters of credit · _stolen: a locked drawer in the League counting room_
 - `the-leagues-register-of--1` 1× The League's register of letters · _stolen: the League strongroom, Thornbury_
@@ -106,10 +105,8 @@ Species traits: Resourceful, Skillful, Versatile
 - `watch-captain-ormes-keys-1` 1× Watch-captain Orme's keys · _loot: Watch-captain Orme_
 - `keys-of-the-lidless-chap-1` 1× Keys of the Lidless chapel · _gift: Reeve Ashby's surrender of Thornbury_
 - `mattocks-keys-1` 1× Mattock's keys · _loot: Old Mattock's wrist, the well-house at Harrowgate_
-- `antler-token-of-the-thor-1` 1× Sedge's antler token (Antler token of the Thornpact) · _loot: Sedge's body at the Hartstone_
-  - A disc of polished antler the size of a palm, carved with a stag's head crowned by an oak over an open hand, strung on red cord. Old, worn smooth by many thumbs. Found in Sedge's furs.
 - `lerners-written-confessi-1` 1× Lerner's written confession · _gift: written by Sergeant Lerner under Ottilie's charm, Day 18_
-- `shortbow-2-1` 1× Shortbow +2 — Rare · _gift: the Rookery armoury (retcon by ruling: the bow owed since Day 1)_
+- `shortbow-2-1` 1× Shortbow +2 (equipped) — Rare · _gift: the Rookery armoury (retcon by ruling: the bow owed since Day 1)_
 - `robe-of-eyes-1` 1× Robe of Eyes (equipped) (attuned) — Rare · _loot: Sabine's iron-bound travelling chest_
 - `potion-of-healing-2` 2× Potion of Healing — Common · _loot: Sabine's iron-bound travelling chest_
 - `fenns-keys-1` 1× Fenn's keys · _loot: Fenn's pockets_
@@ -117,6 +114,29 @@ Species traits: Resourceful, Skillful, Versatile
 - `potion-of-greater-healin-2` 1× Potion of Greater Healing — Uncommon · _loot: Fenn's strongbox_
 - `fenns-ledger-of-watching-1` 1× Fenn's ledger of watchings · _loot: Fenn's strongbox_
 - `lerners-letter-day-22-1` 1× Lerner's letter (Day 22) · _gift: Quist's rider_
+- `the-tax-clerks-key-ring-1` 1× The tax clerk's key ring · _stolen: the Ashby tax clerk's nail_
+- `ashby-hundred-tax-rolls-1` 1× Ashby hundred tax rolls · _stolen: the Ashby tax house rolls room_
+  - An armful of parchment from the Ashby tax house rolls room and deed chest: the hundred's assessment and arrears rolls (every holding in Ashby hundred, what it owes for the Midsummer quarter, and who is behind); the quarter's distraint warrants, signed by Master Pellam Sayle; and Sayle's receipts to the Regency's exchequer.
+- `silver-christening-cup-1` 1× Silver christening cup · _loot: A tagged bundle of distrained valuables_
+- `pewter-candlesticks-1` 1× Pewter candlesticks · _loot: A tagged bundle of distrained valuables_
+- `dagger-1-1` 1× Dagger +1 (equipped) — Uncommon · _purchased for 402 GP_
+- `ring-of-motte-keys-1` 1× Ring of motte keys · _loot: Sir Osric Vane's gear_
+- `garrison-pay-roll-1` 1× Garrison pay roll · _loot: The pay chest_
+- `potion-of-healing-3` 2× Potion of Healing (UNIDENTIFIED — players see "Unidentified potion") — Common · _loot: Osric's travelling chest_
+- `fine-clothes-1` 1× Fine clothes (in Bag of Holding) · _loot: Osric's travelling chest_
+- `healers-kit-1` 1× Healer's Kit · _loot: The armoury_
+- `potion-of-healing-4` 1× Potion of Healing (UNIDENTIFIED — players see "Unidentified potion") — Common · _loot: The sergeants' chest_
+- `brandy-1` 1× Brandy (in Bag of Holding) · _loot: The sergeants' chest_
+- `duty-roster-1` 1× Duty roster · _loot: The sergeants' chest_
+- `chain-shirt-1` 4× Chain Shirt (in Bag of Holding) · _loot: The armoury_
+- `shield-1` 6× Shield (in Bag of Holding) · _loot: The armoury_
+- `spear-1` 10× Spear (in Bag of Holding) · _loot: The armoury_
+- `plate-armor-1` 1× Plate Armor (in Bag of Holding) · _loot: Sir Osric Vane's gear_
+- `shield-2` 1× Shield (in Bag of Holding) · _loot: Sir Osric Vane's gear_
+- `longsword-1` 1× Longsword (in Bag of Holding) · _loot: Sir Osric Vane's gear_
+- `light-crossbow-1` 4× Light Crossbow (in Bag of Holding) · _loot: The weapon racks_
+- `bolts-1` 80× Bolts (in Bag of Holding) · _loot: The weapon racks_
+- `spear-2` 12× Spear (in Bag of Holding) · _starting equipment_
 
 Hit Point Dice: Rogue d8 7/7
 Languages: Common, Elvish, Halfling, Thieves' Cant · Tools: Thieves' Tools · Armor training: light

@@ -1,0 +1,20 @@
+{
+  "samples": 64,
+  "initial_selection": {
+    "median_ms": 1.217,
+    "p95_ms": 1.566,
+    "worst_ms": 7.347
+  },
+  "cold_face_and_portrait": {
+    "median_ms": 0.22,
+    "p95_ms": 0.302,
+    "worst_ms": 0.324
+  },
+  "warm_face_and_portrait": {
+    "median_ms": 0.046,
+    "p95_ms": 0.065,
+    "worst_ms": 0.089
+  },
+  "distinct_choices": 55,
+  "image_service_calls": 0
+}

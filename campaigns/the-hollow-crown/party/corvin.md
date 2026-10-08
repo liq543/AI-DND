@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Wizard 7** (Evoker) · **Background:** Sage · **XP:** 25357
+**Player:** DM · **Human** · **Wizard 7** (Evoker) · **Background:** Sage · **XP:** 29849
 
 **HP** 41/41 · **AC** 14 (unarmored 10 + Dex 2 + bracers 2) · **Speed** 30 ft · **Initiative** +5 · **Proficiency** +3 · **Passive Perception** 11
 
@@ -27,7 +27,7 @@ Attacks per Attack action: 1
 ## Spellcasting
 
 - **Wizard:** save DC 15, attack +7, cantrips 4, prepared 11, up to level 4
-- **Slots:** L1 4/4, L2 3/3, L3 2/3, L4 1/1
+- **Slots:** L1 4/4, L2 3/3, L3 3/3, L4 1/1
 - **Cantrips:** fire-bolt, mage-hand, minor-illusion, light
 - **Prepared:** shield, sending, sleep, misty-step, invisibility, suggestion, fireball, counterspell, animate-dead, dispel-magic, wall-of-fire
 - **Spellbook:** detect-magic, identify, shield, sleep, magic-missile, alarm, feather-fall, disguise-self, misty-step, knock, invisibility, suggestion, fireball, counterspell, animate-dead, dispel-magic, wall-of-fire, sending
@@ -46,7 +46,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 100 GP 1 SP 5 CP
+**Coins:** 106 GP 1 SP 5 CP
 
 - `dagger-1` 2× Dagger · _starting equipment_
 - `quarterstaff-1` 2× Quarterstaff · _starting equipment (Arcane Focus)_
@@ -75,6 +75,9 @@ Species traits: Resourceful, Skillful, Versatile
 - `the-marchwood-tax-rolls-1` 1× The Marchwood tax rolls · _loot: Harrowgate's strongroom, the tax-roll chest_
 - `the-lord-protectors-lett-1` 1× The Lord Protector's letters to Harrowgate · _loot: Harrowgate's strongroom, the tally shelves_
 - `spell-scroll-hold-person-1` 1× Spell Scroll (Hold Person) — Uncommon · _loot: The brothers' packs_
+- `dice-set-1` 1× Dice set · _loot: The footlockers_
+- `playing-card-set-1` 1× Playing card set · _loot: The footlockers_
+- `lucky-charm-1` 1× Lucky charm · _loot: The footlockers_
 
 Hit Point Dice: Wizard d6 7/7
 Languages: Common, Elvish, Draconic · Tools: Calligrapher's Supplies · Armor training: none

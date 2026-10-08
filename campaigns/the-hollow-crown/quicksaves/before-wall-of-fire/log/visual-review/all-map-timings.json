@@ -1,0 +1,303 @@
+[
+  {
+    "fixture": "region:The Hollowmark",
+    "cold_ms": 83.77,
+    "median_ms": 55.63,
+    "p95_ms": 77.51,
+    "svg_bytes": 1033433
+  },
+  {
+    "fixture": "interior:The Rookery",
+    "cold_ms": 45.68,
+    "median_ms": 15.72,
+    "p95_ms": 17.43,
+    "svg_bytes": 1603702
+  },
+  {
+    "fixture": "interior:The Grey Barrow",
+    "cold_ms": 22.24,
+    "median_ms": 16.08,
+    "p95_ms": 19.27,
+    "svg_bytes": 1078067
+  },
+  {
+    "fixture": "interior:The Socket",
+    "cold_ms": 8.2,
+    "median_ms": 4.9,
+    "p95_ms": 5.54,
+    "svg_bytes": 769162
+  },
+  {
+    "fixture": "interior:Crowsfoot",
+    "cold_ms": 36.3,
+    "median_ms": 26.02,
+    "p95_ms": 29.47,
+    "svg_bytes": 1662948
+  },
+  {
+    "fixture": "interior:The Pens",
+    "cold_ms": 20.8,
+    "median_ms": 15.85,
+    "p95_ms": 17.12,
+    "svg_bytes": 965712
+  },
+  {
+    "fixture": "interior:The Beech Holloway",
+    "cold_ms": 26.53,
+    "median_ms": 23.17,
+    "p95_ms": 26.27,
+    "svg_bytes": 693878
+  },
+  {
+    "fixture": "wilderness:The Gallows track, by night",
+    "cold_ms": 6.53,
+    "median_ms": 4.45,
+    "p95_ms": 5.63,
+    "svg_bytes": 554901
+  },
+  {
+    "fixture": "wilderness:The Gallows track, the turn-off",
+    "cold_ms": 6.77,
+    "median_ms": 4.97,
+    "p95_ms": 6.0,
+    "svg_bytes": 556587
+  },
+  {
+    "fixture": "wilderness:The Gallows track, the turn-off",
+    "cold_ms": 5.88,
+    "median_ms": 3.87,
+    "p95_ms": 4.29,
+    "svg_bytes": 523972
+  },
+  {
+    "fixture": "wilderness:The Withy Pond",
+    "cold_ms": 19.1,
+    "median_ms": 15.77,
+    "p95_ms": 17.71,
+    "svg_bytes": 687922
+  },
+  {
+    "fixture": "wilderness:The deer path, at first light",
+    "cold_ms": 7.12,
+    "median_ms": 5.06,
+    "p95_ms": 6.55,
+    "svg_bytes": 539979
+  },
+  {
+    "fixture": "battle:The Gallows track, the charcoal clearing",
+    "cold_ms": 7.84,
+    "median_ms": 5.11,
+    "p95_ms": 6.16,
+    "svg_bytes": 620576
+  },
+  {
+    "fixture": "wilderness:Fallowfield",
+    "cold_ms": 32.43,
+    "median_ms": 25.06,
+    "p95_ms": 36.26,
+    "svg_bytes": 1002824
+  },
+  {
+    "fixture": "battle:The Old Toll Bridge",
+    "cold_ms": 12.14,
+    "median_ms": 8.74,
+    "p95_ms": 10.32,
+    "svg_bytes": 674130
+  },
+  {
+    "fixture": "town:Thornbury: the West Gate quarter",
+    "cold_ms": 40.15,
+    "median_ms": 35.02,
+    "p95_ms": 44.19,
+    "svg_bytes": 1191520
+  },
+  {
+    "fixture": "interior:The Wheatsheaf",
+    "cold_ms": 19.44,
+    "median_ms": 11.21,
+    "p95_ms": 12.0,
+    "svg_bytes": 929735
+  },
+  {
+    "fixture": "interior:Coldharbour",
+    "cold_ms": 13.48,
+    "median_ms": 9.05,
+    "p95_ms": 10.19,
+    "svg_bytes": 824009
+  },
+  {
+    "fixture": "interior:The Chapel of the Unblinking",
+    "cold_ms": 16.2,
+    "median_ms": 9.21,
+    "p95_ms": 9.99,
+    "svg_bytes": 1112749
+  },
+  {
+    "fixture": "town:Thornbury",
+    "cold_ms": 18.04,
+    "median_ms": 16.43,
+    "p95_ms": 17.76,
+    "svg_bytes": 883937
+  },
+  {
+    "fixture": "interior:The Mission house, Ambersell (upper floor)",
+    "cold_ms": 9.01,
+    "median_ms": 3.02,
+    "p95_ms": 3.88,
+    "svg_bytes": 868061
+  },
+  {
+    "fixture": "wilderness:The March Road before the West Gate",
+    "cold_ms": 23.17,
+    "median_ms": 16.29,
+    "p95_ms": 21.79,
+    "svg_bytes": 937780
+  },
+  {
+    "fixture": "wilderness:The March Road, east of Harrowgate",
+    "cold_ms": 11.03,
+    "median_ms": 7.49,
+    "p95_ms": 8.35,
+    "svg_bytes": 684442
+  },
+  {
+    "fixture": "interior:The League house, Thornbury",
+    "cold_ms": 15.29,
+    "median_ms": 9.08,
+    "p95_ms": 10.25,
+    "svg_bytes": 946878
+  },
+  {
+    "fixture": "wilderness:Brockholt",
+    "cold_ms": 16.44,
+    "median_ms": 12.0,
+    "p95_ms": 13.64,
+    "svg_bytes": 839612
+  },
+  {
+    "fixture": "wilderness:Oxbow Mill",
+    "cold_ms": 7.94,
+    "median_ms": 5.36,
+    "p95_ms": 6.76,
+    "svg_bytes": 655826
+  },
+  {
+    "fixture": "town:Thornbury: the Cornmarket",
+    "cold_ms": 23.73,
+    "median_ms": 20.39,
+    "p95_ms": 23.8,
+    "svg_bytes": 1021756
+  },
+  {
+    "fixture": "interior:The Gilded Hand's hall, Gildford",
+    "cold_ms": 15.88,
+    "median_ms": 4.51,
+    "p95_ms": 6.69,
+    "svg_bytes": 763817
+  },
+  {
+    "fixture": "wilderness:Harrowgate",
+    "cold_ms": 54.48,
+    "median_ms": 71.26,
+    "p95_ms": 104.62,
+    "svg_bytes": 1278552
+  },
+  {
+    "fixture": "interior:Harrowgate's strongroom",
+    "cold_ms": 10.82,
+    "median_ms": 2.27,
+    "p95_ms": 3.38,
+    "svg_bytes": 599889
+  },
+  {
+    "fixture": "wilderness:Brackenhow: Aelric's farm",
+    "cold_ms": 31.6,
+    "median_ms": 10.94,
+    "p95_ms": 15.62,
+    "svg_bytes": 947964
+  },
+  {
+    "fixture": "wilderness:The Hartstone",
+    "cold_ms": 23.17,
+    "median_ms": 18.37,
+    "p95_ms": 22.16,
+    "svg_bytes": 758933
+  },
+  {
+    "fixture": "wilderness:The Gallows Oak",
+    "cold_ms": 16.63,
+    "median_ms": 13.36,
+    "p95_ms": 14.09,
+    "svg_bytes": 741198
+  },
+  {
+    "fixture": "portrait:ranger",
+    "cold_ms": 0.74,
+    "median_ms": 0.3,
+    "p95_ms": 0.63,
+    "svg_bytes": 22514
+  },
+  {
+    "fixture": "portrait:knight",
+    "cold_ms": 0.83,
+    "median_ms": 0.44,
+    "p95_ms": 0.66,
+    "svg_bytes": 21286
+  },
+  {
+    "fixture": "portrait:mage",
+    "cold_ms": 0.6,
+    "median_ms": 0.3,
+    "p95_ms": 0.43,
+    "svg_bytes": 24170
+  },
+  {
+    "fixture": "portrait:cleric",
+    "cold_ms": 0.6,
+    "median_ms": 0.39,
+    "p95_ms": 0.51,
+    "svg_bytes": 25838
+  },
+  {
+    "fixture": "portrait:wolf",
+    "cold_ms": 0.33,
+    "median_ms": 0.01,
+    "p95_ms": 0.02,
+    "svg_bytes": 20396
+  },
+  {
+    "fixture": "portrait:dragon",
+    "cold_ms": 0.22,
+    "median_ms": 0.01,
+    "p95_ms": 0.02,
+    "svg_bytes": 24522
+  },
+  {
+    "fixture": "item:Silver Longsword",
+    "cold_ms": 1.1,
+    "median_ms": 0.08,
+    "p95_ms": 0.18,
+    "svg_bytes": 19087
+  },
+  {
+    "fixture": "item:Potion of Healing",
+    "cold_ms": 1.44,
+    "median_ms": 0.22,
+    "p95_ms": 0.27,
+    "svg_bytes": 29897
+  },
+  {
+    "fixture": "item:Ruby Amulet",
+    "cold_ms": 0.38,
+    "median_ms": 0.18,
+    "p95_ms": 0.23,
+    "svg_bytes": 29422
+  },
+  {
+    "fixture": "item:Leather Spellbook",
+    "cold_ms": 0.8,
+    "median_ms": 0.3,
+    "p95_ms": 0.68,
+    "svg_bytes": 37775
+  }
+]

@@ -520,6 +520,9 @@ def render_battle(m, mode="player", entities=(), current=None, show_grid=True, c
             parts.append(f'<circle cx="{cx}" cy="{cy}" r="{cell * .3}" fill="#ffd36b" filter="url(#glow)"/>')
         elif f["type"] == "poi":
             parts.append(f'<text x="{cx}" y="{cy + 6}" text-anchor="middle" font-size="{cell * .6}">★</text>')
+    # spell walls (Wall of Fire): the burning band, then the wall itself, flickering
+    for sw in m.get("spell_walls", []):
+        parts.append(spell_wall_svg(sw, cell))
     # props: any icon from the vendored game-icons library placed on a tile as a decoration (a globe, a skull, a harp)
     for pr in m.get("props", []):
         if player and m.get("fog") and not (0 <= pr["y"] < len(revealed) and revealed[pr["y"]][pr["x"]] == "1"):
@@ -666,6 +669,43 @@ def weather_cells(grid,kind):
                 if p in water:water.remove(p);group.add(p);todo.append(p)
         if outside:out.update(group)
     return out
+
+
+def spell_wall_svg(w, cell):
+    """A standing spell wall: a heat shimmer over the squares its burning side reaches, and a sheet of
+    animated flame along its squares, drawn the moment it's cast and gone when it ends."""
+    r = random.Random(w["id"] + w["caster"])
+    gid = f'wall-{esc(w["id"])}'
+    out = [f'<g class="spell-wall"><title>{esc(w["name"])} ({esc(w["dice"])} {esc(w["type"])}; {esc(w["side"])} side burns)</title>',
+           f'<defs><linearGradient id="{gid}-core" x1="0" y1="1" x2="0" y2="0">'
+           '<stop offset="0" stop-color="#7a1004"/><stop offset=".35" stop-color="#ff4d00"/>'
+           '<stop offset=".7" stop-color="#ffb32b"/><stop offset="1" stop-color="#fff2b0"/></linearGradient>'
+           f'<radialGradient id="{gid}-heat"><stop offset="0" stop-color="#ff6a00" stop-opacity=".42"/>'
+           '<stop offset="1" stop-color="#ff3a00" stop-opacity=".12"/></radialGradient></defs>']
+    for (x, y) in w.get("hot", []):
+        d = r.uniform(1.4, 2.4)
+        out.append(f'<rect x="{x * cell}" y="{y * cell}" width="{cell}" height="{cell}" fill="url(#{gid}-heat)">'
+                   f'<animate attributeName="opacity" values=".55;.95;.65;.9;.55" dur="{d:.2f}s" repeatCount="indefinite"/></rect>')
+    for (x, y) in w["cells"]:
+        x0, y0 = x * cell, y * cell
+        out.append(f'<rect x="{x0}" y="{y0}" width="{cell}" height="{cell}" fill="#ff5a00" opacity=".85" filter="url(#glow)">'
+                   f'<animate attributeName="opacity" values=".7;1;.8;.95;.7" dur="{r.uniform(.5, .9):.2f}s" repeatCount="indefinite"/></rect>')
+        for i in range(3):
+            fx = x0 + cell * r.uniform(.15, .85)
+            h = cell * r.uniform(.75, 1.25)
+            wd = cell * r.uniform(.18, .3)
+            base = y0 + cell * .95
+            dur = r.uniform(.35, .7)
+            # each tongue is drawn from its own base so it can stretch and shrink in place
+            path = (f'M{-wd:.1f} 0 Q{-wd * 1.3:.1f} {-h * .5:.1f} 0 {-h:.1f} '
+                    f'Q{wd * 1.3:.1f} {-h * .5:.1f} {wd:.1f} 0 Z')
+            out.append(f'<g transform="translate({fx:.1f} {base:.1f})"><path d="{path}" fill="url(#{gid}-core)" opacity=".9">'
+                       f'<animateTransform attributeName="transform" type="scale" '
+                       f'values="1 1;.9 1.15;1.05 .9;.95 1.08;1 1" dur="{dur:.2f}s" repeatCount="indefinite"/>'
+                       f'<animate attributeName="opacity" values=".75;1;.8;.95;.75" dur="{dur * 1.3:.2f}s" repeatCount="indefinite"/></path></g>')
+        out.append(f'<circle cx="{x0 + cell * .5:.1f}" cy="{y0 + cell * .55:.1f}" r="{cell * .16:.1f}" fill="#fff6cf" opacity=".85"/>')
+    out.append('</g>')
+    return "".join(out)
 
 
 def prop_svg(pr, cell, T):

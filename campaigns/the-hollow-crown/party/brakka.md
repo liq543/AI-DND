@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Orc** · **Fighter 7** (Champion) · **Background:** Soldier · **XP:** 25357
+**Player:** DM · **Orc** · **Fighter 7** (Champion) · **Background:** Soldier · **XP:** 29849
 
 **HP** 71/71 · **AC** 20 (Plate Armor 18 + Defense style 1 + items 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
 
@@ -22,8 +22,6 @@
 |---|---|---|---|
 | Flame Tongue (Greatsword) | +8 | 2d6+5 slashing | reach 5 ft, mastery graze |
 | Dagger | +8 | 1d4+5 piercing | range 20/60 ft |
-| Longsword | +8 | 1d8+5 slashing | reach 5 ft |
-| Lance | +8 | 1d10+5 piercing | reach 10 ft |
 | Unarmed Strike | +8 | 6 bludgeoning | reach 5 ft |
 
 Attacks per Attack action: 2
@@ -53,7 +51,6 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 - `travelers-clothes-1` 1× Traveler's Clothes · _starting equipment_
 - `backpack-1` 1× Backpack · _starting equipment (unpacked from Dungeoneer's Pack)_
 - `caltrops-1` 1× Caltrops · _starting equipment (unpacked from Dungeoneer's Pack)_
-- `crowbar-1` 1× Crowbar · _starting equipment (unpacked from Dungeoneer's Pack)_
 - `oil-1` 2× Oil · _starting equipment (unpacked from Dungeoneer's Pack)_
 - `rations-1` 10× Rations · _starting equipment (unpacked from Dungeoneer's Pack)_
 - `tinderbox-1` 1× Tinderbox · _starting equipment (unpacked from Dungeoneer's Pack)_
@@ -70,18 +67,8 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 - `clothes-fine-1` 1× Clothes, Fine · _purchased for 45 GP_
 - `potion-of-greater-healin-1` 1× Potion of Greater Healing — Uncommon · _purchased for 200 GP_
 - `rope-1` 1× Rope · _purchased for 1 GP_
-- `pistol-1` 1× Pistol · _loot: Mother Gallows at the Gallows Oak_
-- `scimitar-1` 1× Scimitar · _loot: Mother Gallows at the Gallows Oak_
-- `studded-leather-armor-1` 1× Studded Leather Armor · _loot: Mother Gallows at the Gallows Oak_
-- `heavy-crossbow-1` 1× Heavy Crossbow · _loot: Coll_
-- `mace-1` 1× Mace · _loot: Coll_
-- `leather-armor-1` 1× Leather Armor · _loot: Coll_
-- `dagger-1` 5× Dagger (equipped) · _loot: The second penitent's belt_
-- `shield-1` 1× Shield · _loot: Sir Hugh Darrow's arms and saddlebags_
+- `dagger-1` 2× Dagger (equipped) · _loot: The second penitent's belt_
 - `darrows-saddlebags-1` 1× Darrow's saddlebags · _loot: Sir Hugh Darrow's arms and saddlebags_
-- `longsword-1` 1× Longsword (equipped) · _loot: Sir Anselm Brey's arms_
-- `shield-2` 1× Shield · _loot: Sir Anselm Brey's arms_
-- `lance-1` 1× Lance (equipped) · _loot: Sir Anselm Brey's arms_
 
 Hit Point Dice: Fighter d10 7/7
 Languages: Common, Orc, Giant · Tools: *Choose one kind of Gaming Set* (see "Equipment") · Armor training: light, medium, heavy, shield

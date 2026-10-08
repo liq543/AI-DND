@@ -541,7 +541,8 @@ def sheet_md(g, e):
     for it in e.get("inventory", []):
         lines.append(f"- `{it['id']}` {it.get('qty', 1)}× " + (f"{it['alias']} ({it['name']})" if it.get("alias") else it["name"]) +
                      ("" if item_known(it) else f" (UNIDENTIFIED — players see \"{item_display_name(it)}\")") + (" (equipped)" if it.get("equipped") else "") +
-                     (" (attuned)" if it.get("attuned") else "") + (f" — {it['rarity']}" if it.get("rarity") else "") + f" · _{it.get('source', '')}_" +
+                     (" (attuned)" if it.get("attuned") else "") + (f" (in {next((b['name'] for b in e['inventory'] if b['id'] == it['in']), 'a bag')})" if it.get("in") else "") +
+                     (f" — {it['rarity']}" if it.get("rarity") else "") + f" · _{it.get('source', '')}_" +
                      (f"\n  - {it['note']}" if it.get("note") else ""))
     lines += ["", f"Hit Point Dice: " + ", ".join(f"{c} d{srd.find('classes', c)['hit_die']} {l - e.get('hd_spent', {}).get(c, 0)}/{l}" for c, l in e["classes"].items()),
               f"Languages: {', '.join(e.get('languages', []))} · Tools: {', '.join(e.get('tools', []))} · Armor training: {', '.join(e.get('armor_training', [])) or 'none'}",

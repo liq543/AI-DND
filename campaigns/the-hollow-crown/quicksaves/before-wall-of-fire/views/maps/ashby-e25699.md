@@ -1,0 +1,51 @@
+# Snapshot — party moved to Ashby tax house, upstairs at Day 34, 21:44 (event 25699)
+
+### Ashby (`ashby`, town 52×36, lighting dark)
+- Brakka Holloway (`brakka`, pc) at (12,20) — 71/71 HP
+- Corvin Asche (`corvin`, pc) at (11,21) — 41/41 HP
+- Ottilie Marsh (`ottilie`, pc) at (12,21) — 48/48 HP
+- A Greencloak at the motte gate A (`a-greencloak-at-the-motte-gate-a`, enemy) at (38,8) — 11/11 HP
+- A Greencloak at the motte gate B (`a-greencloak-at-the-motte-gate-b`, enemy) at (38,7) — 11/11 HP
+- A Greencloak crossbow sergeant A (`a-greencloak-crossbow-sergeant-a`, enemy) at (46,4) — 11/11 HP · hidden
+- A Greencloak crossbow sergeant B (`a-greencloak-crossbow-sergeant-b`, enemy) at (45,4) — 11/11 HP · hidden
+- A Greencloak crossbow sergeant C (`a-greencloak-crossbow-sergeant-c`, enemy) at (46,3) — 11/11 HP · hidden
+- A Greencloak crossbow sergeant D (`a-greencloak-crossbow-sergeant-d`, enemy) at (47,4) — 11/11 HP · hidden
+- A Greencloak of the garrison A (`a-greencloak-of-the-garrison-a`, enemy) at (47,9) — 11/11 HP · hidden
+- A Greencloak of the garrison B (`a-greencloak-of-the-garrison-b`, enemy) at (48,9) — 11/11 HP · hidden
+- A Greencloak of the garrison C (`a-greencloak-of-the-garrison-c`, enemy) at (47,10) — 11/11 HP · hidden
+- A Greencloak of the garrison D (`a-greencloak-of-the-garrison-d`, enemy) at (46,9) — 11/11 HP · hidden
+- A Greencloak of the garrison E (`a-greencloak-of-the-garrison-e`, enemy) at (47,8) — 11/11 HP · hidden
+- A Greencloak of the garrison F (`a-greencloak-of-the-garrison-f`, enemy) at (48,8) — 11/11 HP · hidden
+- A Greencloak of the garrison G (`a-greencloak-of-the-garrison-g`, enemy) at (48,10) — 11/11 HP · hidden
+- A Greencloak of the garrison H (`a-greencloak-of-the-garrison-h`, enemy) at (46,8) — 11/11 HP · hidden
+- A Greencloak of the garrison I (`a-greencloak-of-the-garrison-i`, enemy) at (46,10) — 11/11 HP · hidden
+- A Greencloak of the garrison J (`a-greencloak-of-the-garrison-j`, enemy) at (47,7) — 11/11 HP · hidden
+- A Greencloak of the garrison K (`a-greencloak-of-the-garrison-k`, enemy) at (49,9) — 11/11 HP · hidden
+- A Greencloak of the garrison L (`a-greencloak-of-the-garrison-l`, enemy) at (47,11) — 11/11 HP · hidden
+- A Greencloak of the garrison M (`a-greencloak-of-the-garrison-m`, enemy) at (45,9) — 11/11 HP · hidden
+- A Greencloak of the garrison N (`a-greencloak-of-the-garrison-n`, enemy) at (46,7) — 11/11 HP · hidden
+- A Greencloak of the garrison O (`a-greencloak-of-the-garrison-o`, enemy) at (49,8) — 11/11 HP · hidden
+- A Greencloak of the garrison P (`a-greencloak-of-the-garrison-p`, enemy) at (48,7) — 11/11 HP · hidden
+- A Greencloak of the garrison Q (`a-greencloak-of-the-garrison-q`, enemy) at (49,10) — 11/11 HP · hidden
+- A Greencloak of the garrison R (`a-greencloak-of-the-garrison-r`, enemy) at (45,10) — 11/11 HP · hidden
+- A Greencloak of the garrison S (`a-greencloak-of-the-garrison-s`, enemy) at (46,11) — 11/11 HP · hidden
+- A Greencloak of the garrison T (`a-greencloak-of-the-garrison-t`, enemy) at (48,11) — 11/11 HP · hidden
+- A market-goer A (`a-market-goer-a`, neutral) at (30,22) — 4/4 HP · hidden
+- A market-goer B (`a-market-goer-b`, neutral) at (30,21) — 4/4 HP · hidden
+- A market-goer C (`a-market-goer-c`, neutral) at (29,22) — 4/4 HP · hidden
+- A market-goer D (`a-market-goer-d`, neutral) at (30,23) — 4/4 HP · hidden
+- A town watchman with a lantern A (`a-town-watchman-with-a-lantern-a`, neutral) at (36,27) — 4/4 HP
+- A town watchman with a lantern B (`a-town-watchman-with-a-lantern-b`, neutral) at (37,27) — 4/4 HP
+- A townsman on the South Gate A (`a-townsman-on-the-south-gate-a`, neutral) at (33,33) — 4/4 HP · hidden
+- A townsman on the South Gate B (`a-townsman-on-the-south-gate-b`, neutral) at (32,33) — 4/4 HP · hidden
+- Master Pellam Sayle, the Regent's summoner (`master-pellam-sayle-the-regents-summoner`, enemy) at (29,2) — 9/9 HP · hidden
+- Sir Osric Vane (`sir-osric-vane`, enemy) at (42,3) — 52/52 HP · hidden
+- point of interest `poi-1`: The market cross at (33,24) → journal j637
+- point of interest `poi-2`: The tax house at (21,22) → journal j638
+- point of interest `poi-3`: The Crown and Sheaf at (29,3) → journal j639
+- point of interest `poi-4`: The motte gate at (39,8) → journal j640
+- point of interest `poi-5`: The motte tower at (42,3) → journal j641
+- point of interest `poi-6`: The Drowned Rat at (11,20) → journal j642
+- point of interest `poi-7`: The counting room's strongbox at (20,19) → journal j643
+- doors: (17,2) closed, (31,2) closed, (40,2) closed, (39,8) closed, (31,11) closed, (40,12) closed, (13,14) closed, (13,19) closed, (40,19) closed, (22,22) closed, (5,30) closed, (9,30) closed, (24,30) closed, (43,30) closed
+- labels: Market Square (30,20), The motte (Regency garrison) (45,7), The market cross (33,23), South Gate (33,34)

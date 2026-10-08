@@ -189,6 +189,10 @@ def parse_spell(path):
         cm = re.search(r"saving throw[^.]*?(?:or|fail\w*)[^.]*?\bhave the (\w+) condition", main, re.I)
         if cm:
             effect["condition"] = cm.group(1).lower()
+            # a rider on that condition: "While Charmed, the creature has the Incapacitated condition" (Hypnotic Pattern)
+            rider = re.search(rf"While {cm.group(1)}, (?:the creature|the target|it) has the (\w+) condition", main, re.I)
+            if rider:
+                effect["riders"] = [rider.group(1).lower()]
         if re.search(r"repeats? the (?:saving throw|save) at the end of each of its turns|"
                      r"at the end of each of its turns, (?:the|a|each) (?:target|creature) (?:repeats|can repeat) the (?:save|saving throw)",
                      main, re.I):

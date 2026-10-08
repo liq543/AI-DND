@@ -54,6 +54,28 @@ class UncannyDodgeTest(unittest.TestCase):
         code, out = _cli.run(self.env, "feature", "kira-vale", "uncanny dodge")
         self.assertNotEqual(code, 0)   # no second dodge of the same hit (and the Reaction is spent)
 
+    def test_dodge_undoes_the_fall_the_hit_caused(self):
+        # the Reaction comes before the damage: a hit that would drop the rogue to 0 is halved, and she stays up,
+        # conscious, on her feet, with her dagger still in hand
+        import engine.mechanics as M
+        g = _cli.game(self.env)
+        k = g.get("kira-vale")
+        if not any(i.get("equipped") and i.get("kind") == "weapon" for i in k["inventory"]):
+            wid = next(i["id"] for i in k["inventory"] if i.get("kind") == "weapon")
+            M.equip(g, k, wid, True)
+        before = g.get("kira-vale")["hp"]
+        M.apply_damage(g, g.get("kira-vale"), [[before + 4, "slashing"]], source="greataxe", attacker=g.get("snag"))
+        g.commit()
+        self.assertEqual(self.hp(), 0)
+        self.ok("feature", "kira-vale", "uncanny dodge")
+        g = _cli.game(self.env)
+        k = g.get("kira-vale")
+        self.assertEqual(k["hp"], before - (before + 4) // 2)
+        names = {c["name"] for c in k.get("conditions", [])}
+        self.assertNotIn("unconscious", names)
+        self.assertNotIn("prone", names)
+        self.assertTrue(any(i.get("equipped") and i.get("kind") == "weapon" for i in k["inventory"]))
+
     def test_answers_a_hand_rolled_attack(self):
         # a spell attack the engine leaves to the DM (rolled by hand) is recorded with `damage --attacker`
         before = self.hp()

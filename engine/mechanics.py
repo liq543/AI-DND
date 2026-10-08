@@ -7,7 +7,7 @@ import json
 import math
 import re
 
-from . import dice, maps, srd, effects as E, spells as S
+from . import dice, maps, srd, walls, effects as E, spells as S
 from .core import item_display_name
 from .core import (MAGIC_EFFECTS, RARITY_ORDER, TIER_MAX_GP_AWARD, TIER_MAX_RARITY, RuleError,
                    abilities, amod, armor_class, attacks_per_action, condition_names, derive, fmt_mod,
@@ -233,7 +233,20 @@ def skill_bonus_jack(e):
     return pb(e) // 2 if e.get("classes", {}).get("Bard", 0) >= 2 else 0
 
 
-def saving_throw(g, e, ability, dc, adv=(), dis=(), source=None, spell=False, now=False, request=None, effect=None, purpose=None):
+def magic_resistance(e):
+    """'greater' (Greater Magic Resistance: auto-succeeds on saves against spells and other magical effects, spell
+    attack rolls automatically miss), 'normal' (Magic Resistance: Advantage on those saves) or None."""
+    names = {(a.get("name") or "").lower() for a in e.get("actions", [])}
+    if "greater magic resistance" in names:
+        return "greater"
+    if "magic resistance" in names:
+        return "normal"
+    return None
+
+
+def saving_throw(g, e, ability, dc, adv=(), dis=(), source=None, spell=False, now=False, request=None, effect=None, purpose=None,
+                 magical=False):
+    """`spell` or `magical` (a magic item's effect, e.g. a Dagger of Venom's poison) brings in Magic Resistance."""
     ab = srd.ability_key(ability) or ability
     names = condition_names(e)
     label = f"{ab.upper()} save DC {dc}"
@@ -244,12 +257,20 @@ def saving_throw(g, e, ability, dc, adv=(), dis=(), source=None, spell=False, no
         if effect:
             apply_save_effect(g, e, res, effect)
         return res
+    mr = magic_resistance(e) if (spell or magical) else None
+    if mr == "greater":
+        g.say(f"{e['name']} automatically succeeds on the {label} (Greater Magic Resistance).", kind="roll", who=e["id"],
+              save=ab, success=True)
+        res = {"success": True, "auto": True}
+        if effect:
+            apply_save_effect(g, e, res, effect)
+        return res
     adv, dis = list(adv), list(dis)
     if ab == "dex" and "restrained" in names:
         dis.append("restrained")
     if ab == "dex" and any(c["name"] == "dodging" for c in e.get("conditions", [])):
         adv.append("Dodge")
-    if spell and any(a["name"].lower() == "magic resistance" for a in e.get("actions", [])):
+    if mr == "normal":
         adv.append("Magic Resistance")
     if bloodied_frenzy(e):
         adv.append("Bloodied Frenzy")
@@ -307,10 +328,11 @@ def apply_save_effect(g, e, res, effect):
             parts = [[a // 2, t] for a, t in parts] if effect.get("half") else []
         if parts:
             apply_damage(g, e, parts, source=effect.get("source"))
-    if effect.get("condition") and not res["success"]:
-        add_condition(g, e, effect["condition"], source=effect.get("source"), caster=effect.get("caster"),
-                      spell=effect.get("spell"), save=effect.get("repeat_save"), escalate=effect.get("escalate"),
-                      until=effect.get("until"))
+    for cond in ([effect["condition"]] if effect.get("condition") else []) + list(effect.get("conditions") or []):
+        if not res["success"]:
+            add_condition(g, e, cond, source=effect.get("source"), caster=effect.get("caster"),
+                          spell=effect.get("spell"), save=effect.get("repeat_save"), escalate=effect.get("escalate"),
+                          until=effect.get("until"))
 
 
 # ====================================================================== damage & healing
@@ -361,7 +383,8 @@ def apply_damage(g, e, parts, source=None, crit=False, attacker=None, melee_with
     if attacker is not None:
         # remembered for reactions that answer a hit (Uncanny Dodge halves the attack's damage)
         c = combat(g)
-        patch["last_hit"] = {"amount": total, "hp_lost": remaining, "attacker": attacker.get("id") if isinstance(attacker, dict) else attacker,
+        patch["last_hit"] = {"amount": total, "hp_lost": remaining, "hp_before": hp_before,
+                             "attacker": attacker.get("id") if isinstance(attacker, dict) else attacker,
                              "round": (c or {}).get("round"), "time": g.state["time"]}
     msg = f"💥 {e['name']} takes {total} damage" + (f" ({', '.join(sorted(set(notes)))})" if notes else "") + \
           (f", {absorbed} absorbed by temporary HP" if absorbed else "") + (f" from {source}" if source else "")
@@ -576,6 +599,7 @@ def end_concentration(g, e, why):
         return
     g.set(e, concentration=None)
     g.say(f"{e['name']} loses Concentration on {conc['spell_name']} ({why}).", kind="condition")
+    walls.remove_for(g, e["id"], conc["spell"])
     for other in list(g.entities.values()):
         linked = [c for c in other.get("conditions", []) if c.get("caster") == e["id"] and c.get("spell") == conc["spell"]]
         if linked:
@@ -693,7 +717,9 @@ def attack_modes(g, att, tgt, ranged, dist, extra_adv=(), extra_dis=()):
 
 def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, offhand=False, versatile=False,
            sneak=False, smite=None, now=False, request=None, bonus_action=False, knockout=False):
-    att, tgt = g.get(att_ref), g.get(tgt_ref)
+    # a save-based area action (a breath, an Emanation) can name several targets: "kira,wren,bram"
+    tgt_refs = [t.strip() for t in str(tgt_ref).split(",") if t.strip()] or [tgt_ref]
+    att, tgt = g.get(att_ref), g.get(tgt_refs[0])
     if not combat(g) and not request:
         raise RuleError("Attacking a creature starts a fight: `combat start` first (use --surprised for an ambush), "
                         "so turns and the action economy apply.")
@@ -712,7 +738,9 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
     else:
         act = monster_action(att, weapon)
         if act.get("kind") == "save":
-            return monster_save_action(g, att, act, [tgt_ref], now=now)
+            return monster_save_action(g, att, act, tgt_refs, now=now)
+        if len(tgt_refs) > 1:
+            raise RuleError(f"{act['name']} is an attack roll against one target at a time.")
         if act.get("kind") != "attack":
             raise RuleError(f"'{act['name']}' isn't an attack roll; narrate it or use `save` with its DC. Text: {act['text'][:200]}")
         if act.get("recharge") and not att.get("recharge_ready", {}).get(act["name"], True):
@@ -911,7 +939,7 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
         t2 = g.get(tgt["id"])
         if not t2.get("dead"):
             pr = g.roll("2d10", f"{name} poison", att["id"])
-            saving_throw(g, t2, "con", 15, source=f"{name} poison", now=True,
+            saving_throw(g, t2, "con", 15, source=f"{name} poison", now=True, magical=True,
                          effect={"damage": [[pr["total"], "poison"]], "half": False, "condition": "poisoned",
                                  "source": f"{name} poison (1 minute)"})
     if att["kind"] == "pc" and prof.get("mastery") and prof["mastery"] in [m.lower() for m in att.get("masteries", [])]:
@@ -1021,13 +1049,17 @@ def monster_save_action(g, att, act, targets, now=False):
         g.set(att, **{f"recharge_ready__{act['name']}": False})
     if act.get("per_day"):
         g.set(att, **{f"per_day_used__{act['name']}": att.get("per_day_used", {}).get(act["name"], 0) + 1})
-    cond = None
-    mc = re.search(r"\*Failure:\*.*?(?:has|have) the (\w+) condition", act["text"], re.S)
+    conds = []
+    mc = re.search(r"\*Failure:\*.*?(?:has|have) the (\w+(?: and \w+)?) conditions?", act["text"], re.S)
     if mc:
-        cond = mc.group(1).lower()
+        conds = [c.lower() for c in mc.group(1).split(" and ")]
+    until = None
+    if re.search(r"until the start of the [\w' -]+?'s next turn", act["text"]):
+        until = f"start of {att['id']}'s next turn"   # cleared when this creature's next turn starts
     for t in tgts:
         saving_throw(g, t, act["save_ability"], act["dc"], source=act["name"], now=now,
-                     effect={"damage": parts, "half": act.get("half_on_success"), "condition": cond, "source": act["name"]})
+                     effect={"damage": parts, "half": act.get("half_on_success"), "conditions": conds,
+                             "source": act["name"], "until": until})
     return {"ok": True}
 
 
@@ -1369,6 +1401,7 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
                                  "caster": e["id"], "spell": spell["slug"],
                                  "repeat_save": f"{fx['save']}:{sc['dc']}" if fx.get("repeat") and condition else None,
                                  "escalate": fx.get("escalate") if condition == fx.get("condition") else None,
+                                 "conditions": fx.get("riders") if condition == fx.get("condition") else None,
                                  "until": until})
     elif kind == "darts":
         if not tgts:
@@ -1412,6 +1445,11 @@ def spell_attack(g, e, t, spell, sc, expr, fx, adv, dis, now, slot=0, request=No
         cover = maps.cover_between(m, token_pos(e), token_pos(t), [token_pos(o) for o in g.entities.values() if same_map(o, e) and alive(o)])
         if cover == "total":
             raise RuleError(f"{t['name']} has Total Cover.")
+    if magic_resistance(t) == "greater":
+        # rules: Greater Magic Resistance — the attack rolls of spells automatically miss it
+        g.say(f"✨ {spell['name']} → {t['name']}: the spell's attack automatically misses (Greater Magic Resistance).",
+              kind="attack", who=e["id"], target=t["id"], hit=False, crit=False, ranged=ranged, spell=spell["slug"])
+        return {"hit": False, "crit": False, "auto": True}
     a_adv, a_dis = attack_modes(g, e, t, ranged, d, adv, dis)
     if wants_request(g, e, now) and not request:
         return {"request": make_request(g, e, f"{spell['name']} vs {t['name']}",
@@ -1520,6 +1558,11 @@ def start_of_turn(g, e):
             [c for c in e.get("conditions", []) if c["name"] == "dodging"]
     for c in conds:
         remove_condition(g, e, c["name"], quiet=True)
+    # conditions another creature imposed "until the start of <its> next turn" end now, on everyone
+    tag = f"start of {e['id']}'s next turn"
+    for o in list(g.entities.values()):
+        for c in [c for c in o.get("conditions", []) if c.get("until") == tag]:
+            remove_condition(g, g.get(o["id"]), c["name"], quiet=True)
     if e.get("legendary_actions"):
         g.set(e, legendary_used=0)
     if e["kind"] == "pc" and e["hp"] == 0 and not e.get("dead") and not e.get("death", {}).get("stable"):
@@ -1531,6 +1574,8 @@ def start_of_turn(g, e):
 
 
 def end_of_turn(g, e):
+    walls.end_turn(g, e)
+    e = g.get(e["id"])
     E.turn_boundary(g, e, "end")
     for fx in list(E.active(e)):
         if fx.get("repeat_save"):
@@ -1571,6 +1616,8 @@ def end_of_turn(g, e):
 
 def move(g, ref, dest=None, path=None, dash=False, force=None, crawl=False, jump=False, group=None):
     e = g.get(ref)
+    if not alive(e) and not force:
+        raise RuleError(f"{e['name']} is down and can't move.")
     if not e.get("token"):
         raise RuleError(f"{e['name']} isn't placed on a map. Use `place`.")
     m = g.state["maps"][e["token"]["map"]]
@@ -1608,7 +1655,14 @@ def move(g, ref, dest=None, path=None, dash=False, force=None, crawl=False, jump
                     raise RuleError(f"Square {sq} is occupied by a hostile creature — you can't move through it.")
         else:
             dest = tuple(dest)
-            dist, parent = maps.pathfind(m, start, dest, blocked=frozenset(hostile_sq), cost_mult=mult)
+            # nobody walks into a burning wall by accident: auto-routes go round it; walking through takes --path
+            fire = walls.wall_squares(m, all_walls=True) - {dest}
+            dist, parent = maps.pathfind(m, start, dest, blocked=frozenset(hostile_sq | fire), cost_mult=mult)
+            if dest not in dist and fire:
+                near, _ = maps.pathfind(m, start, dest, blocked=frozenset(hostile_sq), cost_mult=mult)
+                if dest in near:
+                    raise RuleError(f"The only way from {start} to {dest} runs through a spell wall. To walk through "
+                                    f"it anyway, give the squares with --path (entering it burns).")
             if dest not in dist:
                 raise RuleError(f"No path from {start} to {dest} (walls, impassable terrain or hostile creatures in the way).")
             full = maps.path_to(parent, start, dest)
@@ -1652,6 +1706,10 @@ def move(g, ref, dest=None, path=None, dash=False, force=None, crawl=False, jump
                         break
                     was_in = maps.distance_squares(sq, token_pos(o)) * 5 <= reach
         set_economy(g, e["id"], move_used=used + feet)
+    stop = walls.entered(g, e, full)   # a creature the wall kills goes no further than the square it fell in
+    if stop is not None:
+        full = full[:stop + 1]
+    e = g.get(e["id"])
     end = full[-1]
     g.set(e, token={**e["token"], "x": end[0], "y": end[1]})
     trap_hits = [f for f in m.get("features", []) if f.get("type") == "trap" and f.get("hidden") and (f["x"], f["y"]) in set(full[1:])]
@@ -2237,6 +2295,30 @@ def fall_inert(g, e):
         remove_item(g, g.get(e["id"]), it["id"], min(it.get("qty", 1), 2), "dropped")
 
 
+def undo_fall(g, e):
+    """A reaction that answers the hit (Uncanny Dodge) comes before its damage: if halving it keeps the creature up,
+    the fall that hit caused never happened. Unconscious and its Prone go, death saves reset, and the weapons it dropped
+    at that moment are back in hand."""
+    keep = [c for c in e.get("conditions", []) if not (c["name"] == "unconscious" and c.get("source") == "0 HP")
+            and not (c["name"] == "prone" and c.get("source") == "fell Unconscious")]
+    g.set(e, conditions=keep, death={"success": 0, "fail": 0, "stable": False})
+    t = e.get("token")
+    if not t:
+        return
+    m = g.state["maps"][t["map"]]
+    back = [f for f in m.get("floor", []) if f.get("note") == f"dropped by {e['name']}" and f.get("time", g.state["time"]) == g.state["time"]
+            and (f["x"], f["y"]) == (t["x"], t["y"]) and not f.get("in")]
+    if not back:
+        return
+    g.emit("map.set", id=t["map"], set={"floor": [f for f in m["floor"] if f not in back]})
+    e = g.get(e["id"])
+    inv = [dict(i) for i in e.get("inventory", [])]
+    for f in back:
+        inv.append(dict(f["item"], equipped=True))
+    g.set(e, inventory=inv)
+    g.say(f"  {e['name']} never let go: " + ", ".join(item_display_name(f["item"]) for f in back) + " back in hand.", kind="item")
+
+
 def bundle_size(it):
     """Pieces per priced bundle for ammunition (SRD: Arrows 20 for 1 GP). Older saved items lack the field."""
     if it.get("bundle"):
@@ -2301,7 +2383,7 @@ def put_on_floor(g, map_id, x, y, item, note, into=None):
     n = 1
     while any(f["id"] == f"floor-{n}" for f in floor):
         n += 1
-    entry = {"id": f"floor-{n}", "x": x, "y": y, "item": item, "note": note}
+    entry = {"id": f"floor-{n}", "x": x, "y": y, "item": item, "note": note, "time": g.state["time"]}
     if into:
         entry["in"] = into["id"]
     floor.append(entry)
@@ -2331,6 +2413,77 @@ def stash_item(g, e, ref, box_id, qty=1):
         set_economy(g, e["id"], object_used=True)
     remove_item(g, e, it["id"], qty, "stashed")
     put_on_floor(g, t["map"], box["x"], box["y"], dict(it, qty=qty, equipped=False, attuned=False), f"stashed by {e['name']}", into=box)
+
+
+# SRD armor and gear weights the parsed tables don't carry (rules/core/06-equipment.md)
+KNOWN_LB = {"padded-armor": 8, "leather-armor": 10, "studded-leather-armor": 13, "hide-armor": 12, "chain-shirt": 20,
+            "scale-mail": 45, "breastplate": 20, "half-plate-armor": 40, "ring-mail": 40, "chain-mail": 55,
+            "splint-armor": 60, "plate-armor": 65, "shield": 6, "light-crossbow": 5, "heavy-crossbow": 18, "hand-crossbow": 3, "bolts": 1.5 / 20, "arrows": 1 / 20}
+BAGS = {"bag-of-holding": 500, "handy-haversack": 120}
+
+
+def item_lb(it):
+    """Pounds for one of this item, from the SRD where it says, else 0 (unknown)."""
+    w = it.get("weight")
+    if isinstance(w, (int, float)):
+        return float(w)
+    m = re.match(r"([\d.]+)\s*lb", str(w or ""))
+    if m:
+        return float(m.group(1))
+    key = srd.slug(it.get("base_name") or it["name"])
+    if key in KNOWN_LB:
+        return KNOWN_LB[key]
+    for table in ("weapons", "gear", "armor"):
+        row = (srd.data().get(table) or {}).get(key)
+        m = re.match(r"([\d.]+)\s*lb", str((row or {}).get("weight") or ""))
+        if m:
+            return float(m.group(1))
+    return 0
+
+
+def bag_item(g, e, ref, bag_ref, qty=None):
+    """Put an inventory item into a carried magic bag (Bag of Holding: 500 lb, 64 cubic feet)."""
+    bag = find_item(e, bag_ref)
+    cap = BAGS.get(srd.slug(bag.get("base_name") or bag["name"]))
+    if not cap:
+        raise RuleError(f"{bag['name']} isn't a bag that holds things (Bag of Holding).")
+    it = find_item(e, ref)
+    if it["id"] == bag["id"]:
+        raise RuleError("A bag can't go inside itself.")
+    if srd.slug(it.get("base_name") or it["name"]) in BAGS:
+        raise RuleError("Putting one extradimensional bag inside another tears both open into the Astral Plane "
+                        "(Bag of Holding). Not doing that.")
+    if it.get("equipped"):
+        raise RuleError(f"Unequip {it['name']} first.")
+    n = qty or it.get("qty", 1)
+    if n > it.get("qty", 1):
+        raise RuleError(f"{e['name']} has only {it.get('qty', 1)}× {it['name']}.")
+    held = sum(item_lb(i) * i.get("qty", 1) for i in e["inventory"] if i.get("in") == bag["id"])
+    if held + item_lb(it) * n > cap:
+        raise RuleError(f"{bag['name']} holds {cap} lb; it already holds about {held:g} lb and that adds {item_lb(it) * n:g}.")
+    inv = []
+    for i in e["inventory"]:
+        if i["id"] != it["id"]:
+            inv.append(i)
+        elif n >= i.get("qty", 1):
+            inv.append(dict(i, **{"in": bag["id"]}))
+        else:
+            inv.append(dict(i, qty=i.get("qty", 1) - n))
+            k = 1
+            while any(x["id"] == f"{i['id']}-bag{k}" for x in e["inventory"]):
+                k += 1
+            inv.append(dict(i, id=f"{i['id']}-bag{k}", qty=n, **{"in": bag["id"]}))
+    g.set(e, inventory=inv)
+    g.say(f"👜 {e['name']} puts {n}× {it['name']} into the {bag['name']} "
+          f"(about {held + item_lb(it) * n:g} of {cap} lb).", kind="item")
+
+
+def unbag_item(g, e, ref):
+    it = find_item(e, ref)
+    if not it.get("in"):
+        raise RuleError(f"{it['name']} isn't in a bag.")
+    g.set(e, inventory=[dict({k: v for k, v in i.items() if k != "in"}) if i["id"] == it["id"] else i for i in e["inventory"]])
+    g.say(f"👜 {e['name']} takes {it.get('qty', 1)}× {it['name']} out of the bag.", kind="item")
 
 
 def pick_up(g, e, floor_id, with_attack=False):
@@ -2368,8 +2521,9 @@ def pick_up(g, e, floor_id, with_attack=False):
         set_economy(g, e["id"], object_used=True)
     inv = [dict(i) for i in e.get("inventory", [])]
     item = dict(f["item"])
-    if item.get("kind") == "weapon":
-        item["equipped"] = True  # picking a weapon up puts it in hand (rules glossary: equipping includes picking it up)
+    # a dead owner's "equipped" flag doesn't come with the item; a weapon picked up goes into a free hand, else it's stowed
+    item["equipped"] = False
+    item.pop("attuned", None)
     same = next((i for i in inv if i["name"] == item["name"] and not i.get("custom") and item.get("kind") in ("weapon", "gear", "consumable")
                  and not item.get("magic")), None)
     if same:
@@ -2380,6 +2534,12 @@ def pick_up(g, e, floor_id, with_attack=False):
     g.set(e, inventory=inv)
     g.emit("map.set", id=t["map"], set={"floor": [x for x in m.get("floor", []) if x["id"] != floor_id]})
     g.say(f"⬆ {e['name']} picks up {item.get('qty', 1)}× {item_display_name(item)}.", kind="item", who=e["id"])
+    if item.get("kind") == "weapon" and not same:
+        # picking a weapon up puts it in hand (rules glossary: equipping includes picking it up) when a hand is free
+        try:
+            equip(g, g.get(e["id"]), item["id"], True)
+        except RuleError:
+            g.note(f"  {e['name']}'s hands are full: the {item['name']} is stowed.")
 
 
 def recover_thrown(g, e, floor_id, how):

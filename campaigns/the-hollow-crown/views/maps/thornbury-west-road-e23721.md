@@ -1,0 +1,36 @@
+# Snapshot — party moved to Harrowgate at Day 24, 18:20 (event 23721)
+
+### The March Road before the West Gate (`thornbury-west-road`, wilderness 38×24, lighting bright)
+- Brakka Holloway (`brakka`, pc) at (27,10) — 71/71 HP
+- Corvin Asche (`corvin`, pc) at (27,12) — 41/41 HP
+- Kit Corvell (`kit`, pc) at (28,11) — 57/57 HP
+- Ottilie Marsh (`ottilie`, pc) at (28,12) — 48/48 HP
+- A carter with a load of turnips (`a-carter-with-a-load-of-turnips`, neutral) at (30,13) — 4/4 HP · hidden
+- Causeway watchman with a torch (`guard-a-5`, enemy) at (32,10) — DEAD · hidden
+- Causeway watchman with a torch (`guard-b-5`, enemy) at (32,12) — DEAD · hidden
+- Crabbe's four (late of Castle Gaunt) 1 (`crabbes-four-late-of-castle-gaunt-1`, ally) at (22,11) — 11/11 HP
+- Crabbe's four (late of Castle Gaunt) 2 (`crabbes-four-late-of-castle-gaunt-2`, ally) at (22,10) — 11/11 HP
+- Crabbe's four (late of Castle Gaunt) 3 (`crabbes-four-late-of-castle-gaunt-3`, ally) at (21,11) — 11/11 HP
+- Crabbe's four (late of Castle Gaunt) 4 (`crabbes-four-late-of-castle-gaunt-4`, ally) at (23,11) — 11/11 HP
+- League man in grey (`guard-c-3`, enemy) at (37,10) — DEAD · hidden
+- Nib (`nib`, neutral) at (29,11) — 4/4 HP
+- Night watchman with a crossbow (`guard-b-4`, enemy) at (35,12) — DEAD · hidden
+- Night watchman with a lantern (`guard-a-4`, enemy) at (35,10) — DEAD · hidden
+- Sergeant Wystan Crabbe (`gaunt-sergeant-a`, ally) at (25,11) — 65/65 HP
+- The Stag (`the-stag`, enemy) at (24,12) — 1/67 HP · restrained
+- Townsfolk at the gallows A (`townsfolk-at-the-gallows-a`, neutral) at (23,16) — 4/4 HP · hidden
+- Townsfolk at the gallows B (`townsfolk-at-the-gallows-b`, neutral) at (22,16) — 4/4 HP · hidden
+- Townsfolk at the gallows C (`townsfolk-at-the-gallows-c`, neutral) at (24,16) — 4/4 HP · hidden
+- Townsfolk at the gallows D (`townsfolk-at-the-gallows-d`, neutral) at (23,17) — 4/4 HP · hidden
+- Townsfolk at the gallows E (`townsfolk-at-the-gallows-e`, neutral) at (23,15) — 4/4 HP · hidden
+- point of interest `poi-2`: The town ditch at (31,5) → journal j373
+- point of interest `poi-3`: The roadside copse at (7,4) → journal j374
+- point of interest `poi-4`: The ruined tithe barn at (10,17) → journal j375
+- point of interest `poi-5`: The roadside shrine at (20,8) → journal j376
+- point of interest `poi-6`: The milestone at (25,14) → journal j377
+- point of interest `poi-8`: The West Gate at (34,11) → journal j555
+- point of interest `poi-9`: The alarm bell at (36,10) → journal j556
+- point of interest `poi-10`: The proclamation board at (30,12) → journal j557
+- point of interest `poi-11`: The town gallows (Peg and Ord hanging) at (28,19) → journal j586
+- point of interest `poi-12`: Three fresh graves in the potter's field at (20,17) → journal j621
+- doors: (10,15) open

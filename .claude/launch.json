@@ -5,7 +5,8 @@
       "name": "live-table",
       "runtimeExecutable": "python",
       "runtimeArgs": ["-m", "engine", "serve", "--port", "8765"],
-      "port": 8765
+      "port": 8765,
+      "autoPort": false
     }
   ]
 }

@@ -367,6 +367,9 @@ class EngineTest(unittest.TestCase):
         self.ok("item", "add", "kira", "Sickle", "--source", "found: a spare sickle")
         self.ok("item", "add", "kira", "Light Hammer", "--source", "found: a spare hammer")
         inv = self.state().get("kira")["inventory"]
+        for i in inv:   # empty hands: a picked-up weapon goes into a free hand
+            if i.get("equipped") and (i.get("kind") == "weapon" or i.get("category") == "shield"):
+                self.ok("item", "unequip", "kira", i["id"])
         dagger = next(i["id"] for i in inv if i.get("base_name") == "Sickle")
         axe = next(i["id"] for i in inv if i.get("base_name") == "Light Hammer")
         self.ok("item", "drop", "kira", dagger)
@@ -791,6 +794,30 @@ class EngineTest(unittest.TestCase):
         g=self.state();self.assertEqual(g.state['seq'],seq)
         self.assertEqual(g.dir.joinpath('engine/events.jsonl').read_bytes(),before)
         self.rule('asset','look','identity-artisan','--presentation','ambiguous-value',contains='Presentation:')
+
+    def test_scene_descriptions_preserve_portrait_after_restart(self):
+        from engine import art
+        self.ok('npc','add','commoner','--name','Portrait Townswoman','--at','2,2','--map','arena','--desc','A human townswoman with brown hair.')
+        e=self.state().get('portrait-townswoman');before=(art.portrait_choice(e),art.art_version(e))
+        self.ok('npc','describe','portrait-townswoman','--text','An orc grabbed her and dragged her away.')
+        e=self.state().get('portrait-townswoman')
+        self.assertEqual(before,(art.portrait_choice(e),art.art_version(e)))
+        self.assertEqual(art.species_of(e),'Human');self.assertEqual(art.visual_identity(e)['presentation'],'feminine')
+        seq=self.state().state['seq']
+        self.ok('asset','stabilize','portrait-townswoman')
+        self.assertEqual(seq,self.state().state['seq'])
+        self.ok('npc','remove','portrait-townswoman')
+
+    def test_first_description_and_intentional_manual_face(self):
+        from engine import art
+        self.ok('npc','add','commoner','--name','Portrait Artisan','--at','2,2','--map','arena')
+        self.ok('npc','describe','portrait-artisan','--text','A woman with pale skin and black hair.')
+        e=self.state().get('portrait-artisan');self.assertEqual(art.visual_identity(e)['presentation'],'feminine')
+        self.ok('asset','faces','portrait-artisan','--choose','portraits-human/04')
+        self.ok('npc','describe','portrait-artisan','--text','A dwarf threatened this artisan.')
+        self.assertEqual(art.portrait_choice(self.state().get('portrait-artisan')),('portraits-human',4))
+        self.rule('asset','faces','portrait-artisan','--choose','portraits-fantasy/06',contains='species and presentation')
+        self.ok('npc','remove','portrait-artisan')
 
     def test_new_party_members_join_at_the_partys_xp(self):
         from engine import mechanics as M

@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Bard 7** (College of Lore) · **Background:** Sage · **XP:** 25357
+**Player:** DM · **Human** · **Bard 7** (College of Lore) · **Background:** Sage · **XP:** 29849
 
 **HP** 48/48 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
 
@@ -20,7 +20,6 @@
 
 | Attack | To hit | Damage | Notes |
 |---|---|---|---|
-| Mace | +2 | 1d6-1 bludgeoning | reach 5 ft |
 | Unarmed Strike | +2 | 0 bludgeoning | reach 5 ft |
 
 Attacks per Attack action: 1
@@ -46,7 +45,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 105 GP 5 SP 3 CP
+**Coins:** 100 GP 8 SP 3 CP
 
 - `pan-flute-1` 1× Pan flute · _starting equipment_
 - `entertainers-pack-1` 1× Entertainer's Pack · _starting equipment_
@@ -80,15 +79,13 @@ Species traits: Resourceful, Skillful, Versatile
 - `lidless-signet-ring-1` 1× Lidless signet ring · _found: on a cord round Mother Sabine's neck_
 - `oiled-silk-slip-from-sab-1` 1× Oiled-silk slip from Sabine's hem · _found: sewn flat into the hem of Mother Sabine's shift_
 - `watchers-penny-1` 1× Watcher's penny · _found: on a string round Goody Prail's neck_
-- `forged-letter-in-sabines-1` 1× Forged letter in Sabine's hand · _crafted: Ottilie's forgery in Sabine's hand, cipher and seal_
-  - A letter on Sabine's cream paper in her cipher and a flawless copy of her hand, sealed in grey wax with the Lidless signet: 'The place is found. Send the Glass at once, quietly, with six brothers in pilgrim grey and its keeper, no banners, by the Pilgrim Road through Tanner's Cross. I will meet it myself at the burnt chapel on the Pilgrim Road, a day east of Thornbury.' For Brother Prior Anselm at Ambersell. (Ottilie's third attempt, Day 23.)
 - `dove-grey-travelling-clo-1` 1× Dove-grey travelling clothes · _loot: Sabine's iron-bound travelling chest_
 - `blank-writing-case-1` 1× Blank writing case · _loot: Sabine's iron-bound travelling chest_
 - `spell-scroll-lesser-rest-1` 1× Spell Scroll (Lesser Restoration) — Uncommon · _loot: The brothers' packs_
 - `the-gilded-hands-contrac-1` 1× The Gilded Hand's contract (new terms) · _gift: Vaux's paymaster_
-- `mace-1` 1× Mace (equipped) · _loot: Sir Piers Whitlock's arms_
-- `shield-1` 1× Shield · _loot: Sir Piers Whitlock's arms_
 - `potion-of-healing-2` 2× Potion of Healing (UNIDENTIFIED — players see "Unidentified potion") — Common · _loot: Sir Piers Whitlock's arms_
+- `antler-token-of-the-thor-2` 1× Antler token of the Thornpact — Uncommon · _reward: Gorse, warden of Hartwell, in exchange for the Stag_
+- `osrics-marching-orders-1` 1× Osric's marching orders · _loot: Osric's letters_
 
 Hit Point Dice: Bard d8 7/7
 Languages: Common, Elvish, Halfling · Tools: Calligrapher's Supplies, Forgery Kit, Disguise Kit · Armor training: light

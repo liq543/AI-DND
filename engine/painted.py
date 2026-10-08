@@ -107,15 +107,18 @@ def selection(e,L,explicit,hair_colors,skin_colors):
     presentation=explicit.get('presentation')
     if presentation:candidates=[r for r in candidates if r[2][1]==presentation]
     if not candidates:return None
-    if species=='Human' and 'skin' in explicit:
+    if 'skin' in explicit:
         nearest=min(_color_distance(explicit['skin'],skin_colors.get(r[2][5],'#c89a6a')) for r in candidates)
         candidates=[r for r in candidates if _color_distance(explicit['skin'],skin_colors.get(r[2][5],'#c89a6a'))<=nearest+.012]
+    if 'hair_color' in explicit and species!='Dragonborn':
+        nearest=min(_color_distance(explicit['hair_color'],hair_colors.get(r[2][3],'#222222')) for r in candidates)
+        candidates=[r for r in candidates if _color_distance(explicit['hair_color'],hair_colors.get(r[2][3],'#222222'))<=nearest+.005]
     def score(record):
         row=record[2]
         score=0
         for i,k in enumerate(FIELDS[2:],2):
             expected=explicit.get(k,L.get(k))
-            weight=9 if k in explicit else 1
+            weight=9 if k in explicit else 1 if k=='outfit' else .3
             if k=='hair_color': mismatch=_color_distance(expected,hair_colors.get(row[i],'#222222'))
             elif k=='skin': mismatch=_color_distance(expected,skin_colors.get(row[i],'#c89a6a'))
             elif k=='outfit':
@@ -128,14 +131,23 @@ def selection(e,L,explicit,hair_colors,skin_colors):
             score+=0 if record[0]=='portraits-extra' and record[1] in (2,4) or record[0]=='portraits-fantasy' and record[1] in (12,13) else 12
         if explicit.get('hair_style')=='bun':
             score+=0 if record[0]=='portraits-extra' and record[1] in (1,7) else 7
-        if explicit.get('beard') and explicit['beard']!='none':
+        if 'beard' in explicit:
             bearded={("portraits-fantasy",4),("portraits-fantasy-extra",4),
                      ("portraits-human",1),("portraits-human",6),("portraits-human",14),
                      ("portraits-extra",3),("portraits-extra",4),("portraits-extra",6),("portraits-extra",13),("portraits-extra",14)}
-            score+=0 if (record[0],record[1]) in bearded else 18
-        tie=int(hashlib.sha256(f"{L['seed']}:{record[0]}:{record[1]}".encode()).hexdigest()[:8],16)/2**32
-        return score+tie*.18
-    col,i,_=min(candidates,key=score)
+            traits=portrait_records().get((record[0],record[1]),{})
+            actual=traits.get('beard') or ('short' if (record[0],record[1]) in bearded else 'none')
+            expected=explicit['beard']
+            score+=0 if actual==expected else 5 if actual!='none' and expected!='none' else 18
+        if explicit.get('hair_style'):
+            actual=portrait_records().get((record[0],record[1]),{}).get('hair_style')
+            if actual:score+=0 if actual==explicit['hair_style'] else 5
+        return score
+    # Select among close compatible matches instead of giving every similar job the same face.
+    # Explicit trait penalties stay much larger than this allowance; identity remains a hard filter.
+    best=min(score(r) for r in candidates)
+    pool=[r for r in candidates if score(r)<=best+.65]
+    col,i,_=min(pool,key=lambda r:hashlib.sha256(f"{L['seed']}:{r[0]}:{r[1]}".encode()).digest())
     return (col,i) if uri(col,i) else None
 
 def creature_selection(e):
@@ -163,7 +175,10 @@ def creature_selection(e):
 @lru_cache(maxsize=2)
 def identity_catalogue(kind):
     path=ROOT/'identity-v3-catalogue.json'
-    return tuple(json.loads(path.read_text(encoding='utf-8')).get(kind,[])) if path.is_file() else ()
+    rows=json.loads(path.read_text(encoding='utf-8')).get(kind,[]) if path.is_file() else []
+    expansion=ROOT/'portrait-v5-catalogue.json'
+    if kind=='portraits' and expansion.is_file():rows+=json.loads(expansion.read_text(encoding='utf-8'))['portraits']
+    return tuple(rows)
 
 
 @lru_cache(maxsize=1)
@@ -181,6 +196,8 @@ def portrait(e, selected, mode='portrait',size=None):
     traits=f'data-species="{esc(identity["species"])}" data-presentation="{identity["presentation"]}" data-art="{col}/{i:02d}"'
     if mode=='face':
         sz=size or 256
+        if col.endswith('-v5'):
+            return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="{sz}" height="{sz}"><title>{label}</title><image class="painted-face" {traits} href="{source}" x="-50" y="-2" width="356" height="356" preserveAspectRatio="xMidYMid slice"/></svg>'
         return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="{sz}" height="{sz}"><title>{label}</title><image class="painted-face" {traits} href="{source}" x="-20" y="-8" width="296" height="296" preserveAspectRatio="xMidYMid slice"/></svg>'
     sz=size or 320
     inner=(f'<title>{label}</title><rect width="320" height="400" fill="#16251f"/>'

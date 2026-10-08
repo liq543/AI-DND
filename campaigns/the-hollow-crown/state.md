@@ -2,32 +2,32 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 2 · **In-world time:** Day 24, 07:00 · **Mode:** exploration
-**Current map:** The Chapel of the Unblinking (`unblinking-chapel`) · **Events:** 23281 · **Log head:** `4c747702efd37122`
-**Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
+**Session:** 3 · **In-world time:** Day 35, 19:30 · **Mode:** exploration
+**Current map:** Highbarrow (`highbarrow`) · **Events:** 28106 · **Log head:** `1ee72948cafe1599`
+**Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [70, 47]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | unblinking-chapel (6,11) |
-| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | unblinking-chapel (6,12) |
-| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:2/3 L4:1/1 | unblinking-chapel (5,10) |
-| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | unblinking-chapel (7,11) |
+| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | highbarrow-goose (2,3) |
+| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | highbarrow-goose (1,2) |
+| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | highbarrow-goose (2,4) |
+| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | highbarrow (38,33) |
 
 ## Other creatures (DM view)
 
 | Creature | Side | HP | AC | Conditions | Position | Hidden |
 |---|---|---|---|---|---|---|
-| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | unblinking-chapel (8,5) |  |
-| Mr Fennimore Quist (`mr-fennimore-quist`, spy) | neutral | 23/27 | 12 | — | rookery (47,31) |  |
+| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | thornbury (25,31) |  |
+| Mr Fennimore Quist (`mr-fennimore-quist`, spy) | neutral | 23/27 | 12 | — | rookery (36,10) |  |
 | Mother Hobday (`mother-hobday`, commoner) | neutral | 4/4 | 10 | — | rookery (4,2) |  |
-| Ada Crisp (`ada-crisp`, commoner) | neutral | 4/4 | 10 | — | rookery (44,6) |  |
+| Ada Crisp (`ada-crisp`, commoner) | neutral | 4/4 | 10 | — | rookery (33,11) |  |
 | Bel Crisp (`bel-crisp`, commoner) | neutral | 4/4 | 10 | — | barrow-gate (27,6) |  |
 | Tobin Rudge (`tobin-rudge`, commoner) | neutral | 4/4 | 10 | — | the-pens (1,7) | yes |
 | Corlis (`corlis`, commoner) | neutral | 4/4 | 10 | — | barrow-gate (38,10) |  |
 | Harl (`harl`, tough) | neutral | 32/32 | 12 | — | rookery (47,33) |  |
-| Bastian (`bastian`, tough) | neutral | 25/32 | 12 | — | socket (6,21) |  |
+| Bastian (`bastian`, tough) | neutral | 25/32 | 12 | — | the-pens (4,6) |  |
 | Mercy Fulk (`mercy-fulk`, commoner) | enemy | 2/4 | 10 | restrained, petrified | socket (3,22) |  |
 | Amos Pettigrew (`amos-pettigrew`, commoner) | neutral | 4/4 | 10 | — | barrow-gate (26,5) |  |
 | Garrick Webb (`garrick-webb`, tough) | neutral | 32/32 | 12 | restrained | the-pens (21,3) |  |
@@ -45,9 +45,9 @@
 | Bandit D (`bandit-d`, bandit) | enemy | 0/11 | 12 | — · DEAD | withy-pond (22,6) |  |
 | Bandit E (`bandit-e`, bandit) | enemy | 0/11 | 12 | — · DEAD | withy-pond (28,6) |  |
 | Mastiff (`mastiff`, mastiff) | enemy | 0/5 | 12 | — · DEAD | withy-pond (20,4) |  |
-| Wat (`bandit-a-3`, bandit) | ally | 11/11 | 12 | — | crowsfoot (23,22) | yes |
-| Sal (`bandit-b-3`, bandit) | ally | 11/11 | 12 | — | crowsfoot (24,22) | yes |
-| Hesketh Rowe (`hesketh-rowe`, bandit-captain) | ally | 52/52 | 15 | — | crowsfoot (22,24) |  |
+| Wat (`bandit-a-3`, bandit) | ally | 11/11 | 12 | — | crowsfoot (17,30) |  |
+| Sal (`bandit-b-3`, bandit) | ally | 11/11 | 12 | — | crowsfoot (17,31) |  |
+| Hesketh Rowe (`hesketh-rowe`, bandit-captain) | ally | 52/52 | 15 | — | crowsfoot (26,28) |  |
 | Ned, the runner (`bandit-a-4`, bandit) | neutral | 11/11 | 12 | — | crowsfoot (14,11) |  |
 | Dickon, a toll man (`bandit-b-4`, bandit) | ally | 11/11 | 12 | — | crowsfoot (51,23) |  |
 | Bandit C (`bandit-c-3`, bandit) | ally | 11/11 | 12 | — | crowsfoot (19,29) | yes |
@@ -55,7 +55,7 @@
 | Mastiff A (`mastiff-a-2`, mastiff) | ally | 5/5 | 12 | — | crowsfoot (49,22) |  |
 | Mastiff B (`mastiff-b-2`, mastiff) | ally | 5/5 | 12 | — | crowsfoot (50,21) |  |
 | Mother Gallows (`mother-gallows`, bandit-captain) | enemy | 0/52 | 15 | — · DEAD | gallows-oak (22,12) |  |
-| Tansy Moll (`tansy-moll`, bandit-captain) | ally | 52/52 | 15 | — | crowsfoot (24,25) |  |
+| Tansy Moll (`tansy-moll`, bandit-captain) | ally | 52/52 | 15 | — | crowsfoot (28,33) |  |
 | Aldous Crane (`aldous-crane`, bandit-captain) | ally | 52/52 | 15 | — | thornbury (16,26) |  |
 | Coll (`coll`, tough) | enemy | 0/32 | 12 | mocked · DEAD | gallows-oak (17,16) |  |
 | Mastiff A (`mastiff-a-3`, mastiff) | ally | 5/5 | 12 | — | crowsfoot (25,24) | yes |
@@ -66,7 +66,7 @@
 | Bandit D (`bandit-d-4`, bandit) | ally | 11/11 | 12 | — | crowsfoot (22,29) | yes |
 | Bandit E (`bandit-e-3`, bandit) | ally | 6/11 | 12 | — | crowsfoot (16,31) | yes |
 | Bandit F (`bandit-f-2`, bandit) | ally | 10/11 | 12 | — | crowsfoot (17,31) | yes |
-| Ivo Tarrant (`bandit-g`, bandit) | ally | 11/11 | 12 | — | unblinking-chapel (7,12) |  |
+| Ivo Tarrant (`bandit-g`, bandit) | ally | 11/11 | 12 | — | unblinking-chapel (7,12) | yes |
 | Bandit H (`bandit-h`, bandit) | ally | 11/11 | 12 | — | crowsfoot (19,31) | yes |
 | Guard A (`guard-a`, guard) | enemy | 0/11 | 16 | — · DEAD | fallowfield (14,7) |  |
 | Guard B (`guard-b`, guard) | enemy | 0/11 | 16 | — · DEAD | fallowfield (15,7) |  |
@@ -87,17 +87,15 @@
 | Greencloak by the pike (`guard-a-3`, guard) | enemy | 0/11 | 16 | — · DEAD | toll-bridge (21,9) |  |
 | Greencloak with a crossbow (`guard-b-3`, guard) | enemy | 0/11 | 16 | — · DEAD | toll-bridge (22,13) |  |
 | Landlord Abel Fenn (`landlord-abel-fenn`, commoner) | neutral | 0/4 | 10 | — · DEAD | wheatsheaf-upper (1,7) |  |
-| Peg, the Wheatsheaf's serving girl (`the-serving-girl`, commoner) | neutral | 0/4 | 10 | restrained · DEAD | thornbury-west-road (28,18) |  |
 | A League carter (`commoner-a-2`, commoner) | neutral | 4/4 | 10 | — | wheatsheaf (16,9) | yes |
 | Another League carter (`commoner-b-2`, commoner) | neutral | 4/4 | 10 | — | wheatsheaf (16,11) | yes |
 | Gaffer Moss (`gaffer-moss`, commoner) | neutral | 4/4 | 10 | — | coldharbour (2,6) |  |
-| Master Pell (`master-pell`, commoner) | neutral | 4/4 | 10 | — | coldharbour (30,7) |  |
-| Pell's boy (`pells-boy`, commoner) | neutral | 4/4 | 10 | — | coldharbour (31,10) |  |
+| Master Pell (`master-pell`, commoner) | neutral | 4/4 | 10 | — | coldharbour (30,7) | yes |
+| Pell's boy (`pells-boy`, commoner) | neutral | 4/4 | 10 | — | coldharbour (31,10) | yes |
 | A Hanged Man at his ale (`bandit-a-6`, bandit) | ally | 11/11 | 12 | — | coldharbour (13,7) |  |
 | Another Hanged Man (`bandit-b-6`, bandit) | ally | 11/11 | 12 | — | coldharbour (15,7) |  |
-| Brother Ennis (`brother-ennis`, priest-acolyte) | enemy | 1/11 | 13 | restrained, prone | the-pens (11,3) |  |
-| Mother Sabine, the woman in dove-grey (`the-woman-in-dove-grey`, spy) | enemy | 1/27 | 12 | prone, poisoned, blinded, restrained | the-pens (26,12) |  |
-| Sergeant Dorran Lerner (`sergeant-dorran-lerner`, guard-captain) | ally | 57/75 | 18 | — | harrowgate (22,10) |  |
+| Mother Sabine, the woman in dove-grey (`the-woman-in-dove-grey`, spy) | enemy | 1/27 | 12 | poisoned, restrained, blinded | the-pens (26,12) |  |
+| Sergeant Dorran Lerner (`sergeant-dorran-lerner`, guard-captain) | ally | 57/75 | 18 | — | harrowgate (18,16) | yes |
 | Greencloak A (`greencloak-a`, guard) | enemy | 0/11 | 16 | — · DEAD | beech-holloway (14,11) |  |
 | Greencloak B (`greencloak-b`, guard) | enemy | 0/11 | 16 | — · DEAD | beech-holloway (14,13) |  |
 | Greencloak C (`greencloak-c`, guard) | enemy | 0/11 | 16 | — · DEAD | beech-holloway (13,11) |  |
@@ -135,39 +133,21 @@
 | Watch-captain Orme (`watch-captain-orme`, warrior-veteran) | enemy | 0/65 | 17 | mocked · DEAD | thornbury (17,27) | yes |
 | Reeve Odo Ashby (`reeve-odo-ashby`, noble) | neutral | 9/9 | 15 | — | thornbury-heart (23,10) |  |
 | Edwin Ashby (`edwin-ashby`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (22,30) |  |
-| Captain Brannoc Vaux (`captain-brannoc-vaux`, gladiator) | neutral | 112/112 | 16 | — | unblinking-chapel (20,12) |  |
+| Captain Brannoc Vaux (`captain-brannoc-vaux`, gladiator) | neutral | 112/112 | 16 | — | thornbury (46,13) | yes |
 | Vaux's paymaster (`vauxs-paymaster`, commoner) | neutral | 4/4 | 10 | — | thornbury-east-road (22,12) | yes |
-| Sergeant Mags Orrel (`sergeant-mags-orrel`, warrior-veteran) | neutral | 65/65 | 17 | — | unblinking-chapel (21,11) |  |
-| Sleeping Greencloak 1 (`sleeping-greencloak-1`, guard) | enemy | 0/11 | 16 | unconscious, prone · DEAD | harrowgate (31,13) |  |
-| Greencloak waking (`sleeping-greencloak-2`, guard) | enemy | 0/11 | 16 | prone · DEAD | harrowgate (31,14) |  |
-| Sleeping Greencloak 3 (`sleeping-greencloak-3`, guard) | enemy | 0/11 | 16 | unconscious, prone · DEAD | harrowgate (31,15) |  |
-| Sleeping Greencloak 4 (`sleeping-greencloak-4`, guard) | enemy | 0/11 | 16 | unconscious, prone · DEAD | harrowgate (31,16) |  |
-| Sleeping conscript 1 (`sleeping-conscript-1`, commoner) | enemy | 0/4 | 10 | unconscious, prone · DEAD | harrowgate (31,17) |  |
-| Sleeping conscript 2 (`sleeping-conscript-2`, commoner) | enemy | 0/4 | 10 | unconscious, prone · DEAD | harrowgate (30,14) |  |
-| Sleeping conscript 3 (`sleeping-conscript-3`, commoner) | enemy | 0/4 | 10 | unconscious, prone · DEAD | harrowgate (30,16) |  |
-| Sleeping conscript 4 (`sleeping-conscript-4`, commoner) | enemy | 0/4 | 10 | unconscious, prone · DEAD | harrowgate (30,18) |  |
-| Sleeping conscript 5 (`sleeping-conscript-5`, commoner) | enemy | 0/4 | 10 | unconscious, prone · DEAD | harrowgate (32,13) |  |
-| Sleeping conscript 6 (`sleeping-conscript-6`, commoner) | enemy | 0/4 | 10 | unconscious, prone · DEAD | harrowgate (32,15) |  |
-| Sleeping conscript 7 (`sleeping-conscript-7`, commoner) | enemy | 0/4 | 10 | unconscious, prone · DEAD | harrowgate (32,17) |  |
+| Sergeant Mags Orrel (`sergeant-mags-orrel`, warrior-veteran) | neutral | 65/65 | 17 | — | unblinking-chapel (21,11) | yes |
 | Surrendered conscript A (`sleeping-conscript-8`, commoner) | neutral | 4/4 | 10 | — | harrowgate (26,17) | yes |
 | Surrendered conscript B (`sleeping-conscript-9`, commoner) | neutral | 4/4 | 10 | — | harrowgate (27,17) | yes |
 | Tam, a conscript (`sleeping-conscript-10`, commoner) | enemy | 4/4 | 10 | — | harrowgate (20,10) | yes |
 | Surrendered conscript D (`sleeping-conscript-11`, commoner) | neutral | 4/4 | 10 | — | harrowgate (26,18) | yes |
 | Surrendered conscript E (`sleeping-conscript-12`, commoner) | neutral | 4/4 | 10 | — | harrowgate (27,18) | yes |
-| Greencloak on the south wall (`greencloak-on-the-south-wall`, guard) | enemy | 0/11 | 16 | — · DEAD | harrowgate (18,24) |  |
-| Greencloak at the gate brazier (`greencloak-at-the-gate-brazier`, guard) | enemy | 0/11 | 16 | — · DEAD | harrowgate (21,25) |  |
-| Sergeant Brice Tolly (`sergeant-brice-tolly`, guard) | enemy | 0/11 | 16 | unconscious, prone · DEAD | harrowgate (26,25) |  |
-| Conscript on the west wall (`conscript-on-the-west-wall`, commoner) | enemy | 0/4 | 10 | — · DEAD | harrowgate (12,22) |  |
-| Conscript on the east wall (`conscript-on-the-east-wall`, commoner) | enemy | 0/4 | 10 | — · DEAD | harrowgate (34,10) |  |
-| Old Mattock (`old-mattock`, commoner) | neutral | 0/4 | 10 | unconscious, prone · DEAD | harrowgate (28,8) |  |
-| Harrowgate's cook (`harrowgates-cook`, commoner) | neutral | 0/4 | 10 | — · DEAD | harrowgate (24,14) |  |
 | Sir Gerold Ambry (`sir-gerold-ambry`, knight) | neutral | 52/52 | 10 | — | harrowgate (20,9) |  |
 | Ditchley's reeve (`commoner-a-4`, commoner) | neutral | 4/4 | 10 | — | harrowgate (24,28) | yes |
-| Wilf Underhay (`commoner-b-4`, commoner) | ally | 4/4 | 10 | — | harrowgate (18,12) |  |
-| Osgar (`commoner-c`, commoner) | ally | 4/4 | 10 | — | harrowgate (17,12) |  |
-| Ditchley man 4 (`commoner-d`, commoner) | ally | 4/4 | 10 | — | harrowgate (19,12) |  |
-| Ditchley man 5 (`commoner-e`, commoner) | ally | 4/4 | 10 | — | harrowgate (15,12) |  |
-| Ditchley man 6 (`commoner-f`, commoner) | ally | 4/4 | 10 | — | harrowgate (16,12) |  |
+| Wilf Underhay (`commoner-b-4`, commoner) | ally | 4/4 | 10 | — | harrowgate (19,17) |  |
+| Osgar (`commoner-c`, commoner) | ally | 4/4 | 10 | — | harrowgate (20,17) |  |
+| Ditchley man 4 (`commoner-d`, commoner) | ally | 4/4 | 10 | — | harrowgate (21,17) |  |
+| Ditchley man 5 (`commoner-e`, commoner) | ally | 4/4 | 10 | — | harrowgate (19,16) |  |
+| Ditchley man 6 (`commoner-f`, commoner) | ally | 4/4 | 10 | — | harrowgate (20,16) |  |
 | Ditchley man 7 (`commoner-g`, commoner) | neutral | 4/4 | 10 | — | harrowgate (26,31) | yes |
 | Ditchley man 8 (`commoner-h`, commoner) | neutral | 4/4 | 10 | — | harrowgate (29,30) | yes |
 | Ditchley man 9 (`commoner-i`, commoner) | neutral | 4/4 | 10 | — | harrowgate (30,30) | yes |
@@ -192,11 +172,10 @@
 | Dunstan (`dunstan`, commoner) | neutral | 4/4 | 10 | — | brackenhow (19,12) |  |
 | Bran (`bran`, mastiff) | neutral | 5/5 | 12 | — | brackenhow (16,11) |  |
 | Sedge (`sedge`, druid) | enemy | 0/44 | 13 | — · DEAD | hartstone (22,14) |  |
-| The Stag (`the-stag`, berserker) | enemy | 1/67 | 11 | restrained | thornbury-heart (23,12) |  |
+| The Stag (`the-stag`, berserker) | enemy | 1/67 | 11 | — | crowsfoot (16,30) | yes |
 | Scout A (`scout-a`, scout) | enemy | 0/16 | 13 | — · DEAD | hartstone (28,18) |  |
 | Scout B (`scout-b`, scout) | enemy | 0/16 | 13 | prone · DEAD | hartstone (23,10) |  |
 | Tough A (`tough-a`, tough) | enemy | 0/32 | 12 | — · DEAD | hartstone (27,17) |  |
-| Tough B (`tough-b`, tough) | enemy | 7/32 | 11 | restrained | thornbury-heart (24,12) |  |
 | Tough C (`tough-c`, tough) | enemy | 0/32 | 12 | — · DEAD | hartstone (20,15) |  |
 | Tough D (`tough-d`, tough) | enemy | 0/32 | 12 | — · DEAD | hartstone (26,17) |  |
 | Mastiff A (`mastiff-a`, mastiff) | enemy | 0/5 | 12 | — · DEAD | gallows-oak (23,18) |  |
@@ -207,11 +186,10 @@
 | Old hand 4 (`bandit-d-2`, bandit) | ally | 11/11 | 12 | — | crowsfoot (24,27) | yes |
 | Hanged Man on the West Gate toll (`hanged-man-on-the-west-gate-toll`, bandit) | ally | 11/11 | 16 | — | thornbury-gaol (11,5) |  |
 | Hanged Man at the toll table (`hanged-man-at-the-toll-table`, bandit) | ally | 11/11 | 16 | — | thornbury-gaol (11,4) |  |
-| Goody Prail, the egg-woman (`a-market-woman-with-egg-baskets`, commoner) | neutral | 4/4 | 10 | blinded, restrained | the-pens (16,3) |  |
-| A carter with a load of turnips (`a-carter-with-a-load-of-turnips`, commoner) | neutral | 4/4 | 10 | — | thornbury-west-road (30,13) | yes |
+| Goody Prail, the egg-woman (`a-market-woman-with-egg-baskets`, commoner) | neutral | 4/4 | 10 | restrained | the-pens (16,3) |  |
 | A horse-coper at the fair yard (`a-horse-coper-at-the-fair-yard`, commoner) | neutral | 4/4 | 10 | — | thornbury (4,32) |  |
-| Market folk A (`market-folk-a`, commoner) | neutral | 4/4 | 10 | — | thornbury (47,10) | yes |
-| Market folk B (`market-folk-b`, commoner) | neutral | 4/4 | 10 | — | thornbury (47,11) | yes |
+| A woman with a basket of leeks (`market-folk-a`, commoner) | neutral | 4/4 | 10 | — | thornbury (46,4) | yes |
+| A cooper's apprentice with a barrow (`market-folk-b`, commoner) | neutral | 4/4 | 10 | — | thornbury (47,5) | yes |
 | Hanged Man off duty A (`hanged-man-off-duty-a`, bandit) | ally | 11/11 | 12 | — | unblinking-chapel (9,20) |  |
 | Hanged Man off duty B (`hanged-man-off-duty-b`, bandit) | ally | 11/11 | 16 | — | unblinking-chapel (25,10) |  |
 | Hanged Man off duty C (`hanged-man-off-duty-c`, bandit) | ally | 11/11 | 16 | — | unblinking-chapel (25,13) |  |
@@ -222,12 +200,6 @@
 | Eyeless Brother C (`eyeless-brother-c`, cultist-fanatic) | enemy | 0/44 | 13 | — · DEAD | wheatsheaf (18,13) |  |
 | Eyeless Brother D (`eyeless-brother-d`, cultist-fanatic) | enemy | 0/44 | 13 | — · DEAD | wheatsheaf (18,10) |  |
 | Peg's mother (`pegs-mother`, commoner) | neutral | 4/4 | 10 | restrained | unblinking-chapel (10,21) |  |
-| Townsfolk at the gallows A (`townsfolk-at-the-gallows-a`, commoner) | neutral | 4/4 | 10 | — | thornbury-west-road (23,16) | yes |
-| Townsfolk at the gallows B (`townsfolk-at-the-gallows-b`, commoner) | neutral | 4/4 | 10 | — | thornbury-west-road (22,16) | yes |
-| Townsfolk at the gallows C (`townsfolk-at-the-gallows-c`, commoner) | neutral | 4/4 | 10 | — | thornbury-west-road (24,16) | yes |
-| Townsfolk at the gallows D (`townsfolk-at-the-gallows-d`, commoner) | neutral | 4/4 | 10 | — | thornbury-west-road (23,17) | yes |
-| Townsfolk at the gallows E (`townsfolk-at-the-gallows-e`, commoner) | neutral | 4/4 | 10 | — | thornbury-west-road (23,15) | yes |
-| Ord, the League house under-clerk (`ord-the-league-house-under-clerk`, commoner) | neutral | 0/4 | 10 | — · DEAD | thornbury-west-road (29,20) |  |
 | Davy, the landlord's boy (`a-boy-hiding-in-the-loft`, commoner) | neutral | 4/4 | 10 | restrained | unblinking-chapel (8,21) |  |
 | Hanged Man with the ladder A (`hanged-man-with-the-ladder-a`, bandit) | ally | 11/11 | 12 | — | wheatsheaf-yard (6,9) |  |
 | Hanged Man with the ladder B (`hanged-man-with-the-ladder-b`, bandit) | ally | 11/11 | 12 | — | wheatsheaf-yard (7,9) |  |
@@ -243,8 +215,8 @@
 | Sir Hugh Darrow, banneret of Castle Gaunt (`sir-hugh-darrow-banneret-of-castle-gaunt`, knight) | enemy | 52/52 | 10 | — | unblinking-chapel (7,10) | yes |
 | Sir Anselm Brey (`sir-anselm-brey`, knight) | enemy | 52/52 | 10 | — | thornbury-gaol (12,2) |  |
 | Sir Piers Whitlock (`sir-piers-whitlock`, knight) | enemy | 52/52 | 10 | — | thornbury-gaol (16,2) |  |
-| Gaunt sergeant A (`gaunt-sergeant-a`, warrior-veteran) | ally | 65/65 | 16 | — | unblinking-chapel (10,10) |  |
-| Gaunt sergeant B (`gaunt-sergeant-b`, warrior-veteran) | ally | 65/65 | 16 | — | unblinking-chapel (11,10) |  |
+| Sergeant Wystan Crabbe (`gaunt-sergeant-a`, warrior-veteran) | ally | 65/65 | 16 | — | harrowgate (23,21) |  |
+| Sergeant Godric Lusk (`gaunt-sergeant-b`, warrior-veteran) | ally | 65/65 | 16 | — | thornbury (47,14) | yes |
 | Gaunt man-at-arms A (`gaunt-man-at-arms-a`, guard) | ally | 11/11 | 16 | — | unblinking-chapel (12,10) |  |
 | Gaunt man-at-arms B (`gaunt-man-at-arms-b`, guard) | ally | 11/11 | 16 | — | unblinking-chapel (13,10) |  |
 | Gaunt man-at-arms C (`gaunt-man-at-arms-c`, guard) | ally | 11/11 | 16 | — | unblinking-chapel (14,10) |  |
@@ -257,64 +229,142 @@
 | Gaunt man-at-arms J (`gaunt-man-at-arms-j`, guard) | ally | 11/11 | 16 | — | unblinking-chapel (21,10) |  |
 | Gaunt man-at-arms K (`gaunt-man-at-arms-k`, guard) | ally | 11/11 | 16 | — | unblinking-chapel (22,10) |  |
 | Gaunt man-at-arms L (`gaunt-man-at-arms-l`, guard) | ally | 11/11 | 16 | — | unblinking-chapel (23,10) |  |
-| Gaunt man-at-arms M (`gaunt-man-at-arms-m`, guard) | enemy | 11/11 | 11 | — | thornbury-gaol (12,7) |  |
-| Gaunt man-at-arms N (`gaunt-man-at-arms-n`, guard) | enemy | 11/11 | 11 | — | thornbury-gaol (13,8) |  |
-| Gaunt man-at-arms O (`gaunt-man-at-arms-o`, guard) | enemy | 11/11 | 11 | — | thornbury-gaol (16,7) |  |
-| Gaunt man-at-arms P (`gaunt-man-at-arms-p`, guard) | enemy | 11/11 | 11 | — | thornbury-gaol (17,8) |  |
+| Gaunt man-at-arms M (`gaunt-man-at-arms-m`, guard) | enemy | 11/11 | 11 | — | thornbury-gaol (12,7) | yes |
+| Gaunt man-at-arms N (`gaunt-man-at-arms-n`, guard) | enemy | 11/11 | 11 | — | thornbury-gaol (13,8) | yes |
+| Gaunt man-at-arms O (`gaunt-man-at-arms-o`, guard) | enemy | 11/11 | 11 | — | thornbury-gaol (16,7) | yes |
+| Gaunt man-at-arms P (`gaunt-man-at-arms-p`, guard) | enemy | 11/11 | 11 | — | thornbury-gaol (17,8) | yes |
 | Thornbury recruits 1 (`thornbury-recruits-1`, commoner) | ally | 4/4 | 10 | — | unblinking-chapel (10,16) |  |
 | Thornbury recruits 2 (`thornbury-recruits-2`, commoner) | ally | 4/4 | 10 | — | unblinking-chapel (10,17) |  |
 | Thornbury recruits 3 (`thornbury-recruits-3`, commoner) | ally | 4/4 | 10 | — | unblinking-chapel (10,15) |  |
 | Thornbury recruits 4 (`thornbury-recruits-4`, commoner) | ally | 4/4 | 10 | — | unblinking-chapel (8,16) |  |
 | Thornbury recruits 5 (`thornbury-recruits-5`, commoner) | ally | 4/4 | 10 | — | unblinking-chapel (10,18) |  |
 | Hob Sallis, the reeve's gaoler (`hob-sallis-the-reeves-gaoler`, guard) | neutral | 11/11 | 16 | — | thornbury-gaol (6,5) |  |
+| Jory Pike, the Pilgrim Road carrier (`jory-pike-the-pilgrim-road-carrier`, commoner) | neutral | 4/4 | 10 | — | thornbury (47,26) | yes |
+| Jory's grey mule (`jorys-grey-mule`, mule) | neutral | 11/11 | 10 | — | thornbury (48,26) | yes |
+| Crabbe's four (late of Castle Gaunt) 1 (`crabbes-four-late-of-castle-gaunt-1`, guard) | ally | 11/11 | 16 | — | harrowgate (25,21) |  |
+| Crabbe's four (late of Castle Gaunt) 2 (`crabbes-four-late-of-castle-gaunt-2`, guard) | ally | 11/11 | 16 | — | harrowgate (24,21) |  |
+| Crabbe's four (late of Castle Gaunt) 3 (`crabbes-four-late-of-castle-gaunt-3`, guard) | ally | 11/11 | 16 | — | harrowgate (24,20) |  |
+| Crabbe's four (late of Castle Gaunt) 4 (`crabbes-four-late-of-castle-gaunt-4`, guard) | ally | 11/11 | 16 | — | harrowgate (22,20) |  |
+| A groom at the stables (`a-groom-at-the-stables`, commoner) | neutral | 4/4 | 10 | — | harrowgate (16,20) |  |
+| A carter at supper A (`a-carter-at-supper-a`, commoner) | neutral | 4/4 | 10 | — | coldharbour (9,16) |  |
+| A carter at supper B (`a-carter-at-supper-b`, commoner) | neutral | 4/4 | 10 | — | coldharbour (8,16) |  |
+| Jenny Copp, the scullion (`a-scullion-girl`, commoner) | neutral | 4/4 | 10 | restrained | the-pens (11,3) |  |
+| One of Hesketh's new dozen A (`one-of-heskeths-new-dozen-a`, bandit) | ally | 11/11 | 12 | — | crowsfoot (50,23) |  |
+| One of Hesketh's new dozen B (`one-of-heskeths-new-dozen-b`, bandit) | ally | 11/11 | 12 | — | crowsfoot (22,20) |  |
+| One of Hesketh's new dozen C (`one-of-heskeths-new-dozen-c`, bandit) | ally | 11/11 | 12 | — | crowsfoot (24,20) |  |
+| Hew Fallow, the miller's boy (`hew-fallow-the-millers-boy`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (19,27) | yes |
+| Vaux's rider (`vauxs-rider`, guard) | ally | 11/11 | 16 | — | crowsfoot (20,29) |  |
+| A warden of Hartwell (`a-watcher-in-the-oaks-a`, scout) | ally | 16/16 | 13 | — | crowsfoot (15,30) |  |
+| A second warden of Hartwell (`a-watcher-in-the-oaks-b`, scout) | ally | 16/16 | 13 | — | crowsfoot (15,31) |  |
+| A third warden of Hartwell (`a-watcher-in-the-oaks-c`, scout) | ally | 16/16 | 13 | — | crowsfoot (16,31) |  |
+| A fourth warden of Hartwell (`a-watcher-in-the-oaks-d`, scout) | ally | 16/16 | 13 | — | crowsfoot (16,32) |  |
+| Gorse, warden of Hartwell (`gorse-warden-of-hartwell`, druid) | neutral | 44/44 | 13 | — | crowsfoot (24,28) | yes |
+| A Kestrel man-at-arms A (`a-kestrel-man-at-arms-a`, guard) | neutral | 11/11 | 16 | — | kestrel-keep (40,7) |  |
+| A Kestrel man-at-arms B (`a-kestrel-man-at-arms-b`, guard) | neutral | 11/11 | 16 | — | kestrel-keep (39,7) |  |
+| A Kestrelford villager A (`a-kestrelford-villager-a`, commoner) | neutral | 4/4 | 10 | — | kestrel-keep (20,8) |  |
+| A Kestrelford villager B (`a-kestrelford-villager-b`, commoner) | neutral | 4/4 | 10 | — | kestrel-keep (21,8) |  |
+| A Kestrelford villager C (`a-kestrelford-villager-c`, commoner) | neutral | 4/4 | 10 | — | kestrel-keep (20,7) |  |
+| Tam Kerrow, the falconer (`tam-kerrow-the-falconer`, scout) | neutral | 16/16 | 13 | — | kestrel-keep (35,4) |  |
+| Lady Isolde Kestrel (`lady-isolde-kestrel`, noble) | neutral | 9/9 | 15 | — | kestrel-hall (6,6) |  |
+| Rowan Kestrel (`rowan-kestrel`, commoner) | neutral | 4/4 | 10 | — | kestrel-hall (7,6) |  |
+| Master Hawke, the steward (`master-hawke-the-steward`, commoner) | neutral | 4/4 | 10 | — | kestrel-hall (9,8) |  |
+| Sergeant Ilsa Brand (`sergeant-ilsa-brand`, warrior-veteran) | neutral | 65/65 | 17 | — | kestrel-hall (3,9) |  |
+| A man-at-arms at the hall door A (`a-man-at-arms-at-the-hall-door-a`, guard) | neutral | 11/11 | 16 | — | kestrel-hall (8,16) |  |
+| A man-at-arms at the hall door B (`a-man-at-arms-at-the-hall-door-b`, guard) | neutral | 11/11 | 16 | — | kestrel-hall (9,16) |  |
+| A townsman on the South Gate A (`a-townsman-on-the-south-gate-a`, commoner) | neutral | 4/4 | 10 | — | ashby (33,33) | yes |
+| A townsman on the South Gate B (`a-townsman-on-the-south-gate-b`, commoner) | neutral | 4/4 | 10 | — | ashby (32,33) | yes |
+| A Greencloak at the tax house A (`a-greencloak-at-the-tax-house-a`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (17,22) |  |
+| A Greencloak at the tax house B (`a-greencloak-at-the-tax-house-b`, guard) | enemy | 11/11 | 16 | — | ashby (32,3) |  |
+| A Greencloak at the motte gate A (`a-greencloak-at-the-motte-gate-a`, guard) | enemy | 11/11 | 16 | — | ashby (40,8) | yes |
+| A Greencloak at the motte gate B (`a-greencloak-at-the-motte-gate-b`, guard) | enemy | 11/11 | 16 | — | ashby (41,9) | yes |
+| A market-goer A (`a-market-goer-a`, commoner) | neutral | 4/4 | 10 | — | ashby (30,22) | yes |
+| A market-goer B (`a-market-goer-b`, commoner) | neutral | 4/4 | 10 | — | ashby (30,21) | yes |
+| A market-goer C (`a-market-goer-c`, commoner) | neutral | 4/4 | 10 | — | ashby (29,22) | yes |
+| A market-goer D (`a-market-goer-d`, commoner) | neutral | 4/4 | 10 | — | ashby (30,23) | yes |
+| Sir Osric Vane (`sir-osric-vane`, knight) | enemy | 0/52 | 18 | — · DEAD | ashby (17,26) |  |
+| A Greencloak crossbow sergeant A (`a-greencloak-crossbow-sergeant-a`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (16,26) |  |
+| A Greencloak crossbow sergeant B (`a-greencloak-crossbow-sergeant-b`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (18,27) |  |
+| A Greencloak crossbow sergeant C (`a-greencloak-crossbow-sergeant-c`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (16,23) |  |
+| A Greencloak crossbow sergeant D (`a-greencloak-crossbow-sergeant-d`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (17,24) |  |
+| A Greencloak of the garrison A (`a-greencloak-of-the-garrison-a`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (20,24) |  |
+| A Greencloak of the garrison B (`a-greencloak-of-the-garrison-b`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (21,24) |  |
+| A Greencloak of the garrison C (`a-greencloak-of-the-garrison-c`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (22,24) |  |
+| A Greencloak of the garrison D (`a-greencloak-of-the-garrison-d`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (23,24) |  |
+| A Greencloak of the garrison E (`a-greencloak-of-the-garrison-e`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (24,24) |  |
+| A Greencloak of the garrison F (`a-greencloak-of-the-garrison-f`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (25,24) |  |
+| A Greencloak of the garrison G (`a-greencloak-of-the-garrison-g`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (26,24) |  |
+| A Greencloak of the garrison H (`a-greencloak-of-the-garrison-h`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (27,24) |  |
+| A Greencloak of the garrison I (`a-greencloak-of-the-garrison-i`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (28,24) |  |
+| A Greencloak of the garrison J (`a-greencloak-of-the-garrison-j`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (29,24) |  |
+| A Greencloak of the garrison K (`a-greencloak-of-the-garrison-k`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (15,24) |  |
+| A Greencloak of the garrison L (`a-greencloak-of-the-garrison-l`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (15,23) |  |
+| A Greencloak of the garrison M (`a-greencloak-of-the-garrison-m`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (16,23) |  |
+| A Greencloak of the garrison N (`a-greencloak-of-the-garrison-n`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (16,22) |  |
+| A Greencloak of the garrison O (`a-greencloak-of-the-garrison-o`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (18,24) |  |
+| A Greencloak of the garrison P (`a-greencloak-of-the-garrison-p`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (17,22) |  |
+| A Greencloak of the garrison Q (`a-greencloak-of-the-garrison-q`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (17,23) |  |
+| A Greencloak of the garrison R (`a-greencloak-of-the-garrison-r`, guard) | enemy | 0/11 | 16 | mocked · DEAD | ashby (21,27) |  |
+| A Greencloak of the garrison S (`a-greencloak-of-the-garrison-s`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (22,28) |  |
+| A Greencloak of the garrison T (`a-greencloak-of-the-garrison-t`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (18,25) |  |
+| A Greencloak inside the tax house A (`a-greencloak-inside-the-tax-house-a`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (17,21) |  |
+| A Greencloak inside the tax house B (`a-greencloak-inside-the-tax-house-b`, guard) | enemy | 0/11 | 16 | — · DEAD | ashby (20,23) |  |
+| The tax clerk (`the-tax-clerk`, commoner) | enemy | 0/4 | 10 | unconscious · DEAD | ashby (19,24) |  |
+| Master Pellam Sayle, the Regent's summoner (`master-pellam-sayle-the-regents-summoner`, noble) | enemy | 9/9 | 15 | — | ashby (29,2) | yes |
+| A town watchman with a lantern A (`a-town-watchman-with-a-lantern-a`, commoner) | neutral | 4/4 | 10 | — | ashby (47,27) |  |
+| A town watchman with a lantern B (`a-town-watchman-with-a-lantern-b`, commoner) | neutral | 4/4 | 10 | — | ashby (49,25) |  |
+| The Rat's alewife (`the-rats-alewife`, commoner) | neutral | 4/4 | 10 | — | ashby (10,20) |  |
+| An old drinker (`an-old-drinker`, commoner) | neutral | 4/4 | 10 | — | ashby (10,21) |  |
+| A castle sentry A (`a-castle-sentry-a`, guard) | enemy | 11/11 | 16 | — | highbarrow (45,12) |  |
+| A castle sentry B (`a-castle-sentry-b`, guard) | enemy | 11/11 | 16 | — | highbarrow (47,12) |  |
+| The depot clerk (`the-depot-clerk`, commoner) | neutral | 4/4 | 10 | — | highbarrow (52,5) |  |
+| Marta Pell (`marta-pell`, commoner) | neutral | 4/4 | 10 | — | highbarrow-goose (2,8) |  |
 
 ## Agenda (scheduled by the engine; `agenda list`)
 
-- `a50` Day 23, 09:00 [due] Corvin's research on paired speaking stones resumes only once he is back in his library at the Rookery (Arcana check then)
-- `a28` Day 24, 07:00 [due] Quist's word from the Coldharbour carriers on the League's silver cart (route, guard, halts) for Day 34
-- `a51` Day 24, 10:00 [pending] The Pilgrim Road carrier calls at Thornbury on his eastward run (the Wheatsheaf is gone; he'll ask at the barracks or the Drover's Rest): the Mission's post to Ambersell goes with him
-- `a60` Day 24, 12:00 [pending] Quist at the Hollins Stones outside the Stillness: Corvin can reach him with Sending (the silver-cart word, the fort's cancelled works and money)
-- `a43` Day 24, 15:00 [pending] The hanging of the two Thornbound raiders (the Stag and the young spearman) at the gallows by Thornbury's market cross, by Lord Corvell's order
-- `a47` Day 25, 05:45 [pending, secret] Lord's-day dawn: the Watchtower chaplain casts Sending to Brother Ennis (it fails inside the Stillness; outside it, Ennis hears 25 words and answers at once)
-- `a48` Day 25, 18:00 [pending] Hesketh's Crowsfoot dozen should be signed and posted on the bridge and the green (raised with Kit's 100 crowns)
-- `a57` Day 26, 12:00 [pending] Quist sells Castle Gaunt's three plate harnesses (half of 1,500 each) and two riding horses (half of 75 each) to the League's buyers at Coldharbour; take the plate and hacks off Quist's rider (auto 2325 GP → treasury)
-- `a40` Day 30, 12:00 [pending] Ditchley's first quarter of tithes and rents under the Unkindness, brought by Amyas the reeve (auto 30+2d10 → treasury)
-- `a7` Day 30, 18:00 [pending] Month's end: household wages (Quist 90, Mother Hobday 75, Harl 75, Bastian 150, Ada, Bel, Tobin and Corlis 10 each) (auto -430 GP → treasury)
-- `a26` Day 30, 18:05 [pending] Coldharbour's first month as the Unkindness's inn: takings less Moss's wage and the new staff, with the dice room open (stables not yet finished) (auto 65+6d10 → treasury) (auto 65+6d10 → treasury)
-- `a49` Day 30, 18:10 [pending] Wages for Hesketh's Crowsfoot dozen from Day 25 (2 shillings a day each) (auto -14 GP → treasury)
-- `a59` Day 32, 12:00 [pending, secret] Castle Gaunt's answer to the ransom letter reaches Thornbury (decide with a hidden roll: Brey's father, Whitlock's kin, the castle for the men)
-- `a13` Day 35, 09:00 [pending, secret] Sabine sends to Ambersell for the Seeing Glass
+- `a47` Day 25, 05:45 [due, secret] Lord's-day dawn: the Watchtower chaplain casts Sending to Brother Ennis (it fails inside the Stillness; outside it, Ennis hears 25 words and answers at once)
+- `a70` Day 29, 21:00 [due] Reminder: at Gorse's meeting Ottilie is to get everything she can on the green dragon of the eastern Elderwild (where, how big, what it guards)
 - `a52` Day 37, 00:00 [pending] New moon: Sabine's dead-man's letter falls due. Unless a letter in her hand has reached Brother Prior Anselm at Ambersell, the Glass is sent west
 - `a16` Day 37, 20:00 [pending] New moon: the Eye in the Socket must meet a living gaze tonight, or the Stillness weakens
+- `a79` Day 38, 12:00 [pending] Vaux and forty of the Gilded Hand reach Kestrel Keep; Lady Kestrel runs her kestrel up beside Kit's crow and declares for Lord Corvell publicly
 - `a14` Day 40, 12:00 [pending, secret] Hedda and Tobias reach Thornbury, following Tobias's sliver
 - `a53` Day 42, 12:00 [pending, secret] The Seeing Glass reaches the burnt chapel on the Pilgrim Road (if the forged letter is believed): its keeper and six brothers in pilgrim grey, expecting Mother Sabine; they wait two days, then go on to Thornbury
 - `a32` Day 45, 08:00 [pending] Thornbury's first month of Crown dues and war-tax share, paid by Reeve Ashby to the Unkindness (auto 150+10d10 → treasury) (auto 150+10d10 → treasury)
+- `a78` Day 45, 12:00 [pending] Hartwell's first furs and amber reach Thornbury's market under the pact; the Unkindness's tenth (auto 25+2d10 → treasury)
 - `a42` Day 46, 12:00 [pending] Widow Tessaly's first month's remittance from the League house's wool trade (her tenth kept) (auto 60+2d20 → treasury)
 - `a44` Day 53, 12:00 [pending] Midsummer quarter-day: Lerner, tax-farmer of the Marchwood, owes Lord Corvell 4,000 crowns in full (shortfall from his own purse and his sister's house)
+- `a80` Day 53, 12:00 [pending] Midsummer quarter-day: Kestrel's first third of the rents (auto 40+2d10 → treasury)
 - `a55` Day 53, 16:00 [pending] The Gilded Hand's second month on the new terms: 3,375 due to Captain Vaux (and a fifth of the month's spoils) (-3375 GP → treasury)
+- `a74` Day 53, 18:00 [pending, secret] Two Eyeless Brothers scout the burnt chapel on the Pilgrim Road for Vashti's coming
+- `a75` Day 54, 18:00 [pending, secret] Vashti Ul-Amar reaches the burnt chapel on the Pilgrim Road with eight Eyeless Brothers and the Watchtower chaplain, expecting Sabine and the Eye
 
 ## Forces (`forces list`)
 
 - Hanged Men of Thornbury (`thornbury-hanged`): 5× Bandit, AC 12 (stat block), at Thornbury, the barracks (the old Lidless chapel) and both gates, captain Ivo Tarrant, pay 2sp/day · Friendly (Advantage on Influence checks with them)
 - Thornbury recruits (`thornbury-recruits`): 5× Commoner, AC 10 (stat block), at Thornbury, the barracks, captain Ivo Tarrant, pay 2sp/day · Friendly (Advantage on Influence checks with them)
 - Lerner's recruits (`harrowgate-recruits`): 7× Commoner, AC 10 (stat block), at Harrowgate, the castle yard, captain Sergeant Dorran Lerner · Friendly (Advantage on Influence checks with them)
-- The Gilded Hand (Second and Fourth Banners) (`gilded-hand`): 100× Warrior Infantry, AC 13 (stat block), at Thornbury, camped on the fair ground, captain Captain Brannoc Vaux, pay 3,375 a month and a fifth of their spoils · Indifferent (no modifier on Influence checks with them)
-- Kit's men-at-arms (late of Castle Gaunt) (`gaunt-men`): 12× Guard, AC 16 (Chain Shirt 13 + Dex 1 + Shield 2), kit: Chain Shirt, Shield, Spear, at Thornbury, the barracks, captain the two Gaunt sergeants, pay 1gp/day · Friendly (Advantage on Influence checks with them)
-- The Gaunt sergeants (`gaunt-sergeants`): 2× Warrior Veteran, AC 16 (Chain Mail 16), kit: Chain Mail, Halberd, at Thornbury, the barracks, captain Ivo Tarrant, pay 1gp/day · Friendly (Advantage on Influence checks with them)
+- The Gilded Hand, Fourth Banner (`gilded-hand`): 50× Warrior Infantry, AC 13 (stat block), at Thornbury, camped on the fair ground, captain Captain Brannoc Vaux, pay half of the Hand's 3,375 a month (one contract), and a fifth of their spoils · Indifferent (no modifier on Influence checks with them)
+- Kit's men-at-arms (late of Castle Gaunt) (`gaunt-men`): 8× Guard, AC 16 (Chain Shirt 13 + Dex 1 + Shield 2), kit: Chain Shirt, Shield, Spear, at Thornbury, the barracks, captain the remaining Gaunt sergeant, under Ivo Tarrant, pay 1gp/day · Friendly (Advantage on Influence checks with them)
+- The Gaunt sergeants (`gaunt-sergeants`): 1× Warrior Veteran, AC 16 (Chain Mail 16), kit: Chain Mail, Halberd, at Thornbury, the barracks, captain Ivo Tarrant, pay 1gp/day · Friendly (Advantage on Influence checks with them)
 - Hanged Men of the gate watch (`thornbury-gate-watch`): 4× Bandit, AC 16 (Chain Shirt 13 + Dex 1 + Shield 2), kit: Chain Shirt, Shield, Spear, at Thornbury, the barracks (the old Lidless chapel) and both gates, captain Ivo Tarrant, pay 2sp/day · Friendly (Advantage on Influence checks with them)
+- Sergeant Wystan Crabbe (late of Castle Gaunt) (`harrowgate-sergeant`): 1× Warrior Veteran, AC 16 (Chain Mail 16), kit: Chain Mail, Halberd, at on the March Road to Harrowgate, with the crew, captain Sergeant Wystan Crabbe, pay 1gp/day · Friendly (Advantage on Influence checks with them)
+- Crabbe's four (late of Castle Gaunt) (`harrowgate-gaunt-men`): 4× Guard, AC 16 (Chain Shirt 13 + Dex 1 + Shield 2), kit: Chain Shirt, Shield, Spear, at on the March Road to Harrowgate, with the crew, captain Sergeant Wystan Crabbe, pay 1gp/day · Friendly (Advantage on Influence checks with them)
+- The Gilded Hand at Saint Wendrel's (`gilded-hand-second`): 10× Warrior Infantry, AC 13 (stat block), at Saint Wendrel's Abbey, captain Sergeant Mags Orrel, pay half of the Hand's 3,375 a month (one contract), and a fifth of their spoils · Indifferent (no modifier on Influence checks with them)
+- Wardens of Hartwell (`hartwell-wardens`): 6× Scout, AC 13 (stat block), at Crowsfoot, the Crow and Kettle, captain Gorse, warden of Hartwell (lent to the Unkindness), pay Hartwell's pact (no wage) · Indifferent (no modifier on Influence checks with them)
+- The Gilded Hand, Second Banner (Kestrel detachment) (`gilded-hand-kestrel`): 40× Warrior Infantry, AC 13 (stat block), at marching from Saint Wendrel's to Kestrel Keep (dawn Day 35, due Day 38), captain Captain Brannoc Vaux, pay half of the Hand's 3,375 a month (one contract), and a fifth of their spoils · Indifferent (no modifier on Influence checks with them)
+- Kestrel's men-at-arms (`kestrel-men`): 12× Guard, AC 16 (stat block), at Kestrel Keep, captain Sergeant Ilsa Brand, pay Lady Kestrel's (her household) · Indifferent (no modifier on Influence checks with them)
 
 ## Maps (exact current contents — tokens and items stay where they were left)
 
-### The Rookery (`rookery`, interior 52×36, lighting dim)
-- Ada Crisp (`ada-crisp`, neutral) at (44,6) — 4/4 HP
+### The Rookery (`rookery`, interior 52×36, lighting bright)
+- Ada Crisp (`ada-crisp`, neutral) at (33,11) — 4/4 HP
 - Harl (`harl`, neutral) at (47,33) — 32/32 HP
 - Mother Hobday (`mother-hobday`, neutral) at (4,2) — 4/4 HP
-- Mr Fennimore Quist (`mr-fennimore-quist`, neutral) at (47,31) — 23/27 HP
+- Mr Fennimore Quist (`mr-fennimore-quist`, neutral) at (36,10) — 23/27 HP
 - container `kits-strongbox`: Kit's strongbox at (41,14)
 - container `hall-of-spoils`: The Hall of Spoils at (13,17)
 - container `otties-chest`: Ottilie's chest of identities at (13,30)
 - container `asches-chest`: Asche's chest at (23,30)
-- container `treasury`: The great strongbox at (49,32) — coins: 13541 GP
+- container `treasury`: The great strongbox at (49,32) — coins: 18361 GP
 - in The Hall of Spoils (`hall-of-spoils`) `floor-1`: 1× The Curator's Ring at (13,17) — stashed by Kit Corvell
 - in The Hall of Spoils (`hall-of-spoils`) `floor-2`: 1× The Gala seating chart at (13,17) — stashed by Kit Corvell
 - in The Hall of Spoils (`hall-of-spoils`) `floor-3`: 1× The Curator's daybook at (13,17) — stashed by Kit Corvell
@@ -400,10 +450,9 @@
 - point of interest `poi-15`: The old well at (14,22) → journal j46
 - point of interest `poi-16`: The Barrow track at (20,25) → journal j47
 - point of interest `poi-17`: The sentinel stone at (25,20) → journal j48
-- doors: (16,8) open, (23,8) open, (12,11) open, (19,11) closed, (26,11) open, (34,12) closed, (19,16) closed, (20,16) closed
+- doors: (16,8) open, (23,8) open, (12,11) open, (19,11) closed, (26,11) open, (34,12) closed, (19,16) open, (20,16) closed
 
 ### The Socket (`socket`, interior 36×26, lighting dim)
-- Bastian (`bastian`, neutral) at (6,21) — 25/32 HP
 - Mercy Fulk (`mercy-fulk`, enemy) at (3,22) — 2/4 HP · restrained, petrified
 - Nell Pratt, a ditch-digger's wife (`villager-4`, neutral) at (12,22) — 4/4 HP · petrified
 - container `visor-pegs`: The visor pegs at (14,11)
@@ -434,6 +483,10 @@
 - doors: (14,12) open, (14,13) closed, (25,19) closed
 
 ### Crowsfoot (`crowsfoot`, interior 60×40, lighting dim)
+- A fourth warden of Hartwell (`a-watcher-in-the-oaks-d`, ally) at (16,32) — 16/16 HP
+- A second warden of Hartwell (`a-watcher-in-the-oaks-b`, ally) at (15,31) — 16/16 HP
+- A third warden of Hartwell (`a-watcher-in-the-oaks-c`, ally) at (16,31) — 16/16 HP
+- A warden of Hartwell (`a-watcher-in-the-oaks-a`, ally) at (15,30) — 16/16 HP
 - Bandit A (`bandit-a-5`, ally) at (51,22) — 11/11 HP
 - Bandit B (`bandit-b-5`, ally) at (18,29) — 11/11 HP · hidden
 - Bandit C (`bandit-c-3`, ally) at (19,29) — 11/11 HP · hidden
@@ -445,7 +498,9 @@
 - Bandit H (`bandit-h`, ally) at (19,31) — 11/11 HP · hidden
 - Dickon, a toll man (`bandit-b-4`, ally) at (51,23) — 11/11 HP
 - Edwin Ashby (`edwin-ashby`, neutral) at (22,30) — 4/4 HP
-- Hesketh Rowe (`hesketh-rowe`, ally) at (22,24) — 52/52 HP
+- Gorse, warden of Hartwell (`gorse-warden-of-hartwell`, neutral) at (24,28) — 44/44 HP · hidden
+- Hesketh Rowe (`hesketh-rowe`, ally) at (26,28) — 52/52 HP
+- Hew Fallow, the miller's boy (`hew-fallow-the-millers-boy`, neutral) at (19,27) — 4/4 HP · hidden
 - Jessamy Crook (`jessamy-crook`, enemy) at (14,12) — DEAD · hidden
 - Mastiff A (`mastiff-a-2`, ally) at (49,22) — 5/5 HP
 - Mastiff A (`mastiff-a-3`, ally) at (25,24) — 5/5 HP · hidden
@@ -456,10 +511,15 @@
 - Old hand 2 (`bandit-b-2`, ally) at (22,27) — 11/11 HP · hidden
 - Old hand 3 (`bandit-c-2`, ally) at (23,27) — 11/11 HP · hidden
 - Old hand 4 (`bandit-d-2`, ally) at (24,27) — 11/11 HP · hidden
-- Sal (`bandit-b-3`, ally) at (24,22) — 11/11 HP · hidden
-- Tansy Moll (`tansy-moll`, ally) at (24,25) — 52/52 HP
+- One of Hesketh's new dozen A (`one-of-heskeths-new-dozen-a`, ally) at (50,23) — 11/11 HP
+- One of Hesketh's new dozen B (`one-of-heskeths-new-dozen-b`, ally) at (22,20) — 11/11 HP
+- One of Hesketh's new dozen C (`one-of-heskeths-new-dozen-c`, ally) at (24,20) — 11/11 HP
+- Sal (`bandit-b-3`, ally) at (17,31) — 11/11 HP
+- Tansy Moll (`tansy-moll`, ally) at (28,33) — 52/52 HP
+- The Stag (`the-stag`, enemy) at (16,30) — 1/67 HP · hidden
+- Vaux's rider (`vauxs-rider`, ally) at (20,29) — 11/11 HP
 - Villager (`villager`, neutral) at (20,22) — 4/4 HP
-- Wat (`bandit-a-3`, ally) at (23,22) — 11/11 HP · hidden
+- Wat (`bandit-a-3`, ally) at (17,30) — 11/11 HP
 - Wenna Croft, on watch (`villager-3`, enemy) at (37,6) — DEAD
 - container `mercys-coin-bowl`: Mercy's coin bowl at (28,32)
 - container `the-linen-chest`: The linen chest at (32,37)
@@ -503,18 +563,20 @@
 - point of interest `poi-42`: The ditch at (30,22) → journal j370
 - point of interest `poi-43`: The reeve's bed-closet at (26,5) → journal j371
 - point of interest `poi-44`: The plank-bridge toll at (51,24) → journal j437
+- point of interest `poi-45`: The fort timber on the green at (31,12) → journal j623
 - doors: (25,4) closed, (22,8) closed, (35,9) closed, (43,9) open, (40,16) open, (8,17) closed, (40,17) open, (40,18) open, (40,19) open, (23,26) closed, (56,26) closed, (43,27) closed, (8,28) closed, (30,29) open, (37,29) open, (26,34) open, (30,35) open, (23,36) closed, (44,36) open
 
 ### The Pens (`the-pens`, interior 30×16, lighting dim)
 - A Fallowfield tenant (`commoner-a`, neutral) at (16,12) — 4/4 HP · restrained
 - A second Fallowfield tenant (`commoner-b`, neutral) at (21,12) — 4/4 HP · restrained
 - Alys Brinn (`alys-brinn`, neutral) at (16,3) — DEAD · hidden
+- Bastian (`bastian`, neutral) at (4,6) — 25/32 HP
 - Brother Cuthbert (`brother-cuthbert`, neutral) at (26,3) — 11/11 HP · restrained
-- Brother Ennis (`brother-ennis`, enemy) at (11,3) — 1/11 HP · restrained, prone
 - Garrick Webb (`garrick-webb`, neutral) at (21,3) — 32/32 HP · restrained
-- Goody Prail, the egg-woman (`a-market-woman-with-egg-baskets`, neutral) at (16,3) — 4/4 HP · blinded, restrained
+- Goody Prail, the egg-woman (`a-market-woman-with-egg-baskets`, neutral) at (16,3) — 4/4 HP · restrained
 - Hob, the miller's man (`villager-2`, neutral) at (11,12) — 4/4 HP · restrained
-- Mother Sabine, the woman in dove-grey (`the-woman-in-dove-grey`, enemy) at (26,12) — 1/27 HP · prone, poisoned, blinded, restrained
+- Jenny Copp, the scullion (`a-scullion-girl`, neutral) at (11,3) — 4/4 HP · restrained
+- Mother Sabine, the woman in dove-grey (`the-woman-in-dove-grey`, enemy) at (26,12) — 1/27 HP · poisoned, restrained, blinded
 - Tobin Rudge (`tobin-rudge`, neutral) at (1,7) — 4/4 HP · hidden
 - container `gaolers-chest`: The gaoler's chest at (8,11)
 - point of interest `poi-1`: The stair up at (1,7) → journal j161
@@ -655,8 +717,11 @@
 - doors: (23,8) closed
 
 ### Thornbury: the West Gate quarter (`thornbury`, town 60×40, lighting bright)
+- A cooper's apprentice with a barrow (`market-folk-b`, neutral) at (47,5) — 4/4 HP · hidden
 - A horse-coper at the fair yard (`a-horse-coper-at-the-fair-yard`, neutral) at (4,32) — 4/4 HP
+- A woman with a basket of leeks (`market-folk-a`, neutral) at (46,4) — 4/4 HP · hidden
 - Aldous Crane (`aldous-crane`, ally) at (16,26) — 52/52 HP
+- Captain Brannoc Vaux (`captain-brannoc-vaux`, neutral) at (46,13) — 112/112 HP · hidden
 - Cornmarket watchman (`guard-a-6`, enemy) at (6,27) — DEAD · hidden
 - Cornmarket watchman (`guard-b-6`, enemy) at (4,27) — DEAD · hidden
 - Cornmarket watchman (`guard-c-4`, enemy) at (4,28) — DEAD · hidden
@@ -665,8 +730,10 @@
 - Cornmarket watchman (`guard-f-2`, enemy) at (6,26) — DEAD · hidden
 - Goodwife Haddow (`goodwife-haddow`, neutral) at (4,23) — 4/4 HP · hidden
 - Hal Bramble (`hal-bramble`, neutral) at (26,31) — 4/4 HP · hidden
-- Market folk A (`market-folk-a`, neutral) at (47,10) — 4/4 HP · hidden
-- Market folk B (`market-folk-b`, neutral) at (47,11) — 4/4 HP · hidden
+- Jory Pike, the Pilgrim Road carrier (`jory-pike-the-pilgrim-road-carrier`, neutral) at (47,26) — 4/4 HP · hidden
+- Jory's grey mule (`jorys-grey-mule`, neutral) at (48,26) — 11/11 HP · hidden
+- Nib (`nib`, neutral) at (25,31) — 4/4 HP
+- Sergeant Godric Lusk (`gaunt-sergeant-b`, ally) at (47,14) — 65/65 HP · hidden
 - Watch-captain Orme (`watch-captain-orme`, enemy) at (17,27) — DEAD · mocked · hidden
 - Watchman at the brazier (`guard-c-2`, enemy) at (4,26) — DEAD · hidden
 - Widow Tessaly (`widow-tessaly`, neutral) at (55,5) — 4/4 HP · hidden
@@ -684,7 +751,7 @@
 - point of interest `poi-19`: The Chapel of the Unblinking, now the Hanged Men's barracks at (44,13) → journal j558
 - point of interest `poi-20`: The West Gate, from inside at (1,27) → journal j559
 - point of interest `poi-21`: The Wheatsheaf (burned out) at (44,9) → journal j583
-- doors: (14,1) closed, (29,1) closed, (31,1) closed, (45,1) closed, (52,1) closed, (58,1) closed, (40,2) closed, (48,2) closed, (4,3) closed, (9,3) closed, (22,3) closed, (3,6) closed, (22,6) closed, (35,6) closed, (48,7) closed, (53,7) closed, (15,8) closed, (29,9) closed, (44,9) closed, (22,11) closed, (5,13) closed, (9,13) closed, (44,13) closed, (48,13) closed, (53,13) closed, (54,16) closed, (11,17) closed, (57,17) closed, (50,18) closed, (32,19) closed, (39,19) closed, (3,20) closed, (22,20) closed, (48,21) closed, (52,21) closed, (11,22) closed, (56,22) closed, (42,23) closed, (16,24) closed, (26,24) closed, (31,24) closed, (35,24) closed, (6,25) closed, (1,27) open, (9,29) closed, (31,29) closed, (58,29) closed, (3,30) open, (17,30) closed, (25,30) closed, (37,30) closed, (44,31) closed, (12,34) closed, (48,34) closed, (53,34) closed, (23,36) closed, (28,36) closed, (35,36) closed, (12,37) closed, (57,37) closed, (48,38) closed
+- doors: (14,1) closed, (29,1) closed, (31,1) closed, (45,1) closed, (52,1) closed, (58,1) closed, (40,2) closed, (48,2) closed, (4,3) closed, (9,3) closed, (22,3) closed, (3,6) closed, (22,6) closed, (35,6) closed, (48,7) closed, (53,7) closed, (15,8) closed, (29,9) closed, (44,9) closed, (22,11) closed, (5,13) closed, (9,13) closed, (44,13) open, (48,13) closed, (53,13) closed, (54,16) closed, (11,17) closed, (57,17) closed, (50,18) closed, (32,19) closed, (39,19) closed, (3,20) closed, (22,20) closed, (48,21) closed, (52,21) closed, (11,22) closed, (56,22) closed, (42,23) closed, (16,24) closed, (26,24) closed, (31,24) closed, (35,24) closed, (6,25) closed, (1,27) open, (9,29) closed, (31,29) closed, (58,29) closed, (3,30) open, (17,30) closed, (25,30) closed, (37,30) closed, (44,31) closed, (12,34) closed, (48,34) closed, (53,34) closed, (23,36) closed, (28,36) closed, (35,36) closed, (12,37) closed, (57,37) closed, (48,38) closed
 - labels: Market Square (26,15), West Gate (4,26), March Road: on to the town's heart (56,27), Tanners' Row: to the north ward (13,1), Brewers' Street (47,1), To the fair ground and the south ward (47,38), Wheat Lane (30,5), Cooper's Lane (30,37)
 
 ### The Wheatsheaf (`wheatsheaf`, interior 30×22, lighting bright)
@@ -721,27 +788,25 @@
 
 ### Coldharbour (`coldharbour`, interior 34×24, lighting dim)
 - A Hanged Man at his ale (`bandit-a-6`, ally) at (13,7) — 11/11 HP
+- A carter at supper A (`a-carter-at-supper-a`, neutral) at (9,16) — 4/4 HP
+- A carter at supper B (`a-carter-at-supper-b`, neutral) at (8,16) — 4/4 HP
 - Another Hanged Man (`bandit-b-6`, ally) at (15,7) — 11/11 HP
 - Gaffer Moss (`gaffer-moss`, neutral) at (2,6) — 4/4 HP
-- Master Pell (`master-pell`, neutral) at (30,7) — 4/4 HP
-- Pell's boy (`pells-boy`, neutral) at (31,10) — 4/4 HP
+- Master Pell (`master-pell`, neutral) at (30,7) — 4/4 HP · hidden
+- Pell's boy (`pells-boy`, neutral) at (31,10) — 4/4 HP · hidden
 - point of interest `poi-1`: The front door at (10,23) → journal j335
 - point of interest `poi-2`: The long bar at (3,10) → journal j336
 - point of interest `poi-3`: The common-room hearth at (24,12) → journal j337
 - point of interest `poi-4`: The drovers' table at (14,4) → journal j338
 - point of interest `poi-5`: The parlour door at (25,8) → journal j339
 - point of interest `poi-6`: The parlour table at (29,8) → journal j340
-- point of interest `poi-7`: Master Pell's strongbox at (31,6) → journal j341
 - point of interest `poi-8`: The dormitory door at (25,19) → journal j342
-- doors: (25,2) closed, (25,8) open, (25,19) closed, (10,23) closed
+- point of interest `poi-9`: The kitchen range at (27,3) → journal j625
+- point of interest `poi-10`: The new dice tables at (13,7) → journal j626
+- doors: (25,2) open, (25,8) open, (25,19) closed, (10,23) closed
 - labels: Bar (3,2)
 
-### The Chapel of the Unblinking (`unblinking-chapel`, interior 32×24, lighting dim)
-- Brakka Holloway (`brakka`, pc) at (6,12) — 71/71 HP
-- Corvin Asche (`corvin`, pc) at (5,10) — 41/41 HP
-- Kit Corvell (`kit`, pc) at (6,11) — 57/57 HP
-- Ottilie Marsh (`ottilie`, pc) at (7,11) — 48/48 HP
-- Captain Brannoc Vaux (`captain-brannoc-vaux`, neutral) at (20,12) — 112/112 HP
+### The Chapel of the Unblinking (`unblinking-chapel`, interior 32×24, lighting bright)
 - Davy, the landlord's boy (`a-boy-hiding-in-the-loft`, neutral) at (8,21) — 4/4 HP · restrained
 - Gaunt man-at-arms A (`gaunt-man-at-arms-a`, ally) at (12,10) — 11/11 HP
 - Gaunt man-at-arms B (`gaunt-man-at-arms-b`, ally) at (13,10) — 11/11 HP
@@ -755,8 +820,6 @@
 - Gaunt man-at-arms J (`gaunt-man-at-arms-j`, ally) at (21,10) — 11/11 HP
 - Gaunt man-at-arms K (`gaunt-man-at-arms-k`, ally) at (22,10) — 11/11 HP
 - Gaunt man-at-arms L (`gaunt-man-at-arms-l`, ally) at (23,10) — 11/11 HP
-- Gaunt sergeant A (`gaunt-sergeant-a`, ally) at (10,10) — 65/65 HP
-- Gaunt sergeant B (`gaunt-sergeant-b`, ally) at (11,10) — 65/65 HP
 - Gilded Hand foot A (`gilded-hand-foot-a`, neutral) at (24,11) — 9/9 HP
 - Gilded Hand foot B (`gilded-hand-foot-b`, neutral) at (24,12) — 9/9 HP
 - Gilded Hand foot C (`gilded-hand-foot-c`, neutral) at (22,13) — 9/9 HP
@@ -766,11 +829,10 @@
 - Hanged Man off duty A (`hanged-man-off-duty-a`, ally) at (9,20) — 11/11 HP
 - Hanged Man off duty B (`hanged-man-off-duty-b`, ally) at (25,10) — 11/11 HP
 - Hanged Man off duty C (`hanged-man-off-duty-c`, ally) at (25,13) — 11/11 HP
-- Ivo Tarrant (`bandit-g`, ally) at (7,12) — 11/11 HP
-- Nib (`nib`, neutral) at (8,5) — 4/4 HP
+- Ivo Tarrant (`bandit-g`, ally) at (7,12) — 11/11 HP · hidden
 - Peg's mother (`pegs-mother`, neutral) at (10,21) — 4/4 HP · restrained
 - Quist's rider (`quists-rider`, ally) at (6,14) — 11/11 HP · hidden
-- Sergeant Mags Orrel (`sergeant-mags-orrel`, neutral) at (21,11) — 65/65 HP
+- Sergeant Mags Orrel (`sergeant-mags-orrel`, neutral) at (21,11) — 65/65 HP · hidden
 - Sir Hugh Darrow, banneret of Castle Gaunt (`sir-hugh-darrow-banneret-of-castle-gaunt`, enemy) at (7,10) — 52/52 HP · hidden
 - Thornbury recruits 1 (`thornbury-recruits-1`, ally) at (10,16) — 4/4 HP
 - Thornbury recruits 2 (`thornbury-recruits-2`, ally) at (10,17) — 4/4 HP
@@ -819,20 +881,12 @@
 - doors: (18,4) closed, (18,10) closed, (9,13) closed, (18,16) closed
 - labels: The Missioner's study (9,6), Bedchamber (23,5), The chapel gallery (23,12), Stair passage (9,16)
 
-### The March Road before the West Gate (`thornbury-west-road`, wilderness 38×24, lighting dark)
-- A carter with a load of turnips (`a-carter-with-a-load-of-turnips`, neutral) at (30,13) — 4/4 HP · hidden
+### The March Road before the West Gate (`thornbury-west-road`, wilderness 38×24, lighting bright)
 - Causeway watchman with a torch (`guard-a-5`, enemy) at (32,10) — DEAD · hidden
 - Causeway watchman with a torch (`guard-b-5`, enemy) at (32,12) — DEAD · hidden
 - League man in grey (`guard-c-3`, enemy) at (37,10) — DEAD · hidden
 - Night watchman with a crossbow (`guard-b-4`, enemy) at (35,12) — DEAD · hidden
 - Night watchman with a lantern (`guard-a-4`, enemy) at (35,10) — DEAD · hidden
-- Ord, the League house under-clerk (`ord-the-league-house-under-clerk`, neutral) at (29,20) — DEAD
-- Peg, the Wheatsheaf's serving girl (`the-serving-girl`, neutral) at (28,18) — DEAD · restrained
-- Townsfolk at the gallows A (`townsfolk-at-the-gallows-a`, neutral) at (23,16) — 4/4 HP · hidden
-- Townsfolk at the gallows B (`townsfolk-at-the-gallows-b`, neutral) at (22,16) — 4/4 HP · hidden
-- Townsfolk at the gallows C (`townsfolk-at-the-gallows-c`, neutral) at (24,16) — 4/4 HP · hidden
-- Townsfolk at the gallows D (`townsfolk-at-the-gallows-d`, neutral) at (23,17) — 4/4 HP · hidden
-- Townsfolk at the gallows E (`townsfolk-at-the-gallows-e`, neutral) at (23,15) — 4/4 HP · hidden
 - point of interest `poi-2`: The town ditch at (31,5) → journal j373
 - point of interest `poi-3`: The roadside copse at (7,4) → journal j374
 - point of interest `poi-4`: The ruined tithe barn at (10,17) → journal j375
@@ -842,6 +896,7 @@
 - point of interest `poi-9`: The alarm bell at (36,10) → journal j556
 - point of interest `poi-10`: The proclamation board at (30,12) → journal j557
 - point of interest `poi-11`: The town gallows (Peg and Ord hanging) at (28,19) → journal j586
+- point of interest `poi-12`: Three fresh graves in the potter's field at (20,17) → journal j621
 - doors: (10,15) open
 
 ### The March Road, east of Harrowgate (`march-road-east`, wilderness 46×26, lighting bright)
@@ -921,7 +976,6 @@
 
 ### Thornbury: the Cornmarket (`thornbury-heart`, town 48×28, lighting bright)
 - Reeve Odo Ashby (`reeve-odo-ashby`, neutral) at (23,10) — 9/9 HP
-- The Stag (`the-stag`, enemy) at (23,12) — 1/67 HP · restrained
 - Thornbury townsfolk 1 (`commoner-a-5`, neutral) at (20,15) — 4/4 HP · hidden
 - Thornbury townsfolk 10 (`commoner-j-2`, neutral) at (20,17) — 4/4 HP · hidden
 - Thornbury townsfolk 11 (`commoner-k`, neutral) at (20,13) — 4/4 HP · hidden
@@ -934,7 +988,6 @@
 - Thornbury townsfolk 7 (`commoner-g-2`, neutral) at (26,13) — 4/4 HP · hidden
 - Thornbury townsfolk 8 (`commoner-h-2`, neutral) at (21,11) — 4/4 HP · hidden
 - Thornbury townsfolk 9 (`commoner-i-2`, neutral) at (21,14) — 4/4 HP · hidden
-- Tough B (`tough-b`, enemy) at (24,12) — 7/32 HP · restrained
 - point of interest `poi-1`: The reeve's hall at (23,6) → journal j465
 - point of interest `poi-2`: The market cross at (23,11) → journal j466
 - point of interest `poi-3`: The stocks at (23,12) → journal j467
@@ -955,42 +1008,30 @@
 - point of interest `poi-4`: The racks at (2,8) → journal j478
 - doors: (13,2) closed, (16,5) closed, (6,11) closed
 
-### Harrowgate (`harrowgate`, wilderness 46×34, lighting bright)
-- Conscript on the east wall (`conscript-on-the-east-wall`, enemy) at (34,10) — DEAD
-- Conscript on the west wall (`conscript-on-the-west-wall`, enemy) at (12,22) — DEAD
+### Harrowgate (`harrowgate`, wilderness 46×34, lighting dim)
+- A groom at the stables (`a-groom-at-the-stables`, neutral) at (16,20) — 4/4 HP
+- Crabbe's four (late of Castle Gaunt) 1 (`crabbes-four-late-of-castle-gaunt-1`, ally) at (25,21) — 11/11 HP
+- Crabbe's four (late of Castle Gaunt) 2 (`crabbes-four-late-of-castle-gaunt-2`, ally) at (24,21) — 11/11 HP
+- Crabbe's four (late of Castle Gaunt) 3 (`crabbes-four-late-of-castle-gaunt-3`, ally) at (24,20) — 11/11 HP
+- Crabbe's four (late of Castle Gaunt) 4 (`crabbes-four-late-of-castle-gaunt-4`, ally) at (22,20) — 11/11 HP
 - Ditchley man 10 (`commoner-j`, neutral) at (31,30) — 4/4 HP · hidden
-- Ditchley man 4 (`commoner-d`, ally) at (19,12) — 4/4 HP
-- Ditchley man 5 (`commoner-e`, ally) at (15,12) — 4/4 HP
-- Ditchley man 6 (`commoner-f`, ally) at (16,12) — 4/4 HP
+- Ditchley man 4 (`commoner-d`, ally) at (21,17) — 4/4 HP
+- Ditchley man 5 (`commoner-e`, ally) at (19,16) — 4/4 HP
+- Ditchley man 6 (`commoner-f`, ally) at (20,16) — 4/4 HP
 - Ditchley man 7 (`commoner-g`, neutral) at (26,31) — 4/4 HP · hidden
 - Ditchley man 8 (`commoner-h`, neutral) at (29,30) — 4/4 HP · hidden
 - Ditchley man 9 (`commoner-i`, neutral) at (30,30) — 4/4 HP · hidden
 - Ditchley's reeve (`commoner-a-4`, neutral) at (24,28) — 4/4 HP · hidden
-- Greencloak at the gate brazier (`greencloak-at-the-gate-brazier`, enemy) at (21,25) — DEAD
-- Greencloak on the south wall (`greencloak-on-the-south-wall`, enemy) at (18,24) — DEAD
-- Greencloak waking (`sleeping-greencloak-2`, enemy) at (31,14) — DEAD · prone
-- Harrowgate's cook (`harrowgates-cook`, neutral) at (24,14) — DEAD
-- Old Mattock (`old-mattock`, neutral) at (28,8) — DEAD · unconscious, prone
-- Osgar (`commoner-c`, ally) at (17,12) — 4/4 HP
-- Sergeant Brice Tolly (`sergeant-brice-tolly`, enemy) at (26,25) — DEAD · unconscious, prone
-- Sergeant Dorran Lerner (`sergeant-dorran-lerner`, ally) at (22,10) — 57/75 HP
+- Osgar (`commoner-c`, ally) at (20,17) — 4/4 HP
+- Sergeant Dorran Lerner (`sergeant-dorran-lerner`, ally) at (18,16) — 57/75 HP · hidden
+- Sergeant Wystan Crabbe (`gaunt-sergeant-a`, ally) at (23,21) — 65/65 HP
 - Sir Gerold Ambry (`sir-gerold-ambry`, neutral) at (20,9) — 52/52 HP
-- Sleeping Greencloak 1 (`sleeping-greencloak-1`, enemy) at (31,13) — DEAD · unconscious, prone
-- Sleeping Greencloak 3 (`sleeping-greencloak-3`, enemy) at (31,15) — DEAD · unconscious, prone
-- Sleeping Greencloak 4 (`sleeping-greencloak-4`, enemy) at (31,16) — DEAD · unconscious, prone
-- Sleeping conscript 1 (`sleeping-conscript-1`, enemy) at (31,17) — DEAD · unconscious, prone
-- Sleeping conscript 2 (`sleeping-conscript-2`, enemy) at (30,14) — DEAD · unconscious, prone
-- Sleeping conscript 3 (`sleeping-conscript-3`, enemy) at (30,16) — DEAD · unconscious, prone
-- Sleeping conscript 4 (`sleeping-conscript-4`, enemy) at (30,18) — DEAD · unconscious, prone
-- Sleeping conscript 5 (`sleeping-conscript-5`, enemy) at (32,13) — DEAD · unconscious, prone
-- Sleeping conscript 6 (`sleeping-conscript-6`, enemy) at (32,15) — DEAD · unconscious, prone
-- Sleeping conscript 7 (`sleeping-conscript-7`, enemy) at (32,17) — DEAD · unconscious, prone
 - Surrendered conscript A (`sleeping-conscript-8`, neutral) at (26,17) — 4/4 HP · hidden
 - Surrendered conscript B (`sleeping-conscript-9`, neutral) at (27,17) — 4/4 HP · hidden
 - Surrendered conscript D (`sleeping-conscript-11`, neutral) at (26,18) — 4/4 HP · hidden
 - Surrendered conscript E (`sleeping-conscript-12`, neutral) at (27,18) — 4/4 HP · hidden
 - Tam, a conscript (`sleeping-conscript-10`, enemy) at (20,10) — 4/4 HP · hidden
-- Wilf Underhay (`commoner-b-4`, ally) at (18,12) — 4/4 HP
+- Wilf Underhay (`commoner-b-4`, ally) at (19,17) — 4/4 HP
 - point of interest `poi-1`: The Harrowgate milestone at (9,30) → journal j480
 - point of interest `poi-2`: The crag at (20,28) → journal j481
 - point of interest `poi-3`: The castle ramp at (27,29) → journal j482
@@ -1022,7 +1063,8 @@
 - point of interest `poi-30`: The stair up at (20,9) → journal j509
 - point of interest `poi-31`: The stair down at (15,14) → journal j510
 - point of interest `poi-32`: The hall shelves at (20,14) → journal j511
-- doors: (29,5) closed, (27,10) open, (18,15) closed, (29,15) open, (24,16) open, (23,23) open, (24,23) open, (22,25) open, (25,25) open, (23,27) closed, (24,27) closed
+- point of interest `poi-33`: The new graves below the crag at (8,31) → journal j622
+- doors: (29,5) closed, (27,10) open, (18,15) closed, (29,15) open, (24,16) open, (23,23) open, (24,23) open, (22,25) open, (25,25) open, (23,27) open, (24,27) open
 
 ### Harrowgate's strongroom (`harrowgate-strongroom`, interior 10×7, lighting dark)
 - point of interest `poi-1`: The tax-roll chest at (3,4) → journal j512
@@ -1130,10 +1172,10 @@
 - labels: Stream (29,12), Road (1,14)
 
 ### The reeve's gaol, under the reeve's hall (`thornbury-gaol`, interior 30×14, lighting dim)
-- Gaunt man-at-arms M (`gaunt-man-at-arms-m`, enemy) at (12,7) — 11/11 HP
-- Gaunt man-at-arms N (`gaunt-man-at-arms-n`, enemy) at (13,8) — 11/11 HP
-- Gaunt man-at-arms O (`gaunt-man-at-arms-o`, enemy) at (16,7) — 11/11 HP
-- Gaunt man-at-arms P (`gaunt-man-at-arms-p`, enemy) at (17,8) — 11/11 HP
+- Gaunt man-at-arms M (`gaunt-man-at-arms-m`, enemy) at (12,7) — 11/11 HP · hidden
+- Gaunt man-at-arms N (`gaunt-man-at-arms-n`, enemy) at (13,8) — 11/11 HP · hidden
+- Gaunt man-at-arms O (`gaunt-man-at-arms-o`, enemy) at (16,7) — 11/11 HP · hidden
+- Gaunt man-at-arms P (`gaunt-man-at-arms-p`, enemy) at (17,8) — 11/11 HP · hidden
 - Hanged Man at the toll table (`hanged-man-at-the-toll-table`, ally) at (11,4) — 11/11 HP
 - Hanged Man on the West Gate toll (`hanged-man-on-the-west-gate-toll`, ally) at (11,5) — 11/11 HP
 - Hob Sallis, the reeve's gaoler (`hob-sallis-the-reeves-gaoler`, neutral) at (6,5) — 11/11 HP
@@ -1147,21 +1189,204 @@
 - doors: (12,3) closed, (16,3) closed, (20,3) closed, (24,3) closed, (27,3) closed, (10,4) open, (12,6) closed, (16,6) closed, (20,6) closed, (24,6) closed, (27,6) closed
 - labels: Bar (3,2)
 
+### Kestrelford and Kestrel Keep (`kestrel-keep`, town 48×32, lighting bright)
+- A Kestrel man-at-arms A (`a-kestrel-man-at-arms-a`, neutral) at (40,7) — 11/11 HP
+- A Kestrel man-at-arms B (`a-kestrel-man-at-arms-b`, neutral) at (39,7) — 11/11 HP
+- A Kestrelford villager A (`a-kestrelford-villager-a`, neutral) at (20,8) — 4/4 HP
+- A Kestrelford villager B (`a-kestrelford-villager-b`, neutral) at (21,8) — 4/4 HP
+- A Kestrelford villager C (`a-kestrelford-villager-c`, neutral) at (20,7) — 4/4 HP
+- Tam Kerrow, the falconer (`tam-kerrow-the-falconer`, neutral) at (35,4) — 16/16 HP
+- point of interest `poi-1`: The keep tower at (40,3) → journal j628
+- point of interest `poi-2`: The gatehouse at (40,6) → journal j629
+- point of interest `poi-3`: The mews at (35,3) → journal j630
+- point of interest `poi-4`: Kestrelford's crossroads at (22,7) → journal j631
+- point of interest `poi-5`: The Dawn chapel at (14,15) → journal j632
+- point of interest `poi-6`: The Kestrel's Rest at (36,13) → journal j633
+- doors: (39,5) closed, (40,6) closed, (36,10) closed, (40,10) closed, (7,13) closed, (11,15) closed, (14,21) closed, (37,21) closed, (42,21) closed, (7,26) closed
+- labels: Market Square (19,3), Kestrel Keep (40,0), Kestrelford (14,9)
+
+### Kestrel Keep, the great hall (`kestrel-hall`, interior 26×18, lighting dim)
+- A man-at-arms at the hall door A (`a-man-at-arms-at-the-hall-door-a`, neutral) at (8,16) — 11/11 HP
+- A man-at-arms at the hall door B (`a-man-at-arms-at-the-hall-door-b`, neutral) at (9,16) — 11/11 HP
+- Lady Isolde Kestrel (`lady-isolde-kestrel`, neutral) at (6,6) — 9/9 HP
+- Master Hawke, the steward (`master-hawke-the-steward`, neutral) at (9,8) — 4/4 HP
+- Rowan Kestrel (`rowan-kestrel`, neutral) at (7,6) — 4/4 HP
+- Sergeant Ilsa Brand (`sergeant-ilsa-brand`, neutral) at (3,9) — 65/65 HP
+- point of interest `poi-1`: The hearth and the sword at (8,2) → journal j634
+- point of interest `poi-2`: The high table at (6,7) → journal j635
+- point of interest `poi-3`: The hall door at (9,17) → journal j636
+- doors: (16,3) closed, (16,6) closed, (16,10) closed, (9,17) closed
+
+### Ashby (`ashby`, town 52×36, lighting dim)
+- A Greencloak at the motte gate A (`a-greencloak-at-the-motte-gate-a`, enemy) at (40,8) — 11/11 HP · hidden
+- A Greencloak at the motte gate B (`a-greencloak-at-the-motte-gate-b`, enemy) at (41,9) — 11/11 HP · hidden
+- A Greencloak at the tax house A (`a-greencloak-at-the-tax-house-a`, enemy) at (17,22) — DEAD
+- A Greencloak at the tax house B (`a-greencloak-at-the-tax-house-b`, enemy) at (32,3) — 11/11 HP
+- A Greencloak crossbow sergeant A (`a-greencloak-crossbow-sergeant-a`, enemy) at (16,26) — DEAD
+- A Greencloak crossbow sergeant B (`a-greencloak-crossbow-sergeant-b`, enemy) at (18,27) — DEAD
+- A Greencloak crossbow sergeant C (`a-greencloak-crossbow-sergeant-c`, enemy) at (16,23) — DEAD
+- A Greencloak crossbow sergeant D (`a-greencloak-crossbow-sergeant-d`, enemy) at (17,24) — DEAD
+- A Greencloak inside the tax house A (`a-greencloak-inside-the-tax-house-a`, enemy) at (17,21) — DEAD
+- A Greencloak inside the tax house B (`a-greencloak-inside-the-tax-house-b`, enemy) at (20,23) — DEAD
+- A Greencloak of the garrison A (`a-greencloak-of-the-garrison-a`, enemy) at (20,24) — DEAD
+- A Greencloak of the garrison B (`a-greencloak-of-the-garrison-b`, enemy) at (21,24) — DEAD
+- A Greencloak of the garrison C (`a-greencloak-of-the-garrison-c`, enemy) at (22,24) — DEAD
+- A Greencloak of the garrison D (`a-greencloak-of-the-garrison-d`, enemy) at (23,24) — DEAD
+- A Greencloak of the garrison E (`a-greencloak-of-the-garrison-e`, enemy) at (24,24) — DEAD
+- A Greencloak of the garrison F (`a-greencloak-of-the-garrison-f`, enemy) at (25,24) — DEAD
+- A Greencloak of the garrison G (`a-greencloak-of-the-garrison-g`, enemy) at (26,24) — DEAD
+- A Greencloak of the garrison H (`a-greencloak-of-the-garrison-h`, enemy) at (27,24) — DEAD
+- A Greencloak of the garrison I (`a-greencloak-of-the-garrison-i`, enemy) at (28,24) — DEAD
+- A Greencloak of the garrison J (`a-greencloak-of-the-garrison-j`, enemy) at (29,24) — DEAD
+- A Greencloak of the garrison K (`a-greencloak-of-the-garrison-k`, enemy) at (15,24) — DEAD
+- A Greencloak of the garrison L (`a-greencloak-of-the-garrison-l`, enemy) at (15,23) — DEAD
+- A Greencloak of the garrison M (`a-greencloak-of-the-garrison-m`, enemy) at (16,23) — DEAD
+- A Greencloak of the garrison N (`a-greencloak-of-the-garrison-n`, enemy) at (16,22) — DEAD
+- A Greencloak of the garrison O (`a-greencloak-of-the-garrison-o`, enemy) at (18,24) — DEAD
+- A Greencloak of the garrison P (`a-greencloak-of-the-garrison-p`, enemy) at (17,22) — DEAD
+- A Greencloak of the garrison Q (`a-greencloak-of-the-garrison-q`, enemy) at (17,23) — DEAD
+- A Greencloak of the garrison R (`a-greencloak-of-the-garrison-r`, enemy) at (21,27) — DEAD · mocked
+- A Greencloak of the garrison S (`a-greencloak-of-the-garrison-s`, enemy) at (22,28) — DEAD
+- A Greencloak of the garrison T (`a-greencloak-of-the-garrison-t`, enemy) at (18,25) — DEAD
+- A market-goer A (`a-market-goer-a`, neutral) at (30,22) — 4/4 HP · hidden
+- A market-goer B (`a-market-goer-b`, neutral) at (30,21) — 4/4 HP · hidden
+- A market-goer C (`a-market-goer-c`, neutral) at (29,22) — 4/4 HP · hidden
+- A market-goer D (`a-market-goer-d`, neutral) at (30,23) — 4/4 HP · hidden
+- A town watchman with a lantern A (`a-town-watchman-with-a-lantern-a`, neutral) at (47,27) — 4/4 HP
+- A town watchman with a lantern B (`a-town-watchman-with-a-lantern-b`, neutral) at (49,25) — 4/4 HP
+- A townsman on the South Gate A (`a-townsman-on-the-south-gate-a`, neutral) at (33,33) — 4/4 HP · hidden
+- A townsman on the South Gate B (`a-townsman-on-the-south-gate-b`, neutral) at (32,33) — 4/4 HP · hidden
+- An old drinker (`an-old-drinker`, neutral) at (10,21) — 4/4 HP
+- Master Pellam Sayle, the Regent's summoner (`master-pellam-sayle-the-regents-summoner`, enemy) at (29,2) — 9/9 HP · hidden
+- Sir Osric Vane (`sir-osric-vane`, enemy) at (17,26) — DEAD
+- The Rat's alewife (`the-rats-alewife`, neutral) at (10,20) — 4/4 HP
+- The tax clerk (`the-tax-clerk`, enemy) at (19,24) — DEAD · unconscious
+- container `box-2`: Sir Osric Vane's gear at (17,26)
+- point of interest `poi-1`: The market cross at (33,24) → journal j637
+- point of interest `poi-2`: The tax house at (21,22) → journal j638
+- point of interest `poi-3`: The Crown and Sheaf at (29,3) → journal j639
+- point of interest `poi-4`: The motte gate at (39,8) → journal j640
+- point of interest `poi-5`: The motte tower at (42,3) → journal j641
+- point of interest `poi-6`: The Drowned Rat at (11,20) → journal j642
+- point of interest `poi-7`: The counting room's strongbox at (20,19) → journal j643
+- point of interest `poi-8`: The jammed tax house door at (22,23) → journal j659
+- point of interest `poi-9`: The Drowned Rat's front window at (13,21) → journal j665
+- point of interest `poi-10`: Corvin's Wall of Fire at (25,24) → journal j666
+- point of interest `poi-11`: Sir Osric Vane at (17,26) → journal j667
+- point of interest `poi-12`: The barred motte gate at (38,8) → journal j668
+- doors: (17,2) closed, (31,2) closed, (40,2) open, (43,3) open, (39,8) open, (31,11) closed, (40,12) closed, (13,14) closed, (13,19) open, (40,19) closed, (22,22) open, (5,30) closed, (9,30) closed, (24,30) closed, (43,30) closed
+- labels: Market Square (30,20), The motte (Regency garrison) (45,7), The market cross (33,23), South Gate (33,34)
+
+### Ashby tax house, ground floor (`ashby-tax-down`, interior 16×14, lighting dim)
+- point of interest `poi-1`: The front door at (3,13) → journal j649
+- point of interest `poi-2`: The guardroom table at (3,10) → journal j650
+- point of interest `poi-3`: The stair foot at (1,1) → journal j651
+- point of interest `poi-4`: The sergeant's desk at (7,8) → journal j656
+- point of interest `poi-5`: The spear racks at (12,7) → journal j657
+- point of interest `poi-6`: The bunk room at (10,2) → journal j658
+- doors: (7,2) closed, (3,5) closed, (10,5) closed, (3,13) closed
+
+### Ashby tax house, upstairs (`ashby-tax-up`, interior 16×14, lighting dark)
+- container `ashby-tax-chest-2`: The tax strongbox at (12,3)
+- container `ashby-distraint-bundle`: A tagged bundle of distrained valuables at (13,12)
+- point of interest `poi-1`: The tax strongbox at (12,3) → journal j644
+- point of interest `poi-2`: The clerk's cot at (10,1) → journal j645
+- point of interest `poi-3`: The tally desk at (9,4) → journal j646
+- point of interest `poi-4`: The upper shutters at (15,2) → journal j647
+- point of interest `poi-5`: The stair head at (1,1) → journal j648
+- point of interest `poi-6`: The counting table at (5,3) → journal j652
+- point of interest `poi-7`: The tally shelves at (5,1) → journal j653
+- point of interest `poi-8`: The rolls room at (2,10) → journal j654
+- point of interest `poi-9`: The distraint store at (10,10) → journal j655
+- doors: (4,7) closed, (11,7) open, (5,10) closed
+
+### The Drowned Rat (`drowned-rat`, interior 20×14, lighting dim)
+- point of interest `poi-1`: The lane door at (19,10) → journal j660
+- point of interest `poi-2`: The front window at (19,4) → journal j661
+- point of interest `poi-3`: The bar at (12,6) → journal j662
+- point of interest `poi-4`: The hearth at (18,7) → journal j663
+- point of interest `poi-5`: The window table at (15,4) → journal j664
+- doors: (9,2) closed, (9,6) closed, (9,9) closed, (19,10) closed
+- labels: Bar (12,2)
+
+### The old tower, ground floor (`t-test`, interior 16×14, lighting dim)
+- container `ashby-tower-racks`: The weapon racks at (7,1)
+- point of interest `poi-1`: The tower door at (7,13) → journal j669
+- point of interest `poi-2`: The weapon racks at (7,1) → journal j670
+- point of interest `poi-3`: The hall hearth at (12,2) → journal j671
+- point of interest `poi-4`: The long table at (6,4) → journal j672
+- point of interest `poi-5`: The tower stair at (12,4) → journal j673
+- point of interest `poi-6`: The stores at (7,10) → journal j674
+- doors: (7,12) open, (7,13) closed
+
+### The old tower, Osric's chamber (`ashby-tower-up`, interior 16×14, lighting dim)
+- container `ashby-pay-chest`: The pay chest at (12,2)
+- container `osric-travel-chest`: Osric's travelling chest at (12,3)
+- container `osric-letters`: Osric's letters at (9,2)
+- point of interest `poi-1`: The stair head at (2,4) → journal j675
+- point of interest `poi-2`: Osric's bed at (3,2) → journal j676
+- point of interest `poi-3`: Osric's writing desk at (9,2) → journal j677
+- point of interest `poi-4`: The pay chest at (12,2) → journal j678
+- point of interest `poi-5`: Osric's travelling chest at (12,3) → journal j679
+- point of interest `poi-6`: The armour stand at (14,7) → journal j680
+- point of interest `poi-7`: The chamber table at (7,5) → journal j681
+
+### Ashby barracks (`ashby-barracks`, interior 20×14, lighting dim)
+- container `ashby-footlockers`: The footlockers at (7,2)
+- container `ashby-armoury`: The armoury at (16,2)
+- container `ashby-sergeants-chest`: The sergeants' chest at (18,7)
+- point of interest `poi-1`: The barracks door at (9,13) → journal j682
+- point of interest `poi-2`: The bunk room at (6,3) → journal j683
+- point of interest `poi-3`: The armoury at (16,1) → journal j684
+- point of interest `poi-4`: The sergeants' room at (16,6) → journal j685
+- point of interest `poi-5`: The mess table at (9,10) → journal j686
+- point of interest `poi-6`: The cook stove at (1,11) → journal j687
+- point of interest `poi-7`: The barracks lamps at (3,7) → journal j688
+- doors: (13,3) open, (13,7) open, (2,9) open, (16,9) open, (9,13) closed
+
+### Highbarrow (`highbarrow`, town 56×40, lighting dim)
+- Ottilie Marsh (`ottilie`, pc) at (38,33) — 48/48 HP
+- A castle sentry A (`a-castle-sentry-a`, enemy) at (45,12) — 11/11 HP
+- A castle sentry B (`a-castle-sentry-b`, enemy) at (47,12) — 11/11 HP
+- The depot clerk (`the-depot-clerk`, neutral) at (52,5) — 4/4 HP
+- point of interest `poi-1`: The castle gate at (46,12) → journal j689
+- point of interest `poi-2`: The keep at (46,5) → journal j690
+- point of interest `poi-3`: The empty horse lines at (40,8) → journal j691
+- point of interest `poi-4`: The quartermaster's depot at (52,4) → journal j692
+- point of interest `poi-5`: The winter quarters at (8,7) → journal j693
+- point of interest `poi-6`: The Old Wood Road north at (31,0) → journal j694
+- point of interest `poi-7`: The Gilded Goose at (39,30) → journal j695
+- doors: (14,5) closed, (37,5) closed, (49,5) closed, (28,6) closed, (10,8) closed, (28,10) closed, (37,14) closed, (18,19) closed, (51,19) closed, (6,26) closed, (22,26) closed, (37,29) closed
+- labels: Market Square (27,17), Highbarrow Castle (46,1), The winter quarters (6,4)
+
+### The Gilded Goose, Highbarrow (`highbarrow-goose`, interior 20×14, lighting dim)
+- Brakka Holloway (`brakka`, pc) at (1,2) — 71/71 HP
+- Corvin Asche (`corvin`, pc) at (2,4) — 41/41 HP
+- Kit Corvell (`kit`, pc) at (2,3) — 57/57 HP
+- Marta Pell (`marta-pell`, neutral) at (2,8) — 4/4 HP
+- point of interest `poi-1`: The inn door at (6,13) → journal j696
+- point of interest `poi-2`: The tap counter at (3,8) → journal j697
+- point of interest `poi-3`: The common-room hearth at (18,9) → journal j698
+- point of interest `poi-4`: The best room at (2,2) → journal j699
+- point of interest `poi-5`: The back stair at (10,3) → journal j700
+- doors: (1,5) closed, (7,5) closed, (15,5) closed, (6,13) closed
+- labels: Bar (3,7)
+
 
 ## Recent events
 
-- “Quist's inside the Stillness, boss. It turns divination to grey fog, and Sending is divination. But Hesketh's at Crowsfoot, three miles outside it. I'll send through him, and have Quist step out to the Hollins Stones at noon so I can speak to him direct.”
-- ✨ Corvin Asche casts Sending targeting Hesketh Rowe.
-- “(Sending) Hesketh, Corvin. Ride to Quist now: cancel the fort works. Have Quist stand outside the Stillness at the Hollins Stones at noon; I'll Send.”
-- “(answering in Corvin's head) Aye, Corvin. Riding now. Quist at the Stones by noon. Carpenters'll squeal; there's timber stacked all over the green. Dozen signs tomorrow.”
-- “He's riding. Quist at the Stones at noon. The carpenters will squeal, he says, and there's timber all over Crowsfoot green.”
-- 📅 Scheduled for Day 24, 12:00: Quist at the Hollins Stones outside the Stillness: Corvin can reach him with Sending (the silver-cart word, the fort's cancelled works and money) [a60]
-- Kit sat on the altar step with Fenn's ledger open on his knee: a fat book in calf, the landlord's slow round hand, three years of the road.
-- 📓 Added to the journal: Fenn's ledger of watchings
-- “Darling. Jenny Copp is a scullion at Coldharbour. Our Coldharbour. The Mission has had an ear in your own kitchen since Gildford.”
-- “Ditchley, Ashpole, Harrowgate, the abbey. That's every village we've been through.”
-- 📅 Due (Day 24, 07:00): Quist's word from the Coldharbour carriers on the League's silver cart (route, guard, halts) for Day 34
-- ⏳ 30m passes — Corvin's Sending and reading Fenn's ledger. Now Day 24, 07:00.
-- 🎬 The Hanged Men's barracks — Day 24, 07:00. The war council at the altar, Fenn's ledger open; Hesketh riding for the Rookery.
-- 🗺 Map: The Chapel of the Unblinking
-- — Session 2 ends —
+- 📅 Due (Day 35, 12:00): Two more wardens of Hartwell reach Crowsfoot under the pact (one knows the way to the Green Hollow); add them to the Wardens of Hartwell
+-    Kit Corvell: HP 57/57, spell slots and features restored.
+-    Brakka Holloway: HP 71/71, spell slots and features restored.
+-    Corvin Asche: HP 41/41, spell slots and features restored.
+-    Ottilie Marsh: HP 48/48, spell slots and features restored.
+- ⚔ Wardens of Hartwell (`hartwell-wardens`): 6× Scout, AC 13 (stat block), at Crowsfoot, the Crow and Kettle, captain Gorse, warden of Hartwell (lent to the Unkindness), pay Hartwell's pact (no wage) · Indifferent (no modifier on Influence checks with them) — two more wardens of Hartwell reach the Crow and Kettle at noon, one a guide who knows the way to the Green Hollow.
+- ⏳ 33m passes — waiting for sunset. Now Day 35, 19:30.
+- Ottilie Marsh is at (38,33) on Highbarrow.
+- At sunset Ottilie steps out into the Goose's cart yard, turns the antler token in her fingers, and speaks low into it.
+- “Quist. Ottilie. We won't return for the new moon. Feed the Eye a villager on Day 37, eight o'clock. Your news. Ashby's garrison is dead.”
+- A pause long enough to worry. Then the steward's voice, thin and precise, comes out of the antler as if he were standing at her elbow.
+- “My lord's will. Day 37, eight o'clock: done. Treasury eighteen thousand three hundred sixty-one. Two Hartwell wardens at the Crow, one your guide. Pens quiet.”
+- 🎬 Highbarrow, the Goose's cart yard — Day 35, 19:30. Sunset over Highbarrow; Ottilie in the inn's cart yard with the antler token, the castle banner dark against a red sky.
+- 🗺 Map: Highbarrow
+- — Session 3 ends —

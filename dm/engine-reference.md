@@ -95,6 +95,7 @@ combat swap kira,wren        # Alert feat: Initiative Swap with a willing ally, 
 combat next                  # end turn → next creature (recharges, conditions, death saves handled)
 combat status | combat add <id> | combat remove <id> | combat end
 combat reset-turn --reason "..."   # public repair: restore the current creature's action economy (e.g. after voiding a mistaken roll with `ruling`)
+combat reset-turn wren --reason "..."   # replay an earlier creature's turn this round (played wrong): the order rewinds to it; undo its results first
 attack kira goblin-warrior-a greatsword [--adv "reason"] [--dis "reason"] [--sneak] [--smite 1] [--offhand] [--versatile] [--reaction] [--knockout]
 attack goblin-warrior-a kira scimitar           # monster actions come from the stat block
 attack adult-red-dragon kira "fire breath"       # save-based actions: the target(s) roll saves
@@ -108,6 +109,9 @@ cast cleric guidance --targets kira --choice stealth
 cast cleric resistance --targets kira --choice fire
 cast druid "enhance ability" --level 3 --targets kira,wren --choice strength,intelligence
 cast cleric "mass heal" --targets kira,wren --choice 120,80
+cast wren "wall of fire" --wall "10,8 21,8" --hot south   # drawn on the map at once; everyone on its squares saves; the hot side burns
+#   whoever ends a turn within 10 ft of it (or inside), entering it burns once a turn, it blocks sight, and it goes when Concentration ends.
+#   Ring: --ring 12,8 --hot inside|outside. Already cast before the engine drew it: map spell-wall --caster wren --spell "wall of fire" --line "x,y x,y" --hot south
 cast wren "detect magic" --ritual | cast wren shield --free "Magic Initiate" | cast wren fireball --scroll <item-id>
 feature kira "second wind" | feature bruna rage | feature pal "lay on hands" --amount 5 --target kira | feature kira "action surge"
 bardic <who>                  # spend a Bardic Inspiration die
@@ -178,6 +182,7 @@ item drop kira dagger-1 --qty 1      # lands on the map at the token's square (g
 item pickup kira floor-1             # must be in/next to that square; in combat uses the free object interaction
 map container crypt 12,7 --name "Iron-bound chest" [--text "..."] [--id chest-1]   # a tile that holds items (clickable)
 item stash kira rope-1 --to chest-1 [--qty 2]   # put an item into a container (in/next to it)
+item stash kira plate-armor-1 --to bag-of-holding-1 [--qty 4]   # into a carried Bag of Holding (500 lb; no bag in a bag) · item unbag kira <item-id> takes it out
 # Loot is decided before anyone searches, and the engine holds you to it:
 loot list                                   # loot owed by defeated notable foes + every sealed cache and its contents (DM)
 loot suggest [--rarity Rare] [--kind weapon]   # SRD magic items within the party's tier cap
@@ -243,6 +248,10 @@ asset look kira --clear-like            # stop preserving another creature's app
 asset identity kira                    # read-only species, presentation, face/body selection and missing/conflicting facts
 asset identity                         # inspect party and current map
 asset identity --all --issues-only      # audit every creature, including corpses; does not pin guesses or write events
+asset stabilize --all                  # retain each existing creature's first authored visual identity and chosen face
+asset stabilize kira --refresh         # intentionally choose again using saved appearance and current visual pins
+asset faces kira                       # list compatible local portrait bases for this creature
+asset faces kira --choose portraits-human/04  # choose and retain one compatible face explicitly
 asset art kira [--crop face] [--out file.svg] | asset art kira:<item-id> | asset art srd:flame-tongue     # write the generated picture to look at
 asset portrait kira [--style heraldic] [--clear] | asset icon "dragon" | asset fetch <url> --name "Cave art" --license CC0 --credit "..." [--portrait kira] [--item kira:<item-id>]
 asset import path/to/file.png --license "own work" | asset draw drawing.svg --name "Sister Maren" --portrait maren

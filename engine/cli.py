@@ -12,7 +12,7 @@ import shutil
 import sys
 from pathlib import Path
 
-from . import art, assets, chargen, dice, forces as F, itemart, loot as L, maps, mechanics as M, render, srd, views
+from . import art, assets, chargen, dice, forces as F, itemart, loot as L, maps, mechanics as M, render, srd, views, walls as W
 from .core import (Game, RuleError, derive, fmt_time, level, parse_duration, parse_when, replay, tier, TIER_MAX_GP_AWARD,
                    SIZE_CELLS)
 from .store import ACTIVE_FILE, CAMPAIGNS, Store, TamperError, active_dir
@@ -758,7 +758,19 @@ def cmd_combat(g, a):
             raise RuleError('combat reset-turn --reason "what went wrong" (shown to the player)')
         cur = M.current_id(g)
         c = dict(c)
-        c["economy"] = {**c.get("economy", {}), cur: {}}
+        if a.ids and g.get(a.ids)["id"] != cur:
+            # replay an earlier creature's turn this round (its turn was played wrong): the order rewinds to it,
+            # and everyone after it acts again from there
+            who = g.get(a.ids)["id"]
+            idx = next((i for i, o in enumerate(c["order"]) if o["id"] == who), None)
+            if idx is None or idx > c["turn"]:
+                raise RuleError(f"{g.get(who)['name']} hasn't had its turn yet this round; nothing to replay.")
+            later = [o["id"] for o in c["order"][idx:c["turn"] + 1]]
+            c["turn"] = idx
+            c["economy"] = {**c.get("economy", {}), **{i: {} for i in later}}
+            cur = who
+        else:
+            c["economy"] = {**c.get("economy", {}), cur: {}}
         g.emit("combat.set", combat=c)
         g.override(a.reason, f"reset {g.get(cur)['name']}'s turn economy")
         g.say(f"🔧 {g.get(cur)['name']}'s turn economy reset — {a.reason}", kind="combat")
@@ -788,7 +800,8 @@ def cmd_combat(g, a):
         xp = sum(g.entities[i]["xp"] for i in defeated if i in g.entities)
         g.emit("encounter.log", defeated=defeated, xp=xp, awarded=False, time=g.state["time"],
                rounds=c["round"], ammo=c.get("ammo_total") or {k: v.get("ammo_spent", 0) for k, v in c.get("economy", {}).items() if v.get("ammo_spent")})
-        g.emit("time.set", minutes=g.state["time"] + max(1, c["round"] / 10))
+        # the fight took its rounds (6 s each), not a whole minute: short spells cast in it keep the time they have left
+        g.emit("time.set", minutes=g.state["time"] + c["round"] / 10)
         for e in g.entities.values():
             conds = [x for x in e.get("conditions", []) if x["name"] in ("dodging", "helped", "raging", "disengaged")]
             if conds:
@@ -909,9 +922,36 @@ def cmd_attack(g, a):
 
 
 def cmd_cast(g, a):
+    wall = None
+    if getattr(a, "wall", None) or getattr(a, "ring", None):
+        wall = wall_plan(g, a.caster, a.spell, a.wall, a.ring, a.hot)
+        if a.targets:
+            raise RuleError("A wall finds its own targets: everyone standing on its squares. Leave out --targets.")
+        a.targets = ",".join(t["id"] for t in W.creatures_on(g, wall["map"], wall["cells"])) or "none"
     M.cast(g, a.caster, a.spell, a.level, ids(a.targets), ritual=a.ritual, free=a.free, adv=ids(a.adv), dis=ids(a.dis), readied=getattr(a, 'readied', False),
            condition=a.condition, component=a.component, now=a.now, scroll=a.scroll, choice=a.choice,
            item=getattr(a, "item", None))
+    if wall:
+        W.add(g, g.get(a.caster), wall["spell"], wall["map"], wall["cells"], wall["hot"], wall["side"],
+              a.level or wall["spell"]["level"])
+
+
+def wall_plan(g, caster_ref, spell_name, ends, center, side):
+    """Where a spell wall stands: its squares and the squares its burning side reaches."""
+    e = g.get(caster_ref)
+    spell = g.require("spells", spell_name, "Spell")
+    p = W.profile(spell["slug"])
+    if not e.get("token"):
+        raise RuleError(f"{e['name']} isn't on a map.")
+    mid = e["token"]["map"]
+    m = g.state["maps"][mid]
+    if not side:
+        raise RuleError("--hot <side>: which side burns (north|south|east|west..., or inside|outside for a ring)")
+    if center:
+        cells, c = W.ring(m, center, p)
+    else:
+        cells, c = W.line(m, ends, p), None
+    return {"spell": spell, "map": mid, "cells": cells, "hot": W.hot_cells(cells, side, p, c), "side": side}
 
 
 def cmd_check(g, a):
@@ -1240,6 +1280,13 @@ def cmd_feature(g, a):
         hit, c = e.get("last_hit"), M.combat(g)
         if not c or not hit or hit.get("round") != c.get("round") or hit.get("time") != g.state["time"] or hit.get("dodged"):
             raise RuleError("Uncanny Dodge answers an attack that just hit you (this round); there's no such hit to halve.")
+        # the reaction comes before the damage: judge it on the state before this hit (the hit's own fall to 0 HP
+        # doesn't stop it), and if half the damage leaves the rogue standing, that fall never happened
+        if e["hp"] == 0 and hit.get("hp_before") and not e.get("dead"):
+            half_lost = max(0, hit["hp_lost"] - (hit["amount"] - hit["amount"] // 2))
+            if hit["hp_before"] - half_lost > 0:
+                M.undo_fall(g, e)
+                e = g.get(e["id"])
     if M.combat(g) and act:
         M.use_action(g, e, act, key or name)
     if key:
@@ -1248,7 +1295,13 @@ def cmd_feature(g, a):
     if k == "uncanny dodge":
         hit = e["last_hit"]
         back = min(hit["hp_lost"], hit["amount"] - hit["amount"] // 2)
-        g.set(e, hp=min(M.hp_max(e), e["hp"] + back), last_hit=dict(hit, dodged=True))
+        if hit.get("hp_before") is not None:
+            # HP the hit took beyond what was left don't come back: the rogue ends on (HP before) − (half the damage)
+            new_hp = max(0, hit["hp_before"] - max(0, hit["hp_lost"] - back))
+        else:
+            new_hp = e["hp"] + back
+        g.set(e, hp=min(M.hp_max(e), new_hp), last_hit=dict(hit, dodged=True))
+        back = g.get(e["id"])["hp"] - e["hp"]
         g.say(f"🌀 {e['name']} uses Uncanny Dodge: the hit's {hit['amount']} damage is halved to {hit['amount'] // 2} "
               f"({back} HP back; {g.get(e['id'])['hp']}/{M.hp_max(e)}).", kind="heal", who=e["id"])
         return
@@ -1609,7 +1662,12 @@ def cmd_item(g, a):
     elif a.action == "stash":
         if not a.to:
             raise RuleError("item stash <who> <item-id> --to <container-id> [--qty N]  (see `map container`)")
-        M.stash_item(g, e, a.item, a.to, a.qty)
+        if any(i["id"] == a.to for i in e.get("inventory", [])):
+            M.bag_item(g, e, a.item, a.to, a.qty if a.qty != 1 else None)   # a carried bag (Bag of Holding)
+        else:
+            M.stash_item(g, e, a.item, a.to, a.qty)
+    elif a.action == "unbag":
+        M.unbag_item(g, e, a.item)
     elif a.action == "floor-record":
         # beta fix: put an item that was dropped before floor tracking existed onto the map — only if the log shows that drop
         line = f"{e['name']}: {a.qty}× {a.item} dropped."
@@ -2277,6 +2335,22 @@ def cmd_map(g, a):
             raise RuleError("map icons <words> — e.g. `map icons cauldron`, `map icons book pile`")
         hits = assets.search_icons(words, 30)
         print(", ".join(hits) if hits else "No icons match; try a simpler word.")
+    elif a.action == "spell-wall":
+        # draw a wall for a spell its caster is already concentrating on (cast before the engine drew walls, or
+        # redrawn after a fix): no new save, it only stands from now on and burns as the spell says
+        if not (a.caster and a.spell and (a.line or a.ring) and a.hot):
+            raise RuleError('map spell-wall --caster <id> --spell "wall of fire" (--line "x,y x,y" | --ring x,y) --hot <side>')
+        ce = g.get(a.caster)
+        spell = g.require("spells", a.spell, "Spell")
+        if (ce.get("concentration") or {}).get("spell") != spell["slug"]:
+            raise RuleError(f"{ce['name']} isn't concentrating on {spell['name']}.")
+        plan = wall_plan(g, a.caster, a.spell, a.line, a.ring, a.hot)
+        m = g.state["maps"][plan["map"]]
+        keep = [w for w in m.get("spell_walls", []) if not (w["caster"] == ce["id"] and w["spell"] == spell["slug"])]
+        if len(keep) != len(m.get("spell_walls", [])):
+            g.emit("map.set", id=plan["map"], set={"spell_walls": keep})   # redrawn: the old outline is replaced
+        W.add(g, ce, spell, plan["map"], plan["cells"], plan["hot"], plan["side"],
+              (ce.get("concentration") or {}).get("level") or spell["level"])
     elif a.action in ("prop", "prop-move", "prop-remove"):
         # decoration drawn from an icon on a tile: a globe on a desk, a skull on a shelf, a harp in a corner.
         # With --blocks the square is filled (impassable, half cover); without it the piece is set dressing.
@@ -2491,7 +2565,42 @@ def show_map(g, mid):
 # ====================================================================== assets & presentation
 
 def cmd_asset(g, a):
+    from . import art,painted,portrait_profiles
     s = g.state
+    if a.action=='faces':
+        from . import art,painted,portrait_profiles
+        if len(a.args)!=1:raise RuleError('asset faces <id> [--choose collection/number]')
+        e=g.get(a.args[0]);identity=art.visual_identity(e)
+        choices=[(pair,r) for pair,r in painted.portrait_records().items() if r['species']==identity['species'] and r['presentation']==identity['presentation']]
+        if a.choose:
+            try:
+                col,num=a.choose.rsplit('/',1);pair=(col,int(num))
+            except (ValueError,TypeError):raise RuleError('--choose must be collection/number, as listed by asset faces.')
+            if pair not in dict(choices) or not painted.uri(*pair):raise RuleError('Chosen face must match the resolved species and presentation and exist locally.')
+            profile=dict(e.get('portrait_profile') or portrait_profiles.capture(e));profile['choice']=pair;profile['mode']='painted'
+            g.set(e,portrait_profile=profile)
+            g.note(f'Face selected and retained for {e["name"]}: {col}/{pair[1]:02d}.')
+        else:
+            current=art.portrait_choice(e);L=art.look_of(e)
+            choices.sort(key=lambda entry:(entry[1].get('age')!=L['age'],entry[1].get('outfit')!=L['outfit'],entry[0]))
+            g.note(f'{e["name"]}: {identity["species"]} / {identity["presentation"]}; {len(choices)} compatible faces. Current: {current}.')
+            for pair,r in choices:
+                g.note(f'  {pair[0]}/{pair[1]:02d}: {r.get("age","adult")}, {r.get("skin")}, {r.get("hair_color")} hair, {r.get("outfit")}.')
+        return
+    if a.action=='stabilize':
+        from . import portrait_profiles,art
+        if a.all:targets=list(g.entities.values())
+        elif a.args:targets=[g.get(ident) for ident in a.args]
+        else:raise RuleError('asset stabilize <ids...> or --all; --refresh intentionally chooses again.')
+        originals=portrait_profiles.original_descriptions(g.events)
+        changed=0
+        for e in targets:
+            if e.get('portrait_profile') and not a.refresh:continue
+            source=(e.get('portrait_profile') or {}).get('source_description') if a.refresh else originals.get(e['id'])
+            g.set(e,portrait_profile=portrait_profiles.capture(e,source))
+            changed+=1
+        g.note(f'Stabilized {changed} portrait identities. Scene descriptions now leave these faces unchanged.')
+        return
     if a.action == "icon":
         for n in assets.search_icons(" ".join(a.args), 25):
             print(n)
@@ -3348,6 +3457,9 @@ def build_parser():
     c.add_argument("--adv")
     c.add_argument("--dis")
     c.add_argument("--now", action="store_true")
+    c.add_argument("--wall", help='Wall of Fire as a line: "x,y x,y" (its two ends, up to 60 ft); targets are found on its squares')
+    c.add_argument("--ring", help="Wall of Fire as a ring: its centre x,y (20 ft across)")
+    c.add_argument("--hot", help="the burning side: north|south|east|west|northeast|... or inside|outside for a ring")
 
     c = sp.add_parser("check", help="ability check / skill check")
     c.add_argument("who")
@@ -3585,8 +3697,13 @@ def build_parser():
     c.add_argument("--type", dest="stype", help="map settlement/site: hamlet|village|town|city|capital|castle|abbey, or ruins|lair|grove|...")
     c.add_argument("--path", dest="route_path", help='map route <region> road|river --path "x,y x,y ..." (waypoints)')
     c.add_argument("--small", help="map import-grid: why this place is genuinely smaller than a playable map (a skiff, a cell)")
+    c.add_argument("--caster", help="map spell-wall: who is concentrating on the wall spell")
+    c.add_argument("--spell", help="map spell-wall: the spell (wall of fire)")
+    c.add_argument("--line", help='map spell-wall: the two ends "x,y x,y"')
+    c.add_argument("--ring", help="map spell-wall: a ring's centre x,y")
+    c.add_argument("--hot", help="map spell-wall: the burning side (north|south|... or inside|outside)")
 
-    c = sp.add_parser("asset", help="icon|fetch|import|draw|portrait|look|identity|art|list")
+    c = sp.add_parser("asset", help="icon|fetch|import|draw|portrait|look|identity|stabilize|faces|art|list")
     c.add_argument("action")
     c.add_argument("args", nargs="*")
     c.add_argument("--name")
@@ -3604,6 +3721,8 @@ def build_parser():
     c.add_argument('--all',action='store_true',help='identity: audit every creature; default is party and current map')
     c.add_argument('--issues-only',action='store_true',help='identity: show only missing/conflicting identity or pinned art')
     c.add_argument('--clear-like',action='store_true',help='look: stop preserving another creature\'s appearance')
+    c.add_argument('--refresh',action='store_true',help='stabilize: intentionally select a face again from saved appearance and current pins')
+    c.add_argument('--choose',help='faces: retain an exact compatible collection/number from the face catalogue')
     for f in ("hair", "beard", "eyes", "skin", "marks", "headwear", "outfit", "cloak", "build", "age", "expression", "horns",
               "accent", "background", "presentation", "species"):
         c.add_argument(f"--{f}", dest=f"look_{f}", help=f"look: {f} (free text, e.g. --hair \"long silver braid\")")

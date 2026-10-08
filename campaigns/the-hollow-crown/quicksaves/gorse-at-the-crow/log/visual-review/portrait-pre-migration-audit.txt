@@ -1,0 +1,375 @@
+nib: Human / masculine (species: unspecified; presentation: description); face portraits-extra/10; body corpses-human-masculine-v4/03
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+mr-fennimore-quist: Human / masculine (species: unspecified; presentation: description); face portraits-extra/13; body corpses-human-masculine-v4/03
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+mother-hobday: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/11; body corpses-human-neutral-v4/11
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+ada-crisp: Human / feminine (species: unspecified; presentation: look); face portraits-extra/01; body corpses-human-feminine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+bel-crisp: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/11; body corpses-human-neutral-v4/11
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+tobin-rudge: Human / masculine (species: unspecified; presentation: look); face portraits-human/12; body corpses-human-masculine-v4/00
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+corlis: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/07; body corpses-human-neutral-v4/07
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+harl: Human / masculine (species: unspecified; presentation: look); face portraits-human/09; body corpses-human-masculine-v4/12
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+bastian: Human / masculine (species: unspecified; presentation: look); face portraits-human/01; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+amos-pettigrew: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+garrick-webb: Human / masculine (species: unspecified; presentation: description); face portraits-extra/03; body corpses-human-masculine-v4/13
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+brother-cuthbert: Human / masculine (species: unspecified; presentation: look); face portraits-human/15; body corpses-human-masculine-v4/14
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+villager: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/11; body corpses-human-neutral-v4/11
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+villager-3: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+jessamy-crook: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/13; body corpses-human-neutral-v4/13
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+kester-brinn: Human / masculine (species: unspecified; presentation: description); face portraits-human/00; body corpses-human-masculine-v4/01
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+bandit-a-3: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/13; body corpses-human-neutral-v4/13
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+bandit-b-3: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/05; body corpses-human-neutral-v4/05
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+mother-gallows: Human / feminine (species: unspecified; presentation: description); face portraits-extra/08; body corpses-human-feminine-v4/13
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-a: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/04; body corpses-human-neutral-v4/04
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-b: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/04; body corpses-human-neutral-v4/04
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+orrin-vasse: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-a-2: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-b-2: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-c: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-d: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-e: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-f: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-g: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-h: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-i: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+commoner-a: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/07; body corpses-human-neutral-v4/07
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+commoner-b: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/00; body corpses-human-neutral-v4/00
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+the-toll-keeper: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-a-3: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/04; body corpses-human-neutral-v4/04
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-b-3: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+commoner-a-2: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/03; body corpses-human-neutral-v4/03
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+commoner-b-2: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/15; body corpses-human-neutral-v4/15
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+gaffer-moss: Human / masculine (species: unspecified; presentation: look); face portraits-extra/14; body corpses-human-masculine-v4/14
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+pells-boy: Human / masculine (species: unspecified; presentation: name); face portraits-human/15; body corpses-human-masculine-v4/14
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+brother-ennis: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/06; body corpses-human-neutral-v4/06
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+the-woman-in-dove-grey: Human / feminine (species: unspecified; presentation: name); face portraits-extra/08; body corpses-human-feminine-v4/13
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+greencloak-a: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+greencloak-b: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+greencloak-c: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+greencloak-d: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/08; body corpses-human-neutral-v4/08
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-greencloak-a: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-greencloak-b: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/04; body corpses-human-neutral-v4/04
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-greencloak-c: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/00; body corpses-human-neutral-v4/00
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-greencloak-d: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/00; body corpses-human-neutral-v4/00
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-greencloak-e: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/08; body corpses-human-neutral-v4/08
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-greencloak-f: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-greencloak-g: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-greencloak-h: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+the-wagons-carter: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-a-4: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-b-4: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-c-2: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+dunstan-the-night-porter: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/07; body corpses-human-neutral-v4/07
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+jory-the-league-clerk: Human / masculine (species: unspecified; presentation: description); face portraits-human/15; body corpses-human-masculine-v4/14
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+commoner-a-3: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/07; body corpses-human-neutral-v4/07
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+commoner-b-3: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-a-5: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-b-5: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-a-6: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-b-6: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-c-4: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-d-2: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-e-2: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+guard-f-2: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+watch-captain-orme: Human / masculine (species: unspecified; presentation: description); face portraits-extra/06; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+reeve-odo-ashby: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/02; body corpses-human-neutral-v4/02
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+edwin-ashby: Human / masculine (species: unspecified; presentation: description); face portraits-human/15; body corpses-human-masculine-v4/14
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-greencloak-1: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/04; body corpses-human-neutral-v4/04
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-greencloak-2: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/00; body corpses-human-neutral-v4/00
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-greencloak-3: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-greencloak-4: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/08; body corpses-human-neutral-v4/08
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-conscript-1: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-conscript-2: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-conscript-3: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-conscript-4: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-conscript-5: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-conscript-6: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-conscript-7: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-conscript-8: Human / masculine (species: unspecified; presentation: description); face portraits-human/15; body corpses-human-masculine-v4/14
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-conscript-9: Human / masculine (species: unspecified; presentation: description); face portraits-human/11; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-conscript-10: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-conscript-11: Human / masculine (species: unspecified; presentation: description); face portraits-human/00; body corpses-human-masculine-v4/01
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sleeping-conscript-12: Human / masculine (species: unspecified; presentation: description); face portraits-extra/10; body corpses-human-masculine-v4/03
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+greencloak-on-the-south-wall: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+greencloak-at-the-gate-brazier: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sergeant-brice-tolly: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+conscript-on-the-west-wall: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+conscript-on-the-east-wall: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+old-mattock: Human / masculine (species: unspecified; presentation: description); face portraits-extra/04; body corpses-human-masculine-v4/02
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+harrowgates-cook: Human / feminine (species: unspecified; presentation: description); face portraits-extra/15; body corpses-human-feminine-v4/03
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sir-gerold-ambry: Human / masculine (species: unspecified; presentation: name); face portraits-human/12; body corpses-human-masculine-v4/00
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+commoner-b-4: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+commoner-c: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/03; body corpses-human-neutral-v4/03
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+commoner-d: Human / masculine (species: unspecified; presentation: name); face portraits-human/11; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+commoner-e: Human / masculine (species: unspecified; presentation: name); face portraits-human/11; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+commoner-f: Human / masculine (species: unspecified; presentation: name); face portraits-extra/10; body corpses-human-masculine-v4/03
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+commoner-g: Human / masculine (species: unspecified; presentation: name); face portraits-human/02; body corpses-human-masculine-v4/02
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+commoner-h: Human / masculine (species: unspecified; presentation: name); face portraits-human/02; body corpses-human-masculine-v4/02
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+commoner-i: Human / masculine (species: unspecified; presentation: name); face portraits-human/02; body corpses-human-masculine-v4/02
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+commoner-j: Human / masculine (species: unspecified; presentation: name); face portraits-human/02; body corpses-human-masculine-v4/02
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+commoner-a-5: Human / masculine (species: description; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Public description and resolved species disagree; check the subject or pin.
+commoner-b-5: Human / masculine (species: description; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Public description and resolved species disagree; check the subject or pin.
+commoner-c-2: Human / masculine (species: description; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Public description and resolved species disagree; check the subject or pin.
+commoner-d-2: Human / masculine (species: description; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Public description and resolved species disagree; check the subject or pin.
+commoner-e-2: Human / masculine (species: description; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Public description and resolved species disagree; check the subject or pin.
+commoner-f-2: Human / masculine (species: description; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Public description and resolved species disagree; check the subject or pin.
+commoner-g-2: Human / masculine (species: description; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Public description and resolved species disagree; check the subject or pin.
+commoner-h-2: Human / masculine (species: description; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Public description and resolved species disagree; check the subject or pin.
+commoner-i-2: Human / masculine (species: description; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Public description and resolved species disagree; check the subject or pin.
+commoner-j-2: Human / masculine (species: description; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Public description and resolved species disagree; check the subject or pin.
+commoner-k: Human / masculine (species: description; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Public description and resolved species disagree; check the subject or pin.
+commoner-l: Human / masculine (species: description; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Public description and resolved species disagree; check the subject or pin.
+hal-bramble: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/15; body corpses-human-neutral-v4/15
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+a-hill-farmer: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+hild: Human / feminine (species: unspecified; presentation: look); face portraits-extra/15; body corpses-human-feminine-v4/03
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+dunstan: Human / masculine (species: unspecified; presentation: description); face portraits-human/11; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+scout-a: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/13; body corpses-human-neutral-v4/13
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+scout-b: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/13; body corpses-human-neutral-v4/13
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+tough-a: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/09; body corpses-human-neutral-v4/09
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+tough-c: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/09; body corpses-human-neutral-v4/09
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+tough-d: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/09; body corpses-human-neutral-v4/09
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+a-market-woman-with-egg-baskets: Human / feminine (species: unspecified; presentation: description); face portraits-extra/01; body corpses-human-feminine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+a-carter-with-a-load-of-turnips: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/07; body corpses-human-neutral-v4/07
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+a-horse-coper-at-the-fair-yard: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/05; body corpses-human-neutral-v4/05
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+market-folk-a: Human / feminine (species: unspecified; presentation: name); face portraits-extra/01; body corpses-human-feminine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+market-folk-b: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/07; body corpses-human-neutral-v4/07
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+a-boy-hiding-in-the-loft: Human / masculine (species: unspecified; presentation: description); face portraits-human/11; body corpses-human-masculine-v4/07
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+gilded-hand-outrider-a: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/13; body corpses-human-neutral-v4/13
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+gilded-hand-outrider-b: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/05; body corpses-human-neutral-v4/05
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+gilded-hand-foot-a: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/05; body corpses-human-neutral-v4/05
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+gilded-hand-foot-b: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/09; body corpses-human-neutral-v4/09
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+gilded-hand-foot-c: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/09; body corpses-human-neutral-v4/09
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+gilded-hand-foot-d: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/09; body corpses-human-neutral-v4/09
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sir-hugh-darrow-banneret-of-castle-gaunt: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sir-anselm-brey: Human / masculine (species: unspecified; presentation: name); face portraits-human/12; body corpses-human-masculine-v4/00
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+sir-piers-whitlock: Human / masculine (species: unspecified; presentation: description); face portraits-extra/06; body corpses-human-masculine-v4/04
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+gaunt-sergeant-a: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+gaunt-sergeant-b: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+thornbury-recruits-1: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/15; body corpses-human-neutral-v4/15
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+thornbury-recruits-2: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/11; body corpses-human-neutral-v4/11
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+thornbury-recruits-3: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/15; body corpses-human-neutral-v4/15
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+thornbury-recruits-4: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/03; body corpses-human-neutral-v4/03
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+thornbury-recruits-5: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/07; body corpses-human-neutral-v4/07
+  ⚠ Presentation unspecified: neutral art. Pin --presentation when known.
+  ⚠ Species unspecified: Human fallback. Pin --species when known.
+  ⚠ Public description and resolved presentation disagree; check the pin or description.
+Checked 251 creature(s); displayed 149. No identity changed.

@@ -1,7 +1,7 @@
 """Generated art: characters drawn from what they look like, and creatures drawn from what they are.
 
-Everything here is deterministic: the same creature record always draws the same picture, so art never has to be
-stored (the signed log already holds everything it is drawn from). What goes into a portrait, in priority order:
+Everything here is deterministic. Engine events store the resolved face and original appearance separately from
+scene description; rendering never writes state. What establishes a portrait, in priority order:
 1. `look` fields the DM set with `asset look <id> --hair ... --eyes ...` (free text, one field per feature);
 2. the creature's public description (`npc describe` / `char bio <id> appearance`), read for hair, eyes, skin,
    scars, headwear, clothing and so on;
@@ -424,14 +424,32 @@ def canonical_species(value):
 
 def presentation_from(value):
     """Read the subject's first identity cue, not clothing or a later person's pronouns."""
-    words={'feminine':'feminine','female':'feminine','woman':'feminine','girl':'feminine','lady':'feminine',
-           'matron':'feminine','maiden':'feminine','she':'feminine','her':'feminine','hers':'feminine','herself':'feminine',
-           'masculine':'masculine','male':'masculine','man':'masculine','boy':'masculine','lord':'masculine',
-           'gentleman':'masculine','sir':'masculine','he':'masculine','him':'masculine','his':'masculine','himself':'masculine',
+    value=re.sub(r'\b(?:men[ -]at[ -]arms|man[ -]at[ -]arms|guardsmen|guardsman|townsmen|townsman|armsmen|armsman|spearmen|spearman|watchmen|watchman|footmen|footman)\b','man',str(value),flags=re.I)
+    value=re.sub(r'\b(?:townswoman|townswomen|washerwoman|washerwomen)\b','woman',value,flags=re.I)
+    words={'feminine':'feminine','female':'feminine','woman':'feminine','women':'feminine','girl':'feminine','lady':'feminine',
+           'matron':'feminine','maiden':'feminine','mother':'feminine','sister':'feminine','queen':'feminine','she':'feminine','her':'feminine','hers':'feminine','herself':'feminine',
+           'masculine':'masculine','male':'masculine','man':'masculine','men':'masculine','boy':'masculine','lord':'masculine',
+           'gentleman':'masculine','sir':'masculine','father':'masculine','brother':'masculine','king':'masculine','he':'masculine','him':'masculine','his':'masculine','himself':'masculine',
            'androgynous':'androgynous','neutral':'androgynous','nonbinary':'androgynous','non-binary':'androgynous',
            'they':'androgynous','them':'androgynous','their':'androgynous'}
     for word in _words(value):
         if word in words:return words[word]
+    return None
+
+
+def subject_description(text):
+    """Only the opening description of this subject; later scene actions are not appearance."""
+    opening=re.split(r'(?:[.!?;]\s|\n)',str(text or '').strip(),maxsplit=1)[0]
+    return re.split(r'\b(?:grabbed|seized|dragged|restrained|pushed|struck|attacked|escorted|carried|pulled|followed|helped|standing beside|next to|beside)\b',opening,maxsplit=1,flags=re.I)[0].strip(' ,;:')[:600]
+
+
+def subject_species(text,words):
+    nominal=re.split(r'\b(?:with|who|whose|by|after|beside|next to|from|in|wearing|tending|guarding|holding|watching|speaking|talking)\b',subject_description(text),maxsplit=1,flags=re.I)[0]
+    hits=[(match.start(),-len(word),sp) for word,sp in words.items()
+          if (match:=re.search(r'\b'+re.escape(word)+r'\b',nominal.lower()))]
+    implied=re.search(r'\b(?:townswom[ae]n|townsm[ae]n|washerwom[ae]n|woman|women|man|men)\b',nominal,re.I)
+    if implied:hits.append((implied.start(),-len(implied.group()),'Human'))
+    if hits:return min(hits)[2]
     return None
 
 
@@ -441,12 +459,16 @@ def visual_identity(e):
     Visual pins and preserved appearances precede structured identity, public description,
     then stat block/name hints. A job, equipped armor or costume never defines identity.
     """
-    look=e.get('look') or {};kept=e.get('art_of') or {};bio=e.get('bio') or {}
-    desc=e.get('appearance') or bio.get('appearance') or ''
+    look=e.get('look') or {};kept=e.get('art_of') or {};bio=e.get('bio') or {};profile=e.get('portrait_profile') or {}
+    desc=profile.get('source_description') if profile else subject_description(e.get('appearance') or bio.get('appearance') or '')
     species=None;species_source='unspecified'
     for source,value in (('look',look.get('species')),('preserved',kept.get('species')),
+                         ('profile',(profile.get('identity') or {}).get('species')),
                          ('entity',e.get('species') or e.get('race')),('bio',bio.get('species') or bio.get('race'))):
-        if value:species=canonical_species(value);species_source=source;break
+        if value:
+            species=canonical_species(value)
+            species_source=(profile['identity'].get('species_source','unspecified') if source=='profile' else source)
+            break
     if not species:
         humanoid=e.get('kind')=='pc' or str(e.get('type','')).lower().startswith('humanoid')
         words=SPECIES_WORDS if humanoid else {**SPECIES_WORDS,**CREATURE_WORDS}
@@ -454,16 +476,22 @@ def visual_identity(e):
             ('stat block',e.get('srd_name','')),('description',desc),('name',e.get('name','')))
         for source,value in hints:
             # Earliest subject species wins; related people mentioned later do not take precedence.
-            hits=[(match.start(),-len(word),sp) for word,sp in words.items()
-                  if (match:=re.search(r'\b'+re.escape(word)+r'\b',str(value).lower()))]
-            if hits:species=min(hits)[2];species_source=source;break
+            found=subject_species(value,words) if source=='description' else canonical_species(value) if str(value).lower() in words else None
+            if not found and source!='description':
+                hits=[(match.start(),-len(word),sp) for word,sp in words.items() if (match:=re.search(r'\b'+re.escape(word)+r'\b',str(value).lower()))]
+                found=min(hits)[2] if hits else None
+            if found:species=found;species_source=source;break
     presentation=None;presentation_source='unspecified'
     for source,value in (('look',look.get('presentation')),('preserved',kept.get('presentation') or (kept.get('traits') or kept.get('look') or {}).get('presentation')),
+                         ('profile',(profile.get('identity') or {}).get('presentation')),
                          ('entity',e.get('presentation') or e.get('gender') or e.get('sex') or e.get('pronouns')),
                          ('bio',bio.get('presentation') or bio.get('gender') or bio.get('sex') or bio.get('pronouns')),
                          ('description',desc),('name',e.get('name',''))):
-        found=presentation_from(value)
-        if found:presentation=found;presentation_source=source;break
+        found=presentation_from(re.split(r'\b(?:with|who|whose|by|after|beside|next to|from)\b',str(value or ''),maxsplit=1,flags=re.I)[0] if source=='description' else value)
+        if found:
+            presentation=found
+            presentation_source=(profile['identity'].get('presentation_source','unspecified') if source=='profile' else source)
+            break
     return dict(species=species or 'Human',presentation=presentation or 'androgynous',
                 species_source=species_source,presentation_source=presentation_source)
 
@@ -563,8 +591,10 @@ def look_of(e):
         elif L["outfit"] in ("plate", "chain", "leather"):
             L["outfit"] = {"Monk": "monk", "Barbarian": "furs"}.get(max(e["classes"].items(), key=lambda kv: kv[1])[0], "tunic")
     # what the description says
-    desc = e.get("appearance") or (e.get("bio") or {}).get("appearance") or ""
+    profile=e.get('portrait_profile') or {}
+    desc = profile.get('source_description') if profile else e.get("appearance") or (e.get("bio") or {}).get("appearance") or ""
     _apply(L, read_description(desc))
+    _apply(L,profile.get('traits') or {})
     _apply(L,kept.get('traits') or {})
     # what the DM pinned with `asset look`
     for field, text in (e.get("look") or {}).items():
@@ -651,6 +681,8 @@ def _read_field(field, text):
     if field == "outfit":
         f = read_description(t)
         out = {k: v for k, v in f.items() if k in ("outfit", "cloth", "pendant", "cloak", "cloak_color")}
+        if low in {'plate','chain','leather','robe','tunic','doublet','vestments','coat','furs','druid','monk'}:
+            out['outfit']=low
         if "cloth" not in out:
             c = next((CLOTH_COLORS[w] for w in _words(low) if w in CLOTH_COLORS), None)
             if c:
@@ -718,7 +750,12 @@ def identity_report(e):
     if e.get('portrait'):warnings.append('Pinned portrait takes precedence; its identity cannot be verified automatically. Clear/re-pin it after correcting the look.')
     structured=canonical_species(e.get('species') or e.get('race'))
     if structured and structured!=identity['species']:warnings.append(f"Visual species {identity['species']} differs from stored species {structured}; stats are unchanged.")
-    description=read_description(e.get('appearance') or (e.get('bio') or {}).get('appearance') or '')
+    from .portrait_profiles import descriptive
+    raw=e.get('appearance') or (e.get('bio') or {}).get('appearance') or ''
+    text=subject_description(raw) if descriptive(raw) else ''
+    description=read_description(text)
+    description['species_hint']=subject_species(text,{**SPECIES_WORDS,**CREATURE_WORDS})
+    description['presentation']=presentation_from(re.split(r'\b(?:with|who|whose|by|after|beside|next to|from)\b',text,maxsplit=1,flags=re.I)[0])
     if description.get('species_hint') and description['species_hint']!=identity['species']:warnings.append('Public description and resolved species disagree; check the subject or pin.')
     if description.get('presentation') and description['presentation']!=identity['presentation']:warnings.append('Public description and resolved presentation disagree; check the pin or description.')
     summary=(f"{e['id']}: {identity['species']} / {identity['presentation']} "
@@ -1502,13 +1539,22 @@ def portrait_choice(e):
     kept=e.get('art_of') or {};saved=tuple(kept.get('portrait_asset') or ())
     record=painted.portrait_records().get(saved)
     identity=visual_identity(e)
+    profile=e.get('portrait_profile') or {};fixed=tuple(profile.get('choice') or ())
+    fixed_record=painted.portrait_records().get(fixed)
+    if profile and (e.get('look') or {})==profile.get('source_look',{}):
+        if not fixed:return None  # A stored procedural face is also a deliberate stable choice.
+        stored_identity=profile.get('identity') or {}
+        if identity['species']==stored_identity.get('species') and identity['presentation']==stored_identity.get('presentation'):
+            if fixed_record is None or fixed_record['species']==identity['species'] and fixed_record['presentation'] in ('any',identity['presentation']):
+                return fixed if painted.uri(*fixed) else None
+    if fixed_record and (e.get('look') or {})==profile.get('source_look',{}) and fixed_record['species']==identity['species'] and fixed_record['presentation'] in ('any',identity['presentation']) and painted.uri(*fixed):return fixed
     if record and (e.get('look') or {})==kept.get('recipient_look',{}) and record['species']==identity['species'] and record['presentation'] in ('any',identity['presentation']) and painted.uri(*saved):return saved
     if is_humanlike(e):
-        explicit=read_description(e.get('appearance') or (e.get('bio') or {}).get('appearance') or '')
+        explicit=read_description(profile.get('source_description') if profile else subject_description(e.get('appearance') or (e.get('bio') or {}).get('appearance') or ''))
         for field,text in (e.get('look') or {}).items():explicit.update(_read_field(field,text))
         L=look_of(e)
         if L['species']=='Dragonborn' and e.get('ancestry'):explicit['skin']=L['skin']
-        if L['species']=='Elf' and re.search(r'\bdrow\b',str(e.get('srd_name',''))+' '+str(e.get('appearance',''))):
+        if L['species']=='Elf' and re.search(r'\bdrow\b',str(e.get('srd_name',''))+' '+str(e.get('appearance','')),re.I):
             if 'skin' not in (e.get('look') or {}):L['skin']='#4f2d1a';explicit['skin']=L['skin']
             if 'hair' not in (e.get('look') or {}):L['hair_color']='#e8e2cf';explicit['hair_color']=L['hair_color']
         # Appearance preservation records have priority, as in the procedural renderer.
@@ -1522,6 +1568,10 @@ def portrait_choice(e):
 
 def art_version(e):
     """Changes whenever anything the picture is drawn from changes (cache-busting for the viewer)."""
+    if e.get('portrait_profile'):
+        import json
+        blob=json.dumps([e.get(k) for k in ('name','portrait_profile','look','art_of','portrait','icon')]+[ART_REV],sort_keys=True,separators=(',',':'))
+        return hashlib.sha1(blob.encode()).hexdigest()[:10]
     keys = ("name", "species", "race", "presentation", "gender", "sex", "pronouns", "classes", "ancestry", "appearance", "look", "side", "type", "size", "srd_name", "art_of")
     worn = [(i.get("name"), i.get("category")) for i in e.get("inventory", []) if i.get("kind") == "armor" and i.get("equipped")]
     bio=e.get('bio') or {}
@@ -1529,4 +1579,4 @@ def art_version(e):
     return hashlib.sha1(blob.encode()).hexdigest()[:10]
 
 
-ART_REV = 11
+ART_REV = 12

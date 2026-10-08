@@ -391,7 +391,7 @@ All hired abroad. None have been below the Great Hall. All `commoner`, Neutral.
 ### The Hartstone raiders (Thornbound, Day 17)
 - **Sedge** (NE; `sedge`, druid): the antlered woman who did the talking; killed by Kit's arrow.
 - **The Stag** (CE; `the-stag`, berserker): huge, green-painted, elk-antler helm; knocked out by Brakka and bound. Prisoner.
-- **The last spearman** (`tough-b`): fled, held by Ottilie's Hypnotic Pattern, bound by Brakka. Prisoner.
+- **The last spearman** (`tough-b`): fled, held by Ottilie's Hypnotic Pattern, bound by Brakka. **Hanged Day 24, 08:00, at the West Road gallows** by Kit's order. The Stag is in Hob Sallis's cells, held for trade with Gorse.
 - **Dickon** (CN; `bandit-b-4`): young Hanged Man on the plank-bridge toll; told Wat Hollin he'd 'think on' Mother's offer (Day 17); black eye from Hesketh.
 - **Day 19:** **Mother Gallows** killed at the Gallows Oak (Kit's arrow, Corvin's Fireball); **Coll** killed by Ottilie's mockery; his two mastiffs killed. **Wat Hollin**, **Sal Pike** and four old hands returned to the Unkindness (Ottilie's Persuasion 28; Wat sent away by Mother herself).
 - **Mother Sabine (Day 21):** token `the-woman-in-dove-grey` renamed "Mother Sabine, the woman in dove-grey" (Lawful Evil). Ottilie, as Bess Harrow, saw her face to face in the Wheatsheaf's back room at 11:40 and knew her from the Mole. Veiled in grey lace before strangers; silver eye-pin; writing case. 'I bless no one. I am only a penitent.'
@@ -407,6 +407,7 @@ All hired abroad. None have been below the Great Hall. All `commoner`, Neutral.
 ### Davy, Fenn's boy (Watcher)
 - The dead landlord's boy, about fourteen; watched the gate and the road for the Lady. Not found by Ivo's search on the night of Day 22; somewhere inside the walls.
 - **Davy and Peg's mother** (Day 23): prisoners in the barracks vestry under the Hanged Men's guard; each is the other's hostage. Davy is to give Ottilie's forged Sabine letter to Jory Pike on Day 24.
+- **Day 24, 10:05:** Davy delivered the forged letter to Jory Pike flawlessly. Kit: he stays prisoner until the Lidless threat is neutralised, then goes free; his life is his.
 - **Vaux, Day 23:** met Kit in person for the first time at the East Gate ("So the statue has legs"). He took the new terms as "a wager, not a contract" and rides with the Second and Fourth Banners himself. Mags Orrel: "Gods help us."
 ### Castle Gaunt's column (Day 23)
 - **Sir Hugh Darrow, banneret of Castle Gaunt** (`knight`, Lawful Neutral): lean, grey-bearded, on a tall bay, with a black-and-silver square banner; tired, patient and unafraid. He came with the Regent's writ to take "the outlaw Corvell" and Thornbury.
@@ -417,3 +418,29 @@ All hired abroad. None have been below the Great Hall. All `commoner`, Neutral.
 - **Ivo Tarrant, Day 23:** Kit gave him Darrow's **Longsword +1** (he wears it; the engine lets him fight with it at +3, 1d8+1) and a Castle Gaunt destrier. "Boss, I'll not shame it."
 - **Sir Hugh Darrow, Day 23:** on parole, with his oath as a knight not to bear arms against the Unkindness for a year and a day, and to tell Castle Gaunt and the Regent exactly what he saw. He leaves on foot at first light Day 24 with the ransom letter.
 - **Hob Sallis, Day 23:** took Kit's 5 crowns. Kit's man first; he'll let nobody into or out of the cells, not even the reeve, except on Kit's word.
+- **Gorse, warden of Hartwell** (Chaotic Neutral; `gorse-warden-of-hartwell`, druid): small and knotted as a hawthorn root, bald, a long white beard plaited with red cord and a sprig of mistletoe; grey wool cloak; the twin antler token at his throat. Sedge was his daughter. Came to the Crow and Kettle alone and empty-handed on Day 29, 21:00, for the Stag.
+- **Jory Pike, the Pilgrim Road carrier** (Neutral; `jory-pike-the-pilgrim-road-carrier`, commoner): leathery, fifty, waxed cape and broad hat, post-satchel, a grey mule under lead-sealed panniers; twenty years on the Pilgrim Road every fourth day; drank Fenn's ale for twenty years. Day 24, 10:00: took the forged Sabine letter from Davy for Ambersell ('eight days, if the road's kind').
+- **Sergeant Wystan Crabbe** (Lawful Neutral; `gaunt-sergeant-a`, warrior-veteran): squat, grizzled, fifty, a jaw like a bucket; 26 years in the Regent's pay. From Day 24 leads four Gaunt men-at-arms at Harrowgate under Lerner.
+- **Sergeant Godric Lusk** (Neutral; `gaunt-sergeant-b`, warrior-veteran): tall, raw-boned, broken nose, a drillmaster's bark. Holds Thornbury with eight Gaunt men under Ivo from Day 24.
+- **Mother Sabine, Day 25:** broken on the cold-room slab by Ottilie (Persuasion 26) with Brakka's menace; told of the Court, the Choir and Vashti Ul-Amar; offers to be the Court's believed voice in return for her life. Unhooded, strapped in the cold room.
+- **Jenny Copp** (Neutral; `a-scullion-girl`, commoner): scullion at Coldharbour, about sixteen, chapped hands, mousy hair under a kerchief; a Mission Watcher on Fenn's ledger (a penny a week for her mother). The crew came for her Day 25, 17:15.
+- **Brother Ennis:** beheaded by Brakka in the Pens on Kit's order, Day 25, 21:40; buried in the dell. His cell holds Jenny Copp.
+- **Brother Oswin** (Lawful Neutral; `brother-oswin`, commoner): lay brother of Saint Wendrel's, about thirty, tonsured, ink-fingered; the Mission's Watcher at the abbey. Taken by Vaux in the scriptorium with a half-written letter to Ambersell (Day 25); brought in irons to the Crow and Kettle, Day 26 18:00.
+- **Hew Fallow** (Neutral; `hew-fallow-the-millers-boy`): the Ashpole miller's boy, twelve, the Mission's Watcher; taken Day 26, sent to Hob Sallis at Thornbury. Sells everyone's secrets.
+- **Brother Oswin:** hanged from the lightning-split oak on Crowsfoot green, Day 26, 19:45, after Suggestion.
+- **Father Confessor Wymond** (not met): the High Fane's man Gaspard expects with a writ within the month (Oswin, Day 26).
+- **Tam Kerrow, the falconer** (Neutral; `tam-kerrow-the-falconer`, scout): Kestrel Keep's falconer, weathered, leather gauntlet, a hooded kestrel on his fist (Day 34).
+- **Nib's post (ruling Day 34):** Thornbury, the Plough and Pennant's loft, as Kit's eyes and ears since Day 19; he never left with the crew after Day 24. Over Days 24-34 he has watched the town (decide his reports when Kit next asks or returns).
+### Kestrel Keep (Day 34)
+- **Lady Isolde Kestrel** (Lawful Neutral; `lady-isolde-kestrel`, noble): about forty, mourning grey, dark hair in a silver net, widow's ring on a chain; sharp and proud; widow of Sir Aubrey (died at Redfield); has declared for nobody.
+- **Rowan Kestrel** (Neutral Good; `rowan-kestrel`): her son and heir, twelve, in a doublet too big for him.
+- **Master Hawke, the steward** (Lawful Neutral; `master-hawke-the-steward`): old, stooped, black gown, keys; forty years' service.
+- **Sergeant Ilsa Brand** (Lawful Neutral; `sergeant-ilsa-brand`, warrior-veteran): broad, fifty, scarred eyebrow; captain of the keep's twelve men-at-arms; stands within two strides of her lady.
+### Ashby (Day 34)
+- **Sir Osric Vane** (Lawful Neutral; `sir-osric-vane`, knight): the Regency's garrison captain in Ashby's motte; lean, careful, forty-odd, grey crop.
+- **Master Pellam Sayle, the Regent's summoner** (Lawful Evil; noble): plump officious herald lodging at the Crown and Sheaf.
+- **The Rat's alewife** (Ashby, the Drowned Rat; `the-rats-alewife`, commoner, N): broad, red-armed, stained apron; wipes cups and asks no questions. Saw the crew watching the tax house all evening.
+- **An old drinker** (the Drowned Rat; `an-old-drinker`, commoner, N): a grey-stubbled carter asleep over his pot.
+- **Sir Osric Vane** (Ashby): killed Day 34, 22:00 in the square by Kit's arrow and Corvin's Fireball; his body and the motte keys at 17,26.
+- **Dunny** (Ashby motte gate guard, N): gangling, young, terrified; surrendered with his mate Day 34 on Ottilie's promise that they'd live.
+- **Marta Pell** (Highbarrow, landlady of the Gilded Goose; commoner, N): broad, grey-plaited, floury; papering her privy with the army's unpaid Regency scrip; no love for green tabards.
