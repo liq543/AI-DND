@@ -2,18 +2,18 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 2 · **In-world time:** Day 23, 19:56 · **Mode:** exploration
-**Current map:** The reeve's gaol, under the reeve's hall (`thornbury-gaol`) · **Events:** 23173 · **Log head:** `6956c8919f439733`
+**Session:** 2 · **In-world time:** Day 24, 06:00 · **Mode:** exploration
+**Current map:** The Chapel of the Unblinking (`unblinking-chapel`) · **Events:** 23227 · **Log head:** `68ac4cf08e5bd8eb`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | thornbury-gaol (7,4) |
-| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | thornbury-gaol (8,5) |
-| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-gaol (8,3) |
-| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-gaol (7,6) |
+| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | unblinking-chapel (16,2) |
+| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | unblinking-chapel (18,2) |
+| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | unblinking-chapel (22,2) |
+| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | unblinking-chapel (20,2) |
 
 ## Other creatures (DM view)
 
@@ -231,7 +231,7 @@
 | Davy, the landlord's boy (`a-boy-hiding-in-the-loft`, commoner) | neutral | 4/4 | 10 | restrained | unblinking-chapel (8,21) |  |
 | Hanged Man with the ladder A (`hanged-man-with-the-ladder-a`, bandit) | ally | 11/11 | 12 | — | wheatsheaf-yard (6,9) |  |
 | Hanged Man with the ladder B (`hanged-man-with-the-ladder-b`, bandit) | ally | 11/11 | 12 | — | wheatsheaf-yard (7,9) |  |
-| Quist's rider (`quists-rider`, bandit) | ally | 11/11 | 12 | — | unblinking-chapel (6,14) |  |
+| Quist's rider (`quists-rider`, bandit) | ally | 11/11 | 12 | — | unblinking-chapel (6,14) | yes |
 | Reeve's man at the East Gate A (`reeves-man-at-the-east-gate-a`, guard) | neutral | 11/11 | 16 | — | thornbury-east-road (3,11) |  |
 | Reeve's man at the East Gate B (`reeves-man-at-the-east-gate-b`, guard) | neutral | 11/11 | 16 | — | thornbury-east-road (3,12) |  |
 | Gilded Hand outrider A (`gilded-hand-outrider-a`, warrior-infantry) | neutral | 9/9 | 13 | — | unblinking-chapel (26,11) |  |
@@ -240,7 +240,7 @@
 | Gilded Hand foot B (`gilded-hand-foot-b`, warrior-infantry) | neutral | 9/9 | 13 | — | unblinking-chapel (24,12) |  |
 | Gilded Hand foot C (`gilded-hand-foot-c`, warrior-infantry) | neutral | 9/9 | 13 | — | unblinking-chapel (22,13) |  |
 | Gilded Hand foot D (`gilded-hand-foot-d`, warrior-infantry) | neutral | 9/9 | 13 | — | unblinking-chapel (23,13) |  |
-| Sir Hugh Darrow, banneret of Castle Gaunt (`sir-hugh-darrow-banneret-of-castle-gaunt`, knight) | enemy | 52/52 | 10 | — | unblinking-chapel (7,10) |  |
+| Sir Hugh Darrow, banneret of Castle Gaunt (`sir-hugh-darrow-banneret-of-castle-gaunt`, knight) | enemy | 52/52 | 10 | — | unblinking-chapel (7,10) | yes |
 | Sir Anselm Brey (`sir-anselm-brey`, knight) | enemy | 52/52 | 10 | — | thornbury-gaol (12,2) |  |
 | Sir Piers Whitlock (`sir-piers-whitlock`, knight) | enemy | 52/52 | 10 | — | thornbury-gaol (16,2) |  |
 | Gaunt sergeant A (`gaunt-sergeant-a`, warrior-veteran) | ally | 65/65 | 16 | — | unblinking-chapel (10,10) |  |
@@ -271,9 +271,6 @@
 ## Agenda (scheduled by the engine; `agenda list`)
 
 - `a50` Day 23, 09:00 [due] Corvin's research on paired speaking stones resumes only once he is back in his library at the Rookery (Arcana check then)
-- `a54` Day 24, 06:00 [pending, secret] Corvin: at his next Long Rest, prepare Sending in place of Magic Missile (the player's choice, Day 23)
-- `a56` Day 24, 06:00 [pending] Quist's rider leaves Thornbury at first light with two warhorses (one for Lerner at Harrowgate, one for Hesketh at Crowsfoot), two riding horses and three suits of plate for Quist to sell; also Lerner's recruits' 10 crowns
-- `a58` Day 24, 06:00 [pending] Sir Hugh Darrow leaves Thornbury on parole at first light, on foot by the March Road for Castle Gaunt with the ransom letter (Brey 1,000, Whitlock 300, four men-at-arms 20 each)
 - `a28` Day 24, 07:00 [pending] Quist's word from the Coldharbour carriers on the League's silver cart (route, guard, halts) for Day 34
 - `a51` Day 24, 10:00 [pending] The Pilgrim Road carrier calls at Thornbury on his eastward run (the Wheatsheaf is gone; he'll ask at the barracks or the Drover's Rest): the Mission's post to Ambersell goes with him
 - `a43` Day 24, 15:00 [pending] The hanging of the two Thornbound raiders (the Stag and the young spearman) at the gallows by Thornbury's market cross, by Lord Corvell's order
@@ -657,7 +654,7 @@
 - point of interest `poi-7`: The burning tollhouse at (23,7) → journal j386
 - doors: (23,8) closed
 
-### Thornbury: the West Gate quarter (`thornbury`, town 60×40, lighting dark)
+### Thornbury: the West Gate quarter (`thornbury`, town 60×40, lighting bright)
 - A horse-coper at the fair yard (`a-horse-coper-at-the-fair-yard`, neutral) at (4,32) — 4/4 HP
 - Aldous Crane (`aldous-crane`, ally) at (16,26) — 52/52 HP
 - Cornmarket watchman (`guard-a-6`, enemy) at (6,27) — DEAD · hidden
@@ -740,6 +737,10 @@
 - labels: Bar (3,2)
 
 ### The Chapel of the Unblinking (`unblinking-chapel`, interior 32×24, lighting dim)
+- Brakka Holloway (`brakka`, pc) at (18,2) — 71/71 HP
+- Corvin Asche (`corvin`, pc) at (22,2) — 41/41 HP
+- Kit Corvell (`kit`, pc) at (16,2) — 57/57 HP
+- Ottilie Marsh (`ottilie`, pc) at (20,2) — 48/48 HP
 - Captain Brannoc Vaux (`captain-brannoc-vaux`, neutral) at (20,12) — 112/112 HP
 - Davy, the landlord's boy (`a-boy-hiding-in-the-loft`, neutral) at (8,21) — 4/4 HP · restrained
 - Gaunt man-at-arms A (`gaunt-man-at-arms-a`, ally) at (12,10) — 11/11 HP
@@ -768,9 +769,9 @@
 - Ivo Tarrant (`bandit-g`, ally) at (10,5) — 11/11 HP
 - Nib (`nib`, neutral) at (8,5) — 4/4 HP
 - Peg's mother (`pegs-mother`, neutral) at (10,21) — 4/4 HP · restrained
-- Quist's rider (`quists-rider`, ally) at (6,14) — 11/11 HP
+- Quist's rider (`quists-rider`, ally) at (6,14) — 11/11 HP · hidden
 - Sergeant Mags Orrel (`sergeant-mags-orrel`, neutral) at (21,11) — 65/65 HP
-- Sir Hugh Darrow, banneret of Castle Gaunt (`sir-hugh-darrow-banneret-of-castle-gaunt`, enemy) at (7,10) — 52/52 HP
+- Sir Hugh Darrow, banneret of Castle Gaunt (`sir-hugh-darrow-banneret-of-castle-gaunt`, enemy) at (7,10) — 52/52 HP · hidden
 - Thornbury recruits 1 (`thornbury-recruits-1`, ally) at (10,16) — 4/4 HP
 - Thornbury recruits 2 (`thornbury-recruits-2`, ally) at (10,17) — 4/4 HP
 - Thornbury recruits 3 (`thornbury-recruits-3`, ally) at (10,15) — 4/4 HP
@@ -1129,10 +1130,6 @@
 - labels: Stream (29,12), Road (1,14)
 
 ### The reeve's gaol, under the reeve's hall (`thornbury-gaol`, interior 30×14, lighting dim)
-- Brakka Holloway (`brakka`, pc) at (8,5) — 71/71 HP
-- Corvin Asche (`corvin`, pc) at (8,3) — 41/41 HP
-- Kit Corvell (`kit`, pc) at (7,4) — 57/57 HP
-- Ottilie Marsh (`ottilie`, pc) at (7,6) — 48/48 HP
 - Gaunt man-at-arms M (`gaunt-man-at-arms-m`, enemy) at (12,7) — 11/11 HP
 - Gaunt man-at-arms N (`gaunt-man-at-arms-n`, enemy) at (13,8) — 11/11 HP
 - Gaunt man-at-arms O (`gaunt-man-at-arms-o`, enemy) at (16,7) — 11/11 HP
@@ -1153,18 +1150,18 @@
 
 ## Recent events
 
-- Gaunt man-at-arms M is at (12,7) on The reeve's gaol, under the reeve's hall.
-- Gaunt man-at-arms N is at (13,8) on The reeve's gaol, under the reeve's hall.
-- Gaunt man-at-arms O is at (16,7) on The reeve's gaol, under the reeve's hall.
-- Gaunt man-at-arms P is at (17,8) on The reeve's gaol, under the reeve's hall.
-- 🚪 The door at (10,4) is opened.
-- “Knights, is it. Never had knights. One to a cell for them, two and two for the rest. Bread and small beer twice a day, my lord, and the reeve pays for it, I suppose?”
-- Hob turned the big keys one after another. Brey went in without a word. Whitlock stopped at his door and looked back at the crew a long moment before he ducked under the lintel.
-- “Three hundred. My wife'll have to sell the mill.”
-- “Tell the reeve he can take their keep out of his dues.”
-- 💰 Kit Corvell hands 5 GP to Hob Sallis, the reeve's gaoler. Purses: Kit Corvell 293 GP 7 SP 5 CP, Hob Sallis, the reeve's gaoler 5 GP.
-- Kit pressed five crowns into Hob's hand and closed the gaoler's fingers over them.
-- “Remember, though. You're my man first.”
-- Hob looked at the gold in his palm a long moment: more than the reeve paid him in a season. He stopped chewing.
-- “Your man first, my lord. Nobody in or out of my cells but on your word. Not the reeve, neither.”
-- ⏳ 5m passes — settling the gaol. Now Day 23, 19:56.
+- “A dormitory of dead monks. How romantic. Wake me if anyone tries to murder us, darling, and not otherwise.”
+- 🌙 The party takes a Long Rest (8 hours). Now Day 24, 04:06.
+-    Kit Corvell: HP 57/57, spell slots and features restored.
+-    Brakka Holloway: HP 71/71, spell slots and features restored.
+-    Corvin Asche: HP 41/41, spell slots and features restored.
+-    Ottilie Marsh: HP 48/48, spell slots and features restored.
+- 📖 Corvin Asche prepares: Fire Bolt, Mage Hand, Minor Illusion, Light, Shield, Sending, Sleep, Misty Step, Invisibility, Suggestion, Fireball, Counterspell, Animate Dead, Dispel Magic, Wall of Fire.
+- Before he slept, Corvin turned his spellbook to Sending and let Magic Missile go from his mind; the wand would do that work now.
+- ⏳ 100m passes — the last of the night until first light. Now Day 24, 05:46.
+- “Morning, boss. The knight walked out the West Gate at first light like he said he would, alone, letter in his coat. Quist's lad went the same way with the horses and the steel.”
+- 👋 Sir Hugh Darrow, banneret of Castle Gaunt leaves the scene.
+- 👋 Quist's rider leaves the scene.
+- 🎬 The Hanged Men's barracks — Day 24, 06:00. Grey dawn through the lancet windows; the front pew empty; the Hanged Men stirring.
+- 🗺 Map: The Chapel of the Unblinking
+- ⏳ 14m passes — to first light. Now Day 24, 06:00.

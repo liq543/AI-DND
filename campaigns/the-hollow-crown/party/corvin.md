@@ -29,7 +29,7 @@ Attacks per Attack action: 1
 - **Wizard:** save DC 15, attack +7, cantrips 4, prepared 11, up to level 4
 - **Slots:** L1 4/4, L2 3/3, L3 3/3, L4 1/1
 - **Cantrips:** fire-bolt, mage-hand, minor-illusion, light
-- **Prepared:** shield, magic-missile, sleep, misty-step, invisibility, suggestion, fireball, counterspell, animate-dead, dispel-magic, wall-of-fire
+- **Prepared:** shield, sending, sleep, misty-step, invisibility, suggestion, fireball, counterspell, animate-dead, dispel-magic, wall-of-fire
 - **Spellbook:** detect-magic, identify, shield, sleep, magic-missile, alarm, feather-fall, disguise-self, misty-step, knock, invisibility, suggestion, fireball, counterspell, animate-dead, dispel-magic, wall-of-fire, sending
 
 **Granted spells:** prestidigitation (Magic Initiate (Wizard)), message (Magic Initiate (Wizard)), comprehend-languages (Magic Initiate (Wizard))
