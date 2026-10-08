@@ -2,8 +2,8 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 2 · **In-world time:** Day 23, 18:00 · **Mode:** exploration
-**Current map:** The March Road before the West Gate (`thornbury-west-road`) · **Events:** 22508 · **Log head:** `6d146dffc99486d5`
+**Session:** 2 · **In-world time:** Day 23, 18:05 · **Mode:** exploration
+**Current map:** The March Road before the West Gate (`thornbury-west-road`) · **Events:** 22572 · **Log head:** `a95d1bf9cb799bd3`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
@@ -13,7 +13,7 @@
 | Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | thornbury-west-road (29,11) |
 | Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | thornbury-west-road (28,11) |
 | Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-west-road (28,12) |
-| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-west-road (29,12) |
+| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-west-road (26,12) |
 
 ## Other creatures (DM view)
 
@@ -782,7 +782,7 @@
 - Brakka Holloway (`brakka`, pc) at (28,11) — 71/71 HP
 - Corvin Asche (`corvin`, pc) at (28,12) — 41/41 HP
 - Kit Corvell (`kit`, pc) at (29,11) — 57/57 HP
-- Ottilie Marsh (`ottilie`, pc) at (29,12) — 48/48 HP
+- Ottilie Marsh (`ottilie`, pc) at (26,12) — 48/48 HP
 - A carter with a load of turnips (`a-carter-with-a-load-of-turnips`, neutral) at (30,13) — 4/4 HP · hidden
 - Causeway watchman with a torch (`guard-a-5`, enemy) at (32,10) — DEAD · hidden
 - Causeway watchman with a torch (`guard-b-5`, enemy) at (32,12) — DEAD · hidden
@@ -817,6 +817,25 @@
 - Townsfolk at the gallows C (`townsfolk-at-the-gallows-c`, neutral) at (24,16) — 4/4 HP · hidden
 - Townsfolk at the gallows D (`townsfolk-at-the-gallows-d`, neutral) at (23,17) — 4/4 HP · hidden
 - Townsfolk at the gallows E (`townsfolk-at-the-gallows-e`, neutral) at (23,15) — 4/4 HP · hidden
+- container `box-2`: Sir Hugh Darrow's arms and saddlebags at (12,11) · SEALED (contents hidden from players) — coins: 85 GP
+- container `box-3`: Sir Piers Whitlock's arms at (11,12) · SEALED (contents hidden from players) — coins: 12 GP
+- container `box-4`: Sir Anselm Brey's arms at (11,10) · SEALED (contents hidden from players) — coins: 20 GP
+- container `gaunt-arms`: Castle Gaunt's grounded arms at (15,12) · SEALED (contents hidden from players)
+- in Sir Hugh Darrow's arms and saddlebags (`box-2`) `floor-1`: 1× Longsword +1 at (12,11) — in Sir Hugh Darrow's arms and saddlebags
+- in Sir Hugh Darrow's arms and saddlebags (`box-2`) `floor-2`: 1× Plate Armor at (12,11) — in Sir Hugh Darrow's arms and saddlebags
+- in Sir Hugh Darrow's arms and saddlebags (`box-2`) `floor-3`: 1× Shield at (12,11) — in Sir Hugh Darrow's arms and saddlebags
+- in Sir Hugh Darrow's arms and saddlebags (`box-2`) `floor-4`: 1× Darrow's saddlebags at (12,11) — in Sir Hugh Darrow's arms and saddlebags
+- in Sir Piers Whitlock's arms (`box-3`) `floor-5`: 1× Plate Armor at (11,12) — in Sir Piers Whitlock's arms
+- in Sir Piers Whitlock's arms (`box-3`) `floor-6`: 1× Mace at (11,12) — in Sir Piers Whitlock's arms
+- in Sir Piers Whitlock's arms (`box-3`) `floor-7`: 1× Shield at (11,12) — in Sir Piers Whitlock's arms
+- in Sir Piers Whitlock's arms (`box-3`) `floor-8`: 2× Potion of Healing at (11,12) — in Sir Piers Whitlock's arms
+- in Sir Anselm Brey's arms (`box-4`) `floor-9`: 1× Plate Armor at (11,10) — in Sir Anselm Brey's arms
+- in Sir Anselm Brey's arms (`box-4`) `floor-10`: 1× Longsword at (11,10) — in Sir Anselm Brey's arms
+- in Sir Anselm Brey's arms (`box-4`) `floor-11`: 1× Shield at (11,10) — in Sir Anselm Brey's arms
+- in Sir Anselm Brey's arms (`box-4`) `floor-12`: 1× Lance at (11,10) — in Sir Anselm Brey's arms
+- in Castle Gaunt's grounded arms (`gaunt-arms`) `floor-13`: 16× Spear at (15,12) — in Castle Gaunt's grounded arms
+- in Castle Gaunt's grounded arms (`gaunt-arms`) `floor-14`: 16× Shield at (15,12) — in Castle Gaunt's grounded arms
+- in Castle Gaunt's grounded arms (`gaunt-arms`) `floor-15`: 2× Halberd at (15,12) — in Castle Gaunt's grounded arms
 - point of interest `poi-2`: The town ditch at (31,5) → journal j373
 - point of interest `poi-3`: The roadside copse at (7,4) → journal j374
 - point of interest `poi-4`: The ruined tithe barn at (10,17) → journal j375
@@ -1117,18 +1136,18 @@
 
 ## Recent events
 
-- 👁 Gaunt man-at-arms E appears.
-- 👁 Gaunt man-at-arms F appears.
-- 👁 Gaunt man-at-arms G appears.
-- 👁 Gaunt man-at-arms H appears.
-- 👁 Gaunt man-at-arms I appears.
-- 👁 Gaunt man-at-arms J appears.
-- 👁 Gaunt man-at-arms K appears.
-- 👁 Gaunt man-at-arms L appears.
-- 👁 Gaunt man-at-arms M appears.
-- 👁 Gaunt man-at-arms N appears.
-- 👁 Gaunt man-at-arms O appears.
-- 👁 Gaunt man-at-arms P appears.
-- At six the column came down the March Road out of the low sun: a black-and-silver banner, three knights on big horses and twenty-odd men-at-arms in good order behind, spears sloped. They saw the four figures on the road before the open gate, the empty toll trestle, the dead on the gallows.
-- Somewhere behind the town wall a horse whinnied. The scarred knight's head came round to the wall-walk; he leaned to the banneret and pointed with his mace, and the column halted well short of the gate, the men-at-arms closing up and locking their shields.
-- “In the name of the Regent and the Antler Throne! I am Hugh Darrow, banneret of Castle Gaunt. I seek the outlaw who calls himself Corvell, and the town of Thornbury, which he holds unlawfully. Which of you speaks for him?”
+- Ottilie Marsh — CHA (Persuasion): 1d20(8) +10 = 18 vs DC 15 → SUCCESS
+- Darrow looked at the wall a long moment, and at the open gate, and at the dead on the gallows. Then he looked back down the road at his twenty, dusty from a day's march, and something in his tired face settled.
+- “Sir Hugh, you can't! To these? They hanged a girl on that tree!”
+- “Be quiet, Anselm. I'll not feed twenty men to a wall for a writ. Castle Gaunt yields, lady, on your word that they live. I yield to your arithmetic, not to his crown.”
+- “Ground your spears. Ground them, I said.”
+- 🪑 Castle Gaunt's grounded arms placed at (15,11) on The March Road before the West Gate.
+- Down the column the spears came down into the dust of the March Road, then the shields, a sergeant's halberd last. Darrow dismounted, unbuckled his sword belt and held it out hilt-first toward Kit across the empty road; after a moment Whitlock did the same. Brey sat his horse white with fury, and then he too got down.
+- ⭐ Kit Corvell gains 1950 XP (Castle Gaunt's column yielded at the West Gate to Ottilie's parley: Sir Hugh Darrow, banneret of Castle Gaunt (700), Sir Anselm Brey (700), Sir Piers Whitlock (700), Gaunt sergeant A (700), Gaunt sergeant B (700), Gaunt man-at-arms A (25), Gaunt man-at-arms B (25), Gaunt man-at-arms C (25), Gaunt man-at-arms D (25), Gaunt man-at-arms E (25), Gaunt man-at-arms F (25), Gaunt man-at-arms G (25), Gaunt man-at-arms H (25), Gaunt man-at-arms I (25), Gaunt man-at-arms J (25), Gaunt man-at-arms K (25), Gaunt man-at-arms L (25), Gaunt man-at-arms M (25), Gaunt man-at-arms N (25), Gaunt man-at-arms O (25), Gaunt man-at-arms P (25); ×2 house XP rate) — total 25207.
+- ⭐ Brakka Holloway gains 1950 XP (Castle Gaunt's column yielded at the West Gate to Ottilie's parley: Sir Hugh Darrow, banneret of Castle Gaunt (700), Sir Anselm Brey (700), Sir Piers Whitlock (700), Gaunt sergeant A (700), Gaunt sergeant B (700), Gaunt man-at-arms A (25), Gaunt man-at-arms B (25), Gaunt man-at-arms C (25), Gaunt man-at-arms D (25), Gaunt man-at-arms E (25), Gaunt man-at-arms F (25), Gaunt man-at-arms G (25), Gaunt man-at-arms H (25), Gaunt man-at-arms I (25), Gaunt man-at-arms J (25), Gaunt man-at-arms K (25), Gaunt man-at-arms L (25), Gaunt man-at-arms M (25), Gaunt man-at-arms N (25), Gaunt man-at-arms O (25), Gaunt man-at-arms P (25); ×2 house XP rate) — total 25207.
+- ⭐ Corvin Asche gains 1950 XP (Castle Gaunt's column yielded at the West Gate to Ottilie's parley: Sir Hugh Darrow, banneret of Castle Gaunt (700), Sir Anselm Brey (700), Sir Piers Whitlock (700), Gaunt sergeant A (700), Gaunt sergeant B (700), Gaunt man-at-arms A (25), Gaunt man-at-arms B (25), Gaunt man-at-arms C (25), Gaunt man-at-arms D (25), Gaunt man-at-arms E (25), Gaunt man-at-arms F (25), Gaunt man-at-arms G (25), Gaunt man-at-arms H (25), Gaunt man-at-arms I (25), Gaunt man-at-arms J (25), Gaunt man-at-arms K (25), Gaunt man-at-arms L (25), Gaunt man-at-arms M (25), Gaunt man-at-arms N (25), Gaunt man-at-arms O (25), Gaunt man-at-arms P (25); ×2 house XP rate) — total 25207.
+- ⭐ Ottilie Marsh gains 1950 XP (Castle Gaunt's column yielded at the West Gate to Ottilie's parley: Sir Hugh Darrow, banneret of Castle Gaunt (700), Sir Anselm Brey (700), Sir Piers Whitlock (700), Gaunt sergeant A (700), Gaunt sergeant B (700), Gaunt man-at-arms A (25), Gaunt man-at-arms B (25), Gaunt man-at-arms C (25), Gaunt man-at-arms D (25), Gaunt man-at-arms E (25), Gaunt man-at-arms F (25), Gaunt man-at-arms G (25), Gaunt man-at-arms H (25), Gaunt man-at-arms I (25), Gaunt man-at-arms J (25), Gaunt man-at-arms K (25), Gaunt man-at-arms L (25), Gaunt man-at-arms M (25), Gaunt man-at-arms N (25), Gaunt man-at-arms O (25), Gaunt man-at-arms P (25); ×2 house XP rate) — total 25207.
+- ⏳ 5m passes — the parley and the yielding. Now Day 23, 18:05.
+- 🎬 The West Gate — Day 23, 18:05. Castle Gaunt's column has grounded its arms on the March Road; the banneret holds out his sword.
+- 🗺 Map: The March Road before the West Gate
+- 🧰 Castle Gaunt's grounded arms at (15,12) on The March Road before the West Gate.

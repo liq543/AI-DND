@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** Player · **Human** · **Rogue 7** (Thief) · **Background:** Criminal · **XP:** 23257
+**Player:** Player · **Human** · **Rogue 7** (Thief) · **Background:** Criminal · **XP:** 25207
 
 **HP** 57/57 · **AC** 16 (Studded Leather Armor 12 + Dex 4) · **Speed** 30 ft · **Initiative** +7 · **Proficiency** +3 · **Passive Perception** 17
 
