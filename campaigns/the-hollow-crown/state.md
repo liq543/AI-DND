@@ -2,24 +2,24 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 2 · **In-world time:** Day 23, 15:15 · **Mode:** exploration
-**Current map:** The March Road before the West Gate (`thornbury-west-road`) · **Events:** 22187 · **Log head:** `a0bf5a99dbb217a8`
+**Session:** 2 · **In-world time:** Day 23, 16:00 · **Mode:** exploration
+**Current map:** The Pilgrim Road before the East Gate (`thornbury-east-road`) · **Events:** 22298 · **Log head:** `c89d51b43f174946`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | thornbury-west-road (31,11) |
-| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | thornbury-west-road (30,11) |
-| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-west-road (30,12) |
-| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-west-road (31,12) |
+| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | thornbury-east-road (6,12) |
+| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | thornbury-east-road (6,13) |
+| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-east-road (7,13) |
+| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-east-road (7,12) |
 
 ## Other creatures (DM view)
 
 | Creature | Side | HP | AC | Conditions | Position | Hidden |
 |---|---|---|---|---|---|---|
-| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | thornbury-west-road (31,10) |  |
+| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | thornbury-east-road (5,13) |  |
 | Mr Fennimore Quist (`mr-fennimore-quist`, spy) | neutral | 23/27 | 12 | — | rookery (47,31) |  |
 | Mother Hobday (`mother-hobday`, commoner) | neutral | 4/4 | 10 | — | rookery (4,2) |  |
 | Ada Crisp (`ada-crisp`, commoner) | neutral | 4/4 | 10 | — | rookery (44,6) |  |
@@ -135,9 +135,9 @@
 | Watch-captain Orme (`watch-captain-orme`, warrior-veteran) | enemy | 0/65 | 17 | mocked · DEAD | thornbury (17,27) | yes |
 | Reeve Odo Ashby (`reeve-odo-ashby`, noble) | neutral | 9/9 | 15 | — | thornbury-heart (23,10) |  |
 | Edwin Ashby (`edwin-ashby`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (22,30) |  |
-| Captain Brannoc Vaux (`captain-brannoc-vaux`, gladiator) | neutral | 112/112 | 16 | — | gilded-hand-hall (6,2) |  |
-| Vaux's paymaster (`vauxs-paymaster`, commoner) | neutral | 4/4 | 10 | — | gilded-hand-hall (9,9) |  |
-| Sergeant Mags Orrel (`sergeant-mags-orrel`, warrior-veteran) | neutral | 65/65 | 17 | — | gilded-hand-hall (6,10) | yes |
+| Captain Brannoc Vaux (`captain-brannoc-vaux`, gladiator) | neutral | 112/112 | 16 | — | thornbury-east-road (16,12) |  |
+| Vaux's paymaster (`vauxs-paymaster`, commoner) | neutral | 4/4 | 10 | — | thornbury-east-road (22,12) |  |
+| Sergeant Mags Orrel (`sergeant-mags-orrel`, warrior-veteran) | neutral | 65/65 | 17 | — | thornbury-east-road (16,13) |  |
 | Sleeping Greencloak 1 (`sleeping-greencloak-1`, guard) | enemy | 0/11 | 16 | unconscious, prone · DEAD | harrowgate (31,13) |  |
 | Greencloak waking (`sleeping-greencloak-2`, guard) | enemy | 0/11 | 16 | prone · DEAD | harrowgate (31,14) |  |
 | Sleeping Greencloak 3 (`sleeping-greencloak-3`, guard) | enemy | 0/11 | 16 | unconscious, prone · DEAD | harrowgate (31,15) |  |
@@ -232,11 +232,19 @@
 | Hanged Man with the ladder A (`hanged-man-with-the-ladder-a`, bandit) | ally | 11/11 | 12 | — | wheatsheaf-yard (6,9) |  |
 | Hanged Man with the ladder B (`hanged-man-with-the-ladder-b`, bandit) | ally | 11/11 | 12 | — | wheatsheaf-yard (7,9) |  |
 | Quist's rider (`quists-rider`, bandit) | ally | 11/11 | 12 | — | wheatsheaf-yard (8,9) |  |
+| Reeve's man at the East Gate A (`reeves-man-at-the-east-gate-a`, guard) | neutral | 11/11 | 16 | — | thornbury-east-road (3,11) |  |
+| Reeve's man at the East Gate B (`reeves-man-at-the-east-gate-b`, guard) | neutral | 11/11 | 16 | — | thornbury-east-road (3,12) |  |
+| Gilded Hand outrider A (`gilded-hand-outrider-a`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury-east-road (12,12) |  |
+| Gilded Hand outrider B (`gilded-hand-outrider-b`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury-east-road (12,11) |  |
+| Gilded Hand foot A (`gilded-hand-foot-a`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury-east-road (26,12) |  |
+| Gilded Hand foot B (`gilded-hand-foot-b`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury-east-road (25,12) |  |
+| Gilded Hand foot C (`gilded-hand-foot-c`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury-east-road (27,12) |  |
+| Gilded Hand foot D (`gilded-hand-foot-d`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury-east-road (26,13) |  |
 
 ## Agenda (scheduled by the engine; `agenda list`)
 
 - `a50` Day 23, 09:00 [due] Corvin's research on paired speaking stones resumes only once he is back in his library at the Rookery (Arcana check then)
-- `a36` Day 23, 16:00 [pending] The Gilded Hand (Captain Vaux, 100 men) reach Thornbury: a month's pay is due on arrival, 2.25 crowns a head a day (6,750) (-6750 GP → treasury)
+- `a36` Day 23, 16:00 [due] The Gilded Hand (Captain Vaux, 100 men) reach Thornbury: a month's pay is due on arrival, 2.25 crowns a head a day (6,750) (-6750 GP → treasury)
 - `a54` Day 24, 06:00 [pending, secret] Corvin: at his next Long Rest, prepare Sending in place of Magic Missile (the player's choice, Day 23)
 - `a28` Day 24, 07:00 [pending] Quist's word from the Coldharbour carriers on the League's silver cart (route, guard, halts) for Day 34
 - `a51` Day 24, 10:00 [pending] The Pilgrim Road carrier calls at Thornbury on his eastward run (the Wheatsheaf is gone; he'll ask at the barracks or the Drover's Rest): the Mission's post to Ambersell goes with him
@@ -723,6 +731,7 @@
 - point of interest `poi-5`: The Eastgate quarter at (47,17) → journal j361
 - point of interest `poi-6`: The fair ground at (29,29) → journal j362
 - point of interest `poi-7`: The West Gate at (4,19) → journal j363
+- point of interest `poi-8`: The East Gate at (56,19) → journal j608
 - labels: The West Gate quarter (12,12), The north ward (20,6), The town's heart (38,11), The Eastgate quarter (46,23), The south ward (29,33), March Road (west) (4,21), The Wend (56,22)
 
 ### The Mission house, Ambersell (upper floor) (`mission-house`, interior 30×20, lighting dim)
@@ -736,10 +745,6 @@
 - labels: The Missioner's study (9,6), Bedchamber (23,5), The chapel gallery (23,12), Stair passage (9,16)
 
 ### The March Road before the West Gate (`thornbury-west-road`, wilderness 38×24, lighting bright)
-- Brakka Holloway (`brakka`, pc) at (30,11) — 71/71 HP
-- Corvin Asche (`corvin`, pc) at (30,12) — 41/41 HP
-- Kit Corvell (`kit`, pc) at (31,11) — 57/57 HP
-- Ottilie Marsh (`ottilie`, pc) at (31,12) — 48/48 HP
 - A carter with a load of turnips (`a-carter-with-a-load-of-turnips`, neutral) at (30,13) — 4/4 HP · hidden
 - Causeway watchman with a torch (`guard-a-5`, enemy) at (32,10) — DEAD · hidden
 - Causeway watchman with a torch (`guard-b-5`, enemy) at (32,12) — DEAD · hidden
@@ -748,7 +753,6 @@
 - Hanged Man off duty C (`hanged-man-off-duty-c`, ally) at (33,12) — 11/11 HP
 - Hanged Man on the West Gate toll (`hanged-man-on-the-west-gate-toll`, ally) at (35,11) — 11/11 HP
 - League man in grey (`guard-c-3`, enemy) at (37,10) — DEAD · hidden
-- Nib (`nib`, neutral) at (31,10) — 4/4 HP
 - Night watchman with a crossbow (`guard-b-4`, enemy) at (35,12) — DEAD · hidden
 - Night watchman with a lantern (`guard-a-4`, enemy) at (35,10) — DEAD · hidden
 - Ord, the League house under-clerk (`ord-the-league-house-under-clerk`, neutral) at (29,20) — DEAD
@@ -873,9 +877,6 @@
 - labels: March Road (to the West Gate) (2,12), March Road (to the East Gate) (42,12), Cloth Lane (38,4)
 
 ### The Gilded Hand's hall, Gildford (`gilded-hand-hall`, interior 22×12, lighting dim)
-- Captain Brannoc Vaux (`captain-brannoc-vaux`, neutral) at (6,2) — 112/112 HP
-- Sergeant Mags Orrel (`sergeant-mags-orrel`, neutral) at (6,10) — 65/65 HP · hidden
-- Vaux's paymaster (`vauxs-paymaster`, neutral) at (9,9) — 4/4 HP
 - container `gilded-strongbox`: The company strongbox at (10,9)
 - point of interest `poi-1`: The stone bust over the hearth at (6,1) → journal j475
 - point of interest `poi-2`: The long table at (7,4) → journal j476
@@ -1046,21 +1047,46 @@
 - point of interest `poi-10`: Peg's cot at (15,14) → journal j597
 - doors: (14,9) open, (14,15) closed
 
+### The Pilgrim Road before the East Gate (`thornbury-east-road`, wilderness 40×24, lighting bright)
+- Brakka Holloway (`brakka`, pc) at (6,13) — 71/71 HP
+- Corvin Asche (`corvin`, pc) at (7,13) — 41/41 HP
+- Kit Corvell (`kit`, pc) at (6,12) — 57/57 HP
+- Ottilie Marsh (`ottilie`, pc) at (7,12) — 48/48 HP
+- Captain Brannoc Vaux (`captain-brannoc-vaux`, neutral) at (16,12) — 112/112 HP
+- Gilded Hand foot A (`gilded-hand-foot-a`, neutral) at (26,12) — 9/9 HP
+- Gilded Hand foot B (`gilded-hand-foot-b`, neutral) at (25,12) — 9/9 HP
+- Gilded Hand foot C (`gilded-hand-foot-c`, neutral) at (27,12) — 9/9 HP
+- Gilded Hand foot D (`gilded-hand-foot-d`, neutral) at (26,13) — 9/9 HP
+- Gilded Hand outrider A (`gilded-hand-outrider-a`, neutral) at (12,12) — 9/9 HP
+- Gilded Hand outrider B (`gilded-hand-outrider-b`, neutral) at (12,11) — 9/9 HP
+- Nib (`nib`, neutral) at (5,13) — 4/4 HP
+- Reeve's man at the East Gate A (`reeves-man-at-the-east-gate-a`, neutral) at (3,11) — 11/11 HP
+- Reeve's man at the East Gate B (`reeves-man-at-the-east-gate-b`, neutral) at (3,12) — 11/11 HP
+- Sergeant Mags Orrel (`sergeant-mags-orrel`, neutral) at (16,13) — 65/65 HP
+- Vaux's paymaster (`vauxs-paymaster`, neutral) at (22,12) — 4/4 HP
+- point of interest `poi-1`: The East Gate at (2,12) → journal j609
+- point of interest `poi-2`: The town ditch at (4,8) → journal j610
+- point of interest `poi-3`: The Wend bridge at (30,12) → journal j611
+- point of interest `poi-4`: The Wend at (30,5) → journal j612
+- point of interest `poi-5`: The waymark at (34,10) → journal j613
+- doors: (2,12) open, (2,13) open
+- labels: Stream (29,12), Road (1,14)
+
 
 ## Recent events
 
-- The crew came out under the West Gate onto the March Road, Nib trotting behind. The toll men straightened; two off-duty Hanged Men left their dice to stand by the gate. Out on the road, Peg and Ord turned slowly on the gallows with the crows at them, and the few carts coming in gave the posts a wide berth.
-- “Road's quiet, my lord. Turnips and a tinker since noon. No company of a hundred, nor anything like it.”
-- “Can I wear it over the leathers? Then it's mine.”
-- “Over the leathers and under the cloak, yes. A robe's neither armour nor a cloak. Truesight and darkvision to a hundred and twenty feet, and nothing in sight gets past you. Its weakness is light: a Light spell cast on it, or Daylight close by, blinds you for a while.”
-- “Do keep it in the pack in town, darling. We did just tell everyone the people in eye-robes were spies.”
-- Kit kept the Robe of Eyes, folded in his pack.
-- “We rest here an hour. I'll get to know my new robe.”
-- Kit sat down by the gate with his back to the wall, the Robe of Eyes on under the Cloak of Elvenkind, hood up, and spent the hour on it alone.
-- ⏳ The party takes a Short Rest (1 hour). Now Day 23, 15:15.
-- Kit Corvell attunes to Robe of Eyes through the Short Rest.
-- Through the hour: two carts of turnips and a tinker's mule paid the toll; the off-duty Hanged Men went back to their dice on an upturned crate; Brakka sat on the verge, the Hand's money in his purse and his eyes on the western road; Corvin read in the shade, Ottilie dozed against the wall with her hat over her face, and Nib threw stones at the crows on the gallows until a toll man cuffed him.
-- “Mm. Wake me when someone important arrives, darling. Or someone rich.”
-- When the hour was done, the world opened round Kit: he could see behind him without turning his head, and every shadow in the gate arch was plain as noon.
-- 🎬 The West Gate — Day 23, 15:15. Afternoon sun on the March Road; the toll men dozing, the road west empty so far.
-- 🗺 Map: The March Road before the West Gate
+- ⏳ 30m passes — waiting at the East Gate. Now Day 23, 16:00.
+- Captain Brannoc Vaux is at (16,12) on The Pilgrim Road before the East Gate.
+- 👁 Sergeant Mags Orrel is revealed!
+- Vaux's paymaster is at (22,12) on The Pilgrim Road before the East Gate.
+- 👁 Gilded Hand outrider A appears (neutral).
+- 👁 Gilded Hand outrider B appears (neutral).
+- 👁 Gilded Hand foot A appears (neutral).
+- 👁 Gilded Hand foot B appears (neutral).
+- 👁 Gilded Hand foot C appears (neutral).
+- 👁 Gilded Hand foot D appears (neutral).
+- 🪑 The Hand's pay-wagon placed at (23,13) on The Pilgrim Road before the East Gate.
+- 🪑 The Gilded Hand's banner placed at (17,12) on The Pilgrim Road before the East Gate.
+- At four the column came over the rise beyond the Wend: outriders first, then a gilt hand on a red banner, then a long snake of spears and crossbows, wagons and a surgeon's cart, stretching back down the Pilgrim Road past the waymark and out of sight. The boots rang on the bridge.
+- Captain Vaux rode under the banner on a big grey, his gilded gauntlet on the reins; Sergeant Mags Orrel walked at his stirrup.
+- “The Gilded Hand, Second and Fourth Banners, under contract! We're to ask at the gate for their lord. Who's lord of this town?”
