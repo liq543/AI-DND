@@ -14,7 +14,7 @@ from .core import (MAGIC_EFFECTS, RARITY_ORDER, TIER_MAX_GP_AWARD, TIER_MAX_RARI
                    has_feat, has_feature, hp_max, level, mod, pact_slots, pb, resources, save_mod,
                    skill_mod, speed, spell_slots, spellcasting, tier, weapon_attack, equipped,
                    initiative_mod, exhaustion_penalty, max_spell_level_for_class, parse_duration, fmt_time,
-                   item_bonus)
+                   item_bonus, item_sense)
 
 AUTO_FAIL_STR_DEX = {"paralyzed", "petrified", "stunned", "unconscious"}
 ATTACKER_DIS = {"blinded", "frightened", "poisoned", "prone", "restrained"}
@@ -202,6 +202,8 @@ def ability_check(g, e, what, dc=None, adv=(), dis=(), hidden=False, purpose=Non
             need = STEALTH_ADV_ITEMS.get(base)
             if need is not None and it.get("equipped") and (not need or it.get("attuned")):
                 adv.append(it.get("base_name") or it["name"])
+    if what == "perception" and item_bonus(e, "adv_perception"):
+        adv.append("Robe of Eyes (sight)")  # rules/magic-items/robe-of-eyes.md: Wisdom (Perception) checks that rely on sight
     m -= exhaustion_penalty(e)
     if wants_request(g, e, now) and not request:
         return {"request": make_request(g, e, f"{label}" + (f" DC {dc}" if dc and not hidden else ""),
@@ -631,9 +633,9 @@ def attack_modes(g, att, tgt, ranged, dist, extra_adv=(), extra_dis=()):
     an, tn = condition_names(att), condition_names(tgt)
     for c in ATTACKER_DIS & an:
         dis.append(f"attacker {c}")
-    if "invisible" in an and not E.has(att, "reveals_invisible") and not E.has(tgt, "see_invisible"):
+    if "invisible" in an and not E.has(att, "reveals_invisible") and not E.has(tgt, "see_invisible") and not item_sense(tgt, "truesight"):
         adv.append("attacker invisible")
-    if "invisible" in tn and not E.has(tgt, "reveals_invisible") and not E.has(att, "see_invisible"):
+    if "invisible" in tn and not E.has(tgt, "reveals_invisible") and not E.has(att, "see_invisible") and not item_sense(att, "truesight"):
         dis.append("target invisible")
     for c in TARGET_ADV & tn:
         adv.append(f"target {c}")
@@ -1648,7 +1650,8 @@ def stand(g, ref):
 
 def vision_ft(g, e, m):
     light = m.get("lighting", "bright")
-    dv = max(e.get("darkvision", 0), max((f.get("darkvision", 0) for f in E.active(e)), default=0))
+    dv = max(e.get("darkvision", 0), item_sense(e, "darkvision"), item_sense(e, "truesight"),
+             max((f.get("darkvision", 0) for f in E.active(e)), default=0))
     carried = 0
     for it in e.get("inventory", []):
         n = it["name"].lower()
@@ -1780,7 +1783,7 @@ def require_no_dying(g, what):
                         f"before {what} — time doesn't skip past death saves.")
 
 
-def short_rest(g, members, hit_dice=None, focus=None):
+def short_rest(g, members, hit_dice=None, focus=None, attune_to=None):
     if combat(g):
         raise RuleError("You can't rest during combat.")
     require_no_dying(g, "resting")
@@ -1833,6 +1836,9 @@ def short_rest(g, members, hit_dice=None, focus=None):
     for eid, ref in (focus or {}).items():
         # SRD: focus on one magic item during a Short Rest while in contact with it; at the end you learn its properties
         identify_item(g, g.get(eid), ref, "focused on it through a Short Rest")
+    for eid, ref in (attune_to or {}).items():
+        # SRD: attuning takes a Short Rest focused only on that item (the rest's hour covers it)
+        attune(g, g.get(eid), ref, during_rest=True)
 
 
 def long_rest(g, members, ended_at=None, nights=1):
@@ -2179,7 +2185,7 @@ def equip(g, e, ref, on=True):
     g.say(f"{e['name']} equips {it['name']}.", kind="item")
 
 
-def attune(g, e, ref, on=True):
+def attune(g, e, ref, on=True, during_rest=False):
     it = find_item(e, ref)
     if on:
         if not it.get("needs_attunement"):
@@ -2188,10 +2194,12 @@ def attune(g, e, ref, on=True):
             raise RuleError(f"{e['name']} is already attuned to 3 items (the maximum).")
         if combat(g):
             raise RuleError("Attuning takes a Short Rest focused on the item — not in combat.")
-        g.emit("time.set", minutes=g.state["time"] + 60)
+        if not during_rest:  # on its own: an hour spent on the item alone (`rest short --attune` folds it into a rest)
+            g.emit("time.set", minutes=g.state["time"] + 60)
     inv = [dict(i, attuned=on, equipped=True if on else i.get("equipped")) if i["id"] == it["id"] else dict(i) for i in e["inventory"]]
     g.set(e, inventory=inv)
-    g.say(f"{e['name']} {'attunes to' if on else 'ends attunement with'} {it['name']}" + (" (1 hour)." if on else "."), kind="item")
+    g.say(f"{e['name']} {'attunes to' if on else 'ends attunement with'} {it['name']}"
+          + ((" through the Short Rest." if during_rest else " (1 hour).") if on else "."), kind="item")
 
 
 def fall_inert(g, e):

@@ -1337,7 +1337,16 @@ def cmd_rest(g, a):
                 raise RuleError("A creature can focus on only one magic item per Short Rest.")
             M.find_item(g.get(k), item)
             focus[g.get(k)["id"]] = item
-        M.short_rest(g, members, hd, focus)
+        attune_to = {}
+        for part in ids(getattr(a, "attune", None)):
+            k, _, item = part.partition(":")
+            if not item:
+                raise RuleError("--attune who:item-id (one magic item per creature)")
+            eid = g.get(k)["id"]
+            if eid in attune_to or eid in focus:
+                raise RuleError("A creature can focus on only one magic item per Short Rest (to identify it or to attune to it).")
+            attune_to[eid] = item
+        M.short_rest(g, members, hd, focus, attune_to)
     elif getattr(a, "ended_at", None):
         # repair: the time already passed (a journey's nights) held a Long Rest the engine didn't credit; logged publicly
         when = parse_when(a.ended_at)
@@ -3377,6 +3386,7 @@ def build_parser():
     c.add_argument("--who")
     c.add_argument("--hd", help="hit dice to spend: kira:2,bob:1")
     c.add_argument("--focus", help="short rest: identify a magic item by focusing on it, kira:item-id (one per creature)")
+    c.add_argument("--attune", help="short rest: attune to a magic item through the rest, kira:item-id (one per creature)")
     c.add_argument("--refund-hd", help="repair: refund Hit Point Dice spent by mistake, kira:1 (needs --reason; takes no rest)")
     c.add_argument("--ended-at", help='repair: a Long Rest already taken inside time that has passed, ending "Day N, HH:MM" '
                                       '(needs --reason; no time passes)')

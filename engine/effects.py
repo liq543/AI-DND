@@ -148,7 +148,8 @@ def attack_modes(att, tgt, distance=None):
     for fx in active(att):
         if "attack" in fx.get("adv_tests", []):
             adv.append(fx["name"])
-    senses = str(att.get("senses", "")).lower()
+    from .core import item_sense
+    senses = str(att.get("senses", "")).lower() + (" truesight" if item_sense(att, "truesight") else "")
     for fx in active(tgt):
         if fx.get("attacks_against_adv") and not any(c["name"] == "blinded" for c in att.get("conditions", [])):
             adv.append(fx["name"])

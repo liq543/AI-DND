@@ -186,6 +186,8 @@ MAGIC_EFFECTS = {
     "belt-of-storm-giant-strength": {"set": {"str": 29}},
     "boots-of-speed": {},
     "stone-of-good-luck-luckstone": {"checks": 1, "saves": 1},
+    # senses (largest range wins, never summed) and Advantage on sight-based Perception
+    "robe-of-eyes": {"sense_darkvision": 120, "sense_truesight": 120, "adv_perception": 1},
 }
 RARITY_ORDER = ["Common", "Uncommon", "Rare", "Very Rare", "Legendary", "Artifact"]
 TIER_MAX_RARITY = {1: "Uncommon", 2: "Rare", 3: "Very Rare", 4: "Legendary"}
@@ -375,6 +377,17 @@ def item_bonus(e, key):
         if active and key in eff:
             total += eff[key]
     return total
+
+
+def item_sense(e, key):
+    """Largest range of a sense ('darkvision', 'truesight') granted by a worn magic item (attuned if it needs it)."""
+    best = 0
+    for it in e.get("inventory", []):
+        eff = MAGIC_EFFECTS.get(it.get("ref"), {})
+        active = it.get("attuned") if it.get("needs_attunement") else it.get("equipped")
+        if active:
+            best = max(best, eff.get(f"sense_{key}", 0))
+    return best
 
 
 def has_feature(e, name):

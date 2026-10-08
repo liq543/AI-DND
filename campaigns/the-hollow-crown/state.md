@@ -3,7 +3,7 @@
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
 **Session:** 2 · **In-world time:** Day 23, 14:15 · **Mode:** exploration
-**Current map:** The March Road before the West Gate (`thornbury-west-road`) · **Events:** 22164 · **Log head:** `e6b8e6e5d4e55e6a`
+**Current map:** The March Road before the West Gate (`thornbury-west-road`) · **Events:** 22168 · **Log head:** `9cb414d508834aec`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
@@ -1049,10 +1049,6 @@
 
 ## Recent events
 
-- ⏳ 10m passes — down the ladder and out through the market to the West Gate. Now Day 23, 14:15.
-- Quist's rider is at (8,9) on The Wheatsheaf's stable yard.
-- Quist's rider went off to the Hanged Men's tarp in the yard for a bowl and a sleep; the Hanged Man at the ladder hauled it down after the crew and carried it back to the stable.
-- Hanged Man with the ladder A is at (6,9) on The Wheatsheaf's stable yard.
 - 🚶 Hanged Man off duty B moves 35 ft to (33,10).
 - 🚶 Hanged Man off duty C moves 40 ft to (33,12).
 - 🎬 The West Gate — Day 23, 14:15. Bright afternoon on the March Road; crows on the gallows, a slow trickle of carts at the toll.
@@ -1064,3 +1060,7 @@
 - Nib is at (31,10) on The March Road before the West Gate.
 - The crew came out under the West Gate onto the March Road, Nib trotting behind. The toll men straightened; two off-duty Hanged Men left their dice to stand by the gate. Out on the road, Peg and Ord turned slowly on the gallows with the crows at them, and the few carts coming in gave the posts a wide berth.
 - “Road's quiet, my lord. Turnips and a tinker since noon. No company of a hundred, nor anything like it.”
+- “Can I wear it over the leathers? Then it's mine.”
+- “Over the leathers and under the cloak, yes. A robe's neither armour nor a cloak. Truesight and darkvision to a hundred and twenty feet, and nothing in sight gets past you. Its weakness is light: a Light spell cast on it, or Daylight close by, blinds you for a while.”
+- “Do keep it in the pack in town, darling. We did just tell everyone the people in eye-robes were spies.”
+- Kit kept the Robe of Eyes, folded in his pack.
