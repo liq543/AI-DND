@@ -2,24 +2,24 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 2 · **In-world time:** Day 23, 16:35 · **Mode:** exploration
-**Current map:** Thornbury: the West Gate quarter (`thornbury`) · **Events:** 22386 · **Log head:** `61abb9dbd70881d4`
+**Session:** 2 · **In-world time:** Day 23, 18:00 · **Mode:** exploration
+**Current map:** The March Road before the West Gate (`thornbury-west-road`) · **Events:** 22508 · **Log head:** `6d146dffc99486d5`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | thornbury (4,27) |
-| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | thornbury (5,27) |
-| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury (5,28) |
-| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury (4,28) |
+| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | thornbury-west-road (29,11) |
+| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | thornbury-west-road (28,11) |
+| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-west-road (28,12) |
+| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-west-road (29,12) |
 
 ## Other creatures (DM view)
 
 | Creature | Side | HP | AC | Conditions | Position | Hidden |
 |---|---|---|---|---|---|---|
-| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | thornbury (6,27) |  |
+| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | thornbury (6,28) |  |
 | Mr Fennimore Quist (`mr-fennimore-quist`, spy) | neutral | 23/27 | 12 | — | rookery (47,31) |  |
 | Mother Hobday (`mother-hobday`, commoner) | neutral | 4/4 | 10 | — | rookery (4,2) |  |
 | Ada Crisp (`ada-crisp`, commoner) | neutral | 4/4 | 10 | — | rookery (44,6) |  |
@@ -205,16 +205,16 @@
 | Old hand 2 (`bandit-b-2`, bandit) | ally | 11/11 | 12 | — | crowsfoot (22,27) | yes |
 | Old hand 3 (`bandit-c-2`, bandit) | ally | 11/11 | 12 | — | crowsfoot (23,27) | yes |
 | Old hand 4 (`bandit-d-2`, bandit) | ally | 11/11 | 12 | — | crowsfoot (24,27) | yes |
-| Hanged Man on the West Gate toll (`hanged-man-on-the-west-gate-toll`, bandit) | ally | 11/11 | 12 | — | thornbury-west-road (35,11) |  |
-| Hanged Man at the toll table (`hanged-man-at-the-toll-table`, bandit) | ally | 11/11 | 12 | — | thornbury-west-road (37,12) |  |
+| Hanged Man on the West Gate toll (`hanged-man-on-the-west-gate-toll`, bandit) | ally | 11/11 | 12 | — | thornbury (8,26) |  |
+| Hanged Man at the toll table (`hanged-man-at-the-toll-table`, bandit) | ally | 11/11 | 12 | — | thornbury (7,26) |  |
 | Goody Prail, the egg-woman (`a-market-woman-with-egg-baskets`, commoner) | neutral | 4/4 | 10 | blinded, restrained | the-pens (16,3) |  |
 | A carter with a load of turnips (`a-carter-with-a-load-of-turnips`, commoner) | neutral | 4/4 | 10 | — | thornbury-west-road (30,13) | yes |
 | A horse-coper at the fair yard (`a-horse-coper-at-the-fair-yard`, commoner) | neutral | 4/4 | 10 | — | thornbury (4,32) |  |
 | Market folk A (`market-folk-a`, commoner) | neutral | 4/4 | 10 | — | thornbury (47,10) | yes |
 | Market folk B (`market-folk-b`, commoner) | neutral | 4/4 | 10 | — | thornbury (47,11) | yes |
 | Hanged Man off duty A (`hanged-man-off-duty-a`, bandit) | ally | 11/11 | 12 | — | unblinking-chapel (9,20) |  |
-| Hanged Man off duty B (`hanged-man-off-duty-b`, bandit) | ally | 11/11 | 12 | — | thornbury-west-road (33,10) |  |
-| Hanged Man off duty C (`hanged-man-off-duty-c`, bandit) | ally | 11/11 | 12 | — | thornbury-west-road (33,12) |  |
+| Hanged Man off duty B (`hanged-man-off-duty-b`, bandit) | ally | 11/11 | 12 | — | thornbury (7,28) |  |
+| Hanged Man off duty C (`hanged-man-off-duty-c`, bandit) | ally | 11/11 | 12 | — | thornbury (8,28) |  |
 | A hooded penitent with bound eyes (`a-hooded-penitent-with-bound-eyes`, cultist-fanatic) | enemy | 0/44 | 13 | unconscious, prone · DEAD | wheatsheaf (11,11) |  |
 | A second penitent (`a-second-penitent`, cultist-fanatic) | enemy | 0/44 | 13 | — · DEAD | wheatsheaf (3,6) |  |
 | Eyeless Brother A (`eyeless-brother-a`, cultist-fanatic) | enemy | 0/44 | 13 | — · DEAD | wheatsheaf (15,11) |  |
@@ -240,6 +240,27 @@
 | Gilded Hand foot B (`gilded-hand-foot-b`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury (13,31) |  |
 | Gilded Hand foot C (`gilded-hand-foot-c`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury (21,24) |  |
 | Gilded Hand foot D (`gilded-hand-foot-d`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury (21,30) |  |
+| Sir Hugh Darrow, banneret of Castle Gaunt (`sir-hugh-darrow-banneret-of-castle-gaunt`, knight) | enemy | 52/52 | 18 | — | thornbury-west-road (12,11) |  |
+| Sir Anselm Brey (`sir-anselm-brey`, knight) | enemy | 52/52 | 18 | — | thornbury-west-road (11,10) |  |
+| Sir Piers Whitlock (`sir-piers-whitlock`, knight) | enemy | 52/52 | 18 | — | thornbury-west-road (11,12) |  |
+| Gaunt sergeant A (`gaunt-sergeant-a`, warrior-veteran) | enemy | 65/65 | 17 | — | thornbury-west-road (9,11) |  |
+| Gaunt sergeant B (`gaunt-sergeant-b`, warrior-veteran) | enemy | 65/65 | 17 | — | thornbury-west-road (8,11) |  |
+| Gaunt man-at-arms A (`gaunt-man-at-arms-a`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (6,11) |  |
+| Gaunt man-at-arms B (`gaunt-man-at-arms-b`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (6,10) |  |
+| Gaunt man-at-arms C (`gaunt-man-at-arms-c`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (6,12) |  |
+| Gaunt man-at-arms D (`gaunt-man-at-arms-d`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (7,11) |  |
+| Gaunt man-at-arms E (`gaunt-man-at-arms-e`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (5,11) |  |
+| Gaunt man-at-arms F (`gaunt-man-at-arms-f`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (7,12) |  |
+| Gaunt man-at-arms G (`gaunt-man-at-arms-g`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (7,10) |  |
+| Gaunt man-at-arms H (`gaunt-man-at-arms-h`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (5,12) |  |
+| Gaunt man-at-arms I (`gaunt-man-at-arms-i`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (5,10) |  |
+| Gaunt man-at-arms J (`gaunt-man-at-arms-j`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (4,11) |  |
+| Gaunt man-at-arms K (`gaunt-man-at-arms-k`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (6,9) |  |
+| Gaunt man-at-arms L (`gaunt-man-at-arms-l`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (6,13) |  |
+| Gaunt man-at-arms M (`gaunt-man-at-arms-m`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (7,13) |  |
+| Gaunt man-at-arms N (`gaunt-man-at-arms-n`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (8,10) |  |
+| Gaunt man-at-arms O (`gaunt-man-at-arms-o`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (7,9) |  |
+| Gaunt man-at-arms P (`gaunt-man-at-arms-p`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (4,10) |  |
 
 ## Agenda (scheduled by the engine; `agenda list`)
 
@@ -617,10 +638,6 @@
 - doors: (23,8) closed
 
 ### Thornbury: the West Gate quarter (`thornbury`, town 60×40, lighting bright)
-- Brakka Holloway (`brakka`, pc) at (5,27) — 71/71 HP
-- Corvin Asche (`corvin`, pc) at (5,28) — 41/41 HP
-- Kit Corvell (`kit`, pc) at (4,27) — 57/57 HP
-- Ottilie Marsh (`ottilie`, pc) at (4,28) — 48/48 HP
 - A horse-coper at the fair yard (`a-horse-coper-at-the-fair-yard`, neutral) at (4,32) — 4/4 HP
 - Aldous Crane (`aldous-crane`, ally) at (16,26) — 52/52 HP
 - Captain Brannoc Vaux (`captain-brannoc-vaux`, neutral) at (13,25) — 112/112 HP
@@ -638,9 +655,13 @@
 - Gilded Hand outrider B (`gilded-hand-outrider-b`, neutral) at (5,31) — 9/9 HP
 - Goodwife Haddow (`goodwife-haddow`, neutral) at (4,23) — 4/4 HP · hidden
 - Hal Bramble (`hal-bramble`, neutral) at (26,31) — 4/4 HP · hidden
+- Hanged Man at the toll table (`hanged-man-at-the-toll-table`, ally) at (7,26) — 11/11 HP
+- Hanged Man off duty B (`hanged-man-off-duty-b`, ally) at (7,28) — 11/11 HP
+- Hanged Man off duty C (`hanged-man-off-duty-c`, ally) at (8,28) — 11/11 HP
+- Hanged Man on the West Gate toll (`hanged-man-on-the-west-gate-toll`, ally) at (8,26) — 11/11 HP
 - Market folk A (`market-folk-a`, neutral) at (47,10) — 4/4 HP · hidden
 - Market folk B (`market-folk-b`, neutral) at (47,11) — 4/4 HP · hidden
-- Nib (`nib`, neutral) at (6,27) — 4/4 HP
+- Nib (`nib`, neutral) at (6,28) — 4/4 HP
 - Sergeant Mags Orrel (`sergeant-mags-orrel`, neutral) at (13,29) — 65/65 HP
 - Watch-captain Orme (`watch-captain-orme`, enemy) at (17,27) — DEAD · mocked · hidden
 - Watchman at the brazier (`guard-c-2`, enemy) at (4,26) — DEAD · hidden
@@ -758,18 +779,39 @@
 - labels: The Missioner's study (9,6), Bedchamber (23,5), The chapel gallery (23,12), Stair passage (9,16)
 
 ### The March Road before the West Gate (`thornbury-west-road`, wilderness 38×24, lighting bright)
+- Brakka Holloway (`brakka`, pc) at (28,11) — 71/71 HP
+- Corvin Asche (`corvin`, pc) at (28,12) — 41/41 HP
+- Kit Corvell (`kit`, pc) at (29,11) — 57/57 HP
+- Ottilie Marsh (`ottilie`, pc) at (29,12) — 48/48 HP
 - A carter with a load of turnips (`a-carter-with-a-load-of-turnips`, neutral) at (30,13) — 4/4 HP · hidden
 - Causeway watchman with a torch (`guard-a-5`, enemy) at (32,10) — DEAD · hidden
 - Causeway watchman with a torch (`guard-b-5`, enemy) at (32,12) — DEAD · hidden
-- Hanged Man at the toll table (`hanged-man-at-the-toll-table`, ally) at (37,12) — 11/11 HP
-- Hanged Man off duty B (`hanged-man-off-duty-b`, ally) at (33,10) — 11/11 HP
-- Hanged Man off duty C (`hanged-man-off-duty-c`, ally) at (33,12) — 11/11 HP
-- Hanged Man on the West Gate toll (`hanged-man-on-the-west-gate-toll`, ally) at (35,11) — 11/11 HP
+- Gaunt man-at-arms A (`gaunt-man-at-arms-a`, enemy) at (6,11) — 11/11 HP
+- Gaunt man-at-arms B (`gaunt-man-at-arms-b`, enemy) at (6,10) — 11/11 HP
+- Gaunt man-at-arms C (`gaunt-man-at-arms-c`, enemy) at (6,12) — 11/11 HP
+- Gaunt man-at-arms D (`gaunt-man-at-arms-d`, enemy) at (7,11) — 11/11 HP
+- Gaunt man-at-arms E (`gaunt-man-at-arms-e`, enemy) at (5,11) — 11/11 HP
+- Gaunt man-at-arms F (`gaunt-man-at-arms-f`, enemy) at (7,12) — 11/11 HP
+- Gaunt man-at-arms G (`gaunt-man-at-arms-g`, enemy) at (7,10) — 11/11 HP
+- Gaunt man-at-arms H (`gaunt-man-at-arms-h`, enemy) at (5,12) — 11/11 HP
+- Gaunt man-at-arms I (`gaunt-man-at-arms-i`, enemy) at (5,10) — 11/11 HP
+- Gaunt man-at-arms J (`gaunt-man-at-arms-j`, enemy) at (4,11) — 11/11 HP
+- Gaunt man-at-arms K (`gaunt-man-at-arms-k`, enemy) at (6,9) — 11/11 HP
+- Gaunt man-at-arms L (`gaunt-man-at-arms-l`, enemy) at (6,13) — 11/11 HP
+- Gaunt man-at-arms M (`gaunt-man-at-arms-m`, enemy) at (7,13) — 11/11 HP
+- Gaunt man-at-arms N (`gaunt-man-at-arms-n`, enemy) at (8,10) — 11/11 HP
+- Gaunt man-at-arms O (`gaunt-man-at-arms-o`, enemy) at (7,9) — 11/11 HP
+- Gaunt man-at-arms P (`gaunt-man-at-arms-p`, enemy) at (4,10) — 11/11 HP
+- Gaunt sergeant A (`gaunt-sergeant-a`, enemy) at (9,11) — 65/65 HP
+- Gaunt sergeant B (`gaunt-sergeant-b`, enemy) at (8,11) — 65/65 HP
 - League man in grey (`guard-c-3`, enemy) at (37,10) — DEAD · hidden
 - Night watchman with a crossbow (`guard-b-4`, enemy) at (35,12) — DEAD · hidden
 - Night watchman with a lantern (`guard-a-4`, enemy) at (35,10) — DEAD · hidden
 - Ord, the League house under-clerk (`ord-the-league-house-under-clerk`, neutral) at (29,20) — DEAD
 - Peg, the Wheatsheaf's serving girl (`the-serving-girl`, neutral) at (28,18) — DEAD · restrained
+- Sir Anselm Brey (`sir-anselm-brey`, enemy) at (11,10) — 52/52 HP
+- Sir Hugh Darrow, banneret of Castle Gaunt (`sir-hugh-darrow-banneret-of-castle-gaunt`, enemy) at (12,11) — 52/52 HP
+- Sir Piers Whitlock (`sir-piers-whitlock`, enemy) at (11,12) — 52/52 HP
 - Townsfolk at the gallows A (`townsfolk-at-the-gallows-a`, neutral) at (23,16) — 4/4 HP · hidden
 - Townsfolk at the gallows B (`townsfolk-at-the-gallows-b`, neutral) at (22,16) — 4/4 HP · hidden
 - Townsfolk at the gallows C (`townsfolk-at-the-gallows-c`, neutral) at (24,16) — 4/4 HP · hidden
@@ -1075,18 +1117,18 @@
 
 ## Recent events
 
-- 🗺 Map: Thornbury: the West Gate quarter
-- Captain Brannoc Vaux is at (13,25) on Thornbury: the West Gate quarter.
-- Sergeant Mags Orrel is at (13,29) on Thornbury: the West Gate quarter.
-- Gilded Hand foot A is at (13,23) on Thornbury: the West Gate quarter.
-- Gilded Hand foot B is at (13,31) on Thornbury: the West Gate quarter.
-- Gilded Hand foot C is at (21,24) on Thornbury: the West Gate quarter.
-- Gilded Hand foot D is at (21,30) on Thornbury: the West Gate quarter.
-- Gilded Hand outrider A is at (4,31) on Thornbury: the West Gate quarter.
-- Gilded Hand outrider B is at (5,31) on Thornbury: the West Gate quarter.
-- Kit Corvell is at (4,27) on Thornbury: the West Gate quarter.
-- Ottilie Marsh is at (4,28) on Thornbury: the West Gate quarter.
-- Brakka Holloway is at (5,27) on Thornbury: the West Gate quarter.
-- Corvin Asche is at (5,28) on Thornbury: the West Gate quarter.
-- Nib is at (6,27) on Thornbury: the West Gate quarter.
-- Behind the West Gate the street emptied of townsfolk and filled with quiet men: spears down the lanes either side, crossbowmen crouched along the wall-walk below the parapet, ten horse in the horse-fair yard with their girths tight. From the road outside, through the open arch, there is nothing to see but an empty street.
+- 👁 Gaunt man-at-arms E appears.
+- 👁 Gaunt man-at-arms F appears.
+- 👁 Gaunt man-at-arms G appears.
+- 👁 Gaunt man-at-arms H appears.
+- 👁 Gaunt man-at-arms I appears.
+- 👁 Gaunt man-at-arms J appears.
+- 👁 Gaunt man-at-arms K appears.
+- 👁 Gaunt man-at-arms L appears.
+- 👁 Gaunt man-at-arms M appears.
+- 👁 Gaunt man-at-arms N appears.
+- 👁 Gaunt man-at-arms O appears.
+- 👁 Gaunt man-at-arms P appears.
+- At six the column came down the March Road out of the low sun: a black-and-silver banner, three knights on big horses and twenty-odd men-at-arms in good order behind, spears sloped. They saw the four figures on the road before the open gate, the empty toll trestle, the dead on the gallows.
+- Somewhere behind the town wall a horse whinnied. The scarred knight's head came round to the wall-walk; he leaned to the banneret and pointed with his mace, and the column halted well short of the gate, the men-at-arms closing up and locking their shields.
+- “In the name of the Regent and the Antler Throne! I am Hugh Darrow, banneret of Castle Gaunt. I seek the outlaw who calls himself Corvell, and the town of Thornbury, which he holds unlawfully. Which of you speaks for him?”
