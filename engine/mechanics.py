@@ -1157,7 +1157,10 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
         if combat(g):
             raise RuleError("Ritual casting takes 10 extra minutes — not possible in combat.")
         slot_level = base
-        g.emit("time.set", minutes=g.state["time"] + 10)
+        # rules glossary, Ritual: 10 minutes longer than the spell's normal casting time (Identify: 1 + 10 = 11 minutes)
+        ct = re.search(r"(\d+)\s*(minute|hour)", str(spell.get("casting_time", "")), re.I)
+        normal = int(ct.group(1)) * (60 if ct.group(2).lower() == "hour" else 1) if ct else 0
+        g.emit("time.set", minutes=g.state["time"] + 10 + normal)
     elif how == "scroll":
         slot_level = base
     elif how == "item":

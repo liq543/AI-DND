@@ -80,6 +80,10 @@ class ChargenFixesTest(unittest.TestCase):
                 "--spellbook", "detect magic,magic missile,shield,sleep,mage armor,alarm")
         self.assertIn("as a ritual", self.ok("cast", "mira", "detect magic", "--ritual"))
         self.rule("cast", "mira", "sleep", "--ritual", contains="prepared")
+        # a ritual takes 10 minutes more than its normal casting time: Alarm (1 minute) as a ritual is 11 minutes
+        before = _cli.game(self.env).state["time"]
+        self.ok("cast", "mira", "alarm", "--ritual", "--targets", "mira")
+        self.assertEqual(_cli.game(self.env).state["time"] - before, 11)
 
     def test_bard_instrument_and_lore_proficiencies(self):
         base = ["char", "create", "--name", "Lia Song", "--class", "Bard", "--species", "Human", "--background", "Acolyte",

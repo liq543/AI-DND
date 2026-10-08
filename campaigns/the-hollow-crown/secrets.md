@@ -881,3 +881,4 @@ Gallery.
   - **The brothers' packs** (four rooms): pilgrims' gear, 6 crowns between them, **a Spell Scroll of Lesser Restoration** and **a Spell Scroll of Hold Person** (the Mission's), and their black pact-blades (Sickle-shaped daggers; mundane).
   - **The long room's prayer table:** a little lidless stone Face (statue-sight window: it looks toward its twin in the Mission house at Ambersell).
   Ivo's men have the yard and the stable end; they have not gone upstairs (the stair burned) and nobody has looked in the back room.
+- **Day 23, 14:05:** Quist's rider delivered Lerner's letter and Quist's note at the Wheatsheaf. The crew now knows the Castle Gaunt column is coming and has been on the March Road since dawn. It is still due at Thornbury about 18:00 (the West Gate, by the March Road).

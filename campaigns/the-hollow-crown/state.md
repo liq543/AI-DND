@@ -2,15 +2,15 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 2 · **In-world time:** Day 23, 13:10 · **Mode:** exploration
-**Current map:** The Wheatsheaf, upper floor (`wheatsheaf-upper`) · **Events:** 22058 · **Log head:** `2571a8d76cd3ef0c`
+**Session:** 2 · **In-world time:** Day 23, 14:05 · **Mode:** exploration
+**Current map:** The Wheatsheaf, upper floor (`wheatsheaf-upper`) · **Events:** 22123 · **Log head:** `1d43998bb267b419`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | wheatsheaf-upper (7,11) |
+| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | wheatsheaf-upper (28,19) |
 | Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | wheatsheaf-upper (19,14) |
 | Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | wheatsheaf-upper (18,13) |
 | Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | wheatsheaf-upper (17,13) |
@@ -19,7 +19,7 @@
 
 | Creature | Side | HP | AC | Conditions | Position | Hidden |
 |---|---|---|---|---|---|---|
-| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | unblinking-chapel (20,2) |  |
+| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | wheatsheaf (25,20) |  |
 | Mr Fennimore Quist (`mr-fennimore-quist`, spy) | neutral | 23/27 | 12 | — | rookery (47,31) |  |
 | Mother Hobday (`mother-hobday`, commoner) | neutral | 4/4 | 10 | — | rookery (4,2) |  |
 | Ada Crisp (`ada-crisp`, commoner) | neutral | 4/4 | 10 | — | rookery (44,6) |  |
@@ -231,6 +231,7 @@
 | Davy, the landlord's boy (`a-boy-hiding-in-the-loft`, commoner) | neutral | 4/4 | 10 | restrained | unblinking-chapel (8,21) |  |
 | Hanged Man with the ladder A (`hanged-man-with-the-ladder-a`, bandit) | ally | 11/11 | 12 | — | wheatsheaf (27,20) |  |
 | Hanged Man with the ladder B (`hanged-man-with-the-ladder-b`, bandit) | ally | 11/11 | 12 | — | wheatsheaf-yard (7,9) |  |
+| Quist's rider (`quists-rider`, bandit) | ally | 11/11 | 12 | — | wheatsheaf (24,20) |  |
 
 ## Agenda (scheduled by the engine; `agenda list`)
 
@@ -650,6 +651,8 @@
 - Eyeless Brother C (`eyeless-brother-c`, enemy) at (18,13) — DEAD
 - Eyeless Brother D (`eyeless-brother-d`, enemy) at (18,10) — DEAD
 - Hanged Man with the ladder A (`hanged-man-with-the-ladder-a`, ally) at (27,20) — 11/11 HP
+- Nib (`nib`, neutral) at (25,20) — 4/4 HP
+- Quist's rider (`quists-rider`, ally) at (24,20) — 11/11 HP
 - container `sabines-chest`: Sabine's iron-bound travelling chest at (2,7)
 - container `box-1`: The second penitent's belt at (3,6)
 - point of interest `poi-2`: The great hearth at (10,11) → journal j326
@@ -694,7 +697,6 @@
 - Davy, the landlord's boy (`a-boy-hiding-in-the-loft`, neutral) at (8,21) — 4/4 HP · restrained
 - Hanged Man off duty A (`hanged-man-off-duty-a`, ally) at (9,20) — 11/11 HP
 - Ivo Tarrant (`bandit-g`, ally) at (10,5) — 11/11 HP
-- Nib (`nib`, neutral) at (20,2) — 4/4 HP
 - Peg's mother (`pegs-mother`, neutral) at (10,21) — 4/4 HP · restrained
 - container `ennis-strongbox`: Ennis's strongbox at (13,1)
 - container `ennis-chest`: Ennis's clothes chest at (6,3)
@@ -1007,7 +1009,7 @@
 ### The Wheatsheaf, upper floor (`wheatsheaf-upper`, interior 30×22, lighting dim)
 - Brakka Holloway (`brakka`, pc) at (19,14) — 71/71 HP
 - Corvin Asche (`corvin`, pc) at (18,13) — 41/41 HP
-- Kit Corvell (`kit`, pc) at (7,11) — 57/57 HP
+- Kit Corvell (`kit`, pc) at (28,19) — 57/57 HP
 - Ottilie Marsh (`ottilie`, pc) at (17,13) — 48/48 HP
 - Landlord Abel Fenn (`landlord-abel-fenn`, neutral) at (1,7) — DEAD
 - container `fenns-strongbox`: Fenn's strongbox at (7,10)
@@ -1047,18 +1049,18 @@
 
 ## Recent events
 
-- 🚪 The door at (20,9) is opened.
-- 🚶 Corvin Asche moves 110 ft to (18,13).
-- 🚶 Ottilie Marsh moves 105 ft to (17,13).
-- 🚶 Brakka Holloway moves 115 ft to (19,14).
-- The four pilgrims' rooms across the corridor are bare: stripped beds, a silver lidless eye nailed over each. The brothers kept their packs together in the long room, by the pallets.
-- 🧰 Corvin Asche opens the brothers' packs: 1× Unidentified magic consumable, 1× Unidentified magic consumable, 4× Dagger, 6 GP.
-- ⬆ Corvin Asche picks up 1× Unidentified magic consumable.
-- ⬆ Ottilie Marsh picks up 1× Unidentified magic consumable.
-- ⬆ Brakka Holloway picks up 4× Dagger.
-- 💰 Brakka Holloway takes 6 GP from The brothers' packs. The brothers' packs: 0 GP; purse 6856 GP 4 SP 5 CP.
-- “Two scrolls, Mission work, sealed with the eye. I'll want a quiet hour with these.”
-- 📍 Noted on The Wheatsheaf, upper floor: The prayer table (20,13) — click it on the map for its journal entry.
-- On the prayer table at the head of the long room sits a little lidless stone face, no bigger than a fist, staring at the door.
-- “Boss. Another one of them faces. Want it smashed like the chapel's?”
-- ⏳ 20m passes — searching the upper floor. Now Day 23, 13:10.
+- ⚠ DM override — the clock put back from Day 23, 14:55 to Day 23, 14:05. Reason: DM error: each Identify ritual's time was counted twice (the engine already advances a ritual, and the DM added it again); five rituals of 11 minutes from 13:10 end at 14:05
+- ⏪ The clock is put back to Day 23, 14:05 — DM error: each Identify ritual's time was counted twice (the engine already advances a ritual, and the DM added it again); five rituals of 11 minutes from 13:10 end at 14:05.
+- Nib is at (25,20) on The Wheatsheaf.
+- 👁 Quist's rider appears (ally).
+- “Boss! Up there? Rider from home! Says it's urgent!”
+- 🚶 Kit Corvell moves 110 ft to (28,19).
+- Kit came to the stair head. The rider passed two letters up the ladder: Lerner's, sealed with a thumbprint in wax, and a note from Quist wrapped round it.
+- “From Master Quist, my lord. Rode since first light. Sergeant Lerner's man came to the Rookery at dawn and found you gone.”
+- 🎒 Kit Corvell gains 1× Lerner's letter (Day 22) — gift: Quist's rider.
+- 📓 Added to the journal: Lerner's letter
+- 📓 Added to the journal: Quist's note
+- “Twenty men and two knights. On the March Road since dawn.”
+- “Twenty-five miles on foot. They'll be here by suppertime, darling. About when the Hand arrives with our money.”
+- 🎬 The Wheatsheaf, upper floor — Day 23, 14:05. Letters from Harrowgate; Castle Gaunt's column on the March Road since dawn.
+- 🗺 Map: The Wheatsheaf, upper floor
