@@ -2,9 +2,9 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Orc** · **Fighter 6** (Champion) · **Background:** Soldier · **XP:** 21581
+**Player:** DM · **Orc** · **Fighter 7** (Champion) · **Background:** Soldier · **XP:** 23007
 
-**HP** 58/58 · **AC** 19 (Plate Armor 18 + items 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
+**HP** 71/71 · **AC** 20 (Plate Armor 18 + Defense style 1 + items 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
@@ -32,13 +32,13 @@ Attacks per Attack action: 2
 
 ## Features & feats
 
-Savage Attacker, Great Weapon Fighting, Ability Score Improvement, Ability Score Improvement
+Savage Attacker, Great Weapon Fighting, Ability Score Improvement, Ability Score Improvement, Defense
 
 Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 
 ## Inventory
 
-**Coins:** 176 GP 1 SP 5 CP
+**Coins:** 6850 GP 1 SP 5 CP
 
 - `javelin-1` 8× Javelin · _starting equipment_
 - `spear-1` 1× Spear · _starting equipment_
@@ -74,7 +74,7 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 - `mace-1` 1× Mace · _loot: Coll_
 - `leather-armor-1` 1× Leather Armor · _loot: Coll_
 
-Hit Point Dice: Fighter d10 6/6
+Hit Point Dice: Fighter d10 7/7
 Languages: Common, Orc, Giant · Tools: *Choose one kind of Gaming Set* (see "Equipment") · Armor training: light, medium, heavy, shield
 
 ## HP history
@@ -85,3 +85,4 @@ Languages: Common, Orc, Giant · Tools: *Choose one kind of Gaming Set* (see "Eq
 - Level 4: +8 (fixed average)
 - Level 5: +8 (fixed average)
 - Level 6: +8 (fixed average)
+- Level 7: +13 (rolled 1d10(10) = 10)

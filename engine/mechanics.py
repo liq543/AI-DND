@@ -13,7 +13,8 @@ from .core import (MAGIC_EFFECTS, RARITY_ORDER, TIER_MAX_GP_AWARD, TIER_MAX_RARI
                    abilities, amod, armor_class, attacks_per_action, condition_names, derive, fmt_mod,
                    has_feat, has_feature, hp_max, level, mod, pact_slots, pb, resources, save_mod,
                    skill_mod, speed, spell_slots, spellcasting, tier, weapon_attack, equipped,
-                   initiative_mod, exhaustion_penalty, max_spell_level_for_class, parse_duration, fmt_time)
+                   initiative_mod, exhaustion_penalty, max_spell_level_for_class, parse_duration, fmt_time,
+                   item_bonus)
 
 AUTO_FAIL_STR_DEX = {"paralyzed", "petrified", "stunned", "unconscious"}
 ATTACKER_DIS = {"blinded", "frightened", "poisoned", "prone", "restrained"}
@@ -171,6 +172,8 @@ def ability_check(g, e, what, dc=None, adv=(), dis=(), hidden=False, purpose=Non
         prof = e["kind"] == "pc" and any(tool["name"].lower() == t.lower() or (tool.get("tool_kind") or "").lower() == t.lower()
                                          for t in e.get("tools", []))
         m = amod(e, ab) + (pb(e) if prof else (skill_bonus_jack(e) if e["kind"] == "pc" else 0))
+        if e["kind"] == "pc":
+            m += item_bonus(e, "checks")   # e.g. a Stone of Good Luck: +1 to every ability check, tools included
         label = f"{ab.upper()} ({tool['name']}{', proficient' if prof else ''})"
         if e["kind"] == "pc" and not any(i["name"].lower() == tool["name"].lower() for i in e.get("inventory", [])):
             raise RuleError(f"{e['name']} needs {tool['name']} in hand for that check.")
@@ -178,7 +181,7 @@ def ability_check(g, e, what, dc=None, adv=(), dis=(), hidden=False, purpose=Non
         ab = srd.ability_key(what)
         if not ab:
             raise RuleError(f"'{what}' is not a skill, ability or tool. Skills: {', '.join(srd.SKILLS)}")
-        m, label = amod(e, ab) + (skill_bonus_jack(e) if e["kind"] == "pc" else 0), f"{ab.upper()} check"
+        m, label = amod(e, ab) + (skill_bonus_jack(e) + item_bonus(e, "checks") if e["kind"] == "pc" else 0), f"{ab.upper()} check"
     adv, dis = list(adv), list(dis)
     if what == "athletics" and e["kind"] == "pc" and _has_feature(e, "Remarkable Athlete"):
         adv.append("Remarkable Athlete")
@@ -858,6 +861,11 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
             notes.append(f"possible extra {rd['dice']} {rd['type']} {rd['condition']} — DM applies with `damage` if it applies")
     if notes:
         g.say("   + " + "; ".join(notes), kind="attack")
+    if item and item.get("lit") and "flame tongue" in item["name"].lower():
+        # rules/magic-items/flame-tongue.md: while ablaze, an extra 2d6 Fire damage on a hit
+        fr = g.roll("2d6", f"{name} flames", att["id"], crit=crit)
+        parts.append([fr["total"], "fire"])
+        g.say(f"   + flames {fr['text']} fire", kind="attack")
     for fx in E.active(att):
         if fx.get("weapon_damage_dice") and parts:
             expr = fx["weapon_damage_dice"]
@@ -1605,7 +1613,7 @@ def vision_ft(g, e, m):
     for it in e.get("inventory", []):
         n = it["name"].lower()
         if it.get("lit"):
-            carried = max(carried, 40 if "torch" in n else 60 if "lantern" in n else 10)
+            carried = max(carried, 40 if "torch" in n else 60 if "lantern" in n else 80 if "flame tongue" in n else 10)
     if light in ("bright", "dim"):
         # SRD: dim light only makes an area Lightly Obscured (Disadvantage on sight-based Perception); it doesn't limit
         # how far you can see, so dim is revealed like bright light. Walls and doors still block line of sight.
@@ -2092,6 +2100,8 @@ def equip(g, e, ref, on=True):
     target = next(i for i in inv if i["id"] == it["id"])
     if not on:
         target["equipped"] = False
+        if "flame tongue" in target["name"].lower():
+            target["lit"] = False   # the flames last until the weapon is dropped, stowed or sheathed
         effects = [f for f in e.get("effects", []) if f.get("name") != "untrained armor" or f.get("item") != it["id"]]
         g.set(e, inventory=inv, effects=effects)
         g.say(f"{e['name']} unequips {it['name']}.")
@@ -2380,6 +2390,10 @@ def award_xp(g, members, total, reason):
     alive_members = [m for m in members if not m.get("dead")]
     if not alive_members:
         raise RuleError("No living characters to receive XP.")
+    rate = float(g.state["settings"].get("xp_rate", "1") or 1)
+    if rate != 1:
+        total = int(total * rate)
+        reason = f"{reason}; ×{g.state['settings']['xp_rate']} house XP rate"
     each = total // len(alive_members)
     for m in alive_members:
         new = m.get("xp", 0) + each

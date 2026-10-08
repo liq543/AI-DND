@@ -1,0 +1,34 @@
+# Snapshot — party moved to The Wheatsheaf, upper floor at Day 21, 11:46 (event 20802)
+
+### The Wheatsheaf (`wheatsheaf`, interior 30×22, lighting dim)
+- Brakka Holloway (`brakka`, pc) at (5,7) — 50/58 HP
+- Corvin Asche (`corvin`, pc) at (9,9) — 12/38 HP
+- Ottilie Marsh (`ottilie`, pc) at (6,3) — 34/39 HP
+- A League carter (`commoner-a-2`, neutral) at (16,9) — 4/4 HP · hidden
+- A hooded penitent with bound eyes (`a-hooded-penitent-with-bound-eyes`, enemy) at (11,11) — DEAD · unconscious, prone
+- A second penitent (`a-second-penitent`, enemy) at (3,6) — DEAD
+- Another League carter (`commoner-b-2`, neutral) at (16,11) — 4/4 HP · hidden
+- Eyeless Brother A (`eyeless-brother-a`, enemy) at (15,11) — DEAD
+- Eyeless Brother B (`eyeless-brother-b`, enemy) at (11,8) — DEAD
+- Eyeless Brother C (`eyeless-brother-c`, enemy) at (18,13) — DEAD
+- Eyeless Brother D (`eyeless-brother-d`, enemy) at (18,10) — DEAD
+- Mother Sabine, the woman in dove-grey (`the-woman-in-dove-grey`, enemy) at (4,6) — 1/27 HP · prone, poisoned, unconscious
+- The serving girl (`the-serving-girl`, neutral) at (0,18) — 4/4 HP · hidden
+- point of interest `poi-1`: The long bar at (26,8) → journal j325
+- point of interest `poi-2`: The great hearth at (10,11) → journal j326
+- point of interest `poi-3`: The carters' table at (15,10) → journal j327
+- point of interest `poi-4`: A table by the hearth at (13,13) → journal j328
+- point of interest `poi-5`: The corner table at (24,16) → journal j329
+- point of interest `poi-6`: The back room door at (9,9) → journal j330
+- point of interest `poi-7`: The back-room table at (4,4) → journal j331
+- point of interest `poi-8`: The front door at (12,0) → journal j332
+- point of interest `poi-9`: The stair up at (28,20) → journal j333
+- point of interest `poi-10`: The room slate at (26,11) → journal j560
+- point of interest `poi-11`: The kitchen room door at (9,13) → journal j561
+- point of interest `poi-12`: The kitchen room's bed at (3,12) → journal j562
+- point of interest `poi-13`: The rush-seat chair at (4,12) → journal j563
+- point of interest `poi-14`: The linen cupboard at (2,13) → journal j564
+- point of interest `poi-15`: The back room's shutter at (0,4) → journal j565
+- point of interest `poi-16`: The kitchen's yard door at (0,18) → journal j566
+- doors: (12,0) open, (13,0) closed, (0,4) closed, (9,9) open, (9,13) open, (0,18) open, (9,18) open
+- labels: Bar (26,2)

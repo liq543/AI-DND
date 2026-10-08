@@ -1,0 +1,4244 @@
+{
+  "sequence": 19515,
+  "reports": [
+    {
+      "id": "kit",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "entity",
+        "presentation_source": "look"
+      },
+      "face": [
+        "portraits-extra",
+        13
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        3
+      ],
+      "warnings": [],
+      "summary": "kit: Human / masculine (species: entity; presentation: look); face portraits-extra/13; body corpses-human-masculine-v4/03"
+    },
+    {
+      "id": "brakka",
+      "identity": {
+        "species": "Orc",
+        "presentation": "masculine",
+        "species_source": "preserved",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-fantasy",
+        6
+      ],
+      "body": [
+        "corpses-fantasy-a-v4",
+        8
+      ],
+      "warnings": [],
+      "summary": "brakka: Orc / masculine (species: preserved; presentation: description); face portraits-fantasy/06; body corpses-fantasy-a-v4/08"
+    },
+    {
+      "id": "corvin",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "preserved",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        2
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        2
+      ],
+      "warnings": [],
+      "summary": "corvin: Human / masculine (species: preserved; presentation: description); face portraits-extra/02; body corpses-human-masculine-v4/02"
+    },
+    {
+      "id": "ottilie",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "preserved",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        3
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        15
+      ],
+      "warnings": [],
+      "summary": "ottilie: Human / feminine (species: preserved; presentation: description); face portraits-human/03; body corpses-human-feminine-v4/15"
+    },
+    {
+      "id": "nib",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "nib: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "mr-fennimore-quist",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        13
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        3
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "mr-fennimore-quist: Human / masculine (species: unspecified; presentation: description); face portraits-extra/13; body corpses-human-masculine-v4/03"
+    },
+    {
+      "id": "mother-hobday",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        15
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        3
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "mother-hobday: Human / feminine (species: unspecified; presentation: description); face portraits-extra/15; body corpses-human-feminine-v4/03"
+    },
+    {
+      "id": "ada-crisp",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "look"
+      },
+      "face": [
+        "portraits-extra",
+        1
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "ada-crisp: Human / feminine (species: unspecified; presentation: look); face portraits-extra/01; body corpses-human-feminine-v4/07"
+    },
+    {
+      "id": "bel-crisp",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        15
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        3
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bel-crisp: Human / feminine (species: unspecified; presentation: description); face portraits-extra/15; body corpses-human-feminine-v4/03"
+    },
+    {
+      "id": "tobin-rudge",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "look"
+      },
+      "face": [
+        "portraits-human",
+        12
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        0
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "tobin-rudge: Human / masculine (species: unspecified; presentation: look); face portraits-human/12; body corpses-human-masculine-v4/00"
+    },
+    {
+      "id": "corlis",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        10
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        3
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "corlis: Human / masculine (species: unspecified; presentation: description); face portraits-extra/10; body corpses-human-masculine-v4/03"
+    },
+    {
+      "id": "harl",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "look"
+      },
+      "face": [
+        "portraits-human",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        12
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "harl: Human / masculine (species: unspecified; presentation: look); face portraits-human/09; body corpses-human-masculine-v4/12"
+    },
+    {
+      "id": "bastian",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "look"
+      },
+      "face": [
+        "portraits-human",
+        1
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        4
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bastian: Human / masculine (species: unspecified; presentation: look); face portraits-human/01; body corpses-human-masculine-v4/04"
+    },
+    {
+      "id": "mercy-fulk",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        1
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "mercy-fulk: Human / feminine (species: unspecified; presentation: description); face portraits-extra/01; body corpses-human-feminine-v4/07"
+    },
+    {
+      "id": "amos-pettigrew",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "amos-pettigrew: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "garrick-webb",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        3
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        13
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "garrick-webb: Human / masculine (species: unspecified; presentation: description); face portraits-extra/03; body corpses-human-masculine-v4/13"
+    },
+    {
+      "id": "alys-brinn",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        15
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        3
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "alys-brinn: Human / feminine (species: unspecified; presentation: description); face portraits-extra/15; body corpses-human-feminine-v4/03"
+    },
+    {
+      "id": "brother-cuthbert",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "look"
+      },
+      "face": [
+        "portraits-human",
+        15
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        14
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "brother-cuthbert: Human / masculine (species: unspecified; presentation: look); face portraits-human/15; body corpses-human-masculine-v4/14"
+    },
+    {
+      "id": "villager",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "villager: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "villager-2",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "villager-2: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "villager-3",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "villager-3: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "villager-4",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        15
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        3
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "villager-4: Human / feminine (species: unspecified; presentation: description); face portraits-extra/15; body corpses-human-feminine-v4/03"
+    },
+    {
+      "id": "jessamy-crook",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        13
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        13
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "jessamy-crook: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/13; body corpses-human-neutral-v4/13"
+    },
+    {
+      "id": "kester-brinn",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "kester-brinn: Human / masculine (species: unspecified; presentation: description); face portraits-human/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "bandit-a",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-a: Human / masculine (species: unspecified; presentation: description); face portraits-extra/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "bandit-b",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        9
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-b: Human / masculine (species: unspecified; presentation: description); face portraits-extra/09; body corpses-human-masculine-v4/09"
+    },
+    {
+      "id": "bandit-c",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        9
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-c: Human / masculine (species: unspecified; presentation: description); face portraits-extra/09; body corpses-human-masculine-v4/09"
+    },
+    {
+      "id": "bandit-d",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        3
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        13
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-d: Human / masculine (species: unspecified; presentation: description); face portraits-extra/03; body corpses-human-masculine-v4/13"
+    },
+    {
+      "id": "bandit-e",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-e: Human / masculine (species: unspecified; presentation: description); face portraits-extra/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "mastiff",
+      "identity": {
+        "species": "Mastiff",
+        "presentation": "androgynous",
+        "species_source": "stat block",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-beasts-v3",
+        1
+      ],
+      "body": [
+        "corpses-beasts-v4",
+        1
+      ],
+      "warnings": [],
+      "summary": "mastiff: Mastiff / androgynous (species: stat block; presentation: unspecified); face portraits-beasts-v3/01; body corpses-beasts-v4/01"
+    },
+    {
+      "id": "bandit-a-3",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        3
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        13
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-a-3: Human / masculine (species: unspecified; presentation: description); face portraits-extra/03; body corpses-human-masculine-v4/13"
+    },
+    {
+      "id": "bandit-b-3",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        8
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-b-3: Human / feminine (species: unspecified; presentation: description); face portraits-human/08; body corpses-human-feminine-v4/01"
+    },
+    {
+      "id": "hesketh-rowe",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        3
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        13
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "hesketh-rowe: Human / masculine (species: unspecified; presentation: description); face portraits-extra/03; body corpses-human-masculine-v4/13"
+    },
+    {
+      "id": "bandit-a-4",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-a-4: Human / masculine (species: unspecified; presentation: description); face portraits-human/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "bandit-b-4",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-b-4: Human / masculine (species: unspecified; presentation: description); face portraits-human/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "bandit-c-3",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-c-3: Human / masculine (species: unspecified; presentation: description); face portraits-extra/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "bandit-d-3",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-d-3: Human / masculine (species: unspecified; presentation: description); face portraits-extra/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "mastiff-a-2",
+      "identity": {
+        "species": "Mastiff",
+        "presentation": "androgynous",
+        "species_source": "stat block",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-beasts-v3",
+        1
+      ],
+      "body": [
+        "corpses-beasts-v4",
+        1
+      ],
+      "warnings": [],
+      "summary": "mastiff-a-2: Mastiff / androgynous (species: stat block; presentation: unspecified); face portraits-beasts-v3/01; body corpses-beasts-v4/01"
+    },
+    {
+      "id": "mastiff-b-2",
+      "identity": {
+        "species": "Mastiff",
+        "presentation": "androgynous",
+        "species_source": "stat block",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-beasts-v3",
+        1
+      ],
+      "body": [
+        "corpses-beasts-v4",
+        1
+      ],
+      "warnings": [],
+      "summary": "mastiff-b-2: Mastiff / androgynous (species: stat block; presentation: unspecified); face portraits-beasts-v3/01; body corpses-beasts-v4/01"
+    },
+    {
+      "id": "mother-gallows",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        8
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        13
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "mother-gallows: Human / feminine (species: unspecified; presentation: description); face portraits-extra/08; body corpses-human-feminine-v4/13"
+    },
+    {
+      "id": "tansy-moll",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        13
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        11
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "tansy-moll: Human / feminine (species: unspecified; presentation: description); face portraits-human/13; body corpses-human-feminine-v4/11"
+    },
+    {
+      "id": "aldous-crane",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        13
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        3
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "aldous-crane: Human / masculine (species: unspecified; presentation: description); face portraits-extra/13; body corpses-human-masculine-v4/03"
+    },
+    {
+      "id": "coll",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "coll: Human / masculine (species: unspecified; presentation: description); face portraits-extra/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "mastiff-a-3",
+      "identity": {
+        "species": "Mastiff",
+        "presentation": "androgynous",
+        "species_source": "stat block",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-beasts-v3",
+        1
+      ],
+      "body": [
+        "corpses-beasts-v4",
+        1
+      ],
+      "warnings": [],
+      "summary": "mastiff-a-3: Mastiff / androgynous (species: stat block; presentation: unspecified); face portraits-beasts-v3/01; body corpses-beasts-v4/01"
+    },
+    {
+      "id": "mastiff-b-3",
+      "identity": {
+        "species": "Mastiff",
+        "presentation": "androgynous",
+        "species_source": "stat block",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-beasts-v3",
+        1
+      ],
+      "body": [
+        "corpses-beasts-v4",
+        1
+      ],
+      "warnings": [],
+      "summary": "mastiff-b-3: Mastiff / androgynous (species: stat block; presentation: unspecified); face portraits-beasts-v3/01; body corpses-beasts-v4/01"
+    },
+    {
+      "id": "bandit-a-5",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        9
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-a-5: Human / masculine (species: unspecified; presentation: description); face portraits-extra/09; body corpses-human-masculine-v4/09"
+    },
+    {
+      "id": "bandit-b-5",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        9
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-b-5: Human / masculine (species: unspecified; presentation: description); face portraits-extra/09; body corpses-human-masculine-v4/09"
+    },
+    {
+      "id": "bandit-c-4",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        9
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-c-4: Human / masculine (species: unspecified; presentation: description); face portraits-extra/09; body corpses-human-masculine-v4/09"
+    },
+    {
+      "id": "bandit-d-4",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-d-4: Human / masculine (species: unspecified; presentation: description); face portraits-extra/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "bandit-e-3",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-e-3: Human / masculine (species: unspecified; presentation: description); face portraits-extra/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "bandit-f-2",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-f-2: Human / masculine (species: unspecified; presentation: description); face portraits-extra/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "bandit-g",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-g: Human / masculine (species: unspecified; presentation: description); face portraits-extra/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "bandit-h",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-h: Human / masculine (species: unspecified; presentation: description); face portraits-extra/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "guard-a",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        4
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        4
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-a: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/04; body corpses-human-neutral-v4/04"
+    },
+    {
+      "id": "guard-b",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        4
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        4
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-b: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/04; body corpses-human-neutral-v4/04"
+    },
+    {
+      "id": "sir-lucan-mire",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        1
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        4
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sir-lucan-mire: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04"
+    },
+    {
+      "id": "orrin-vasse",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        1
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        4
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "orrin-vasse: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04"
+    },
+    {
+      "id": "guard-a-2",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        12
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-a-2: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12"
+    },
+    {
+      "id": "guard-b-2",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        12
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-b-2: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12"
+    },
+    {
+      "id": "guard-c",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        12
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-c: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12"
+    },
+    {
+      "id": "guard-d",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        12
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-d: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12"
+    },
+    {
+      "id": "guard-e",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        1
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        4
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-e: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04"
+    },
+    {
+      "id": "guard-f",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        12
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-f: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12"
+    },
+    {
+      "id": "guard-g",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        1
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        4
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-g: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04"
+    },
+    {
+      "id": "guard-h",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        1
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        4
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-h: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04"
+    },
+    {
+      "id": "guard-i",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        12
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-i: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12"
+    },
+    {
+      "id": "commoner-a",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        7
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        7
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "commoner-a: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/07; body corpses-human-neutral-v4/07"
+    },
+    {
+      "id": "commoner-b",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        0
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        0
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "commoner-b: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/00; body corpses-human-neutral-v4/00"
+    },
+    {
+      "id": "the-toll-keeper",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "the-toll-keeper: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "guard-a-3",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        4
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        4
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-a-3: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/04; body corpses-human-neutral-v4/04"
+    },
+    {
+      "id": "guard-b-3",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        12
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        12
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-b-3: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12"
+    },
+    {
+      "id": "landlord-abel-fenn",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "look"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "landlord-abel-fenn: Human / masculine (species: unspecified; presentation: look); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "the-serving-girl",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        1
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "the-serving-girl: Human / feminine (species: unspecified; presentation: description); face portraits-extra/01; body corpses-human-feminine-v4/07"
+    },
+    {
+      "id": "commoner-a-2",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        3
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        3
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "commoner-a-2: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/03; body corpses-human-neutral-v4/03"
+    },
+    {
+      "id": "commoner-b-2",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        15
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        15
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "commoner-b-2: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/15; body corpses-human-neutral-v4/15"
+    },
+    {
+      "id": "gaffer-moss",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "look"
+      },
+      "face": [
+        "portraits-extra",
+        14
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        14
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "gaffer-moss: Human / masculine (species: unspecified; presentation: look); face portraits-extra/14; body corpses-human-masculine-v4/14"
+    },
+    {
+      "id": "master-pell",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "master-pell: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "pells-boy",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "name"
+      },
+      "face": [
+        "portraits-human",
+        15
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        14
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "pells-boy: Human / masculine (species: unspecified; presentation: name); face portraits-human/15; body corpses-human-masculine-v4/14"
+    },
+    {
+      "id": "bandit-a-6",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        3
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        13
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-a-6: Human / masculine (species: unspecified; presentation: description); face portraits-extra/03; body corpses-human-masculine-v4/13"
+    },
+    {
+      "id": "bandit-b-6",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-b-6: Human / masculine (species: unspecified; presentation: description); face portraits-extra/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "brother-ennis",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        2
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        2
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "brother-ennis: Human / masculine (species: unspecified; presentation: description); face portraits-extra/02; body corpses-human-masculine-v4/02"
+    },
+    {
+      "id": "the-woman-in-dove-grey",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        8
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        13
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "the-woman-in-dove-grey: Human / feminine (species: unspecified; presentation: description); face portraits-extra/08; body corpses-human-feminine-v4/13"
+    },
+    {
+      "id": "sergeant-dorran-lerner",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        1
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        4
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sergeant-dorran-lerner: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04"
+    },
+    {
+      "id": "greencloak-a",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        12
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        12
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "greencloak-a: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12"
+    },
+    {
+      "id": "greencloak-b",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        12
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        12
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "greencloak-b: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12"
+    },
+    {
+      "id": "greencloak-c",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        12
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        12
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "greencloak-c: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12"
+    },
+    {
+      "id": "greencloak-d",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        8
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        8
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "greencloak-d: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/08; body corpses-human-neutral-v4/08"
+    },
+    {
+      "id": "sleeping-greencloak-a",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        12
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        12
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-greencloak-a: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12"
+    },
+    {
+      "id": "sleeping-greencloak-b",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        4
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        4
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-greencloak-b: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/04; body corpses-human-neutral-v4/04"
+    },
+    {
+      "id": "sleeping-greencloak-c",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        0
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        0
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-greencloak-c: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/00; body corpses-human-neutral-v4/00"
+    },
+    {
+      "id": "sleeping-greencloak-d",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        0
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        0
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-greencloak-d: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/00; body corpses-human-neutral-v4/00"
+    },
+    {
+      "id": "sleeping-greencloak-e",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        8
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        8
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-greencloak-e: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/08; body corpses-human-neutral-v4/08"
+    },
+    {
+      "id": "sleeping-greencloak-f",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        12
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        12
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-greencloak-f: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12"
+    },
+    {
+      "id": "sleeping-greencloak-g",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        12
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        12
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-greencloak-g: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12"
+    },
+    {
+      "id": "sleeping-greencloak-h",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        12
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        12
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-greencloak-h: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12"
+    },
+    {
+      "id": "the-wagons-carter",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "the-wagons-carter: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "guard-a-4",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        12
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-a-4: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12"
+    },
+    {
+      "id": "guard-b-4",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        1
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        4
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-b-4: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04"
+    },
+    {
+      "id": "guard-c-2",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        12
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-c-2: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12"
+    },
+    {
+      "id": "factor-ambrose-leck",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        4
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        2
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "factor-ambrose-leck: Human / masculine (species: unspecified; presentation: description); face portraits-extra/04; body corpses-human-masculine-v4/02"
+    },
+    {
+      "id": "margery-leck",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        15
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        3
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "margery-leck: Human / feminine (species: unspecified; presentation: description); face portraits-extra/15; body corpses-human-feminine-v4/03"
+    },
+    {
+      "id": "dunstan-the-night-porter",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        13
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        3
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "dunstan-the-night-porter: Human / masculine (species: unspecified; presentation: description); face portraits-extra/13; body corpses-human-masculine-v4/03"
+    },
+    {
+      "id": "jory-the-league-clerk",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        15
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        14
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "jory-the-league-clerk: Human / masculine (species: unspecified; presentation: description); face portraits-human/15; body corpses-human-masculine-v4/14"
+    },
+    {
+      "id": "piers-alderson",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "piers-alderson: Human / masculine (species: unspecified; presentation: description); face portraits-human/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "the-aldersons-mastiff",
+      "identity": {
+        "species": "Mastiff",
+        "presentation": "androgynous",
+        "species_source": "stat block",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-beasts-v3",
+        1
+      ],
+      "body": [
+        "corpses-beasts-v4",
+        1
+      ],
+      "warnings": [],
+      "summary": "the-aldersons-mastiff: Mastiff / androgynous (species: stat block; presentation: unspecified); face portraits-beasts-v3/01; body corpses-beasts-v4/01"
+    },
+    {
+      "id": "commoner-a-3",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        7
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        7
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "commoner-a-3: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/07; body corpses-human-neutral-v4/07"
+    },
+    {
+      "id": "commoner-b-3",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "commoner-b-3: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "hamon-alderson",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        4
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        2
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "hamon-alderson: Human / masculine (species: unspecified; presentation: description); face portraits-extra/04; body corpses-human-masculine-v4/02"
+    },
+    {
+      "id": "guard-a-5",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        4
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        4
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-a-5: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/04; body corpses-human-neutral-v4/04"
+    },
+    {
+      "id": "guard-b-5",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        0
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        0
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-b-5: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/00; body corpses-human-neutral-v4/00"
+    },
+    {
+      "id": "guard-c-3",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        13
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        3
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-c-3: Human / masculine (species: unspecified; presentation: description); face portraits-extra/13; body corpses-human-masculine-v4/03"
+    },
+    {
+      "id": "guard-a-6",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        0
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        0
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-a-6: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/00; body corpses-human-neutral-v4/00"
+    },
+    {
+      "id": "guard-b-6",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        12
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        12
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-b-6: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12"
+    },
+    {
+      "id": "guard-c-4",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        0
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        0
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-c-4: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/00; body corpses-human-neutral-v4/00"
+    },
+    {
+      "id": "guard-d-2",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        8
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        8
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-d-2: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/08; body corpses-human-neutral-v4/08"
+    },
+    {
+      "id": "guard-e-2",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        8
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        8
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-e-2: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/08; body corpses-human-neutral-v4/08"
+    },
+    {
+      "id": "guard-f-2",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        0
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        0
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "guard-f-2: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/00; body corpses-human-neutral-v4/00"
+    },
+    {
+      "id": "watch-captain-orme",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        4
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "watch-captain-orme: Human / masculine (species: unspecified; presentation: description); face portraits-extra/06; body corpses-human-masculine-v4/04"
+    },
+    {
+      "id": "reeve-odo-ashby",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        4
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        2
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "reeve-odo-ashby: Human / masculine (species: unspecified; presentation: description); face portraits-extra/04; body corpses-human-masculine-v4/02"
+    },
+    {
+      "id": "edwin-ashby",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        15
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        14
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "edwin-ashby: Human / masculine (species: unspecified; presentation: description); face portraits-human/15; body corpses-human-masculine-v4/14"
+    },
+    {
+      "id": "captain-brannoc-vaux",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        10
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        3
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "captain-brannoc-vaux: Human / masculine (species: unspecified; presentation: description); face portraits-extra/10; body corpses-human-masculine-v4/03"
+    },
+    {
+      "id": "vauxs-paymaster",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        11
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        11
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "vauxs-paymaster: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/11; body corpses-human-neutral-v4/11"
+    },
+    {
+      "id": "sergeant-mags-orrel",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        1
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sergeant-mags-orrel: Human / feminine (species: unspecified; presentation: description); face portraits-extra/01; body corpses-human-feminine-v4/07"
+    },
+    {
+      "id": "sleeping-greencloak-1",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        4
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        4
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-greencloak-1: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/04; body corpses-human-neutral-v4/04"
+    },
+    {
+      "id": "sleeping-greencloak-2",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        0
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        0
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-greencloak-2: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/00; body corpses-human-neutral-v4/00"
+    },
+    {
+      "id": "sleeping-greencloak-3",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        12
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        12
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-greencloak-3: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/12; body corpses-human-neutral-v4/12"
+    },
+    {
+      "id": "sleeping-greencloak-4",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        8
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        8
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-greencloak-4: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/08; body corpses-human-neutral-v4/08"
+    },
+    {
+      "id": "sleeping-conscript-1",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-conscript-1: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "sleeping-conscript-2",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-conscript-2: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "sleeping-conscript-3",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-conscript-3: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "sleeping-conscript-4",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-conscript-4: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "sleeping-conscript-5",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-conscript-5: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "sleeping-conscript-6",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-conscript-6: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "sleeping-conscript-7",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-conscript-7: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "sleeping-conscript-8",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        15
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        14
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-conscript-8: Human / masculine (species: unspecified; presentation: description); face portraits-human/15; body corpses-human-masculine-v4/14"
+    },
+    {
+      "id": "sleeping-conscript-9",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        11
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-conscript-9: Human / masculine (species: unspecified; presentation: description); face portraits-human/11; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "sleeping-conscript-10",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-conscript-10: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "sleeping-conscript-11",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-conscript-11: Human / masculine (species: unspecified; presentation: description); face portraits-human/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "sleeping-conscript-12",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        10
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        3
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sleeping-conscript-12: Human / masculine (species: unspecified; presentation: description); face portraits-extra/10; body corpses-human-masculine-v4/03"
+    },
+    {
+      "id": "greencloak-on-the-south-wall",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        12
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "greencloak-on-the-south-wall: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12"
+    },
+    {
+      "id": "greencloak-at-the-gate-brazier",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        1
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        4
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "greencloak-at-the-gate-brazier: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04"
+    },
+    {
+      "id": "sergeant-brice-tolly",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        12
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sergeant-brice-tolly: Human / masculine (species: unspecified; presentation: description); face portraits-human/09; body corpses-human-masculine-v4/12"
+    },
+    {
+      "id": "conscript-on-the-west-wall",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "conscript-on-the-west-wall: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "conscript-on-the-east-wall",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "conscript-on-the-east-wall: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "old-mattock",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        4
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        2
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "old-mattock: Human / masculine (species: unspecified; presentation: description); face portraits-extra/04; body corpses-human-masculine-v4/02"
+    },
+    {
+      "id": "harrowgates-cook",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        15
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        3
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "harrowgates-cook: Human / feminine (species: unspecified; presentation: description); face portraits-extra/15; body corpses-human-feminine-v4/03"
+    },
+    {
+      "id": "sir-gerold-ambry",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        12
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        0
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sir-gerold-ambry: Human / masculine (species: unspecified; presentation: description); face portraits-human/12; body corpses-human-masculine-v4/00"
+    },
+    {
+      "id": "commoner-a-4",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        9
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "commoner-a-4: Human / masculine (species: unspecified; presentation: description); face portraits-extra/09; body corpses-human-masculine-v4/09"
+    },
+    {
+      "id": "commoner-b-4",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        1
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        4
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "commoner-b-4: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04"
+    },
+    {
+      "id": "commoner-c",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "commoner-c: Human / masculine (species: unspecified; presentation: description); face portraits-human/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "commoner-d",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        11
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "commoner-d: Human / masculine (species: unspecified; presentation: description); face portraits-human/11; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "commoner-e",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        11
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "commoner-e: Human / masculine (species: unspecified; presentation: description); face portraits-human/11; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "commoner-f",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        10
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        3
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "commoner-f: Human / masculine (species: unspecified; presentation: description); face portraits-extra/10; body corpses-human-masculine-v4/03"
+    },
+    {
+      "id": "commoner-g",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "name"
+      },
+      "face": [
+        "portraits-human",
+        2
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        2
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "commoner-g: Human / masculine (species: unspecified; presentation: name); face portraits-human/02; body corpses-human-masculine-v4/02"
+    },
+    {
+      "id": "commoner-h",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "name"
+      },
+      "face": [
+        "portraits-human",
+        2
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        2
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "commoner-h: Human / masculine (species: unspecified; presentation: name); face portraits-human/02; body corpses-human-masculine-v4/02"
+    },
+    {
+      "id": "commoner-i",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "name"
+      },
+      "face": [
+        "portraits-human",
+        2
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        2
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "commoner-i: Human / masculine (species: unspecified; presentation: name); face portraits-human/02; body corpses-human-masculine-v4/02"
+    },
+    {
+      "id": "commoner-j",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "name"
+      },
+      "face": [
+        "portraits-human",
+        2
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        2
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "commoner-j: Human / masculine (species: unspecified; presentation: name); face portraits-human/02; body corpses-human-masculine-v4/02"
+    },
+    {
+      "id": "commoner-a-5",
+      "identity": {
+        "species": "Orc",
+        "presentation": "feminine",
+        "species_source": "description",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-fantasy",
+        7
+      ],
+      "body": [
+        "corpses-fantasy-a-v4",
+        10
+      ],
+      "warnings": [],
+      "summary": "commoner-a-5: Orc / feminine (species: description; presentation: description); face portraits-fantasy/07; body corpses-fantasy-a-v4/10"
+    },
+    {
+      "id": "commoner-b-5",
+      "identity": {
+        "species": "Orc",
+        "presentation": "feminine",
+        "species_source": "description",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-fantasy",
+        7
+      ],
+      "body": [
+        "corpses-fantasy-a-v4",
+        10
+      ],
+      "warnings": [],
+      "summary": "commoner-b-5: Orc / feminine (species: description; presentation: description); face portraits-fantasy/07; body corpses-fantasy-a-v4/10"
+    },
+    {
+      "id": "commoner-c-2",
+      "identity": {
+        "species": "Orc",
+        "presentation": "feminine",
+        "species_source": "description",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-fantasy",
+        7
+      ],
+      "body": [
+        "corpses-fantasy-a-v4",
+        11
+      ],
+      "warnings": [],
+      "summary": "commoner-c-2: Orc / feminine (species: description; presentation: description); face portraits-fantasy/07; body corpses-fantasy-a-v4/11"
+    },
+    {
+      "id": "commoner-d-2",
+      "identity": {
+        "species": "Orc",
+        "presentation": "feminine",
+        "species_source": "description",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-fantasy",
+        7
+      ],
+      "body": [
+        "corpses-fantasy-a-v4",
+        11
+      ],
+      "warnings": [],
+      "summary": "commoner-d-2: Orc / feminine (species: description; presentation: description); face portraits-fantasy/07; body corpses-fantasy-a-v4/11"
+    },
+    {
+      "id": "commoner-e-2",
+      "identity": {
+        "species": "Orc",
+        "presentation": "feminine",
+        "species_source": "description",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-fantasy",
+        7
+      ],
+      "body": [
+        "corpses-fantasy-a-v4",
+        10
+      ],
+      "warnings": [],
+      "summary": "commoner-e-2: Orc / feminine (species: description; presentation: description); face portraits-fantasy/07; body corpses-fantasy-a-v4/10"
+    },
+    {
+      "id": "commoner-f-2",
+      "identity": {
+        "species": "Orc",
+        "presentation": "feminine",
+        "species_source": "description",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-fantasy",
+        7
+      ],
+      "body": [
+        "corpses-fantasy-a-v4",
+        11
+      ],
+      "warnings": [],
+      "summary": "commoner-f-2: Orc / feminine (species: description; presentation: description); face portraits-fantasy/07; body corpses-fantasy-a-v4/11"
+    },
+    {
+      "id": "commoner-g-2",
+      "identity": {
+        "species": "Orc",
+        "presentation": "feminine",
+        "species_source": "description",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-fantasy",
+        7
+      ],
+      "body": [
+        "corpses-fantasy-a-v4",
+        10
+      ],
+      "warnings": [],
+      "summary": "commoner-g-2: Orc / feminine (species: description; presentation: description); face portraits-fantasy/07; body corpses-fantasy-a-v4/10"
+    },
+    {
+      "id": "commoner-h-2",
+      "identity": {
+        "species": "Orc",
+        "presentation": "feminine",
+        "species_source": "description",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-fantasy",
+        7
+      ],
+      "body": [
+        "corpses-fantasy-a-v4",
+        10
+      ],
+      "warnings": [],
+      "summary": "commoner-h-2: Orc / feminine (species: description; presentation: description); face portraits-fantasy/07; body corpses-fantasy-a-v4/10"
+    },
+    {
+      "id": "commoner-i-2",
+      "identity": {
+        "species": "Orc",
+        "presentation": "feminine",
+        "species_source": "description",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-fantasy",
+        7
+      ],
+      "body": [
+        "corpses-fantasy-a-v4",
+        10
+      ],
+      "warnings": [],
+      "summary": "commoner-i-2: Orc / feminine (species: description; presentation: description); face portraits-fantasy/07; body corpses-fantasy-a-v4/10"
+    },
+    {
+      "id": "commoner-j-2",
+      "identity": {
+        "species": "Orc",
+        "presentation": "feminine",
+        "species_source": "description",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-fantasy",
+        7
+      ],
+      "body": [
+        "corpses-fantasy-a-v4",
+        10
+      ],
+      "warnings": [],
+      "summary": "commoner-j-2: Orc / feminine (species: description; presentation: description); face portraits-fantasy/07; body corpses-fantasy-a-v4/10"
+    },
+    {
+      "id": "commoner-k",
+      "identity": {
+        "species": "Orc",
+        "presentation": "feminine",
+        "species_source": "description",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-fantasy",
+        7
+      ],
+      "body": [
+        "corpses-fantasy-a-v4",
+        10
+      ],
+      "warnings": [],
+      "summary": "commoner-k: Orc / feminine (species: description; presentation: description); face portraits-fantasy/07; body corpses-fantasy-a-v4/10"
+    },
+    {
+      "id": "commoner-l",
+      "identity": {
+        "species": "Orc",
+        "presentation": "feminine",
+        "species_source": "description",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-fantasy",
+        7
+      ],
+      "body": [
+        "corpses-fantasy-a-v4",
+        10
+      ],
+      "warnings": [],
+      "summary": "commoner-l: Orc / feminine (species: description; presentation: description); face portraits-fantasy/07; body corpses-fantasy-a-v4/10"
+    },
+    {
+      "id": "goodwife-haddow",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        15
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        3
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "goodwife-haddow: Human / feminine (species: unspecified; presentation: description); face portraits-extra/15; body corpses-human-feminine-v4/03"
+    },
+    {
+      "id": "widow-tessaly",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        1
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "widow-tessaly: Human / feminine (species: unspecified; presentation: description); face portraits-extra/01; body corpses-human-feminine-v4/07"
+    },
+    {
+      "id": "hal-bramble",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "hal-bramble: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "a-hill-farmer",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "a-hill-farmer: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "hild",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "look"
+      },
+      "face": [
+        "portraits-extra",
+        15
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        3
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "hild: Human / feminine (species: unspecified; presentation: look); face portraits-extra/15; body corpses-human-feminine-v4/03"
+    },
+    {
+      "id": "dunstan",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        11
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "dunstan: Human / masculine (species: unspecified; presentation: description); face portraits-human/11; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "bran",
+      "identity": {
+        "species": "Mastiff",
+        "presentation": "androgynous",
+        "species_source": "stat block",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-beasts-v3",
+        1
+      ],
+      "body": [
+        "corpses-beasts-v4",
+        1
+      ],
+      "warnings": [],
+      "summary": "bran: Mastiff / androgynous (species: stat block; presentation: unspecified); face portraits-beasts-v3/01; body corpses-beasts-v4/01"
+    },
+    {
+      "id": "sedge",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        3
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        15
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "sedge: Human / feminine (species: unspecified; presentation: description); face portraits-human/03; body corpses-human-feminine-v4/15"
+    },
+    {
+      "id": "the-stag",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        2
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        2
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "the-stag: Human / masculine (species: unspecified; presentation: description); face portraits-extra/02; body corpses-human-masculine-v4/02"
+    },
+    {
+      "id": "scout-a",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        13
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        13
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "scout-a: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/13; body corpses-human-neutral-v4/13"
+    },
+    {
+      "id": "scout-b",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        13
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        13
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "scout-b: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/13; body corpses-human-neutral-v4/13"
+    },
+    {
+      "id": "tough-a",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        9
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        9
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "tough-a: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/09; body corpses-human-neutral-v4/09"
+    },
+    {
+      "id": "tough-b",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        9
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        9
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "tough-b: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/09; body corpses-human-neutral-v4/09"
+    },
+    {
+      "id": "tough-c",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        9
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        9
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "tough-c: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/09; body corpses-human-neutral-v4/09"
+    },
+    {
+      "id": "tough-d",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        9
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        9
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "tough-d: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/09; body corpses-human-neutral-v4/09"
+    },
+    {
+      "id": "mastiff-a",
+      "identity": {
+        "species": "Mastiff",
+        "presentation": "androgynous",
+        "species_source": "stat block",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-beasts-v3",
+        1
+      ],
+      "body": [
+        "corpses-beasts-v4",
+        1
+      ],
+      "warnings": [],
+      "summary": "mastiff-a: Mastiff / androgynous (species: stat block; presentation: unspecified); face portraits-beasts-v3/01; body corpses-beasts-v4/01"
+    },
+    {
+      "id": "mastiff-b",
+      "identity": {
+        "species": "Mastiff",
+        "presentation": "androgynous",
+        "species_source": "stat block",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-beasts-v3",
+        1
+      ],
+      "body": [
+        "corpses-beasts-v4",
+        1
+      ],
+      "warnings": [],
+      "summary": "mastiff-b: Mastiff / androgynous (species: stat block; presentation: unspecified); face portraits-beasts-v3/01; body corpses-beasts-v4/01"
+    },
+    {
+      "id": "bandit-a-2",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        9
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        9
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-a-2: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/09; body corpses-human-neutral-v4/09"
+    },
+    {
+      "id": "bandit-b-2",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        5
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        5
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-b-2: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/05; body corpses-human-neutral-v4/05"
+    },
+    {
+      "id": "bandit-c-2",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        1
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        1
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-c-2: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/01; body corpses-human-neutral-v4/01"
+    },
+    {
+      "id": "bandit-d-2",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        5
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        5
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "bandit-d-2: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/05; body corpses-human-neutral-v4/05"
+    },
+    {
+      "id": "hanged-man-on-the-west-gate-toll",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        1
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        4
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "hanged-man-on-the-west-gate-toll: Human / masculine (species: unspecified; presentation: description); face portraits-human/01; body corpses-human-masculine-v4/04"
+    },
+    {
+      "id": "hanged-man-at-the-toll-table",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        9
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "hanged-man-at-the-toll-table: Human / masculine (species: unspecified; presentation: description); face portraits-extra/09; body corpses-human-masculine-v4/09"
+    },
+    {
+      "id": "a-market-woman-with-egg-baskets",
+      "identity": {
+        "species": "Human",
+        "presentation": "feminine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        15
+      ],
+      "body": [
+        "corpses-human-feminine-v4",
+        3
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "a-market-woman-with-egg-baskets: Human / feminine (species: unspecified; presentation: description); face portraits-extra/15; body corpses-human-feminine-v4/03"
+    },
+    {
+      "id": "a-carter-with-a-load-of-turnips",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        6
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        7
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "a-carter-with-a-load-of-turnips: Human / masculine (species: unspecified; presentation: description); face portraits-human/06; body corpses-human-masculine-v4/07"
+    },
+    {
+      "id": "a-horse-coper-at-the-fair-yard",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "a-horse-coper-at-the-fair-yard: Human / masculine (species: unspecified; presentation: description); face portraits-extra/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "market-folk-a",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        7
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        7
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "market-folk-a: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/07; body corpses-human-neutral-v4/07"
+    },
+    {
+      "id": "market-folk-b",
+      "identity": {
+        "species": "Human",
+        "presentation": "androgynous",
+        "species_source": "unspecified",
+        "presentation_source": "unspecified"
+      },
+      "face": [
+        "portraits-human-neutral-v3",
+        7
+      ],
+      "body": [
+        "corpses-human-neutral-v4",
+        7
+      ],
+      "warnings": [
+        "Presentation unspecified: neutral art. Pin --presentation when known.",
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "market-folk-b: Human / androgynous (species: unspecified; presentation: unspecified); face portraits-human-neutral-v3/07; body corpses-human-neutral-v4/07"
+    },
+    {
+      "id": "hanged-man-off-duty-a",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        9
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        9
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "hanged-man-off-duty-a: Human / masculine (species: unspecified; presentation: description); face portraits-extra/09; body corpses-human-masculine-v4/09"
+    },
+    {
+      "id": "hanged-man-off-duty-b",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-extra",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "hanged-man-off-duty-b: Human / masculine (species: unspecified; presentation: description); face portraits-extra/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "hanged-man-off-duty-c",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        0
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        1
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "hanged-man-off-duty-c: Human / masculine (species: unspecified; presentation: description); face portraits-human/00; body corpses-human-masculine-v4/01"
+    },
+    {
+      "id": "a-hooded-penitent-with-bound-eyes",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "description"
+      },
+      "face": [
+        "portraits-human",
+        2
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        2
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "a-hooded-penitent-with-bound-eyes: Human / masculine (species: unspecified; presentation: description); face portraits-human/02; body corpses-human-masculine-v4/02"
+    },
+    {
+      "id": "a-second-penitent",
+      "identity": {
+        "species": "Human",
+        "presentation": "masculine",
+        "species_source": "unspecified",
+        "presentation_source": "look"
+      },
+      "face": [
+        "portraits-extra",
+        2
+      ],
+      "body": [
+        "corpses-human-masculine-v4",
+        2
+      ],
+      "warnings": [
+        "Species unspecified: Human fallback. Pin --species when known."
+      ],
+      "summary": "a-second-penitent: Human / masculine (species: unspecified; presentation: look); face portraits-extra/02; body corpses-human-masculine-v4/02"
+    }
+  ]
+}

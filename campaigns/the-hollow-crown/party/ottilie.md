@@ -2,9 +2,9 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Bard 6** (College of Lore) · **Background:** Sage · **XP:** 21581
+**Player:** DM · **Human** · **Bard 7** (College of Lore) · **Background:** Sage · **XP:** 23007
 
-**HP** 39/39 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
+**HP** 48/48 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
@@ -26,10 +26,10 @@ Attacks per Attack action: 1
 
 ## Spellcasting
 
-- **Bard:** save DC 14, attack +6, cantrips 3, prepared 10, up to level 3
-- **Slots:** L1 4/4, L2 3/3, L3 3/3
+- **Bard:** save DC 14, attack +6, cantrips 3, prepared 11, up to level 4
+- **Slots:** L1 4/4, L2 3/3, L3 3/3, L4 1/1
 - **Cantrips:** vicious-mockery, message, mage-hand
-- **Prepared:** charm-person, disguise-self, dissonant-whispers, healing-word, silent-image, suggestion, invisibility, hypnotic-pattern, cure-wounds, clairvoyance
+- **Prepared:** charm-person, disguise-self, dissonant-whispers, healing-word, silent-image, suggestion, invisibility, hypnotic-pattern, cure-wounds, clairvoyance, dimension-door
 
 **Granted spells:** minor-illusion (Magic Initiate (Wizard)), prestidigitation (Magic Initiate (Wizard)), disguise-self (Magic Initiate (Wizard)), revivify (Magical Discoveries (College of Lore)), speak-with-dead (Magical Discoveries (College of Lore))
 
@@ -45,7 +45,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 93 GP 5 SP
+**Coins:** 93 GP 5 SP 3 CP
 
 - `pan-flute-1` 1× Pan flute · _starting equipment_
 - `entertainers-pack-1` 1× Entertainer's Pack · _starting equipment_
@@ -55,7 +55,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `robe-1` 1× Robe · _starting equipment_
 - `studded-leather-armor-1` 1× Studded Leather Armor (equipped) · _purchased for 90 GP_
 - `disguise-kit-1` 1× Disguise Kit · _purchased for 25 GP_
-- `dagger-1` 2× Dagger · _starting equipment_
+- `dagger-1` 3× Dagger · _starting equipment_
 - `quarterstaff-1` 1× Quarterstaff · _starting equipment_
 - `lantern-hooded-1` 1× Swamped hooded lantern (Lantern, Hooded) · _purchased for 5 GP_
   - Ottilie's hooded lantern, swamped going under the arch: the wick and the oil reservoir are full of canal water. It won't light tonight.
@@ -73,8 +73,16 @@ Species traits: Resourceful, Skillful, Versatile
 - `potion-of-greater-healin-1` 1× Potion of Greater Healing — Uncommon · _purchased for 200 GP_
 - `midnight-blue-silk-cloak-1` 1× Midnight-blue silk cloak · _loot: taken back off the bound woman at the Withy Pond_
 - `forgery-kit-1` 1× Forgery Kit · _found: his own tools, from his back-room workshop_
+- `sabines-walnut-writing-c-1` 1× Sabine's walnut writing case · _loot: Mother Sabine's back room at the Wheatsheaf_
+- `silver-eye-pin-1` 1× Silver eye-pin · _loot: Mother Sabine's collar_
+- `sabines-hollow-hairpin-1` 1× Sabine's hollow hairpin · _found: in Mother Sabine's hair_
+- `lidless-signet-ring-1` 1× Lidless signet ring · _found: on a cord round Mother Sabine's neck_
+- `oiled-silk-slip-from-sab-1` 1× Oiled-silk slip from Sabine's hem · _found: sewn flat into the hem of Mother Sabine's shift_
+- `watchers-penny-1` 1× Watcher's penny · _found: on a string round Goody Prail's neck_
+- `forged-letter-in-sabines-1` 1× Forged letter in Sabine's hand · _crafted: Ottilie's forgery in Sabine's hand, cipher and seal_
+  - A letter on Sabine's cream paper in her cipher and a flawless copy of her hand, sealed in grey wax with the Lidless signet: 'The place is found. Send the Glass at once, quietly, with six brothers in pilgrim grey and its keeper, no banners, by the Pilgrim Road through Tanner's Cross. I will meet it myself at the burnt chapel on the Pilgrim Road, a day east of Thornbury.' For Brother Prior Anselm at Ambersell. (Ottilie's third attempt, Day 23.)
 
-Hit Point Dice: Bard d8 6/6
+Hit Point Dice: Bard d8 7/7
 Languages: Common, Elvish, Halfling · Tools: Calligrapher's Supplies, Forgery Kit, Disguise Kit · Armor training: light
 
 ## HP history
@@ -85,3 +93,4 @@ Languages: Common, Elvish, Halfling · Tools: Calligrapher's Supplies, Forgery K
 - Level 4: +6 (fixed average)
 - Level 5: +6 (fixed average)
 - Level 6: +6 (fixed average)
+- Level 7: +9 (rolled 1d8(8) = 8)

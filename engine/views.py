@@ -462,7 +462,7 @@ def player_view(g):
                     for e in s.get("journal", [])],
         "lore": [{"id": e["id"], "name": e["name"], "facts": e.get("lore", [])} for e in s["entities"].values()
                  if e.get("lore") and not e.get("hidden")],
-        "overrides": s["overrides"][-20:], "settings": {k: v for k, v in s["settings"].items() if k in ("player_rolls", "xp_mode", "difficulty")},
+        "overrides": s["overrides"][-20:], "settings": {k: v for k, v in s["settings"].items() if k in ("player_rolls", "xp_mode", "difficulty", "xp_rate")},
         "assets": {k: {kk: v.get(kk) for kk in ("id", "name", "kind", "license", "credit", "source")} for k, v in s["assets"].items() if v.get("public")},
     }
 

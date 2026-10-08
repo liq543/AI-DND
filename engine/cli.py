@@ -218,7 +218,9 @@ def cmd_campaign(a):
 SETTINGS = {"player_rolls": ("auto", "viewer"), "xp_mode": ("xp", "milestone"), "difficulty": ("forgiving", "standard", "deadly"),
             "start_level": None, "hp_mode": ("avg", "roll"),
             # house rule: "narrated" = no forced-march saves on ordinary journeys; `travel --push` still rolls them
-            "forced_march": ("srd", "narrated")}
+            "forced_march": ("srd", "narrated"),
+            # house rule: a table's pacing choice; every XP award is multiplied by it (public, in the log)
+            "xp_rate": ("1", "1.5", "2", "3")}
 
 
 def set_setting(g, key, value):
@@ -1529,8 +1531,21 @@ def cmd_item(g, a):
         g.say(f"🏷 {e['name']}'s {it['name']}" + (f" is now known as \"{a.alias}\"" if a.alias else "") + " — note added.", kind="item")
     elif a.action == "light":
         it = M.find_item(e, a.item)
+        if re.search(r"flame tongue", it["name"], re.I):
+            # rules/magic-items/flame-tongue.md: a Bonus Action and a command word, while holding it (on or off)
+            if not it.get("equipped"):
+                raise RuleError(f"{e['name']} must be holding the {it['name']} to ignite it (`item equip`).")
+            if not it.get("attuned"):
+                raise RuleError(f"The {it['name']} requires attunement before its command word works.")
+            M.use_action(g, e, "bonus", "Flame Tongue command word")
+            inv = [dict(i, lit=not i.get("lit")) if i["id"] == it["id"] else i for i in e["inventory"]]
+            g.set(e, inventory=inv)
+            g.say(f"🔥 {e['name']}'s {it['name']} " + ("bursts into flame (+2d6 Fire on a hit; Bright Light 40 ft, Dim 40 ft more)."
+                                                        if not it.get("lit") else "gutters out."))
+            M.reveal_for(g, g.get(e["id"]))
+            return
         if not re.search(r"torch|lantern|candle", it["name"], re.I):
-            raise RuleError("Only torches, lanterns and candles can be lit.")
+            raise RuleError("Only torches, lanterns and candles (and a Flame Tongue) can be lit.")
         inv = [dict(i, lit=not i.get("lit")) if i["id"] == it["id"] else i for i in e["inventory"]]
         g.set(e, inventory=inv)
         g.say(f"🔥 {e['name']} {'lights' if not it.get('lit') else 'puts out'} the {it['name']}.")

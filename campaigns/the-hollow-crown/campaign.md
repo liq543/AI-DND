@@ -66,6 +66,7 @@ allies) and climb. By the end of this chapter, Kit wants a crown. Any crown. Pre
 - **Travel is narrated** (player's choice, Day 2): no forced-march saves on ordinary journeys (`set forced_march=narrated`). The DM summarises the road, keeps the clock honest and stops for encounters and arrivals. Travel Exhaustion only on a deliberate, punishing push (`travel --push`), always warned first. Applies to everyone, enemies included.
 - **The Unkindness's treasury** (player's rule, Day 4): every member's money goes into the vault (`treasury`, the great
   strongbox in the Counting Room, `coins treasury <amt> --from <who>`); each carries 100 crowns. No more shares.
+- **Double XP** (player's rule, Day 23 / 2026-10-08): every XP award from here on is doubled (`set xp_rate=2`, shown on each award), so the chapter's level 6 to 10 arc fits the real play time.
 - **The Stillness** (the lair's ward) has written rules: `secrets.md` → The Stillness. They are shared with the player as a
   journal handout once the lair is final.
 

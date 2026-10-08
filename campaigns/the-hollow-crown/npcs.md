@@ -394,3 +394,16 @@ All hired abroad. None have been below the Great Hall. All `commoner`, Neutral.
 - **The last spearman** (`tough-b`): fled, held by Ottilie's Hypnotic Pattern, bound by Brakka. Prisoner.
 - **Dickon** (CN; `bandit-b-4`): young Hanged Man on the plank-bridge toll; told Wat Hollin he'd 'think on' Mother's offer (Day 17); black eye from Hesketh.
 - **Day 19:** **Mother Gallows** killed at the Gallows Oak (Kit's arrow, Corvin's Fireball); **Coll** killed by Ottilie's mockery; his two mastiffs killed. **Wat Hollin**, **Sal Pike** and four old hands returned to the Unkindness (Ottilie's Persuasion 28; Wat sent away by Mother herself).
+- **Mother Sabine (Day 21):** token `the-woman-in-dove-grey` renamed "Mother Sabine, the woman in dove-grey" (Lawful Evil). Ottilie, as Bess Harrow, saw her face to face in the Wheatsheaf's back room at 11:40 and knew her from the Mole. Veiled in grey lace before strangers; silver eye-pin; writing case. 'I bless no one. I am only a penitent.'
+- **Day 21:** Mother Sabine captured alive at the Wheatsheaf (knocked out). Landlord Abel Fenn dead (Kit's arrow, upstairs end window). The six Eyeless Brothers and the hooded penitent dead. The serving girl fled to the market. Nib with Kit.
+### Goody Prail, the egg-woman (`a-market-woman-with-egg-baskets`, commoner), Lawful Neutral
+- A wiry market woman of fifty in a brown shawl; Brother Ennis's Watcher in Thornbury, then the Lady's runner (eggs to the Wheatsheaf's yard twice a day). Caught by Brakka in the market, Day 21, 11:53. Silent, frightened, stubborn.
+### Peg, the Wheatsheaf's serving girl (`the-serving-girl`), Neutral Good: DEAD
+- Seventeen, barefoot, patched brown kirtle. Fled the Wheatsheaf fire crying murder; hanged by Lord Corvell's order at the West Gate gallows, Day 22, 20:30, for 'spreading falsehoods'. A board on the post reads LIAR.
+### Peg's mother (`pegs-mother`, commoner), Neutral Good
+- A stout washerwoman of the south ward, red forearms, shawl. Watched her daughter hanged. Silent now.
+### Ord, the League house under-clerk (`ord-the-league-house-under-clerk`), Lawful Neutral: DEAD
+- Balding under-clerk of forty; Ennis's Watcher at the League house (names for a penny a week). Hanged at the West Gate gallows beside Peg, Day 23 ~00:30.
+### Davy, Fenn's boy (Watcher)
+- The dead landlord's boy, about fourteen; watched the gate and the road for the Lady. Not found by Ivo's search on the night of Day 22; somewhere inside the walls.
+- **Davy and Peg's mother** (Day 23): prisoners in the barracks vestry under the Hanged Men's guard; each is the other's hostage. Davy is to give Ottilie's forged Sabine letter to Jory Pike on Day 24.

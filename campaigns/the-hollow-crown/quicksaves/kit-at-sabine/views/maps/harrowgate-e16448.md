@@ -1,0 +1,63 @@
+# Snapshot — party moved to Thornbury: the Cornmarket at Day 16, 13:30 (event 16448)
+
+### Harrowgate (`harrowgate`, wilderness 46×34, lighting bright)
+- Conscript on the east wall (`conscript-on-the-east-wall`, enemy) at (34,10) — DEAD
+- Conscript on the west wall (`conscript-on-the-west-wall`, enemy) at (12,22) — DEAD
+- Ditchley man 10 (`commoner-j`, neutral) at (31,30) — 4/4 HP · hidden
+- Ditchley man 7 (`commoner-g`, neutral) at (26,31) — 4/4 HP · hidden
+- Ditchley man 8 (`commoner-h`, neutral) at (29,30) — 4/4 HP · hidden
+- Ditchley man 9 (`commoner-i`, neutral) at (30,30) — 4/4 HP · hidden
+- Ditchley's reeve (`commoner-a-4`, neutral) at (24,28) — 4/4 HP · hidden
+- Greencloak at the gate brazier (`greencloak-at-the-gate-brazier`, enemy) at (21,25) — DEAD
+- Greencloak on the south wall (`greencloak-on-the-south-wall`, enemy) at (18,24) — DEAD
+- Greencloak waking (`sleeping-greencloak-2`, enemy) at (31,14) — DEAD · prone
+- Harrowgate's cook (`harrowgates-cook`, neutral) at (24,14) — DEAD
+- Old Mattock (`old-mattock`, neutral) at (28,8) — DEAD · unconscious, prone
+- Sergeant Brice Tolly (`sergeant-brice-tolly`, enemy) at (26,25) — DEAD · unconscious, prone
+- Sleeping Greencloak 1 (`sleeping-greencloak-1`, enemy) at (31,13) — DEAD · unconscious, prone
+- Sleeping Greencloak 3 (`sleeping-greencloak-3`, enemy) at (31,15) — DEAD · unconscious, prone
+- Sleeping Greencloak 4 (`sleeping-greencloak-4`, enemy) at (31,16) — DEAD · unconscious, prone
+- Sleeping conscript 1 (`sleeping-conscript-1`, enemy) at (31,17) — DEAD · unconscious, prone
+- Sleeping conscript 2 (`sleeping-conscript-2`, enemy) at (30,14) — DEAD · unconscious, prone
+- Sleeping conscript 3 (`sleeping-conscript-3`, enemy) at (30,16) — DEAD · unconscious, prone
+- Sleeping conscript 4 (`sleeping-conscript-4`, enemy) at (30,18) — DEAD · unconscious, prone
+- Sleeping conscript 5 (`sleeping-conscript-5`, enemy) at (32,13) — DEAD · unconscious, prone
+- Sleeping conscript 6 (`sleeping-conscript-6`, enemy) at (32,15) — DEAD · unconscious, prone
+- Sleeping conscript 7 (`sleeping-conscript-7`, enemy) at (32,17) — DEAD · unconscious, prone
+- Surrendered conscript A (`sleeping-conscript-8`, neutral) at (26,17) — 4/4 HP · hidden
+- Surrendered conscript B (`sleeping-conscript-9`, neutral) at (27,17) — 4/4 HP · hidden
+- Surrendered conscript D (`sleeping-conscript-11`, neutral) at (26,18) — 4/4 HP · hidden
+- Surrendered conscript E (`sleeping-conscript-12`, neutral) at (27,18) — 4/4 HP · hidden
+- Tam, a conscript (`sleeping-conscript-10`, enemy) at (20,10) — 4/4 HP · hidden
+- point of interest `poi-1`: The Harrowgate milestone at (9,30) → journal j480
+- point of interest `poi-2`: The crag at (20,28) → journal j481
+- point of interest `poi-3`: The castle ramp at (27,29) → journal j482
+- point of interest `poi-4`: The portcullis at (23,27) → journal j483
+- point of interest `poi-5`: Firelight in the gatehouse at (21,27) → journal j484
+- point of interest `poi-6`: The south-west tower at (10,25) → journal j485
+- point of interest `poi-7`: The keep at (17,8) → journal j486
+- point of interest `poi-8`: The north postern (Lerner's account) at (29,5) → journal j487
+- point of interest `poi-10`: The kitchen door at (24,16) → journal j489
+- point of interest `poi-11`: The barracks door at (29,15) → journal j490
+- point of interest `poi-12`: The stables at (16,20) → journal j491
+- point of interest `poi-13`: The grain cart at (21,20) → journal j492
+- point of interest `poi-14`: The smithy lean-to at (27,20) → journal j493
+- point of interest `poi-15`: The mounting block at (23,18) → journal j494
+- point of interest `poi-16`: The inner gate at (23,23) → journal j495
+- point of interest `poi-17`: The well-house door at (27,10) → journal j496
+- point of interest `poi-18`: The castle well at (27,7) → journal j497
+- point of interest `poi-19`: Mattock's pallet at (30,7) → journal j498
+- point of interest `poi-20`: The cider barrel at (26,9) → journal j499
+- point of interest `poi-21`: The guardroom brazier at (20,25) → journal j500
+- point of interest `poi-22`: Tolly's cot at (27,24) → journal j501
+- point of interest `poi-23`: The barracks spear-rack at (31,18) → journal j502
+- point of interest `poi-24`: The burning barracks at (31,15) → journal j503
+- point of interest `poi-25`: The bread ovens at (23,13) → journal j504
+- point of interest `poi-26`: The kitchen worktable at (25,14) → journal j505
+- point of interest `poi-27`: The keep door at (18,15) → journal j506
+- point of interest `poi-28`: The keep hall table at (17,11) → journal j507
+- point of interest `poi-29`: The keep hall hearth at (15,9) → journal j508
+- point of interest `poi-30`: The stair up at (20,9) → journal j509
+- point of interest `poi-31`: The stair down at (15,14) → journal j510
+- point of interest `poi-32`: The hall shelves at (20,14) → journal j511
+- doors: (29,5) closed, (27,10) open, (18,15) closed, (29,15) open, (24,16) open, (23,23) open, (24,23) open, (22,25) open, (25,25) open, (23,27) closed, (24,27) closed

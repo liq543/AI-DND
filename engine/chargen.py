@@ -501,6 +501,21 @@ def catch_up(g, e, a):
         patch["tools"] = e.get("tools", []) + tl
         patch["choices"] = {**patch.get("choices", ch), "skilled": sk + tl}
         done.append(f"Skilled: {', '.join(sk + tl)}")
+    for cname, crow in cls_rows.items():
+        sub = e.get("subclasses", {}).get(cname)
+        owed = [lv for lv, f in (crow["subclasses"].get(sub, {}).get("features", []) if sub else [])
+                if f == "Additional Fighting Style" and lv <= e["classes"][cname]]
+        have = [f for f in e["feats"] if str(f.get("source", "")).startswith("Additional Fighting Style")]
+        if owed and len(have) < len(owed):
+            fs = srd.find("feats", getattr(a, "fighting_style", None) or "")
+            if not fs or fs["category"] != "fighting style":
+                raise RuleError(f"{sub} Additional Fighting Style: choose --fighting-style "
+                                + "|".join(k for k, v in srd.data()["feats"].items() if v["category"] == "fighting style"))
+            if any(x["name"] == fs["name"] for x in e["feats"]):
+                raise RuleError(f"{e['name']} already has the {fs['name']} Fighting Style.")
+            patch["feats"] = list(patch.get("feats", e["feats"])) + [
+                {"name": fs["name"], "source": f"Additional Fighting Style ({sub} {owed[0]})"}]
+            done.append(f"Additional Fighting Style: {fs['name']}")
     start = g.state["settings"].get("start_level", 1)
     lv = level(e)
     if lv <= start and e.get("xp", 0) < xp_threshold(lv):
@@ -603,6 +618,17 @@ def levelup(g, e, a):
         if not fs or fs["category"] != "fighting style":
             raise RuleError("Choose --fighting-style " + "|".join(k for k, v in d["feats"].items() if v["category"] == "fighting style"))
         feats.append({"name": fs["name"], "source": "Fighting Style"})
+    sub_now = patch.get("subclasses", e.get("subclasses", {})).get(cls_name)
+    sub_feats = [f for lv, f in cls["subclasses"].get(sub_now, {}).get("features", []) if lv == new_cl] if sub_now else []
+    if "Additional Fighting Style" in sub_feats:
+        # e.g. Champion 7 (rules/classes/fighter.md): another Fighting Style feat of your choice
+        fs = srd.find("feats", a.fighting_style or "")
+        if not fs or fs["category"] != "fighting style":
+            raise RuleError(f"{sub_now} {new_cl}, Additional Fighting Style: choose --fighting-style "
+                            + "|".join(k for k, v in d["feats"].items() if v["category"] == "fighting style"))
+        if any(x["name"] == fs["name"] for x in feats):
+            raise RuleError(f"{e['name']} already has the {fs['name']} Fighting Style.")
+        feats.append({"name": fs["name"], "source": f"Additional Fighting Style ({sub_now} {new_cl})"})
     if "Expertise" in feats_here:
         ex = [s.strip().lower() for s in (a.expertise or "").split(",") if s.strip()]
         if len(ex) != 2 or any(s not in e["skills"] or s in e.get("expertise", []) for s in ex):

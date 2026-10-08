@@ -2,9 +2,9 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** Player · **Human** · **Rogue 6** (Thief) · **Background:** Criminal · **XP:** 21581
+**Player:** Player · **Human** · **Rogue 7** (Thief) · **Background:** Criminal · **XP:** 23007
 
-**HP** 51/51 · **AC** 16 (Studded Leather Armor 12 + Dex 4) · **Speed** 30 ft · **Initiative** +7 · **Proficiency** +3 · **Passive Perception** 17
+**HP** 57/57 · **AC** 16 (Studded Leather Armor 12 + Dex 4) · **Speed** 30 ft · **Initiative** +7 · **Proficiency** +3 · **Passive Perception** 17
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
@@ -27,7 +27,7 @@
 
 Attacks per Attack action: 1
 
-**Granted spells:** mage-hand (Magic Initiate (Wizard)), minor-illusion (Magic Initiate (Wizard)), disguise-self (Magic Initiate (Wizard), free cast used)
+**Granted spells:** mage-hand (Magic Initiate (Wizard)), minor-illusion (Magic Initiate (Wizard)), disguise-self (Magic Initiate (Wizard))
 
 ## Features & feats
 
@@ -37,7 +37,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 100 GP 3 SP 5 CP
+**Coins:** 98 GP 3 SP 5 CP
 
 - `the-magpies-key-1` 1× The Magpie's Key · _stolen: Lot 9, lifted from Dorothea Quill mid-raid_
 - `quiver-1` 1× Quiver · _starting equipment_
@@ -56,7 +56,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `cart-1` 2× Cart · _purchased for 15 GP_
 - `horse-draft-1` 1× Horse, Draft · _purchased for 50 GP_
 - `studded-leather-armor-1` 1× Studded Leather Armor (equipped) · _purchased for 90 GP_
-- `arrows-2` 60× Arrows · _starting equipment_
+- `arrows-2` 99× Arrows · _starting equipment_
 - `arrows-3` 1× Arrows · _starting equipment_
 - `lantern-hooded-1` 1× Lantern, Hooded · _purchased for 5 GP_
 - `lantern-bullseye-1` 1× Lantern, Bullseye · _purchased for 10 GP_
@@ -111,7 +111,7 @@ Species traits: Resourceful, Skillful, Versatile
   - A disc of polished antler the size of a palm, carved with a stag's head crowned by an oak over an open hand, strung on red cord. Old, worn smooth by many thumbs. Found in Sedge's furs.
 - `lerners-written-confessi-1` 1× Lerner's written confession · _gift: written by Sergeant Lerner under Ottilie's charm, Day 18_
 
-Hit Point Dice: Rogue d8 6/6
+Hit Point Dice: Rogue d8 7/7
 Languages: Common, Elvish, Halfling, Thieves' Cant · Tools: Thieves' Tools · Armor training: light
 
 ## HP history
@@ -122,3 +122,4 @@ Languages: Common, Elvish, Halfling, Thieves' Cant · Tools: Thieves' Tools · A
 - Level 4: +8 (fixed average)
 - Level 5: +8 (fixed average)
 - Level 6: +8 (fixed average)
+- Level 7: +6 (rolled 1d8(3) = 3)

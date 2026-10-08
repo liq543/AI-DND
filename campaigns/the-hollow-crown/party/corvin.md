@@ -2,9 +2,9 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Wizard 6** (Evoker) · **Background:** Sage · **XP:** 21581
+**Player:** DM · **Human** · **Wizard 7** (Evoker) · **Background:** Sage · **XP:** 23007
 
-**HP** 38/38 · **AC** 14 (unarmored 10 + Dex 2 + bracers 2) · **Speed** 30 ft · **Initiative** +5 · **Proficiency** +3 · **Passive Perception** 11
+**HP** 41/41 · **AC** 14 (unarmored 10 + Dex 2 + bracers 2) · **Speed** 30 ft · **Initiative** +5 · **Proficiency** +3 · **Passive Perception** 11
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
@@ -26,11 +26,11 @@ Attacks per Attack action: 1
 
 ## Spellcasting
 
-- **Wizard:** save DC 15, attack +7, cantrips 4, prepared 10, up to level 3
-- **Slots:** L1 4/4, L2 3/3, L3 3/3
+- **Wizard:** save DC 15, attack +7, cantrips 4, prepared 11, up to level 4
+- **Slots:** L1 4/4, L2 3/3, L3 3/3, L4 1/1
 - **Cantrips:** fire-bolt, mage-hand, minor-illusion, light
-- **Prepared:** shield, magic-missile, sleep, misty-step, invisibility, suggestion, fireball, counterspell, animate-dead, dispel-magic
-- **Spellbook:** detect-magic, identify, shield, sleep, magic-missile, alarm, feather-fall, disguise-self, misty-step, knock, invisibility, suggestion, fireball, counterspell, animate-dead, dispel-magic
+- **Prepared:** shield, magic-missile, sleep, misty-step, invisibility, suggestion, fireball, counterspell, animate-dead, dispel-magic, wall-of-fire
+- **Spellbook:** detect-magic, identify, shield, sleep, magic-missile, alarm, feather-fall, disguise-self, misty-step, knock, invisibility, suggestion, fireball, counterspell, animate-dead, dispel-magic, wall-of-fire, sending
 
 **Granted spells:** prestidigitation (Magic Initiate (Wizard)), message (Magic Initiate (Wizard)), comprehend-languages (Magic Initiate (Wizard))
 
@@ -46,7 +46,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 101 GP 1 SP 5 CP
+**Coins:** 100 GP 1 SP 5 CP
 
 - `dagger-1` 2× Dagger · _starting equipment_
 - `quarterstaff-1` 2× Quarterstaff · _starting equipment (Arcane Focus)_
@@ -75,7 +75,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `the-marchwood-tax-rolls-1` 1× The Marchwood tax rolls · _loot: Harrowgate's strongroom, the tax-roll chest_
 - `the-lord-protectors-lett-1` 1× The Lord Protector's letters to Harrowgate · _loot: Harrowgate's strongroom, the tally shelves_
 
-Hit Point Dice: Wizard d6 6/6
+Hit Point Dice: Wizard d6 7/7
 Languages: Common, Elvish, Draconic · Tools: Calligrapher's Supplies · Armor training: none
 
 ## HP history
@@ -86,3 +86,4 @@ Languages: Common, Elvish, Draconic · Tools: Calligrapher's Supplies · Armor t
 - Level 4: +6 (fixed average)
 - Level 5: +6 (fixed average)
 - Level 6: +6 (fixed average)
+- Level 7: +3 (rolled 1d6(1) = 1)
