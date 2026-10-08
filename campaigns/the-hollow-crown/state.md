@@ -2,18 +2,18 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 2 · **In-world time:** Day 24, 06:30 · **Mode:** exploration
-**Current map:** The Chapel of the Unblinking (`unblinking-chapel`) · **Events:** 23245 · **Log head:** `3151485cfd6a2db1`
+**Session:** 2 · **In-world time:** Day 24, 07:00 · **Mode:** exploration
+**Current map:** The Chapel of the Unblinking (`unblinking-chapel`) · **Events:** 23280 · **Log head:** `c280079219d3d466`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | unblinking-chapel (16,2) |
-| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | unblinking-chapel (18,2) |
-| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | unblinking-chapel (22,2) |
-| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | unblinking-chapel (20,2) |
+| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | unblinking-chapel (6,11) |
+| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | unblinking-chapel (6,12) |
+| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:2/3 L4:1/1 | unblinking-chapel (5,10) |
+| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | unblinking-chapel (7,11) |
 
 ## Other creatures (DM view)
 
@@ -66,7 +66,7 @@
 | Bandit D (`bandit-d-4`, bandit) | ally | 11/11 | 12 | — | crowsfoot (22,29) | yes |
 | Bandit E (`bandit-e-3`, bandit) | ally | 6/11 | 12 | — | crowsfoot (16,31) | yes |
 | Bandit F (`bandit-f-2`, bandit) | ally | 10/11 | 12 | — | crowsfoot (17,31) | yes |
-| Ivo Tarrant (`bandit-g`, bandit) | ally | 11/11 | 12 | — | unblinking-chapel (10,5) |  |
+| Ivo Tarrant (`bandit-g`, bandit) | ally | 11/11 | 12 | — | unblinking-chapel (7,12) |  |
 | Bandit H (`bandit-h`, bandit) | ally | 11/11 | 12 | — | crowsfoot (19,31) | yes |
 | Guard A (`guard-a`, guard) | enemy | 0/11 | 16 | — · DEAD | fallowfield (14,7) |  |
 | Guard B (`guard-b`, guard) | enemy | 0/11 | 16 | — · DEAD | fallowfield (15,7) |  |
@@ -271,8 +271,9 @@
 ## Agenda (scheduled by the engine; `agenda list`)
 
 - `a50` Day 23, 09:00 [due] Corvin's research on paired speaking stones resumes only once he is back in his library at the Rookery (Arcana check then)
-- `a28` Day 24, 07:00 [pending] Quist's word from the Coldharbour carriers on the League's silver cart (route, guard, halts) for Day 34
+- `a28` Day 24, 07:00 [due] Quist's word from the Coldharbour carriers on the League's silver cart (route, guard, halts) for Day 34
 - `a51` Day 24, 10:00 [pending] The Pilgrim Road carrier calls at Thornbury on his eastward run (the Wheatsheaf is gone; he'll ask at the barracks or the Drover's Rest): the Mission's post to Ambersell goes with him
+- `a60` Day 24, 12:00 [pending] Quist at the Hollins Stones outside the Stillness: Corvin can reach him with Sending (the silver-cart word, the fort's cancelled works and money)
 - `a43` Day 24, 15:00 [pending] The hanging of the two Thornbound raiders (the Stag and the young spearman) at the gallows by Thornbury's market cross, by Lord Corvell's order
 - `a47` Day 25, 05:45 [pending, secret] Lord's-day dawn: the Watchtower chaplain casts Sending to Brother Ennis (it fails inside the Stillness; outside it, Ennis hears 25 words and answers at once)
 - `a48` Day 25, 18:00 [pending] Hesketh's Crowsfoot dozen should be signed and posted on the bridge and the green (raised with Kit's 100 crowns)
@@ -282,7 +283,6 @@
 - `a26` Day 30, 18:05 [pending] Coldharbour's first month as the Unkindness's inn: takings less Moss's wage and the new staff, with the dice room open (stables not yet finished) (auto 65+6d10 → treasury) (auto 65+6d10 → treasury)
 - `a49` Day 30, 18:10 [pending] Wages for Hesketh's Crowsfoot dozen from Day 25 (2 shillings a day each) (auto -14 GP → treasury)
 - `a59` Day 32, 12:00 [pending, secret] Castle Gaunt's answer to the ransom letter reaches Thornbury (decide with a hidden roll: Brey's father, Whitlock's kin, the castle for the men)
-- `a8` Day 34, 09:00 [pending] The Crowsfoot fort's second month of building falls due (about 4,000 crowns for the carpenters, timber and gangs)
 - `a13` Day 35, 09:00 [pending, secret] Sabine sends to Ambersell for the Seeing Glass
 - `a52` Day 37, 00:00 [pending] New moon: Sabine's dead-man's letter falls due. Unless a letter in her hand has reached Brother Prior Anselm at Ambersell, the Glass is sent west
 - `a16` Day 37, 20:00 [pending] New moon: the Eye in the Socket must meet a living gaze tonight, or the Stillness weakens
@@ -737,10 +737,10 @@
 - labels: Bar (3,2)
 
 ### The Chapel of the Unblinking (`unblinking-chapel`, interior 32×24, lighting dim)
-- Brakka Holloway (`brakka`, pc) at (18,2) — 71/71 HP
-- Corvin Asche (`corvin`, pc) at (22,2) — 41/41 HP
-- Kit Corvell (`kit`, pc) at (16,2) — 57/57 HP
-- Ottilie Marsh (`ottilie`, pc) at (20,2) — 48/48 HP
+- Brakka Holloway (`brakka`, pc) at (6,12) — 71/71 HP
+- Corvin Asche (`corvin`, pc) at (5,10) — 41/41 HP
+- Kit Corvell (`kit`, pc) at (6,11) — 57/57 HP
+- Ottilie Marsh (`ottilie`, pc) at (7,11) — 48/48 HP
 - Captain Brannoc Vaux (`captain-brannoc-vaux`, neutral) at (20,12) — 112/112 HP
 - Davy, the landlord's boy (`a-boy-hiding-in-the-loft`, neutral) at (8,21) — 4/4 HP · restrained
 - Gaunt man-at-arms A (`gaunt-man-at-arms-a`, ally) at (12,10) — 11/11 HP
@@ -766,7 +766,7 @@
 - Hanged Man off duty A (`hanged-man-off-duty-a`, ally) at (9,20) — 11/11 HP
 - Hanged Man off duty B (`hanged-man-off-duty-b`, ally) at (25,10) — 11/11 HP
 - Hanged Man off duty C (`hanged-man-off-duty-c`, ally) at (25,13) — 11/11 HP
-- Ivo Tarrant (`bandit-g`, ally) at (10,5) — 11/11 HP
+- Ivo Tarrant (`bandit-g`, ally) at (7,12) — 11/11 HP
 - Nib (`nib`, neutral) at (8,5) — 4/4 HP
 - Peg's mother (`pegs-mother`, neutral) at (10,21) — 4/4 HP · restrained
 - Quist's rider (`quists-rider`, ally) at (6,14) — 11/11 HP · hidden
@@ -1150,18 +1150,18 @@
 
 ## Recent events
 
+- “Corvin, send word to Quist, and see if he has anything to report. And cancel the fort. We've taken a castle and a walled town; that's two sets of walls already. Why build a fort? And give me Fenn's ledger. I'll read it now.”
+- “Quist's inside the Stillness, boss. It turns divination to grey fog, and Sending is divination. But Hesketh's at Crowsfoot, three miles outside it. I'll send through him, and have Quist step out to the Hollins Stones at noon so I can speak to him direct.”
+- ✨ Corvin Asche casts Sending targeting Hesketh Rowe.
+- “(Sending) Hesketh, Corvin. Ride to Quist now: cancel the fort works. Have Quist stand outside the Stillness at the Hollins Stones at noon; I'll Send.”
+- “(answering in Corvin's head) Aye, Corvin. Riding now. Quist at the Stones by noon. Carpenters'll squeal; there's timber stacked all over the green. Dozen signs tomorrow.”
+- “He's riding. Quist at the Stones at noon. The carpenters will squeal, he says, and there's timber all over Crowsfoot green.”
+- 📅 Scheduled for Day 24, 12:00: Quist at the Hollins Stones outside the Stillness: Corvin can reach him with Sending (the silver-cart word, the fort's cancelled works and money) [a60]
+- Kit sat on the altar step with Fenn's ledger open on his knee: a fat book in calf, the landlord's slow round hand, three years of the road.
+- 📓 Added to the journal: Fenn's ledger of watchings
+- “Darling. Jenny Copp is a scullion at Coldharbour. Our Coldharbour. The Mission has had an ear in your own kitchen since Gildford.”
+- “Ditchley, Ashpole, Harrowgate, the abbey. That's every village we've been through.”
+- 📅 Due (Day 24, 07:00): Quist's word from the Coldharbour carriers on the League's silver cart (route, guard, halts) for Day 34
+- ⏳ 30m passes — Corvin's Sending and reading Fenn's ledger. Now Day 24, 07:00.
+- 🎬 The Hanged Men's barracks — Day 24, 07:00. The war council at the altar, Fenn's ledger open; Hesketh riding for the Rookery.
 - 🗺 Map: The Chapel of the Unblinking
-- ⏳ 14m passes — to first light. Now Day 24, 06:00.
-- “Somebody give me a full military report. And what we do next.”
-- Corvin spread his maps on the old altar in the grey light, weighted the corners with Ivo's mug and the Darrow sword's scabbard, and cleared his throat. Brakka, Ottilie and Ivo gathered round.
-- “Strength first. In Thornbury: Vaux's hundred on the fair ground; fourteen of Castle Gaunt's own in their mail under the two sergeants; Ivo's nine Hanged Men, four of them in mail now, and five raw lads off the table. At Harrowgate, Lerner and seven recruits behind Gerold's walls. At Crowsfoot, Hesketh, and his new dozen sign by tomorrow evening. Coldharbour, Moss and the inn. The Rookery, Bastian and the Pens. Near a hundred and forty blades, boss, and only the Hand are soldiers.”
-- “Money. The great strongbox at home holds a little over thirteen and a half thousand; Brakka carries three thousand four hundred of the Hand's fee back. Out: the fort's four thousand on the thirty-fourth, the Hand three thousand three hundred and seventy-five a month, the Gaunt men fourteen a day, the household four hundred and thirty a month. In: Quist's sale of the plate on the twenty-sixth, the ransoms if Castle Gaunt pays, and Lerner's four thousand at Midsummer. We're rich until Midsummer, darling. After that we need a cart of silver.”
-- “Threats. Darrow reaches Castle Gaunt in four or five days and tells them a king with a hundred mercenaries holds Thornbury. Expect the Regent's answer in two or three weeks, and bigger. The Mission: Sabine's letter goes east today with the carrier and buys us quiet past the new moon, but they'll miss her. And the Eye wants a living gaze on the new moon, the thirty-seventh, and the Pens just lost Alys. The League's masters are angry, and their silver cart runs on the thirty-fourth.”
-- “My counsel. Today: see the carrier off at ten, hang the raiders at three as you ordered, and read Fenn's ledger: every watcher the Mission has in the March is named in it. Leave Vaux and the Hand to hold Thornbury, with the Gaunt sergeants drilling Ivo's recruits. Send one sergeant and four of the Gaunt men to Lerner: Harrowgate is the door Castle Gaunt will knock on. Then ride home: Quist's word on the silver cart, the fort's money, a gaze for the Eye before the new moon, and my stones. And on the thirty-fourth, take the League's cart with the Hand's horse and crossbows. Give Vaux his fifth of something real and he'll follow you anywhere.”
-- “And if the Regent comes himself?”
-- “Then we'll want walls, and a great deal more than a hundred men. Which is why the fort matters and the silver matters.”
-- “We'll hold the town, boss. Me and the sword.”
-- ⏳ 30m passes — Corvin's military report at the altar. Now Day 24, 06:30.
-- 🎬 The Hanged Men's barracks — Day 24, 06:30. Maps on the old altar; the war council in the dawn light.
-- 🗺 Map: The Chapel of the Unblinking
-- “Or at least every traveller Fenn reported to them, and when. That's a start.”
