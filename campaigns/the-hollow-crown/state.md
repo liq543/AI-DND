@@ -2,24 +2,24 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 2 · **In-world time:** Day 23, 14:05 · **Mode:** exploration
-**Current map:** The Wheatsheaf, upper floor (`wheatsheaf-upper`) · **Events:** 22123 · **Log head:** `1d43998bb267b419`
+**Session:** 2 · **In-world time:** Day 23, 14:15 · **Mode:** exploration
+**Current map:** The March Road before the West Gate (`thornbury-west-road`) · **Events:** 22164 · **Log head:** `e6b8e6e5d4e55e6a`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | wheatsheaf-upper (28,19) |
-| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | wheatsheaf-upper (19,14) |
-| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | wheatsheaf-upper (18,13) |
-| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | wheatsheaf-upper (17,13) |
+| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | thornbury-west-road (31,11) |
+| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | thornbury-west-road (30,11) |
+| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-west-road (30,12) |
+| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-west-road (31,12) |
 
 ## Other creatures (DM view)
 
 | Creature | Side | HP | AC | Conditions | Position | Hidden |
 |---|---|---|---|---|---|---|
-| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | wheatsheaf (25,20) |  |
+| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | thornbury-west-road (31,10) |  |
 | Mr Fennimore Quist (`mr-fennimore-quist`, spy) | neutral | 23/27 | 12 | — | rookery (47,31) |  |
 | Mother Hobday (`mother-hobday`, commoner) | neutral | 4/4 | 10 | — | rookery (4,2) |  |
 | Ada Crisp (`ada-crisp`, commoner) | neutral | 4/4 | 10 | — | rookery (44,6) |  |
@@ -213,8 +213,8 @@
 | Market folk A (`market-folk-a`, commoner) | neutral | 4/4 | 10 | — | thornbury (47,10) | yes |
 | Market folk B (`market-folk-b`, commoner) | neutral | 4/4 | 10 | — | thornbury (47,11) | yes |
 | Hanged Man off duty A (`hanged-man-off-duty-a`, bandit) | ally | 11/11 | 12 | — | unblinking-chapel (9,20) |  |
-| Hanged Man off duty B (`hanged-man-off-duty-b`, bandit) | ally | 11/11 | 12 | — | thornbury-west-road (29,17) |  |
-| Hanged Man off duty C (`hanged-man-off-duty-c`, bandit) | ally | 11/11 | 12 | — | thornbury-west-road (26,18) |  |
+| Hanged Man off duty B (`hanged-man-off-duty-b`, bandit) | ally | 11/11 | 12 | — | thornbury-west-road (33,10) |  |
+| Hanged Man off duty C (`hanged-man-off-duty-c`, bandit) | ally | 11/11 | 12 | — | thornbury-west-road (33,12) |  |
 | A hooded penitent with bound eyes (`a-hooded-penitent-with-bound-eyes`, cultist-fanatic) | enemy | 0/44 | 13 | unconscious, prone · DEAD | wheatsheaf (11,11) |  |
 | A second penitent (`a-second-penitent`, cultist-fanatic) | enemy | 0/44 | 13 | — · DEAD | wheatsheaf (3,6) |  |
 | Eyeless Brother A (`eyeless-brother-a`, cultist-fanatic) | enemy | 0/44 | 13 | — · DEAD | wheatsheaf (15,11) |  |
@@ -229,9 +229,9 @@
 | Townsfolk at the gallows E (`townsfolk-at-the-gallows-e`, commoner) | neutral | 4/4 | 10 | — | thornbury-west-road (23,15) | yes |
 | Ord, the League house under-clerk (`ord-the-league-house-under-clerk`, commoner) | neutral | 0/4 | 10 | — · DEAD | thornbury-west-road (29,20) |  |
 | Davy, the landlord's boy (`a-boy-hiding-in-the-loft`, commoner) | neutral | 4/4 | 10 | restrained | unblinking-chapel (8,21) |  |
-| Hanged Man with the ladder A (`hanged-man-with-the-ladder-a`, bandit) | ally | 11/11 | 12 | — | wheatsheaf (27,20) |  |
+| Hanged Man with the ladder A (`hanged-man-with-the-ladder-a`, bandit) | ally | 11/11 | 12 | — | wheatsheaf-yard (6,9) |  |
 | Hanged Man with the ladder B (`hanged-man-with-the-ladder-b`, bandit) | ally | 11/11 | 12 | — | wheatsheaf-yard (7,9) |  |
-| Quist's rider (`quists-rider`, bandit) | ally | 11/11 | 12 | — | wheatsheaf (24,20) |  |
+| Quist's rider (`quists-rider`, bandit) | ally | 11/11 | 12 | — | wheatsheaf-yard (8,9) |  |
 
 ## Agenda (scheduled by the engine; `agenda list`)
 
@@ -650,9 +650,6 @@
 - Eyeless Brother B (`eyeless-brother-b`, enemy) at (11,8) — DEAD
 - Eyeless Brother C (`eyeless-brother-c`, enemy) at (18,13) — DEAD
 - Eyeless Brother D (`eyeless-brother-d`, enemy) at (18,10) — DEAD
-- Hanged Man with the ladder A (`hanged-man-with-the-ladder-a`, ally) at (27,20) — 11/11 HP
-- Nib (`nib`, neutral) at (25,20) — 4/4 HP
-- Quist's rider (`quists-rider`, ally) at (24,20) — 11/11 HP
 - container `sabines-chest`: Sabine's iron-bound travelling chest at (2,7)
 - container `box-1`: The second penitent's belt at (3,6)
 - point of interest `poi-2`: The great hearth at (10,11) → journal j326
@@ -738,15 +735,20 @@
 - doors: (18,4) closed, (18,10) closed, (9,13) closed, (18,16) closed
 - labels: The Missioner's study (9,6), Bedchamber (23,5), The chapel gallery (23,12), Stair passage (9,16)
 
-### The March Road before the West Gate (`thornbury-west-road`, wilderness 38×24, lighting dark)
+### The March Road before the West Gate (`thornbury-west-road`, wilderness 38×24, lighting bright)
+- Brakka Holloway (`brakka`, pc) at (30,11) — 71/71 HP
+- Corvin Asche (`corvin`, pc) at (30,12) — 41/41 HP
+- Kit Corvell (`kit`, pc) at (31,11) — 57/57 HP
+- Ottilie Marsh (`ottilie`, pc) at (31,12) — 48/48 HP
 - A carter with a load of turnips (`a-carter-with-a-load-of-turnips`, neutral) at (30,13) — 4/4 HP · hidden
 - Causeway watchman with a torch (`guard-a-5`, enemy) at (32,10) — DEAD · hidden
 - Causeway watchman with a torch (`guard-b-5`, enemy) at (32,12) — DEAD · hidden
 - Hanged Man at the toll table (`hanged-man-at-the-toll-table`, ally) at (37,12) — 11/11 HP
-- Hanged Man off duty B (`hanged-man-off-duty-b`, ally) at (29,17) — 11/11 HP
-- Hanged Man off duty C (`hanged-man-off-duty-c`, ally) at (26,18) — 11/11 HP
+- Hanged Man off duty B (`hanged-man-off-duty-b`, ally) at (33,10) — 11/11 HP
+- Hanged Man off duty C (`hanged-man-off-duty-c`, ally) at (33,12) — 11/11 HP
 - Hanged Man on the West Gate toll (`hanged-man-on-the-west-gate-toll`, ally) at (35,11) — 11/11 HP
 - League man in grey (`guard-c-3`, enemy) at (37,10) — DEAD · hidden
+- Nib (`nib`, neutral) at (31,10) — 4/4 HP
 - Night watchman with a crossbow (`guard-b-4`, enemy) at (35,12) — DEAD · hidden
 - Night watchman with a lantern (`guard-a-4`, enemy) at (35,10) — DEAD · hidden
 - Ord, the League house under-clerk (`ord-the-league-house-under-clerk`, neutral) at (29,20) — DEAD
@@ -1007,10 +1009,6 @@
 - doors: (22,12) open
 
 ### The Wheatsheaf, upper floor (`wheatsheaf-upper`, interior 30×22, lighting dim)
-- Brakka Holloway (`brakka`, pc) at (19,14) — 71/71 HP
-- Corvin Asche (`corvin`, pc) at (18,13) — 41/41 HP
-- Kit Corvell (`kit`, pc) at (28,19) — 57/57 HP
-- Ottilie Marsh (`ottilie`, pc) at (17,13) — 48/48 HP
 - Landlord Abel Fenn (`landlord-abel-fenn`, neutral) at (1,7) — DEAD
 - container `fenns-strongbox`: Fenn's strongbox at (7,10)
 - container `brothers-packs`: The brothers' packs at (18,14)
@@ -1023,7 +1021,9 @@
 - doors: (3,6) closed, (10,6) closed, (17,6) closed, (25,6) closed, (0,7) closed, (4,9) open, (12,9) closed, (20,9) open
 
 ### The Wheatsheaf's stable yard (`wheatsheaf-yard`, interior 24×22, lighting bright)
+- Hanged Man with the ladder A (`hanged-man-with-the-ladder-a`, ally) at (6,9) — 11/11 HP
 - Hanged Man with the ladder B (`hanged-man-with-the-ladder-b`, ally) at (7,9) — 11/11 HP
+- Quist's rider (`quists-rider`, ally) at (8,9) — 11/11 HP
 - point of interest `poi-1`: The yard gate at (9,0) → journal j572
 - point of interest `poi-2`: The horse trough at (11,6) → journal j573
 - point of interest `poi-3`: The lean-to cart shed at (21,8) → journal j574
@@ -1049,18 +1049,18 @@
 
 ## Recent events
 
-- ⚠ DM override — the clock put back from Day 23, 14:55 to Day 23, 14:05. Reason: DM error: each Identify ritual's time was counted twice (the engine already advances a ritual, and the DM added it again); five rituals of 11 minutes from 13:10 end at 14:05
-- ⏪ The clock is put back to Day 23, 14:05 — DM error: each Identify ritual's time was counted twice (the engine already advances a ritual, and the DM added it again); five rituals of 11 minutes from 13:10 end at 14:05.
-- Nib is at (25,20) on The Wheatsheaf.
-- 👁 Quist's rider appears (ally).
-- “Boss! Up there? Rider from home! Says it's urgent!”
-- 🚶 Kit Corvell moves 110 ft to (28,19).
-- Kit came to the stair head. The rider passed two letters up the ladder: Lerner's, sealed with a thumbprint in wax, and a note from Quist wrapped round it.
-- “From Master Quist, my lord. Rode since first light. Sergeant Lerner's man came to the Rookery at dawn and found you gone.”
-- 🎒 Kit Corvell gains 1× Lerner's letter (Day 22) — gift: Quist's rider.
-- 📓 Added to the journal: Lerner's letter
-- 📓 Added to the journal: Quist's note
-- “Twenty men and two knights. On the March Road since dawn.”
-- “Twenty-five miles on foot. They'll be here by suppertime, darling. About when the Hand arrives with our money.”
-- 🎬 The Wheatsheaf, upper floor — Day 23, 14:05. Letters from Harrowgate; Castle Gaunt's column on the March Road since dawn.
-- 🗺 Map: The Wheatsheaf, upper floor
+- ⏳ 10m passes — down the ladder and out through the market to the West Gate. Now Day 23, 14:15.
+- Quist's rider is at (8,9) on The Wheatsheaf's stable yard.
+- Quist's rider went off to the Hanged Men's tarp in the yard for a bowl and a sleep; the Hanged Man at the ladder hauled it down after the crew and carried it back to the stable.
+- Hanged Man with the ladder A is at (6,9) on The Wheatsheaf's stable yard.
+- 🚶 Hanged Man off duty B moves 35 ft to (33,10).
+- 🚶 Hanged Man off duty C moves 40 ft to (33,12).
+- 🎬 The West Gate — Day 23, 14:15. Bright afternoon on the March Road; crows on the gallows, a slow trickle of carts at the toll.
+- 🗺 Map: The March Road before the West Gate
+- Kit Corvell is at (31,11) on The March Road before the West Gate.
+- Brakka Holloway is at (30,11) on The March Road before the West Gate.
+- Corvin Asche is at (30,12) on The March Road before the West Gate.
+- Ottilie Marsh is at (31,12) on The March Road before the West Gate.
+- Nib is at (31,10) on The March Road before the West Gate.
+- The crew came out under the West Gate onto the March Road, Nib trotting behind. The toll men straightened; two off-duty Hanged Men left their dice to stand by the gate. Out on the road, Peg and Ord turned slowly on the gallows with the crows at them, and the few carts coming in gave the posts a wide berth.
+- “Road's quiet, my lord. Turnips and a tinker since noon. No company of a hundred, nor anything like it.”
