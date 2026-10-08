@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Bard 7** (College of Lore) · **Background:** Sage · **XP:** 23007
+**Player:** DM · **Human** · **Bard 7** (College of Lore) · **Background:** Sage · **XP:** 23257
 
 **HP** 48/48 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
 
@@ -84,6 +84,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `dove-grey-travelling-clo-1` 1× Dove-grey travelling clothes · _loot: Sabine's iron-bound travelling chest_
 - `blank-writing-case-1` 1× Blank writing case · _loot: Sabine's iron-bound travelling chest_
 - `spell-scroll-lesser-rest-1` 1× Spell Scroll (Lesser Restoration) — Uncommon · _loot: The brothers' packs_
+- `the-gilded-hands-contrac-1` 1× The Gilded Hand's contract (new terms) · _gift: Vaux's paymaster_
 
 Hit Point Dice: Bard d8 7/7
 Languages: Common, Elvish, Halfling · Tools: Calligrapher's Supplies, Forgery Kit, Disguise Kit · Armor training: light

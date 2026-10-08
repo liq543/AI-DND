@@ -2,7 +2,7 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Orc** · **Fighter 7** (Champion) · **Background:** Soldier · **XP:** 23007
+**Player:** DM · **Orc** · **Fighter 7** (Champion) · **Background:** Soldier · **XP:** 23257
 
 **HP** 71/71 · **AC** 20 (Plate Armor 18 + Defense style 1 + items 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
 
@@ -39,7 +39,7 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 
 ## Inventory
 
-**Coins:** 6856 GP 4 SP 5 CP
+**Coins:** 3481 GP 4 SP 5 CP
 
 - `javelin-1` 8× Javelin · _starting equipment_
 - `spear-1` 1× Spear · _starting equipment_

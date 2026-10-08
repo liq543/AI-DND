@@ -2,18 +2,18 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 2 · **In-world time:** Day 23, 16:00 · **Mode:** exploration
-**Current map:** The Pilgrim Road before the East Gate (`thornbury-east-road`) · **Events:** 22298 · **Log head:** `c89d51b43f174946`
+**Session:** 2 · **In-world time:** Day 23, 16:10 · **Mode:** exploration
+**Current map:** The Pilgrim Road before the East Gate (`thornbury-east-road`) · **Events:** 22341 · **Log head:** `3e6d5a76d0e7727f`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | thornbury-east-road (6,12) |
+| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | thornbury-east-road (9,12) |
 | Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | thornbury-east-road (6,13) |
 | Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-east-road (7,13) |
-| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-east-road (7,12) |
+| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-east-road (10,13) |
 
 ## Other creatures (DM view)
 
@@ -244,7 +244,6 @@
 ## Agenda (scheduled by the engine; `agenda list`)
 
 - `a50` Day 23, 09:00 [due] Corvin's research on paired speaking stones resumes only once he is back in his library at the Rookery (Arcana check then)
-- `a36` Day 23, 16:00 [due] The Gilded Hand (Captain Vaux, 100 men) reach Thornbury: a month's pay is due on arrival, 2.25 crowns a head a day (6,750) (-6750 GP → treasury)
 - `a54` Day 24, 06:00 [pending, secret] Corvin: at his next Long Rest, prepare Sending in place of Magic Missile (the player's choice, Day 23)
 - `a28` Day 24, 07:00 [pending] Quist's word from the Coldharbour carriers on the League's silver cart (route, guard, halts) for Day 34
 - `a51` Day 24, 10:00 [pending] The Pilgrim Road carrier calls at Thornbury on his eastward run (the Wheatsheaf is gone; he'll ask at the barracks or the Drover's Rest): the Mission's post to Ambersell goes with him
@@ -264,6 +263,7 @@
 - `a32` Day 45, 08:00 [pending] Thornbury's first month of Crown dues and war-tax share, paid by Reeve Ashby to the Unkindness (auto 150+10d10 → treasury) (auto 150+10d10 → treasury)
 - `a42` Day 46, 12:00 [pending] Widow Tessaly's first month's remittance from the League house's wool trade (her tenth kept) (auto 60+2d20 → treasury)
 - `a44` Day 53, 12:00 [pending] Midsummer quarter-day: Lerner, tax-farmer of the Marchwood, owes Lord Corvell 4,000 crowns in full (shortfall from his own purse and his sister's house)
+- `a55` Day 53, 16:00 [pending] The Gilded Hand's second month on the new terms: 3,375 due to Captain Vaux (and a fifth of the month's spoils) (-3375 GP → treasury)
 
 ## Maps (exact current contents — tokens and items stay where they were left)
 
@@ -1050,8 +1050,8 @@
 ### The Pilgrim Road before the East Gate (`thornbury-east-road`, wilderness 40×24, lighting bright)
 - Brakka Holloway (`brakka`, pc) at (6,13) — 71/71 HP
 - Corvin Asche (`corvin`, pc) at (7,13) — 41/41 HP
-- Kit Corvell (`kit`, pc) at (6,12) — 57/57 HP
-- Ottilie Marsh (`ottilie`, pc) at (7,12) — 48/48 HP
+- Kit Corvell (`kit`, pc) at (9,12) — 57/57 HP
+- Ottilie Marsh (`ottilie`, pc) at (10,13) — 48/48 HP
 - Captain Brannoc Vaux (`captain-brannoc-vaux`, neutral) at (16,12) — 112/112 HP
 - Gilded Hand foot A (`gilded-hand-foot-a`, neutral) at (26,12) — 9/9 HP
 - Gilded Hand foot B (`gilded-hand-foot-b`, neutral) at (25,12) — 9/9 HP
@@ -1075,18 +1075,18 @@
 
 ## Recent events
 
-- ⏳ 30m passes — waiting at the East Gate. Now Day 23, 16:00.
-- Captain Brannoc Vaux is at (16,12) on The Pilgrim Road before the East Gate.
-- 👁 Sergeant Mags Orrel is revealed!
-- Vaux's paymaster is at (22,12) on The Pilgrim Road before the East Gate.
-- 👁 Gilded Hand outrider A appears (neutral).
-- 👁 Gilded Hand outrider B appears (neutral).
-- 👁 Gilded Hand foot A appears (neutral).
-- 👁 Gilded Hand foot B appears (neutral).
-- 👁 Gilded Hand foot C appears (neutral).
-- 👁 Gilded Hand foot D appears (neutral).
-- 🪑 The Hand's pay-wagon placed at (23,13) on The Pilgrim Road before the East Gate.
-- 🪑 The Gilded Hand's banner placed at (17,12) on The Pilgrim Road before the East Gate.
-- At four the column came over the rise beyond the Wend: outriders first, then a gilt hand on a red banner, then a long snake of spears and crossbows, wagons and a surgeon's cart, stretching back down the Pilgrim Road past the waymark and out of sight. The boots rang on the bridge.
-- Captain Vaux rode under the banner on a big grey, his gilded gauntlet on the reins; Sergeant Mags Orrel walked at his stirrup.
-- “The Gilded Hand, Second and Fourth Banners, under contract! We're to ask at the gate for their lord. Who's lord of this town?”
+- Vaux was quiet a long moment, the gauntlet drumming on his saddlebow. Then he laughed, short and genuine, and looked at Kit rather than Ottilie.
+- “A fifth of a kingdom against half a month. That's a wager, not a contract. In. But it goes in the book, lady, in ink, witnessed by my sergeant. And the half is paid today, on this road.”
+- “Witnessed. Gods help us.”
+- 💰 Brakka Holloway spends 3375 GP (paid: the Gilded Hand's first month on the new terms (half the fee, a fifth of spoils)). Purse: 3481 GP 4 SP 5 CP.
+- 📅 Scheduled for Day 53, 16:00: The Gilded Hand's second month on the new terms: 3,375 due to Captain Vaux (and a fifth of the month's spoils) (payment -3375 GP out of treasury) [a55]
+- The paymaster counted Brakka's coin into the brass-bound coffer bag by bag and wrote the new terms into the company book in a cramped clerk's hand; Vaux signed, Mags made her mark, and a fair copy went to Ottilie.
+- 🎒 Ottilie Marsh gains 1× The Gilded Hand's contract (new terms) — gift: Vaux's paymaster.
+- ⭐ Kit Corvell gains 250 XP (Ottilie's new contract with the Gilded Hand at the gate: half the fee and a fifth of the spoils; ×2 house XP rate) — total 23257.
+- ⭐ Brakka Holloway gains 250 XP (Ottilie's new contract with the Gilded Hand at the gate: half the fee and a fifth of the spoils; ×2 house XP rate) — total 23257.
+- ⭐ Corvin Asche gains 250 XP (Ottilie's new contract with the Gilded Hand at the gate: half the fee and a fifth of the spoils; ×2 house XP rate) — total 23257.
+- ⭐ Ottilie Marsh gains 250 XP (Ottilie's new contract with the Gilded Hand at the gate: half the fee and a fifth of the spoils; ×2 house XP rate) — total 23257.
+- “Now, my lord. These knights of yours. Where are they, when do they come, and where do my hundred sleep tonight?”
+- ⏳ 10m passes — terms at the gate, the counting and the signing. Now Day 23, 16:10.
+- 🎬 The East Gate — Day 23, 16:10. The Gilded Hand halted on the Pilgrim Road, a new contract in ink; Vaux waiting on his orders.
+- 🗺 Map: The Pilgrim Road before the East Gate

@@ -407,3 +407,4 @@ All hired abroad. None have been below the Great Hall. All `commoner`, Neutral.
 ### Davy, Fenn's boy (Watcher)
 - The dead landlord's boy, about fourteen; watched the gate and the road for the Lady. Not found by Ivo's search on the night of Day 22; somewhere inside the walls.
 - **Davy and Peg's mother** (Day 23): prisoners in the barracks vestry under the Hanged Men's guard; each is the other's hostage. Davy is to give Ottilie's forged Sabine letter to Jory Pike on Day 24.
+- **Vaux, Day 23:** met Kit in person for the first time at the East Gate ("So the statue has legs"). He took the new terms as "a wager, not a contract" and rides with the Second and Fourth Banners himself. Mags Orrel: "Gods help us."
