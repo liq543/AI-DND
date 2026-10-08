@@ -2,24 +2,24 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 2 · **In-world time:** Day 23, 18:05 · **Mode:** exploration
-**Current map:** The March Road before the West Gate (`thornbury-west-road`) · **Events:** 22572 · **Log head:** `a95d1bf9cb799bd3`
+**Session:** 2 · **In-world time:** Day 23, 18:40 · **Mode:** exploration
+**Current map:** The Chapel of the Unblinking (`unblinking-chapel`) · **Events:** 22844 · **Log head:** `0c907bbf2394f3d5`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | thornbury-west-road (29,11) |
-| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | thornbury-west-road (28,11) |
-| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-west-road (28,12) |
-| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-west-road (26,12) |
+| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | unblinking-chapel (6,12) |
+| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | unblinking-chapel (6,11) |
+| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | unblinking-chapel (7,11) |
+| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | unblinking-chapel (7,12) |
 
 ## Other creatures (DM view)
 
 | Creature | Side | HP | AC | Conditions | Position | Hidden |
 |---|---|---|---|---|---|---|
-| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | thornbury (6,28) |  |
+| Nib (`nib`, commoner) | neutral | 4/4 | 10 | — | unblinking-chapel (8,5) |  |
 | Mr Fennimore Quist (`mr-fennimore-quist`, spy) | neutral | 23/27 | 12 | — | rookery (47,31) |  |
 | Mother Hobday (`mother-hobday`, commoner) | neutral | 4/4 | 10 | — | rookery (4,2) |  |
 | Ada Crisp (`ada-crisp`, commoner) | neutral | 4/4 | 10 | — | rookery (44,6) |  |
@@ -135,9 +135,9 @@
 | Watch-captain Orme (`watch-captain-orme`, warrior-veteran) | enemy | 0/65 | 17 | mocked · DEAD | thornbury (17,27) | yes |
 | Reeve Odo Ashby (`reeve-odo-ashby`, noble) | neutral | 9/9 | 15 | — | thornbury-heart (23,10) |  |
 | Edwin Ashby (`edwin-ashby`, commoner) | neutral | 4/4 | 10 | — | crowsfoot (22,30) |  |
-| Captain Brannoc Vaux (`captain-brannoc-vaux`, gladiator) | neutral | 112/112 | 16 | — | thornbury (13,25) |  |
+| Captain Brannoc Vaux (`captain-brannoc-vaux`, gladiator) | neutral | 112/112 | 16 | — | unblinking-chapel (20,12) |  |
 | Vaux's paymaster (`vauxs-paymaster`, commoner) | neutral | 4/4 | 10 | — | thornbury-east-road (22,12) | yes |
-| Sergeant Mags Orrel (`sergeant-mags-orrel`, warrior-veteran) | neutral | 65/65 | 17 | — | thornbury (13,29) |  |
+| Sergeant Mags Orrel (`sergeant-mags-orrel`, warrior-veteran) | neutral | 65/65 | 17 | — | unblinking-chapel (21,11) |  |
 | Sleeping Greencloak 1 (`sleeping-greencloak-1`, guard) | enemy | 0/11 | 16 | unconscious, prone · DEAD | harrowgate (31,13) |  |
 | Greencloak waking (`sleeping-greencloak-2`, guard) | enemy | 0/11 | 16 | prone · DEAD | harrowgate (31,14) |  |
 | Sleeping Greencloak 3 (`sleeping-greencloak-3`, guard) | enemy | 0/11 | 16 | unconscious, prone · DEAD | harrowgate (31,15) |  |
@@ -205,16 +205,16 @@
 | Old hand 2 (`bandit-b-2`, bandit) | ally | 11/11 | 12 | — | crowsfoot (22,27) | yes |
 | Old hand 3 (`bandit-c-2`, bandit) | ally | 11/11 | 12 | — | crowsfoot (23,27) | yes |
 | Old hand 4 (`bandit-d-2`, bandit) | ally | 11/11 | 12 | — | crowsfoot (24,27) | yes |
-| Hanged Man on the West Gate toll (`hanged-man-on-the-west-gate-toll`, bandit) | ally | 11/11 | 12 | — | thornbury (8,26) |  |
-| Hanged Man at the toll table (`hanged-man-at-the-toll-table`, bandit) | ally | 11/11 | 12 | — | thornbury (7,26) |  |
+| Hanged Man on the West Gate toll (`hanged-man-on-the-west-gate-toll`, bandit) | ally | 11/11 | 12 | — | unblinking-chapel (7,22) |  |
+| Hanged Man at the toll table (`hanged-man-at-the-toll-table`, bandit) | ally | 11/11 | 12 | — | unblinking-chapel (7,20) |  |
 | Goody Prail, the egg-woman (`a-market-woman-with-egg-baskets`, commoner) | neutral | 4/4 | 10 | blinded, restrained | the-pens (16,3) |  |
 | A carter with a load of turnips (`a-carter-with-a-load-of-turnips`, commoner) | neutral | 4/4 | 10 | — | thornbury-west-road (30,13) | yes |
 | A horse-coper at the fair yard (`a-horse-coper-at-the-fair-yard`, commoner) | neutral | 4/4 | 10 | — | thornbury (4,32) |  |
 | Market folk A (`market-folk-a`, commoner) | neutral | 4/4 | 10 | — | thornbury (47,10) | yes |
 | Market folk B (`market-folk-b`, commoner) | neutral | 4/4 | 10 | — | thornbury (47,11) | yes |
 | Hanged Man off duty A (`hanged-man-off-duty-a`, bandit) | ally | 11/11 | 12 | — | unblinking-chapel (9,20) |  |
-| Hanged Man off duty B (`hanged-man-off-duty-b`, bandit) | ally | 11/11 | 12 | — | thornbury (7,28) |  |
-| Hanged Man off duty C (`hanged-man-off-duty-c`, bandit) | ally | 11/11 | 12 | — | thornbury (8,28) |  |
+| Hanged Man off duty B (`hanged-man-off-duty-b`, bandit) | ally | 11/11 | 12 | — | unblinking-chapel (25,10) |  |
+| Hanged Man off duty C (`hanged-man-off-duty-c`, bandit) | ally | 11/11 | 12 | — | unblinking-chapel (25,13) |  |
 | A hooded penitent with bound eyes (`a-hooded-penitent-with-bound-eyes`, cultist-fanatic) | enemy | 0/44 | 13 | unconscious, prone · DEAD | wheatsheaf (11,11) |  |
 | A second penitent (`a-second-penitent`, cultist-fanatic) | enemy | 0/44 | 13 | — · DEAD | wheatsheaf (3,6) |  |
 | Eyeless Brother A (`eyeless-brother-a`, cultist-fanatic) | enemy | 0/44 | 13 | — · DEAD | wheatsheaf (15,11) |  |
@@ -234,33 +234,33 @@
 | Quist's rider (`quists-rider`, bandit) | ally | 11/11 | 12 | — | wheatsheaf-yard (8,9) |  |
 | Reeve's man at the East Gate A (`reeves-man-at-the-east-gate-a`, guard) | neutral | 11/11 | 16 | — | thornbury-east-road (3,11) |  |
 | Reeve's man at the East Gate B (`reeves-man-at-the-east-gate-b`, guard) | neutral | 11/11 | 16 | — | thornbury-east-road (3,12) |  |
-| Gilded Hand outrider A (`gilded-hand-outrider-a`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury (4,31) |  |
-| Gilded Hand outrider B (`gilded-hand-outrider-b`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury (5,31) |  |
-| Gilded Hand foot A (`gilded-hand-foot-a`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury (13,23) |  |
-| Gilded Hand foot B (`gilded-hand-foot-b`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury (13,31) |  |
-| Gilded Hand foot C (`gilded-hand-foot-c`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury (21,24) |  |
-| Gilded Hand foot D (`gilded-hand-foot-d`, warrior-infantry) | neutral | 9/9 | 13 | — | thornbury (21,30) |  |
-| Sir Hugh Darrow, banneret of Castle Gaunt (`sir-hugh-darrow-banneret-of-castle-gaunt`, knight) | enemy | 52/52 | 18 | — | thornbury-west-road (12,11) |  |
-| Sir Anselm Brey (`sir-anselm-brey`, knight) | enemy | 52/52 | 18 | — | thornbury-west-road (11,10) |  |
-| Sir Piers Whitlock (`sir-piers-whitlock`, knight) | enemy | 52/52 | 18 | — | thornbury-west-road (11,12) |  |
-| Gaunt sergeant A (`gaunt-sergeant-a`, warrior-veteran) | enemy | 65/65 | 17 | — | thornbury-west-road (9,11) |  |
-| Gaunt sergeant B (`gaunt-sergeant-b`, warrior-veteran) | enemy | 65/65 | 17 | — | thornbury-west-road (8,11) |  |
-| Gaunt man-at-arms A (`gaunt-man-at-arms-a`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (6,11) |  |
-| Gaunt man-at-arms B (`gaunt-man-at-arms-b`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (6,10) |  |
-| Gaunt man-at-arms C (`gaunt-man-at-arms-c`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (6,12) |  |
-| Gaunt man-at-arms D (`gaunt-man-at-arms-d`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (7,11) |  |
-| Gaunt man-at-arms E (`gaunt-man-at-arms-e`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (5,11) |  |
-| Gaunt man-at-arms F (`gaunt-man-at-arms-f`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (7,12) |  |
-| Gaunt man-at-arms G (`gaunt-man-at-arms-g`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (7,10) |  |
-| Gaunt man-at-arms H (`gaunt-man-at-arms-h`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (5,12) |  |
-| Gaunt man-at-arms I (`gaunt-man-at-arms-i`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (5,10) |  |
-| Gaunt man-at-arms J (`gaunt-man-at-arms-j`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (4,11) |  |
-| Gaunt man-at-arms K (`gaunt-man-at-arms-k`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (6,9) |  |
-| Gaunt man-at-arms L (`gaunt-man-at-arms-l`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (6,13) |  |
-| Gaunt man-at-arms M (`gaunt-man-at-arms-m`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (7,13) |  |
-| Gaunt man-at-arms N (`gaunt-man-at-arms-n`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (8,10) |  |
-| Gaunt man-at-arms O (`gaunt-man-at-arms-o`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (7,9) |  |
-| Gaunt man-at-arms P (`gaunt-man-at-arms-p`, guard) | enemy | 11/11 | 16 | — | thornbury-west-road (4,10) |  |
+| Gilded Hand outrider A (`gilded-hand-outrider-a`, warrior-infantry) | neutral | 9/9 | 13 | — | unblinking-chapel (26,11) |  |
+| Gilded Hand outrider B (`gilded-hand-outrider-b`, warrior-infantry) | neutral | 9/9 | 13 | — | unblinking-chapel (26,12) |  |
+| Gilded Hand foot A (`gilded-hand-foot-a`, warrior-infantry) | neutral | 9/9 | 13 | — | unblinking-chapel (24,11) |  |
+| Gilded Hand foot B (`gilded-hand-foot-b`, warrior-infantry) | neutral | 9/9 | 13 | — | unblinking-chapel (24,12) |  |
+| Gilded Hand foot C (`gilded-hand-foot-c`, warrior-infantry) | neutral | 9/9 | 13 | — | unblinking-chapel (22,13) |  |
+| Gilded Hand foot D (`gilded-hand-foot-d`, warrior-infantry) | neutral | 9/9 | 13 | — | unblinking-chapel (23,13) |  |
+| Sir Hugh Darrow, banneret of Castle Gaunt (`sir-hugh-darrow-banneret-of-castle-gaunt`, knight) | enemy | 52/52 | 10 | — | unblinking-chapel (7,10) |  |
+| Sir Anselm Brey (`sir-anselm-brey`, knight) | enemy | 52/52 | 10 | — | unblinking-chapel (8,10) |  |
+| Sir Piers Whitlock (`sir-piers-whitlock`, knight) | enemy | 52/52 | 10 | — | unblinking-chapel (9,10) |  |
+| Gaunt sergeant A (`gaunt-sergeant-a`, warrior-veteran) | enemy | 65/65 | 11 | — | unblinking-chapel (10,10) |  |
+| Gaunt sergeant B (`gaunt-sergeant-b`, warrior-veteran) | enemy | 65/65 | 11 | — | unblinking-chapel (11,10) |  |
+| Gaunt man-at-arms A (`gaunt-man-at-arms-a`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (12,10) |  |
+| Gaunt man-at-arms B (`gaunt-man-at-arms-b`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (13,10) |  |
+| Gaunt man-at-arms C (`gaunt-man-at-arms-c`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (14,10) |  |
+| Gaunt man-at-arms D (`gaunt-man-at-arms-d`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (15,10) |  |
+| Gaunt man-at-arms E (`gaunt-man-at-arms-e`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (16,10) |  |
+| Gaunt man-at-arms F (`gaunt-man-at-arms-f`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (17,10) |  |
+| Gaunt man-at-arms G (`gaunt-man-at-arms-g`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (18,10) |  |
+| Gaunt man-at-arms H (`gaunt-man-at-arms-h`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (19,10) |  |
+| Gaunt man-at-arms I (`gaunt-man-at-arms-i`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (20,10) |  |
+| Gaunt man-at-arms J (`gaunt-man-at-arms-j`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (21,10) |  |
+| Gaunt man-at-arms K (`gaunt-man-at-arms-k`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (22,10) |  |
+| Gaunt man-at-arms L (`gaunt-man-at-arms-l`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (23,10) |  |
+| Gaunt man-at-arms M (`gaunt-man-at-arms-m`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (8,13) |  |
+| Gaunt man-at-arms N (`gaunt-man-at-arms-n`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (9,13) |  |
+| Gaunt man-at-arms O (`gaunt-man-at-arms-o`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (10,13) |  |
+| Gaunt man-at-arms P (`gaunt-man-at-arms-p`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (11,13) |  |
 
 ## Agenda (scheduled by the engine; `agenda list`)
 
@@ -637,32 +637,19 @@
 - point of interest `poi-7`: The burning tollhouse at (23,7) → journal j386
 - doors: (23,8) closed
 
-### Thornbury: the West Gate quarter (`thornbury`, town 60×40, lighting bright)
+### Thornbury: the West Gate quarter (`thornbury`, town 60×40, lighting dim)
 - A horse-coper at the fair yard (`a-horse-coper-at-the-fair-yard`, neutral) at (4,32) — 4/4 HP
 - Aldous Crane (`aldous-crane`, ally) at (16,26) — 52/52 HP
-- Captain Brannoc Vaux (`captain-brannoc-vaux`, neutral) at (13,25) — 112/112 HP
 - Cornmarket watchman (`guard-a-6`, enemy) at (6,27) — DEAD · hidden
 - Cornmarket watchman (`guard-b-6`, enemy) at (4,27) — DEAD · hidden
 - Cornmarket watchman (`guard-c-4`, enemy) at (4,28) — DEAD · hidden
 - Cornmarket watchman (`guard-d-2`, enemy) at (5,26) — DEAD · hidden
 - Cornmarket watchman (`guard-e-2`, enemy) at (5,28) — DEAD · hidden
 - Cornmarket watchman (`guard-f-2`, enemy) at (6,26) — DEAD · hidden
-- Gilded Hand foot A (`gilded-hand-foot-a`, neutral) at (13,23) — 9/9 HP
-- Gilded Hand foot B (`gilded-hand-foot-b`, neutral) at (13,31) — 9/9 HP
-- Gilded Hand foot C (`gilded-hand-foot-c`, neutral) at (21,24) — 9/9 HP
-- Gilded Hand foot D (`gilded-hand-foot-d`, neutral) at (21,30) — 9/9 HP
-- Gilded Hand outrider A (`gilded-hand-outrider-a`, neutral) at (4,31) — 9/9 HP
-- Gilded Hand outrider B (`gilded-hand-outrider-b`, neutral) at (5,31) — 9/9 HP
 - Goodwife Haddow (`goodwife-haddow`, neutral) at (4,23) — 4/4 HP · hidden
 - Hal Bramble (`hal-bramble`, neutral) at (26,31) — 4/4 HP · hidden
-- Hanged Man at the toll table (`hanged-man-at-the-toll-table`, ally) at (7,26) — 11/11 HP
-- Hanged Man off duty B (`hanged-man-off-duty-b`, ally) at (7,28) — 11/11 HP
-- Hanged Man off duty C (`hanged-man-off-duty-c`, ally) at (8,28) — 11/11 HP
-- Hanged Man on the West Gate toll (`hanged-man-on-the-west-gate-toll`, ally) at (8,26) — 11/11 HP
 - Market folk A (`market-folk-a`, neutral) at (47,10) — 4/4 HP · hidden
 - Market folk B (`market-folk-b`, neutral) at (47,11) — 4/4 HP · hidden
-- Nib (`nib`, neutral) at (6,28) — 4/4 HP
-- Sergeant Mags Orrel (`sergeant-mags-orrel`, neutral) at (13,29) — 65/65 HP
 - Watch-captain Orme (`watch-captain-orme`, enemy) at (17,27) — DEAD · mocked · hidden
 - Watchman at the brazier (`guard-c-2`, enemy) at (4,26) — DEAD · hidden
 - Widow Tessaly (`widow-tessaly`, neutral) at (55,5) — 4/4 HP · hidden
@@ -732,16 +719,60 @@
 - doors: (25,2) closed, (25,8) open, (25,19) closed, (10,23) closed
 - labels: Bar (3,2)
 
-### The Chapel of the Unblinking (`unblinking-chapel`, interior 32×24, lighting bright)
+### The Chapel of the Unblinking (`unblinking-chapel`, interior 32×24, lighting dim)
+- Brakka Holloway (`brakka`, pc) at (6,11) — 71/71 HP
+- Corvin Asche (`corvin`, pc) at (7,11) — 41/41 HP
+- Kit Corvell (`kit`, pc) at (6,12) — 57/57 HP
+- Ottilie Marsh (`ottilie`, pc) at (7,12) — 48/48 HP
+- Captain Brannoc Vaux (`captain-brannoc-vaux`, neutral) at (20,12) — 112/112 HP
 - Davy, the landlord's boy (`a-boy-hiding-in-the-loft`, neutral) at (8,21) — 4/4 HP · restrained
+- Gaunt man-at-arms A (`gaunt-man-at-arms-a`, enemy) at (12,10) — 11/11 HP
+- Gaunt man-at-arms B (`gaunt-man-at-arms-b`, enemy) at (13,10) — 11/11 HP
+- Gaunt man-at-arms C (`gaunt-man-at-arms-c`, enemy) at (14,10) — 11/11 HP
+- Gaunt man-at-arms D (`gaunt-man-at-arms-d`, enemy) at (15,10) — 11/11 HP
+- Gaunt man-at-arms E (`gaunt-man-at-arms-e`, enemy) at (16,10) — 11/11 HP
+- Gaunt man-at-arms F (`gaunt-man-at-arms-f`, enemy) at (17,10) — 11/11 HP
+- Gaunt man-at-arms G (`gaunt-man-at-arms-g`, enemy) at (18,10) — 11/11 HP
+- Gaunt man-at-arms H (`gaunt-man-at-arms-h`, enemy) at (19,10) — 11/11 HP
+- Gaunt man-at-arms I (`gaunt-man-at-arms-i`, enemy) at (20,10) — 11/11 HP
+- Gaunt man-at-arms J (`gaunt-man-at-arms-j`, enemy) at (21,10) — 11/11 HP
+- Gaunt man-at-arms K (`gaunt-man-at-arms-k`, enemy) at (22,10) — 11/11 HP
+- Gaunt man-at-arms L (`gaunt-man-at-arms-l`, enemy) at (23,10) — 11/11 HP
+- Gaunt man-at-arms M (`gaunt-man-at-arms-m`, enemy) at (8,13) — 11/11 HP
+- Gaunt man-at-arms N (`gaunt-man-at-arms-n`, enemy) at (9,13) — 11/11 HP
+- Gaunt man-at-arms O (`gaunt-man-at-arms-o`, enemy) at (10,13) — 11/11 HP
+- Gaunt man-at-arms P (`gaunt-man-at-arms-p`, enemy) at (11,13) — 11/11 HP
+- Gaunt sergeant A (`gaunt-sergeant-a`, enemy) at (10,10) — 65/65 HP
+- Gaunt sergeant B (`gaunt-sergeant-b`, enemy) at (11,10) — 65/65 HP
+- Gilded Hand foot A (`gilded-hand-foot-a`, neutral) at (24,11) — 9/9 HP
+- Gilded Hand foot B (`gilded-hand-foot-b`, neutral) at (24,12) — 9/9 HP
+- Gilded Hand foot C (`gilded-hand-foot-c`, neutral) at (22,13) — 9/9 HP
+- Gilded Hand foot D (`gilded-hand-foot-d`, neutral) at (23,13) — 9/9 HP
+- Gilded Hand outrider A (`gilded-hand-outrider-a`, neutral) at (26,11) — 9/9 HP
+- Gilded Hand outrider B (`gilded-hand-outrider-b`, neutral) at (26,12) — 9/9 HP
+- Hanged Man at the toll table (`hanged-man-at-the-toll-table`, ally) at (7,20) — 11/11 HP
 - Hanged Man off duty A (`hanged-man-off-duty-a`, ally) at (9,20) — 11/11 HP
+- Hanged Man off duty B (`hanged-man-off-duty-b`, ally) at (25,10) — 11/11 HP
+- Hanged Man off duty C (`hanged-man-off-duty-c`, ally) at (25,13) — 11/11 HP
+- Hanged Man on the West Gate toll (`hanged-man-on-the-west-gate-toll`, ally) at (7,22) — 11/11 HP
 - Ivo Tarrant (`bandit-g`, ally) at (10,5) — 11/11 HP
+- Nib (`nib`, neutral) at (8,5) — 4/4 HP
 - Peg's mother (`pegs-mother`, neutral) at (10,21) — 4/4 HP · restrained
+- Sergeant Mags Orrel (`sergeant-mags-orrel`, neutral) at (21,11) — 65/65 HP
+- Sir Anselm Brey (`sir-anselm-brey`, enemy) at (8,10) — 52/52 HP
+- Sir Hugh Darrow, banneret of Castle Gaunt (`sir-hugh-darrow-banneret-of-castle-gaunt`, enemy) at (7,10) — 52/52 HP
+- Sir Piers Whitlock (`sir-piers-whitlock`, enemy) at (9,10) — 52/52 HP
 - container `ennis-strongbox`: Ennis's strongbox at (13,1)
 - container `ennis-chest`: Ennis's clothes chest at (6,3)
 - container `brothers-chest`: The brothers' chest at (17,3)
 - container `alms-box`: The alms box at (29,9)
 - container `vestment-chest`: The vestment chest at (12,22)
+- container `barracks-armoury`: The barracks armoury at (6,21)
+- in The barracks armoury (`barracks-armoury`) `floor-1`: 16× Spear at (6,21) — stashed by Hanged Man at the toll table
+- in The barracks armoury (`barracks-armoury`) `floor-2`: 16× Shield at (6,21) — stashed by Hanged Man at the toll table
+- in The barracks armoury (`barracks-armoury`) `floor-3`: 2× Halberd at (6,21) — stashed by Hanged Man at the toll table
+- in The barracks armoury (`barracks-armoury`) `floor-4`: 16× Chain Shirt at (6,21) — stashed by Hanged Man on the West Gate toll
+- in The barracks armoury (`barracks-armoury`) `floor-5`: 2× Chain Mail at (6,21) — stashed by Hanged Man on the West Gate toll
 - point of interest `poi-2`: The altar at (3,11) → journal j349
 - point of interest `poi-3`: The silver-eye doors at (31,11) → journal j350
 - point of interest `poi-4`: The notice board at (25,9) → journal j351
@@ -778,64 +809,20 @@
 - doors: (18,4) closed, (18,10) closed, (9,13) closed, (18,16) closed
 - labels: The Missioner's study (9,6), Bedchamber (23,5), The chapel gallery (23,12), Stair passage (9,16)
 
-### The March Road before the West Gate (`thornbury-west-road`, wilderness 38×24, lighting bright)
-- Brakka Holloway (`brakka`, pc) at (28,11) — 71/71 HP
-- Corvin Asche (`corvin`, pc) at (28,12) — 41/41 HP
-- Kit Corvell (`kit`, pc) at (29,11) — 57/57 HP
-- Ottilie Marsh (`ottilie`, pc) at (26,12) — 48/48 HP
+### The March Road before the West Gate (`thornbury-west-road`, wilderness 38×24, lighting dim)
 - A carter with a load of turnips (`a-carter-with-a-load-of-turnips`, neutral) at (30,13) — 4/4 HP · hidden
 - Causeway watchman with a torch (`guard-a-5`, enemy) at (32,10) — DEAD · hidden
 - Causeway watchman with a torch (`guard-b-5`, enemy) at (32,12) — DEAD · hidden
-- Gaunt man-at-arms A (`gaunt-man-at-arms-a`, enemy) at (6,11) — 11/11 HP
-- Gaunt man-at-arms B (`gaunt-man-at-arms-b`, enemy) at (6,10) — 11/11 HP
-- Gaunt man-at-arms C (`gaunt-man-at-arms-c`, enemy) at (6,12) — 11/11 HP
-- Gaunt man-at-arms D (`gaunt-man-at-arms-d`, enemy) at (7,11) — 11/11 HP
-- Gaunt man-at-arms E (`gaunt-man-at-arms-e`, enemy) at (5,11) — 11/11 HP
-- Gaunt man-at-arms F (`gaunt-man-at-arms-f`, enemy) at (7,12) — 11/11 HP
-- Gaunt man-at-arms G (`gaunt-man-at-arms-g`, enemy) at (7,10) — 11/11 HP
-- Gaunt man-at-arms H (`gaunt-man-at-arms-h`, enemy) at (5,12) — 11/11 HP
-- Gaunt man-at-arms I (`gaunt-man-at-arms-i`, enemy) at (5,10) — 11/11 HP
-- Gaunt man-at-arms J (`gaunt-man-at-arms-j`, enemy) at (4,11) — 11/11 HP
-- Gaunt man-at-arms K (`gaunt-man-at-arms-k`, enemy) at (6,9) — 11/11 HP
-- Gaunt man-at-arms L (`gaunt-man-at-arms-l`, enemy) at (6,13) — 11/11 HP
-- Gaunt man-at-arms M (`gaunt-man-at-arms-m`, enemy) at (7,13) — 11/11 HP
-- Gaunt man-at-arms N (`gaunt-man-at-arms-n`, enemy) at (8,10) — 11/11 HP
-- Gaunt man-at-arms O (`gaunt-man-at-arms-o`, enemy) at (7,9) — 11/11 HP
-- Gaunt man-at-arms P (`gaunt-man-at-arms-p`, enemy) at (4,10) — 11/11 HP
-- Gaunt sergeant A (`gaunt-sergeant-a`, enemy) at (9,11) — 65/65 HP
-- Gaunt sergeant B (`gaunt-sergeant-b`, enemy) at (8,11) — 65/65 HP
 - League man in grey (`guard-c-3`, enemy) at (37,10) — DEAD · hidden
 - Night watchman with a crossbow (`guard-b-4`, enemy) at (35,12) — DEAD · hidden
 - Night watchman with a lantern (`guard-a-4`, enemy) at (35,10) — DEAD · hidden
 - Ord, the League house under-clerk (`ord-the-league-house-under-clerk`, neutral) at (29,20) — DEAD
 - Peg, the Wheatsheaf's serving girl (`the-serving-girl`, neutral) at (28,18) — DEAD · restrained
-- Sir Anselm Brey (`sir-anselm-brey`, enemy) at (11,10) — 52/52 HP
-- Sir Hugh Darrow, banneret of Castle Gaunt (`sir-hugh-darrow-banneret-of-castle-gaunt`, enemy) at (12,11) — 52/52 HP
-- Sir Piers Whitlock (`sir-piers-whitlock`, enemy) at (11,12) — 52/52 HP
 - Townsfolk at the gallows A (`townsfolk-at-the-gallows-a`, neutral) at (23,16) — 4/4 HP · hidden
 - Townsfolk at the gallows B (`townsfolk-at-the-gallows-b`, neutral) at (22,16) — 4/4 HP · hidden
 - Townsfolk at the gallows C (`townsfolk-at-the-gallows-c`, neutral) at (24,16) — 4/4 HP · hidden
 - Townsfolk at the gallows D (`townsfolk-at-the-gallows-d`, neutral) at (23,17) — 4/4 HP · hidden
 - Townsfolk at the gallows E (`townsfolk-at-the-gallows-e`, neutral) at (23,15) — 4/4 HP · hidden
-- container `box-2`: Sir Hugh Darrow's arms and saddlebags at (12,11) · SEALED (contents hidden from players) — coins: 85 GP
-- container `box-3`: Sir Piers Whitlock's arms at (11,12) · SEALED (contents hidden from players) — coins: 12 GP
-- container `box-4`: Sir Anselm Brey's arms at (11,10) · SEALED (contents hidden from players) — coins: 20 GP
-- container `gaunt-arms`: Castle Gaunt's grounded arms at (15,12) · SEALED (contents hidden from players)
-- in Sir Hugh Darrow's arms and saddlebags (`box-2`) `floor-1`: 1× Longsword +1 at (12,11) — in Sir Hugh Darrow's arms and saddlebags
-- in Sir Hugh Darrow's arms and saddlebags (`box-2`) `floor-2`: 1× Plate Armor at (12,11) — in Sir Hugh Darrow's arms and saddlebags
-- in Sir Hugh Darrow's arms and saddlebags (`box-2`) `floor-3`: 1× Shield at (12,11) — in Sir Hugh Darrow's arms and saddlebags
-- in Sir Hugh Darrow's arms and saddlebags (`box-2`) `floor-4`: 1× Darrow's saddlebags at (12,11) — in Sir Hugh Darrow's arms and saddlebags
-- in Sir Piers Whitlock's arms (`box-3`) `floor-5`: 1× Plate Armor at (11,12) — in Sir Piers Whitlock's arms
-- in Sir Piers Whitlock's arms (`box-3`) `floor-6`: 1× Mace at (11,12) — in Sir Piers Whitlock's arms
-- in Sir Piers Whitlock's arms (`box-3`) `floor-7`: 1× Shield at (11,12) — in Sir Piers Whitlock's arms
-- in Sir Piers Whitlock's arms (`box-3`) `floor-8`: 2× Potion of Healing at (11,12) — in Sir Piers Whitlock's arms
-- in Sir Anselm Brey's arms (`box-4`) `floor-9`: 1× Plate Armor at (11,10) — in Sir Anselm Brey's arms
-- in Sir Anselm Brey's arms (`box-4`) `floor-10`: 1× Longsword at (11,10) — in Sir Anselm Brey's arms
-- in Sir Anselm Brey's arms (`box-4`) `floor-11`: 1× Shield at (11,10) — in Sir Anselm Brey's arms
-- in Sir Anselm Brey's arms (`box-4`) `floor-12`: 1× Lance at (11,10) — in Sir Anselm Brey's arms
-- in Castle Gaunt's grounded arms (`gaunt-arms`) `floor-13`: 16× Spear at (15,12) — in Castle Gaunt's grounded arms
-- in Castle Gaunt's grounded arms (`gaunt-arms`) `floor-14`: 16× Shield at (15,12) — in Castle Gaunt's grounded arms
-- in Castle Gaunt's grounded arms (`gaunt-arms`) `floor-15`: 2× Halberd at (15,12) — in Castle Gaunt's grounded arms
 - point of interest `poi-2`: The town ditch at (31,5) → journal j373
 - point of interest `poi-3`: The roadside copse at (7,4) → journal j374
 - point of interest `poi-4`: The ruined tithe barn at (10,17) → journal j375
@@ -1136,18 +1123,18 @@
 
 ## Recent events
 
-- Ottilie Marsh — CHA (Persuasion): 1d20(8) +10 = 18 vs DC 15 → SUCCESS
-- Darrow looked at the wall a long moment, and at the open gate, and at the dead on the gallows. Then he looked back down the road at his twenty, dusty from a day's march, and something in his tired face settled.
-- “Sir Hugh, you can't! To these? They hanged a girl on that tree!”
-- “Be quiet, Anselm. I'll not feed twenty men to a wall for a writ. Castle Gaunt yields, lady, on your word that they live. I yield to your arithmetic, not to his crown.”
-- “Ground your spears. Ground them, I said.”
-- 🪑 Castle Gaunt's grounded arms placed at (15,11) on The March Road before the West Gate.
-- Down the column the spears came down into the dust of the March Road, then the shields, a sergeant's halberd last. Darrow dismounted, unbuckled his sword belt and held it out hilt-first toward Kit across the empty road; after a moment Whitlock did the same. Brey sat his horse white with fury, and then he too got down.
-- ⭐ Kit Corvell gains 1950 XP (Castle Gaunt's column yielded at the West Gate to Ottilie's parley: Sir Hugh Darrow, banneret of Castle Gaunt (700), Sir Anselm Brey (700), Sir Piers Whitlock (700), Gaunt sergeant A (700), Gaunt sergeant B (700), Gaunt man-at-arms A (25), Gaunt man-at-arms B (25), Gaunt man-at-arms C (25), Gaunt man-at-arms D (25), Gaunt man-at-arms E (25), Gaunt man-at-arms F (25), Gaunt man-at-arms G (25), Gaunt man-at-arms H (25), Gaunt man-at-arms I (25), Gaunt man-at-arms J (25), Gaunt man-at-arms K (25), Gaunt man-at-arms L (25), Gaunt man-at-arms M (25), Gaunt man-at-arms N (25), Gaunt man-at-arms O (25), Gaunt man-at-arms P (25); ×2 house XP rate) — total 25207.
-- ⭐ Brakka Holloway gains 1950 XP (Castle Gaunt's column yielded at the West Gate to Ottilie's parley: Sir Hugh Darrow, banneret of Castle Gaunt (700), Sir Anselm Brey (700), Sir Piers Whitlock (700), Gaunt sergeant A (700), Gaunt sergeant B (700), Gaunt man-at-arms A (25), Gaunt man-at-arms B (25), Gaunt man-at-arms C (25), Gaunt man-at-arms D (25), Gaunt man-at-arms E (25), Gaunt man-at-arms F (25), Gaunt man-at-arms G (25), Gaunt man-at-arms H (25), Gaunt man-at-arms I (25), Gaunt man-at-arms J (25), Gaunt man-at-arms K (25), Gaunt man-at-arms L (25), Gaunt man-at-arms M (25), Gaunt man-at-arms N (25), Gaunt man-at-arms O (25), Gaunt man-at-arms P (25); ×2 house XP rate) — total 25207.
-- ⭐ Corvin Asche gains 1950 XP (Castle Gaunt's column yielded at the West Gate to Ottilie's parley: Sir Hugh Darrow, banneret of Castle Gaunt (700), Sir Anselm Brey (700), Sir Piers Whitlock (700), Gaunt sergeant A (700), Gaunt sergeant B (700), Gaunt man-at-arms A (25), Gaunt man-at-arms B (25), Gaunt man-at-arms C (25), Gaunt man-at-arms D (25), Gaunt man-at-arms E (25), Gaunt man-at-arms F (25), Gaunt man-at-arms G (25), Gaunt man-at-arms H (25), Gaunt man-at-arms I (25), Gaunt man-at-arms J (25), Gaunt man-at-arms K (25), Gaunt man-at-arms L (25), Gaunt man-at-arms M (25), Gaunt man-at-arms N (25), Gaunt man-at-arms O (25), Gaunt man-at-arms P (25); ×2 house XP rate) — total 25207.
-- ⭐ Ottilie Marsh gains 1950 XP (Castle Gaunt's column yielded at the West Gate to Ottilie's parley: Sir Hugh Darrow, banneret of Castle Gaunt (700), Sir Anselm Brey (700), Sir Piers Whitlock (700), Gaunt sergeant A (700), Gaunt sergeant B (700), Gaunt man-at-arms A (25), Gaunt man-at-arms B (25), Gaunt man-at-arms C (25), Gaunt man-at-arms D (25), Gaunt man-at-arms E (25), Gaunt man-at-arms F (25), Gaunt man-at-arms G (25), Gaunt man-at-arms H (25), Gaunt man-at-arms I (25), Gaunt man-at-arms J (25), Gaunt man-at-arms K (25), Gaunt man-at-arms L (25), Gaunt man-at-arms M (25), Gaunt man-at-arms N (25), Gaunt man-at-arms O (25), Gaunt man-at-arms P (25); ×2 house XP rate) — total 25207.
-- ⏳ 5m passes — the parley and the yielding. Now Day 23, 18:05.
-- 🎬 The West Gate — Day 23, 18:05. Castle Gaunt's column has grounded its arms on the March Road; the banneret holds out his sword.
-- 🗺 Map: The March Road before the West Gate
-- 🧰 Castle Gaunt's grounded arms at (15,12) on The March Road before the West Gate.
+- Hanged Man at the toll table: 16× Shield stashed.
+- ⬇ 16× Shield goes into the barracks armoury — stashed by Hanged Man at the toll table.
+- Hanged Man at the toll table: 2× Halberd stashed.
+- ⬇ 2× Halberd goes into the barracks armoury — stashed by Hanged Man at the toll table.
+- Hanged Man on the West Gate toll: 16× Chain Shirt stashed.
+- ⬇ 16× Chain Shirt goes into the barracks armoury — stashed by Hanged Man on the West Gate toll.
+- Hanged Man on the West Gate toll: 2× Chain Mail stashed.
+- ⬇ 2× Chain Mail goes into the barracks armoury — stashed by Hanged Man on the West Gate toll.
+- The Hanged Men stacked Castle Gaunt's spears, shields and mail on the old vestry racks. In the nave the prisoners sat on the pews in their shirts; Ivo came down from the study, took in twenty-one Regency soldiers and a hundred mercenaries in his barracks, and swallowed.
+- “Boss. That's... a lot of guests.”
+- Vaux leaned on a pillar by the door and looked Ivo over the way he'd looked at Kit at the gate, pleasantly, like a price.
+- “(quietly, to Ottilie) What now? I didn't really expect that to work.”
+- “(quietly) Neither did I, darling. Now we decide what they're worth. The knights are worth ransom: their families pay, or Castle Gaunt does. The men-at-arms are soldiers whose Regent can't pay them; offer them our coin and Lerner's ranks and half will take it. Or we send Darrow home on his parole with our message, and he tells the Regent exactly what he saw today. And darling, I gave them my word they'd live. My word is worth more to us alive than they are dead.”
+- “(low) A banneret on parole keeps it. That one would.”
+- “(low) Them sergeants could teach Lerner's boys to stand in a line. Better than I can.”

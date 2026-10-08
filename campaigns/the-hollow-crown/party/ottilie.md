@@ -20,6 +20,7 @@
 
 | Attack | To hit | Damage | Notes |
 |---|---|---|---|
+| Mace | +2 | 1d6-1 bludgeoning | reach 5 ft |
 | Unarmed Strike | +2 | 0 bludgeoning | reach 5 ft |
 
 Attacks per Attack action: 1
@@ -45,7 +46,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 93 GP 5 SP 3 CP
+**Coins:** 105 GP 5 SP 3 CP
 
 - `pan-flute-1` 1× Pan flute · _starting equipment_
 - `entertainers-pack-1` 1× Entertainer's Pack · _starting equipment_
@@ -85,6 +86,10 @@ Species traits: Resourceful, Skillful, Versatile
 - `blank-writing-case-1` 1× Blank writing case · _loot: Sabine's iron-bound travelling chest_
 - `spell-scroll-lesser-rest-1` 1× Spell Scroll (Lesser Restoration) — Uncommon · _loot: The brothers' packs_
 - `the-gilded-hands-contrac-1` 1× The Gilded Hand's contract (new terms) · _gift: Vaux's paymaster_
+- `plate-armor-1` 1× Plate Armor · _loot: Sir Piers Whitlock's arms_
+- `mace-1` 1× Mace (equipped) · _loot: Sir Piers Whitlock's arms_
+- `shield-1` 1× Shield · _loot: Sir Piers Whitlock's arms_
+- `potion-of-healing-2` 2× Potion of Healing (UNIDENTIFIED — players see "Unidentified potion") — Common · _loot: Sir Piers Whitlock's arms_
 
 Hit Point Dice: Bard d8 7/7
 Languages: Common, Elvish, Halfling · Tools: Calligrapher's Supplies, Forgery Kit, Disguise Kit · Armor training: light

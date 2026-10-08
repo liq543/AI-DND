@@ -100,6 +100,13 @@ class LootTest(unittest.TestCase):
         self.assertNotIn("box-1", self.ok("loot", "cache", "field", "7,7", "--name", "Yet another"))
         self.assertIn("box-1", out)
 
+    def test_container_names_take_the_right_article(self):
+        from engine.mechanics import the
+        self.assertEqual(the("Iron chest"), "the Iron chest")
+        self.assertEqual(the("The miller's chest"), "the miller's chest")
+        self.assertEqual(the("Kira's pack"), "Kira's pack")
+        self.assertEqual(the("Captain Rhosk's saddlebags"), "Captain Rhosk's saddlebags")
+
     def test_companion_turn_lists_its_kit(self):
         self.ok("item", "add", "kira-vale", "Potion of Healing", "--source", "loot: test")
         g = _cli.game(self.env)

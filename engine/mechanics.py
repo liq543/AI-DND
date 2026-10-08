@@ -2262,7 +2262,7 @@ def the(name):
     "Kira's pack" stays "Kira's pack" (no doubled or wrong article)."""
     if re.match(r"(?i)the\s", name):
         return re.sub(r"^the\s+", "the ", name, flags=re.I)
-    if re.match(r"^[\w-]+'s\b", name):
+    if re.match(r"^[\w-]+'s\b", name) or re.match(r"^[A-Z][\w-]*(?:\s+[A-Z][\w-]*)*'s\b", name):
         return name
     return f"the {name}"
 
