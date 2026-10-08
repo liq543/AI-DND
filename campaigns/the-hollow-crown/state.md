@@ -2,18 +2,18 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 2 · **In-world time:** Day 23, 19:36 · **Mode:** exploration
-**Current map:** The Chapel of the Unblinking (`unblinking-chapel`) · **Events:** 23029 · **Log head:** `74c37e3c29c41125`
+**Session:** 2 · **In-world time:** Day 23, 19:51 · **Mode:** exploration
+**Current map:** The reeve's gaol, under the reeve's hall (`thornbury-gaol`) · **Events:** 23163 · **Log head:** `30e6738ea24a83d4`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
 
 | Character | Lvl | HP | AC | Conditions | Slots | Position |
 |---|---|---|---|---|---|---|
-| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | unblinking-chapel (6,12) |
-| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | unblinking-chapel (6,11) |
-| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | unblinking-chapel (7,11) |
-| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | unblinking-chapel (9,12) |
+| Kit Corvell (`kit`) | 7 | 57/57 | 16 | — | — | thornbury-gaol (7,4) |
+| Brakka Holloway (`brakka`) | 7 | 71/71 | 20 | — | — | thornbury-gaol (8,5) |
+| Corvin Asche (`corvin`) | 7 | 41/41 | 14 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-gaol (8,3) |
+| Ottilie Marsh (`ottilie`) | 7 | 48/48 | 13 | — | L1:4/4 L2:3/3 L3:3/3 L4:1/1 | thornbury-gaol (7,6) |
 
 ## Other creatures (DM view)
 
@@ -205,8 +205,8 @@
 | Old hand 2 (`bandit-b-2`, bandit) | ally | 11/11 | 12 | — | crowsfoot (22,27) | yes |
 | Old hand 3 (`bandit-c-2`, bandit) | ally | 11/11 | 12 | — | crowsfoot (23,27) | yes |
 | Old hand 4 (`bandit-d-2`, bandit) | ally | 11/11 | 12 | — | crowsfoot (24,27) | yes |
-| Hanged Man on the West Gate toll (`hanged-man-on-the-west-gate-toll`, bandit) | ally | 11/11 | 16 | — | unblinking-chapel (7,22) |  |
-| Hanged Man at the toll table (`hanged-man-at-the-toll-table`, bandit) | ally | 11/11 | 16 | — | unblinking-chapel (7,20) |  |
+| Hanged Man on the West Gate toll (`hanged-man-on-the-west-gate-toll`, bandit) | ally | 11/11 | 16 | — | thornbury-gaol (11,5) |  |
+| Hanged Man at the toll table (`hanged-man-at-the-toll-table`, bandit) | ally | 11/11 | 16 | — | thornbury-gaol (11,4) |  |
 | Goody Prail, the egg-woman (`a-market-woman-with-egg-baskets`, commoner) | neutral | 4/4 | 10 | blinded, restrained | the-pens (16,3) |  |
 | A carter with a load of turnips (`a-carter-with-a-load-of-turnips`, commoner) | neutral | 4/4 | 10 | — | thornbury-west-road (30,13) | yes |
 | A horse-coper at the fair yard (`a-horse-coper-at-the-fair-yard`, commoner) | neutral | 4/4 | 10 | — | thornbury (4,32) |  |
@@ -231,7 +231,7 @@
 | Davy, the landlord's boy (`a-boy-hiding-in-the-loft`, commoner) | neutral | 4/4 | 10 | restrained | unblinking-chapel (8,21) |  |
 | Hanged Man with the ladder A (`hanged-man-with-the-ladder-a`, bandit) | ally | 11/11 | 12 | — | wheatsheaf-yard (6,9) |  |
 | Hanged Man with the ladder B (`hanged-man-with-the-ladder-b`, bandit) | ally | 11/11 | 12 | — | wheatsheaf-yard (7,9) |  |
-| Quist's rider (`quists-rider`, bandit) | ally | 11/11 | 12 | — | wheatsheaf-yard (8,9) |  |
+| Quist's rider (`quists-rider`, bandit) | ally | 11/11 | 12 | — | unblinking-chapel (6,14) |  |
 | Reeve's man at the East Gate A (`reeves-man-at-the-east-gate-a`, guard) | neutral | 11/11 | 16 | — | thornbury-east-road (3,11) |  |
 | Reeve's man at the East Gate B (`reeves-man-at-the-east-gate-b`, guard) | neutral | 11/11 | 16 | — | thornbury-east-road (3,12) |  |
 | Gilded Hand outrider A (`gilded-hand-outrider-a`, warrior-infantry) | neutral | 9/9 | 13 | — | unblinking-chapel (26,11) |  |
@@ -241,8 +241,8 @@
 | Gilded Hand foot C (`gilded-hand-foot-c`, warrior-infantry) | neutral | 9/9 | 13 | — | unblinking-chapel (22,13) |  |
 | Gilded Hand foot D (`gilded-hand-foot-d`, warrior-infantry) | neutral | 9/9 | 13 | — | unblinking-chapel (23,13) |  |
 | Sir Hugh Darrow, banneret of Castle Gaunt (`sir-hugh-darrow-banneret-of-castle-gaunt`, knight) | enemy | 52/52 | 10 | — | unblinking-chapel (7,10) |  |
-| Sir Anselm Brey (`sir-anselm-brey`, knight) | enemy | 52/52 | 10 | — | unblinking-chapel (8,10) |  |
-| Sir Piers Whitlock (`sir-piers-whitlock`, knight) | enemy | 52/52 | 10 | — | unblinking-chapel (9,10) |  |
+| Sir Anselm Brey (`sir-anselm-brey`, knight) | enemy | 52/52 | 10 | — | thornbury-gaol (12,2) |  |
+| Sir Piers Whitlock (`sir-piers-whitlock`, knight) | enemy | 52/52 | 10 | — | thornbury-gaol (16,2) |  |
 | Gaunt sergeant A (`gaunt-sergeant-a`, warrior-veteran) | ally | 65/65 | 16 | — | unblinking-chapel (10,10) |  |
 | Gaunt sergeant B (`gaunt-sergeant-b`, warrior-veteran) | ally | 65/65 | 16 | — | unblinking-chapel (11,10) |  |
 | Gaunt man-at-arms A (`gaunt-man-at-arms-a`, guard) | ally | 11/11 | 16 | — | unblinking-chapel (12,10) |  |
@@ -257,29 +257,34 @@
 | Gaunt man-at-arms J (`gaunt-man-at-arms-j`, guard) | ally | 11/11 | 16 | — | unblinking-chapel (21,10) |  |
 | Gaunt man-at-arms K (`gaunt-man-at-arms-k`, guard) | ally | 11/11 | 16 | — | unblinking-chapel (22,10) |  |
 | Gaunt man-at-arms L (`gaunt-man-at-arms-l`, guard) | ally | 11/11 | 16 | — | unblinking-chapel (23,10) |  |
-| Gaunt man-at-arms M (`gaunt-man-at-arms-m`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (8,13) |  |
-| Gaunt man-at-arms N (`gaunt-man-at-arms-n`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (9,13) |  |
-| Gaunt man-at-arms O (`gaunt-man-at-arms-o`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (10,13) |  |
-| Gaunt man-at-arms P (`gaunt-man-at-arms-p`, guard) | enemy | 11/11 | 11 | — | unblinking-chapel (11,13) |  |
+| Gaunt man-at-arms M (`gaunt-man-at-arms-m`, guard) | enemy | 11/11 | 11 | — | thornbury-gaol (12,7) |  |
+| Gaunt man-at-arms N (`gaunt-man-at-arms-n`, guard) | enemy | 11/11 | 11 | — | thornbury-gaol (13,8) |  |
+| Gaunt man-at-arms O (`gaunt-man-at-arms-o`, guard) | enemy | 11/11 | 11 | — | thornbury-gaol (16,7) |  |
+| Gaunt man-at-arms P (`gaunt-man-at-arms-p`, guard) | enemy | 11/11 | 11 | — | thornbury-gaol (17,8) |  |
 | Thornbury recruits 1 (`thornbury-recruits-1`, commoner) | ally | 4/4 | 10 | — | unblinking-chapel (10,16) |  |
 | Thornbury recruits 2 (`thornbury-recruits-2`, commoner) | ally | 4/4 | 10 | — | unblinking-chapel (10,17) |  |
 | Thornbury recruits 3 (`thornbury-recruits-3`, commoner) | ally | 4/4 | 10 | — | unblinking-chapel (10,15) |  |
 | Thornbury recruits 4 (`thornbury-recruits-4`, commoner) | ally | 4/4 | 10 | — | unblinking-chapel (8,16) |  |
 | Thornbury recruits 5 (`thornbury-recruits-5`, commoner) | ally | 4/4 | 10 | — | unblinking-chapel (10,18) |  |
+| Hob Sallis, the reeve's gaoler (`hob-sallis-the-reeves-gaoler`, guard) | neutral | 11/11 | 16 | — | thornbury-gaol (6,5) |  |
 
 ## Agenda (scheduled by the engine; `agenda list`)
 
 - `a50` Day 23, 09:00 [due] Corvin's research on paired speaking stones resumes only once he is back in his library at the Rookery (Arcana check then)
 - `a54` Day 24, 06:00 [pending, secret] Corvin: at his next Long Rest, prepare Sending in place of Magic Missile (the player's choice, Day 23)
+- `a56` Day 24, 06:00 [pending] Quist's rider leaves Thornbury at first light with two warhorses (one for Lerner at Harrowgate, one for Hesketh at Crowsfoot), two riding horses and three suits of plate for Quist to sell; also Lerner's recruits' 10 crowns
+- `a58` Day 24, 06:00 [pending] Sir Hugh Darrow leaves Thornbury on parole at first light, on foot by the March Road for Castle Gaunt with the ransom letter (Brey 1,000, Whitlock 300, four men-at-arms 20 each)
 - `a28` Day 24, 07:00 [pending] Quist's word from the Coldharbour carriers on the League's silver cart (route, guard, halts) for Day 34
 - `a51` Day 24, 10:00 [pending] The Pilgrim Road carrier calls at Thornbury on his eastward run (the Wheatsheaf is gone; he'll ask at the barracks or the Drover's Rest): the Mission's post to Ambersell goes with him
 - `a43` Day 24, 15:00 [pending] The hanging of the two Thornbound raiders (the Stag and the young spearman) at the gallows by Thornbury's market cross, by Lord Corvell's order
 - `a47` Day 25, 05:45 [pending, secret] Lord's-day dawn: the Watchtower chaplain casts Sending to Brother Ennis (it fails inside the Stillness; outside it, Ennis hears 25 words and answers at once)
 - `a48` Day 25, 18:00 [pending] Hesketh's Crowsfoot dozen should be signed and posted on the bridge and the green (raised with Kit's 100 crowns)
+- `a57` Day 26, 12:00 [pending] Quist sells Castle Gaunt's three plate harnesses (half of 1,500 each) and two riding horses (half of 75 each) to the League's buyers at Coldharbour; take the plate and hacks off Quist's rider (auto 2325 GP → treasury)
 - `a40` Day 30, 12:00 [pending] Ditchley's first quarter of tithes and rents under the Unkindness, brought by Amyas the reeve (auto 30+2d10 → treasury)
 - `a7` Day 30, 18:00 [pending] Month's end: household wages (Quist 90, Mother Hobday 75, Harl 75, Bastian 150, Ada, Bel, Tobin and Corlis 10 each) (auto -430 GP → treasury)
 - `a26` Day 30, 18:05 [pending] Coldharbour's first month as the Unkindness's inn: takings less Moss's wage and the new staff, with the dice room open (stables not yet finished) (auto 65+6d10 → treasury) (auto 65+6d10 → treasury)
 - `a49` Day 30, 18:10 [pending] Wages for Hesketh's Crowsfoot dozen from Day 25 (2 shillings a day each) (auto -14 GP → treasury)
+- `a59` Day 32, 12:00 [pending, secret] Castle Gaunt's answer to the ransom letter reaches Thornbury (decide with a hidden roll: Brey's father, Whitlock's kin, the castle for the men)
 - `a8` Day 34, 09:00 [pending] The Crowsfoot fort's second month of building falls due (about 4,000 crowns for the carpenters, timber and gangs)
 - `a13` Day 35, 09:00 [pending, secret] Sabine sends to Ambersell for the Seeing Glass
 - `a52` Day 37, 00:00 [pending] New moon: Sabine's dead-man's letter falls due. Unless a letter in her hand has reached Brother Prior Anselm at Ambersell, the Glass is sent west
@@ -735,10 +740,6 @@
 - labels: Bar (3,2)
 
 ### The Chapel of the Unblinking (`unblinking-chapel`, interior 32×24, lighting dim)
-- Brakka Holloway (`brakka`, pc) at (6,11) — 71/71 HP
-- Corvin Asche (`corvin`, pc) at (7,11) — 41/41 HP
-- Kit Corvell (`kit`, pc) at (6,12) — 57/57 HP
-- Ottilie Marsh (`ottilie`, pc) at (9,12) — 48/48 HP
 - Captain Brannoc Vaux (`captain-brannoc-vaux`, neutral) at (20,12) — 112/112 HP
 - Davy, the landlord's boy (`a-boy-hiding-in-the-loft`, neutral) at (8,21) — 4/4 HP · restrained
 - Gaunt man-at-arms A (`gaunt-man-at-arms-a`, ally) at (12,10) — 11/11 HP
@@ -753,10 +754,6 @@
 - Gaunt man-at-arms J (`gaunt-man-at-arms-j`, ally) at (21,10) — 11/11 HP
 - Gaunt man-at-arms K (`gaunt-man-at-arms-k`, ally) at (22,10) — 11/11 HP
 - Gaunt man-at-arms L (`gaunt-man-at-arms-l`, ally) at (23,10) — 11/11 HP
-- Gaunt man-at-arms M (`gaunt-man-at-arms-m`, enemy) at (8,13) — 11/11 HP
-- Gaunt man-at-arms N (`gaunt-man-at-arms-n`, enemy) at (9,13) — 11/11 HP
-- Gaunt man-at-arms O (`gaunt-man-at-arms-o`, enemy) at (10,13) — 11/11 HP
-- Gaunt man-at-arms P (`gaunt-man-at-arms-p`, enemy) at (11,13) — 11/11 HP
 - Gaunt sergeant A (`gaunt-sergeant-a`, ally) at (10,10) — 65/65 HP
 - Gaunt sergeant B (`gaunt-sergeant-b`, ally) at (11,10) — 65/65 HP
 - Gilded Hand foot A (`gilded-hand-foot-a`, neutral) at (24,11) — 9/9 HP
@@ -765,18 +762,15 @@
 - Gilded Hand foot D (`gilded-hand-foot-d`, neutral) at (23,13) — 9/9 HP
 - Gilded Hand outrider A (`gilded-hand-outrider-a`, neutral) at (26,11) — 9/9 HP
 - Gilded Hand outrider B (`gilded-hand-outrider-b`, neutral) at (26,12) — 9/9 HP
-- Hanged Man at the toll table (`hanged-man-at-the-toll-table`, ally) at (7,20) — 11/11 HP
 - Hanged Man off duty A (`hanged-man-off-duty-a`, ally) at (9,20) — 11/11 HP
 - Hanged Man off duty B (`hanged-man-off-duty-b`, ally) at (25,10) — 11/11 HP
 - Hanged Man off duty C (`hanged-man-off-duty-c`, ally) at (25,13) — 11/11 HP
-- Hanged Man on the West Gate toll (`hanged-man-on-the-west-gate-toll`, ally) at (7,22) — 11/11 HP
 - Ivo Tarrant (`bandit-g`, ally) at (10,5) — 11/11 HP
 - Nib (`nib`, neutral) at (8,5) — 4/4 HP
 - Peg's mother (`pegs-mother`, neutral) at (10,21) — 4/4 HP · restrained
+- Quist's rider (`quists-rider`, ally) at (6,14) — 11/11 HP
 - Sergeant Mags Orrel (`sergeant-mags-orrel`, neutral) at (21,11) — 65/65 HP
-- Sir Anselm Brey (`sir-anselm-brey`, enemy) at (8,10) — 52/52 HP
 - Sir Hugh Darrow, banneret of Castle Gaunt (`sir-hugh-darrow-banneret-of-castle-gaunt`, enemy) at (7,10) — 52/52 HP
-- Sir Piers Whitlock (`sir-piers-whitlock`, enemy) at (9,10) — 52/52 HP
 - Thornbury recruits 1 (`thornbury-recruits-1`, ally) at (10,16) — 4/4 HP
 - Thornbury recruits 2 (`thornbury-recruits-2`, ally) at (10,17) — 4/4 HP
 - Thornbury recruits 3 (`thornbury-recruits-3`, ally) at (10,15) — 4/4 HP
@@ -1100,7 +1094,6 @@
 ### The Wheatsheaf's stable yard (`wheatsheaf-yard`, interior 24×22, lighting bright)
 - Hanged Man with the ladder A (`hanged-man-with-the-ladder-a`, ally) at (6,9) — 11/11 HP
 - Hanged Man with the ladder B (`hanged-man-with-the-ladder-b`, ally) at (7,9) — 11/11 HP
-- Quist's rider (`quists-rider`, ally) at (8,9) — 11/11 HP
 - point of interest `poi-1`: The yard gate at (9,0) → journal j572
 - point of interest `poi-2`: The horse trough at (11,6) → journal j573
 - point of interest `poi-3`: The lean-to cart shed at (21,8) → journal j574
@@ -1135,21 +1128,43 @@
 - doors: (2,12) open, (2,13) open
 - labels: Stream (29,12), Road (1,14)
 
+### The reeve's gaol, under the reeve's hall (`thornbury-gaol`, interior 30×14, lighting dim)
+- Brakka Holloway (`brakka`, pc) at (8,5) — 71/71 HP
+- Corvin Asche (`corvin`, pc) at (8,3) — 41/41 HP
+- Kit Corvell (`kit`, pc) at (7,4) — 57/57 HP
+- Ottilie Marsh (`ottilie`, pc) at (7,6) — 48/48 HP
+- Gaunt man-at-arms M (`gaunt-man-at-arms-m`, enemy) at (12,7) — 11/11 HP
+- Gaunt man-at-arms N (`gaunt-man-at-arms-n`, enemy) at (13,8) — 11/11 HP
+- Gaunt man-at-arms O (`gaunt-man-at-arms-o`, enemy) at (16,7) — 11/11 HP
+- Gaunt man-at-arms P (`gaunt-man-at-arms-p`, enemy) at (17,8) — 11/11 HP
+- Hanged Man at the toll table (`hanged-man-at-the-toll-table`, ally) at (11,4) — 11/11 HP
+- Hanged Man on the West Gate toll (`hanged-man-on-the-west-gate-toll`, ally) at (11,5) — 11/11 HP
+- Hob Sallis, the reeve's gaoler (`hob-sallis-the-reeves-gaoler`, neutral) at (6,5) — 11/11 HP
+- Sir Anselm Brey (`sir-anselm-brey`, enemy) at (12,2) — 52/52 HP
+- Sir Piers Whitlock (`sir-piers-whitlock`, enemy) at (16,2) — 52/52 HP
+- point of interest `poi-1`: The stair up to the reeve's hall at (2,1) → journal j614
+- point of interest `poi-2`: The gaoler's table at (5,4) → journal j615
+- point of interest `poi-3`: The key-board at (1,6) → journal j616
+- point of interest `poi-4`: The brazier at (8,7) → journal j617
+- point of interest `poi-5`: The cell passage at (20,4) → journal j618
+- doors: (12,3) closed, (16,3) closed, (20,3) closed, (24,3) closed, (27,3) closed, (10,4) open, (12,6) closed, (16,6) closed, (20,6) closed, (24,6) closed, (27,6) closed
+- labels: Bar (3,2)
+
 
 ## Recent events
 
-- “Boss, the lads'd walk into a fire for you tonight. Mail! On a Hanged Man! My mother'd not know me.”
-- “And the Hand's fifth, my lord?”
-- “The Hand took nothing, darling. You stood in a lane. Next time take something.”
-- “Ha. Fair. Next time, then.”
-- ⭐ Kit Corvell gains 150 XP (Ottilie turned twelve of Castle Gaunt's men-at-arms and both sergeants to Kit's pay; ×2 house XP rate) — total 25357.
-- ⭐ Brakka Holloway gains 150 XP (Ottilie turned twelve of Castle Gaunt's men-at-arms and both sergeants to Kit's pay; ×2 house XP rate) — total 25357.
-- ⭐ Corvin Asche gains 150 XP (Ottilie turned twelve of Castle Gaunt's men-at-arms and both sergeants to Kit's pay; ×2 house XP rate) — total 25357.
-- ⭐ Ottilie Marsh gains 150 XP (Ottilie turned twelve of Castle Gaunt's men-at-arms and both sergeants to Kit's pay; ×2 house XP rate) — total 25357.
-- ⏳ 45m passes — the recruiting and sharing out the spoils at the barracks. Now Day 23, 19:36.
-- 🎬 The Hanged Men's barracks — Day 23, 19:36. Dark outside; the old chapel loud with silver and song, Castle Gaunt's mail on Hanged Men's backs, four loyal men-at-arms and three knights on the front pews.
-- 🗺 Map: The Chapel of the Unblinking
-- ⚔ Gaunt sergeant A, Gaunt sergeant B enlisted in The Gaunt sergeants (AC 16: Chain Mail 16).
-- ⚔ Gaunt man-at-arms A, Gaunt man-at-arms B, Gaunt man-at-arms C, Gaunt man-at-arms D, Gaunt man-at-arms E, Gaunt man-at-arms F, Gaunt man-at-arms G, Gaunt man-at-arms H, Gaunt man-at-arms I, Gaunt man-at-arms J, Gaunt man-at-arms K, Gaunt man-at-arms L enlisted in Kit's men-at-arms (late of Castle Gaunt) (AC 16: Chain Shirt 13 + Dex 1 + Shield 2).
-- ⚔ Hanged Man at the toll table, Hanged Man on the West Gate toll, Hanged Man off duty B, Hanged Man off duty C enlisted in Hanged Men of the gate watch (AC 16: Chain Shirt 13 + Dex 1 + Shield 2).
-- ⚔ Hanged Man off duty A, Hanged Man with the ladder A, Hanged Man with the ladder B enlisted in Hanged Men of Thornbury (AC 12: stat block).
+- Brakka Holloway is at (8,5) on The reeve's gaol, under the reeve's hall.
+- Ottilie Marsh is at (7,6) on The reeve's gaol, under the reeve's hall.
+- Corvin Asche is at (8,3) on The reeve's gaol, under the reeve's hall.
+- Hanged Man at the toll table is at (11,4) on The reeve's gaol, under the reeve's hall.
+- Hanged Man on the West Gate toll is at (11,5) on The reeve's gaol, under the reeve's hall.
+- Sir Anselm Brey is at (12,2) on The reeve's gaol, under the reeve's hall.
+- Sir Piers Whitlock is at (16,2) on The reeve's gaol, under the reeve's hall.
+- Gaunt man-at-arms M is at (12,7) on The reeve's gaol, under the reeve's hall.
+- Gaunt man-at-arms N is at (13,8) on The reeve's gaol, under the reeve's hall.
+- Gaunt man-at-arms O is at (16,7) on The reeve's gaol, under the reeve's hall.
+- Gaunt man-at-arms P is at (17,8) on The reeve's gaol, under the reeve's hall.
+- 🚪 The door at (10,4) is opened.
+- “Knights, is it. Never had knights. One to a cell for them, two and two for the rest. Bread and small beer twice a day, my lord, and the reeve pays for it, I suppose?”
+- Hob turned the big keys one after another. Brey went in without a word. Whitlock stopped at his door and looked back at the crew a long moment before he ducked under the lintel.
+- “Three hundred. My wife'll have to sell the mill.”

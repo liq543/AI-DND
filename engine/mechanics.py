@@ -616,7 +616,35 @@ def monster_action(e, name, kinds=("attack",)):
     for a in e.get("actions", []):
         if srd.slug(a["name"]) == key or srd.slug(a["full_name"]) == key:
             return a
+    held = held_weapon_action(e, name)
+    if held:
+        return held
     raise RuleError(f"{e['name']}'s stat block has no action '{name}'. Actions: {', '.join(a['name'] for a in e.get('actions', []))}")
+
+
+def held_weapon_action(e, name):
+    """An NPC fighting with a real weapon from its inventory (a captain given a magic sword): an attack built from the
+    SRD weapon table, the creature's Str or Dex (Dex for ranged, the better for Finesse), its Proficiency Bonus and any
+    +N. Only a weapon it has equipped counts."""
+    key = srd.slug(name)
+    it = next((i for i in e.get("inventory", []) if i.get("equipped") and i.get("kind") == "weapon"
+               and key in (srd.slug(i["id"]), srd.slug(i["name"]), srd.slug(i.get("base_name") or ""))), None)
+    if not it:
+        return None
+    w = srd.find("weapons", it.get("base_name") or it["name"])
+    if not w:
+        return None
+    ab = e.get("abilities") or {}
+    mod_of = lambda k: (ab.get(k) or {}).get("mod", 0) if isinstance(ab.get(k), dict) else (int(ab.get(k, 10)) - 10) // 2
+    props = set(w["properties"])
+    m = mod_of("dex") if w["ranged"] else max(mod_of("str"), mod_of("dex")) if "finesse" in props else mod_of("str")
+    plus = it.get("magic_bonus", 0)
+    dmod = m + plus
+    return {"name": it["name"], "full_name": it["name"], "kind": "attack",
+            "attack_type": "ranged" if w["ranged"] else ("melee or ranged" if "thrown" in props else "melee"),
+            "bonus": m + int(e.get("pb", 2)) + plus, "reach": None if w["ranged"] else (10 if "reach" in props else 5),
+            "range": w["range"], "text": f"{it['name']} (held weapon)",
+            "damage": [{"dice": f"{w['damage']}{fmt_mod(dmod) if dmod else ''}", "type": w["type"]}]}
 
 
 def bloodied_frenzy(e):

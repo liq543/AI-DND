@@ -413,3 +413,6 @@ All hired abroad. None have been below the Great Hall. All `commoner`, Neutral.
 - **Sir Anselm Brey** (`knight`, Lawful Neutral): a big young knight on a dappled warhorse, three black ravens on a red surcoat.
 - **Sir Piers Whitlock** (`knight`, Lawful Neutral): thickset and older, with a scar-squint and a mace. He watches walls.
 - 2 Gaunt sergeants (`warrior-veteran`) and 16 men-at-arms (`guard`).
+- **Hob Sallis, the reeve's gaoler** (`guard`, Lawful Neutral): stooped and slab-handed, about fifty, leather apron, ring of keys, cudgel. Chews constantly and says little. Keeps the gaol book. "Never had knights."
+- **Ivo Tarrant, Day 23:** Kit gave him Darrow's **Longsword +1** (he wears it; the engine lets him fight with it at +3, 1d8+1) and a Castle Gaunt destrier. "Boss, I'll not shame it."
+- **Sir Hugh Darrow, Day 23:** on parole, with his oath as a knight not to bear arms against the Unkindness for a year and a day, and to tell Castle Gaunt and the Regent exactly what he saw. He leaves on foot at first light Day 24 with the ransom letter.

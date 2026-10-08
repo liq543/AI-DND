@@ -86,7 +86,6 @@ Species traits: Resourceful, Skillful, Versatile
 - `blank-writing-case-1` 1× Blank writing case · _loot: Sabine's iron-bound travelling chest_
 - `spell-scroll-lesser-rest-1` 1× Spell Scroll (Lesser Restoration) — Uncommon · _loot: The brothers' packs_
 - `the-gilded-hands-contrac-1` 1× The Gilded Hand's contract (new terms) · _gift: Vaux's paymaster_
-- `plate-armor-1` 1× Plate Armor · _loot: Sir Piers Whitlock's arms_
 - `mace-1` 1× Mace (equipped) · _loot: Sir Piers Whitlock's arms_
 - `shield-1` 1× Shield · _loot: Sir Piers Whitlock's arms_
 - `potion-of-healing-2` 2× Potion of Healing (UNIDENTIFIED — players see "Unidentified potion") — Common · _loot: Sir Piers Whitlock's arms_

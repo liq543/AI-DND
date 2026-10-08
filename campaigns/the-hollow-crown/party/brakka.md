@@ -22,7 +22,6 @@
 |---|---|---|---|
 | Flame Tongue (Greatsword) | +8 | 2d6+5 slashing | reach 5 ft, mastery graze |
 | Dagger | +8 | 1d4+5 piercing | range 20/60 ft |
-| Longsword +1 | +9 | 1d8+6 slashing | reach 5 ft |
 | Longsword | +8 | 1d8+5 slashing | reach 5 ft |
 | Lance | +8 | 1d10+5 piercing | reach 10 ft |
 | Unarmed Strike | +8 | 6 bludgeoning | reach 5 ft |
@@ -78,16 +77,11 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 - `mace-1` 1× Mace · _loot: Coll_
 - `leather-armor-1` 1× Leather Armor · _loot: Coll_
 - `dagger-1` 5× Dagger (equipped) · _loot: The second penitent's belt_
-- `longsword-1-1` 1× Longsword +1 (equipped) — Uncommon · _loot: Sir Hugh Darrow's arms and saddlebags_
-- `plate-armor-2` 1× Plate Armor · _loot: Sir Hugh Darrow's arms and saddlebags_
 - `shield-1` 1× Shield · _loot: Sir Hugh Darrow's arms and saddlebags_
 - `darrows-saddlebags-1` 1× Darrow's saddlebags · _loot: Sir Hugh Darrow's arms and saddlebags_
-- `plate-armor-3` 1× Plate Armor · _loot: Sir Anselm Brey's arms_
 - `longsword-1` 1× Longsword (equipped) · _loot: Sir Anselm Brey's arms_
 - `shield-2` 1× Shield · _loot: Sir Anselm Brey's arms_
 - `lance-1` 1× Lance (equipped) · _loot: Sir Anselm Brey's arms_
-- `warhorse-1` 3× Warhorse · _loot: Castle Gaunt's knights' destriers_
-- `riding-horse-1` 2× Riding Horse · _loot: Castle Gaunt's sergeants' horses_
 
 Hit Point Dice: Fighter d10 7/7
 Languages: Common, Orc, Giant · Tools: *Choose one kind of Gaming Set* (see "Equipment") · Armor training: light, medium, heavy, shield
