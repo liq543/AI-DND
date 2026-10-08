@@ -2,8 +2,8 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 2 · **In-world time:** Day 24, 06:00 · **Mode:** exploration
-**Current map:** The Chapel of the Unblinking (`unblinking-chapel`) · **Events:** 23227 · **Log head:** `68ac4cf08e5bd8eb`
+**Session:** 2 · **In-world time:** Day 24, 06:30 · **Mode:** exploration
+**Current map:** The Chapel of the Unblinking (`unblinking-chapel`) · **Events:** 23245 · **Log head:** `3151485cfd6a2db1`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
@@ -1150,18 +1150,18 @@
 
 ## Recent events
 
-- “A dormitory of dead monks. How romantic. Wake me if anyone tries to murder us, darling, and not otherwise.”
-- 🌙 The party takes a Long Rest (8 hours). Now Day 24, 04:06.
--    Kit Corvell: HP 57/57, spell slots and features restored.
--    Brakka Holloway: HP 71/71, spell slots and features restored.
--    Corvin Asche: HP 41/41, spell slots and features restored.
--    Ottilie Marsh: HP 48/48, spell slots and features restored.
-- 📖 Corvin Asche prepares: Fire Bolt, Mage Hand, Minor Illusion, Light, Shield, Sending, Sleep, Misty Step, Invisibility, Suggestion, Fireball, Counterspell, Animate Dead, Dispel Magic, Wall of Fire.
-- Before he slept, Corvin turned his spellbook to Sending and let Magic Missile go from his mind; the wand would do that work now.
-- ⏳ 100m passes — the last of the night until first light. Now Day 24, 05:46.
-- “Morning, boss. The knight walked out the West Gate at first light like he said he would, alone, letter in his coat. Quist's lad went the same way with the horses and the steel.”
-- 👋 Sir Hugh Darrow, banneret of Castle Gaunt leaves the scene.
-- 👋 Quist's rider leaves the scene.
-- 🎬 The Hanged Men's barracks — Day 24, 06:00. Grey dawn through the lancet windows; the front pew empty; the Hanged Men stirring.
 - 🗺 Map: The Chapel of the Unblinking
 - ⏳ 14m passes — to first light. Now Day 24, 06:00.
+- “Somebody give me a full military report. And what we do next.”
+- Corvin spread his maps on the old altar in the grey light, weighted the corners with Ivo's mug and the Darrow sword's scabbard, and cleared his throat. Brakka, Ottilie and Ivo gathered round.
+- “Strength first. In Thornbury: Vaux's hundred on the fair ground; fourteen of Castle Gaunt's own in their mail under the two sergeants; Ivo's nine Hanged Men, four of them in mail now, and five raw lads off the table. At Harrowgate, Lerner and seven recruits behind Gerold's walls. At Crowsfoot, Hesketh, and his new dozen sign by tomorrow evening. Coldharbour, Moss and the inn. The Rookery, Bastian and the Pens. Near a hundred and forty blades, boss, and only the Hand are soldiers.”
+- “Money. The great strongbox at home holds a little over thirteen and a half thousand; Brakka carries three thousand four hundred of the Hand's fee back. Out: the fort's four thousand on the thirty-fourth, the Hand three thousand three hundred and seventy-five a month, the Gaunt men fourteen a day, the household four hundred and thirty a month. In: Quist's sale of the plate on the twenty-sixth, the ransoms if Castle Gaunt pays, and Lerner's four thousand at Midsummer. We're rich until Midsummer, darling. After that we need a cart of silver.”
+- “Threats. Darrow reaches Castle Gaunt in four or five days and tells them a king with a hundred mercenaries holds Thornbury. Expect the Regent's answer in two or three weeks, and bigger. The Mission: Sabine's letter goes east today with the carrier and buys us quiet past the new moon, but they'll miss her. And the Eye wants a living gaze on the new moon, the thirty-seventh, and the Pens just lost Alys. The League's masters are angry, and their silver cart runs on the thirty-fourth.”
+- “My counsel. Today: see the carrier off at ten, hang the raiders at three as you ordered, and read Fenn's ledger: every watcher the Mission has in the March is named in it. Leave Vaux and the Hand to hold Thornbury, with the Gaunt sergeants drilling Ivo's recruits. Send one sergeant and four of the Gaunt men to Lerner: Harrowgate is the door Castle Gaunt will knock on. Then ride home: Quist's word on the silver cart, the fort's money, a gaze for the Eye before the new moon, and my stones. And on the thirty-fourth, take the League's cart with the Hand's horse and crossbows. Give Vaux his fifth of something real and he'll follow you anywhere.”
+- “And if the Regent comes himself?”
+- “Then we'll want walls, and a great deal more than a hundred men. Which is why the fort matters and the silver matters.”
+- “We'll hold the town, boss. Me and the sword.”
+- ⏳ 30m passes — Corvin's military report at the altar. Now Day 24, 06:30.
+- 🎬 The Hanged Men's barracks — Day 24, 06:30. Maps on the old altar; the war council in the dawn light.
+- 🗺 Map: The Chapel of the Unblinking
+- “Or at least every traveller Fenn reported to them, and when. That's a start.”
