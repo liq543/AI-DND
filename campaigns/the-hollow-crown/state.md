@@ -2,8 +2,8 @@
 
 > AUTO-GENERATED after every engine command. Narrative notes belong in npcs.md / locations.md / quests.md / log/.
 
-**Session:** 2 · **In-world time:** Day 23, 19:51 · **Mode:** exploration
-**Current map:** The reeve's gaol, under the reeve's hall (`thornbury-gaol`) · **Events:** 23163 · **Log head:** `30e6738ea24a83d4`
+**Session:** 2 · **In-world time:** Day 23, 19:56 · **Mode:** exploration
+**Current map:** The reeve's gaol, under the reeve's hall (`thornbury-gaol`) · **Events:** 23173 · **Log head:** `6956c8919f439733`
 **Settings:** player_rolls=auto, xp_mode=xp, difficulty=standard, start_level=6, forced_march=narrated, xp_rate=2 · **Party position (region):** [37, 74]
 
 ## Party
@@ -1153,13 +1153,6 @@
 
 ## Recent events
 
-- Brakka Holloway is at (8,5) on The reeve's gaol, under the reeve's hall.
-- Ottilie Marsh is at (7,6) on The reeve's gaol, under the reeve's hall.
-- Corvin Asche is at (8,3) on The reeve's gaol, under the reeve's hall.
-- Hanged Man at the toll table is at (11,4) on The reeve's gaol, under the reeve's hall.
-- Hanged Man on the West Gate toll is at (11,5) on The reeve's gaol, under the reeve's hall.
-- Sir Anselm Brey is at (12,2) on The reeve's gaol, under the reeve's hall.
-- Sir Piers Whitlock is at (16,2) on The reeve's gaol, under the reeve's hall.
 - Gaunt man-at-arms M is at (12,7) on The reeve's gaol, under the reeve's hall.
 - Gaunt man-at-arms N is at (13,8) on The reeve's gaol, under the reeve's hall.
 - Gaunt man-at-arms O is at (16,7) on The reeve's gaol, under the reeve's hall.
@@ -1168,3 +1161,10 @@
 - “Knights, is it. Never had knights. One to a cell for them, two and two for the rest. Bread and small beer twice a day, my lord, and the reeve pays for it, I suppose?”
 - Hob turned the big keys one after another. Brey went in without a word. Whitlock stopped at his door and looked back at the crew a long moment before he ducked under the lintel.
 - “Three hundred. My wife'll have to sell the mill.”
+- “Tell the reeve he can take their keep out of his dues.”
+- 💰 Kit Corvell hands 5 GP to Hob Sallis, the reeve's gaoler. Purses: Kit Corvell 293 GP 7 SP 5 CP, Hob Sallis, the reeve's gaoler 5 GP.
+- Kit pressed five crowns into Hob's hand and closed the gaoler's fingers over them.
+- “Remember, though. You're my man first.”
+- Hob looked at the gold in his palm a long moment: more than the reeve paid him in a season. He stopped chewing.
+- “Your man first, my lord. Nobody in or out of my cells but on your word. Not the reeve, neither.”
+- ⏳ 5m passes — settling the gaol. Now Day 23, 19:56.

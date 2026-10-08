@@ -36,7 +36,7 @@ Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 298 GP 7 SP 5 CP
+**Coins:** 293 GP 7 SP 5 CP
 
 - `the-magpies-key-1` 1× The Magpie's Key · _stolen: Lot 9, lifted from Dorothea Quill mid-raid_
 - `quiver-1` 1× Quiver · _starting equipment_

@@ -416,3 +416,4 @@ All hired abroad. None have been below the Great Hall. All `commoner`, Neutral.
 - **Hob Sallis, the reeve's gaoler** (`guard`, Lawful Neutral): stooped and slab-handed, about fifty, leather apron, ring of keys, cudgel. Chews constantly and says little. Keeps the gaol book. "Never had knights."
 - **Ivo Tarrant, Day 23:** Kit gave him Darrow's **Longsword +1** (he wears it; the engine lets him fight with it at +3, 1d8+1) and a Castle Gaunt destrier. "Boss, I'll not shame it."
 - **Sir Hugh Darrow, Day 23:** on parole, with his oath as a knight not to bear arms against the Unkindness for a year and a day, and to tell Castle Gaunt and the Regent exactly what he saw. He leaves on foot at first light Day 24 with the ransom letter.
+- **Hob Sallis, Day 23:** took Kit's 5 crowns. Kit's man first; he'll let nobody into or out of the cells, not even the reeve, except on Kit's word.
