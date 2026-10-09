@@ -85,6 +85,11 @@ class MapHierarchyTest(unittest.TestCase):
         self.assertIn("brightwater", views.openable_maps(g))        # but clicking the town opens it
         pv = views.player_view(g)["maps"]["brightwater"]
         self.assertEqual((pv["anchor"], pv["tab"], pv["parent"]), ("brightwater", False, "realm"))
+        # with the world map itself on the table, known towns under it still get no tab of their own
+        self.ok("map", "show", "realm")
+        g = _cli.game(self.env)
+        self.assertNotIn("brightwater", views.visible_maps(g))
+        self.assertIn("brightwater", views.openable_maps(g))
 
     def test_clock_rewind_is_a_public_repair(self):
         from engine.core import fmt_time

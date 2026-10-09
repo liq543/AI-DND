@@ -2,50 +2,51 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Human** · **Bard 7** (College of Lore) · **Background:** Sage · **XP:** 29849
+**Player:** DM · **Human** · **Bard 8** (College of Lore) · **Background:** Sage · **XP:** 34886
 
-**HP** 48/48 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
+**HP** 45/54 · **AC** 13 (Studded Leather Armor 12 + Dex 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
-| 8 (-1) | 13 (+1) | 12 (+1) | 16 (+3) | 11 (+0) | 17 (+3) |
+| 8 (-1) | 13 (+1) | 12 (+1) | 16 (+3) | 11 (+0) | 19 (+4) |
 
-**Saves:** STR +0, DEX +5*, CON +2, INT +4, WIS +1, CHA +7*
+**Saves:** STR +0, DEX +5*, CON +2, INT +4, WIS +1, CHA +8*
 
-**Skills:** Acrobatics +3, Animal Handling +2, Arcana +7*, Athletics +1, Deception +10**, History +7*, Insight +4*, Intimidation +5, Investigation +7*, Medicine +2, Nature +5, Perception +4*, Performance +7*, Persuasion +10**, Religion +5, Sleight Of Hand +5*, Stealth +5*, Survival +2
+**Skills:** Acrobatics +3, Animal Handling +2, Arcana +7*, Athletics +1, Deception +11**, History +7*, Insight +4*, Intimidation +6, Investigation +7*, Medicine +2, Nature +5, Perception +4*, Performance +8*, Persuasion +11**, Religion +5, Sleight Of Hand +5*, Stealth +5*, Survival +2
 
-**Conditions:** — · **Exhaustion:** 0
+**Conditions:** — · **Exhaustion:** 0 · **Concentrating on:** Polymorph
 
 ## Attacks
 
 | Attack | To hit | Damage | Notes |
 |---|---|---|---|
+| Club | +2 | 1d4-1 bludgeoning | reach 5 ft |
 | Unarmed Strike | +2 | 0 bludgeoning | reach 5 ft |
 
 Attacks per Attack action: 1
 
 ## Spellcasting
 
-- **Bard:** save DC 14, attack +6, cantrips 3, prepared 11, up to level 4
-- **Slots:** L1 4/4, L2 3/3, L3 3/3, L4 1/1
+- **Bard:** save DC 15, attack +7, cantrips 3, prepared 12, up to level 4
+- **Slots:** L1 3/4, L2 3/3, L3 3/3, L4 1/2
 - **Cantrips:** vicious-mockery, message, mage-hand
-- **Prepared:** charm-person, disguise-self, dissonant-whispers, healing-word, silent-image, suggestion, invisibility, hypnotic-pattern, cure-wounds, clairvoyance, dimension-door
+- **Prepared:** charm-person, disguise-self, dissonant-whispers, healing-word, silent-image, suggestion, invisibility, hypnotic-pattern, cure-wounds, clairvoyance, dimension-door, polymorph
 
 **Granted spells:** minor-illusion (Magic Initiate (Wizard)), prestidigitation (Magic Initiate (Wizard)), disguise-self (Magic Initiate (Wizard)), revivify (Magical Discoveries (College of Lore)), speak-with-dead (Magical Discoveries (College of Lore))
 
 ## Limited features
 
-- **Bardic Inspiration:** 3/3
+- **Bardic Inspiration:** 3/4
 
 ## Features & feats
 
-Magic Initiate (Wizard), Skilled, Ability Score Improvement
+Magic Initiate (Wizard), Skilled, Ability Score Improvement, Ability Score Improvement
 
 Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 100 GP 8 SP 3 CP
+**Coins:** 102 GP 8 SP 3 CP
 
 - `pan-flute-1` 1× Pan flute · _starting equipment_
 - `entertainers-pack-1` 1× Entertainer's Pack · _starting equipment_
@@ -83,11 +84,12 @@ Species traits: Resourceful, Skillful, Versatile
 - `blank-writing-case-1` 1× Blank writing case · _loot: Sabine's iron-bound travelling chest_
 - `spell-scroll-lesser-rest-1` 1× Spell Scroll (Lesser Restoration) — Uncommon · _loot: The brothers' packs_
 - `the-gilded-hands-contrac-1` 1× The Gilded Hand's contract (new terms) · _gift: Vaux's paymaster_
-- `potion-of-healing-2` 2× Potion of Healing (UNIDENTIFIED — players see "Unidentified potion") — Common · _loot: Sir Piers Whitlock's arms_
+- `potion-of-healing-2` 2× Potion of Healing — Common · _loot: Sir Piers Whitlock's arms_
 - `antler-token-of-the-thor-2` 1× Antler token of the Thornpact — Uncommon · _reward: Gorse, warden of Hartwell, in exchange for the Stag_
 - `osrics-marching-orders-1` 1× Osric's marching orders · _loot: Osric's letters_
+- `club-1` 1× Club (equipped) · _loot: Grey pilgrim C's gear_
 
-Hit Point Dice: Bard d8 7/7
+Hit Point Dice: Bard d8 8/8
 Languages: Common, Elvish, Halfling · Tools: Calligrapher's Supplies, Forgery Kit, Disguise Kit · Armor training: light
 
 ## HP history
@@ -99,3 +101,4 @@ Languages: Common, Elvish, Halfling · Tools: Calligrapher's Supplies, Forgery K
 - Level 5: +6 (fixed average)
 - Level 6: +6 (fixed average)
 - Level 7: +9 (rolled 1d8(8) = 8)
+- Level 8: +6 (fixed average)

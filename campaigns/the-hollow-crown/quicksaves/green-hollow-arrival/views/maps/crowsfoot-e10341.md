@@ -1,0 +1,85 @@
+# Snapshot — party moved to The Rookery at Day 8, 21:23 (event 10341)
+
+### Crowsfoot (`crowsfoot`, interior 60×40, lighting dark)
+- Aldous Crane (`aldous-crane`, ally) at (13,11) — 52/52 HP
+- Bandit A (`bandit-a-5`, ally) at (16,29) — 11/11 HP
+- Bandit B (`bandit-b-4`, ally) at (17,29) — 11/11 HP
+- Bandit B (`bandit-b-5`, ally) at (18,29) — 11/11 HP
+- Bandit C (`bandit-c-3`, ally) at (19,29) — 11/11 HP
+- Bandit C (`bandit-c-4`, ally) at (20,29) — 11/11 HP
+- Bandit D (`bandit-d-3`, ally) at (21,29) — 11/11 HP
+- Bandit D (`bandit-d-4`, ally) at (22,29) — 11/11 HP
+- Bandit E (`bandit-e-3`, ally) at (16,31) — 6/11 HP
+- Bandit F (`bandit-f-2`, ally) at (17,31) — 10/11 HP
+- Bandit G (`bandit-g`, ally) at (18,31) — 11/11 HP
+- Bandit H (`bandit-h`, ally) at (19,31) — 11/11 HP
+- Coll (`coll`, ally) at (50,22) — 32/32 HP
+- Greencloak A (`greencloak-a`, neutral) at (54,23) — 11/11 HP · hidden
+- Greencloak B (`greencloak-b`, neutral) at (54,24) — 11/11 HP · hidden
+- Greencloak C (`greencloak-c`, neutral) at (56,17) — 11/11 HP · hidden
+- Greencloak D (`greencloak-d`, neutral) at (57,16) — 11/11 HP · hidden
+- Hesketh Rowe (`hesketh-rowe`, ally) at (15,10) — 52/52 HP
+- Jessamy Crook (`jessamy-crook`, ally) at (24,4) — 52/52 HP
+- Mastiff A (`mastiff-a-2`, ally) at (49,22) — 5/5 HP
+- Mastiff A (`mastiff-a-3`, ally) at (25,24) — 5/5 HP
+- Mastiff B (`mastiff-b-2`, ally) at (50,21) — 5/5 HP
+- Mastiff B (`mastiff-b-3`, ally) at (22,23) — 5/5 HP
+- Mother Gallows (`mother-gallows`, ally) at (24,5) — 52/52 HP
+- Ned, the runner (`bandit-a-4`, ally) at (14,11) — 11/11 HP
+- Sal (`bandit-b-3`, ally) at (7,6) — 11/11 HP
+- Sergeant Dorran Lerner (`sergeant-dorran-lerner`, neutral) at (57,18) — 75/75 HP · hidden
+- Sleeping Greencloak A (`sleeping-greencloak-a`, neutral) at (54,15) — 11/11 HP · hidden
+- Sleeping Greencloak B (`sleeping-greencloak-b`, neutral) at (54,16) — 11/11 HP · hidden
+- Sleeping Greencloak C (`sleeping-greencloak-c`, neutral) at (55,15) — 11/11 HP · hidden
+- Sleeping Greencloak D (`sleeping-greencloak-d`, neutral) at (54,14) — 11/11 HP · hidden
+- Sleeping Greencloak E (`sleeping-greencloak-e`, neutral) at (55,16) — 11/11 HP · hidden
+- Sleeping Greencloak F (`sleeping-greencloak-f`, neutral) at (54,17) — 11/11 HP · hidden
+- Sleeping Greencloak G (`sleeping-greencloak-g`, neutral) at (56,15) — 11/11 HP · hidden
+- Sleeping Greencloak H (`sleeping-greencloak-h`, neutral) at (54,13) — 11/11 HP · hidden
+- Tansy Moll (`tansy-moll`, ally) at (26,29) — 52/52 HP
+- Villager (`villager`, neutral) at (26,16) — 4/4 HP · hidden
+- Villager (`villager-4`, neutral) at (33,18) — 4/4 HP · hidden
+- Wat (`bandit-a-3`, ally) at (7,5) — 11/11 HP
+- Wenna Croft, on watch (`villager-3`, enemy) at (37,6) — DEAD
+- container `mercys-coin-bowl`: Mercy's coin bowl at (28,32)
+- container `the-linen-chest`: The linen chest at (32,37)
+- point of interest `poi-2`: The Barrow track's end at (12,9) → journal j125
+- point of interest `poi-3`: The lightning-split oak at (29,16) → journal j126
+- point of interest `poi-4`: The village well at (23,19) → journal j127
+- point of interest `poi-5`: The oak bench at (34,20) → journal j128
+- point of interest `poi-6`: The reeve's longhouse at (22,8) → journal j129
+- point of interest `poi-7`: The chapel of the Dawn at (35,9) → journal j130
+- point of interest `poi-8`: The mill at (43,9) → journal j131
+- point of interest `poi-9`: The mill wheel at (50,8) → journal j132
+- point of interest `poi-10`: The smithy at (40,17) → journal j133
+- point of interest `poi-11`: The forge at (45,16) → journal j134
+- point of interest `poi-12`: The anvil at (43,17) → journal j135
+- point of interest `poi-13`: The plank bridge at (52,23) → journal j136
+- point of interest `poi-14`: The Harrow Brook at (51,18) → journal j137
+- point of interest `poi-15`: The Crow and Kettle at (23,26) → journal j138
+- point of interest `poi-16`: The hitching rails at (17,25) → journal j139
+- point of interest `poi-17`: The inglenook hearth at (14,29) → journal j140
+- point of interest `poi-18`: The settles at (15,28) → journal j141
+- point of interest `poi-19`: The counter at (27,30) → journal j142
+- point of interest `poi-20`: The ale casks at (29,28) → journal j143
+- point of interest `poi-21`: The dice table at (25,30) → journal j144
+- point of interest `poi-22`: The taproom tables at (22,32) → journal j145
+- point of interest `poi-23`: The pot shelf at (29,33) → journal j146
+- point of interest `poi-24`: The kitchen range at (36,28) → journal j147
+- point of interest `poi-25`: The kitchen table at (33,29) → journal j148
+- point of interest `poi-26`: The kitchen door at (37,29) → journal j149
+- point of interest `poi-27`: The passage door at (26,34) → journal j150
+- point of interest `poi-28`: The back-room door at (30,35) → journal j151
+- point of interest `poi-29`: The sickbed at (35,34) → journal j152
+- point of interest `poi-30`: The washstand at (35,36) → journal j153
+- point of interest `poi-31`: The stair up at (29,37) → journal j154
+- point of interest `poi-32`: The cellar hatch at (24,37) → journal j155
+- point of interest `poi-33`: The snug at (17,36) → journal j156
+- point of interest `poi-34`: The horse trough at (40,35) → journal j157
+- point of interest `poi-35`: The inn stable at (46,36) → journal j158
+- point of interest `poi-36`: The bell rope, tied off at (36,10) → journal j212
+- point of interest `poi-39`: The post-box, broken open at (14,10) → journal j216
+- point of interest `poi-40`: Wenna Croft, laid out at (37,6) → journal j218
+- point of interest `poi-42`: The ditch at (30,22) → journal j370
+- point of interest `poi-43`: The reeve's bed-closet at (26,5) → journal j371
+- doors: (25,4) closed, (22,8) closed, (35,9) closed, (43,9) open, (40,16) open, (8,17) closed, (40,17) open, (40,18) open, (40,19) open, (23,26) closed, (56,26) closed, (43,27) closed, (8,28) closed, (30,29) open, (37,29) open, (26,34) open, (30,35) open, (23,36) closed, (44,36) open

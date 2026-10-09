@@ -96,7 +96,9 @@ combat next                  # end turn → next creature (recharges, conditions
 combat status | combat add <id> | combat remove <id> | combat end
 combat reset-turn --reason "..."   # public repair: restore the current creature's action economy (e.g. after voiding a mistaken roll with `ruling`)
 combat reset-turn wren --reason "..."   # replay an earlier creature's turn this round (played wrong): the order rewinds to it; undo its results first
+action wren end-concentration   # end Concentration at any time, no action needed (SRD), even off-turn
 attack kira goblin-warrior-a greatsword [--adv "reason"] [--dis "reason"] [--sneak] [--smite 1] [--offhand] [--versatile] [--reaction] [--knockout]
+attack kira goblin-a shortbow-2-1 --ammo arrows-1-1   # pick the ammunition stack (default: plain before magic); Arrows +1 adds +1 to hit and damage on top of the bow's own
 attack goblin-warrior-a kira scimitar           # monster actions come from the stat block
 attack adult-red-dragon kira "fire breath"       # save-based actions: the target(s) roll saves
 action kira dash|disengage|dodge|help --target wren|hide|search|study|influence|utilize|ready|magic [--bonus --via "Cunning Action"]
@@ -113,6 +115,9 @@ cast wren "wall of fire" --wall "10,8 21,8" --hot south   # drawn on the map at 
 #   whoever ends a turn within 10 ft of it (or inside), entering it burns once a turn, it blocks sight, and it goes when Concentration ends.
 #   Ring: --ring 12,8 --hot inside|outside. Already cast before the engine drew it: map spell-wall --caster wren --spell "wall of fire" --line "x,y x,y" --hot south
 cast wren "detect magic" --ritual | cast wren shield --free "Magic Initiate" | cast wren fireball --scroll <item-id>
+#   a Spell Scroll uses the scroll's save DC / attack bonus (by spell level), not the reader's; above their level: ability check DC 10 + level
+cast wren "magic missile" --item <wand-id> --level 2   # charged item: charges = level - base + 1; dawn recharge rolled automatically
+cast wren "charm person" --item <eyes-id> | cast wren "disguise self" --item <hat-id>   # item's own DC; at-will items spend nothing
 feature kira "second wind" | feature bruna rage | feature pal "lay on hands" --amount 5 --target kira | feature kira "action surge"
 bardic <who>                  # spend a Bardic Inspiration die
 deathsave kira | stabilize wren kira | legendary-resist adult-red-dragon
@@ -127,6 +132,8 @@ Haste's additional action is used after the ordinary action; its Attack action p
 check kira athletics --dc 15 [--adv "rope"] [--hidden]      # several: check kira,wren perception --dc 12
 contest bandit-captain deception --vs kira --vs-skill insight --passive --hidden   # opposed check (NPC lie vs passive Insight)
 contest kira deception --vs guard --vs-skill insight --passive          # PC lie vs NPC; drop --passive if they actively read
+contest wren stealth --vs goblin-a --vs-skill perception --passive      # worn items count: Cloak of Elvenkind (Perception to find
+#   its wearer at Disadvantage / passive -5), Robe of Eyes (passive +5); `action kira search --target wren` applies the cloak too
 ruling --what "The captain's confession stands" --reason "..."            # public DM ruling / correction (override list)
 save kira,wren dex --dc 13 --damage "4d6 fire" --half --source "fire trap"
 save bandit wis --dc 13 --condition frightened --repeat --source "Frightful Presence"
@@ -162,6 +169,7 @@ After a quickload, everything past the save point never happened: don't mention 
 ## Rest, time, travel
 ```
 rest short --hd kira:2,wren:1 | rest long               # 16-hour spacing, 1 HP minimum, all rules applied
+rest short|long --attune kira:<item-id> --focus wren:<item-id>   # attune / identify one item per creature during the rest (max 3 attuned)
 travel over several days credits a Long Rest each night (no extra time); repair a missed one: rest long --ended-at "Day 9, 06:00" --reason "..."
 time 2h --reason "searching the library"
 travel 24 --pace normal | travel --to 55,30 --pace slow   # region map: terrain & roads, moves the party marker
@@ -176,8 +184,13 @@ item add kira "Longsword +1" --source "reward: the Duke"        # rarity capped 
 item add kira "Spell Scroll (Fireball)" --source "loot: ..."
 item equip|unequip|attune|unattune|use|light|drop|sell <who> <item-id> [--to <target>] [--qty N]
 item use kira dagger-of-venom-1     # Bonus Action: coat the blade BEFORE the attack (it poisons the next hit)
+#   worn items apply themselves once equipped (attuned if needed): AC/save bonuses, Cloak of Displacement (attacks vs the wearer at
+#   Disadvantage; off after damage until its next turn, and at Speed 0), Ring of Mind Shielding (immune to Detect Thoughts / Zone of
+#   Truth). One cloak, footwear, gloves, bracers and headwear at a time; one copy of an item attuned; "by a Spellcaster" is checked.
+item use wren pearl-of-power-1 [--level 2]   # Magic action: regain one expended slot of level 3 or lower (default: highest); once per dawn
 item venom-hit kira dagger-of-venom-1 --to goblin-a --how "..."   # repair: the coat came first but was recorded after the hit
 item give kira <item-id> --to wren | item recover-ammo kira Arrows | item card kira <item-id>
+item recover-ammo kira "Arrows +1"   # magic pieces that hit are no longer magic: half the misses come back magic, the rest as plain Arrows
 item drop kira dagger-1 --qty 1      # lands on the map at the token's square (gold diamond marker, shown to players)
 item pickup kira floor-1             # must be in/next to that square; in combat uses the free object interaction
 map container crypt 12,7 --name "Iron-bound chest" [--text "..."] [--id chest-1]   # a tile that holds items (clickable)

@@ -14,7 +14,7 @@ from .core import (MAGIC_EFFECTS, RARITY_ORDER, TIER_MAX_GP_AWARD, TIER_MAX_RARI
                    has_feat, has_feature, hp_max, level, mod, pact_slots, pb, resources, save_mod,
                    skill_mod, speed, spell_slots, spellcasting, tier, weapon_attack, equipped,
                    initiative_mod, exhaustion_penalty, max_spell_level_for_class, parse_duration, fmt_time,
-                   item_bonus, item_sense)
+                   item_bonus, item_sense, WORN_SLOTS)
 
 AUTO_FAIL_STR_DEX = {"paralyzed", "petrified", "stunned", "unconscious"}
 ATTACKER_DIS = {"blinded", "frightened", "poisoned", "prone", "restrained"}
@@ -32,6 +32,11 @@ SCROLL_RARITY = {0: "Common", 1: "Common", 2: "Uncommon", 3: "Uncommon", 4: "Rar
 PLUS_RARITY = {"weapon": {1: "Uncommon", 2: "Rare", 3: "Very Rare"}, "ammunition": {1: "Uncommon", 2: "Rare", 3: "Very Rare"},
                "armor": {1: "Rare", 2: "Very Rare", 3: "Legendary"}, "shield": {1: "Uncommon", 2: "Rare", 3: "Very Rare"}}
 COIN_CP = {"cp": 1, "sp": 10, "ep": 50, "gp": 100, "pp": 1000}
+# rules/magic-items/spell-scroll.md: the scroll's spell level sets its save DC and attack bonus (not the reader's)
+SCROLL_DC_ATTACK = {0: (13, 5), 1: (13, 5), 2: (13, 5), 3: (15, 7), 4: (15, 7), 5: (17, 9), 6: (17, 9), 7: (18, 10),
+                    8: (18, 10), 9: (19, 11)}
+# rules/magic-items/ring-of-mind-shielding.md: magic that reads thoughts or tells whether the wearer is lying
+MIND_READING_SPELLS = {"detect-thoughts", "zone-of-truth"}
 
 
 # ====================================================================== combat helpers
@@ -380,6 +385,8 @@ def apply_damage(g, e, parts, source=None, crit=False, attacker=None, melee_with
         E.remove(g, e, ward, "prevents dropping to zero HP")
         new_hp = 1
     patch = {"temp_hp": temp - absorbed, "hp": new_hp}
+    if total > 0 and item_bonus(e, "displacement") and not e.get("displacement_off"):
+        patch["displacement_off"] = True   # Cloak of Displacement: off until the start of the wearer's next turn
     if attacker is not None:
         # remembered for reactions that answer a hit (Uncanny Dodge halves the attack's damage)
         c = combat(g)
@@ -439,6 +446,8 @@ def apply_damage(g, e, parts, source=None, crit=False, attacker=None, melee_with
         fall_inert(g, g.get(e["id"]))
     if patch.get("dead"):
         end_concentration(g, e, "died")
+    if patch.get("displacement_off"):
+        msg += " Its Cloak of Displacement flickers out until the start of its next turn."
     g.say(msg, kind="damage", who=e["id"], amount=total, dtype=(parts[0][1] if parts else None), crit=bool(crit),
           down=new_hp == 0, dead=bool(patch.get("dead")), hp=new_hp, hp_max=hp_max(e))
     # concentration
@@ -678,6 +687,19 @@ def bloodied_frenzy(e):
     return 0 < e.get("hp", 0) <= hp_max(e) / 2
 
 
+def displaced(e):
+    """rules/magic-items/cloak-of-displacement.md: attack rolls against the wearer (attuned) have Disadvantage. After the
+    wearer takes damage the property stops until the start of its next turn, and it's suppressed while its Speed is 0."""
+    if not item_bonus(e, "displacement") or e.get("displacement_off"):
+        return False
+    return any(v for v in speed(e).values())
+
+
+def perceive_dis(e):
+    """Wisdom (Perception) checks made to perceive e have Disadvantage (a Cloak of Elvenkind it wears, attuned)."""
+    return ["Cloak of Elvenkind"] if item_bonus(e, "perceive_dis") else []
+
+
 def attack_modes(g, att, tgt, ranged, dist, extra_adv=(), extra_dis=()):
     adv, dis = list(extra_adv), list(extra_dis)
     if bloodied_frenzy(att):
@@ -691,6 +713,8 @@ def attack_modes(g, att, tgt, ranged, dist, extra_adv=(), extra_dis=()):
         dis.append("target invisible")
     for c in TARGET_ADV & tn:
         adv.append(f"target {c}")
+    if displaced(tgt):
+        dis.append("Cloak of Displacement")
     if "prone" in tn:
         if dist is not None and dist <= 5 and not ranged:
             adv.append("target prone (within 5 ft)")
@@ -716,7 +740,9 @@ def attack_modes(g, att, tgt, ranged, dist, extra_adv=(), extra_dis=()):
 
 
 def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, offhand=False, versatile=False,
-           sneak=False, smite=None, now=False, request=None, bonus_action=False, knockout=False):
+           sneak=False, smite=None, now=False, request=None, bonus_action=False, knockout=False, ammo=None, ammo_used=None):
+    """ammo: inventory id of the ammunition stack to fire (default: plain ammunition first). ammo_used: the piece a
+    player-roll request already spent ({"name", "bonus"}), so the Roll resolves with it."""
     # a save-based area action (a breath, an Emanation) can name several targets: "kira,wren,bram"
     tgt_refs = [t.strip() for t in str(tgt_ref).split(",") if t.strip()] or [tgt_ref]
     att, tgt = g.get(att_ref), g.get(tgt_refs[0])
@@ -728,12 +754,21 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
     if att["id"] == tgt["id"]:
         raise RuleError("A creature can't attack itself.")
     # ---------------------------------------------------------------- profile
+    ammo_it = None
     if att["kind"] == "pc":
         item, _ = find_weapon(att, weapon)
         prof = weapon_attack(att, item, versatile=versatile, offhand=offhand)
+        if prof.get("ammo") and not request:
+            ammo_it = pick_ammo(att, item, ammo)
+            ammo_used = {"name": ammo_it["name"], "bonus": ammo_it.get("magic_bonus", 0)}
+        elif ammo and not request:
+            raise RuleError(f"--ammo is for weapons with the Ammunition property; {prof['name']} has none.")
+        if ammo_used and ammo_used.get("bonus"):
+            # rules/magic-items/ammunition-1-2-or-3.md: the ammunition's bonus stacks with a magic weapon's
+            prof = weapon_attack(att, item, versatile=versatile, offhand=offhand, ammo_bonus=ammo_used["bonus"])
         reach, rng, ranged = prof["reach"], prof["range"], prof["ranged"]
         bonus, dmg_parts = prof["bonus"], [[prof["damage"], prof["type"]]]
-        name = prof["name"]
+        name = prof["name"] + (f" ({ammo_used['name']})" if ammo_used and ammo_used.get("bonus") else "")
         is_spell = False
     else:
         act = monster_action(att, weapon)
@@ -824,14 +859,14 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
                         light_item=(item or {}).get("id") if light else ec.get("light_item"))
     # ---------------------------------------------------------------- ammunition
     if att["kind"] == "pc" and prof.get("ammo") and not request:
-        use_ammo(g, att, item)
+        use_ammo(g, att, item, ammo_it)
     # ---------------------------------------------------------------- roll
     a_adv, a_dis = attack_modes(g, att, tgt, ranged, d, adv, extra_dis)
     if wants_request(g, att, now) and not request:
         return {"request": make_request(g, att, f"attack with {name} vs {tgt['name']}",
                                         {"op": "attack", "att": att["id"], "tgt": tgt["id"], "weapon": weapon,
                                          "adv": list(adv), "dis": list(dis), "offhand": offhand, "versatile": versatile,
-                                         "sneak": sneak, "smite": smite, "reaction": reaction})}
+                                         "sneak": sneak, "smite": smite, "reaction": reaction, "ammo_used": ammo_used})}
     exh = exhaustion_penalty(att)
     fxbonus, extra, fxadv, fxdis = E.roll_modifiers(g, att, "attack")
     a_adv.extend(fxadv)
@@ -856,6 +891,17 @@ def attack(g, att_ref, tgt_ref, weapon=None, adv=(), dis=(), reaction=False, off
     g.say(line, kind="attack", roll=r["id"], who=att["id"], target=tgt["id"], hit=hit, crit=crit, ranged=bool(ranged),
           weapon=name, dtype=(dmg_parts[0][1] if dmg_parts else None), nat=r["nat"])
     break_invisibility(g, att, "made an attack roll")
+    if hit and ammo_used and ammo_used.get("bonus"):
+        # "Once it hits a target, the ammunition is no longer magical" (recover-ammo counts only the misses as magic)
+        c = combat(g)
+        if c:
+            c = dict(c)
+            tally = {k: dict(v) for k, v in c.get("ammo_magic_hits", {}).items()}
+            mine = tally.setdefault(att["id"], {})
+            mine[ammo_used["name"]] = mine.get(ammo_used["name"], 0) + 1
+            c["ammo_magic_hits"] = tally
+            g.emit("combat.set", combat=c)
+        g.note(f"  The {ammo_used['name']} piece that hit is no longer magical.")
     if item and ranged and prof.get("thrown") and not prof.get("ammo") and att.get("inventory") and att.get("token") and tgt.get("token"):
         # a thrown weapon leaves the hand and ends up by the target (pick it up with `item pickup`)
         remove_item(g, att, item["id"], 1, "thrown")
@@ -998,29 +1044,50 @@ def grapple_or_shove(g, att, tgt, kind, prone=False, reaction=False):
     return res
 
 
-def use_ammo(g, e, item):
+def ammo_kind(item):
     w = srd.find("weapons", item["base_name"])
     kind = {"bow": "arrow", "crossbow": "bolt", "sling": "bullet", "blowgun": "needle"}
-    want = next((v for k, v in kind.items() if k in w["name"].lower()), "arrow")
-    inv = e.get("inventory", [])
-    for it in inv:
-        if want in it["name"].lower() and it.get("qty", 1) > 0:
-            new_inv = [dict(x) for x in inv]
-            for x in new_inv:
-                if x["id"] == it["id"]:
-                    x["qty"] = x.get("qty", 1) - 1
-            new_inv = [x for x in new_inv if x.get("qty", 1) > 0]
-            g.set(e, inventory=new_inv)
-            if combat(g):
-                set_economy(g, e["id"], ammo_spent=economy(g, e["id"]).get("ammo_spent", 0) + 1, ammo_item=it["name"])
-                # the turn economy resets every turn, so keep a fight-long tally for recovering ammunition afterwards
-                c = dict(combat(g))
-                tally = dict(c.get("ammo_total", {}))
-                tally[e["id"]] = tally.get(e["id"], 0) + 1
-                c["ammo_total"] = tally
-                g.emit("combat.set", combat=c)
-            return
-    raise RuleError(f"{e['name']} is out of ammunition ({want}s) for the {item['name']}.")
+    return next((v for k, v in kind.items() if k in w["name"].lower()), "arrow")
+
+
+def pick_ammo(e, item, ref=None):
+    """The ammunition stack a shot uses: the one named (`attack --ammo <item-id>`), else plain ammunition before
+    magic (Arrows before Arrows +1), so magic pieces are only spent when chosen or when nothing else is left."""
+    want = ammo_kind(item)
+    if ref:
+        it = find_item(e, ref)
+        if want not in it["name"].lower() or it.get("kind") in ("weapon", "armor"):
+            raise RuleError(f"{it['name']} isn't ammunition for the {item['name']} (it fires {want}s).")
+        return it
+    stacks = [it for it in e.get("inventory", []) if want in it["name"].lower() and it.get("kind") not in ("weapon", "armor")
+              and it.get("qty", 1) > 0]
+    if not stacks:
+        raise RuleError(f"{e['name']} is out of ammunition ({want}s) for the {item['name']}.")
+    return min(stacks, key=lambda it: it.get("magic_bonus", 0))
+
+
+def use_ammo(g, e, item, it=None):
+    it = it or pick_ammo(e, item)
+    new_inv = [dict(x) for x in e.get("inventory", [])]
+    for x in new_inv:
+        if x["id"] == it["id"]:
+            x["qty"] = x.get("qty", 1) - 1
+    new_inv = [x for x in new_inv if x.get("qty", 1) > 0]
+    g.set(e, inventory=new_inv)
+    if combat(g):
+        set_economy(g, e["id"], ammo_spent=economy(g, e["id"]).get("ammo_spent", 0) + 1, ammo_item=it["name"])
+        # the turn economy resets every turn, so keep a fight-long tally for recovering ammunition afterwards
+        c = dict(combat(g))
+        tally = dict(c.get("ammo_total", {}))
+        tally[e["id"]] = tally.get(e["id"], 0) + 1
+        c["ammo_total"] = tally
+        if it.get("magic_bonus"):
+            magic = {k: dict(v) for k, v in c.get("ammo_magic", {}).items()}
+            mine = magic.setdefault(e["id"], {})
+            mine[it["name"]] = mine.get(it["name"], 0) + 1
+            c["ammo_magic"] = magic
+        g.emit("combat.set", combat=c)
+    return it
 
 
 def monster_save_action(g, att, act, targets, now=False):
@@ -1156,7 +1223,16 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
             raise RuleError(f"{e['name']} has no item {item} that casts {spell['name']}.")
         if spec["attunement"] and not it.get("attuned"):
             raise RuleError(f"{it['name']} requires attunement before it can be used.")
-        lvl0 = spec["base_level"] or base
+        if spec.get("at_will"):
+            # e.g. a Hat of Disguise: "you can cast the Disguise Self spell" — no charges, the spell's own level
+            if slot_level and slot_level != base:
+                raise RuleError(f"{it['name']} casts {spell['name']} at its own level ({base}) only.")
+            wand = {"it": it, "spec": spec, "need": 0, "have": None}
+            slot_level, how = base, "item"
+            lvl0 = None
+        else:
+            lvl0 = spec["base_level"] or base
+    if item and lvl0 is not None:
         want = slot_level or lvl0
         need = want - lvl0 + 1
         if need < 1 or need > spec["max_charges"]:
@@ -1167,6 +1243,8 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
             raise RuleError(f"{it['name']} has {have} charge(s) left; level {want} needs {need}.")
         wand = {"it": it, "spec": spec, "need": need, "have": have}
         slot_level, how = want, "item"
+    elif item:
+        pass   # an at-will item spell (set above)
     elif e["kind"] == "pc":
         if scroll:
             it = next((i for i in e.get("inventory", []) if i["id"] == scroll), None)
@@ -1195,7 +1273,7 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
             if used >= source_act["per_day"]:
                 raise RuleError(f"{e['name']} has used {source_act['full_name']} {used}/{source_act['per_day']} times today.")
             g.set(e, **{f"per_day_used__{source_act['name']}": used + 1})
-        m1 = re.search(r"(\d)/Day Each:\*\*\s*(.*)", source_act["text"])
+        m1 = re.search(r"(\d)e?/Day Each:\*\*\s*(.*)", source_act["text"])  # SRD 5.2 writes "2e/Day Each"
         if m1 and spell["name"].lower() in m1.group(2).lower():
             key = f"{spell['slug']}-day"
             used = e.get("per_day_used", {}).get(key, 0)
@@ -1276,7 +1354,7 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
         use_action(g, e, kind, f"cast {spell['name']}")
     if how == "scroll":
         g.set(e, inventory=[i for i in e["inventory"] if i["id"] != scroll])
-    if wand:
+    if wand and not wand["spec"].get("at_will"):
         left = wand["have"] - wand["need"]
         e = g.get(e["id"])
         g.set(e, inventory=[dict(i, charges=left) if i["id"] == wand["it"]["id"] else i for i in e["inventory"]])
@@ -1302,12 +1380,6 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
                 rng = 15 * 2 ** ((lv >= 5) + (lv >= 11) + (lv >= 17))
             if dd is not None and dd > rng and not spell["range"].lower().startswith("self"):
                 raise RuleError(f"{t['name']} is {dd} ft away — beyond {spell['name']}'s range ({spell['range']}).")
-    # --------------------------------------------------------------- concentration
-    if spell["concentration"]:
-        if e.get("concentration"):
-            end_concentration(g, e, f"began concentrating on {spell['name']}")
-        g.set(e, concentration={"spell": spell["slug"], "spell_name": spell["name"], "targets": [t["id"] for t in tgts],
-                                "since": E.clock(g), "duration": spell["duration"], "instance": f"cast{g.state['seq'] + 1}"})
     sc = spellcasting(e).get(next(iter(c for c in e.get("classes", {}) if c in spell["classes"]), None) or next(iter(spellcasting(e) or {"x": 0}), None), {}) if e["kind"] == "pc" else {}
     if e["kind"] == "pc" and not sc and spellcasting(e):
         sc = next(iter(spellcasting(e).values()))
@@ -1317,19 +1389,39 @@ def cast(g, caster_ref, spell_name, slot_level=None, targets=(), ritual=False, f
         mat = re.search(r"([+-]\d+) to hit with spell attacks", text)
         sc = {"dc": int(mdc.group(1)) if mdc else 10 + e.get("pb", 2), "attack": int(mat.group(1)) if mat else e.get("pb", 2),
               "ability": "int"}
-    if wand and wand["spec"]["dc"]:
+    if wand and wand["spec"].get("dc"):
         sc = dict(sc or {}, dc=wand["spec"]["dc"])
+    if how == "scroll":
+        # rules/magic-items/spell-scroll.md: the scroll's spell level sets the save DC and attack bonus (the reader's
+        # spellcasting ability still makes the check for a spell above the level they can cast)
+        dc, atk = SCROLL_DC_ATTACK[base]
+        sc = dict(sc or {}, dc=dc, attack=atk)
     if how == "scroll" and base > max((spellcasting(e).get(c, {}).get("max_level", 0) for c in e["classes"]), default=0):
         chk = ability_check(g, e, sc["ability"], dc=10 + base, now=True, purpose=f"read scroll of {spell['name']}")
         if not chk.get("success"):
             g.say(f"The magic of the scroll fizzles — {spell['name']} vanishes from it.")
             return {"failed": True}
+    shielded = []
+    if spell["slug"] in MIND_READING_SPELLS:
+        # rules/magic-items/ring-of-mind-shielding.md: immune to magic that reads thoughts or reveals lies
+        for t in [t for t in tgts if item_bonus(t, "mind_shield")]:
+            shielded.append(t)
+            g.say(f"🛡 {t['name']} is immune to {spell['name']} (Ring of Mind Shielding).", kind="spell", who=t["id"])
+            tgts = [x for x in tgts if x["id"] != t["id"]]
+    # --------------------------------------------------------------- concentration (a fizzled scroll never starts it)
+    if spell["concentration"]:
+        if e.get("concentration"):
+            end_concentration(g, e, f"began concentrating on {spell['name']}")
+        g.set(e, concentration={"spell": spell["slug"], "spell_name": spell["name"], "targets": [t["id"] for t in tgts],
+                                "since": E.clock(g), "duration": spell["duration"], "instance": f"cast{g.state['seq'] + 1}"})
     break_invisibility_on_cast(g, e, spell)
     g.say(f"✨ {e['name']} casts {spell['name']}" + (f" at level {slot_level}" if base and slot_level > base else "") +
-          (" as a ritual" if ritual else "") + (f" (from {how})" if how in ("scroll", "granted") else "") + (f" from {wand['it']['name']}" if wand else "") +
+          (" as a ritual" if ritual else "") + (f" (from {how})" if how in ("scroll", "granted") else "") + (f" from {wand['it']['name']}" + (" (at will)" if wand["spec"].get("at_will") else "") if wand else "") +
           (f" targeting {', '.join(t['name'] for t in tgts)}" if tgts else "") + ".", kind="spell", who=e["id"],
           spell=spell["slug"], targets=[t["id"] for t in tgts], dtype=(spell.get("effect") or {}).get("type"),
           fxkind=(spell.get("effect") or {}).get("kind"))
+    if shielded and not tgts:
+        return {"ok": True}   # every target was shielded: the spell is cast, nothing more happens
     # --------------------------------------------------------------- effects
     entry = S.support(spell)
     if entry["remaining"]:
@@ -1537,7 +1629,7 @@ def roll_initiative(g, e, surprised=False, now=False, request=None):
 
 def start_of_turn(g, e):
     """Recharge rolls, effects ending at start of turn, death saves."""
-    g.set(e, turns_started=e.get("turns_started", 0) + 1)
+    g.set(e, turns_started=e.get("turns_started", 0) + 1, **({"displacement_off": False} if e.get("displacement_off") else {}))
     E.expire(g)
     E.turn_boundary(g, e, "start")
     for fx in E.active(e):
@@ -2242,6 +2334,7 @@ def equip(g, e, ref, on=True):
         return
     if it["kind"] not in ("weapon", "armor", "magic"):
         raise RuleError(f"{it['name']} isn't something you equip.")
+    worn_slot_free(e, it)
     effects = list(e.get("effects", []))
     if it["kind"] == "armor":
         cat = it.get("category")
@@ -2276,8 +2369,17 @@ def attune(g, e, ref, on=True, during_rest=False):
     if on:
         if not it.get("needs_attunement"):
             raise RuleError(f"{it['name']} doesn't require attunement.")
+        if it.get("attuned"):
+            raise RuleError(f"{e['name']} is already attuned to {it['name']}.")
         if sum(1 for i in e["inventory"] if i.get("attuned")) >= 3:
             raise RuleError(f"{e['name']} is already attuned to 3 items (the maximum).")
+        # rules/core/06-equipment.md → No More Than Three Items: "you can't attune to more than one copy of an item"
+        twin = next((i for i in e["inventory"] if i.get("attuned") and i["id"] != it["id"]
+                     and (i.get("ref") or i["name"]) == (it.get("ref") or it["name"]) and i["name"] == it["name"]), None)
+        if twin:
+            raise RuleError(f"{e['name']} is already attuned to a copy of {it['name']} — one copy at a time.")
+        attunement_prerequisite(e, it)
+        worn_slot_free(e, it)
         if combat(g):
             raise RuleError("Attuning takes a Short Rest focused on the item — not in combat.")
         if not during_rest:  # on its own: an hour spent on the item alone (`rest short --attune` folds it into a rest)
@@ -2285,7 +2387,50 @@ def attune(g, e, ref, on=True, during_rest=False):
     inv = [dict(i, attuned=on, equipped=True if on else i.get("equipped")) if i["id"] == it["id"] else dict(i) for i in e["inventory"]]
     g.set(e, inventory=inv)
     g.say(f"{e['name']} {'attunes to' if on else 'ends attunement with'} {it['name']}"
-          + ((" through the Short Rest." if during_rest else " (1 hour).") if on else "."), kind="item")
+          + ((f" through the {during_rest if isinstance(during_rest, str) else 'Short Rest'}." if during_rest else " (1 hour).")
+             if on else "."), kind="item")
+
+
+def attunement_prerequisite(e, it):
+    """rules/core/10-magic-item-rules.md → Attunement Prerequisites: "Requires Attunement by a Spellcaster" (can cast at
+    least one spell with its own traits or features, not through a magic item) or by a named class (a Wizard...)."""
+    meta = it.get("meta") or (srd.find("magic_items", it.get("ref") or it["name"]) or {}).get("meta") or ""
+    m = re.search(r"Requires Attunement by (?:an? )?([^)]+)\)", meta)
+    if not m:
+        return
+    who = m.group(1).strip()
+    if who.lower() == "spellcaster":
+        if e["kind"] == "pc":
+            ok = bool(spellcasting(e)) or bool(e.get("granted_spells"))
+        else:
+            ok = any(re.search(r"\bcasts?\b|spellcasting", (a.get("name", "") + " " + a.get("text", "")), re.I)
+                     for a in e.get("actions", []))
+        if not ok:
+            raise RuleError(f"{it['name']} requires attunement by a spellcaster — {e['name']} can't cast a spell with "
+                            "their own traits or features.")
+        return
+    classes = [c.strip().title() for c in re.split(r",\s*(?:or\s+)?|\s+or\s+", who) if c.strip()]
+    if e["kind"] == "pc" and all(srd.find("classes", c) for c in classes) and not any(c in e.get("classes", {}) for c in classes):
+        raise RuleError(f"{it['name']} requires attunement by a {who}.")   # anything else (a Dwarf...) is the DM's call
+
+
+def worn_slot(it):
+    """Which body slot a worn magic item takes (Multiple Items of the Same Kind), or None."""
+    if it.get("kind") != "magic":
+        return None
+    name = (it.get("base_name") or it.get("name") or "").lower()
+    return next((slot for slot, words in WORN_SLOTS.items() if any(re.search(rf"\b{w}\b", name) for w in words)), None)
+
+
+def worn_slot_free(e, it):
+    """rules/core/06-equipment.md → Multiple Items of the Same Kind: one cloak, one pair of footwear, of gloves or
+    gauntlets, of bracers, one item of headwear."""
+    slot = worn_slot(it)
+    other = next((i for i in e.get("inventory", []) if slot and i["id"] != it["id"] and i.get("equipped")
+                  and worn_slot(i) == slot), None)
+    if other:
+        raise RuleError(f"{e['name']} already wears {other['name']}: only one {slot} item at a time (rules/core/06-equipment.md "
+                        f"→ Multiple Items of the Same Kind). Unequip it first.")
 
 
 def fall_inert(g, e):
@@ -2563,9 +2708,11 @@ def recover_thrown(g, e, floor_id, how):
     g.say(f"⚖ DM ruling: {what} — {how}", kind="info")
 
 
-def use_item(g, e, ref, target=None):
+def use_item(g, e, ref, target=None, level=None):
     it = find_item(e, ref)
     tgt = g.get(target) if target else e
+    if it.get("ref") == "pearl-of-power":
+        return pearl_of_power(g, e, it, level)
     if it.get("heal"):
         if combat(g):
             use_action(g, e, "bonus", f"drink/administer {it['name']}")
@@ -2594,6 +2741,44 @@ def use_item(g, e, ref, target=None):
               kind="action", who=e["id"])
         return
     raise RuleError(f"{it['name']} isn't a consumable. Use `feature` or narrate its use.")
+
+
+def pearl_of_power(g, e, it, level=None):
+    """rules/magic-items/pearl-of-power.md: while it's on your person (attuned, by a spellcaster), a Magic action regains
+    one expended spell slot of level 3 or lower; once used, not again until the next dawn."""
+    if not it.get("attuned"):
+        raise RuleError(f"{it['name']} requires attunement before it can be used.")
+    now = g.state["time"]
+    used = it.get("pearl_used_at")
+    if used is not None and now < next_dawn(used):
+        raise RuleError(f"{it['name']} can't be used again until the next dawn ({fmt_time(next_dawn(used))}).")
+    slots, spent = spell_slots(e), e.get("slots_used", {})
+    pact = pact_slots(e) if e["kind"] == "pc" else None
+    expended = sorted((lv for lv in slots if lv <= 3 and spent.get(str(lv), 0) > 0), reverse=True)
+    pact_ok = bool(pact and pact["level"] <= 3 and e.get("pact_used", 0) > 0)
+    if level is not None and level > 3:
+        raise RuleError(f"{it['name']} restores a spell slot of level 3 or lower.")
+    use_pact = False
+    if level is None:
+        if not expended and not pact_ok:
+            raise RuleError(f"{e['name']} has no expended spell slot of level 3 or lower to regain.")
+        use_pact = not expended
+        level = pact["level"] if use_pact else expended[0]
+    elif level not in expended:
+        if pact_ok and pact["level"] == level:
+            use_pact = True
+        else:
+            raise RuleError(f"{e['name']} has no expended level {level} spell slot to regain.")
+    if combat(g):
+        use_action(g, e, "action", f"Magic action: {it['name']}")
+    if use_pact:
+        g.set(e, pact_used=e.get("pact_used", 0) - 1)
+    else:
+        g.set(e, **{f"slots_used__{level}": spent.get(str(level), 0) - 1})
+    e = g.get(e["id"])
+    g.set(e, inventory=[dict(i, pearl_used_at=now) if i["id"] == it["id"] else dict(i) for i in e["inventory"]])
+    g.say(f"🔮 {e['name']} uses the {it['name']}: regains one expended level {level} "
+          f"{'Pact Magic ' if use_pact else ''}spell slot (usable again after the next dawn).", kind="spell", who=e["id"])
 
 
 def venom_hit(g, e, item_id, tgt_id, how):
@@ -2665,15 +2850,23 @@ def charged_spec(it):
     if not entry:
         return None
     text = (srd.RULES / "magic-items" / f"{entry['slug']}.md").read_text(encoding="utf-8")
-    m_max = re.search(r"has (\d+) charges", text)
-    m_cast = re.search(r"expend (?:no more than (\d+) charges|(\d+) charge) to cast \*([^*]+)\*(?: \(save DC (\d+)\))?", text)
-    if not (m_max and m_cast):
-        return None
+    m_max = re.search(r"(?:has|have) (\d+) charges", text)
+    # "expend no more than 3 charges to cast" (a wand), "expend 1 or more charges to cast" (Eyes of Charming: any number)
+    m_cast = re.search(r"expend (?:no more than (\d+) charges|(\d+) or more charges|(\d+) charges?) to cast \*([^*]+)\*"
+                       r"(?: \(save DC (\d+)\))?", text)
+    if not m_max or not m_cast:
+        # an at-will spell, no charges: "While wearing this hat, you can cast the *Disguise Self* spell"
+        m_will = None if m_max else re.search(r"you can cast the \*([^*]+)\* spell", text)
+        if not m_will:
+            return None
+        return {"name": entry["name"], "spell": srd.slug(m_will.group(1)), "at_will": True, "dc": None,
+                "attunement": entry.get("attunement", False)}
     m_lvl = re.search(r"For 1 charge, you cast the level (\d) version", text)
-    m_regain = re.search(r"regains ([\dd +]+?) expended charges daily at dawn", text)
-    return {"name": entry["name"], "max": int(m_max.group(1)), "spell": srd.slug(m_cast.group(3)),
-            "max_charges": int(m_cast.group(1) or m_cast.group(2)), "base_level": int(m_lvl.group(1)) if m_lvl else None,
-            "dc": int(m_cast.group(4)) if m_cast.group(4) else None,
+    m_regain = re.search(r"regains? ([\dd +]+?|all) expended charges daily at dawn", text)
+    most = int(m_cast.group(1)) if m_cast.group(1) else int(m_max.group(1)) if m_cast.group(2) else int(m_cast.group(3))
+    return {"name": entry["name"], "max": int(m_max.group(1)), "spell": srd.slug(m_cast.group(4)),
+            "max_charges": most, "base_level": int(m_lvl.group(1)) if m_lvl else None,
+            "dc": int(m_cast.group(5)) if m_cast.group(5) else None,
             "regain": m_regain.group(1).replace(" ", "") if m_regain else None, "crumble": "crumbles" in text,
             "attunement": entry.get("attunement", False)}
 
@@ -2687,6 +2880,9 @@ def charged_item_refresh(g, e, it, spec):
     else:
         last = it.get("charges_at", now)
         d = next_dawn(last)
+        while d <= now and charges < spec["max"] and spec["regain"] == "all":
+            charges = spec["max"]   # "regain all expended charges daily at dawn"
+            g.say(f"  🪄 {it['name']} regains all its charges at dawn → {charges}/{spec['max']}.", kind="spell")
         while d <= now and charges < spec["max"] and spec["regain"]:
             r = g.roll(spec["regain"], f"{spec['name']} regains charges at dawn", e["id"])
             before, charges = charges, min(spec["max"], charges + r["total"])

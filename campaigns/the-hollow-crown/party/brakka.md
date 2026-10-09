@@ -2,9 +2,9 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** DM · **Orc** · **Fighter 7** (Champion) · **Background:** Soldier · **XP:** 29849
+**Player:** DM · **Orc** · **Fighter 8** (Champion) · **Background:** Soldier · **XP:** 34886
 
-**HP** 71/71 · **AC** 20 (Plate Armor 18 + Defense style 1 + items 1) · **Speed** 30 ft · **Initiative** +1 · **Proficiency** +3 · **Passive Perception** 14
+**HP** 80/80 · **AC** 21 (Plate Armor +1 18 + 1 + Defense style 1 + items 1) · **Speed** 30 ft · **Initiative** +4 · **Proficiency** +3 · **Passive Perception** 14
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
@@ -33,13 +33,13 @@ Attacks per Attack action: 2
 
 ## Features & feats
 
-Savage Attacker, Great Weapon Fighting, Ability Score Improvement, Ability Score Improvement, Defense
+Savage Attacker, Great Weapon Fighting, Ability Score Improvement, Ability Score Improvement, Defense, Alert
 
 Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 
 ## Inventory
 
-**Coins:** 3411 GP 4 SP 5 CP
+**Coins:** 3417 GP 4 SP 5 CP
 
 - `javelin-1` 8× Javelin · _starting equipment_
 - `spear-1` 1× Spear · _starting equipment_
@@ -60,7 +60,7 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 - `sack-1` 1× Sack · _purchased for 1 CP_
 - `greatsword-1` 1× Greatsword · _starting equipment_
 - `smoked-glass-visor-1` 1× Smoked-glass visor · _gift: Kit, from the Eye's vault_
-- `plate-armor-1` 1× Plate Armor (equipped) · _purchased for 1500 GP_
+- `plate-armor-1` 1× Plate Armor · _purchased for 1500 GP_
 - `flame-tongue-greatsword-1` 1× Flame Tongue (Greatsword) (equipped) (attuned) — Rare · _purchased for 4000 GP_
 - `cloak-of-protection-1` 1× Cloak of Protection (equipped) (attuned) — Uncommon · _purchased for 400 GP_
 - `potion-of-healing-1` 2× Potion of Healing — Common · _purchased for 400 GP_
@@ -69,8 +69,19 @@ Species traits: Adrenaline Rush, Darkvision, Relentless Endurance
 - `rope-1` 1× Rope · _purchased for 1 GP_
 - `dagger-1` 2× Dagger (equipped) · _loot: The second penitent's belt_
 - `darrows-saddlebags-1` 1× Darrow's saddlebags · _loot: Sir Hugh Darrow's arms and saddlebags_
+- `chain-mail-1` 1× Chain Mail · _loot: Sergeant Hamo Tuck's gear_
+- `halberd-1` 1× Halberd · _loot: Sergeant Hamo Tuck's gear_
+- `vyrmalths-head-1` 1× Vyrmalth's head · _loot: hacked from the dragon's corpse at the tithe stone_
+- `shrine-silver-1` 1× Shrine silver · _loot: The dragon's bed of treasure_
+  - Wood-shrine silver from the dragon's bed: leaf-chased ewers, chalices and prised-out fittings, dented and claw-marked. About 900 crowns as trade goods.
+- `gem-1` 6× Cut emeralds (Gem) · _loot: The dragon's bed of treasure_
+  - Six cut emeralds from the dragon's bed, each worth about 100 crowns.
+- `plate-armor-1-1` 1× The red heron plate (Plate Armor +1) (equipped) — Rare · _loot: The dragon's bed of treasure_
+  - A full suit of plate from the antler rack, its breastplate painted with the Regent's antler-and-sun and a knight's own device, a red heron. Years in a dragon's damp lair and not a speck of rust.
+- `potion-of-greater-healin-2` 1× Potion of Greater Healing — Uncommon · _loot: The dragon's bed of treasure_
+- `quarterstaff-1` 4× Quarterstaff · _loot: Grey pilgrim A's gear_
 
-Hit Point Dice: Fighter d10 7/7
+Hit Point Dice: Fighter d10 8/8
 Languages: Common, Orc, Giant · Tools: *Choose one kind of Gaming Set* (see "Equipment") · Armor training: light, medium, heavy, shield
 
 ## HP history
@@ -82,3 +93,4 @@ Languages: Common, Orc, Giant · Tools: *Choose one kind of Gaming Set* (see "Eq
 - Level 5: +8 (fixed average)
 - Level 6: +8 (fixed average)
 - Level 7: +13 (rolled 1d10(10) = 10)
+- Level 8: +9 (fixed average)

@@ -1,0 +1,43 @@
+# Snapshot — party moved to Brackenhow: Aelric's farm at Day 16, 22:51 (event 16752)
+
+### The Chapel of the Unblinking (`unblinking-chapel`, interior 32×24, lighting dim)
+- Brakka Holloway (`brakka`, pc) at (6,10) — 58/58 HP
+- Corvin Asche (`corvin`, pc) at (6,13) — 38/38 HP
+- Kit Corvell (`kit`, pc) at (11,12) — 51/51 HP
+- Ottilie Marsh (`ottilie`, pc) at (6,12) — 39/39 HP
+- Aelric of Brackenhow (`a-hill-farmer`, neutral) at (29,11) — 4/4 HP · hidden
+- Ditchley man 4 (`commoner-d`, ally) at (27,13) — 4/4 HP
+- Ditchley man 5 (`commoner-e`, ally) at (28,14) — 4/4 HP
+- Ditchley man 6 (`commoner-f`, ally) at (26,12) — 4/4 HP
+- Goodwife Haddow (`goodwife-haddow`, neutral) at (10,9) — 4/4 HP · hidden
+- Hal Bramble (`hal-bramble`, neutral) at (12,9) — 4/4 HP · hidden
+- Ivo Tarrant (`bandit-g`, ally) at (29,14) — 11/11 HP
+- Onlooker (`commoner-a-6`, neutral) at (29,10) — 4/4 HP · hidden
+- Onlooker (`commoner-b-6`, neutral) at (29,12) — 4/4 HP · hidden
+- Onlooker (`commoner-c-3`, neutral) at (18,10) — 4/4 HP · hidden
+- Onlooker (`commoner-d-3`, neutral) at (17,10) — 4/4 HP
+- Onlooker (`commoner-e-3`, neutral) at (19,10) — 4/4 HP
+- Osgar (`commoner-c`, ally) at (28,10) — 4/4 HP
+- Reeve Odo Ashby (`reeve-odo-ashby`, neutral) at (9,13) — 9/9 HP
+- Sir Gerold Ambry (`sir-gerold-ambry`, neutral) at (7,9) — 52/52 HP
+- Widow Tessaly (`widow-tessaly`, neutral) at (29,12) — 4/4 HP · hidden
+- Wilf Underhay (`commoner-b-4`, ally) at (27,10) — 4/4 HP
+- container `ennis-strongbox`: Ennis's strongbox at (13,1)
+- container `ennis-chest`: Ennis's clothes chest at (6,3)
+- container `brothers-chest`: The brothers' chest at (17,3)
+- container `alms-box`: The alms box at (29,9)
+- container `vestment-chest`: The vestment chest at (12,22)
+- point of interest `poi-1`: The Unblinking Face at (1,11) → journal j348
+- point of interest `poi-2`: The altar at (3,11) → journal j349
+- point of interest `poi-3`: The silver-eye doors at (31,11) → journal j350
+- point of interest `poi-4`: The notice board at (25,9) → journal j351
+- point of interest `poi-5`: The aisle runner at (14,11) → journal j352
+- point of interest `poi-6`: The lamp that never goes out at (6,8) → journal j353
+- point of interest `poi-7`: Ennis's writing desk at (6,6) → journal j354
+- point of interest `poi-8`: The listening grille at (16,21) → journal j355
+- point of interest `poi-9`: The study desk at (9,2) → journal j356
+- point of interest `poi-10`: The toppled brazier at (4,13) → journal j381
+- point of interest `poi-11`: The recruiting table at (30,13) → journal j518
+- point of interest `poi-12`: The Charter Chair at (5,12) → journal j519
+- doors: (24,2) closed, (10,4) open, (19,4) closed, (31,11) open, (31,12) open, (9,19) closed, (15,19) closed, (18,19) closed, (21,19) closed
+- labels: The nave (14,6), Ennis's study (9,2), The brothers' dormitory (19,2), Vestry (8,21), The listening room (16,21), Store (21,21), Porch (27,11)

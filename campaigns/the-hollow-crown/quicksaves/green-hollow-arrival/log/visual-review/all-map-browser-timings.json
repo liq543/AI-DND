@@ -1,0 +1,173 @@
+{
+  "samples": [
+    {
+      "index": 0,
+      "name": "The Hollowmark",
+      "ms": "212"
+    },
+    {
+      "index": 1,
+      "name": "The Rookery",
+      "ms": "244"
+    },
+    {
+      "index": 2,
+      "name": "The Grey Barrow",
+      "ms": "221"
+    },
+    {
+      "index": 3,
+      "name": "The Socket",
+      "ms": "77"
+    },
+    {
+      "index": 4,
+      "name": "Crowsfoot",
+      "ms": "410"
+    },
+    {
+      "index": 5,
+      "name": "The Pens",
+      "ms": "125"
+    },
+    {
+      "index": 6,
+      "name": "The Beech Holloway",
+      "ms": "151"
+    },
+    {
+      "index": 7,
+      "name": "The Gallows track, by night",
+      "ms": "106"
+    },
+    {
+      "index": 8,
+      "name": "The Gallows track, the turn-off",
+      "ms": "103"
+    },
+    {
+      "index": 9,
+      "name": "The Gallows track, the turn-off",
+      "ms": "109"
+    },
+    {
+      "index": 10,
+      "name": "The Withy Pond",
+      "ms": "244"
+    },
+    {
+      "index": 11,
+      "name": "The deer path, at first light",
+      "ms": "215"
+    },
+    {
+      "index": 12,
+      "name": "The Gallows track, the charcoal clearing",
+      "ms": "98"
+    },
+    {
+      "index": 13,
+      "name": "Fallowfield",
+      "ms": "184"
+    },
+    {
+      "index": 14,
+      "name": "The Old Toll Bridge",
+      "ms": "93"
+    },
+    {
+      "index": 15,
+      "name": "Thornbury: the West Gate quarter",
+      "ms": "353"
+    },
+    {
+      "index": 16,
+      "name": "The Wheatsheaf",
+      "ms": "84"
+    },
+    {
+      "index": 17,
+      "name": "Coldharbour",
+      "ms": "70"
+    },
+    {
+      "index": 18,
+      "name": "The Chapel of the Unblinking",
+      "ms": "110"
+    },
+    {
+      "index": 19,
+      "name": "Thornbury",
+      "ms": "113"
+    },
+    {
+      "index": 20,
+      "name": "The Mission house, Ambersell (upper floor)",
+      "ms": "115"
+    },
+    {
+      "index": 21,
+      "name": "The March Road before the West Gate",
+      "ms": "166"
+    },
+    {
+      "index": 22,
+      "name": "The March Road, east of Harrowgate",
+      "ms": "118"
+    },
+    {
+      "index": 23,
+      "name": "The League house, Thornbury",
+      "ms": "108"
+    },
+    {
+      "index": 24,
+      "name": "Brockholt",
+      "ms": "103"
+    },
+    {
+      "index": 25,
+      "name": "Oxbow Mill",
+      "ms": "52"
+    },
+    {
+      "index": 26,
+      "name": "Thornbury: the Cornmarket",
+      "ms": "245"
+    },
+    {
+      "index": 27,
+      "name": "The Gilded Hand's hall, Gildford",
+      "ms": "63"
+    },
+    {
+      "index": 28,
+      "name": "Harrowgate",
+      "ms": "355"
+    },
+    {
+      "index": 29,
+      "name": "Harrowgate's strongroom",
+      "ms": "47"
+    },
+    {
+      "index": 30,
+      "name": "Brackenhow: Aelric's farm",
+      "ms": "271"
+    },
+    {
+      "index": 31,
+      "name": "The Hartstone",
+      "ms": "499"
+    },
+    {
+      "index": 32,
+      "name": "The Gallows Oak",
+      "ms": "247"
+    }
+  ],
+  "notes": "Local warm gallery load: fetch, insertion, image decoding and two animation frames. Not a device-independent guarantee. First uncached regional study earlier took 2220 ms.",
+  "storm_frame_samples": 120,
+  "storm_frame_median_ms": 16.7,
+  "storm_frame_p95_ms": 16.8
+}

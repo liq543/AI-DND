@@ -1,0 +1,81 @@
+# Snapshot — party moved to Harrowgate at Day 16, 04:22 (event 14876)
+
+### The Rookery (`rookery`, interior 52×36, lighting dim)
+- Ada Crisp (`ada-crisp`, neutral) at (44,4) — 4/4 HP
+- Bastian (`bastian`, neutral) at (47,18) — 32/32 HP
+- Mercy Fulk (`mercy-fulk`, enemy) at (37,17) — 2/4 HP · restrained, petrified
+- Mother Hobday (`mother-hobday`, neutral) at (4,2) — 4/4 HP
+- Mr Fennimore Quist (`mr-fennimore-quist`, neutral) at (41,12) — 23/27 HP
+- Nell Pratt, a ditch-digger's wife (`villager-4`, neutral) at (37,19) — 4/4 HP · petrified
+- Nib (`nib`, neutral) at (40,10) — 4/4 HP
+- Sergeant Dorran Lerner (`sergeant-dorran-lerner`, enemy) at (44,12) — 57/75 HP · hidden
+- Tobin Rudge (`tobin-rudge`, neutral) at (46,18) — 4/4 HP
+- container `kits-strongbox`: Kit's strongbox at (41,14)
+- container `hall-of-spoils`: The Hall of Spoils at (13,17)
+- container `otties-chest`: Ottilie's chest of identities at (13,30)
+- container `asches-chest`: Asche's chest at (23,30)
+- container `treasury`: The great strongbox at (49,32) — coins: 16746 GP
+- in The Hall of Spoils (`hall-of-spoils`) `floor-1`: 1× The Curator's Ring at (13,17) — stashed by Kit Corvell
+- in The Hall of Spoils (`hall-of-spoils`) `floor-2`: 1× The Gala seating chart at (13,17) — stashed by Kit Corvell
+- in The Hall of Spoils (`hall-of-spoils`) `floor-3`: 1× The Curator's daybook at (13,17) — stashed by Kit Corvell
+- in The Hall of Spoils (`hall-of-spoils`) `floor-4`: 1× Smoked-glass visor (gilded, sun-and-key) at (13,17) — stashed by Kit Corvell
+- in The Hall of Spoils (`hall-of-spoils`) `floor-5`: 1× Warden's Sigil Ring at (13,17) — stashed by Kit Corvell
+- in The Hall of Spoils (`hall-of-spoils`) `floor-6`: 1× Black-Gold Coin at (13,17) — stashed by Kit Corvell
+- in The Hall of Spoils (`hall-of-spoils`) `floor-7`: 1× Thorne's smoked-glass visor at (13,17) — stashed by Brakka Holloway
+- in Kit's strongbox (`kits-strongbox`) `floor-8`: 1× Emeric Dane's Last Letter at (41,14) — stashed by Kit Corvell
+- point of interest `poi-1`: The range at (3,1) → journal j49
+- point of interest `poi-2`: The bread oven at (6,1) → journal j50
+- point of interest `poi-3`: The kitchen worktable at (4,4) → journal j51
+- point of interest `poi-4`: The scullery basin at (1,6) → journal j52
+- point of interest `poi-5`: Kitchen barrels at (6,7) → journal j53
+- point of interest `poi-6`: Sacks and smokes at (1,3) → journal j54
+- point of interest `poi-7`: The cask wall at (1,12) → journal j55
+- point of interest `poi-8`: The wine racks at (3,10) → journal j56
+- point of interest `poi-9`: The icehouse chests at (6,10) → journal j57
+- point of interest `poi-10`: The buttery bench at (6,14) → journal j58
+- point of interest `poi-11`: The great hearth at (25,1) → journal j59
+- point of interest `poi-12`: The long table at (25,8) → journal j60
+- point of interest `poi-13`: The great chair at (37,8) → journal j61
+- point of interest `poi-14`: The serpent columns at (13,3) → journal j62
+- point of interest `poi-15`: The minstrels' gallery at (25,14) → journal j63
+- point of interest `poi-16`: The candelabra at (19,4) → journal j64
+- point of interest `poi-17`: The serving door at (11,8) → journal j65
+- point of interest `poi-18`: The great bed at (46,2) → journal j66
+- point of interest `poi-19`: Kit's wardrobes at (50,2) → journal j67
+- point of interest `poi-20`: Kit's dressing table at (42,2) → journal j68
+- point of interest `poi-21`: The brazier at (44,6) → journal j69
+- point of interest `poi-23`: Kit's writing desk at (47,11) → journal j71
+- point of interest `poi-24`: The study shelves at (50,12) → journal j72
+- point of interest `poi-25`: The study's secret door at (45,16) → journal j73
+- point of interest `poi-26`: Kit's private door at (39,10) → journal j74
+- point of interest `poi-27`: The empty plinths at (25,19) → journal j75
+- point of interest `poi-28`: The household stair (foot) at (10,18) → journal j76
+- point of interest `poi-29`: The serpent door (east) at (39,18) → journal j77
+- point of interest `poi-30`: The Coil Stair at (49,18) → journal j78
+- point of interest `poi-31`: The little stage at (7,22) → journal j79
+- point of interest `poi-32`: The footlights at (6,24) → journal j80
+- point of interest `poi-33`: The gilt chairs at (4,26) → journal j81
+- point of interest `poi-34`: Ottilie's forger's desk at (11,32) → journal j82
+- point of interest `poi-35`: The costume racks at (9,30) → journal j83
+- point of interest `poi-36`: The dressing table at (3,33) → journal j84
+- point of interest `poi-37`: The chaise at (1,31) → journal j85
+- point of interest `poi-38`: The reading table at (21,23) → journal j86
+- point of interest `poi-39`: Asche's library at (15,24) → journal j87
+- point of interest `poi-40`: The library ladder at (16,22) → journal j88
+- point of interest `poi-41`: The workbenches at (16,30) → journal j89
+- point of interest `poi-42`: The press at (15,33) → journal j90
+- point of interest `poi-43`: The cauldron at (20,32) → journal j91
+- point of interest `poi-44`: The summoning circle at (22,31) → journal j92
+- point of interest `poi-45`: The slab at (26,32) → journal j93
+- point of interest `poi-46`: The pit at (35,27) → journal j94
+- point of interest `poi-47`: The weapon racks at (29,24) → journal j95
+- point of interest `poi-48`: The water trough at (40,33) → journal j96
+- point of interest `poi-49`: The armour stands at (45,22) → journal j97
+- point of interest `poi-50`: Nib's loft at (49,26) → journal j98
+- point of interest `poi-51`: The vault door at (46,28) → journal j99
+- point of interest `poi-52`: The wage chests at (44,30) → journal j100
+- point of interest `poi-53`: Quist's ledger desk at (45,33) → journal j101
+- point of interest `poi-54`: The map table at (42,11) → journal j394
+- point of interest `poi-55`: Mercy Fulk, in stone at (37,17) → journal j345
+- point of interest `poi-56`: Nell Pratt's statue at (37,19) → journal j474
+- doors: (9,4) closed, (11,8) open, (45,8) open, (39,10) closed, (9,12) closed, (10,16) closed, (24,16) open, (25,16) open, (26,16) open, (45,16) closed, (39,18) closed, (12,20) closed, (21,20) closed, (35,20) closed, (42,24) closed, (21,28) open, (46,28) closed, (6,32) closed, (24,32) closed

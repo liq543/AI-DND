@@ -375,6 +375,17 @@ def cmd_spells(g, a):
                 raise RuleError('spells refund <who> --spell "<name>" --source "why the free cast comes back" (shown publicly)')
             slug = srd.slug(a.spell)
             spent = [x for x in e.get("granted_spells", []) if x["slug"] == slug and x.get("free_used")]
+            day_key = f"{slug}-day"   # a stat block's "N/Day Each" spell (rules/spells/counterspell: a voided cast comes back)
+            # or a stat-block action that casts it ("Misty Step (3/Day)", "Protective Magic (3/Day)")
+            act = next((x for x in e.get("actions", []) if x.get("per_day") and slug.replace("-", " ") in x["text"].lower()
+                        and e.get("per_day_used", {}).get(x["name"], 0) > 0), None)
+            if not spent and act and not e.get("per_day_used", {}).get(day_key, 0):
+                day_key = act["name"]
+            if not spent and e.get("per_day_used", {}).get(day_key, 0) > 0:
+                g.set(e, **{f"per_day_used__{day_key}": e["per_day_used"][day_key] - 1})
+                g.override(a.source, f"one daily cast of {a.spell} refunded to {e['name']}")
+                g.say(f"⚖ {e['name']}: one daily cast of {a.spell} is back — {a.source}.", kind="info")
+                return
             if not spent:
                 raise RuleError(f"{e['name']} has no spent free cast of {a.spell} to refund.")
             g.set(e, granted_spells=[dict(x, free_used=False) if x is spent[0] else x for x in e["granted_spells"]])
@@ -799,13 +810,16 @@ def cmd_combat(g, a):
         defeated = c.get("defeated", [])
         xp = sum(g.entities[i]["xp"] for i in defeated if i in g.entities)
         g.emit("encounter.log", defeated=defeated, xp=xp, awarded=False, time=g.state["time"],
-               rounds=c["round"], ammo=c.get("ammo_total") or {k: v.get("ammo_spent", 0) for k, v in c.get("economy", {}).items() if v.get("ammo_spent")})
+               rounds=c["round"], ammo=c.get("ammo_total") or {k: v.get("ammo_spent", 0) for k, v in c.get("economy", {}).items() if v.get("ammo_spent")},
+               ammo_magic=c.get("ammo_magic", {}), ammo_magic_hits=c.get("ammo_magic_hits", {}))
         # the fight took its rounds (6 s each), not a whole minute: short spells cast in it keep the time they have left
         g.emit("time.set", minutes=g.state["time"] + c["round"] / 10)
         for e in g.entities.values():
             conds = [x for x in e.get("conditions", []) if x["name"] in ("dodging", "helped", "raging", "disengaged")]
             if conds:
                 g.set(e, conditions=[x for x in e["conditions"] if x not in conds])
+            if e.get("displacement_off"):
+                g.set(e, displacement_off=False)   # Cloak of Displacement: the fight's turns are over
         g.emit("combat.set", combat=None)
         M.after_time(g)
         g.say(f"🏁 Combat ends after {c['round']} round(s). Defeated: {', '.join(g.entities[i]['name'] for i in defeated if i in g.entities) or 'none'}"
@@ -846,6 +860,12 @@ def cmd_action(g, a):
     e = g.get(a.who)
     name = a.name.lower()
     kind = "bonus" if a.bonus else "reaction" if a.reaction else "action"
+    if name in ("end-concentration", "drop-concentration"):
+        # SRD: you can end Concentration at any time (no action required), even off your turn
+        if not e.get("concentration"):
+            raise RuleError(f"{e['name']} isn't concentrating on anything.")
+        M.end_concentration(g, e, "ended by choice")
+        return
     if name not in ACTIONS:
         raise RuleError(f"'{name}' is not an SRD action. Actions: {', '.join(sorted(ACTIONS))}. Class features: `feature`.")
     if kind == "bonus" and not a.via:
@@ -900,7 +920,10 @@ def cmd_action(g, a):
             M.add_condition(g, e, "invisible", source="Hide (Stealth " + str(r["total"]) + ")", quiet=True)
             g.say(f"{e['name']} is Hidden (Invisible until found; enemies need Perception ≥ {r['total']}).", kind="action")
     elif name == "search":
-        M.ability_check(g, e, a.skill or "perception", dc=a.dc)
+        skill = a.skill or "perception"
+        # --target: the creature searched for; a Cloak of Elvenkind it wears gives Perception checks to find it Disadvantage
+        hid = g.get(a.target) if a.target else None
+        M.ability_check(g, e, skill, dc=a.dc, dis=M.perceive_dis(hid) if hid and skill == "perception" else ())
     elif name == "study":
         M.ability_check(g, e, a.skill or "investigation", dc=a.dc)
     elif name == "influence":
@@ -916,7 +939,8 @@ def cmd_attack(g, a):
             adv = [x for x in adv if x.lower() != "steady aim"] + ["Steady Aim"]
             M.set_economy(g, a.attacker, steady_aim=False)
         r = M.attack(g, a.attacker, a.target, a.weapon, adv=adv, dis=ids(a.dis), reaction=a.reaction,
-                     offhand=a.offhand, versatile=a.versatile, sneak=a.sneak, smite=a.smite, now=a.now, knockout=a.knockout)
+                     offhand=a.offhand, versatile=a.versatile, sneak=a.sneak, smite=a.smite, now=a.now, knockout=a.knockout,
+                     ammo=a.ammo)
         if "request" in (r or {}):
             break
 
@@ -1115,15 +1139,22 @@ def cmd_contest(g, a):
     from .core import skill_mod
     A, B = g.get(a.who), g.get(a.vs)
     skill_a, skill_b = a.what.lower(), a.vs_skill.lower()
-    ra = M.ability_check(g, A, skill_a, adv=ids(a.adv), dis=ids(a.dis), hidden=a.hidden, now=True,
+    # Cloak of Elvenkind: Wisdom (Perception) checks made to perceive its wearer have Disadvantage
+    dis_a = ids(a.dis) + (M.perceive_dis(B) if skill_a == "perception" else [])
+    dis_b = M.perceive_dis(A) if skill_b == "perception" else []
+    ra = M.ability_check(g, A, skill_a, adv=ids(a.adv), dis=dis_a, hidden=a.hidden, now=True,
                          purpose=a.purpose or f"contest: {skill_a} vs {B['name']}'s {skill_b}")
     if a.passive:
         if skill_b not in srd.SKILLS:
             raise RuleError(f"--passive needs a skill for the opponent, got '{skill_b}'.")
-        tb = 10 + skill_mod(B, skill_b) + (5 if a.passive_adv else 0) - (5 if a.passive_dis else 0)
+        # rules glossary, Passive Perception: +5 with Advantage (a Robe of Eyes), -5 with Disadvantage (a Cloak of Elvenkind)
+        p_adv = a.passive_adv or (skill_b == "perception" and bool(M.item_bonus(B, "adv_perception")))
+        p_dis = a.passive_dis or bool(dis_b)
+        tb = 10 + skill_mod(B, skill_b) + (5 if p_adv else 0) - (5 if p_dis else 0)
         desc_b = f"passive {skill_b.title()} {tb}"
     else:
-        rb = M.ability_check(g, B, skill_b, hidden=a.hidden, now=True, purpose=f"contest: {skill_b} vs {A['name']}'s {skill_a}")
+        rb = M.ability_check(g, B, skill_b, dis=dis_b, hidden=a.hidden, now=True,
+                             purpose=f"contest: {skill_b} vs {A['name']}'s {skill_a}")
         tb = rb["total"]
         desc_b = f"{skill_b.title()} {tb}"
     winner = A if ra["total"] > tb else B
@@ -1436,29 +1467,12 @@ def cmd_rest(g, a):
             g.say(f"⚖ {e['name']}: {n or 1} Hit Point Die refunded.", kind="info")
         return
     members = [g.get(i) for i in ids(a.who)] if a.who else [e for e in g.pcs() if not e.get("dead")]
+    focus, attune_to = rest_focus(g, a)
     if a.kind == "short":
         hd = {}
         for part in ids(a.hd):
             k, _, n = part.partition(":")
             hd[g.get(k)["id"]] = int(n or 1)
-        focus = {}
-        for part in ids(a.focus):
-            k, _, item = part.partition(":")
-            if not item:
-                raise RuleError("--focus who:item-id (one magic item per creature)")
-            if g.get(k)["id"] in focus:
-                raise RuleError("A creature can focus on only one magic item per Short Rest.")
-            M.find_item(g.get(k), item)
-            focus[g.get(k)["id"]] = item
-        attune_to = {}
-        for part in ids(getattr(a, "attune", None)):
-            k, _, item = part.partition(":")
-            if not item:
-                raise RuleError("--attune who:item-id (one magic item per creature)")
-            eid = g.get(k)["id"]
-            if eid in attune_to or eid in focus:
-                raise RuleError("A creature can focus on only one magic item per Short Rest (to identify it or to attune to it).")
-            attune_to[eid] = item
         M.short_rest(g, members, hd, focus, attune_to)
     elif getattr(a, "ended_at", None):
         # repair: the time already passed (a journey's nights) held a Long Rest the engine didn't credit; logged publicly
@@ -1472,10 +1486,41 @@ def cmd_rest(g, a):
             if last is not None and when - 8 * 60 - last < 16 * 60:
                 raise RuleError(f"{e['name']} had finished a Long Rest {M.fmt_duration(when - 8 * 60 - last)} before that one began — "
                                 f"Long Rests need 16 hours between them (rules/core/08-rules-glossary.md → Long Rest).")
+        if focus or attune_to:
+            raise RuleError("--focus / --attune need a rest taken now (`rest short` or `rest long`), not a repair.")
         g.override(a.reason, f"a Long Rest ending {fmt_time(when)} credited to {', '.join(e['name'] for e in members)}")
         M.long_rest(g, members, ended_at=when)
     else:
         M.long_rest(g, members)
+        # rules/core/06-equipment.md: identifying or attuning takes a Short Rest focused on the item; a Long Rest's
+        # 8 hours include that time (one item per creature, as for a Short Rest)
+        for eid, ref in focus.items():
+            M.identify_item(g, g.get(eid), ref, "focused on it through the Long Rest")
+        for eid, ref in attune_to.items():
+            M.attune(g, g.get(eid), ref, during_rest="Long Rest")
+
+
+def rest_focus(g, a):
+    """--focus / --attune who:item-id pairs: one magic item per creature per rest, to identify it or to attune to it."""
+    focus, attune_to = {}, {}
+    for part in ids(getattr(a, "focus", None)):
+        k, _, item = part.partition(":")
+        if not item:
+            raise RuleError("--focus who:item-id (one magic item per creature)")
+        if g.get(k)["id"] in focus:
+            raise RuleError("A creature can focus on only one magic item per rest.")
+        M.find_item(g.get(k), item)
+        focus[g.get(k)["id"]] = item
+    for part in ids(getattr(a, "attune", None)):
+        k, _, item = part.partition(":")
+        if not item:
+            raise RuleError("--attune who:item-id (one magic item per creature)")
+        eid = g.get(k)["id"]
+        if eid in attune_to or eid in focus:
+            raise RuleError("A creature can focus on only one magic item per rest (to identify it or to attune to it).")
+        M.find_item(g.get(eid), item)
+        attune_to[eid] = item
+    return focus, attune_to
 
 
 def cmd_time(g, a):
@@ -1691,7 +1736,7 @@ def cmd_item(g, a):
     elif a.action == "unattune":
         M.attune(g, e, a.item, False)
     elif a.action == "use":
-        M.use_item(g, e, a.item, a.to)
+        M.use_item(g, e, a.item, a.to, level=a.level)
     elif a.action == "recover-thrown":
         M.recover_thrown(g, e, a.item, a.how)
     elif a.action == "venom-hit":
@@ -1764,13 +1809,27 @@ def cmd_item(g, a):
         if not encs or not encs[-1].get("ammo", {}).get(e["id"]):
             raise RuleError("No ammunition was spent in the last combat.")
         idx = len(encs)
-        if any(x.get("recovered_for") == e["id"] and x.get("encounter") == idx for x in g.state["encounters"]):
-            raise RuleError("Ammunition from that fight was already recovered.")
-        n = encs[-1]["ammo"][e["id"]] // 2
+        last = encs[-1]
+        # magic ammunition (Arrows +1) stops being magical once it hits: only its misses come back magic, the rest as plain
+        fired_magic = last.get("ammo_magic", {}).get(e["id"], {})
+        hits_magic = last.get("ammo_magic_hits", {}).get(e["id"], {})
+        want = M.resolve_item(g, a.item) or {}
+        kind = "magic" if want.get("magic_bonus") else "plain"
+        if any(x.get("recovered_for") == e["id"] and x.get("encounter") == idx and x.get("kind", "plain") == kind
+               for x in g.state["encounters"]):
+            raise RuleError(f"{'Magic' if kind == 'magic' else 'Plain'} ammunition from that fight was already recovered.")
+        if kind == "magic":
+            name = next((k for k in fired_magic if k.lower() == want["name"].lower()), None)
+            if not name:
+                raise RuleError(f"{e['name']} fired no {want['name']} in the last combat.")
+            n = (fired_magic[name] - hits_magic.get(name, 0)) // 2
+        else:
+            n = (last["ammo"][e["id"]] - sum(fired_magic.values()) + sum(hits_magic.values())) // 2
         if n < 1:
             raise RuleError("Too little ammunition was spent to recover any (half, rounded down).")
-        M.add_item(g, e, a.item, qty=n, source="found: recovered after combat")
-        g.emit("encounter.log", recovered_for=e["id"], encounter=idx, qty=n)
+        M.add_item(g, e, a.item, qty=n, source="found: recovered after combat", override=a.override,
+                   identified=True if kind == "magic" else None)
+        g.emit("encounter.log", recovered_for=e["id"], encounter=idx, qty=n, kind=kind)
     elif a.action == "card":
         it = M.find_item(e, a.item)
         out = Path(g.dir) / "views" / f"item-{it['id']}.svg"
@@ -3166,7 +3225,8 @@ def fulfill(g, rid, via):
                        spell=spec.get("spell"), now=True, request=rid, effect=spec.get("effect"))
     elif op == "attack":
         M.attack(g, spec["att"], spec["tgt"], spec["weapon"], adv=spec["adv"], dis=spec["dis"], reaction=spec["reaction"],
-                 offhand=spec["offhand"], versatile=spec["versatile"], sneak=spec["sneak"], smite=spec["smite"], now=True, request=rid)
+                 offhand=spec["offhand"], versatile=spec["versatile"], sneak=spec["sneak"], smite=spec["smite"], now=True, request=rid,
+                 ammo_used=spec.get("ammo_used"))
     elif op == "spell_attack":
         M.spell_attack(g, e, g.get(spec["target"]), g.require("spells", spec["spell"], "Spell"),
                        spec["sc"], spec["expr"], spec["fx"], spec["adv"], spec["dis"], True,
@@ -3438,6 +3498,7 @@ def build_parser():
     c.add_argument("--sneak", action="store_true")
     c.add_argument("--smite", type=int, help="Divine Smite slot level")
     c.add_argument("--knockout", action="store_true")
+    c.add_argument("--ammo", help="inventory id of the ammunition to fire (e.g. arrows-1-1 for Arrows +1); default: plain ammunition first")
     c.add_argument("--times", type=int, default=1)
     c.add_argument("--now", action="store_true", help="roll now even in viewer-roll mode")
 
@@ -3557,8 +3618,8 @@ def build_parser():
     c.add_argument("kind", choices=["short", "long"])
     c.add_argument("--who")
     c.add_argument("--hd", help="hit dice to spend: kira:2,bob:1")
-    c.add_argument("--focus", help="short rest: identify a magic item by focusing on it, kira:item-id (one per creature)")
-    c.add_argument("--attune", help="short rest: attune to a magic item through the rest, kira:item-id (one per creature)")
+    c.add_argument("--focus", help="short or long rest: identify a magic item by focusing on it, kira:item-id (one per creature)")
+    c.add_argument("--attune", help="short or long rest: attune to a magic item through the rest, kira:item-id (one per creature)")
     c.add_argument("--refund-hd", help="repair: refund Hit Point Dice spent by mistake, kira:1 (needs --reason; takes no rest)")
     c.add_argument("--ended-at", help='repair: a Long Rest already taken inside time that has passed, ending "Day N, HH:MM" '
                                       '(needs --reason; no time passes)')
@@ -3639,6 +3700,7 @@ def build_parser():
     c.add_argument("--alias", help="item note: display name (e.g. 'Oathkeeper' for a Longsword)")
     c.add_argument("--how", help="item identify/obscure: how the characters learned (or why they don't know) its properties")
     c.add_argument("--identified", action="store_true", help="item add: the characters already know what this magic item does")
+    c.add_argument("--level", type=int, help="item use: the expended spell slot level a Pearl of Power restores (default: highest, 3 max)")
     c = sp.add_parser("coins")
     c.add_argument("who")
     c.add_argument("amount")

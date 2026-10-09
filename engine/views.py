@@ -248,7 +248,10 @@ def visible_maps(g):
                 vis.add(other)
                 todo.append(other)
     above = {a for h in here for a in map_ancestors(s, h)}
-    kids = {mid for mid, m in s["maps"].items() if m.get("parent") in here and m.get("shown")}
+    # known places one level down get tabs, except under the world/region map: every place ever visited hangs off it,
+    # so those stay one click away on the map itself (browsable_maps) instead of flooding the tab bar
+    tab_parents = {h for h in here if map_level(s["maps"].get(h, {})) != "region"}
+    kids = {mid for mid, m in s["maps"].items() if m.get("parent") in tab_parents and m.get("shown")}
     return {mid for mid in vis | kids if s["maps"].get(mid, {}).get("shown") or mid in above}
 
 

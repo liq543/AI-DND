@@ -201,7 +201,9 @@ def companion_kit(g, e):
         if CONSUMABLE_RE.search(it["name"]):
             cons.append(f"{it['name']} ×{it.get('qty', 1)} (`{it['id']}`)")
         spec = M.charged_spec(it) if it.get("magic") else None
-        if spec:
+        if spec and spec.get("at_will") and (it.get("attuned") or not spec["attunement"]):
+            items.append(f"{it['name']} ({spec['spell'].replace('-', ' ').title()} at will: `cast --item {it['id']}`)")
+        elif spec and not spec.get("at_will"):
             left = it.get("charges", spec["max"])
             if left:
                 items.append(f"{it['name']} {left}/{spec['max']} charges (`cast --item {it['id']}`)")

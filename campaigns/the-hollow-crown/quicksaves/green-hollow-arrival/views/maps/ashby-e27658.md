@@ -1,0 +1,61 @@
+# Snapshot — party moved to The old tower, ground floor at Day 34, 22:07 (event 27658)
+
+### Ashby (`ashby`, town 52×36, lighting dim)
+- A Greencloak at the motte gate A (`a-greencloak-at-the-motte-gate-a`, enemy) at (40,8) — 11/11 HP · hidden
+- A Greencloak at the motte gate B (`a-greencloak-at-the-motte-gate-b`, enemy) at (41,9) — 11/11 HP · hidden
+- A Greencloak at the tax house A (`a-greencloak-at-the-tax-house-a`, enemy) at (17,22) — DEAD
+- A Greencloak at the tax house B (`a-greencloak-at-the-tax-house-b`, enemy) at (32,3) — 11/11 HP
+- A Greencloak crossbow sergeant A (`a-greencloak-crossbow-sergeant-a`, enemy) at (16,26) — DEAD
+- A Greencloak crossbow sergeant B (`a-greencloak-crossbow-sergeant-b`, enemy) at (18,27) — DEAD
+- A Greencloak crossbow sergeant C (`a-greencloak-crossbow-sergeant-c`, enemy) at (16,23) — DEAD
+- A Greencloak crossbow sergeant D (`a-greencloak-crossbow-sergeant-d`, enemy) at (17,24) — DEAD
+- A Greencloak inside the tax house A (`a-greencloak-inside-the-tax-house-a`, enemy) at (17,21) — DEAD
+- A Greencloak inside the tax house B (`a-greencloak-inside-the-tax-house-b`, enemy) at (20,23) — DEAD
+- A Greencloak of the garrison A (`a-greencloak-of-the-garrison-a`, enemy) at (20,24) — DEAD
+- A Greencloak of the garrison B (`a-greencloak-of-the-garrison-b`, enemy) at (21,24) — DEAD
+- A Greencloak of the garrison C (`a-greencloak-of-the-garrison-c`, enemy) at (22,24) — DEAD
+- A Greencloak of the garrison D (`a-greencloak-of-the-garrison-d`, enemy) at (23,24) — DEAD
+- A Greencloak of the garrison E (`a-greencloak-of-the-garrison-e`, enemy) at (24,24) — DEAD
+- A Greencloak of the garrison F (`a-greencloak-of-the-garrison-f`, enemy) at (25,24) — DEAD
+- A Greencloak of the garrison G (`a-greencloak-of-the-garrison-g`, enemy) at (26,24) — DEAD
+- A Greencloak of the garrison H (`a-greencloak-of-the-garrison-h`, enemy) at (27,24) — DEAD
+- A Greencloak of the garrison I (`a-greencloak-of-the-garrison-i`, enemy) at (28,24) — DEAD
+- A Greencloak of the garrison J (`a-greencloak-of-the-garrison-j`, enemy) at (29,24) — DEAD
+- A Greencloak of the garrison K (`a-greencloak-of-the-garrison-k`, enemy) at (15,24) — DEAD
+- A Greencloak of the garrison L (`a-greencloak-of-the-garrison-l`, enemy) at (15,23) — DEAD
+- A Greencloak of the garrison M (`a-greencloak-of-the-garrison-m`, enemy) at (16,23) — DEAD
+- A Greencloak of the garrison N (`a-greencloak-of-the-garrison-n`, enemy) at (16,22) — DEAD
+- A Greencloak of the garrison O (`a-greencloak-of-the-garrison-o`, enemy) at (18,24) — DEAD
+- A Greencloak of the garrison P (`a-greencloak-of-the-garrison-p`, enemy) at (17,22) — DEAD
+- A Greencloak of the garrison Q (`a-greencloak-of-the-garrison-q`, enemy) at (17,23) — DEAD
+- A Greencloak of the garrison R (`a-greencloak-of-the-garrison-r`, enemy) at (21,27) — DEAD · mocked
+- A Greencloak of the garrison S (`a-greencloak-of-the-garrison-s`, enemy) at (22,28) — DEAD
+- A Greencloak of the garrison T (`a-greencloak-of-the-garrison-t`, enemy) at (18,25) — DEAD
+- A market-goer A (`a-market-goer-a`, neutral) at (30,22) — 4/4 HP · hidden
+- A market-goer B (`a-market-goer-b`, neutral) at (30,21) — 4/4 HP · hidden
+- A market-goer C (`a-market-goer-c`, neutral) at (29,22) — 4/4 HP · hidden
+- A market-goer D (`a-market-goer-d`, neutral) at (30,23) — 4/4 HP · hidden
+- A town watchman with a lantern A (`a-town-watchman-with-a-lantern-a`, neutral) at (47,27) — 4/4 HP
+- A town watchman with a lantern B (`a-town-watchman-with-a-lantern-b`, neutral) at (49,25) — 4/4 HP
+- A townsman on the South Gate A (`a-townsman-on-the-south-gate-a`, neutral) at (33,33) — 4/4 HP · hidden
+- A townsman on the South Gate B (`a-townsman-on-the-south-gate-b`, neutral) at (32,33) — 4/4 HP · hidden
+- An old drinker (`an-old-drinker`, neutral) at (10,21) — 4/4 HP
+- Master Pellam Sayle, the Regent's summoner (`master-pellam-sayle-the-regents-summoner`, enemy) at (29,2) — 9/9 HP · hidden
+- Sir Osric Vane (`sir-osric-vane`, enemy) at (17,26) — DEAD
+- The Rat's alewife (`the-rats-alewife`, neutral) at (10,20) — 4/4 HP
+- The tax clerk (`the-tax-clerk`, enemy) at (19,24) — DEAD · unconscious
+- container `box-2`: Sir Osric Vane's gear at (17,26)
+- point of interest `poi-1`: The market cross at (33,24) → journal j637
+- point of interest `poi-2`: The tax house at (21,22) → journal j638
+- point of interest `poi-3`: The Crown and Sheaf at (29,3) → journal j639
+- point of interest `poi-4`: The motte gate at (39,8) → journal j640
+- point of interest `poi-5`: The motte tower at (42,3) → journal j641
+- point of interest `poi-6`: The Drowned Rat at (11,20) → journal j642
+- point of interest `poi-7`: The counting room's strongbox at (20,19) → journal j643
+- point of interest `poi-8`: The jammed tax house door at (22,23) → journal j659
+- point of interest `poi-9`: The Drowned Rat's front window at (13,21) → journal j665
+- point of interest `poi-10`: Corvin's Wall of Fire at (25,24) → journal j666
+- point of interest `poi-11`: Sir Osric Vane at (17,26) → journal j667
+- point of interest `poi-12`: The barred motte gate at (38,8) → journal j668
+- doors: (17,2) closed, (31,2) closed, (40,2) open, (43,3) open, (39,8) open, (31,11) closed, (40,12) closed, (13,14) closed, (13,19) open, (40,19) closed, (22,22) open, (5,30) closed, (9,30) closed, (24,30) closed, (43,30) closed
+- labels: Market Square (30,20), The motte (Regency garrison) (45,7), The market cross (33,23), South Gate (33,34)

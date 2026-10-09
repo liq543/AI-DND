@@ -2,17 +2,17 @@
 
 > AUTO-GENERATED from the signed engine log — do not edit. Change things with `python -m engine ...`.
 
-**Player:** Player · **Human** · **Rogue 7** (Thief) · **Background:** Criminal · **XP:** 29849
+**Player:** Player · **Human** · **Rogue 8** (Thief) · **Background:** Criminal · **XP:** 34886
 
-**HP** 57/57 · **AC** 16 (Studded Leather Armor 12 + Dex 4) · **Speed** 30 ft · **Initiative** +7 · **Proficiency** +3 · **Passive Perception** 17
+**HP** 49/65 · **AC** 19 (Studded Leather Armor 12 + Dex 5 + Haste 2) · **Speed** 60 ft · **Initiative** +8 · **Proficiency** +3 · **Passive Perception** 22
 
 | STR | DEX | CON | INT | WIS | CHA |
 |---|---|---|---|---|---|
-| 8 (-1) | 18 (+4) | 16 (+3) | 10 (+0) | 12 (+1) | 13 (+1) |
+| 8 (-1) | 20 (+5) | 16 (+3) | 10 (+0) | 12 (+1) | 13 (+1) |
 
-**Saves:** STR -1, DEX +7*, CON +3, INT +3*, WIS +1, CHA +1
+**Saves:** STR -1, DEX +8*, CON +3, INT +3*, WIS +1, CHA +1
 
-**Skills:** Acrobatics +7*, Animal Handling +1, Arcana +0, Athletics -1, Deception +4*, History +0, Insight +7**, Intimidation +1, Investigation +3*, Medicine +1, Nature +0, Perception +7**, Performance +1, Persuasion +1, Religion +0, Sleight Of Hand +10**, Stealth +10**, Survival +1
+**Skills:** Acrobatics +8*, Animal Handling +1, Arcana +0, Athletics -1, Deception +4*, History +0, Insight +7**, Intimidation +1, Investigation +3*, Medicine +1, Nature +0, Perception +7**, Performance +1, Persuasion +1, Religion +0, Sleight Of Hand +11**, Stealth +11**, Survival +1
 
 **Conditions:** — · **Exhaustion:** 0
 
@@ -20,23 +20,24 @@
 
 | Attack | To hit | Damage | Notes |
 |---|---|---|---|
-| Shortbow +2 | +9 | 1d6+6 piercing | range 80/320 ft, mastery vex |
-| Dagger +1 | +8 | 1d4+5 piercing | range 20/60 ft, mastery nick |
+| Dagger +1 | +9 | 1d4+6 piercing | range 20/60 ft, mastery nick |
 | Unarmed Strike | +2 | 0 bludgeoning | reach 5 ft |
 
 Attacks per Attack action: 1
+
+**Active spell effects:** Haste (expires at minute 61746.4)
 
 **Granted spells:** mage-hand (Magic Initiate (Wizard)), minor-illusion (Magic Initiate (Wizard)), disguise-self (Magic Initiate (Wizard))
 
 ## Features & feats
 
-Alert, Magic Initiate, Ability Score Improvement
+Alert, Magic Initiate, Ability Score Improvement, Ability Score Improvement
 
 Species traits: Resourceful, Skillful, Versatile
 
 ## Inventory
 
-**Coins:** 1988 GP 7 SP 1 CP
+**Coins:** 5122 GP 8 SP 1 CP
 
 - `the-magpies-key-1` 1× The Magpie's Key · _stolen: Lot 9, lifted from Dorothea Quill mid-raid_
 - `quiver-1` 1× Quiver · _starting equipment_
@@ -45,17 +46,19 @@ Species traits: Resourceful, Skillful, Versatile
 - `bell-1` 1× Bell · _starting equipment (unpacked from Burglar's Pack)_
 - `candle-1` 50× Candle · _starting equipment (unpacked from Burglar's Pack)_
 - `crowbar-1` 1× Crowbar · _starting equipment (unpacked from Burglar's Pack)_
-- `oil-1` 20× Oil · _starting equipment (unpacked from Burglar's Pack)_
+- `oil-1` 17× Oil · _starting equipment (unpacked from Burglar's Pack)_
 - `rations-1` 5× Rations · _starting equipment (unpacked from Burglar's Pack)_
+- `rations-1-bag1` 20× Rations (in Bag of Holding) · _starting equipment (unpacked from Burglar's Pack)_
 - `tinderbox-1` 1× Tinderbox · _starting equipment (unpacked from Burglar's Pack)_
 - `waterskin-1` 1× Waterskin · _starting equipment (unpacked from Burglar's Pack)_
 - `thieves-tools-1` 1× Thieves' Tools · _starting equipment_
 - `fine-clothes-charcoal-1` 1× Fine clothes (charcoal) · _gift: bought by Asche at Faircloth's for 15 gp_
 - `calligraphers-supplies-1` 1× Calligrapher's Supplies · _purchased for 10 GP_
-- `cart-1` 2× Cart · _purchased for 15 GP_
+- `cart-1` 3× Cart · _purchased for 15 GP_
 - `horse-draft-1` 1× Horse, Draft · _purchased for 50 GP_
 - `studded-leather-armor-1` 1× Studded Leather Armor (equipped) · _purchased for 90 GP_
-- `arrows-2` 97× Arrows · _starting equipment_
+- `arrows-2` 93× Arrows · _starting equipment_
+- `arrows-2-bag1` 200× Arrows (in Bag of Holding) · _starting equipment_
 - `arrows-3` 1× Arrows · _starting equipment_
 - `lantern-hooded-1` 1× Lantern, Hooded · _purchased for 5 GP_
 - `lantern-bullseye-1` 1× Lantern, Bullseye · _purchased for 10 GP_
@@ -79,7 +82,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `potion-of-healing-1` 2× Potion of Healing — Common · _purchased for 400 GP_
 - `horse-riding-1` 4× Horse, Riding · _purchased for 375 GP_
 - `saddle-riding-1` 5× Saddle - Riding · _purchased for 50 GP_
-- `mule-1` 1× The Rookery's grey mule (Mule) · _stolen: the Rookery's own mule, back from the Hanged Men's horse line_
+- `mule-1` 3× The Rookery's grey mule (Mule) · _stolen: the Rookery's own mule, back from the Hanged Men's horse line_
   - The grey mule taken with the cart on the March Road. Its near-hind shoe is cracked, leaving a forked print: it wants a farrier.
 - `book-1` 1× A little tally-book (Book) · _found: under the woman's pillow in the big tent_
   - A thumb-sized book bound in greasy calfskin, its pages ruled in columns in a small neat hand, with a stub of pencil tied to the spine. It was under the pillow in the big tent, wrapped in a stocking.
@@ -106,7 +109,7 @@ Species traits: Resourceful, Skillful, Versatile
 - `keys-of-the-lidless-chap-1` 1× Keys of the Lidless chapel · _gift: Reeve Ashby's surrender of Thornbury_
 - `mattocks-keys-1` 1× Mattock's keys · _loot: Old Mattock's wrist, the well-house at Harrowgate_
 - `lerners-written-confessi-1` 1× Lerner's written confession · _gift: written by Sergeant Lerner under Ottilie's charm, Day 18_
-- `shortbow-2-1` 1× Shortbow +2 (equipped) — Rare · _gift: the Rookery armoury (retcon by ruling: the bow owed since Day 1)_
+- `shortbow-2-1` 1× Shortbow +2 — Rare · _gift: the Rookery armoury (retcon by ruling: the bow owed since Day 1)_
 - `robe-of-eyes-1` 1× Robe of Eyes (equipped) (attuned) — Rare · _loot: Sabine's iron-bound travelling chest_
 - `potion-of-healing-2` 2× Potion of Healing — Common · _loot: Sabine's iron-bound travelling chest_
 - `fenns-keys-1` 1× Fenn's keys · _loot: Fenn's pockets_
@@ -122,23 +125,52 @@ Species traits: Resourceful, Skillful, Versatile
 - `dagger-1-1` 1× Dagger +1 (equipped) — Uncommon · _purchased for 402 GP_
 - `ring-of-motte-keys-1` 1× Ring of motte keys · _loot: Sir Osric Vane's gear_
 - `garrison-pay-roll-1` 1× Garrison pay roll · _loot: The pay chest_
-- `potion-of-healing-3` 2× Potion of Healing (UNIDENTIFIED — players see "Unidentified potion") — Common · _loot: Osric's travelling chest_
+- `potion-of-healing-3` 2× Potion of Healing — Common · _loot: Osric's travelling chest_
 - `fine-clothes-1` 1× Fine clothes (in Bag of Holding) · _loot: Osric's travelling chest_
 - `healers-kit-1` 1× Healer's Kit · _loot: The armoury_
-- `potion-of-healing-4` 1× Potion of Healing (UNIDENTIFIED — players see "Unidentified potion") — Common · _loot: The sergeants' chest_
+- `potion-of-healing-4` 1× Potion of Healing — Common · _loot: The sergeants' chest_
 - `brandy-1` 1× Brandy (in Bag of Holding) · _loot: The sergeants' chest_
 - `duty-roster-1` 1× Duty roster · _loot: The sergeants' chest_
 - `chain-shirt-1` 4× Chain Shirt (in Bag of Holding) · _loot: The armoury_
 - `shield-1` 6× Shield (in Bag of Holding) · _loot: The armoury_
-- `spear-1` 10× Spear (in Bag of Holding) · _loot: The armoury_
+- `spear-1` 16× Spear (in Bag of Holding) · _loot: The armoury_
 - `plate-armor-1` 1× Plate Armor (in Bag of Holding) · _loot: Sir Osric Vane's gear_
 - `shield-2` 1× Shield (in Bag of Holding) · _loot: Sir Osric Vane's gear_
 - `longsword-1` 1× Longsword (in Bag of Holding) · _loot: Sir Osric Vane's gear_
 - `light-crossbow-1` 4× Light Crossbow (in Bag of Holding) · _loot: The weapon racks_
-- `bolts-1` 80× Bolts (in Bag of Holding) · _loot: The weapon racks_
+- `bolts-1` 180× Bolts (in Bag of Holding) · _loot: The weapon racks_
 - `spear-2` 12× Spear (in Bag of Holding) · _starting equipment_
+- `chain-shirt-2` 1× Chain Shirt (in Bag of Holding) · _loot: A castle sentry A's gear_
+- `shield-3` 1× Shield (in Bag of Holding) · _loot: A castle sentry A's gear_
+- `chain-shirt-3` 1× Chain Shirt (in Bag of Holding) · _loot: A castle sentry B's gear_
+- `shield-4` 1× Shield (in Bag of Holding) · _loot: A castle sentry B's gear_
+- `depot-ledger-1` 1× Depot ledger · _loot: The depot clerk's gear_
+- `depot-cash-box-1` 1× Depot cash box · _loot: The quartermaster's depot_
+- `chain-shirt-4` 1× Chain Shirt (in Bag of Holding) · _loot: Rear-party Greencloak A's gear_
+- `shield-5` 1× Shield (in Bag of Holding) · _loot: Rear-party Greencloak A's gear_
+- `chain-shirt-5` 1× Chain Shirt (in Bag of Holding) · _loot: Rear-party Greencloak B's gear_
+- `shield-6` 1× Shield (in Bag of Holding) · _loot: Rear-party Greencloak B's gear_
+- `ring-of-keys-1` 1× The keep's keys (Ring of keys) · _loot: Sergeant Hamo Tuck's gear_
+  - Sergeant Tuck's iron ring: the keep door, the castellan's chamber, the armoury, a gate padlock and two small brass keys nobody has explained yet.
+- `chain-shirt-6` 1× Chain Shirt (in Bag of Holding) · _loot: Rear-party Greencloak D's gear_
+- `shield-7` 1× Shield (in Bag of Holding) · _loot: Rear-party Greencloak D's gear_
+- `chain-shirt-7` 1× Chain Shirt (in Bag of Holding) · _loot: Jory Teal's gear_
+- `shield-8` 1× Shield (in Bag of Holding) · _loot: Jory Teal's gear_
+- `carved-wooden-horse-1` 1× Carved wooden horse · _loot: Jory Teal's gear_
+  - A little horse whittled from pale wood, worn smooth from a boy's pocket.
+- `green-dragon-fangs-1` 1× Green dragon fangs · _loot: Vyrmalth's gear_
+  - A double handful of the dragon's yellow fangs, prised out of her jaw with Kit's crowbar, each as long as a hand. An alchemist or a sorcerer would pay well.
+- `arrows-1-1` 1× A Regency quiver of bright arrows (Arrows +1) — Uncommon · _loot: The dragon's bed of treasure_
+  - Twenty arrows in a Regency officer's quiver, the heads bright and unrusted, faintly warm to the touch.
+- `arrows-1-2` 17× A Regency quiver of bright arrows (Arrows +1) — Uncommon · _loot: The dragon's bed of treasure_
+  - Twenty arrows in a Regency officer's quiver, the heads bright and unrusted, faintly warm to the touch.
+- `glass-box-key-1` 1× Glass-box key · _loot: Brother Hollis, the Glass-keeper's gear_
+- `mission-holy-symbol-1` 1× Mission holy symbol · _loot: Brother Hollis, the Glass-keeper's gear_
+- `letter-from-the-prior-1` 1× Letter from the Prior · _loot: Brother Hollis, the Glass-keeper's gear_
+- `the-seeing-glass-1` 1× The Seeing Glass · _loot: The iron-bound box_
+  - A lens of black crystal the size of a palm set in a silver eye-socket, cold as ice, wrapped in black silk; carried from Ambersell in a lead-sealed box. Mother Sabine's letters said it 'sees what God cannot'.
 
-Hit Point Dice: Rogue d8 7/7
+Hit Point Dice: Rogue d8 8/8
 Languages: Common, Elvish, Halfling, Thieves' Cant · Tools: Thieves' Tools · Armor training: light
 
 ## HP history
@@ -150,3 +182,4 @@ Languages: Common, Elvish, Halfling, Thieves' Cant · Tools: Thieves' Tools · A
 - Level 5: +8 (fixed average)
 - Level 6: +8 (fixed average)
 - Level 7: +6 (rolled 1d8(3) = 3)
+- Level 8: +8 (fixed average)

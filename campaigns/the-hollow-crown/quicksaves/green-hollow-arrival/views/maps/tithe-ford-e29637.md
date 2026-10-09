@@ -1,0 +1,42 @@
+# Snapshot — party moved to The Hollowmark at Day 37, 10:00 (event 29637)
+
+### The Tithe Ford, Elderwild (`tithe-ford`, wilderness 40×28, lighting dim)
+- Brakka Holloway (`brakka`, pc) at (21,13) — 71/71 HP
+- Corvin Asche (`corvin`, pc) at (36,14) — 41/41 HP
+- Kit Corvell (`kit`, pc) at (23,15) — 52/57 HP
+- Ottilie Marsh (`ottilie`, pc) at (24,15) — 48/48 HP
+- Bran (`thornbound-archer-b`, enemy) at (0,15) — 16/16 HP · hidden
+- Hester Cole (`hester-cole`, neutral) at (21,14) — 4/4 HP · restrained
+- Maud Cole (`maud-cole`, neutral) at (22,14) — 4/4 HP · restrained
+- Sloe (`sloe`, enemy) at (0,9) — 2/44 HP · hidden
+- Thornbound archer A (`thornbound-archer-a`, enemy) at (13,13) — DEAD
+- Thornbound archer C (`thornbound-archer-c`, enemy) at (15,12) — DEAD
+- Thornbound archer D (`thornbound-archer-d`, enemy) at (27,10) — DEAD · mocked
+- Thornbound wolf A (`thornbound-wolf-a`, enemy) at (32,13) — DEAD
+- Thornbound wolf B (`thornbound-wolf-b`, enemy) at (23,12) — DEAD
+- Tithe goat A (`tithe-goat-a`, neutral) at (22,15) — 4/4 HP
+- Tithe goat B (`tithe-goat-b`, neutral) at (23,14) — 4/4 HP
+- Tithe goat C (`tithe-goat-c`, neutral) at (23,16) — 4/4 HP
+- Tithe goat D (`tithe-goat-d`, neutral) at (24,14) — 4/4 HP
+- Tithe goat E (`tithe-goat-e`, neutral) at (24,16) — 4/4 HP
+- Tithe goat F (`tithe-goat-f`, neutral) at (22,16) — 4/4 HP
+- container `box-11`: Thornbound archer A's gear at (13,13) · SEALED (contents hidden from players) — coins: 3 SP
+- container `box-12`: Thornbound archer C's gear at (15,12) · SEALED (contents hidden from players) — coins: 1 GP
+- container `box-13`: Thornbound archer D's gear at (27,10) · SEALED (contents hidden from players)
+- in Thornbound archer A's gear (`box-11`) `floor-1`: 1× Longbow at (13,13) — in Thornbound archer A's gear
+- in Thornbound archer A's gear (`box-11`) `floor-2`: 12× Arrows at (13,13) — in Thornbound archer A's gear
+- in Thornbound archer A's gear (`box-11`) `floor-3`: 1× Leather Armor at (13,13) — in Thornbound archer A's gear
+- in Thornbound archer A's gear (`box-11`) `floor-4`: 1× Shortsword at (13,13) — in Thornbound archer A's gear
+- in Thornbound archer C's gear (`box-12`) `floor-5`: 1× Longbow at (15,12) — in Thornbound archer C's gear
+- in Thornbound archer C's gear (`box-12`) `floor-6`: 9× Arrows at (15,12) — in Thornbound archer C's gear
+- in Thornbound archer C's gear (`box-12`) `floor-7`: 1× Leather Armor at (15,12) — in Thornbound archer C's gear
+- in Thornbound archer C's gear (`box-12`) `floor-8`: 1× Shortsword at (15,12) — in Thornbound archer C's gear
+- in Thornbound archer C's gear (`box-12`) `floor-9`: 1× Antler token at (15,12) — in Thornbound archer C's gear
+- in Thornbound archer D's gear (`box-13`) `floor-10`: 1× Longbow at (27,10) — in Thornbound archer D's gear
+- in Thornbound archer D's gear (`box-13`) `floor-11`: 15× Arrows at (27,10) — in Thornbound archer D's gear
+- in Thornbound archer D's gear (`box-13`) `floor-12`: 1× Leather Armor at (27,10) — in Thornbound archer D's gear
+- in Thornbound archer D's gear (`box-13`) `floor-13`: 1× Shortsword at (27,10) — in Thornbound archer D's gear
+- point of interest `poi-1`: The old bridge at (19,14) → journal j713
+- point of interest `poi-2`: The boundary oak at (23,13) → journal j714
+- point of interest `poi-3`: The ride at (30,15) → journal j715
+- labels: Stream (18,14), Road (1,14)

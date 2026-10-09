@@ -193,7 +193,18 @@ MAGIC_EFFECTS = {
     "stone-of-good-luck-luckstone": {"checks": 1, "saves": 1},
     # senses (largest range wins, never summed) and Advantage on sight-based Perception
     "robe-of-eyes": {"sense_darkvision": 120, "sense_truesight": 120, "adv_perception": 1},
+    # attack rolls against the wearer have Disadvantage (suppressed after damage / at Speed 0: mechanics.displaced)
+    "cloak-of-displacement": {"displacement": 1},
+    # Wisdom (Perception) checks made to perceive the wearer have Disadvantage
+    "cloak-of-elvenkind": {"perceive_dis": 1},
+    # immune to magic that reads thoughts or tells whether the wearer is lying (mechanics.MIND_READING_SPELLS)
+    "ring-of-mind-shielding": {"mind_shield": 1},
 }
+# rules/core/06-equipment.md → Multiple Items of the Same Kind: one cloak, one pair of footwear, gloves/gauntlets,
+# bracers, one item of headwear (armor is handled by equip itself). Matched against the item's base name.
+WORN_SLOTS = {"cloak": ("cloak", "cape", "mantle"), "footwear": ("boots", "slippers", "shoes"),
+              "hands": ("gloves", "gauntlets"), "bracers": ("bracers",),
+              "headwear": ("hat", "helm", "circlet", "headband", "crown", "cap of", "diadem")}
 RARITY_ORDER = ["Common", "Uncommon", "Rare", "Very Rare", "Legendary", "Artifact"]
 TIER_MAX_RARITY = {1: "Uncommon", 2: "Rare", 3: "Very Rare", 4: "Legendary"}
 TIER_MAX_GP_AWARD = {1: 300, 2: 3000, 3: 30000, 4: 200000}
@@ -731,8 +742,9 @@ def item_display_name(it):
             "armor": "Unidentified magic armor"}.get(it.get("kind"), "Unidentified magic item")
 
 
-def weapon_attack(e, item, versatile=False, offhand=False):
-    """Compute attack bonus and damage for a PC wielding an inventory weapon (or unarmed)."""
+def weapon_attack(e, item, versatile=False, offhand=False, ammo_bonus=0):
+    """Compute attack bonus and damage for a PC wielding an inventory weapon (or unarmed). ammo_bonus: magic
+    ammunition fired from it (Arrows +1); its bonus stacks with the weapon's own."""
     if item is None:  # Unarmed Strike
         ability = "str"
         if "Monk" in e["classes"]:
@@ -754,13 +766,13 @@ def weapon_attack(e, item, versatile=False, offhand=False):
     if "Monk" in e["classes"] and not w["ranged"] and (w["category"] == "simple" or "light" in props):
         ability = "dex" if amod(e, "dex") > amod(e, ability) else ability
     m = amod(e, ability)
-    bonus = m + (pb(e) if weapon_proficient(e, w) else 0) + item.get("magic_bonus", 0)
+    bonus = m + (pb(e) if weapon_proficient(e, w) else 0) + item.get("magic_bonus", 0) + ammo_bonus
     if w["ranged"] and has_feat(e, "Archery"):
         bonus += 2
     die = w["versatile"] if versatile and w["versatile"] else w["damage"]
-    dmg_mod = m + item.get("magic_bonus", 0)
+    dmg_mod = m + item.get("magic_bonus", 0) + ammo_bonus
     if offhand and m > 0 and not has_feat(e, "Two-Weapon Fighting"):
-        dmg_mod = item.get("magic_bonus", 0)
+        dmg_mod = item.get("magic_bonus", 0) + ammo_bonus
     if has_feat(e, "Dueling") and not w["ranged"] and not versatile and "two-handed" not in props:
         dmg_mod += 2
     rng = w["range"]
@@ -785,7 +797,8 @@ def derive(e):
             "level": level(e), "pb": pb(e), "abilities": ab, "mods": {a: mod(v) for a, v in ab.items()},
             "saves": {a: save_mod(e, a) for a in srd.ABILITIES},
             "skills": {s: skill_mod(e, s) for s in srd.SKILLS},
-            "passive_perception": 10 + skill_mod(e, "perception"),
+            # rules glossary, Passive Perception: +5 with Advantage on Perception checks (a Robe of Eyes)
+            "passive_perception": 10 + skill_mod(e, "perception") + (5 if item_bonus(e, "adv_perception") else 0),
             "slots": spell_slots(e), "pact": pact_slots(e), "spellcasting": spellcasting(e),
             "resources": resources(e), "attacks_per_action": attacks_per_action(e),
             "attacks": [weapon_attack(e, it) for it in equipped(e, "weapon")] + [weapon_attack(e, None)],
